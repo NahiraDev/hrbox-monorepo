@@ -1,0 +1,61 @@
+/*.rtl {*/
+/*    direction: rtl;*/
+/*    text-align: right;*/
+/*}*/
+
+/*.ltr {*/
+/*    direction: ltr;*/
+/*    text-align: left;*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Yekan Bakh;*/
+/*    font-style: normal;*/
+/*    font-weight: 100;*/
+/*    src: url('assets/fonts/yekan-bakh/woff/YekanBakhFaNum-Thin.woff') format('woff'),*/
+/*    url('assets/fonts/yekan-bakh/woff2/YekanBakhFaNum-Thin.woff2') format('woff2');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Yekan Bakh;*/
+/*    font-style: normal;*/
+/*    font-weight: 300;*/
+/*    src: url('assets/fonts/yekan-bakh/woff/YekanBakhFaNum-Light.woff') format('woff'),*/
+/*    url('assets/fonts/yekan-bakh/woff2/YekanBakhFaNum-Light.woff2') format('woff2');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Yekan Bakh;*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    src: url('assets/fonts/yekan-bakh/woff/YekanBakhFaNum-Regular.woff') format('woff'),*/
+/*    url('assets/fonts/yekan-bakh/woff2/YekanBakhFaNum-Regular.woff2') format('woff2');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Yekan Bakh;*/
+/*    font-style: normal;*/
+/*    font-weight: 600;*/
+/*    src: url('assets/fonts/yekan-bakh/woff/YekanBakhFaNum-SemiBold.woff') format('woff'),*/
+/*    url('assets/fonts/yekan-bakh/woff2/YekanBakhFaNum-SemiBold.woff2') format('woff2');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Yekan Bakh;*/
+/*    font-style: normal;*/
+/*    font-weight: bold;*/
+/*    src: url('assets/fonts/yekan-bakh/woff/YekanBakhFaNum-Bold.woff') format('woff'),*/
+/*    url('assets/fonts/yekan-bakh/woff2/YekanBakhFaNum-Bold.woff2') format('woff2');*/
+/*}*/
+
+/*html[lang="en"] {*/
+/*    font-family: "Open Sans", sans-serif;*/
+/*}*/
+
+/*html[lang="fa"] {*/
+/*    font-family: Yekan Bakh, serif;*/
+/*}*/
+
+/*html, body {*/
+/*    transition: background-color 1s ease, color 1s ease;*/
+/*}*/

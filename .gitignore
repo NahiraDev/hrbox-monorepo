@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+dist-ssr/
+.next/
+.cache/
+.output/
+.turbo/
+.vercel/
+
+# Local env
+.env
+.env.*
+*.local
+
+# Editor files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Lockfiles (only keep pnpm's)
+yarn.lock
+package-lock.json
+bun.lockb
+
+# Optional: typescript cache
+*.tsbuildinfo

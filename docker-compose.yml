@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  project-management:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    command: node apps/project-management/dist/index.js
+    environment:
+      NODE_ENV: production
+
+  payroll:
+    build:
+      context: .
+    ports:
+      - "3001:3000"
+    command: node apps/payroll/dist/index.js
+    environment:
+      NODE_ENV: production

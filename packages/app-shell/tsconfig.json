@@ -1,0 +1,31 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true
+  },
+  "files": ["src/index.ts"],
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/index.ts",
+    "declarations.d.ts",
+    "global.d.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["dist"],
+  "references": [
+    { "path": "../shared-navigations" },
+    { "path": "../shared-translation" },
+    { "path": "../shared-templates" },
+    { "path": "../shared-styles" },
+    { "path": "../shared-services" }
+  ]
+}

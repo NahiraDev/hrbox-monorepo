@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
+    "emitDeclarationOnly": true
+  },
+  "files": ["postcss.config.ts" , "tailwind.config.ts"],
+  "include": ["."],
+  "exclude": ["dist"]
+}

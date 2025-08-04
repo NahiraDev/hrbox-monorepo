@@ -1,0 +1,1 @@
+{"version":3,"file":"AppCircularChart.d.ts","sourceRoot":"","sources":["AppCircularChart.tsx"],"names":[],"mappings":"AAEA,UAAU,uBAAuB;IAC/B,KAAK,EAAE,MAAM,CAAC;IACd,IAAI,CAAC,EAAE,MAAM,CAAC;IACd,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB;AAED,QAAA,MAAM,kBAAkB,EAAE,KAAK,CAAC,EAAE,CAAC,uBAAuB,CA+HzD,CAAC;AAEF,eAAe,kBAAkB,CAAC"}
