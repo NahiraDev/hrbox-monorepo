@@ -10,6 +10,7 @@ import './index.css';
 import {HeroProviderWrapper} from "./provider";
 
 import {RootRouterLoader} from '@hrbox/shared-navigations';
+import {StrictMode} from "react";
 
 export const renderApp = (id: string = 'root') => {
   const root = document.getElementById(id);
@@ -18,23 +19,25 @@ export const renderApp = (id: string = 'root') => {
     return;
   }
   ReactDOM.createRoot(root).render(
-    <I18nextProvider i18n={i18n}>
-      <BrowserRouter>
-        <HeroProviderWrapper>
-          <ReduxProvider store={store}>
-            <PersistGate
-              loading={<div>Loading...</div>}
-              persistor={persistor}
-              onBeforeLift={() => {
-                console.log('Rehydration complete');
-              }}>
-              <DarkModeProvider>
-                <RootRouterLoader/>
-              </DarkModeProvider>
-            </PersistGate>
-          </ReduxProvider>
-        </HeroProviderWrapper>
-      </BrowserRouter>
-    </I18nextProvider>,
+    <StrictMode>
+      <I18nextProvider i18n={i18n}>
+        <BrowserRouter>
+          <HeroProviderWrapper>
+            <ReduxProvider store={store}>
+              <PersistGate
+                loading={<div>Loading...</div>}
+                persistor={persistor}
+                onBeforeLift={() => {
+                  console.log('Rehydration complete');
+                }}>
+                <DarkModeProvider>
+                  <RootRouterLoader/>
+                </DarkModeProvider>
+              </PersistGate>
+            </ReduxProvider>
+          </HeroProviderWrapper>
+        </BrowserRouter>
+      </I18nextProvider>
+    </StrictMode>,
   );
 }

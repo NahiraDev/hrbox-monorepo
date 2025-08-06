@@ -10,6 +10,9 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths(), tailwindcss()],
   clearScreen: false,
   logLevel: 'info',
+  build: {
+    sourcemap: true,
+  },
   server: {
     https: {
       key: fs.readFileSync(path.resolve(process.env.HOME || '', '.vite-ssl/dev-key.pem')),

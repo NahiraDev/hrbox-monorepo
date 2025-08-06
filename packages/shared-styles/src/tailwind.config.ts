@@ -3,10 +3,11 @@ import { type Config } from 'tailwindcss';
 
 export const tailwindConfig: Config = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../apps/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../packages/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../../../node_modules/@heroui/theme/dist/**/*.{js,mjs,ts,jsx,tsx}",
+    "./index.html",
+    './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
