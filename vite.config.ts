@@ -3,20 +3,13 @@ import react from '@vitejs/plugin-react';
 import * as fs from 'fs';
 import * as path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import tailwindcss from 'tailwindcss';
-import  * as autoprefixer from 'autoprefixer';
-import {tailwindConfig} from '@hrbox/shared-styles/tailwind.config';
+// @ts-ignore
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
-  css: {
-    postcss: {
-      plugins: [
-        tailwindcss(tailwindConfig),
-        autoprefixer()
-      ]
-    }
-  },
+  plugins: [react(), tsconfigPaths(), tailwindcss()],
+  clearScreen: false,
+  logLevel: 'info',
   server: {
     https: {
       key: fs.readFileSync(path.resolve(process.env.HOME || '', '.vite-ssl/dev-key.pem')),

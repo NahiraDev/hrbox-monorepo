@@ -6,18 +6,15 @@
     "declaration": true,
     "declarationMap": true,
     "composite": true,
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": true
   },
   "include": [
     "src",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "src/index.ts",
-    "declarations.d.ts",
+    "src/**/*",
+    "**/*.d.ts",
+    "types/**/*.d.ts",
     "global.d.ts",
-    "types/**/*.d.ts"
+    "declarations.d.ts"
   ],
   "exclude": ["dist"],
   "references": [

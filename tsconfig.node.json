@@ -2,7 +2,7 @@
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "node16",
+    "moduleResolution": "node",
     "target": "ES2022",
     "strict": true,
     "types": ["node"],

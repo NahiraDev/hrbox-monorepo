@@ -1,15 +1,15 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider as ReduxProvider } from 'react-redux';
-import { I18nextProvider } from 'react-i18next';
-import { PersistGate } from 'redux-persist/integration/react';
-import { DarkModeProvider } from '@hrbox/shared-templates';
-import { store, persistor } from '@hrbox/shared-templates';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider as ReduxProvider} from 'react-redux';
+import {I18nextProvider} from 'react-i18next';
+import {PersistGate} from 'redux-persist/integration/react';
+import {DarkModeProvider} from '@hrbox/shared-templates';
+import {store, persistor} from '@hrbox/shared-templates';
 import {i18n} from '@hrbox/shared-translation';
 import './index.css';
-import { HeroProviderWrapper } from "./provider.js";
+import {HeroProviderWrapper} from "./provider";
 
-import { RootRouterLoader } from '@hrbox/shared-navigations';
+import {RootRouterLoader} from '@hrbox/shared-navigations';
 
 export const renderApp = (id: string = 'root') => {
   const root = document.getElementById(id);
@@ -19,9 +19,9 @@ export const renderApp = (id: string = 'root') => {
   }
   ReactDOM.createRoot(root).render(
     <I18nextProvider i18n={i18n}>
-      <HeroProviderWrapper>
       <BrowserRouter>
-        <ReduxProvider store={store}>
+        <HeroProviderWrapper>
+          <ReduxProvider store={store}>
             <PersistGate
               loading={<div>Loading...</div>}
               persistor={persistor}
@@ -29,13 +29,12 @@ export const renderApp = (id: string = 'root') => {
                 console.log('Rehydration complete');
               }}>
               <DarkModeProvider>
-                <RootRouterLoader />
+                <RootRouterLoader/>
               </DarkModeProvider>
             </PersistGate>
-        </ReduxProvider>
+          </ReduxProvider>
+        </HeroProviderWrapper>
       </BrowserRouter>
-      </HeroProviderWrapper>
-
     </I18nextProvider>,
   );
 }

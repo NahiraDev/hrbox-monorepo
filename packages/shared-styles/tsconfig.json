@@ -2,13 +2,23 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "src",
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationMap": true,
-    "composite": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "composite": true
   },
-  "files": ["postcss.config.ts" , "tailwind.config.ts"],
-  "include": ["."],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/tailwind.config.ts",
+    "*.d.ts",
+    "types/**/*.d.ts",
+    "declarations.d.ts",
+    "global.d.ts"
+  ],
   "exclude": ["dist"]
 }

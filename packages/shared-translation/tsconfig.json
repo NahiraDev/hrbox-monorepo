@@ -10,13 +10,11 @@
   },
   "include": [
     "src",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "declarations.d.ts",
+    "src/**/*",
+    "**/*.d.ts",
+    "types/**/*.d.ts",
     "global.d.ts",
-    "types/**/*.d.ts"
+    "declarations.d.ts"
   ],
   "exclude": ["dist"]
 }

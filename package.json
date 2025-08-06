@@ -2,12 +2,12 @@
   "name": "hrbox-monorepo",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "build:all": "pnpm run build --filter=all",
     "clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install",
     "prepare": "husky install",
-    "generate:tags": "tsx scripts/generate-tag-types.ts"
+    "generate:tags": "tsx scripts/generate-tag-types.ts",
+    "test": "echo \"No tests configured\" && exit 0"
   },
   "workspaces": [
     "apps/*",
@@ -24,7 +24,7 @@
     "@heroui/kbd": "^2.2.18",
     "@heroui/link": "^2.2.20",
     "@heroui/navbar": "^2.2.21",
-    "@heroui/react": "^2.8.1",
+    "@heroui/react": "^2.8.2",
     "@heroui/snippet": "^2.2.24",
     "@heroui/switch": "^2.2.21",
     "@heroui/system": "^2.4.19",
@@ -34,6 +34,7 @@
     "@react-aria/visually-hidden": "3.8.19",
     "@react-types/shared": "3.27.0",
     "@reduxjs/toolkit": "^2.6.0",
+    "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^24.1.0",
     "apexcharts": "^4.7.0",
     "axios": "^1.9.0",
@@ -84,7 +85,6 @@
     "@typescript-eslint/parser": "^8.38.0",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
-    "dependency-cruiser": "^17.0.0",
     "eslint": "^9.32.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",

@@ -16,8 +16,5 @@
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
     "build": "tsup"
-  },
-  "./tailwind.config": {
-    "import": "./tailwind.config.ts"
   }
 }
