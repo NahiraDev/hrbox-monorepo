@@ -1,0 +1,14 @@
+{
+  "extends": "./configs/tsconfig.base.json",
+  "compilerOptions":{
+    "baseUrl": ".",
+    "paths": {
+      "@package/*": ["packages/*"],
+      "@module/*": ["modules/*"],
+      "@assets/*": ["packages/app-assets/*"],
+      "@configs/*": ["configs/*"]
+    },
+  },
+  "include": ["packages" , "modules" , "configs"],
+  "exclude": ["node_modules", "dist"]
+}

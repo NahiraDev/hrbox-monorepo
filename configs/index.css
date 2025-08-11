@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "@assets/fonts/font.css";
+
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@config "./tailwind.config.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+html, body {
+    transition: background-color 1s ease, color 1s ease;
+}
+
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.ltr {
+    direction: ltr;
+    text-align: left;
+}
+
+html[lang="en"]{
+    font-family: "Open Sans", sans-serif;
+}
+
+html[lang="fa"]{
+    font-family: Yekan Bakh, serif;
+}

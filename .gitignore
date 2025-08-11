@@ -39,6 +39,7 @@ dist-ssr/
 # Lockfiles (only keep pnpm's)
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 bun.lockb
 
 # Optional: typescript cache

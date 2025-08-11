@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
+      "outputs": ["dist/**", "*.d.ts"],
       "cache": false
     },
     "dev": {
@@ -13,6 +13,9 @@
     "lint": {
       "outputs": [],
       "cache": true
+    },
+    "clean": {
+      "dependsOn": ["^dist", "^node_modules", "^.turbo"]
     },
     "test": {
       "dependsOn": ["^build"],

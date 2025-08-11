@@ -1,20 +1,21 @@
 {
-  "name": "@hrbox/app-shell",
+  "name": "@package/app-shell",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": true,
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "build": "tsup"
+    "clean": "rm -rf dist .turbo",
+    "prebuild": "pnpm turbo run clean && tsc --build --clean",
+    "build": "tsc --build && tsup"
   }
 }

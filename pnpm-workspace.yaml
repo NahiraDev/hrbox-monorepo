@@ -1,8 +1,4 @@
 packages:
-  - apps/*
+  - modules/*
   - packages/*
-
-onlyBuiltDependencies:
-  - '@heroui/shared-utils'
-  - '@tailwindcss/oxide'
-  - esbuild
+  - configs/*
