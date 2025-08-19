@@ -1,0 +1,3 @@
+declare const createBaseApi: (baseUrl: string, reducerPath: string, tagTypes: readonly string[]) => import("@reduxjs/toolkit/query").Api<import("@reduxjs/toolkit/query").BaseQueryFn<string | import("@reduxjs/toolkit/query").FetchArgs, unknown, import("@reduxjs/toolkit/query").FetchBaseQueryError>, {}, string, string, typeof import("@reduxjs/toolkit/query").coreModuleName | typeof import("@reduxjs/toolkit/query/react").reactHooksModuleName>;
+export default createBaseApi;
+//# sourceMappingURL=baseApi.d.ts.map

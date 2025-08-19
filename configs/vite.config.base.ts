@@ -5,14 +5,19 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import tailwindcss from '@tailwindcss/vite';
+import { imagetools } from 'vite-imagetools';
 
-export const baseConfig = defineConfig((_env) => {
+export const baseConfig = defineConfig((_env: any) => {
   return {
-    plugins: [react(), tsconfigPaths(), tailwindcss()],
+    plugins: [react(), tsconfigPaths(), tailwindcss(), imagetools()],
     server: {
       https: {
-        key: fs.readFileSync(path.resolve(process.env.HOME || '', '.vite-ssl/dev-key.pem')),
-        cert: fs.readFileSync(path.resolve(process.env.HOME || '', '.vite-ssl/dev-cert.pem')),
+        key: fs.readFileSync(
+          path.resolve(process.env.HOME || '', '.vite-ssl/dev-key.pem'),
+        ),
+        cert: fs.readFileSync(
+          path.resolve(process.env.HOME || '', '.vite-ssl/dev-cert.pem'),
+        ),
       },
       host: '0.0.0.0',
       port: 5173,
@@ -20,10 +25,9 @@ export const baseConfig = defineConfig((_env) => {
     },
     resolve: {
       alias: {
-        '@package': path.resolve(__dirname, '../packages'),
+        '@core': path.resolve(__dirname, '../core'),
         '@module': path.resolve(__dirname, '../modules'),
         '@configs': path.resolve(process.cwd(), 'configs'),
-        '@assets': path.resolve(__dirname, '../packages/app-assets'),
       },
     },
   };

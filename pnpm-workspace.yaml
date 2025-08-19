@@ -1,4 +1,4 @@
 packages:
-  - modules/*
-  - packages/*
-  - configs/*
+  - configs
+  - core
+  - modules

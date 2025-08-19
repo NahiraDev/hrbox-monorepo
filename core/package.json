@@ -1,0 +1,21 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist .turbo",
+    "prebuild": "pnpm turbo run clean && tsc --build --clean",
+    "build": "tsc --build && tsup"
+  }
+}

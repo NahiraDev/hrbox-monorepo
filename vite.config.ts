@@ -1,10 +1,11 @@
-import {type ConfigEnv, defineConfig} from 'vite';
+import { type ConfigEnv, defineConfig } from 'vite';
+
 import { baseConfig } from './configs/vite.config.base';
 
 export default defineConfig((env: ConfigEnv) => {
-    const config = baseConfig(env);
+  const config = baseConfig(env);
 
-    return {
-        ...config,
-    };
+  return {
+    ...config,
+  };
 });
