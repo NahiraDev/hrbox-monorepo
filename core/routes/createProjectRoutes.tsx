@@ -1,5 +1,5 @@
-import { type RouteObject, Navigate } from "react-router-dom";
-import * as React from "react";
+import { type RouteObject, Navigate } from 'react-router-dom';
+import * as React from 'react';
 
 interface ProjectComponents {
   [key: string]: React.ComponentType<any>;
@@ -34,11 +34,11 @@ export function createProjectRoutes(
       children,
     },
     {
-      path: "/",
+      path: '/',
       element: <Navigate replace to={basePath} />,
     },
     {
-      path: "*",
+      path: '*',
       element: <div>404 - Not Found</div>,
     },
   ];

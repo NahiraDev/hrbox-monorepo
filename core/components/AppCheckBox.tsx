@@ -44,9 +44,7 @@ export default function AppCheckbox({ props }: { props: any }) {
           radiusClasses[radius],
           className,
         ),
-        label: clsx(
-          sizeClasses[size]?.label,
-        ),
+        label: clsx(sizeClasses[size]?.label),
       }}
       disabled={disabled}
       isSelected={isSelected}

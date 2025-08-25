@@ -1,9 +1,9 @@
-import { AppButton } from 'core';
+import { AppButton } from '../../../../../core';
 import { Avatar, Form, Input, Select, SelectItem } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { Flag } from '@module/sso/components';
-import { useAppSelector } from 'core';
-import { useFormContext } from 'core';
+import { Flag } from '../../../components';
+import { useAppSelector } from '../../../../../core';
+import { useFormContext } from '../../../../../core';
 
 const LoginByOtpForm = () => {
   const {

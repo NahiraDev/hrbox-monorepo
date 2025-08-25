@@ -76,4 +76,6 @@ export const createStoreWithReducers = (
 };
 
 export type RootState = ReturnType<ReturnType<typeof createRootReducer>>;
-export type AppDispatch = ReturnType<typeof createStoreWithReducers>['store']['dispatch'];
+export type AppDispatch = ReturnType<
+  typeof createStoreWithReducers
+>['store']['dispatch'];

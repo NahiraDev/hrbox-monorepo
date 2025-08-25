@@ -66,9 +66,7 @@ const SliderSSO = () => {
               key={index}
               aria-label={`Go to slide ${index + 1}`}
               className={`w-3 h-3 rounded-full ${
-                selectedIndex === index
-                  ? 'bg-primary-400'
-                  : 'bg-primary-100'
+                selectedIndex === index ? 'bg-primary-400' : 'bg-primary-100'
               }`}
               onClick={() => {
                 if (emblaApi) emblaApi.scrollTo(index);

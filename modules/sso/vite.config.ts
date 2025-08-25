@@ -9,7 +9,7 @@ export default defineConfig((env) => {
 
   return {
     ...config,
-    base:'/sso',
+    base: '/sso',
     build: {
       outDir: 'dist',
       lib: {

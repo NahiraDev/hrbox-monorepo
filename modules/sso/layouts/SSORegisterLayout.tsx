@@ -5,10 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import i18n from 'i18next';
-import { setLanguage, useAppSelector, useAppDispatch } from 'core';
-import { AppButton } from 'core';
-import { LogoMobile, Google, LogoHRLink } from 'core';
 import { useTheme } from '@heroui/use-theme';
+
+import {
+  LogoMobile,
+  Google,
+  LogoHRLink,
+  AppButton,
+  setLanguage,
+  useAppSelector,
+  useAppDispatch,
+} from '../../../core';
 import { SSOHRLinkPaths } from '../router';
 import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
 import LightModeBg from '../assets/hrlink/lightmode-bg.webp';

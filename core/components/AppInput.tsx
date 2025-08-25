@@ -56,20 +56,17 @@ const AppInput = ({ props }: { props: any }) => {
     error && '!border-red-500 !bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
-    className
+    className,
   );
 
   const inputClassNames = clsx(
     'placeholder:text-secondary-1000 lg:placeholder:leading-5 placeholder:leading-normal',
     'placeholder:font-medium',
     error && 'text-red-500',
-    sizeClasses[size]?.input
+    sizeClasses[size]?.input,
   );
 
-  const labelClassNames = clsx(
-    'leading-5',
-    sizeClasses[size]?.label
-  );
+  const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
 
   return (
     <div className="flex flex-col gap-1">

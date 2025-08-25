@@ -1,14 +1,15 @@
 {
   "extends": "./configs/tsconfig.base.json",
-  "compilerOptions":{
+  "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["core/*"],
+      "core/*": ["core/*"],
       "@module/*": ["modules/*"],
-      "@configs/*": ["configs/*"]
+      "@configs/*": ["configs/*"],
+      "@mock/*": ["mock/*"],
     },
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
-  "include": ["core" , "modules" , "configs"],
+  "include": ["core", "modules", "configs", "mock"],
   "exclude": ["node_modules", "dist"]
 }

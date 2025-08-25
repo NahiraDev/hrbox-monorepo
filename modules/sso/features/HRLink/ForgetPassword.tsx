@@ -1,4 +1,4 @@
-import { FormProvider, useAuth } from 'core';
+import { FormProvider, useAuth } from '../../../../core';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 

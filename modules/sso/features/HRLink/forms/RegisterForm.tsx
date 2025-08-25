@@ -1,7 +1,7 @@
-import { AppButton, AppInput } from 'core';
+import { AppButton, AppInput } from '../../../../../core';
 import { Form } from '@heroui/react';
 import { Eye, EyeSlash } from 'iconsax-react';
-import { useFormContext } from 'core';
+import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 

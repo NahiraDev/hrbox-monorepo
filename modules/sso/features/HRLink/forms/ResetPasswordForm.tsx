@@ -1,6 +1,6 @@
-import { AppButton, AppInput } from 'core';
+import { AppButton, AppInput } from '../../../../../core';
 import { Form } from '@heroui/react';
-import { useFormContext } from 'core';
+import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 
 const ResetPasswordForm = () => {

@@ -6,12 +6,13 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-  Button,
+  // Button,
 } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
 import { useState } from 'react';
 
 import { CloseIcon } from '../icons';
+import { AppButton } from '../index.ts';
 
 import AppPagination from './AppPagination';
 import AppModal from './AppModal';
@@ -40,24 +41,34 @@ const AppTable = ({ props }: { props: any }) => {
   const renderActions = () => (
     <div className="relative flex items-center justify-center gap-2">
       <Tooltip content="Edit">
-        <Button
-          className="!min-w-fit !p-0 !w-4 !h-4 !rounded-0 !bg-transparent"
-          onPress={onOpenEditDialog}
-        >
-          <span className="text-lg cursor-pointer">
-            <Edit size="16" />
-          </span>
-        </Button>
+        <AppButton
+          props={{
+            size: '',
+            radius: 'none',
+            onPress: () => {
+              onOpenEditDialog;
+            },
+            content: (
+              <span className="text-lg cursor-pointer">
+                <Edit size="16" />
+              </span>
+            ),
+          }}
+        />
       </Tooltip>
       <Tooltip content="Delete">
-        <Button
-          className="!min-w-fit !p-0 !w-4 !h-4 !rounded-0 !bg-transparent"
-          onPress={() => setDeleteOpen(true)}
-        >
-          <span className="text-lg cursor-pointer">
-            <Trash size="16" />
-          </span>
-        </Button>
+        <AppButton
+          props={{
+            size: '',
+            radius: 'none',
+            onPress: () => setDeleteOpen(true),
+            content: (
+              <span className="text-lg cursor-pointer">
+                <Trash size="16" />
+              </span>
+            ),
+          }}
+        />
       </Tooltip>
     </div>
   );
@@ -89,7 +100,7 @@ const AppTable = ({ props }: { props: any }) => {
               {autoColumns.map((col: any) => (
                 <TableCell
                   key={col.key}
-                  className="text-xs font-normal text-black dark:text-white text-center"
+                  className="text-xs font-normal text-black text-center"
                 >
                   {row[col.key] ??
                     (col.key.toLowerCase().includes('date') ? 'Present' : '')}
@@ -126,32 +137,41 @@ const AppTable = ({ props }: { props: any }) => {
                 Would it be acceptable for you to remove this?
               </span>
             </div>
-            <Button
-              className="!w-6 !h-6 !p-0 !min-w-fit !rounded-0"
-              variant="light"
-              onPress={() => setDeleteOpen(false)}
-            >
-              <CloseIcon />
-            </Button>
+            <AppButton
+              props={{
+                size: '',
+                radius: 'none',
+                onPress: () => setDeleteOpen(false),
+                content: <CloseIcon />,
+              }}
+            />
           </div>
         </AppModal.Header>
         <AppModal.Footer>
-          <Button
-            className="text-secondary-800 !px-3 !py-1.5 !rounded-4 !font-normal !min-w-fit"
-            color="default"
-            variant="light"
-            onPress={() => setDeleteOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            className="bg-danger text-white !px-3 !py-1.5 !rounded-4 !font-normal !min-w-fit"
-            onPress={() => {
-              setDeleteOpen(false);
+          <AppButton
+            props={{
+              size: '',
+              radius: 'radius-4',
+              onPress: () => setDeleteOpen(false),
+              content: (
+                <span className="text-secondary-800 !px-3 !py-1.5 !font-normal !min-w-fit">
+                  Cancel
+                </span>
+              ),
             }}
-          >
-            Delete
-          </Button>
+          />
+          <AppButton
+            props={{
+              size: '',
+              radius: 'radius-4',
+              onPress: () => setDeleteOpen(false),
+              content: (
+                <span className="text-secondary-800 !px-3 !py-1.5 !font-normal !min-w-fit">
+                  Delete
+                </span>
+              ),
+            }}
+          />
         </AppModal.Footer>
       </AppModal>
     </div>

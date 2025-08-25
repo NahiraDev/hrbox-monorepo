@@ -1,8 +1,8 @@
 import { Form, InputOtp } from '@heroui/react';
-import { useFormContext } from 'core';
+import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { AnimateClock } from 'core';
+import { AnimateClock } from '../../../../../core';
 
 const OneTimePasswordForm = () => {
   const {

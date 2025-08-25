@@ -3,10 +3,10 @@ import { ArrowLeft, Global, Message, Moon, User } from 'iconsax-react';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { LogoHRLink, Google, LogoMobile } from 'core';
-import { setLanguage } from 'core';
-import {  AppButton } from 'core';
-import { useAppDispatch, useAppSelector } from 'core';
+import { LogoHRLink, Google, LogoMobile } from '../../../core';
+import { setLanguage } from '../../../core';
+import { AppButton } from '../../../core';
+import { useAppDispatch, useAppSelector } from '../../../core';
 import { useTheme } from '@heroui/use-theme';
 
 import { SliderSSO } from '../components';
@@ -14,7 +14,7 @@ import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
 import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
 
 export const SSOBaseLayout = ({ props }: { props: any }) => {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
   const { children, formTitle, signInWithPhone, arrowBack, isRegister } = props;
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
@@ -72,10 +72,10 @@ export const SSOBaseLayout = ({ props }: { props: any }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null
+  if (!mounted) return null;
   return (
     <div
       key={currentLang}
@@ -174,7 +174,7 @@ export const SSOBaseLayout = ({ props }: { props: any }) => {
                               startContent: (
                                 <Message className="text-primary-400 dark:text-white lg:text-[22px] text-base" />
                               ),
-                              onPress:handleOpenLoginWithPhoneNumber,
+                              onPress: handleOpenLoginWithPhoneNumber,
                             }}
                           />
                         ) : (
@@ -247,13 +247,9 @@ export const SSOBaseLayout = ({ props }: { props: any }) => {
                   props={{
                     className: 'p-1 !w-4 !h-4 min-w-fit',
                     variant: 'light',
-                    onPress:toggleTheme,
+                    onPress: toggleTheme,
                     isIconOnly: true,
-                    startContent: (
-                      <Moon
-                        size="16"
-                      />
-                    ),
+                    startContent: <Moon size="16" />,
                   }}
                 />
                 <AppButton

@@ -1,14 +1,13 @@
-import type { PluginModule } from 'core';
+import type { PluginModule } from '../../../core';
 
-import { SSOHRLinkRoutes } from '@module/sso/router';
-import { SSOHRLinkApi } from '@module/sso/features/HRLink/apis';
-import { reducers } from '@module/sso/reducers/rootReducer';
+import { reducers } from './index.ts';
+import { BasicInfoRoutes } from './index.ts';
 
-const SSOPlugin: PluginModule = {
-  name: 'sso',
-  reducers: { sso: reducers },
-  apis: [SSOHRLinkApi as any],
-  routes: SSOHRLinkRoutes,
+const BasicInfoPlugin: PluginModule = {
+  name: 'basic-info',
+  reducers: { basicInfo: reducers },
+  apis: [],
+  routes: BasicInfoRoutes,
 };
 
-export default SSOPlugin;
+export default BasicInfoPlugin;

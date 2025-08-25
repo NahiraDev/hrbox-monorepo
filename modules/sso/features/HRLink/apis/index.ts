@@ -1,5 +1,5 @@
 import createBaseApi from 'core/apis/baseApi';
-import { createEndpoint } from 'core';
+import { createEndpoint } from '../../../../../core';
 
 import { ApiEndpointsHRLink } from './endpoints';
 
@@ -9,9 +9,7 @@ const BaseApi = createBaseApi('https://api.hrbox.com', 'SSOHRLink', [
 
 export const SSOHRLinkApi = BaseApi.injectEndpoints({
   endpoints: (build) => ({
-    login: createEndpoint(build, ApiEndpointsHRLink.loginApi, 'POST', [
-      'SSOHRLink',
-    ]),
+    login: createEndpoint(build, ApiEndpointsHRLink.loginApi, 'POST', ['SSOHRLink',]),
 
     sendOtp: createEndpoint(build, ApiEndpointsHRLink.sendOtpApi, 'POST', [
       'SSOHRLink',

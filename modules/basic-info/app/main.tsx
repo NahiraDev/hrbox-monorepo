@@ -1,13 +1,13 @@
-import { renderApp } from 'core';
+import { renderApp } from '../../../core';
 import '../../../configs/index.css';
 import '../../../core/translate';
-import './index.css';
-import { serviceRegistry } from 'core';
-import SSOPlugin from '@module/sso/app/register.ts';
+import { serviceRegistry } from '../../../core';
+
+import BasicInfoPlugin from './register';
 
 async function bootstrap() {
-  serviceRegistry.registerPlugin(SSOPlugin);
-  renderApp('ssoRoot');
+  serviceRegistry.registerPlugin(BasicInfoPlugin);
+  renderApp('basicInfoRoot');
 }
 
 bootstrap();

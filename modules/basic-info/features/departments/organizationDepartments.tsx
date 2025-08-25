@@ -1,23 +1,62 @@
-import { BaseLayout } from 'core';
-import { People } from 'iconsax-react';
+import { BaseLayout } from '../../../../core';
+import { User } from 'iconsax-react';
+import { organizationDepartment } from 'mock';
+import { Avatar } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
+import { AppPagination } from '../../../../core';
+
 
 const OrganizationDepartments = () => {
   const { t } = useTranslation();
-
   return (
-    <BaseLayout props={{
-      children:(
-        <div className="rounded-5 border-1 border-primary-400 bg-[#dcf0f966]">
-          <People
-            size="32"
-            className="text-secondary-1000"
-          />
-          {t('lorem')}
-        </div>
-      )
-    }}/>
-  )
-}
+    <BaseLayout
+      props={{
+        children: (
+          <>
+            <div className="w-347 rounded-2xl border border-primary-400 bg-[#DCF0F966] flex flex-wrap gap-x-4 gap-y-2 items-center justify-center p-3">
+              {organizationDepartment.map((user, index) => (
+                <div
+                  className="w-82 bg-white rounded-lg border-l-2 border-primary-400 p-2 shadow-[0_1px_2px_1px_#080E1C4D] hover:bg-[#D6F2FF]"
+                  key={index}
+                >
+                  <div className="flex items-center gap-2 border-b border-[#E5E5E5] pb-1">
+                    <Avatar radius="sm" src="" />
+                    <span className="font-semibold">{user.name}</span>
+                  </div>
+                  <div className="flex p-1">
+                    <span className="font-bold text-xs text-[#0C152A]">
+                      {user.job}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <User size='20px' className="text-primary-400" />
+                    <span className="text-primary-400">
+                      {user.people} {t('people')}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              <div className="w-350 flex justify-end mt-5">
+                <AppPagination
+                  props={{
+                    size: 'sm',
+                    total: 10,
+                    initialPage: 1,
+                    onChange: () => console.log(),
+                    showControls: true,
+                    dotsJump: 10,
+                  }}
+                />
+              </div>
+            </div>
+
+          </>
+        ),
+      }}
+    />
+  );
+
+};
+
 
 export default OrganizationDepartments;

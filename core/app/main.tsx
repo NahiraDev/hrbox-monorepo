@@ -4,7 +4,6 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StrictMode } from 'react';
-
 import { i18n } from '../translate';
 import { createRootReducer } from '../redux';
 import { createStoreWithReducers } from '../redux';
@@ -37,7 +36,7 @@ export const renderApp = (id: string) => {
                   loading={<div>Loading...</div>}
                   persistor={persistor}
                 >
-                    <RootRouterLoader />
+                  <RootRouterLoader />
                 </PersistGate>
               </ReduxProvider>
             </HeroProviderWrapper>

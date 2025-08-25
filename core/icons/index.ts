@@ -6,3 +6,4 @@ export * from './Google';
 export * from './LogoHRLink';
 export * from './LogoMobile';
 export * from './AnimateClock';
+export * from './TickIcon';

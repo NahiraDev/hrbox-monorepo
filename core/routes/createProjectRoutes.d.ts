@@ -1,5 +1,5 @@
-import { type RouteObject } from "react-router-dom";
-import * as React from "react";
+import { type RouteObject } from 'react-router-dom';
+import * as React from 'react';
 interface ProjectComponents {
     [key: string]: React.ComponentType<any>;
 }

@@ -25,9 +25,11 @@ export const baseConfig = defineConfig((_env: any) => {
     },
     resolve: {
       alias: {
-        '@core': path.resolve(__dirname, '../core'),
-        '@module': path.resolve(__dirname, '../modules'),
-        '@configs': path.resolve(process.cwd(), 'configs'),
+        'core': path.resolve(__dirname, 'core'),
+        '@module': path.resolve(__dirname, 'modules'),
+        '@configs': path.resolve(__dirname, 'configs'),
+        '@mock': path.resolve(__dirname, 'mock'),
+        '@basic-info': path.resolve(__dirname, 'modules/basic-info'),
       },
     },
   };

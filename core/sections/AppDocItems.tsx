@@ -19,7 +19,6 @@ export const DocItem = ({ props }: DocItemProps) => {
 
   const handleClick = () => {
     if (to) {
-
     }
   };
 

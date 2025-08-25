@@ -29,6 +29,7 @@ const AppPagination = ({ props }: AppPaginationProps) => {
       showControls={showControls}
       dotsJump={dotsJump}
       onChange={onChange}
+      radius='sm'
       classNames={{
         item: 'bg-white text-secondary-1000 shadow-md dark:bg-info-1000 hover:dark:bg-transparent',
         cursor: 'bg-secondary-400 text-white',

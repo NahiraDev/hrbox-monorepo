@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AnimateClock } from 'core';
+import { AnimateClock } from '../../../core';
 import { useTranslation } from 'react-i18next';
 
 const OTP = () => {

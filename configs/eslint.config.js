@@ -66,7 +66,9 @@ export default defineConfig([
 
     languageOptions: {
       globals: {
-        ...Object.fromEntries(Object.entries(globals.browser).map(([key]) => [key, 'off'])),
+        ...Object.fromEntries(
+          Object.entries(globals.browser).map(([key]) => [key, 'off']),
+        ),
         ...globals.node,
       },
 

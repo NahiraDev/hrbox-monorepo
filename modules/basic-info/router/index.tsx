@@ -1,42 +1,26 @@
-import { lazyLoad } from 'core';
-import { createPaths, createProjectRoutes } from 'core';
+import { lazyLoad } from '../../../core';
+import { createProjectRoutes } from '../../../core';
 
-export const login = lazyLoad(
-  () => import('@module/sso/features/HRLink/Login.tsx'),
+export const organizationDepartments = lazyLoad(
+  () => import('../features/departments/organizationDepartments'),
 );
-export const SSOLoginByOtpHRLink = lazyLoad(
-  () => import('@module/sso/features/HRLink/LoginByOtp.tsx'),
+export const technicalDepartments = lazyLoad(
+  () => import('../features/departments/technicalDepartments'),
 );
-export const SSORegisterHRLink = lazyLoad(
-  () => import('@module/sso/features/HRLink/Register.tsx'),
+export const OrganizationalLocations = lazyLoad(
+  () => import('../features/location/OrganizationalLocations.tsx'),
 );
-
-export const SSOOneTimePasswordHRLink = lazyLoad(
-  () => import('@module/sso/features/HRLink/OneTimePassword.tsx'),
+export const Employees = lazyLoad(
+  () => import('../features/employees/Employees.tsx'),
 );
-export const SSOForgetPasswordHRLink = lazyLoad(
-  () => import('@module/sso/features/HRLink/ForgetPassword.tsx'),
-);
-export const SSOResetPasswordHRLink = lazyLoad(
-  () => import('@module/sso/features/HRLink/ResetPassword.tsx'),
-);
-export const SSOHRLinkRoutes = createProjectRoutes(
-  '/sso',
-  {
-    login,
-    SSOLoginByOtpHRLink,
-    SSORegisterHRLink,
-    SSOOneTimePasswordHRLink,
-    SSOForgetPasswordHRLink,
-    SSOResetPasswordHRLink,
-  }
+export const SatisfactionStatus = lazyLoad(
+  () => import('../features/employees/SatisfactionStatus.tsx'),
 );
 
-export const SSOHRLinkPaths = createPaths('/sso', {
-  Login: '/login',
-  LoginByOtp: '/login-by-otp',
-  OneTimePassword: '/otp',
-  Register: '/register',
-  ForgetPassword: '/forget-password',
-  ResetPassword: '/reset-password',
+export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
+  organizationDepartments,
+  technicalDepartments,
+  OrganizationalLocations ,
+  Employees,
+  SatisfactionStatus,
 });

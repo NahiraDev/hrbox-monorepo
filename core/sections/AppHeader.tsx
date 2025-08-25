@@ -9,9 +9,9 @@ import { Button, Avatar, Divider } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import AvatarUser from '@core/assets/img/inpersonate-avatar.png';
 import { useTheme } from '@heroui/use-theme';
 
+import AvatarUser from '../assets/img/inpersonate-avatar.png';
 import { HourGlass, Logo } from '../icons';
 
 import AppBreadcrumb from './AppBreadCrumb';
@@ -96,7 +96,6 @@ const AppHeader = () => {
                 </span>
               </Button>
             </div>
-
             <div className="flex gap-1">
               <Button isIconOnly variant="light" onPress={() => toggleTheme()}>
                 <Moon
@@ -105,6 +104,7 @@ const AppHeader = () => {
                   variant={theme === 'dark' ? 'Bold' : 'Outline'}
                 />
               </Button>
+
               <Button isIconOnly variant="light">
                 <Notification
                   className="text-secondary-1000 dark:text-white"

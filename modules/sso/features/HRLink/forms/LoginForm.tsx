@@ -1,10 +1,11 @@
-import { AppButton, AppSwitch, AppInput } from 'core';
 import { Form } from '@heroui/react';
 import { Eye, EyeSlash } from 'iconsax-react';
 import { Link } from '@heroui/react';
-import { useFormContext } from 'core';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useFormContext } from '../../../../../core';
+import { AppButton, AppSwitch, AppInput } from '../../../../../core';
 
 const LoginForm = () => {
   const {
@@ -96,7 +97,7 @@ const LoginForm = () => {
             />
             <Link
               className="text-secondary-400 dark:text-white font-semibold text-xs cursor-pointer"
-              onPress={()=>handleOpenForgetPassword()}
+              onPress={() => handleOpenForgetPassword()}
             >
               {t('forgot_password')}
             </Link>

@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { useTheme } from '@heroui/use-theme';
-
 import DarkModeBg from '../assets/img/darkmode-bg.webp';
 import LightModeBg from '../assets/img/lightmode-bg.webp';
 import { serviceRegistry } from '../helpers';

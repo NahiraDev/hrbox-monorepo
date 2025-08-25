@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { FormProvider, useAuth } from 'core';
+import { FormProvider, useAuth } from '../../../../core';
 import { ResetPasswordForm } from './forms';
 import { SSOBaseLayout } from '../../layouts';
 import * as Yup from 'yup';

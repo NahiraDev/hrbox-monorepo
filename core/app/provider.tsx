@@ -7,9 +7,7 @@ export function HeroProviderWrapper({
 }) {
   return (
     <HeroUIProvider>
-      <main>
-        {children}
-      </main>
+      <main className="dark">{children}</main>
     </HeroUIProvider>
   );
 }

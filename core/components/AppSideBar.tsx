@@ -6,10 +6,10 @@ import {
   LogoutCurve,
 } from 'iconsax-react';
 import React, { useEffect, useState } from 'react';
-import { Button } from '@heroui/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { AppButton } from '../../core/components';
 
 import {
   useAppSelector,
@@ -98,22 +98,31 @@ const AppSideBar = ({ menu }: SideBarProps) => {
     <div
       className={`flex relative rounded-lg py-6 px-4 bg-white dark:bg-info-1000 shadow-shadow-light-tight/2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
     >
-      <button
-        className="dark:bg-info-1000 bg-white cursor-pointer flex justify-center items-center absolute top-[50px] right-[-10px] w-6 h-6 rounded-full shadow-[0px_1px_2px_rgba(0,0,0,0.20)]"
-        onClick={() => setFullWidth(!fullWidth)}
-      >
-        {fullWidth ? (
-          <ArrowLeft2
-            className="cursor-pointer text-info-1000 dark:text-white"
-            size="12"
-          />
-        ) : (
-          <ArrowRight2
-            className="cursor-pointer text-info-1000 dark:text-white"
-            size="12"
-          />
-        )}
-      </button>
+      <AppButton
+        props={{
+          className:
+            'flex justify-center items-center absolute top-[50px] right-[-10px] shadow-[0px_1px_2px_rgba(0,0,0,0.20)]',
+          color: 'white',
+          size: '',
+          radius: 'full',
+          onPress: () => setFullWidth(!fullWidth),
+          content: (
+            <div>
+              {fullWidth ? (
+                <ArrowLeft2
+                  className="cursor-pointer text-info-1000"
+                  size="12"
+                />
+              ) : (
+                <ArrowRight2
+                  className="cursor-pointer text-info-1000"
+                  size="12"
+                />
+              )}
+            </div>
+          ),
+        }}
+      />
 
       <div className="flex flex-col items-center w-full">
         <div
@@ -121,33 +130,42 @@ const AppSideBar = ({ menu }: SideBarProps) => {
         >
           {menu.map((item) => (
             <div key={item.name} className="border-transparent">
-              <Button
-                isIconOnly
-                className="flex justify-center items-center !gap-1 !h-fit !w-full p-3 rounded-[0px] bg-transparent transition-all duration-200"
-                variant="flat"
-                onPress={() => handleNavigatePage(item)}
-              >
-                <div
-                  className={`cursor-pointer ${
-                    activeTab === item.name
-                      ? 'text-tertiar-400'
-                      : 'text-secondary-1000 dark:text-white'
-                  }`}
-                >
-                  {item?.icon}
-                </div>
-                {fullWidth && (
-                  <span
-                    className={`cursor-pointer text-[12px] ${
-                      activeTab === item.name
-                        ? 'text-primary dark:text-gold'
-                        : 'text-secondary-1000 dark:text-white'
-                    }`}
-                  >
-                    {item?.name}
-                  </span>
-                )}
-              </Button>
+              <AppButton
+                props={{
+                  className:
+                    'flex justify-center items-center !gap-1 p-3  bg-transparent transition-all duration-200',
+                  isIconOnly: true,
+                  color: 'white',
+                  size: '',
+                  radius: 'none',
+                  onPress: () => handleNavigatePage(item),
+                  variant: 'flat',
+                  content: (
+                    <>
+                      <div
+                        className={`cursor-pointer ${
+                          activeTab === item.name
+                            ? 'text-tertiar-400'
+                            : 'text-secondary-1000 '
+                        }`}
+                      >
+                        {item?.icon}
+                      </div>
+                      {fullWidth && (
+                        <span
+                          className={`cursor-pointer text-[12px] ${
+                            activeTab === item.name
+                              ? 'text-primary '
+                              : 'text-secondary-1000'
+                          }`}
+                        >
+                          {item?.name}
+                        </span>
+                      )}
+                    </>
+                  ),
+                }}
+              />
             </div>
           ))}
         </div>
@@ -158,45 +176,58 @@ const AppSideBar = ({ menu }: SideBarProps) => {
           {bottomMenu.map((item) => (
             <div
               key={item.name}
-              className={`${activeTab === item.name ? 'border-b border-tertiar-400 dark:border-white' : 'border-transparent'}`}
+              className={`${
+                activeTab === item.name
+                  ? 'border-b border-tertiar-400 dark:border-white'
+                  : 'border-transparent'
+              }`}
             >
-              <Button
-                isIconOnly
-                className="flex justify-center items-center !gap-2 p-3 rounded-[0px] !h-fit !w-full bg-transparent transition-all duration-200"
-                onPress={() => {
-                  if (
-                    item.name === t('english') ||
-                    item.name === t('persian')
-                  ) {
-                    handleLanguageChange();
-                  } else if (item.name === 'Log out') {
-                    handleLogout();
-                  } else {
-                    handleNavigatePage(item);
-                  }
+              <AppButton
+                props={{
+                  className:
+                    'flex justify-center items-center !gap-2 p-3 !h-fit !w-full bg-transparent transition-all duration-200',
+                  isIconOnly: true,
+                  color: 'white',
+                  size: '',
+                  radius: 'none',
+                  onPress: () => {
+                    if (
+                      item.name === t('english') ||
+                      item.name === t('persian')
+                    ) {
+                      handleLanguageChange();
+                    } else if (item.name === 'Log out') {
+                      handleLogout();
+                    } else {
+                      handleNavigatePage(item);
+                    }
+                  },
+                  content: (
+                    <>
+                      <div
+                        className={`cursor-pointer ${
+                          activeTab === item.name
+                            ? 'text-tertiar-400'
+                            : 'text-secondary-1000 dark:text-white'
+                        }`}
+                      >
+                        {item?.icon}
+                      </div>
+                      {fullWidth && (
+                        <span
+                          className={`cursor-pointer text-[12px] ${
+                            activeTab === item.name
+                              ? 'text-primary dark:text-gold'
+                              : 'text-secondary-1000'
+                          }`}
+                        >
+                          {item?.name}
+                        </span>
+                      )}
+                    </>
+                  ),
                 }}
-              >
-                <div
-                  className={`cursor-pointer ${
-                    activeTab === item.name
-                      ? 'text-primary-400 dark:text-white'
-                      : 'text-secondary-1000 dark:text-white'
-                  }`}
-                >
-                  {item?.icon}
-                </div>
-                {fullWidth && (
-                  <span
-                    className={`cursor-pointer text-xs font-normal ${
-                      activeTab === item.name
-                        ? 'text-primary-400 dark:text-white'
-                        : 'text-secondary-1000 dark:text-white'
-                    }`}
-                  >
-                    {item?.name}
-                  </span>
-                )}
-              </Button>
+              />
             </div>
           ))}
         </div>

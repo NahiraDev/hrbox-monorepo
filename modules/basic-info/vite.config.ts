@@ -9,12 +9,12 @@ export default defineConfig((env) => {
 
   return {
     ...config,
-    base:'/sso',
+    base: '/basic-info',
     build: {
       outDir: 'dist',
       lib: {
         entry: path.resolve(__dirname, 'app/index.ts'),
-        name: 'SSOModule',
+        name: 'BasicInfoModule',
         formats: ['es'],
         fileName: (format) => `index.${format}.js`,
       },

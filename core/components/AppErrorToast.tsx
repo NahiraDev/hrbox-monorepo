@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Warning2 } from 'iconsax-react';
+import { AppButton } from '../../core';
 
 import { CloseIcon } from '../icons';
 import { clearError, useAppDispatch, useAppSelector } from '../redux';
@@ -39,9 +40,21 @@ const AppErrorToast = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col gap-8 relative">
-            <button className="absolute top-4 right-4" onClick={onCloseToast}>
-              <CloseIcon />
-            </button>
+            <AppButton
+              props={{
+                className: 'absolute top-4 right-4',
+                size: '',
+                radius: '',
+                onPress: () => {
+                  onCloseToast;
+                },
+                content: (
+                  <div>
+                    <CloseIcon />
+                  </div>
+                ),
+              }}
+            />
             <div className="bg-warning-400 py-1.5 px-3 rounded-4 flex gap-1.5">
               <Warning2 color="#fff" size="32" />
               <span className="text-white text-xl">Error!</span>

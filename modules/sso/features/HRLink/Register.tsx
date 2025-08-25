@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { FormProvider, useAuth } from 'core';
+import { FormProvider, useAuth } from '../../../../core';
 import { useTranslation } from 'react-i18next';
 
 import { SSORegisterLayout } from '../../layouts';

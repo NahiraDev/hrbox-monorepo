@@ -9,6 +9,7 @@ export const baseConfig: Options = {
   outDir: 'dist',
   minify: false,
   injectStyle: false,
+  tsconfig: '../tsconfig.json',
   external: ['react', 'react-dom', 'react/jsx-runtime', 'react-redux'],
 };
 

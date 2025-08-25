@@ -1,4 +1,4 @@
-import type { PluginModule } from 'core';
+import type { PluginModule } from '../../../core';
 
 import { SSOHRLinkRoutes } from '@module/sso/router';
 import { SSOHRLinkApi } from '@module/sso/features/HRLink/apis';
