@@ -9,7 +9,7 @@ export function createProjectRoutes(
   basePath: string,
   components: ProjectComponents,
   indexRedirect?: string,
-): RouteObject[] {
+) {
   const children: RouteObject[] = Object.entries(components).map(
     ([path, Component]) => ({
       path,
@@ -28,18 +28,28 @@ export function createProjectRoutes(
     });
   }
 
-  return [
-    {
-      path: basePath,
-      children,
-    },
-    {
-      path: '/',
-      element: <Navigate replace to={basePath} />,
-    },
-    {
-      path: '*',
-      element: <div>404 - Not Found</div>,
-    },
-  ];
+  const menu = Object.keys(components).map((key ,icon) => ({
+    label: key,
+    path: `${basePath}/${key}`,
+    icon: icon,
+  }));
+
+  return {
+    routes: [
+      {
+        path: basePath,
+        children,
+      },
+      {
+        path: '/',
+        element: <Navigate replace to={basePath} />,
+      },
+      {
+        path: '*',
+        element: <div>404 - Not Found</div>,
+      },
+    ],
+    menu,
+  };
 }
+

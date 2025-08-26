@@ -6,7 +6,7 @@ import { reducers } from '@module/sso/reducers/rootReducer';
 
 const SSOPlugin: PluginModule = {
   name: 'sso',
-  reducers: { sso: reducers },
+  reducers: reducers,
   apis: [SSOHRLinkApi as any],
   routes: SSOHRLinkRoutes,
 };

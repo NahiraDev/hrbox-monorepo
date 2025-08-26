@@ -5,7 +5,7 @@ import {
   Global,
   LogoutCurve,
 } from 'iconsax-react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -18,17 +18,7 @@ import {
   setLocalLanguage,
 } from '../redux';
 
-export type SideBarItem = {
-  icon: React.ReactNode;
-  name: string;
-  route?: string;
-};
-
-type SideBarProps = {
-  menu: SideBarItem[];
-};
-
-const AppSideBar = ({ menu }: SideBarProps) => {
+const AppSideBar = ({ menu }: any) => {
   const [fullWidth, setFullWidth] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string | undefined>('Home');
   const navigate = useNavigate();
@@ -53,7 +43,7 @@ const AppSideBar = ({ menu }: SideBarProps) => {
     alert('User logged out');
   };
 
-  const handleNavigatePage = (item: SideBarItem) => {
+  const handleNavigatePage = (item:any) => {
     setActiveTab(item.name);
     if (item.route) {
       navigate(item.route);
@@ -87,7 +77,7 @@ const AppSideBar = ({ menu }: SideBarProps) => {
   }, []);
   useEffect(() => {
     const currentPath = location.pathname;
-    const activeItem = menu.find((item) => item.route === currentPath);
+    const activeItem = menu.find((item:any) => item.route === currentPath);
 
     if (activeItem) {
       setActiveTab(activeItem.name);
@@ -128,7 +118,7 @@ const AppSideBar = ({ menu }: SideBarProps) => {
         <div
           className={`flex flex-col h-full w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}
         >
-          {menu.map((item) => (
+          {menu.map((item:any) => (
             <div key={item.name} className="border-transparent">
               <AppButton
                 props={{

@@ -1,7 +1,7 @@
 import createBaseApi from 'core/apis/baseApi';
 import { createEndpoint } from '../../../../../core';
 
-import { ApiEndpointsHRLink } from './endpoints';
+import { ApiEndpointsHRLink } from '../../../app/endpoints.ts';
 
 const BaseApi = createBaseApi('https://api.hrbox.com', 'SSOHRLink', [
   'SSOHRLink',

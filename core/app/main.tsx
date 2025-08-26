@@ -43,6 +43,5 @@ export const renderApp = (id: string) => {
           </AuthProvider>
         </I18nextProvider>
       </BrowserRouter>
-    </StrictMode>,
-  );
+    </StrictMode>);
 };

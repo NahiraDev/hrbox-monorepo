@@ -4,9 +4,10 @@ import type { Api } from '@reduxjs/toolkit/query/react';
 
 export interface PluginModule {
   name: string;
-  reducers?: Record<string, Reducer>;
+  reducers?: Reducer;
   apis?: Api<any, any, any, any>[];
   routes?: RouteObject[];
+  menu?: Record<string, { label: string; path: string; icon?: React.ReactNode }[]>;
   middleware?: any[];
   dependencies?: string[];
   prefetch?: () => void | Promise<void>;
@@ -22,7 +23,7 @@ export class ServiceRegistry {
       this.plugins.set(plugin.name, {
         ...existing,
         ...plugin,
-        routes: [...(existing.routes || []), ...(plugin.routes || [])], // merge کردن
+        routes: [...(existing.routes || []), ...(plugin.routes || [])],
         reducers: { ...(existing.reducers || {}), ...(plugin.reducers || {}) },
         apis: [...(existing.apis || []), ...(plugin.apis || [])],
         middleware: [
@@ -57,8 +58,6 @@ export class ServiceRegistry {
 
   getAllRoutes(): RouteObject[] {
     const routes: RouteObject[] = [];
-
-    console.log('getAllRoutes():', this.plugins);
     for (const plugin of this.plugins.values()) {
       if (plugin.routes) {
         routes.push(...plugin.routes);
@@ -66,6 +65,37 @@ export class ServiceRegistry {
     }
 
     return routes;
+  }
+
+  getAllMenus(): Record<
+    string,
+    { label: string; path: string; icon?: React.ReactNode }[]
+  >[] {
+    const menus: Record<
+      string,
+      { label: string; path: string; icon?: React.ReactNode }[]
+    >[] = [];
+
+    for (const plugin of this.plugins.values()) {
+      if (plugin.menu) {
+        menus.push(plugin.menu);
+      }
+    }
+
+    return menus;
+  }
+
+  getActiveMenu(pathname: string) {
+    const parts = pathname.split("/").filter(Boolean);
+
+    if (parts.length < 2) return [];
+
+    const [moduleName, featureName] = parts;
+
+    const plugin = this.plugins.get(moduleName);
+    if (!plugin || !plugin.menu) return [];
+
+    return plugin.menu[featureName] || [];
   }
 
   async runPrefetch() {
