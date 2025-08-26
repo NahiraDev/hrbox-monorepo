@@ -13,10 +13,10 @@ export const baseConfig = defineConfig((_env: any) => {
     server: {
       https: {
         key: fs.readFileSync(
-          path.resolve(process.env.HOME || '', '.vite-ssl/dev-key.pem'),
+          path.resolve(process.env.HOME || '', './localhost+2-key.pem'),
         ),
         cert: fs.readFileSync(
-          path.resolve(process.env.HOME || '', '.vite-ssl/dev-cert.pem'),
+          path.resolve(process.env.HOME || '', './localhost+2.pem'),
         ),
       },
       host: '0.0.0.0',

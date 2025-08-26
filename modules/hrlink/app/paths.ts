@@ -1,4 +1,4 @@
-import { createPaths } from 'core/routes';
+import { createPaths } from '../../../core';
 
 export const HRLinkPaths = createPaths('/hrlink', {
   job: {

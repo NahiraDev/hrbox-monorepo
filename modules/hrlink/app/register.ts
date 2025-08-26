@@ -1,9 +1,9 @@
 import type { PluginModule } from '../../../core';
 
-import { HRLinkReducers } from '@module/hrlink/app/reducer';
-import { convertMenuStructure } from '../../../core/helpers/menuStructure';
+import { convertMenuStructure } from '../../../core';
 
-import { HRLinkMenu } from './menu';
+import { HRLinkReducers } from './reducer';
+import { getHRLinkMenuData } from './menu';
 import { HRLinkRoutes } from './routes';
 
 const HRLinkPlugin: PluginModule = {
@@ -11,7 +11,7 @@ const HRLinkPlugin: PluginModule = {
   reducers: HRLinkReducers,
   apis: [],
   routes: HRLinkRoutes.routes,
-  menu: convertMenuStructure(HRLinkMenu()),
+  menu: convertMenuStructure(getHRLinkMenuData()),
 };
 
 export default HRLinkPlugin;

@@ -7,6 +7,7 @@
       "cache": false
     },
     "dev": {
+      "dependsOn": ["^node_modules"],
       "cache": false,
       "persistent": true
     },

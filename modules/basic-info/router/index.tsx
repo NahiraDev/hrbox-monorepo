@@ -30,6 +30,4 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   technicalDepartments: page.departments.technical,
   OrganizationalLocations: page.departments.location,
   EmployeeSatisfactionCalendar: page.employees.satisfaction,
-
-
 });

@@ -1,12 +1,12 @@
-import { createPaths, lazyLoad } from '../../../core';
+import { lazyLoad } from '../../../core';
 import { createProjectRoutes } from '../../../core';
 
 export const page = {
   job: {
-    offers: lazyLoad(() => import('@module/hrlink/features/jobs/offers')),
-    detail: lazyLoad(() => import('@module/hrlink/features/jobs/jobDetail')),
+    offers: lazyLoad(() => import('../features/jobs/offers')),
+    detail: lazyLoad(() => import('../features/jobs/jobDetail')),
     opportunities: lazyLoad(
-      () => import('@module/hrlink/features/jobs/opportunities'),
+      () => import('../features/jobs/opportunities'),
     ),
   },
 };

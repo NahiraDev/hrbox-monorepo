@@ -4,9 +4,8 @@ import { Location, MoreSquare, Trash } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { useState } from 'react';
 
-import { AppPagination } from 'core/index';
-import { BaseLayout } from 'core/index';
-// import SubHeader from 'module/basic-info';
+import { AppPagination } from '../../../../core';
+import { BaseLayout } from '../../../../core';
 
 const OrganizationalLocations = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);

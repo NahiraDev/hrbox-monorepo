@@ -1,55 +1,57 @@
 const BaseUrl = "/DesktopModules/Freelancer/api";
 
 export const HRLinkApiEndpoints = {
-  award: {
-    create: `${BaseUrl}/Award/Add`,
-    edit: `${BaseUrl}/Award/Edit`,
-    delete: `${BaseUrl}/Award/Delete`,
-    search: `${BaseUrl}/Award/Search`,
-    getList: `${BaseUrl}/Award/GetList`,
-    getDetail: `${BaseUrl}/Award/Get`,
-  },
+  resume:{
+    award: {
+      create: `${BaseUrl}/Award/Add`,
+      edit: `${BaseUrl}/Award/Edit`,
+      delete: `${BaseUrl}/Award/Delete`,
+      search: `${BaseUrl}/Award/Search`,
+      getList: `${BaseUrl}/Award/GetList`,
+      getDetail: `${BaseUrl}/Award/Get`,
+    },
 
-  course: {
-    create: `${BaseUrl}/Course/Add`,
-    edit: `${BaseUrl}/Course/Edit`,
-    delete: `${BaseUrl}/Course/Delete`,
-    search: `${BaseUrl}/Course/Search`,
-    getList: `${BaseUrl}/Course/GetCourseList?TypeId=2`,
-    getDetail: `${BaseUrl}/Course/Get`,
-  },
+    course: {
+      create: `${BaseUrl}/Course/Add`,
+      edit: `${BaseUrl}/Course/Edit`,
+      delete: `${BaseUrl}/Course/Delete`,
+      search: `${BaseUrl}/Course/Search`,
+      getList: `${BaseUrl}/Course/GetCourseList?TypeId=2`,
+      getDetail: `${BaseUrl}/Course/Get`,
+    },
 
-  education: {
-    create: `${BaseUrl}/Education/Add`,
-    edit: `${BaseUrl}/Education/Edit`,
-    delete: `${BaseUrl}/Education/Delete`,
-    search: `${BaseUrl}/Education/Search`,
-    getList: `${BaseUrl}/Education/GetList`,
-    getDetail: `${BaseUrl}/Education/Get`,
-    getUniversity: `${BaseUrl}/Education/GetUniversity`,
-    getField: `${BaseUrl}/MasterService/GetFieldOfEducation`,
-  },
+    education: {
+      create: `${BaseUrl}/Education/Add`,
+      edit: `${BaseUrl}/Education/Edit`,
+      delete: `${BaseUrl}/Education/Delete`,
+      search: `${BaseUrl}/Education/Search`,
+      getList: `${BaseUrl}/Education/GetList`,
+      getDetail: `${BaseUrl}/Education/Get`,
+      getUniversity: `${BaseUrl}/Education/GetUniversity`,
+      getField: `${BaseUrl}/MasterService/GetFieldOfEducation`,
+    },
 
-  experience: {
-    create: `${BaseUrl}/Experience/Add`,
-    edit: `${BaseUrl}/Experience/Edit`,
-    delete: `${BaseUrl}/Experience/Delete`,
-    search: `${BaseUrl}/Experience/Search`,
-    getList: `${BaseUrl}/Experience/GetList`,
-    getDetail: `${BaseUrl}/Experience/GetDetails`,
-    typeOfActivity: `${BaseUrl}/Experience/TypeOfActivity`,
-    getIndustries: `${BaseUrl}/MasterService/GetIndustrys`,
-  },
+    experience: {
+      create: `${BaseUrl}/Experience/Add`,
+      edit: `${BaseUrl}/Experience/Edit`,
+      delete: `${BaseUrl}/Experience/Delete`,
+      search: `${BaseUrl}/Experience/Search`,
+      getList: `${BaseUrl}/Experience/GetList`,
+      getDetail: `${BaseUrl}/Experience/GetDetails`,
+      typeOfActivity: `${BaseUrl}/Experience/TypeOfActivity`,
+      getIndustries: `${BaseUrl}/MasterService/GetIndustrys`,
+    },
 
-  skill: {
-    create: `${BaseUrl}/UserSkill/Add`,
-    edit: `${BaseUrl}/UserSkill/Edit`,
-    delete: `${BaseUrl}/UserSkill/Delete`,
-    search: `${BaseUrl}/UserSkill/Search`,
-    getListHard: `${BaseUrl}/UserSkill/UserSkillProfisionalAndSearch`,
-    getListSoft: `${BaseUrl}/UserSkill/UserSkillGeneralAndSearch`,
-    getByType: `${BaseUrl}/UserSkill/GetSkillsByType`,
-    getByParentIdAndType: `${BaseUrl}/UserSkill/GetSkillsByParentIdAndType`,
+    skill: {
+      create: `${BaseUrl}/UserSkill/Add`,
+      edit: `${BaseUrl}/UserSkill/Edit`,
+      delete: `${BaseUrl}/UserSkill/Delete`,
+      search: `${BaseUrl}/UserSkill/Search`,
+      getListHard: `${BaseUrl}/UserSkill/UserSkillProfisionalAndSearch`,
+      getListSoft: `${BaseUrl}/UserSkill/UserSkillGeneralAndSearch`,
+      getByType: `${BaseUrl}/UserSkill/GetSkillsByType`,
+      getByParentIdAndType: `${BaseUrl}/UserSkill/GetSkillsByParentIdAndType`,
+    },
   },
 
   company: {
