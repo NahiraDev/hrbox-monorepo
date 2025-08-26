@@ -1,11 +1,11 @@
-import { OrganizationalLocation } from 'mock';
+import { OrganizationalLocation } from '@mock/index.ts';
 import { Avatar } from '@heroui/react';
 import { Location, MoreSquare, Trash } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { useState } from 'react';
 
-import { AppPagination } from '../../../../core';
-import { BaseLayout } from '../../../../core';
+import { AppPagination } from 'core/index';
+import { BaseLayout } from 'core/index';
 // import SubHeader from 'module/basic-info';
 
 const OrganizationalLocations = () => {

@@ -1,26 +1,35 @@
 import { lazyLoad } from '../../../core';
 import { createProjectRoutes } from '../../../core';
 
-export const organizationDepartments = lazyLoad(
-  () => import('../features/departments/organizationDepartments'),
-);
-export const technicalDepartments = lazyLoad(
-  () => import('../features/departments/technicalDepartments'),
-);
-export const OrganizationalLocations = lazyLoad(
-  () => import('../features/location/OrganizationalLocations.tsx'),
-);
-export const Employees = lazyLoad(
-  () => import('../features/employees/Employees.tsx'),
-);
-export const SatisfactionStatus = lazyLoad(
-  () => import('../features/employees/SatisfactionStatus.tsx'),
-);
+export const page = {
+  departments: {
+    organization: lazyLoad(
+      () => import('../features/departments/organizationDepartments'),
+    ),
+    technical: lazyLoad(
+      () => import('../features/departments/technicalDepartments.tsx'),
+    ),
+    location: lazyLoad(
+      () => import('../features/departments/organizationDepartments'),
+    ),
+    employees: lazyLoad(
+      () => import('../features/employees/EmployeeSatisfactionCalendar')
+    )
+  },
+  employees: {
+    all: lazyLoad(() => import('../features/employees/Employees')),
+    satisfaction: lazyLoad(
+      () => import('../features/employees/EmployeeSatisfactionCalendar'),
+    ),
+  },
+
+};
 
 export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
-  organizationDepartments,
-  technicalDepartments,
-  OrganizationalLocations ,
-  Employees,
-  SatisfactionStatus,
+  organizationDepartments: page.departments.organization,
+  technicalDepartments: page.departments.technical,
+  OrganizationalLocations: page.departments.location,
+  EmployeeSatisfactionCalendar: page.employees.satisfaction,
+
+
 });

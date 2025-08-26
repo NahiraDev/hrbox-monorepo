@@ -7,7 +7,7 @@ const BasicInfoPlugin: PluginModule = {
   name: 'basic-info',
   reducers: { basicInfo: reducers },
   apis: [],
-  routes: BasicInfoRoutes,
+  routes: BasicInfoRoutes.routes,
 };
 
 export default BasicInfoPlugin;
