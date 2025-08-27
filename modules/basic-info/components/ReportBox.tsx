@@ -2,8 +2,6 @@ import { MessageEdit, Trash } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { Avatar } from '@heroui/react';
 
-import { AppButton } from '../../../core';
-
 const ReportBox = () => {
   return (
     <div
