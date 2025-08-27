@@ -134,6 +134,14 @@
   --color-gold: #DDBA69;
 
   /* Border Radius */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
   --radius-1: 2px;
   --radius-2: 4px;
   --radius-3: 6px;
@@ -147,7 +155,31 @@
   --radius-11: 56px;
   --radius-12: 64px;
 
+  /* Spacing Scale */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+  --spacing-9: 2.25rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+
   /* Box Shadows */
+  --shadow-none: none;
+  --shadow-xs: 0px 1px 2px 0px rgba(8, 14, 28, 0.04);
+  --shadow-sm: 0px 1px 3px 0px rgba(8, 14, 28, 0.08);
+  --shadow-md: 0px 4px 8px 0px rgba(8, 14, 28, 0.12);
+  --shadow-lg: 0px 8px 16px 0px rgba(8, 14, 28, 0.16);
+  --shadow-xl: 0px 16px 32px 0px rgba(8, 14, 28, 0.20);
   --shadow-light-tight-1: 0px 1px 3px 0px #080E1C4D;
   --shadow-light-tight-2: 0px 1.25px 4px 0px #080E1C40;
   --shadow-light-tight-3: 0px 2px 6px 0px #080E1C38;
@@ -157,6 +189,49 @@
   --shadow-light-tight-7: 0px 7px 18px 0px #080E1C2B;
   --shadow-light-tight-8: 0px 12px 28px 0px #080E1C33;
   --shadow-light-tight-9: 0px 13px 36px 0px #080E1C38;
+
+  /* Transition Durations */
+  --duration-75: 75ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+  --duration-500: 500ms;
+  --duration-700: 700ms;
+  --duration-1000: 1000ms;
+
+  /* Transition Timing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-Index Scale */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
 }
 
 /* ===========================================
@@ -434,3 +509,11 @@
 .shadow-light-tight-7 { box-shadow: var(--shadow-light-tight-7); }
 .shadow-light-tight-8 { box-shadow: var(--shadow-light-tight-8); }
 .shadow-light-tight-9 { box-shadow: var(--shadow-light-tight-9); }
+
+
+.shadow-none { box-shadow: var(--shadow-none); }
+.shadow-xs { box-shadow: var(--shadow-xs); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
