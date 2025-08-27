@@ -2,10 +2,10 @@ import { renderApp } from '../../../core';
 import '../../../configs/index.css';
 import '../../../core/translate';
 import { serviceRegistry } from '../../../core';
-import HRLinkPlugin from './register';
+import ChartMakerPlugin from './register';
 
 async function bootstrap() {
-  serviceRegistry.registerPlugin(HRLinkPlugin);
+  serviceRegistry.registerPlugin(ChartMakerPlugin);
   renderApp('ChartMakerRoot');
 }
 

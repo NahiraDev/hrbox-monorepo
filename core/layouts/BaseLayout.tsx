@@ -1,11 +1,15 @@
-import { serviceRegistry } from '../helpers';
 import { useLocation } from 'react-router-dom';
+import React from 'react';
 
+import { serviceRegistry } from '../helpers';
 import { AppSupportButton, AppSideBar } from '../components';
 import { AppDocs, AppHeader } from '../sections';
 
-export const BaseLayout = ({ props }: { props: any }) => {
-  const { children } = props;
+interface BaseLayoutProps {
+  content: React.ReactNode;
+}
+
+export const BaseLayout = ({ content }: BaseLayoutProps) => {
   const { pathname } = useLocation();
   const activeMenu = serviceRegistry.getActiveMenu(pathname);
 
@@ -17,14 +21,13 @@ export const BaseLayout = ({ props }: { props: any }) => {
           <AppSideBar menu={activeMenu} />
           <div className="flex-1 min-h-fit h-full">
             <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
-              {children}
+              {content}
             </div>
           </div>
         </div>
         <div className="flex flex-col w-full justify-end">
           <AppDocs />
         </div>
-        <div />
         <AppSupportButton />
       </div>
     </div>

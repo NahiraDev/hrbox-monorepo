@@ -6,7 +6,7 @@ import { AppLoader } from '../components';
 import { App } from '../app';
 
 import { MotionRouter } from './motionRouter';
-import { ProjectRoutesMap } from './routeMaps';
+import { ProjectRoutesMap } from '../../configs/routeMaps';
 
 export const RootRouterLoader = () => {
   const location = useLocation();

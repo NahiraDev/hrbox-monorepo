@@ -13,7 +13,7 @@ export default defineConfig((env) => {
     build: {
       outDir: 'dist',
       lib: {
-        entry: path.resolve(__dirname, 'app/main.tsx'),
+        entry: path.resolve(__dirname, 'app/index.ts'),
         name: 'ChartMakerModule',
         formats: ['es'],
         fileName: (format) => `index.${format}.js`,

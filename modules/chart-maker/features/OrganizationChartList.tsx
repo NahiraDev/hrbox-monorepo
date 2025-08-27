@@ -1,4 +1,4 @@
-import { AppPagination } from 'core/components';
+import { AppPagination } from '../../../core';
 
 import { OrganizationCard } from '../components';
 
