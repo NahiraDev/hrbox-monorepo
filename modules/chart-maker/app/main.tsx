@@ -6,7 +6,7 @@ import HRLinkPlugin from './register';
 
 async function bootstrap() {
   serviceRegistry.registerPlugin(HRLinkPlugin);
-  renderApp('HRLinkRoot');
+  renderApp('ChartMakerRoot');
 }
 
 bootstrap();

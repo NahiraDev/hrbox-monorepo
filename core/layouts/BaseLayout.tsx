@@ -15,7 +15,11 @@ export const BaseLayout = ({ props }: { props: any }) => {
       <div className="flex flex-col h-[calc(100vh-132px)] gap-4">
         <div className="flex gap-4 h-full min-h-fit">
           <AppSideBar menu={activeMenu} />
-          <div className="flex-1 min-h-fit h-full">{children}</div>
+          <div className="flex-1 min-h-fit h-full">
+            <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
+              {children}
+            </div>
+          </div>
         </div>
         <div className="flex flex-col w-full justify-end">
           <AppDocs />

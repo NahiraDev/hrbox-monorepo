@@ -9,7 +9,7 @@ const Employees = () => {
     <BaseLayout
       props={{
         children: (
-          <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
+          <div className="">
             <div className="grid grid-cols-8 gap-3">
               {workersData.map((worker, index) => {
                 return (
