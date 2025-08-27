@@ -16,7 +16,7 @@ export const BaseLayout = ({ content }: BaseLayoutProps) => {
   return (
     <div className="flex flex-col gap-[26px] shadow-tight h-[100vh] pr-16 pl-8">
       <AppHeader />
-      <div className="flex flex-col h-[calc(100vh-132px)] gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex gap-4 h-full min-h-fit">
           <AppSideBar menu={activeMenu} />
           <div className="flex-1 min-h-fit h-full">

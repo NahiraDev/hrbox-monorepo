@@ -14,13 +14,12 @@ export const MotionRouter = () => {
   return (
     <>
       <div
-        className="relative dark:bg-mobile-bg-dark bg-mobile-bg lg:bg-cover lg:bg-center bg-no-repeat"
+        className="relative lg:bg-cover lg:bg-center bg-no-repeat"
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
-          height: '100%',
           zIndex: -1,
           backgroundImage: `url(${theme ? DarkModeBg : LightModeBg})`,
         }}
@@ -34,7 +33,6 @@ export const MotionRouter = () => {
           initial={{ opacity: 0 }}
           style={{
             position: 'absolute',
-            width: '100%',
             height: '100%',
             overflow: 'hidden',
           }}
