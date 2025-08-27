@@ -1,1 +1,1 @@
-export * from './basicInfo';
+export * from './basicInfo.tsx';
