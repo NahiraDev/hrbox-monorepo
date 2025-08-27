@@ -1,0 +1,15 @@
+export const organizationCharts = [
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+  { name: "Nahira", description: "Nahira Digital Accelerator", members: 24, Icon: '' },
+];
