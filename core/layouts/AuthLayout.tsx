@@ -175,7 +175,7 @@ export const AuthLayout = ({ content, props }: AuthLayoutProps) => {
                               text: t('sign_in_with_phone_number'),
                               size: 'lg',
                               className:
-                                'bg-white dark:bg-info-1000 text-sm justify-start gap-3 font-semibold shadow-custom text-[#0000008A] dark:text-white',
+                                'bg-white text-sm justify-start gap-3 font-semibold shadow-custom text-[#0000008A] dark:text-white',
                               startContent: (
                                 <Message className="text-primary-400 dark:text-white lg:text-[22px] text-base" />
                               ),

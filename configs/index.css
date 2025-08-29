@@ -1,19 +1,12 @@
 @import 'tailwindcss';
 @import '../core/assets/fonts/font.css';
-@import './colors.css';
 
 @config "./tailwind.config.js";
 @plugin './hero.ts';
+@layer theme, base, components, utilities;
+@import "./colors.css" layer(theme);
 
-@layer base {
-  :root {
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
 
-  body {
-    @apply font-sans bg-white text-black dark:bg-black dark:text-white;
-  }
-}
 html,
 body {
   transition: background-color 1s ease,

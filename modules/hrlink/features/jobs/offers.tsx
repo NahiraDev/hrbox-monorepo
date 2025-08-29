@@ -310,33 +310,33 @@ export default function JobOffers() {
                           </div>
                           <div className="flex justify-between pt-2">
                             <div className="flex flex-col gap-1">
-                              <span className="text-secondary-800 dark:text-white font-bold text-sm leading-normal">
+                              <span className="text-secondary-800 font-bold text-sm">
                                 {job.title}
                               </span>
                               <div className="flex items-center gap-2">
                                 <Location
-                                  className="text-secondary-1000 dark:text-white"
+                                  className="text-secondary-1000"
                                   size="16"
                                 />
-                                <span className="text-secondary-1000 dark:text-white text-sm font-normal">
+                                <span className="text-secondary-1000 text-sm">
                                   {job.location}
                                 </span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <Clock
-                                  className="text-secondary-1000 dark:text-white"
+                                  className="text-secondary-1000"
                                   size="16"
                                 />
-                                <span className="text-secondary-1000 dark:text-white text-sm font-normal">
+                                <span className="text-secondary-1000 text-sm">
                                   {job.type}
                                 </span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <DollarCircle
-                                  className="text-secondary-1000 dark:text-white"
+                                  className="text-secondary-1000"
                                   size="16"
                                 />
-                                <span className="text-secondary-1000 dark:text-white text-sm font-normal">
+                                <span className="text-secondary-1000 text-sm">
                                   {job.salary}
                                 </span>
                               </div>
@@ -346,7 +346,7 @@ export default function JobOffers() {
                                   size="20"
                                   variant="Bold"
                                 />
-                                <span className="text-info-700 dark:text-white text-sm font-normal">
+                                <span className="text-info-700 text-sm">
                                   {job.status}
                                 </span>
                               </div>

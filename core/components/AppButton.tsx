@@ -4,7 +4,7 @@ import clsx from 'clsx';
 const baseClasses = `
   rounded-2 text-white leading-5 text-base font-normal
   transition-colors duration-200 ease-in-out
-  bg-primary-400 dark:bg-surface-200
+  bg-primary-400 flex
   hover:bg-primary-500 dark:hover:bg-surface-300
   focus:outline-none focus:ring-2 focus:ring-primary-300 dark:focus:ring-surface-100 focus:ring-offset-2
   active:bg-primary-600 dark:active:bg-surface-400
@@ -54,6 +54,7 @@ const AppButton = ({ props }: { props: any }) => {
   const handlePress = onPress || onClick;
   return (
     <Button
+      disableAnimat
       className={clsx(
         baseClasses,
         sizeClasses[size],
@@ -61,11 +62,10 @@ const AppButton = ({ props }: { props: any }) => {
         className,
       )}
       color={color}
-      disableAnimat
-      ion={disableAnimation}
       disableRipple={disableRipple}
       endContent={endContent}
       fullWidth={fullWidth}
+      ion={disableAnimation}
       isDisabled={disabled}
       isIconOnly={isIconOnly}
       isLoading={isSubmitting}
@@ -76,8 +76,8 @@ const AppButton = ({ props }: { props: any }) => {
       startContent={startContent}
       type={type}
       variant={variant}
-      onPress={handlePress}
       onClick={handlePress}
+      onPress={handlePress}
       {...rest}
     >
       {content}

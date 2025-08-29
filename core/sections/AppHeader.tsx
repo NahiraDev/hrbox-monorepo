@@ -23,11 +23,13 @@ const AppHeader = () => {
   const location = useLocation();
   const [currentPages, setCurrentPages] = useState<string[]>([]);
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    const newTheme = theme === "light" ? "dark" : "light";
+    console.log("Switching theme to:", newTheme);
+    setTheme(newTheme);
+
+    // Force apply theme class to ensure it takes effect
+    document.documentElement.className = newTheme;
+    document.body.className = newTheme;
   };
 
   useEffect(() => {
@@ -37,6 +39,18 @@ const AppHeader = () => {
 
     setCurrentPages(['Home', ...pathSegments]);
   }, [location]);
+
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+    document.body.className = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    const currentTheme = localStorage.getItem("heroui-theme") || "light";
+    setTheme(currentTheme);
+  }, [setTheme]);
+
 
   return (
     <div className="flex items-center justify-between pb-8 pt-4 gap-10">
@@ -50,7 +64,7 @@ const AppHeader = () => {
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col gap-2">
             <div>
-              <span className="text-secondary-1000 dark:text-white text-2xl font-semibold leading-normal">
+              <span className="text-secondary-1000 text-2xl font-semibold leading-normal">
                 {location.pathname
                   .split('/')
                   .filter(Boolean)
@@ -71,7 +85,7 @@ const AppHeader = () => {
             <div className="flex gap-2">
               <Button
                 isIconOnly
-                className="bg-white dark:bg-info-1000 !rounded-4 p-2 border border-primary dark:border-surface-200"
+                className="bg-white !rounded-4 p-2 border border-primary-400"
                 variant="light"
               >
                 <Play
@@ -80,7 +94,7 @@ const AppHeader = () => {
                 />
               </Button>
               <Button
-                className="bg-white dark:bg-info-1000 !rounded-4 p-2 border border-primary dark:border-surface-200"
+                className="bg-white  !rounded-4 p-2 border border-primary dark:border-surface-200"
                 variant="light"
               >
                 <span className="text-secondary-1000 dark:text-white font-semibold">
@@ -88,7 +102,7 @@ const AppHeader = () => {
                 </span>
               </Button>
               <Button
-                className="bg-white dark:bg-info-1000 !rounded-4 p-2 border border-primary dark:border-surface-200"
+                className="bg-white rounded-4 p-2 border border-primary dark:border-surface-200"
                 variant="light"
               >
                 <span className="text-secondary-1000 dark:text-white font-semibold">
@@ -126,7 +140,7 @@ const AppHeader = () => {
             </div>
           </div>
         </div>
-        <Divider className="bg-primary dark:bg-surface-200" />
+        <Divider className="bg-primary-400" />
       </div>
     </div>
   );

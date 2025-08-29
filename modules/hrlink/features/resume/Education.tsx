@@ -15,36 +15,23 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import moment from "moment-jalaali";
 
 import { AppInput } from "@/components/AppInput.tsx";
 import { ResumeLayout } from "@/pages/Resume/Layout.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import { AppGeneralDetails } from "@/components/AppGeneralDetails.tsx";
-import { AppMap } from "@/components/AppMap.tsx";
-import { CloseIcon } from "@/icons/closeIcon.tsx";
-import { AppDispatch, RootState } from "@/redux/createStore.ts";
-import {
-  handleCreateEducationApi,
-  handleDeleteEducationApi,
-  handleFetchEducationListApi,
-  handleFetchUniversityEducationApi,
-  handleGetCitiesApi,
-  handleGetFieldOfEducationApi,
-} from "@/services/Resume/Education/apis.ts";
-import { AppDatePicker } from "@/components/AppDatePicker.tsx";
-import { AppAutoComplete } from "@/components/AppAutoComplete.tsx";
-import { Degree, FieldOfStudyType } from "@/utils/general.ts";
-import { AppModal } from "@/components/AppModal.tsx";
+import { UserLocation } from "../common";
+import { Degree, FieldOfStudyType } from "../../../../mock";
+import { useAppSelector , AppModal , AppAutoComplete , AppDatePicker, CloseIcon} from '../../../../core';
+import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '../common/apis';
 
 export default function ResumeInfo() {
+  const [fetchCity] = useLazyFetchCityQuery();
+  const [educationGetField] = useLazyEducationGetFieldsQuery();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
-  const educationData: any = useSelector(
-    (state: RootState) => state.resume.education,
-  );
-  const lang = useSelector((state: RootState) => state.language.lang);
+  const educationData = useAppSelector((state) => state.resume.education,);
+  const lang = useAppSelector((state) => state.language.lang);
   const currentPage = educationData?.pagination?.Page;
   const pageSize = educationData?.pagination?.PageSize;
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
@@ -52,6 +39,7 @@ export default function ResumeInfo() {
     useState<boolean>(false);
   const [openEditJobExperienceModal, setOpenEditJobExperienceModal] =
     useState<boolean>(false);
+
   const handleNavigateToHardSkills = () => {
     navigate("/resume/hard-skills");
   };
@@ -78,92 +66,6 @@ export default function ResumeInfo() {
     };
   });
 
-  const formikCreateAcademicHistory = useFormik({
-    initialValues: {
-      ThesisName: "",
-      Avarage: "",
-      Grade: "",
-      GradeName: "",
-      City: "",
-      FieldOfEducationIName: "",
-      FieldOfEducationId: "",
-      UniversityId: "",
-      YearBegin: "",
-      YearEnd: "",
-    },
-    validationSchema: Yup.object({
-      Grade: Yup.string().required(),
-      ThesisName: Yup.string().required(),
-      Avarage: Yup.string().required(),
-      City: Yup.string().required(),
-      GradeName: Yup.string().required(),
-      FieldOfEducationIName: Yup.string().required(),
-      FieldOfEducationId: Yup.string().required(),
-      UniversityId: Yup.string().required(),
-      YearBegin: Yup.string().required(),
-      YearEnd: Yup.string().required(),
-    }),
-    onSubmit: (values) => {
-      const newEducation = {
-        Grade: values.Grade,
-        GradeName: values.GradeName,
-        Avarage: values.Avarage,
-        ThesisName: values.ThesisName,
-        City: values.City,
-        FieldOfEducationIName: values.FieldOfEducationIName,
-        FieldOfEducationId: values.FieldOfEducationId,
-        UniversityId: values.UniversityId,
-        YearBegin: values.YearBegin,
-        YearEnd: values.YearEnd,
-      };
-
-      dispatch(handleCreateEducationApi(newEducation));
-    },
-  });
-
-  const formikEditAcademicHistory = useFormik({
-    initialValues: {
-      ThesisName: "",
-      Avarage: "",
-      Grade: "",
-      GradeName: "",
-      City: "",
-      FieldOfEducationIName: "",
-      FieldOfEducationId: "",
-      UniversityId: "",
-      YearBegin: "",
-      YearEnd: "",
-    },
-    validationSchema: Yup.object({
-      Grade: Yup.string().required(),
-      ThesisName: Yup.string().required(),
-      Avarage: Yup.string().required(),
-      City: Yup.string().required(),
-      GradeName: Yup.string().required(),
-      FieldOfEducationIName: Yup.string().required(),
-      FieldOfEducationId: Yup.string().required(),
-      UniversityId: Yup.string().required(),
-      YearBegin: Yup.string().required(),
-      YearEnd: Yup.string().required(),
-    }),
-    onSubmit: (values) => {
-      const newEducation = {
-        Grade: values.Grade,
-        GradeName: values.GradeName,
-        Avarage: values.Avarage,
-        ThesisName: values.ThesisName,
-        City: values.City,
-        FieldOfEducationIName: values.FieldOfEducationIName,
-        FieldOfEducationId: values.FieldOfEducationId,
-        UniversityId: values.UniversityId,
-        YearBegin: values.YearBegin,
-        YearEnd: values.YearEnd,
-      };
-
-      dispatch(handleCreateEducationApi(newEducation));
-    },
-  });
-
   const deleteEducation = (educationId: string) => {
     dispatch(handleDeleteEducationApi(educationId));
   };
@@ -171,8 +73,8 @@ export default function ResumeInfo() {
   useEffect(() => {
     dispatch(handleFetchEducationListApi());
     dispatch(handleFetchUniversityEducationApi());
-    dispatch(handleGetFieldOfEducationApi());
-    dispatch(handleGetCitiesApi());
+    fetchCity
+    educationGetField
   }, []);
 
   return (
@@ -311,11 +213,7 @@ export default function ResumeInfo() {
               </div>
               <div className="col-span-1 flex flex-col gap-3">
                 <AppGeneralDetails />
-                <AppMap
-                  props={{
-                    isEdit: true,
-                  }}
-                />
+                <UserLocation/>
               </div>
             </div>
             <AppModal
@@ -550,167 +448,7 @@ export default function ResumeInfo() {
               size="4xl"
               onClose={() => setOpenCreateJobExperienceModal(false)}
             >
-              <Form
-                className="w-full flex flex-col gap-6"
-                onSubmit={formikCreateAcademicHistory.handleSubmit}
-              >
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppInput
-                      props={{
-                        label: "GPA",
-                        required: true,
-                        error: formikCreateAcademicHistory.errors.Avarage,
-                        name: "Avarage",
-                        placeholder: "Please Enter Avarage ...",
-                        type: "text",
-                        value: formikCreateAcademicHistory.values.Avarage,
-                        formik: formikCreateAcademicHistory,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppInput
-                      props={{
-                        label: "Thesis title",
-                        required: true,
-                        error: formikCreateAcademicHistory.errors.ThesisName,
-                        name: "ThesisName",
-                        placeholder: "Please Enter Thesis Title ...",
-                        type: "text",
-                        value: formikCreateAcademicHistory.values.ThesisName,
-                        formik: formikCreateAcademicHistory,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppAutoComplete
-                      props={{
-                        name: "Grade",
-                        label: "Degree",
-                        placeholder: "Please Select Degree ...",
-                        required: true,
-                        value: formikCreateAcademicHistory.values.Grade,
-                        displayKey: `name`,
-                        formikCreateAcademicHistory,
-                        error:
-                          formikCreateAcademicHistory.touched.Grade &&
-                          formikCreateAcademicHistory.errors.Grade,
-                        data: Degree,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppAutoComplete
-                      props={{
-                        name: "FieldOfEducationIName",
-                        label: "University Type",
-                        placeholder: "Please Select Field Of Study ...",
-                        required: true,
-                        value:
-                          formikCreateAcademicHistory.values
-                            .FieldOfEducationIName,
-                        displayKey: `name`,
-                        formikCreateAcademicHistory,
-                        error:
-                          formikCreateAcademicHistory.touched
-                            .FieldOfEducationIName &&
-                          formikCreateAcademicHistory.errors
-                            .FieldOfEducationIName,
-                        data: FieldOfStudyType,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppAutoComplete
-                      props={{
-                        name: "FieldOfEducationIName",
-                        label: "Field Of Study",
-                        placeholder: "Please Select Field Of Study ...",
-                        required: true,
-                        value:
-                          formikCreateAcademicHistory.values
-                            .FieldOfEducationIName,
-                        displayKey: `Name`,
-                        formikCreateAcademicHistory,
-                        error:
-                          formikCreateAcademicHistory.touched
-                            .FieldOfEducationIName &&
-                          formikCreateAcademicHistory.errors
-                            .FieldOfEducationIName,
-                        data: educationData.fieldOfStudy,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppAutoComplete
-                      props={{
-                        name: "UniversityId",
-                        label: "Place of Study",
-                        placeholder: "Please Select University ...",
-                        required: true,
-                        value: formikCreateAcademicHistory.values.UniversityId,
-                        displayKey: `Name`,
-                        formikCreateAcademicHistory,
-                        error:
-                          formikCreateAcademicHistory.touched.UniversityId &&
-                          formikCreateAcademicHistory.errors.UniversityId,
-                        data: educationData.universityList,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppAutoComplete
-                      props={{
-                        name: "City",
-                        label: "City",
-                        placeholder: "Please Select City ...",
-                        required: true,
-                        value: formikCreateAcademicHistory.values.City,
-                        displayKey: `Name`,
-                        formikCreateAcademicHistory,
-                        error:
-                          formikCreateAcademicHistory.touched.City &&
-                          formikCreateAcademicHistory.errors.City,
-                        data: educationData.cities,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2" />
-                </div>
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppDatePicker
-                      props={{
-                        label: "Start Date",
-                        required: true,
-                        error: formikCreateAcademicHistory.errors.YearBegin,
-                        name: "YearBegin",
-                        placeholder: "Please Enter Start Date ...",
-                        formik: formikCreateAcademicHistory,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppDatePicker
-                      props={{
-                        label: "End Date",
-                        required: true,
-                        error: formikCreateAcademicHistory.errors.YearEnd,
-                        name: "YearBegin",
-                        placeholder: "Please Enter End Date ...",
-                        formik: formikCreateAcademicHistory,
-                      }}
-                    />
-                  </div>
-                </div>
-              </Form>
+
             </AppModal>
           </div>
         ),

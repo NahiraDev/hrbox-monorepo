@@ -11,7 +11,6 @@ const LoginByOtpForm = () => {
     handleBlur,
     handleSubmit,
     isSubmitting,
-    formError,
     setFieldValue,
   } = useFormContext();
   const { t } = useTranslation();
@@ -34,8 +33,7 @@ const LoginByOtpForm = () => {
               className="rounded-5 !px-0"
               classNames={{
                 input: `${lang === 'fa' && 'text-left'}`,
-                inputWrapper:
-                  ' !bg-white dark:!bg-info-1000 border border-primary-0 rounded-5 !backdrop_blur[35px] dark:border-none dark:!shadow-secondary w-full px-0',
+                inputWrapper: '!bg-white dark:!bg-info-1000 border border-primary-0 rounded-5 !backdrop_blur[35px] dark:border-none dark:!shadow-secondary w-full px-0',
               }}
               endContent={
                 lang === 'fa' ? (
@@ -161,7 +159,6 @@ const LoginByOtpForm = () => {
           }}
         />
       </div>
-      {formError && <div className="text-red-500 text-sm">{formError}</div>}
     </Form>
   );
 };
