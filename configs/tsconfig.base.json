@@ -16,7 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,

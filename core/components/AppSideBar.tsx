@@ -86,14 +86,13 @@ const AppSideBar = ({ menu }: any) => {
 
   return (
     <div
-      className={`flex relative rounded-lg py-6 px-4 bg-white dark:bg-info-1000 shadow-shadow-light-tight/2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
+      className={`flex relative rounded-lg py-6 px-4 bg-white shadow-lg transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
     >
       <AppButton
         props={{
-          className:
-            'flex justify-center items-center absolute top-[50px] right-[-10px] shadow-[0px_1px_2px_rgba(0,0,0,0.20)]',
+          className: 'absolute top-[50px] right-[-10px] shadow-[0px_1px_2px_rgba(0,0,0,0.20)]',
           color: 'white',
-          size: '',
+          size: 'sm',
           radius: 'full',
           onPress: () => setFullWidth(!fullWidth),
           content: (

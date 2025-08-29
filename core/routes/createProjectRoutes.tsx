@@ -1,5 +1,6 @@
 import { type RouteObject, Navigate } from 'react-router-dom';
 import * as React from 'react';
+import RouteResolver from './RouteResolver';
 
 interface ProjectComponents {
   [key: string]: React.ComponentType<any>;
@@ -15,7 +16,7 @@ export function createProjectRoutes(
       path,
       element: (
         <React.Suspense fallback={<div>Loading...</div>}>
-          <Component />
+          <RouteResolver Component={Component} />
         </React.Suspense>
       ),
     }),
@@ -52,4 +53,3 @@ export function createProjectRoutes(
     menu,
   };
 }
-

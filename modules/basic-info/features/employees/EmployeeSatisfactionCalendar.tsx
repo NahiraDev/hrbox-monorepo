@@ -6,15 +6,13 @@ import EmployeeSatisfactionCalendar1 from '../../components/satisfactionCalnder.
 const EmployeeSatisfactionCalendar = () => {
   return (
     <BaseLayout
-      props={{
-        children: (
-          <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
-            <div className="">
-              <EmployeeSatisfactionCalendar1 />
-            </div>
-          </div>
-        ),
-      }}
+     content={
+       <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
+         <div className="">
+           <EmployeeSatisfactionCalendar1 />
+         </div>
+       </div>
+     }
     />
   );
 };

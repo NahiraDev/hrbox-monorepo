@@ -77,19 +77,27 @@ export const HRLinkApiEndpoints = {
   user: {
     get: `${BaseUrl}/User/GetUser`,
     edit: `${BaseUrl}/User/Edit`,
-    addLocation: `${BaseUrl}/MasterService/AddLocation`,
-    editLocation: `${BaseUrl}/MasterService/EditLocation`,
+    add: `${BaseUrl}/User/Add`,
+    getMilitaryStatus: `${BaseUrl}/User/GetUserMilitaryStatus`,
+    getUserCity: `${BaseUrl}/User/getUserCity`,
+    downloadResume: `${BaseUrl}/User/DownloadResume`,
+  },
+
+  common: {
     getJobGroup: `${BaseUrl}/MasterService/GetJobGroup`,
     getJobCategory: `${BaseUrl}/MasterService/GetJobCategory`,
     getMilitaryStatus: `${BaseUrl}/MasterService/GetMilitaryStatus`,
-    getPlaceByLevel: `${BaseUrl}/MasterService/GetPlaceByLevel?level=1`,
+    getPlaceByLevel: `${BaseUrl}/MasterService/GetPlaceByLevel`,
+    getIndustry: `${BaseUrl}/MasterService/GetIndustrys`,
+    getFieldOfEducation: `${BaseUrl}/MasterService/GetFieldOfEducation`,
+    getRequestOrg: `${BaseUrl}/MasterService/GetRequestOrg`,
+    addLocation: `${BaseUrl}/MasterService/AddLocation`,
+    editLocation: `${BaseUrl}/MasterService/EditLocation`,
+    getLocation: `${BaseUrl}/MasterService/GetLocation`,
+    saveTemplateFile: `${BaseUrl}/MasterService/SaveTempFile`,
   },
 
   dashboard: {
     getData: `${BaseUrl}/Dashboard/GetAllAdaptionByUserId`,
-  },
-
-  auth: {
-    logout: `/DesktopModules/SSO/api/Login/LogOff`,
   },
 };
