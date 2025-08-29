@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
 import {
   Table,
   TableHeader,
@@ -6,48 +7,166 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-  // Button,
 } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
-import { useState } from 'react';
+import { usePaginationManager } from 'core/helpers';
 
-import { CloseIcon } from '../icons';
-import { AppButton } from '../index.ts';
+import { AppDeleteModal, AppShowModeModal } from '../components';
+import { loader } from '../lottie';
 
+import AppButton from './AppButton';
 import AppPagination from './AppPagination';
-import AppModal from './AppModal';
 
-const AppTable = ({ props }: { props: any }) => {
-  const {
-    data,
-    columns,
-    onOpenEditDialog,
-    hasPagination = true,
-    hasPadding = true,
-    hasShadow = true,
-    hasRowBorder = true,
-  } = props;
+interface AppTableProps {
+  data: any;
+  columns?: {
+    key: string;
+    label: string;
+    render?: (value: any, row: any) => React.ReactNode;
+    sortable?: boolean;
+  }[];
+  onEdit?: (row: any) => void;
+  onDelete?: (row: any) => void;
+  hasPagination?: boolean;
+  loading?: boolean;
+  error?: string;
+  pageSize?: number;
+  paginationConfig?: {
+    total: number;
+    pageKey?: string;
+    sizeKey?: string;
+    defaultSize?: number;
+  };
+  enableActions?: boolean;
+}
 
-  const [isDeleteOpen, setDeleteOpen] = useState(false);
+const AppTable = ({
+  data,
+  columns,
+  onEdit,
+  onDelete,
+  hasPagination = true,
+  paginationConfig,
+  enableActions = true,
+  loading = false,
+  error,
+  pageSize = 10,
+}: AppTableProps) => {
+  const deleteModal = AppDeleteModal.useModal();
+  const showModeModal = AppShowModeModal.useModal();
+  const [LottieComponent, setLottieComponent] = useState<any>(null);
+  const pagination = usePaginationManager({
+    total: Math.ceil((data?.length || 0) / pageSize),
+  });
+  const paginatedData = useMemo(() => {
+    if (!hasPagination) return data;
 
-  if (!data.length) return <div className="p-4">No data available</div>;
+    const startIndex = (pagination.currentPage - 1) * pageSize;
+
+    return data.slice(startIndex, startIndex + pageSize);
+  }, [data, pagination.currentPage, pageSize, hasPagination]);
+
+  useEffect(() => {
+    import('lottie-react').then((mod) => {
+      setLottieComponent(() => mod.default);
+    });
+  }, []);
+
+  if (!LottieComponent) return null;
 
   const autoColumns =
     columns ||
-    Object.keys(data[0])
-      .filter((key) => key !== 'id')
-      .map((key) => ({ key, label: key }));
+    (data?.length
+      ? Object.keys(data[0])
+          .filter((key) => key !== 'id')
+          .map((key) => ({
+            key,
+            label: key
+              .replace(/([A-Z])/g, ' $1')
+              .replace(/^./, (str) => str.toUpperCase()),
+            sortable: false,
+            searchable: true,
+          }))
+      : []);
 
-  const renderActions = () => (
+  const renderCell = (value: any, row: any, columnKey: string) => {
+    if (columns?.find((col) => col.key === columnKey)?.render) {
+      return columns.find((col) => col.key === columnKey)?.render!(value, row);
+    }
+
+    if (typeof value === 'boolean') {
+      return value ? 'Yes' : 'No';
+    }
+
+    if (value === null || value === undefined) {
+      return '';
+    }
+
+    if (columnKey.toLowerCase().includes('date')) {
+      return value ? new Date(value).toLocaleDateString() : 'Present';
+    }
+
+    return value;
+  };
+
+  const handleRowClick = (row: any) => {
+    if (enableActions) {
+      const columnPairs = (columns || []).reduce((acc: any[][], col, index) => {
+        if (index % 2 === 0) {
+          acc.push([]);
+        }
+        acc[acc.length - 1].push(col);
+
+        return acc;
+      }, []);
+
+      showModeModal.open({
+        columnPairs: columnPairs,
+        selectedRow: row,
+      });
+    }
+  };
+
+  if (error) {
+    return (
+      <div
+        className={`p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl shadow-light-tight/1`}
+      >
+        <div className="text-center text-red-600 dark:text-red-400">
+          Error: {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="p-8 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1">
+        <div className="flex justify-center items-center">
+          <LottieComponent animationData={loader} loop={true} />
+        </div>
+      </div>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <div
+        className={`p-4 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1`}
+      >
+        <div className="text-center text-gray-500">No data available</div>
+      </div>
+    );
+  }
+  const renderActions = (row: any) => (
     <div className="relative flex items-center justify-center gap-2">
       <Tooltip content="Edit">
         <AppButton
           props={{
-            size: '',
-            radius: 'none',
-            onPress: () => {
-              onOpenEditDialog;
-            },
+            size: 'sm',
+            radius: 'full',
+            variant: 'light',
+            onPress: () => onEdit?.(row),
             content: (
               <span className="text-lg cursor-pointer">
                 <Edit size="16" />
@@ -59,9 +178,15 @@ const AppTable = ({ props }: { props: any }) => {
       <Tooltip content="Delete">
         <AppButton
           props={{
-            size: '',
-            radius: 'none',
-            onPress: () => setDeleteOpen(true),
+            size: 'sm',
+            radius: 'full',
+            variant: 'light',
+            onPress: () => {
+              deleteModal.open({
+                onConfirm: onDelete?.(row),
+                onCancel: deleteModal.close,
+              });
+            },
             content: (
               <span className="text-lg cursor-pointer">
                 <Trash size="16" />
@@ -73,107 +198,87 @@ const AppTable = ({ props }: { props: any }) => {
     </div>
   );
 
+  const tableColumns = (
+    <>
+      {autoColumns.map((col) => (
+        <TableColumn
+          key={col.key}
+          className="text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"
+        >
+          {col.label}
+        </TableColumn>
+      ))}
+      {enableActions && (
+        <TableColumn className="text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12">
+          Actions
+        </TableColumn>
+      )}
+    </>
+  );
+
+  const tableRows = (row: { [x: string]: any }) => (
+    <>
+      {autoColumns.map((col, index) => (
+        <TableCell
+          key={row.id ?? index}
+          className="text-xs font-normal text-black text-center"
+        >
+          {renderCell(row[col.key], row, col.key)}
+        </TableCell>
+      ))}
+      {enableActions && (
+        <TableCell className="text-xs text-secondary-400">
+          {renderActions(row)}
+        </TableCell>
+      )}
+    </>
+  );
+
   return (
-    <div
-      className={`bg-primary-50 w-full border border-primary dark:bg-[rgba(4,66,92,0.60)] ${hasPadding && 'pt-5 pl-5 pr-6'} pb-4 h-full !rounded-[14px] ${hasShadow && 'shadow-shadow-light-tight/1'}`}
-    >
-      <Table aria-label="Customizable Table" className="!h-[95%]">
-        <TableHeader className="!rounded-0">
-          {autoColumns.map((col: any) => (
-            <TableColumn
-              key={col.key}
-              className="text-white dark:text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"
-            >
-              {col.label}
-            </TableColumn>
-          ))}
-          <TableColumn className="text-white dark:text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center">
-            Actions
-          </TableColumn>
-        </TableHeader>
+    <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
+      <Table
+        className="!h-full min-h-[300px]"
+        onRowAction={(row: any) => handleRowClick?.(row)}
+      >
+        <TableHeader className="!rounded-0">{tableColumns}</TableHeader>
         <TableBody>
-          {data.map((row: any, index: number) => (
-            <TableRow
-              key={row.id ?? index}
-              className={`${hasRowBorder && 'border-b border-[#dcf0f966] dark:border-[#04425c66]'} hover:bg-surface dark:hover:bg-[#04425c66] !rounded-4 transition-colors !h-12`}
-            >
-              {autoColumns.map((col: any) => (
-                <TableCell
-                  key={col.key}
-                  className="text-xs font-normal text-black text-center"
-                >
-                  {row[col.key] ??
-                    (col.key.toLowerCase().includes('date') ? 'Present' : '')}
-                </TableCell>
-              ))}
-              <TableCell className="text-xs font-normal text-secondary-400 dark:text-secondary-0">
-                {renderActions()}
+          {paginatedData.length === 0 ? (
+            <TableRow>
+              <TableCell
+                className="text-center py-8"
+                colSpan={autoColumns.length + (enableActions ? 1 : 0)}
+              >
+                No data available
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            paginatedData.map(
+              (row: { [x: string]: any; id?: any }, index: any) => (
+                <TableRow
+                  key={row.id ?? index}
+                  className="hover:bg-surface dark:hover:bg-[#04425c66] !rounded-4 transition-colors !h-12 cursor-pointer"
+                >
+                  {tableRows(row)}
+                </TableRow>
+              ),
+            )
+          )}
         </TableBody>
       </Table>
-      {hasPagination && (
-        <div className="flex justify-end">
+
+      {hasPagination && paginationConfig && (
+        <div className="flex justify-end mt-4">
           <AppPagination
             props={{
+              total: Math.ceil((data?.length || 0) / pageSize),
               size: 'md',
-              total: data.length,
             }}
           />
         </div>
       )}
 
-      <AppModal
-        isOpen={isDeleteOpen}
-        size="2xl"
-        onClose={() => setDeleteOpen(false)}
-      >
-        <AppModal.Header>
-          <div className="flex justify-between items-center w-full">
-            <div className="bg-danger flex gap-2 !rounded-4 !px-3 !py-1.5 items-center">
-              <Trash className="text-white" size="18" />
-              <span className="text-xl text-white font-normal leading-normal">
-                Would it be acceptable for you to remove this?
-              </span>
-            </div>
-            <AppButton
-              props={{
-                size: '',
-                radius: 'none',
-                onPress: () => setDeleteOpen(false),
-                content: <CloseIcon />,
-              }}
-            />
-          </div>
-        </AppModal.Header>
-        <AppModal.Footer>
-          <AppButton
-            props={{
-              size: '',
-              radius: 'radius-4',
-              onPress: () => setDeleteOpen(false),
-              content: (
-                <span className="text-secondary-800 !px-3 !py-1.5 !font-normal !min-w-fit">
-                  Cancel
-                </span>
-              ),
-            }}
-          />
-          <AppButton
-            props={{
-              size: '',
-              radius: 'radius-4',
-              onPress: () => setDeleteOpen(false),
-              content: (
-                <span className="text-secondary-800 !px-3 !py-1.5 !font-normal !min-w-fit">
-                  Delete
-                </span>
-              ),
-            }}
-          />
-        </AppModal.Footer>
-      </AppModal>
+      <AppDeleteModal />
+      <AppShowModeModal />
     </div>
   );
 };

@@ -1,5 +1,11 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
+import {
+  useLazyEducationGetFieldsQuery,
+  useLazyFetchCityQuery,
+} from '@module/hrlink/features/common';
+import { useLazyFetchUniversityQuery } from '@module/hrlink/features/resume/apis';
+import { useEffect } from 'react';
 
 import {
   AppAutoComplete,
@@ -33,7 +39,7 @@ export const formValidationEducation = Yup.object().shape({
   EndDate: Yup.string().required(),
 });
 
-export const handleChangePasswordEducation = (values: any) => {
+export const handleSubmitEducation = (values: any) => {
   return {
     UniversityId: values.UniversityId,
     FieldOfStudy: values.FieldOfStudy,
@@ -50,6 +56,22 @@ export const handleChangePasswordEducation = (values: any) => {
 export const EducationForm = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormContext();
+  const [fetchCity, { isLoading: cityIsLoading, data: cityData }] =
+    useLazyFetchCityQuery();
+  const [
+    educationGetField,
+    { isLoading: educationGetFieldIsLoading, data: educationGetFieldData },
+  ] = useLazyEducationGetFieldsQuery();
+  const [
+    fetchUniversity,
+    { isLoading: universityIsLoading, data: universityData },
+  ] = useLazyFetchUniversityQuery();
+
+  useEffect(() => {
+    fetchCity({});
+    educationGetField({});
+    fetchUniversity({});
+  }, []);
 
   return (
     <Form className="w-full flex flex-col gap-6" onSubmit={handleSubmit}>
@@ -116,11 +138,11 @@ export const EducationForm = () => {
               name: 'FieldOfStudy',
               label: 'Field Of Study',
               displayKey: 'Name',
-              value: values.FieldOfStudy,
               onChange: handleChange,
               onBlur: handleBlur,
+              value: values.FieldOfStudy,
               error: touched.FieldOfStudy && errors.FieldOfStudy,
-              data: educationData.fieldOfStudy,
+              data: !universityIsLoading && universityData,
             }}
           />
         </div>
@@ -134,7 +156,7 @@ export const EducationForm = () => {
               onBlur: handleBlur,
               value: values.UniversityId,
               error: touched.UniversityId && errors.UniversityId,
-              data: educationData.universityList,
+              data: !educationGetFieldIsLoading && educationGetFieldData,
             }}
           />
         </div>
@@ -150,7 +172,7 @@ export const EducationForm = () => {
               onBlur: handleBlur,
               value: values.City,
               error: touched.City && errors.City,
-              data: educationData.cities,
+              data: !cityIsLoading && cityData,
             }}
           />
         </div>

@@ -1,63 +1,74 @@
 import createBaseApi from '../../../../../../core/apis/baseApi';
-import { createEndpoint } from '../../../../../../core';
+import { createEndpoint , createPaginatedEndpoint } from '../../../../../../core';
 import { HRLinkApiEndpoints } from '../../../../app/endpoints';
+import {  } from 'core/apis/createPaginationEndpoint';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'AcademicHistory', [
-  'AcademicHistory',
+const BaseApi = createBaseApi('https://api.hrbox.com', 'Education', [
+  'Education',
 ] as const);
 
 export const EducationApi = BaseApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchEducation: createEndpoint(
+    fetchEducation: createPaginatedEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getList,
       'GET',
-      ['AcademicHistory'],
+      ['Education'],
     ),
-    searchEducation: createEndpoint(
+
+    searchEducation: createPaginatedEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.search,
       'GET',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     fetchEducationDetail: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getDetail,
       'GET',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     fetchUniversity: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getUniversity,
       'GET',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     fetchField: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getField,
       'GET',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     createEducation: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.create,
       'POST',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     editEducation: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.edit,
       'POST',
-      ['AcademicHistory'],
+      ['Education'],
     ),
     deleteEducation: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.delete,
       'DELETE',
-      ['AcademicHistory'],
+      ['Education'],
     ),
   }),
   overrideExisting: false,
 });
 
-export const { useFetchEducationQuery , useSearchEducationQuery ,useFetchEducationDetailQuery,useFetchUniversityQuery , useFetchFieldQuery, useCreateEducationMutation , useEditEducationMutation , useDeleteEducationMutation } = EducationApi;
+export const {
+  useLazyFetchEducationQuery,
+  useSearchEducationQuery,
+  useFetchEducationDetailQuery,
+  useLazyFetchUniversityQuery,
+  useFetchFieldQuery,
+  useCreateEducationMutation,
+  useEditEducationMutation,
+  useDeleteEducationMutation,
+} = EducationApi;

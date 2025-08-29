@@ -31,38 +31,6 @@ export default function ResumeCourses() {
     navigate("/resume/achievements-accolades");
   };
 
-  // const formikCreateCourse = useFormik({
-  //   initialValues: {
-  //     CourseTypeId: 0,
-  //     UserId: 0,
-  //     Name: "",
-  //     Description: "",
-  //     Duration: 0,
-  //     Level: 0,
-  //     CreatedOnDate: "2021-12-20T17:55:00.51",
-  //     LastModifiedOnDate: "2021-12-20T17:55:00.51",
-  //     CreatedByUserId: 0,
-  //     LastModifiedByUserId: 0
-  //   },
-  //   validationSchema: Yup.object({
-  //     Name: Yup.string().required(),
-  //     Date: Yup.date().required(),
-  //     AttachmentUrl: Yup.string().required(),
-  //     Comment: Yup.string()
-  //   }),
-  //   onSubmit: (values) => {
-  //     const newAwardData = {
-  //       // Name: values.Name,
-  //       // GainYear: values.Date.split("/")[0],
-  //       // AttachmentUrl: values.AttachmentUrl,
-  //       // Comment: values.Comment,
-  //       // GainMonth: values.Date.split("/")[1]
-  //     };
-  //
-  //     dispatch(handleCreateAwardApi(newAwardData));
-  //   }
-  // });
-
   useEffect(() => {
     dispatch(handleFetchCourseListApi());
   }, []);
