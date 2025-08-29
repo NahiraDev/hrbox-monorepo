@@ -5,10 +5,9 @@ import {
   ReceiveSquare,
   UserOctagon,
 } from 'iconsax-react';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import EducationModal from '@module/hrlink/features/resume/modals/EducationModal';
-
+import {useNavigate} from 'react-router-dom';
 import { UserLocation, GeneralInformation } from '../common';
 import {
   AppPageTitle,
@@ -42,25 +41,26 @@ export const Education = () => {
           icon={<UserOctagon className="text-white" size="22" />}
           title="Education"
         />
+        <AppButton
+          props={{
+            color: 'white',
+            size: 'md',
+            onPress: () => navigate('/resume/job-experience'),
+            content: <ArrowLeft2 className="text-secondary-1000" size="24" />,
+          }}
+        />
         <div className="flex gap-2">
           <AppButton
             props={{
               color: 'white',
               size: 'md',
-              onPress: navigate('/resume/job-experience'),
-              content: <ArrowLeft2 className="text-secondary-1000" size="24" />,
-            }}
-          />
-          <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              onPress: navigate('/resume/hard-skills'),
+              onPress: () => navigate('/resume/hard-skills'),
               content: (
                 <ArrowRight2 className="text-secondary-1000" size="24" />
               ),
             }}
           />
+
           <div>
             <div className="flex items-center gap-2">
               <AppSearchInput

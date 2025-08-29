@@ -9,7 +9,7 @@ import {
   AppTextArea,
   genderOptions,
   maritalStatusOptions,
-} from '../../../../../core';
+} from 'core/index';
 import * as Yup from 'yup';
 
 export const initialValuesGeneralInformation = {

@@ -5,7 +5,7 @@ import React from 'react';
 interface AppInputProps {
   label?: string;
   required?: boolean;
-  error?: string;
+  error?: any;
   name?: string;
   type?: string;
   value?: string;

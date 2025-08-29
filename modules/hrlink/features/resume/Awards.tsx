@@ -1,20 +1,11 @@
 import { Button } from '@heroui/button';
-import {
-  Add,
-  ArrowLeft2,
-  ArrowRight2,
-  Edit,
-  Link21,
-  ReceiveSquare,
-  SearchNormal1,
-  Trash,
-} from 'iconsax-react';
-import { Form, Input } from '@heroui/react';
+import { Add, ArrowLeft2, ArrowRight2, Edit, Link21, ReceiveSquare, SearchNormal1, Trash } from 'iconsax-react';
+import { Card, CardBody, CardHeader, Form, Input } from '@heroui/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ResumeLayout } from '@/pages/Resume/Layout.tsx';
@@ -30,12 +21,10 @@ import {
   handleCreateAwardApi,
   handleDeleteAwardApi,
   handleEditAwardApi,
-  handleFetchAwardListApi,
   handleSearchAwardApi,
 } from '@/services/Resume/Awards/apis.ts';
 import { AppDispatch, RootState } from '@/redux/createStore.ts';
 import { AppModal } from '@/components/AppModal.tsx';
-import axios from 'axios';
 // import axios from "axios";
 
 export default function ResumeAchievementsAccolades() {
@@ -192,12 +181,7 @@ export default function ResumeAchievementsAccolades() {
                               </button>
                             }
                             placeholder="Search Sth"
-                            startContent={
-                              <SearchNormal1
-                                className="text-secondary-1000 dark:text-white"
-                                size="22"
-                              />
-                            }
+                            startContent={<SearchNormal1 className="text-secondary-1000 dark:text-white" size="22" />}
                             type="text"
                             onChange={(e) => handleSearchAward(e)}
                           />
@@ -213,9 +197,7 @@ export default function ResumeAchievementsAccolades() {
                   onPress={() => setOpenCreateModal(true)}
                 >
                   <Add className="text-secondary-1000 dark:text-white" size="16" />
-                  <span className="text-secondary-1000 dark:text-white font-semibold text-base">
-                    Add New One
-                  </span>
+                  <span className="text-secondary-1000 dark:text-white font-semibold text-base">Add New One</span>
                 </Button>
                 <Button
                   className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2"
@@ -223,9 +205,7 @@ export default function ResumeAchievementsAccolades() {
                   variant="light"
                 >
                   <ReceiveSquare className="text-secondary-1000 dark:text-white" size="16" />
-                  <span className="text-secondary-1000 dark:text-white font-semibold text-base">
-                    Download Resume
-                  </span>
+                  <span className="text-secondary-1000 dark:text-white font-semibold text-base">Download Resume</span>
                 </Button>
               </div>
             </div>
@@ -233,52 +213,49 @@ export default function ResumeAchievementsAccolades() {
               <div className="col-span-3">
                 <div className="flex flex-col h-full justify-between">
                   <div className="grid grid-cols-2 gap-3">
-                    {awards.map((achievement: any, index) => (
-                      <div
+                    {awards.map((achievement: any, index: number) => (
+                      <Card
                         key={index}
-                        className="rounded-5 shadow-shadow-light-tight/1 dark:shadow-shadow-dark-tight/1 p-4 bg-white dark:bg-info-1000"
+                        className="rounded-5 shadow-shadow-light-tight/1 dark:shadow-shadow-dark-tight/1 p-4 bg-white dark:bg-info-1000 flex flex-col gap-2.5"
                       >
-                        <div className="flex flex-col gap-2.5">
-                          <div className="flex flex-col gap-1.5 border-b-1 border-netural-100 pb-1.5">
-                            <div className="flex justify-between">
-                              <div className="flex gap-1.5">
-                                <CupStar
-                                  props={{
-                                    color: '#04070e',
-                                  }}
-                                />
-                                <span className="text-base font-semibold text-secondary-1000 dark:text-white">
-                                  {achievement.name}
-                                </span>
-                              </div>
-                              <div className="flex gap-1">
-                                <Button
-                                  className="!h-5 !w-5 !min-w-fit flex items-center gap-2 !p-1 !rounded-2 bg-white dark:bg-info-1000 shadow-shadow-light-tight/1"
-                                  variant="light"
-                                  onPress={() => {
-                                    setEditAchievementData(achievement);
-                                    setOpenEditModal(true);
-                                  }}
-                                >
-                                  <Edit className="text-secondary-1000 dark:text-white" size="14" />
-                                </Button>
-                                <Button
-                                  className="!h-5 !w-5 !min-w-fit flex items-center gap-2 !p-1 !rounded-2 bg-white dark:bg-info-1000 shadow-shadow-light-tight/1"
-                                  variant="light"
-                                  onPress={() => {
-                                    handleOpenDeleteModal(achievement?.Id);
-                                    setOpenDeleteModal(true);
-                                  }}
-                                >
-                                  <Trash
-                                    className="text-secondary-1000 dark:text-white"
-                                    size="14"
-                                  />
-                                </Button>
-                              </div>
+                        <CardHeader className="flex flex-col gap-1.5 border-b-1 border-netural-100 pb-1.5">
+                          <div className="flex justify-between">
+                            <div className="flex gap-1.5">
+                              <CupStar
+                                props={{
+                                  color: '#04070e',
+                                }}
+                              />
+                              <span className="text-base font-semibold text-secondary-1000 dark:text-white">
+                                {achievement.name}
+                              </span>
+                            </div>
+                            <div className="flex gap-1">
+                              <Button
+                                className="!h-5 !w-5 !min-w-fit flex items-center gap-2 !p-1 !rounded-2 bg-white dark:bg-info-1000 shadow-shadow-light-tight/1"
+                                variant="light"
+                                onPress={() => {
+                                  setEditAchievementData(achievement);
+                                  setOpenEditModal(true);
+                                }}
+                              >
+                                <Edit className="text-secondary-1000 dark:text-white" size="14" />
+                              </Button>
+                              <Button
+                                className="!h-5 !w-5 !min-w-fit flex items-center gap-2 !p-1 !rounded-2 bg-white dark:bg-info-1000 shadow-shadow-light-tight/1"
+                                variant="light"
+                                onPress={() => {
+                                  handleOpenDeleteModal(achievement?.Id);
+                                  setOpenDeleteModal(true);
+                                }}
+                              >
+                                <Trash className="text-secondary-1000 dark:text-white" size="14" />
+                              </Button>
                             </div>
                           </div>
-                          <div className="flex flex-col gap-2">
+                        </CardHeader>
+                        <CardBody className="flex flex-col gap-2">
+                          <div className="">
                             <div className="flex justify-between">
                               <div className="flex flex-col gap-2">
                                 <div className="flex gap-4">
@@ -297,19 +274,19 @@ export default function ResumeAchievementsAccolades() {
                                     {achievement.GainYear + '/' + achievement.GainMonth}
                                   </span>
                                 </div>
+                                <div className="flex gap-4">
+                                  <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
+                                    Description:
+                                  </span>
+                                  <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
+                                    {achievement.Comment}
+                                  </span>
+                                </div>
                               </div>
                             </div>
-                            <div className="flex gap-4">
-                              <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
-                                Description:
-                              </span>
-                              <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
-                                {achievement.Comment}
-                              </span>
-                            </div>
                           </div>
-                        </div>
-                      </div>
+                        </CardBody>
+                      </Card>
                     ))}
                   </div>
                   <div className="flex justify-center">
@@ -360,9 +337,7 @@ export default function ResumeAchievementsAccolades() {
                           color: '#fff',
                         }}
                       />
-                      <span className="text-white font-normal text-xl">
-                        Edit Achievements and accolades
-                      </span>
+                      <span className="text-white font-normal text-xl">Edit Achievements and accolades</span>
                     </div>
                   </div>
                 </div>
@@ -371,11 +346,7 @@ export default function ResumeAchievementsAccolades() {
               size="3xl"
               onClose={() => setOpenEditModal(false)}
             >
-              <Form
-                className="w-full flex flex-col gap-6"
-                id="edit-award-form"
-                onSubmit={formikEditAward.handleSubmit}
-              >
+              <Form className="w-full flex flex-col gap-6" id="edit-award-form" onSubmit={formikEditAward.handleSubmit}>
                 <div className="flex gap-[52px] w-full">
                   <div className="flex flex-col gap-1 w-1/2">
                     <AppInput
@@ -469,9 +440,7 @@ export default function ResumeAchievementsAccolades() {
                           color: '#fff',
                         }}
                       />
-                      <span className="text-white font-normal text-xl">
-                        Add Achievements and accolades
-                      </span>
+                      <span className="text-white font-normal text-xl">Add Achievements and accolades</span>
                     </div>
                   </div>
                 </div>
