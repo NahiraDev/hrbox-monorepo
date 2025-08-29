@@ -1,1 +1,1 @@
-export * from './GeneralInformationForm'
+export * from '../../resume/forms/GeneralInformationForm'

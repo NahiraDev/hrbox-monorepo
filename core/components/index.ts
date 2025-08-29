@@ -13,6 +13,7 @@ import AppLoader from './AppLoader';
 import AppModal from './AppModal';
 import AppErrorToast from './AppErrorToast';
 import AppPageTitle from './AppPageTitle';
+import AppNavigateButton from './AppNavigateButton';
 import AppDeleteModal from './AppDeleteModal';
 import AppShowModeModal from './AppShowModeModal';
 
@@ -32,6 +33,7 @@ export {
   AppErrorToast,
   AppDatePicker,
   AppPageTitle,
+  AppNavigateButton,
   AppDeleteModal,
   AppShowModeModal
 };
