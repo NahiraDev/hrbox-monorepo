@@ -123,29 +123,6 @@ export default function ResumeAchievementsAccolades() {
     },
   });
 
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       `https://hrlink.hrbox.me:50443/DesktopModules/SSO/api/Login/Login`,
-  //       {
-  //         UserName: '4311690622',
-  //         Password: 'Nim@4311',
-  //       },
-  //       {
-  //         method: 'POST',
-  //         withCredentials: true,
-  //       },
-  //     )
-  //     .then(() => {
-  //       dispatch(handleFetchAwardListApi());
-  //     });
-  // axios.get(
-  //   "https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api/Award/GetList",
-  //   { withCredentials: true },
-  // );
-  // dispatch(handleFetchAwardListApi());
-  // }, []);
-
   return (
     <ResumeLayout
       props={{

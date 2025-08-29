@@ -83,3 +83,71 @@ export const FieldOfStudyType = [
     name: "علوم پزشکی",
   },
 ];
+
+export const genderOptions = [
+  {
+    key: 1,
+    value: "male",
+    label: { fa: "مرد", en: "Male" },
+  },
+  {
+    key: 2,
+    value: "female",
+    label: { fa: "زن", en: "Female" },
+  },
+  {
+    key: 3,
+    value: "non_binary",
+    label: { fa: "غیردودویی (Non-binary)", en: "Non-binary" },
+  },
+  {
+    key: 4,
+    value: "trans_male",
+    label: { fa: "ترنس مرد", en: "Trans Male" },
+  },
+  {
+    key: 5,
+    value: "trans_female",
+    label: { fa: "ترنس زن", en: "Trans Female" },
+  },
+  {
+    key: 6,
+    value: "genderqueer",
+    label: { fa: "جندرکوییر (Genderqueer)", en: "Genderqueer" },
+  },
+  {
+    key: 7,
+    value: "agender",
+    label: { fa: "بی‌جنسیت (Agender)", en: "Agender" },
+  },
+  {
+    key: 8,
+    value: "bigender",
+    label: { fa: "دو جنسیتی (Bigender)", en: "Bigender" },
+  },
+  {
+    key: 9,
+    value: "genderfluid",
+    label: { fa: "جنسیت سیال (Genderfluid)", en: "Genderfluid" },
+  },
+  {
+    key: 10,
+    value: "intersex",
+    label: { fa: "میان‌جنسی (Intersex)", en: "Intersex" },
+  },
+  {
+    key: 11,
+    value: "two_spirit",
+    label: { fa: "دو روح (Two-Spirit)", en: "Two-Spirit" },
+  },
+  {
+    key: 12,
+    value: "other",
+    label: { fa: "سایر", en: "Other" },
+  },
+  {
+    key: 13,
+    value: "prefer_not_to_say",
+    label: { fa: "ترجیح می‌دهم نگویم", en: "Prefer not to say" },
+  },
+];

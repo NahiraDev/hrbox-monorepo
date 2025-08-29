@@ -1,5 +1,23 @@
 import { Input } from '@heroui/react';
 import clsx from 'clsx';
+import React from 'react';
+
+interface AppInputProps {
+  label?: string;
+  required?: boolean;
+  error?: string;
+  name?: string;
+  type?: string;
+  value?: string;
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  size?: 'sm' | 'md' | 'lg';
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  className?: string;
+}
 
 const sizeClasses: Record<
   string,
@@ -30,7 +48,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppInput = ({ props }: { props: any }) => {
+const AppInput = ({ props }: { props: AppInputProps }) => {
   const {
     label,
     required,

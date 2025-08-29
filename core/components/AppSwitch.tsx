@@ -32,6 +32,7 @@ const AppSwitch = ({ props }: { props: any }) => {
   const {
     isSelected,
     onChange,
+    onBlur,
     value,
     label,
     size = 'sm',
@@ -65,7 +66,7 @@ const AppSwitch = ({ props }: { props: any }) => {
       isSelected={isSelected}
       size={size}
       onValueChange={onChange}
-      onBlur={handleChange}
+      onBlur={onBlur}
       value={value}
       {...rest}
     >
