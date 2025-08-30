@@ -6,8 +6,7 @@ import {
 } from 'core/components';
 import { Personalcard } from 'iconsax-react';
 import { FormProvider } from 'core/context';
-import { LoginForm } from '@module/sso/features/HRLink/forms';
-import { formValidationEducation ,handleSubmitEducation, initialValuesEducation} from '../forms';
+import { EducationForm, formValidationEducation, handleSubmitEducation, initialValuesEducation } from '../forms';
 import { useCreateEducationMutation } from '../apis';
 
 const EducationModal = () => {
@@ -26,7 +25,7 @@ const EducationModal = () => {
             await createEducation(handleSubmitEducation(values)).unwrap();
           }}
         >
-          <LoginForm />
+          <EducationForm />
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -44,7 +43,8 @@ const EducationModal = () => {
               size: 'md',
               variant: 'light',
               color:'secondary',
-              content: 'Close',
+              type: 'submit',
+              content: 'Submit',
             }}
           />
         </div>

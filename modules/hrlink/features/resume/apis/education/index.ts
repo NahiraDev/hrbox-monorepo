@@ -15,13 +15,6 @@ export const EducationApi = BaseApi.injectEndpoints({
       'GET',
       ['Education'],
     ),
-
-    searchEducation: createPaginatedEndpoint(
-      build,
-      HRLinkApiEndpoints.resume.education.search,
-      'GET',
-      ['Education'],
-    ),
     fetchEducationDetail: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getDetail,

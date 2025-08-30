@@ -23,8 +23,7 @@ export const Education = () => {
   const navigate = useNavigate();
   const [deleteEducation] = useDeleteEducationMutation();
   const educationModal = EducationModal.useModal();
-  const [fetchEducation, { isLoading, data, isError }] =
-    useLazyFetchEducationQuery();
+  const [fetchEducation, { isLoading, data, isError }] = useLazyFetchEducationQuery();
 
   const handleEdit = (row: any) => {
     educationModal.open({ row, isEditMode: true });
@@ -37,10 +36,7 @@ export const Education = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex justify-between">
-        <AppPageTitle
-          icon={<UserOctagon className="text-white" size="22" />}
-          title="Education"
-        />
+        <AppPageTitle icon={<UserOctagon className="text-white" size="22" />} title="Education" />
         <AppButton
           props={{
             color: 'white',
