@@ -2,18 +2,48 @@ import { MessageEdit, Trash } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { Avatar } from '@heroui/react';
 
+import { AppButton } from '../../../core';
+
 const ReportBox = () => {
   return (
-    <div className="p-4 h-120  overflow-y-auto">
-      <div className="flex gap-30">
-        <span className="text-red-500">Sign</span>
+    <div
+      className="p-4 h-100  overflow-y-auto
+      [&::-webkit-scrollbar]:w-3
+      [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  "
+    >
+      <div className="flex gap-20">
+        <span >Sign</span>
         <div className="flex gap-1  ">
-          <Button isIconOnly>
-            <MessageEdit />
-          </Button>
-          <Button isIconOnly>
-            <Trash />
-          </Button>
+          <AppButton
+            props={{
+              className: 'bg-white p-1',
+              size: '',
+              radius: '',
+              onPress: () => {},
+              content: (
+                <div>
+                  <MessageEdit className="text-[#080E1C]" />
+                </div>
+              ),
+            }}
+          />
+          <AppButton
+            props={{
+              className: 'bg-white p-1  ',
+              size: '',
+              radius: '',
+              onPress: () => {},
+              content: (
+                <div>
+                  <Trash className="text-[#080E1C] " />
+                </div>
+              ),
+            }}
+          />
         </div>
       </div>
       {/*<div>*/}
@@ -42,17 +72,17 @@ const ReportBox = () => {
 };
 const User = () => {
   return (
-    <div className="flex gap-3 items-center mt-2">
+    <div className="flex gap-3 items-center  mb-4 mt-2">
       <div>
         <Avatar
-          className="w-11 h-11"
+          className="w-10 h-10"
           radius="sm"
           src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
         />
       </div>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-1 items-center">
         <span className="text-info-400 text-xs">Zahra Pakniyat</span>
-        <Button className="h-6 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary text-[10px]">
+        <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary text-[10px]">
           uiUx designer
         </Button>
       </div>
