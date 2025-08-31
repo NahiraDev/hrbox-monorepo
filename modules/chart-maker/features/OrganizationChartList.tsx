@@ -1,12 +1,17 @@
 import { AppPagination } from '../../../core';
 import { OrganizationCard } from '../components';
+import {organizationCharts} from "../../../mock";
 
-// -------------------- صفحه --------------------
+
 function OrganizationChartList() {
   return (
     <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-4 gap-3">
-        <OrganizationCard />
+      <div className="grid grid-cols-4 2xl:grid-cols-6 gap-3">
+        {
+          organizationCharts.map((item: any)=> (
+            <OrganizationCard props={{item}}/>
+          ))
+        }
       </div>
 
       <div className="flex justify-center">
