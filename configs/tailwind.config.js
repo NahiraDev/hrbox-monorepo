@@ -8,6 +8,14 @@ export default {
     '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
     '../modules/**/index.html',
   ],
+  theme: {
+    extend: {
+      fontSize: {
+        'xxs': '0.65rem',
+        'xxl': '1.4rem',
+      },
+    },
+  },
   plugins: [
     heroui({
       prefix: "heroui", // prefix for themes variables
@@ -15,6 +23,10 @@ export default {
       defaultTheme: "light", // default theme from the themes object
       defaultExtendTheme: "light", // default theme to extend on custom themes
       themes: {
+        fontSize: {
+          'xxs': '0.65rem',
+          'xxl': '1.4rem',
+        },
         light: {
           colors: {
             background: "#FFF",

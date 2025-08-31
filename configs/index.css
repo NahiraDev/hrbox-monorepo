@@ -7,11 +7,16 @@
 @layer theme, base, components, utilities;
 @import "./colors.css" layer(theme);
 
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
   transition: background-color 1s ease,
   color 1s ease;
+  height: 100%;
+  overflow: hidden;
 }
 
 .rtl {

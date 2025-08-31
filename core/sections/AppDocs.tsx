@@ -30,12 +30,12 @@ const AppDocs = () => {
             <motion.div
               key="open"
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center bg-surface rounded-6 w-fit h-[128px]"
+              className="flex items-center bg-surface rounded-6 w-fit"
               exit={{ opacity: 0, y: 100 }}
               initial={{ opacity: 0, y: 100 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex items-center bg-surface rounded-6 w-fit h-[128px]">
+              <div className="flex items-center bg-surface rounded-6 w-fit">
                 <div className="py-2 px-8 flex flex-col items-center gap-4">
                   <button
                     className="bg-netural-150 rounded-4 w-24 h-2"
