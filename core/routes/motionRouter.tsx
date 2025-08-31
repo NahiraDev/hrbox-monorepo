@@ -31,11 +31,7 @@ export const MotionRouter = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
-          style={{
-            position: 'absolute',
-            height: '100%',
-            overflow: 'hidden',
-          }}
+
           transition={{ duration: 0.5 }}
         >
           {element}
