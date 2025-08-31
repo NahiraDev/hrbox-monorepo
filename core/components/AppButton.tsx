@@ -4,10 +4,10 @@ import clsx from 'clsx';
 const baseClasses = `
   rounded-2 text-white leading-5 text-base font-normal
   transition-colors duration-200 ease-in-out
-  bg-primary-400 flex
+  flex min-w-fit
   hover:bg-primary-500 dark:hover:bg-surface-300
   focus:outline-none focus:ring-2 focus:ring-primary-300 dark:focus:ring-surface-100 focus:ring-offset-2
-  active:bg-primary-600 dark:active:bg-surface-400
+  active:bg-primary-600
   disabled:opacity-50 disabled:cursor-not-allowed
 `;
 
