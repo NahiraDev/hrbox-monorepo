@@ -5,7 +5,6 @@ import { useSearchParams } from 'react-router-dom';
 interface AppPaginationProps {
   props: {
     size?: 'sm' | 'md' | 'lg';
-    total: number;
     initialPage?: number;
     showControls?: boolean;
     dotsJump?: number;
@@ -16,7 +15,6 @@ interface AppPaginationProps {
 const AppPagination = ({ props }: AppPaginationProps) => {
   const {
     size = 'md',
-    total,
     initialPage = 1,
     showControls = true,
     dotsJump = 3,

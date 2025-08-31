@@ -102,7 +102,6 @@ export default function ResumeAchievementsAccolades() {
       const editAwardData = {
         Id: values.Id,
         Name: values.Name,
-        GainYear: values.Date.split('/')[0],
         AttachmentUrl: values.AttachmentUrl,
         Comment: values.Comment,
         GainMonth: values.Date.split('/')[1],
@@ -404,113 +403,6 @@ export default function ResumeAchievementsAccolades() {
                         placeholder: 'Please Enter Description ...',
                         value: formikEditAward.values.Comment,
                         formik: formikEditAward,
-                      }}
-                    />
-                  </div>
-                </div>
-              </Form>
-            </AppModal>
-
-            <AppModal
-              footer={
-                <div>
-                  <Button
-                    className="text-xl font-normal"
-                    color="default"
-                    variant="light"
-                    onPress={() => setOpenCreateModal(false)}
-                  >
-                    Close
-                  </Button>
-                  <Button
-                    className="bg-secondary-400 text-xl font-normal text-white"
-                    form="create-award-form"
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </div>
-              }
-              header={
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between items-center">
-                    <div className="bg-secondary-400 shadow-shadow-light-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit">
-                      <CupStar
-                        props={{
-                          color: '#fff',
-                        }}
-                      />
-                      <span className="text-white font-normal text-xl">Add Achievements and accolades</span>
-                    </div>
-                  </div>
-                </div>
-              }
-              isOpen={openCreateModal}
-              size="3xl"
-              onClose={() => setOpenCreateModal(false)}
-            >
-              <Form
-                className="w-full flex flex-col gap-6"
-                id="create-award-form"
-                onSubmit={formikCreateAward.handleSubmit}
-              >
-                <div className="flex gap-[52px] w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppInput
-                      props={{
-                        label: 'Title',
-                        required: true,
-                        error: formikCreateAward.errors.Name,
-                        name: 'Name',
-                        placeholder: 'Please Enter Name ...',
-                        type: 'text',
-                        value: formikCreateAward.values.Name,
-                        formik: formikCreateAward,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppDatePicker
-                      props={{
-                        label: 'Date',
-                        required: true,
-                        error: formikCreateAward.errors.Date,
-                        name: 'Date',
-                        placeholder: 'Please Enter Date ...',
-                        formik: formikCreateAward,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex gap-[52px] w-full">
-                  <div className="flex flex-col gap-1 w-1/2">
-                    <AppInput
-                      props={{
-                        label: 'Upload portfolio',
-                        required: true,
-                        error: formikCreateAward.errors.AttachmentUrl,
-                        name: 'AttachmentUrl',
-                        placeholder: 'Please Enter Attachment Portfolio ...',
-                        type: 'text',
-                        value: formikCreateAward.values.AttachmentUrl,
-                        formik: formikCreateAward,
-                        endContent: <Link21 size="24" />,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1 w-1/2" />
-                </div>
-                <div className="flex gap-14 w-full">
-                  <div className="flex flex-col gap-1 w-full">
-                    <AppTextArea
-                      props={{
-                        label: 'Description',
-                        required: true,
-                        error: formikCreateAward.errors.Comment,
-                        name: 'Comment',
-                        placeholder: 'Please Enter Description ...',
-                        value: formikCreateAward.values.Comment,
-                        formik: formikCreateAward,
                       }}
                     />
                   </div>

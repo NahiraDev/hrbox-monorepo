@@ -14,12 +14,6 @@ export const AwardApi = BaseApi.injectEndpoints({
       'GET',
       ['Award'],
     ),
-    searchAwards: createEndpoint(
-      build,
-      HRLinkApiEndpoints.resume.award.search,
-      'GET',
-      ['Award'],
-    ),
     fetchAwardDetail: createEndpoint(
       build,
       HRLinkApiEndpoints.resume.award.getDetail,
