@@ -1,7 +1,6 @@
 import createBaseApi from '../../../../../../core/apis/baseApi';
 import { createEndpoint , createPaginatedEndpoint } from '../../../../../../core';
 import { HRLinkApiEndpoints } from '../../../../app/endpoints';
-import {  } from 'core/apis/createPaginationEndpoint';
 
 const BaseApi = createBaseApi('https://api.hrbox.com', 'Education', [
   'Education',
@@ -12,13 +11,6 @@ export const EducationApi = BaseApi.injectEndpoints({
     fetchEducation: createPaginatedEndpoint(
       build,
       HRLinkApiEndpoints.resume.education.getList,
-      'GET',
-      ['Education'],
-    ),
-
-    searchEducation: createPaginatedEndpoint(
-      build,
-      HRLinkApiEndpoints.resume.education.search,
       'GET',
       ['Education'],
     ),
@@ -64,7 +56,6 @@ export const EducationApi = BaseApi.injectEndpoints({
 
 export const {
   useLazyFetchEducationQuery,
-  useSearchEducationQuery,
   useFetchEducationDetailQuery,
   useLazyFetchUniversityQuery,
   useFetchFieldQuery,

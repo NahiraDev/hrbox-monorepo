@@ -71,10 +71,7 @@ export class ServiceRegistry {
     string,
     { label: string; path: string; icon?: React.ReactNode }[]
   >[] {
-    const menus: Record<
-      string,
-      { label: string; path: string; icon?: React.ReactNode }[]
-    >[] = [];
+    const menus: Record<string, { label: string; path: string; icon?: React.ReactNode }[]>[] = [];
 
     for (const plugin of this.plugins.values()) {
       if (plugin.menu) {
@@ -86,13 +83,14 @@ export class ServiceRegistry {
   }
 
   getActiveMenu(pathname: string) {
-    const parts = pathname.split("/").filter(Boolean);
+    const parts = pathname.split('/').filter(Boolean);
 
     if (parts.length < 2) return [];
 
     const [moduleName, featureName] = parts;
 
     const plugin = this.plugins.get(moduleName);
+
     if (!plugin || !plugin.menu) return [];
 
     return plugin.menu[featureName] || [];

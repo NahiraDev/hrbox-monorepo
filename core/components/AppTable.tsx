@@ -55,9 +55,11 @@ const AppTable = ({
   const deleteModal = AppDeleteModal.useModal();
   const showModeModal = AppShowModeModal.useModal();
   const [LottieComponent, setLottieComponent] = useState<any>(null);
+
   const pagination = usePaginationManager({
     total: Math.ceil((data?.length || 0) / pageSize),
   });
+
   const paginatedData = useMemo(() => {
     if (!hasPagination) return data;
 

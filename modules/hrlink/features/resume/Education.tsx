@@ -23,8 +23,7 @@ export const Education = () => {
   const navigate = useNavigate();
   const [deleteEducation] = useDeleteEducationMutation();
   const educationModal = EducationModal.useModal();
-  const [fetchEducation, { isLoading, data, isError }] =
-    useLazyFetchEducationQuery();
+  const [fetchEducation, { isLoading, data, isError }] = useLazyFetchEducationQuery();
 
   const handleEdit = (row: any) => {
     educationModal.open({ row, isEditMode: true });

@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 @import '../core/assets/fonts/font.css';
-@import './colors.css';
 
 @config "./tailwind.config.js";
 @plugin './hero.ts';
+
 @layer theme, base, components, utilities;
 @import "./colors.css" layer(theme);
 
