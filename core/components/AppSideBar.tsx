@@ -115,7 +115,7 @@ const AppSideBar = ({ menu }: any) => {
 
       <div className="flex flex-col items-center w-full">
         <div
-          className={`flex flex-col h-full w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}
+          className={`flex flex-col w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}
         >
           {menu.map((item:any) => (
             <div key={item.name} className="border-transparent">
