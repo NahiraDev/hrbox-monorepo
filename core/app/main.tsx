@@ -34,10 +34,7 @@ export const renderApp = (id: string) => {
           <AuthProvider>
             <HeroProviderWrapper>
               <ReduxProvider store={store}>
-                <PersistGate
-                  loading={<div>Loading...</div>}
-                  persistor={persistor}
-                >
+                <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
                   <ModalManagementProvider>
                     <RootRouterLoader />
                   </ModalManagementProvider>

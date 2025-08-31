@@ -1,8 +1,9 @@
 import { useTheme } from '@heroui/use-theme';
+import { useEffect } from 'react';
 
 const Logo = () => {
   const { theme } = useTheme();
-
+  console.log(theme);
   return theme === 'light' ? (
     <svg
       fill="none"

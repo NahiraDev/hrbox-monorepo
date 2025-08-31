@@ -1,7 +1,7 @@
 // import { days } from 'mock';
 
 import { BaseLayout } from '../../../../core';
-import EmployeeSatisfactionCalendar1 from '../../components/satisfactionCalnder.tsx';
+import EmployeeSatisfactionCalendar1 from '../../components/satisfactionCalnder';
 
 const EmployeeSatisfactionCalendar = () => {
   return (

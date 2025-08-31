@@ -15,6 +15,7 @@ import AvatarUser from '../assets/img/inpersonate-avatar.png';
 import { HourGlass, Logo } from '../icons';
 
 import AppBreadcrumb from './AppBreadCrumb';
+import { AppButton } from 'core/components';
 
 const AppHeader = () => {
   const { theme, setTheme } = useTheme();
@@ -22,14 +23,11 @@ const AppHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentPages, setCurrentPages] = useState<string[]>([]);
+
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     console.log("Switching theme to:", newTheme);
     setTheme(newTheme);
-
-    // Force apply theme class to ensure it takes effect
-    document.documentElement.className = newTheme;
-    document.body.className = newTheme;
   };
 
   useEffect(() => {
@@ -40,17 +38,18 @@ const AppHeader = () => {
     setCurrentPages(['Home', ...pathSegments]);
   }, [location]);
 
-
   useEffect(() => {
-    document.documentElement.className = theme;
-    document.body.className = theme;
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+
+    // document.documentElement.style.colorScheme = theme;
+    // document.body.style.background = theme === 'dark' ? '#04070E' : '#FFFFFF';
+    // document.body.style.color = theme === 'dark' ? '#FFFFFF' : '#04070E';
+
+    localStorage.setItem("heroui-theme", theme);
   }, [theme]);
-
-  useEffect(() => {
-    const currentTheme = localStorage.getItem("heroui-theme") || "light";
-    setTheme(currentTheme);
-  }, [setTheme]);
-
 
   return (
     <div className="flex items-center justify-between pb-8 pt-4 gap-10">
@@ -83,18 +82,21 @@ const AppHeader = () => {
           </div>
           <div className="flex gap-2 mb-3">
             <div className="flex gap-2">
+              <AppButton
+                props={{
+                  color:`primary`,
+                  size: 'md',
+                  radius: 'lg',
+                  content:(
+                    <Play
+                      className="text-secondary-1000"
+                      size="24"
+                    />
+                  )
+                }}
+              />
               <Button
-                isIconOnly
-                className="bg-white !rounded-4 p-2 border border-primary-400"
-                variant="light"
-              >
-                <Play
-                  className="text-secondary-1000 dark:text-white"
-                  size="24"
-                />
-              </Button>
-              <Button
-                className="bg-white  !rounded-4 p-2 border border-primary dark:border-surface-200"
+                className="bg-white  !rounded-4 p-2 border border-primary"
                 variant="light"
               >
                 <span className="text-secondary-1000 dark:text-white font-semibold">
