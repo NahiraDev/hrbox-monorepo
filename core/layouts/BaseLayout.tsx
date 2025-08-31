@@ -4,18 +4,28 @@ import React from 'react';
 import { serviceRegistry } from '../helpers';
 import { AppSupportButton, AppSideBar } from '../components';
 import { AppDocs, AppHeader } from '../sections';
+import DarkModeBackground from '../assets/img/darkmode-bg.png';
+import LightModeBackground from '../assets/img/lightmode-bg.png';
+import { useTheme } from '@heroui/use-theme';
 
 interface BaseLayoutProps {
   content: React.ReactNode;
   subHeader?: React.ReactNode;
 }
 
-export const BaseLayout = ({ content , subHeader }: BaseLayoutProps) => {
+export const BaseLayout = ({ content, subHeader }: BaseLayoutProps) => {
   const { pathname } = useLocation();
   const activeMenu = serviceRegistry.getActiveMenu(pathname);
-
+  const { theme } = useTheme();
   return (
-    <div className="flex flex-col h-screen shadow-tight pr-16 pl-8">
+    <div
+      className="flex flex-col h-screen shadow-tight pr-16 pl-8"
+      style={{
+        backgroundImage: `url(${theme === 'light' ? LightModeBackground : DarkModeBackground})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+      }}
+    >
       <AppHeader />
 
       <div className="flex flex-1 min-h-0 gap-4">
