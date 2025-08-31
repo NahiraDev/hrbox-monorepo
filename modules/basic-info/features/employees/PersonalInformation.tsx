@@ -7,7 +7,7 @@ const PersonalInformation = () => {
   return (
     <>
       <BlueHeaderEmployees />
-      <div className="flex ">
+      <div classzName="flex ">
         <div>
           <ReportBox />
         </div>
