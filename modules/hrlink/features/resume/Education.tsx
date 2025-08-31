@@ -36,7 +36,10 @@ export const Education = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex justify-between">
-        <AppPageTitle icon={<UserOctagon className="text-white" size="22" />} title="Education" />
+        <AppPageTitle
+          icon={<UserOctagon className="text-white" size="22" />}
+          title="Education"
+        />
         <AppButton
           props={{
             color: 'white',
