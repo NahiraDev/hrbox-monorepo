@@ -30,7 +30,7 @@ const getLayoutedElements = async (
 ): Promise<{ nodes: Node[]; edges: Edge[] }> => {
   const isHorizontal = options['elk.direction'] === 'RIGHT';
 
-  // هر node می‌تونه اندازه خودش رو داشته باشه، fallback 150x50
+
   const graph = {
     id: 'root',
     layoutOptions: options,
