@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { AuthLayout, BaseLayout } from '../layouts';
 import { useAppSelector } from '../redux';
 import { AppErrorToast } from '../components';
+import { useTheme } from '@heroui/use-theme';
 
 interface AppProps {
   children: React.ReactNode;
@@ -14,7 +15,6 @@ export const App = ({ children }: AppProps) => {
   const lang = useAppSelector((state) => state.language.lang);
   const [dir, setDir] = useState<'ltr' | 'rtl'>(lang === 'en' ? 'ltr' : 'rtl');
   const { pathname } = useLocation();
-
   const isSSOModule = pathname.startsWith('/sso');
   const Layout = isSSOModule ? AuthLayout : BaseLayout;
 

@@ -68,7 +68,6 @@ const AppPagination = ({ props }: AppPaginationProps) => {
       radius="sm"
       showControls={showControls}
       size={size}
-      total={total}
       onChange={handlePageChange}
     />
   );

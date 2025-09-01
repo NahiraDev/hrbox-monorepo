@@ -101,7 +101,7 @@ export const AuthLayout = ({ content, props }: AuthLayoutProps) => {
           className="flex lg:flex-row flex-col justify-between lg:gap-[156px]"
           style={{ zoom: !isXLargeScreen ? '1' : '1.3' }}
         >
-          <div className="lg:hidden flex justify-center py-4 fixed top-0 left-0 w-full border-b border-netural-150 bg-mobile-header dark:border-[rgba(51,51,51,0.4)] dark:bg-[linear-gradient(245deg,_rgba(2,44,61,0.8)_28.83%,_rgba(1,16,26,0.8)_85.57%)] backdrop-blur-md">
+          <div className="lg:hidden flex justify-center py-4 fixed top-0 left-0 w-full border-b border-neutral-150 bg-mobile-header dark:border-[rgba(51,51,51,0.4)] dark:bg-[linear-gradient(245deg,_rgba(2,44,61,0.8)_28.83%,_rgba(1,16,26,0.8)_85.57%)] backdrop-blur-md">
             <div className="p-2">
               <LogoMobile />
             </div>
@@ -159,11 +159,11 @@ export const AuthLayout = ({ content, props }: AuthLayoutProps) => {
                   {content}
                   {!isRegister && (
                     <div className="flex items-center justify-center gap-3 w-full">
-                      <hr className="lg:w-[128px] w-full h-[1px] text-netural-400" />
-                      <span className="text-netural-400 dark:netural-250 text-sm font-bold">
+                      <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
+                      <span className="text-neutral-400 dark:neutral-250 text-sm font-bold">
                         {t('or')}
                       </span>
-                      <hr className="lg:w-[128px] w-full h-[1px] text-netural-400" />
+                      <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
                     </div>
                   )}
                   <div className="w-full md:max-w-xs flex flex-col gap-3">

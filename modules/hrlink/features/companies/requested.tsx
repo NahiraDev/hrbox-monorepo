@@ -263,7 +263,7 @@ export default function RequestedCompanies() {
                         }}
                         onClick={() => handleOpenCompany(company.name)}
                       >
-                        <div className="flex justify-between border-b-1 border-netural-100 pb-1">
+                        <div className="flex justify-between border-b-1 border-neutral-100 pb-1">
                           <div className="flex items-center gap-2">
                             <img
                               alt={`${company.name} Logo`}
@@ -303,7 +303,7 @@ export default function RequestedCompanies() {
                         </div>
                         <div>
                           <div className="flex flex-col gap-4">
-                            <span className="font-bold text-sm text-secondary-800 dark:text-netural-50 text-start">
+                            <span className="font-bold text-sm text-secondary-800 dark:text-neutral-50 text-start">
                               {company.title}
                             </span>
                             <div className="flex gap-4">

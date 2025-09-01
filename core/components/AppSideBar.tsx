@@ -75,6 +75,7 @@ const AppSideBar = ({ menu }: any) => {
     i18n.changeLanguage(lang);
     document.documentElement.lang = lang;
   }, []);
+
   useEffect(() => {
     const currentPath = location.pathname;
     const activeItem = menu.find((item:any) => item.route === currentPath);
@@ -86,7 +87,7 @@ const AppSideBar = ({ menu }: any) => {
 
   return (
     <div
-      className={`flex relative rounded-lg py-6 px-4 bg-white shadow-lg transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
+      className={`flex relative rounded-lg py-4 px-4 bg-white shadow-light-tight-2 dark:shadow-dark-tight-2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
     >
       <AppButton
         props={{
@@ -144,7 +145,7 @@ const AppSideBar = ({ menu }: any) => {
                         <span
                           className={`cursor-pointer text-[12px] ${
                             activeTab === item.name
-                              ? 'text-primary '
+                              ? 'text-primary-400'
                               : 'text-secondary-1000'
                           }`}
                         >
@@ -160,7 +161,7 @@ const AppSideBar = ({ menu }: any) => {
         </div>
 
         <div
-          className={`flex flex-col ${fullWidth ? 'items-start pl-1' : ''} gap-[10px] pt-3 border-t-1 border-secondary-1000 dark:border-white w-full`}
+          className={`flex flex-col ${fullWidth ? 'items-start pl-1' : ''} gap-[10px] pt-3 border-t-1 border-secondary-1000 w-full`}
         >
           {bottomMenu.map((item) => (
             <div

@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import AppDocItem from './AppDocItems';
+import { AppButton } from 'core/components';
 
 const AppDocs = () => {
   const { t } = useTranslation();
@@ -26,23 +27,22 @@ const AppDocs = () => {
     <>
       <AnimatePresence>
         {closeDocs ? (
-          <div className="w-full flex justify-center z-50">
+          <div className="w-full flex justify-center z-50 h-28 relative">
             <motion.div
               key="open"
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center bg-surface rounded-6 w-fit"
+              className="flex items-center bg-surface dark:bg-surface-200 rounded-6 w-fit shadow-light-tight-2 dark:shadow-dark-tight-2"
               exit={{ opacity: 0, y: 100 }}
               initial={{ opacity: 0, y: 100 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex items-center bg-surface rounded-6 w-fit">
+              <div className="flex items-center bg-surface dark:bg-surface-200 rounded-6 w-fit">
                 <div className="py-2 px-8 flex flex-col items-center gap-4">
                   <button
-                    className="bg-netural-150 rounded-4 w-24 h-2"
+                    className="bg-neutral-200 rounded-4 w-24 h-2 absolute top-2"
                     onClick={() => setCloseDocs(false)}
                   />
-                  <div className="flex items-center gap-10 h-full">
-                    {/* DocItems */}
+                  <div className="flex items-center gap-5 h-full">
                     <AppDocItem
                       props={{
                         to: '/dashboard',
@@ -170,9 +170,11 @@ const AppDocs = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="my-2 mx-4">
-              <button
-                className="bg-netural-150 rounded-4 w-48 h-3"
-                onClick={() => setCloseDocs(true)}
+              <AppButton
+                props={{
+                  className:'bg-neutral-150 rounded-4 w-48 h-3',
+                  onClick:() => setCloseDocs(true)
+                }}
               />
             </div>
           </motion.div>

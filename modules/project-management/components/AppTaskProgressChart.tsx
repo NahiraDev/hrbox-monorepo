@@ -26,7 +26,7 @@ export const AppTaskProgressChart = () => {
 
   return (
     <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 h-full">
-      <div className="pb-2 border-b-1 border-netural-100">
+      <div className="pb-2 border-b-1 border-neutral-100">
         <span className="text-base font-semibold text-secondary-1000">
           Progress Status Of Tasks
         </span>

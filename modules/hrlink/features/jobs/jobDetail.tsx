@@ -190,7 +190,7 @@ export default function JobOffers() {
             </div>
             <div className="grid grid-cols-2 gap-3 h-full">
               <div className="rounded-[14px] shadow-shadow-light-tight/1 bg-white dark:bg-info-1000 px-4 py-3 flex flex-col gap-4">
-                <div className="border-b-1 border-netural-100 dark:border-netural-700 pb-2 flex flex-col gap-6">
+                <div className="border-b-1 border-neutral-100 dark:border-neutral-700 pb-2 flex flex-col gap-6">
                   <div className="grid grid-cols-2 justify-between">
                     <div className="flex gap-6">
                       <div>
@@ -305,7 +305,7 @@ export default function JobOffers() {
                     </span>
                   </div>
                 </div>
-                <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-netural-100">
+                <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-neutral-100">
                   <div className="grid grid-cols-2">
                     <div className="flex gap-6">
                       <DollarCircle
@@ -371,7 +371,7 @@ export default function JobOffers() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-netural-100 dark:border-netural-700">
+                <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-neutral-100 dark:border-neutral-700">
                   <div className="flex gap-4">
                     <LampCharge
                       className="text-[#292D32] dark:text-white"
@@ -400,7 +400,7 @@ export default function JobOffers() {
                     </span>
                   </div>
                 </div>
-                <div className="pb-4 border-b-1 border-netural-100">
+                <div className="pb-4 border-b-1 border-neutral-100">
                   <div className="flex flex-col gap-1.5">
                     <div className="flex gap-4">
                       <TickCircle

@@ -217,7 +217,7 @@ export default function ResumeAchievementsAccolades() {
                         key={index}
                         className="rounded-5 shadow-shadow-light-tight/1 dark:shadow-shadow-dark-tight/1 p-4 bg-white dark:bg-info-1000 flex flex-col gap-2.5"
                       >
-                        <CardHeader className="flex flex-col gap-1.5 border-b-1 border-netural-100 pb-1.5">
+                        <CardHeader className="flex flex-col gap-1.5 border-b-1 border-neutral-100 pb-1.5">
                           <div className="flex justify-between">
                             <div className="flex gap-1.5">
                               <CupStar

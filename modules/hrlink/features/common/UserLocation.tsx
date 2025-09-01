@@ -40,7 +40,7 @@ export const UserLocation = () => {
 
   return (
     <div className="bg-white p-3 rounded-5 flex flex-col gap-1 h-2/5 shadow-shadow-light-tight/1">
-      <div className="flex justify-between pb-1.5 border-b border-netural-100">
+      <div className="flex justify-between pb-1.5 border-b border-neutral-100">
         <span className="text-secondary-1000 text-base font-semibold">
           Location
         </span>

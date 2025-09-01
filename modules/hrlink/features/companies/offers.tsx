@@ -222,7 +222,7 @@ export default function CompanyGeneralInfo() {
                       //   backgroundBlendMode: darkMode ? "darken" : "lighten",
                       // }}
                     >
-                      <div className="flex justify-between pb-1 border-b-1 border-netural-100 dark:border-netural-700">
+                      <div className="flex justify-between pb-1 border-b-1 border-neutral-100 dark:border-neutral-700">
                         <div className="flex items-center gap-2">
                           <Buildings2
                             className="text-secondary-400 dark:text-white"

@@ -5,14 +5,15 @@
 @theme {
   --font-display: "Yekan Bakh", "sans-serif";
   --breakpoint-3xl: 120rem;
-
+  --color-white: #ffffff;
   /* Primary Colors */
-  --color-primary-0: #DCF0F9;
+  --color-primary: #0A9AD7;
   --color-primary-100: #B8E2F3;
   --color-primary-150: #96D3ED;
   --color-primary-200: #73C5E8;
   --color-primary-250: #50B6E2;
   --color-primary-300: #2DA8DC;
+  --color-primary-400: #2DA8DC;
   --color-primary-500: #0884B8;
   --color-primary-600: #076E99;
   --color-primary-700: #05587A;
@@ -51,7 +52,7 @@
   --color-neutral-1000: #090909;
 
   /* Info Colors */
-  --color-info-0: #DCEBF4;
+  --color-info: #DCEBF4;
   --color-info-50: #B9D7EA;
   --color-info-150: #96C4E0;
   --color-info-200: #73B0D5;
@@ -66,7 +67,7 @@
   --color-info-1000: #01101A;
 
   /* Success Colors */
-  --color-success-0: #DFF3E7;
+  --color-success: #DFF3E7;
   --color-success-50: #BFE7D0;
   --color-success-150: #A0DBB9;
   --color-success-200: #80D0A1;
@@ -81,7 +82,7 @@
   --color-success-1000: #04180D;
 
   /* Warning Colors */
-  --color-warning-0: #FEEFDA;
+  --color-warning: #FEEFDA;
   --color-warning-100: #FEDFB6;
   --color-warning-150: #FECF92;
   --color-warning-200: #FDBF6E;
@@ -96,7 +97,7 @@
   --color-warning-1000: #241400;
 
   /* Danger Colors */
-  --color-danger-0: #FDE1E1;
+  --color-danger: #FDE1E1;
   --color-danger-50: #FBC3C3;
   --color-danger-150: #F9A6A6;
   --color-danger-200: #F78888;
@@ -111,25 +112,25 @@
   --color-danger-1000: #220606;
 
   /* Tertiary Colors */
-  --color-tertiary-0: #FEDEE6;
-  --color-tertiary-100: #FEBDCD;
-  --color-tertiary-150: #FE9DB4;
-  --color-tertiary-200: #FD7C9B;
-  --color-tertiary-250: #FD5C82;
-  --color-tertiary-300: #FD3B69;
-  --color-tertiary-400: #FD1B51;
-  --color-tertiary-500: #D81745;
-  --color-tertiary-600: #B41339;
-  --color-tertiary-700: #900F2E;
-  --color-tertiary-800: #6C0B22;
-  --color-tertiary-900: #480717;
-  --color-tertiary-1000: #24030B;
+  --color-tertiar: #FEDEE6;
+  --color-tertiar-100: #FEBDCD;
+  --color-tertiar-150: #FE9DB4;
+  --color-tertiar-200: #FD7C9B;
+  --color-tertiar-250: #FD5C82;
+  --color-tertiar-300: #FD3B69;
+  --color-tertiar-400: #FD1B51;
+  --color-tertiar-500: #D81745;
+  --color-tertiar-600: #B41339;
+  --color-tertiar-700: #900F2E;
+  --color-tertiar-800: #6C0B22;
+  --color-tertiar-900: #480717;
+  --color-tertiar-1000: #24030B;
 
   /* Surface Colors */
-  --color-surface-0: #F5FBFE;
+  --color-surface: #F5FBFE;
   --color-surface-50: #DCF0F966;
   --color-surface-100: #04425C66;
-  --color-surface-150: #044566;
+  --color-surface-200: #044566;
 
   /* Gold Color */
   --color-gold: #DDBA69;
@@ -191,6 +192,32 @@
   --shadow-light-tight-8: 0px 12px 28px 0px #080E1C33;
   --shadow-light-tight-9: 0px 13px 36px 0px #080E1C38;
 
+  --shadow-light-fluffy-1: 0px 5px 15px 0px #080E1C26;
+  --shadow-light-fluffy-2: 0px 6.25px 20px 0px #080E1C20;
+  --shadow-light-fluffy-3: 0px 10px 30px 0px #080E1C1C;
+  --shadow-light-fluffy-4: 0px 10px 35px 0px #080E1C1F;
+  --shadow-light-fluffy-5: 0px 15px 60px 0px #080E1C1F;
+  --shadow-light-fluffy-6: 0px 17.5px 70px 0px #080E1C1F;
+  --shadow-light-fluffy-7: 0px 35px 90px 0px #080E1C2;
+
+  --shadow-dark-tight-1: 0px 35px 90px 0px #080E1C22;
+  --shadow-dark-tight-2: 0px 1.25px 4px 0px #152446;
+  --shadow-dark-tight-3: 0px 2px 6px 0px #152446;
+  --shadow-dark-tight-4: 0px 2px 7px 0px #152446;
+  --shadow-dark-tight-5: 0px 3px 12px 0px #152446;
+  --shadow-dark-tight-6: 0px 3.5px 14px 0px #152446;
+  --shadow-dark-tight-7: 0px 7px 18px 0px #152446;
+  --shadow-dark-tight-8: 0px 12px 28px 0px #152446;
+  --shadow-dark-tight-9: 0px 13px 36px 0px #152446;
+
+  --shadow-dark-fluffy-1: 0px 5px 15px 0px #152446;
+  --shadow-dark-fluffy-2: 0px 6.25px 20px 0px #152446;
+  --shadow-dark-fluffy-3: 0px 10px 30px 0px #152446;
+  --shadow-dark-fluffy-4: 0px 10px 35px 0px #152446;
+  --shadow-dark-fluffy-5: 0px 15px 60px 0px #152446;
+  --shadow-dark-fluffy-6: 0px 17.5px 70px 0px #152446;
+  --shadow-dark-fluffy-7: 0px 35px 90px 0px #152446;
+
   /* Transition Durations */
   --duration-75: 75ms;
   --duration-100: 100ms;
@@ -218,4 +245,56 @@
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
+}
+
+@layer base {
+  :root {
+
+    --color-primary: hsl(var(--heroui-primary));
+    --color-primary-foreground: hsl(var(--heroui-primary-foreground));
+    --color-primary-900: hsl(var(--heroui-primary-900));
+
+    --color-secondary-50: hsl(var(--heroui-secondary-50));
+    --color-secondary-100: hsl(var(--heroui-secondary-100));
+    --color-secondary-200: hsl(var(--heroui-secondary-200));
+    --color-secondary-300: hsl(var(--heroui-secondary-300));
+    --color-secondary-400: hsl(var(--heroui-secondary-400));
+    --color-secondary-500: hsl(var(--heroui-secondary-500));
+    --color-secondary-600: hsl(var(--heroui-secondary-600));
+    --color-secondary-700: hsl(var(--heroui-secondary-700));
+    --color-secondary-800: hsl(var(--heroui-secondary-800));
+    --color-secondary-900: hsl(var(--heroui-secondary-900));
+    --color-secondary-1000: hsl(var(--heroui-secondary-1000));
+    --color-primary-400:hsl(var(--heroui-primary-400));
+    --color-secondary-foreground: hsl(var(--heroui-secondary-foreground));
+  }
+
+  .dark {
+    --color-primary: hsl(var(--heroui-primary));
+    --color-primary-foreground: hsl(var(--heroui-primary-foreground));
+    --color-primary-900: hsl(var(--heroui-primary-900));
+
+    --color-secondary-50: hsl(var(--heroui-secondary-50));
+    --color-secondary-100: hsl(var(--heroui-secondary-100));
+    --color-secondary-200: hsl(var(--heroui-secondary-200));
+    --color-secondary-300: hsl(var(--heroui-secondary-300));
+    --color-secondary-400: hsl(var(--heroui-secondary-400));
+    --color-secondary-500: hsl(var(--heroui-secondary-500));
+    --color-secondary-600: hsl(var(--heroui-secondary-600));
+    --color-secondary-700: hsl(var(--heroui-secondary-700));
+    --color-secondary-800: hsl(var(--heroui-secondary-800));
+    --color-secondary-900: hsl(var(--heroui-secondary-900));
+    --color-secondary-1000: hsl(var(--heroui-secondary-1000));
+
+    --color-primary-400:hsl(var(--heroui-primary-400));
+    --color-secondary-foreground: hsl(var(--heroui-secondary-foreground));
+  }
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+.dark .bg-white {
+  background-color: var(--color-info-1000) !important;
 }

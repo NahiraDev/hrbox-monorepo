@@ -272,7 +272,7 @@ export default function CompanyGeneralInfo() {
                   </div>
                   <div className="bg-white dark:bg-info-1000 rounded-[14px] shadow-shadow-light-tight/1 px-6 py-4">
                     <div className="flex flex-col gap-6">
-                      <div className="border-b-1 border-netural-100 dark:border-netural-700">
+                      <div className="border-b-1 border-neutral-100 dark:border-neutral-700">
                         <div className="flex gap-7">
                           <img
                             alt="OurMissions"

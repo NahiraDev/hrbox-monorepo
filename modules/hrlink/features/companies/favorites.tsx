@@ -261,7 +261,7 @@ export default function FavoritesCompanies() {
                         }}
                         onClick={() => handleOpenCompany(company.name)}
                       >
-                        <div className="flex justify-between border-b-1 border-netural-100 pb-1">
+                        <div className="flex justify-between border-b-1 border-neutral-100 pb-1">
                           <div className="flex items-center gap-2">
                             <img
                               alt={`${company.name} Logo`}

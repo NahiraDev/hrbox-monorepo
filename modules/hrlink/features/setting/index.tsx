@@ -51,7 +51,7 @@ export const Setting = () => {
             className="h-full absolute left-0 top-0 opacity-[0.2] blur rounded-[14px] object-cover"
             src={AvatarUser}
           />
-          <div className="flex justify-between border-b-1 border-netural-100 dark:border-netural-700 pb-1.5">
+          <div className="flex justify-between border-b-1 border-neutral-100 dark:border-neutral-700 pb-1.5">
             <span className="text-secondary-900 text-xl">General Details</span>
             <div className="flex gap-1.5">
               <AppButton
