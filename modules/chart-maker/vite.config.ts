@@ -1,32 +1,7 @@
-import path from 'path';
-
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-import { baseConfig } from '../../configs/vite.config.base.ts';
-
-export default defineConfig((env) => {
-  const config = baseConfig(env);
-
-  return {
-    ...config,
-    base: '/chart-maker',
-    build: {
-      outDir: 'dist',
-      lib: {
-        entry: path.resolve(__dirname, 'app/index.ts'),
-        name: 'ChartMakerModule',
-        formats: ['es'],
-        fileName: (format) => `index.${format}.js`,
-      },
-      rollupOptions: {
-        external: ['react', 'react-dom'],
-        output: {
-          globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-          },
-        },
-      },
-    },
-  };
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 5173 },
 });

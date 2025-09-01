@@ -16,5 +16,8 @@
   },
   "scripts": {
     "dev": "vite"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.8.4"
   }
 }
