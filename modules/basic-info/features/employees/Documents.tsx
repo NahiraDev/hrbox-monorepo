@@ -3,16 +3,12 @@ import { identityCard } from 'mock';
 import { AppButton } from 'core/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
 
-import ReportBox from '../../components/ReportBox';
-import BlueHeaderEmployees from '../../components/BlueHeaderEmployees';
+import { BasicInfoLayout } from '../common';
 
 const Documents = () => {
   return (
-    <>
-      <BlueHeaderEmployees />
-      TODO
-      <div className="flex w-full gap-8">
-        <ReportBox />
+    <BasicInfoLayout
+      content={
         <div className="grid grid-cols-4 gap-4 w-full">
           {identityCard.map((user, index) => (
             <Card key={index} className="p-3 w-full h-full ">
@@ -23,28 +19,30 @@ const Documents = () => {
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
-                    <AppButton
-                      props={{
-                        size: 'sm',
-                        radius: 'sm',
-                        variant: 'light',
-                        content: (
-                          <Trash className="text-black group-hover:text-white transition-colors duration-200 w-5 h-6" />
-                        ),
-                        className: 'hover:!bg-red-500 transition-all duration-200',
-                      }}
-                    />
-                    <AppButton
-                      props={{
-                        size: 'sm',
-                        radius: 'sm',
-                        variant: 'light',
-                        content: (
-                          <ArrowRotateLeft className="text-black group-hover:text-white transition-colors duration-200 w-5 h-6" />
-                        ),
-                        className: 'hover:!bg-primary-400 transition-all duration-200',
-                      }}
-                    />
+                    <div>
+                      <AppButton
+                        props={{
+                          size: 'xs',
+                          radius: 'sm',
+                          variant: 'light',
+                          isIconOnly: true,
+                          content: <Trash className="text-secondary-1000 group-hover:text-white" />,
+                          className: 'hover:!bg-red-500 transition-all duration-200',
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <AppButton
+                        props={{
+                          size: 'xs',
+                          radius: 'sm',
+                          variant: 'light',
+                          isIconOnly: true,
+                          content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
+                          className: 'hover:!bg-primary-400 transition-all duration-200',
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="flex gap-0.5 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
@@ -67,8 +65,8 @@ const Documents = () => {
             </Card>
           ))}
         </div>
-      </div>
-    </>
+      }
+    />
   );
 };
 

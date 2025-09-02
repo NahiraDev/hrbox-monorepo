@@ -1,16 +1,15 @@
 import { Card } from '@heroui/react';
-import { Jobss } from 'mock';
+import { Jobss } from '@mock/index';
 // import { AppButton } from 'core/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
 
 import ReportBox from '../../components/ReportBox';
-import BlueHeaderEmployees from '../../components/BlueHeaderEmployees';
+import BlueHeaderEmployees from './BlueHeaderEmployees';
 
 const Jobs = () => {
   return (
     <>
       <BlueHeaderEmployees />
-      TODO
       <div className="flex w-full gap-8">
         <ReportBox />
         <div className="grid grid-cols-4 gap-4 w-full">
