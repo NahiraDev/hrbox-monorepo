@@ -1,11 +1,4 @@
-// import {
-//   GpsSlash,
-//   Profile,
-//   Heart,
-//   ProfileTick,
-//   Call,
-//   Calendar,
-// } from 'iconsax-react';
+import { GpsSlash, Profile, Heart, ProfileTick, Call, Calendar } from 'iconsax-react';
 
 export const organizationDepartment = [
   {
@@ -610,165 +603,289 @@ export const days = [
     day8: '8',
   },
 ];
-// export const workerInfo = [
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Nation Code',
-//     text: '4311469391',
-//   },
-//   {
-//     icon: <Profile />,
-//     title: 'Email',
-//     text: 'example.user789@gmail.com  ',
-//   },
-//   {
-//     icon: <Heart />,
-//     title: 'Salary',
-//     text: '400.000.000 Rial',
-//   },
-//   {
-//     icon: <ProfileTick />,
-//     title: 'Insurance Number',
-//     text: '1234',
-//   },
-//   {
-//     icon: <Call />,
-//     title: 'Last Name',
-//     text: '09120422242',
-//   },
-//   {
-//     icon: <Calendar />,
-//     title: ' Birth Certificate Number',
-//     text: '2025/01/01',
-//   },
-//   {
-//     icon: <ProfileTick />,
-//     title: 'Gender',
-//     text: '1234',
-//   },
-//   {
-//     icon: <Call />,
-//     title: 'Phone Num.',
-//     text: '09120422242',
-//   },
-//   {
-//     icon: <Calendar />,
-//     title: 'Employment Date',
-//     text: '2025/01/01',
-//   },
-//   {
-//     icon: <ProfileTick />,
-//     title: 'Employee Code',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'First Name',
-//     text: '4311469391',
-//   },
-//   {
-//     icon: <Profile />,
-//     title: "Father's Name",
-//     text: 'English/Opensans/Desktop/P/SemiBold',
-//   },
-//   {
-//     icon: <Heart />,
-//     title: 'Place of Issue',
-//     text: '400.000.000 Rial',
-//   },
-//   {
-//     icon: <ProfileTick />,
-//     title: 'Marital Status',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Number of Children',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Date of Birth',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Country',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'City of Residence',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Organizational Rank',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Instagram ID',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Other Networks',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Cover Letter',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Audio Introduction',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Military Service Status',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Nationality',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Province of Residence',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Work Group',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Address',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'LinkedIn',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Other Social Networks',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'Previous Resumes',
-//     text: '1234',
-//   },
-//   {
-//     icon: <GpsSlash />,
-//     title: 'About Me',
-//     text: '1234',
-//   },
-// ];
+export const workerInfo = [
+  {
+    icon: <GpsSlash />,
+    title: 'Nation Code',
+    text: '4311469391',
+  },
+  {
+    icon: <Profile />,
+    title: 'Email',
+    text: 'example.user789@gmail.com  ',
+  },
+  {
+    icon: <Heart />,
+    title: 'Salary',
+    text: '400.000.000 Rial',
+  },
+  {
+    icon: <ProfileTick />,
+    title: 'Insurance Number',
+    text: '1234',
+  },
+  {
+    icon: <Call />,
+    title: 'Last Name',
+    text: '09120422242',
+  },
+  {
+    icon: <Calendar />,
+    title: ' Birth Certificate Number',
+    text: '2025/01/01',
+  },
+  {
+    icon: <ProfileTick />,
+    title: 'Gender',
+    text: '1234',
+  },
+  {
+    icon: <Call />,
+    title: 'Phone Num.',
+    text: '09120422242',
+  },
+  {
+    icon: <Calendar />,
+    title: 'Employment Date',
+    text: '2025/01/01',
+  },
+  {
+    icon: <ProfileTick />,
+    title: 'Employee Code',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'First Name',
+    text: '4311469391',
+  },
+  {
+    icon: <Profile />,
+    title: "Father's Name",
+    text: 'English/Opensans/Desktop/P/SemiBold',
+  },
+  {
+    icon: <Heart />,
+    title: 'Place of Issue',
+    text: '400.000.000 Rial',
+  },
+  {
+    icon: <ProfileTick />,
+    title: 'Marital Status',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Number of Children',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Date of Birth',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Country',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'City of Residence',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Organizational Rank',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Instagram ID',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Other Networks',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Cover Letter',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Audio Introduction',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Military Service Status',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Nationality',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Province of Residence',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Work Group',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Address',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'LinkedIn',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Other Social Networks',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'Previous Resumes',
+    text: '1234',
+  },
+  {
+    icon: <GpsSlash />,
+    title: 'About Me',
+    text: '1234',
+  },
+];
+export const identityCard = [
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },
+];
+export const Jobss = [
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+];
