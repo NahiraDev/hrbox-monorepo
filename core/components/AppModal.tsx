@@ -25,13 +25,7 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = ({
-  title,
-  icon,
-  size = 'md',
-  children,
-  backdropClosable = true,
-}: ModalProps) => {
+const AppModal = ({ title, icon, size = 'md', children, backdropClosable = true }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = () => setIsOpen(true);
@@ -60,9 +54,7 @@ const AppModal = ({
               <div className="flex justify-between items-center">
                 <div className="bg-secondary-400 shadow-light-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit">
                   {icon}
-                  <span className="text-white font-normal text-xl">
-                    {title}
-                  </span>
+                  <span className="text-white font-normal text-xl">{title}</span>
                 </div>
               </div>
             </div>

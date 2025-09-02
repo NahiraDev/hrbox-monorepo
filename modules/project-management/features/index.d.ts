@@ -1,6 +1,3 @@
-export declare const Dashboard: {
-    (props: any): import("react/jsx-runtime").JSX.Element;
-    displayName: string;
-};
+export declare const Dashboard: any;
 export default Dashboard;
 //# sourceMappingURL=index.d.ts.map
