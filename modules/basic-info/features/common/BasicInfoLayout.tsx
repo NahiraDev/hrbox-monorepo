@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { AppTabs } from '../../../../core';
 
 const EmployeesTab = [
-  { key: 'personal-information', title: 'Personal Information', href: '/personal-information' },
+  { key: 'personal-information', title: 'Personal Information', href: '/basic-info/PersonalInformation' },
   { key: 'documents', title: 'Documents', href: '/basic-info/Documents' },
   { key: 'jobs', title: 'Jobs', href: '/basic-info/Jobs' },
   { key: 'education', title: 'Educations', href: '/basic-info/Education' },
