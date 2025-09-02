@@ -58,7 +58,7 @@ export default {
               1000: '#FFF',
             },
             primary: {
-              DEFAULT:'#0A9AD7',
+              DEFAULT:'#044566',
               400: '#044566',
             },
           },

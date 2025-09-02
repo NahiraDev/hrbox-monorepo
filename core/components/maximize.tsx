@@ -15,7 +15,7 @@ export default function Maximize({ targetRef }: { targetRef: React.RefObject<HTM
   return (
     <button
       onClick={toggleFullscreen}
-      className="p-2 rounded-lg border border-sky-500 hover:bg-sky-100 transition"
+      className="p-2 rounded-lg border border-sky-500 border-2 hover:bg-sky-100 transition"
     >
       <MaxIcon size={20} />
     </button>
