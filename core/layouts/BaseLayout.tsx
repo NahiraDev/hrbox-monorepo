@@ -26,7 +26,7 @@ export const BaseLayout = ({ content, subHeader }: BaseLayoutProps) => {
 
             <div className="flex flex-1 min-h-0 gap-8">
               <AppSideBar menu={activeMenu} />
-              <div className="flex-1 overflow-y-auto rounded-xl border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-light-tight-2 dark:shadow-dark-tight-2">
+              <div className="flex-1 rounded-xl border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-light-tight-2 dark:shadow-dark-tight-2 overflow-hidden">
                 {content}
               </div>
             </div>

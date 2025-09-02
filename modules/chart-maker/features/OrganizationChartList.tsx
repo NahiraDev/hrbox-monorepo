@@ -1,13 +1,14 @@
 import { AppPagination } from '../../../core';
-import { OrganizationCard } from '../components';
 import { organizationCharts } from '../../../mock';
+
+import { OrgChartCardListNode } from './common';
 
 const OrganizationChartList = () => {
   return (
     <div className="flex flex-col gap-6 justify-between h-full p-3">
-      <div className="grid grid-cols-4 2xl:grid-cols-6  gap-3">
-        {organizationCharts.map((item: any, index: number) => (
-          <OrganizationCard key={index} props={{ item }} />
+      <div className="grid grid-cols-4 2xl:grid-cols-6 gap-3">
+        {organizationCharts.map((_item: any, index: number) => (
+          <OrgChartCardListNode key={index} />
         ))}
       </div>
 
@@ -22,7 +23,7 @@ const OrganizationChartList = () => {
       </div>
     </div>
   );
-}
+};
 
 // OrganizationChartList.meta = {
 //   path: 'organizationChartList',
