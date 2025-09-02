@@ -1,18 +1,10 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
-import {
-  useLazyEducationGetFieldsQuery,
-  useLazyFetchCityQuery,
-} from '@module/hrlink/features/common';
+import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '@module/hrlink/features/common';
 import { useLazyFetchUniversityQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
 
-import {
-  AppAutoComplete,
-  AppDatePicker,
-  AppInput,
-  useFormContext,
-} from '../../../../../core';
+import { AppAutoComplete, AppDatePicker, AppInput, useFormContext } from '../../../../../core';
 import { Degree, FieldOfStudyType } from '../../../../../mock';
 
 export const initialValuesEducation = {
@@ -54,18 +46,11 @@ export const handleSubmitEducation = (values: any) => {
 };
 
 export const EducationForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormContext();
-  const [fetchCity, { isLoading: cityIsLoading, data: cityData }] =
-    useLazyFetchCityQuery();
-  const [
-    educationGetField,
-    { isLoading: educationGetFieldIsLoading, data: educationGetFieldData },
-  ] = useLazyEducationGetFieldsQuery();
-  const [
-    fetchUniversity,
-    { isLoading: universityIsLoading, data: universityData },
-  ] = useLazyFetchUniversityQuery();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const [fetchCity, { isLoading: cityIsLoading, data: cityData }] = useLazyFetchCityQuery();
+  const [educationGetField, { isLoading: educationGetFieldIsLoading, data: educationGetFieldData }] =
+    useLazyEducationGetFieldsQuery();
+  const [fetchUniversity, { isLoading: universityIsLoading, data: universityData }] = useLazyFetchUniversityQuery();
 
   useEffect(() => {
     fetchCity({});

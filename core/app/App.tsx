@@ -14,7 +14,6 @@ export const App = ({ children }: AppProps) => {
   const lang = useAppSelector((state) => state.language.lang);
   const [dir, setDir] = useState<'ltr' | 'rtl'>(lang === 'en' ? 'ltr' : 'rtl');
   const { pathname } = useLocation();
-
   const isSSOModule = pathname.startsWith('/sso');
   const Layout = isSSOModule ? AuthLayout : BaseLayout;
 
@@ -27,7 +26,7 @@ export const App = ({ children }: AppProps) => {
       <motion.div
         key={lang}
         animate={{ opacity: 1 }}
-        className={`${dir} h-full min-h-fit text-foreground bg-background`}
+        className={`${dir} text-foreground bg-background`}
         dir={dir}
         exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}

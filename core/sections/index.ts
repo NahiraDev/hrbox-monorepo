@@ -3,7 +3,6 @@ import AppDocItems from './AppDocItems';
 import AppDocs from './AppDocs';
 import AppHeader from './AppHeader';
 import App404 from './App404';
-import AppPageHeaderTab from './AppPageHeaderTab';
 
 export {
   AppHeader,
@@ -11,5 +10,4 @@ export {
   AppDocItems,
   AppDocs,
   App404,
-  AppPageHeaderTab,
 };

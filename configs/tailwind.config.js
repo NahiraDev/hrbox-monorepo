@@ -8,19 +8,26 @@ export default {
     '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
     '../modules/**/index.html',
   ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      backgroundImage: {
+        'light-mode-bg': `url('../core/assets/img/lightmode-bg.png')`,
+        'dark-mode-bg': `url('../core/assets/img/darkmode-bg.png')`,
+      }
+    }
+  },
   plugins: [
     heroui({
-      prefix: "heroui", // prefix for themes variables
-      addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-      defaultTheme: "light", // default theme from the themes object
-      defaultExtendTheme: "light", // default theme to extend on custom themes
+      prefix: "heroui",
+      addCommonColors: false,
+      defaultTheme: "light",
+      defaultExtendTheme: "light",
       themes: {
         light: {
           colors: {
-            background: "#FFF",
             foreground: "#04070E",
-            white:'#FFF',
-            black: '#000000',
+            background: "#F5FBFE",
             navy_blue: {
               400: '#1E3363',
             },
@@ -37,13 +44,9 @@ export default {
           },
         },
         dark: {
-          background: "#04070E",
-          foreground: "#FFF",
-          white:'#000',
-          black: '#FFF',
           colors: {
-            white:'#01101A',
-            black: '#FFF',
+            foreground: "#FFF",
+            background: "#01101A",
             navy_blue: {
               400: '#044566',
             },
@@ -51,6 +54,7 @@ export default {
               1000:'#FFF'
             },
             secondary: {
+              DEFAULT:'#FFF',
               1000: '#FFF',
             },
             primary: {

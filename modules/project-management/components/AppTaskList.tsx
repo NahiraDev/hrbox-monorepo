@@ -25,7 +25,7 @@ const SortableTaskCard = ({ id }: { id: string }) => {
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div className="bg-white shadow-shadow-light-tight/1 cursor-move rounded-5 p-4 mb-4">
         <div className="flex flex-col gap-4">
-          <div className="flex gap-2 items-center border-b-1 border-netural-100 pb-1">
+          <div className="flex gap-2 items-center border-b-1 border-neutral-100 pb-1">
             <ClipboardTick className="text-secondary-400" />
             <span className="font-semibold text-base text-secondary-1000 leading-normal">
               Payroll
@@ -91,7 +91,7 @@ export default function AppTasksList() {
 
   return (
     <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 h-full overflow-y-scroll">
-      <div className="flex items-center justify-between mb-4 border-b-1 pb-1 border-netural-100">
+      <div className="flex items-center justify-between mb-4 border-b-1 pb-1 border-neutral-100">
         <span className="text-base font-semibold text-secondary-1000">
           Tasks List
         </span>

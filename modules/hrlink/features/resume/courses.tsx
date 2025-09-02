@@ -168,7 +168,7 @@ export default function ResumeCourses() {
                   {/*      className="rounded-5 shadow-shadow-light-tight/1 dark:shadow-shadow-dark-tight/1 p-4 bg-white dark:bg-info-1000"*/}
                   {/*    >*/}
                   {/*      <div className="flex flex-col gap-2.5">*/}
-                  {/*        <div className="flex flex-col gap-1.5 border-b-1 border-netural-100 pb-1.5">*/}
+                  {/*        <div className="flex flex-col gap-1.5 border-b-1 border-neutral-100 pb-1.5">*/}
                   {/*          <div className="flex justify-between">*/}
                   {/*            <div className="flex gap-1.5">*/}
                   {/*              <Academy*/}

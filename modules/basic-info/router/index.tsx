@@ -21,6 +21,9 @@ export const page = {
     satisfaction: lazyLoad(
       () => import('../features/employees/EmployeeSatisfactionCalendar'),
     ),
+    personalInformation: lazyLoad(
+      () => import('../features/employees/PersonalInformation'),
+    )
   },
 
 };
@@ -30,4 +33,5 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   technicalDepartments: page.departments.technical,
   OrganizationalLocations: page.departments.location,
   EmployeeSatisfactionCalendar: page.employees.satisfaction,
+  PersonalInformation:page.employees.personalInformation,
 });

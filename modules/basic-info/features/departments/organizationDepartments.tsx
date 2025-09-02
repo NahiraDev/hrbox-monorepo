@@ -13,7 +13,7 @@ const OrganizationDepartments = () => {
       props={{
         children: (
           <>
-            <div className="w-347 rounded-2xl border border-primary-400 bg-[#DCF0F966] flex flex-wrap gap-x-4 gap-y-2 items-center justify-center p-3">
+            <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] flex flex-wrap gap-x-4 gap-y-2 items-center justify-center p-3">
               {organizationDepartment.map((user, index) => (
                 <div
                   className="w-82 bg-white rounded-lg border-l-2 border-primary-400 p-2 shadow-[0_1px_2px_1px_#080E1C4D] hover:bg-[#D6F2FF]"

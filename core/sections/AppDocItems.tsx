@@ -1,3 +1,5 @@
+import { AppButton } from 'core/components';
+
 interface DocItemProps {
   props: {
     to?: string;
@@ -24,24 +26,21 @@ export const DocItem = ({ props }: DocItemProps) => {
 
   return (
     <div>
-      <button
-        className={`w-12 h-12 flex items-center justify-center rounded-[10px]
+      <AppButton
+        props={{
+          onPress: () => handleClick(),
+          className: `p-3 flex items-center justify-center rounded-lg w-12 h-12
           ${
             outlined
-              ? 'border border-dashed border-secondary-400 bg-transparent text-secondary-400'
+              ? 'border border-dashed dark:border-white bg-transparent dark:text-white'
               : isActive
-                ? 'bg-[linear-gradient(0deg,_#1E3363_0%,_#3D68C9_126.58%)] text-white dark:from-info-700 dark:to-[#BAD9EC] w-[60px] h-[60px]'
-                : 'bg-gradient-to-t from-[#DCE0E3] to-[#FFFFFF] text-secondary-1000 dark:text-neutral-50 dark:from-surface-150 dark:to-[rgba(4,66,92,0.4)] drop-shadow-[0px_0.945px_2.835px_rgba(0,0,0,0.30)]'
-          }`}
-        onClick={handleClick}
-      >
-        <Icon size={isActive ? '32' : '24'} />
-      </button>
-      {isActive && (
-        <span className="text-xs font-semibold text-center absolute text-secondary-1000 dark:text-white">
-          {title}
-        </span>
-      )}
+                ? 'w-[60px] h-[60px] bg-gradient-to-b from-[#1E3363] to-[#3D68C9] filter-[drop-shadow(0_1.26px_3.78px_rgba(0,0,0,0.3))] text-white dark:bg-gradient-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:filter-[drop-shadow(0_1.26px_3.78px_rgba(0,0,0,0.3))] dark:text-white'
+                : 'bg-gradient-to-t from-[#DCE0E3] to-white filter-[drop-shadow(0_0.887px_2.661px_rgba(0,0,0,0.3))] dark:to-[rgba(4,66,92,0.4)] dark:filter-[drop-shadow(0_0.887px_2.661px_rgba(0,0,0,0.3))] dark:text-white'
+          }`,
+          content: <Icon size={isActive ? '32' : '24'} />,
+        }}
+      />
+      {isActive && <span className="text-xs font-semibold text-center absolute text-secondary-1000">{title}</span>}
     </div>
   );
 };

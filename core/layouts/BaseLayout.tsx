@@ -5,33 +5,39 @@ import { serviceRegistry } from '../helpers';
 import { AppSupportButton, AppSideBar } from '../components';
 import { AppDocs, AppHeader } from '../sections';
 
+
 interface BaseLayoutProps {
   content: React.ReactNode;
   subHeader?: React.ReactNode;
 }
 
-export const BaseLayout = ({ content , subHeader }: BaseLayoutProps) => {
+export const BaseLayout = ({ content, subHeader }: BaseLayoutProps) => {
   const { pathname } = useLocation();
   const activeMenu = serviceRegistry.getActiveMenu(pathname);
-
   return (
-    <div className="flex flex-col gap-[26px] shadow-tight h-[100vh] pr-16 pl-8">
+    <div
+      className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode bg-blend-screen bg-no-repeat bg-center">
       <AppHeader />
-      <div className="flex flex-col gap-4 h-full">
-        <div className="flex gap-4 h-full min-h-fit">
-          <AppSideBar menu={activeMenu} />
-          <div className="flex-1 min-h-fit h-full">
-            {subHeader && <div className="mb-4">{subHeader}</div>}
-            <div className="w-full rounded-2xl border border-primary-400 bg-[#DCF0F966] p-3 h-full flex flex-col justify-between">
-              {content}
+
+      <div className="flex flex-1 min-h-0 gap-4">
+        <div className="flex flex-1 min-h-0 gap-4 items-stretch">
+          <div className="flex flex-col flex-1 min-h-0 gap-4">
+            {subHeader && <div className="mb-4 shrink-0">{subHeader}</div>}
+
+            <div className="flex flex-1 min-h-0 gap-8">
+              <AppSideBar menu={activeMenu} />
+              <div className="flex-1 rounded-xl border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-light-tight-2 dark:shadow-dark-tight-2 overflow-hidden">
+                {content}
+              </div>
+            </div>
+            <div className="mb-4 shrink-0">
+              <AppDocs />
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full justify-end">
-          <AppDocs />
-        </div>
-        <AppSupportButton />
       </div>
+
+      <AppSupportButton />
     </div>
   );
 };

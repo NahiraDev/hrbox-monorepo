@@ -228,7 +228,7 @@ export default function JobOffers() {
                               : 'lighten',
                           }}
                         >
-                          <div className="flex justify-between pb-1 border-b-1 border-netural-100 dark:border-netural-700">
+                          <div className="flex justify-between pb-1 border-b-1 border-neutral-100 dark:border-neutral-700">
                             <div className="flex items-center gap-2">
                               <Buildings2
                                 className="text-secondary-400 dark:text-white"
@@ -492,7 +492,7 @@ export default function JobOffers() {
                       classNames={{
                         filler: '!bg-secondary-400',
                         thumb:
-                          '!bg-secondary-400 after:bg-primary-0 !w-4 !h-4 after:!w-3 after:!h-3',
+                          '!bg-secondary-400 after:bg-primary-400 !w-4 !h-4 after:!w-3 after:!h-3',
                         track: '!h-1',
                       }}
                       formatOptions={{

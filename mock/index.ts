@@ -1,2 +1,3 @@
-export * from './basicInfo';
+export * from './basic-info';
+export * from './chart-maker'
 export * from './hrlink'

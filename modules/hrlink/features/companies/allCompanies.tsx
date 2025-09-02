@@ -176,7 +176,7 @@ export default function AllCompanies() {
                           backgroundBlendMode: darkMode ? "darken" : "lighten",
                         }}
                       >
-                        <div className="flex justify-between border-b-1 border-netural-100 dark:border-netuaral-700 pb-1">
+                        <div className="flex justify-between border-b-1 border-neutral-100 dark:border-netuaral-700 pb-1">
                           <div className="flex items-center gap-2">
                             <img
                               alt={`${company.Name} Logo`}

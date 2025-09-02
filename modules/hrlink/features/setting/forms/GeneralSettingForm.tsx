@@ -59,7 +59,7 @@ export const GeneralSettingForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <div className="flex justify-between border-b-1 border-netural-100 dark:border-netural-700 pb-1.5 w-full">
+      <div className="flex justify-between border-b-1 border-neutral-100 dark:border-neutral-700 pb-1.5 w-full">
         <span className="text-secondary-900 dark:text-white text-xl font-normal leading-normal">
           General Setting
         </span>
