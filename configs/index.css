@@ -46,3 +46,7 @@ html[lang='fa'] {
   font-family: Yekan Bakh,
   serif;
 }
+
+.react-flow {
+  overflow: unset !important;
+}

@@ -2,7 +2,7 @@ import path from 'path';
 
 import { defineConfig } from 'vite';
 
-import { baseConfig } from '../../configs/vite.config.base.ts';
+import { baseConfig } from '../../configs/vite.config.base';
 
 export default defineConfig((env) => {
   const config = baseConfig(env);

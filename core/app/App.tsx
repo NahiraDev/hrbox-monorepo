@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { AuthLayout, BaseLayout } from '../layouts';
 import { useAppSelector } from '../redux';
 import { AppErrorToast } from '../components';
-import { useTheme } from '@heroui/use-theme';
 
 interface AppProps {
   children: React.ReactNode;
