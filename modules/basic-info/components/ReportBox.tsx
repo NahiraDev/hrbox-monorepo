@@ -1,12 +1,12 @@
 import { MessageEdit, Trash } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { Avatar } from '@heroui/react';
-import { AppButton} from 'core/components';
+import { AppButton } from 'core/components';
 
 const ReportBox = () => {
   return (
     <div
-      className="p-4   overflow-y-auto
+      className="p-4 overflow-y-auto w-70
       [&::-webkit-scrollbar]:w-3
       [&::-webkit-scrollbar-track]:rounded-full
     [&::-webkit-scrollbar-track]:bg-gray-100
@@ -15,7 +15,7 @@ const ReportBox = () => {
     >
       <div className="flex justify-between items-cente">
         <span>Sign</span>
-        <div className='flex gap-1'>
+        <div className="flex gap-1">
           <AppButton
             props={{
               className: 'bg-white p-1',
