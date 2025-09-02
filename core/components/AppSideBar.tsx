@@ -1,22 +1,11 @@
-import {
-  ArrowRight2,
-  ArrowLeft2,
-  Setting2,
-  Global,
-  LogoutCurve,
-} from 'iconsax-react';
+import { ArrowRight2, ArrowLeft2, Setting2, Global, LogoutCurve } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { AppButton } from '../../core/components';
 
-import {
-  useAppSelector,
-  useAppDispatch,
-  setLanguage,
-  setLocalLanguage,
-} from '../redux';
+import { AppButton } from '../../core/components';
+import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '../redux';
 
 const AppSideBar = ({ menu }: any) => {
   const [fullWidth, setFullWidth] = useState<boolean>(false);
@@ -43,7 +32,7 @@ const AppSideBar = ({ menu }: any) => {
     alert('User logged out');
   };
 
-  const handleNavigatePage = (item:any) => {
+  const handleNavigatePage = (item: any) => {
     setActiveTab(item.name);
     if (item.route) {
       navigate(item.route);
@@ -78,7 +67,7 @@ const AppSideBar = ({ menu }: any) => {
 
   useEffect(() => {
     const currentPath = location.pathname;
-    const activeItem = menu.find((item:any) => item.route === currentPath);
+    const activeItem = menu.find((item: any) => item.route === currentPath);
 
     if (activeItem) {
       setActiveTab(activeItem.name);
@@ -99,15 +88,9 @@ const AppSideBar = ({ menu }: any) => {
           content: (
             <div>
               {fullWidth ? (
-                <ArrowLeft2
-                  className="cursor-pointer text-info-1000"
-                  size="12"
-                />
+                <ArrowLeft2 className="cursor-pointer text-info-1000" size="12" />
               ) : (
-                <ArrowRight2
-                  className="cursor-pointer text-info-1000"
-                  size="12"
-                />
+                <ArrowRight2 className="cursor-pointer text-info-1000" size="12" />
               )}
             </div>
           ),
@@ -115,15 +98,12 @@ const AppSideBar = ({ menu }: any) => {
       />
 
       <div className="flex flex-col items-center w-full">
-        <div
-          className={`flex flex-col w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}
-        >
-          {menu.map((item:any) => (
+        <div className={`flex flex-col w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}>
+          {menu.map((item: any) => (
             <div key={item.name} className="border-transparent">
               <AppButton
                 props={{
-                  className:
-                    'flex justify-center items-center !gap-1 p-3  bg-transparent transition-all duration-200',
+                  className: 'flex justify-center items-center !gap-1 p-3 bg-transparent transition-all duration-200',
                   isIconOnly: true,
                   color: 'white',
                   size: '',
@@ -134,9 +114,7 @@ const AppSideBar = ({ menu }: any) => {
                     <>
                       <div
                         className={`cursor-pointer ${
-                          activeTab === item.name
-                            ? 'text-tertiar-400'
-                            : 'text-secondary-1000 '
+                          activeTab === item.name ? 'text-tertiar-400' : 'text-secondary-1000 '
                         }`}
                       >
                         {item?.icon}
@@ -144,9 +122,7 @@ const AppSideBar = ({ menu }: any) => {
                       {fullWidth && (
                         <span
                           className={`cursor-pointer text-[12px] ${
-                            activeTab === item.name
-                              ? 'text-primary-400'
-                              : 'text-secondary-1000'
+                            activeTab === item.name ? 'text-primary-400' : 'text-secondary-1000'
                           }`}
                         >
                           {item?.name}
@@ -167,9 +143,7 @@ const AppSideBar = ({ menu }: any) => {
             <div
               key={item.name}
               className={`${
-                activeTab === item.name
-                  ? 'border-b border-tertiar-400 dark:border-white'
-                  : 'border-transparent'
+                activeTab === item.name ? 'border-b border-tertiar-400 dark:border-white' : 'border-transparent'
               }`}
             >
               <AppButton
@@ -181,10 +155,7 @@ const AppSideBar = ({ menu }: any) => {
                   size: '',
                   radius: 'none',
                   onPress: () => {
-                    if (
-                      item.name === t('english') ||
-                      item.name === t('persian')
-                    ) {
+                    if (item.name === t('english') || item.name === t('persian')) {
                       handleLanguageChange();
                     } else if (item.name === 'Log out') {
                       handleLogout();
@@ -196,9 +167,7 @@ const AppSideBar = ({ menu }: any) => {
                     <>
                       <div
                         className={`cursor-pointer ${
-                          activeTab === item.name
-                            ? 'text-tertiar-400'
-                            : 'text-secondary-1000 dark:text-white'
+                          activeTab === item.name ? 'text-tertiar-400' : 'text-secondary-1000 dark:text-white'
                         }`}
                       >
                         {item?.icon}
@@ -206,9 +175,7 @@ const AppSideBar = ({ menu }: any) => {
                       {fullWidth && (
                         <span
                           className={`cursor-pointer text-[12px] ${
-                            activeTab === item.name
-                              ? 'text-primary dark:text-gold'
-                              : 'text-secondary-1000'
+                            activeTab === item.name ? 'text-primary dark:text-gold' : 'text-secondary-1000'
                           }`}
                         >
                           {item?.name}
