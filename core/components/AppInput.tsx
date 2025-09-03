@@ -9,6 +9,8 @@ interface AppInputProps {
   name?: string;
   type?: string;
   value?: string;
+  variant?:any;
+  color?:any;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -55,7 +57,9 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     error,
     name,
     type = 'text',
+    variant = 'solid',
     value,
+    color,
     startContent,
     endContent,
     onFocus,
@@ -105,6 +109,8 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
         placeholder={`Please enter ${label ?? 'value'} ...`}
         startContent={startContent}
         type={type}
+        variant={variant}
+        color={color}
         value={value}
         onBlur={onBlur}
         onChange={onChange}
