@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 import AppTable from '../../../core/components/AppTable';
-import { ProceeModalNew } from '../features/modals/ProcessModalNew';
+import { ProceeModalNew } from './modals/NewOneModal';
 
 export default function ProcessMaker() {
   const [isopenModal, setIsopenModal] = useState(false);

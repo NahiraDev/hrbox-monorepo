@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { ProcessModal } from '../features/modals/ProcessModal;
 import { AddEventModal } from '../features/modals/AddEventModal';
 import { AddActionsModall } from '../features/modals/ActionsModal';
-import {EventModal} from '../features/modals/EventModal';
 
 import './bpmnstyle.css';
 
