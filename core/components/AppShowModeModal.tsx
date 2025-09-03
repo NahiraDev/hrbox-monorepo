@@ -1,6 +1,3 @@
-import { useModal } from 'core/hooks';
-import { withModal } from 'core/helpers';
-
 import AppModal from './AppModal';
 
 interface ColumnPair {
@@ -50,6 +47,4 @@ const AppShowModeModal = ({
   );
 };
 
-AppShowModeModal.useModal = () => useModal();
-
-export default withModal(AppShowModeModal);
+export default AppShowModeModal;

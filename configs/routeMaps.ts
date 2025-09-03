@@ -2,7 +2,7 @@ import type { RouteObject } from 'react-router-dom';
 
 import { HRLinkRoutes } from '../modules/hrlink/app/routes';
 import { SSOHRLinkRoutes } from '../modules/sso/router';
-import { BasicInfoRoutes } from '../modules/basic-info/router';
+import { BasicInfoRoutes } from '../modules/basic-info/app/routes';
 import { ChartMakerRoutes } from '../modules/chart-maker/app/routes';
 
 const routeImporters: Record<string, () => Promise<{ routes: RouteObject[] }>> =

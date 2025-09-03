@@ -1,5 +1,5 @@
 import AppAutoComplete from './AppAutoComplete';
-import AppSideBar from './AppSideBar';
+import AppSideBar from '../sections/AppSideBar';
 import AppSupportButton from './AppSupportButton';
 import AppDatePicker from './AppDatePicker';
 import AppInput from './AppInput';
@@ -15,6 +15,7 @@ import AppErrorToast from './AppErrorToast';
 import AppPageTitle from './AppPageTitle';
 import AppDeleteModal from './AppDeleteModal';
 import AppShowModeModal from './AppShowModeModal';
+import AppTabs from './AppTabs';
 
 export {
   AppAutoComplete,
@@ -32,6 +33,7 @@ export {
   AppErrorToast,
   AppDatePicker,
   AppPageTitle,
+  AppTabs,
   AppDeleteModal,
   AppShowModeModal
 };

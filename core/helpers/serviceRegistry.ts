@@ -1,13 +1,14 @@
 import type { Reducer } from '@reduxjs/toolkit';
 import type { RouteObject } from 'react-router-dom';
 import type { Api } from '@reduxjs/toolkit/query/react';
+import plugin from 'eslint-plugin-react';
 
 export interface PluginModule {
   name: string;
   reducers?: Reducer;
   apis?: Api<any, any, any, any>[];
   routes?: RouteObject[];
-  menu?: Record<string, { label: string; path: string; icon?: React.ReactNode }[]>;
+  menu?: { label: string; path: string; icon?: React.ReactNode }[];
   middleware?: any[];
   dependencies?: string[];
   prefetch?: () => void | Promise<void>;
@@ -36,8 +37,10 @@ export class ServiceRegistry {
     }
   }
 
-  unregisterPlugin(name: string) {
-    this.plugins.delete(name);
+  getModuleName() {
+    for (const plugin of this.plugins.values()) {
+      return plugin.name;
+    }
   }
 
   getAllReducers(): Record<string, Reducer> {
@@ -58,6 +61,7 @@ export class ServiceRegistry {
 
   getAllRoutes(): RouteObject[] {
     const routes: RouteObject[] = [];
+
     for (const plugin of this.plugins.values()) {
       if (plugin.routes) {
         routes.push(...plugin.routes);
@@ -67,33 +71,12 @@ export class ServiceRegistry {
     return routes;
   }
 
-  getAllMenus(): Record<
-    string,
-    { label: string; path: string; icon?: React.ReactNode }[]
-  >[] {
-    const menus: Record<string, { label: string; path: string; icon?: React.ReactNode }[]>[] = [];
-
-    for (const plugin of this.plugins.values()) {
-      if (plugin.menu) {
-        menus.push(plugin.menu);
-      }
-    }
-
-    return menus;
-  }
-
-  getActiveMenu(pathname: string) {
-    const parts = pathname.split('/').filter(Boolean);
-
-    if (parts.length < 2) return [];
-
-    const [moduleName, featureName] = parts;
-
+  getActiveMenu(moduleName:string) {
     const plugin = this.plugins.get(moduleName);
 
     if (!plugin || !plugin.menu) return [];
 
-    return plugin.menu[featureName] || [];
+    return plugin.menu || [];
   }
 
   async runPrefetch() {

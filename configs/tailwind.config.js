@@ -11,6 +11,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      borderRadius:{
+        'xs': '4px'
+      },
       backgroundImage: {
         'light-mode-bg': `url('../core/assets/img/lightmode-bg.png')`,
         'dark-mode-bg': `url('../core/assets/img/darkmode-bg.png')`,
@@ -24,6 +27,9 @@ export default {
       defaultTheme: "light",
       defaultExtendTheme: "light",
       themes: {
+        borderRadius:{
+          'xs': '4px'
+        },
         light: {
           colors: {
             foreground: "#04070E",

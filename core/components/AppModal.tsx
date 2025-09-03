@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useModalContext } from 'core/context';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 
@@ -8,10 +9,8 @@ interface ModalProps {
   title?: string;
   icon?: React.ReactNode;
   size?: ModalSize;
-  header?: React.ReactNode;
   children?: React.ReactNode;
-  footer?: React.ReactNode;
-  backdropClosable?: boolean;
+  modalType: string;
 }
 
 const sizeClasses: Record<ModalSize, string> = {
@@ -25,48 +24,49 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = ({
-  title,
-  icon,
-  size = 'md',
-  children,
-  backdropClosable = true,
-}: ModalProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-
-  (AppModal as any).open = open;
-  (AppModal as any).close = close;
+const AppModal = ({ title, icon, size = 'md', children, modalType}: ModalProps) => {
+  const { isModalOpen, closeModal } = useModalContext();
+  const handleBackdropClick = () => {
+    if (closeModal) {
+      closeModal(modalType);
+    }
+  };
   const content = React.Children.map(children, (child) => {
     if (!React.isValidElement(child)) return child;
 
-    return React.cloneElement(child as any, { close });
+    return React.cloneElement(child as any, { close: closeModal });
   });
 
   return createPortal(
     <AnimatePresence>
-      {isOpen && (
+      {isModalOpen(modalType) && (
         <motion.div
+          animate={{ opacity: 1 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
-          onClick={backdropClosable ? close : undefined}
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          onClick={handleBackdropClick}
         >
           <motion.div
-            className={`bg-[#ffffff4d] rounded-2xl shadow p-10 w-full backdrop-blur-[20px] ${sizeClasses[size]}`}
+            animate={{ scale: 1, opacity: 1 }}
+            className={`bg-[#fff] rounded-2xl shadow p-10 w-full backdrop-blur-[20px] ${sizeClasses[size]}`}
+            exit={{ scale: 0.95, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mb-4">
-              <div className="flex justify-between items-center">
-                <div className="bg-secondary-400 shadow-light-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit">
-                  {icon}
-                  <span className="text-white font-normal text-xl">
-                    {title}
-                  </span>
+            <div className="flex flex-col gap-6">
+              {(title || icon) && (
+                <div className="flex items-center">
+                  <div
+                    className={`shadow-light-tight/1 dark:shadow-dark-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit items-center bg-${modalType === 'delete' ? 'danger' : 'primary'}`}
+                  >
+                    {icon}
+                    <span className="text-white font-normal text-xl">{title}</span>
+                  </div>
                 </div>
-              </div>
+              )}
+              {content}
             </div>
-            {content}
           </motion.div>
         </motion.div>
       )}
@@ -80,7 +80,7 @@ function AppModalBody({ children }: { children: React.ReactNode }) {
 }
 
 function AppModalFooter({ children }: { children: React.ReactNode }) {
-  return <div className="flex justify-between gap-4">{children}</div>;
+  return <div className="flex gap-7 justify-end">{children}</div>;
 }
 
 AppModal.Body = AppModalBody;
