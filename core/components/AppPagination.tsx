@@ -2,30 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { Pagination as HeroPagination } from '@heroui/react';
 import { useSearchParams } from 'react-router-dom';
 
-interface AppPaginationProps {
-  props: {
-    size?: 'sm' | 'md' | 'lg';
-    initialPage?: number;
-    showControls?: boolean;
-    dotsJump?: number;
-    queryKey?: string;
-  };
-}
-
-const AppPagination = ({ props }: AppPaginationProps) => {
-  const {
-    size = 'md',
-    initialPage = 1,
-    showControls = true,
-    dotsJump = 3,
-    queryKey = 'page',
-  } = props;
-
+const AppPagination = ({ total }: { total: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = searchParams.get(queryKey);
+    const pageParam = searchParams.get("");
 
-    return pageParam ? parseInt(pageParam, 10) : initialPage;
+    return pageParam ? parseInt(pageParam, 10) : 1;
   });
 
   const handlePageChange = useCallback(
@@ -34,16 +16,16 @@ const AppPagination = ({ props }: AppPaginationProps) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
 
-        newParams.set(queryKey, page.toString());
+        newParams.set(page.toString(""));
 
         return newParams;
       });
     },
-    [queryKey, setSearchParams],
+    [setSearchParams],
   );
 
   useEffect(() => {
-    const pageParam = searchParams.get(queryKey);
+    const pageParam = searchParams.get("");
 
     if (pageParam) {
       const page = parseInt(pageParam, 10);
@@ -52,22 +34,23 @@ const AppPagination = ({ props }: AppPaginationProps) => {
         setCurrentPage(page);
       }
     }
-  }, [searchParams, queryKey, currentPage]);
+  }, [searchParams, currentPage]);
 
   return (
     <HeroPagination
       classNames={{
-        item: 'bg-white text-secondary-1000 shadow-md dark:bg-info-1000 hover:dark:bg-transparent',
-        cursor: 'bg-secondary-400 text-white',
-        next: 'dark:bg-transparent bg-white text-secondary-1000',
-        prev: 'dark:text-white bg-white text-secondary-1000',
+        item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer',
+        cursor: 'rounded-md',
+        next: 'bg-white rounded-md cursor-pointer',
+        prev: 'bg-white rounded-md cursor-pointer',
       }}
-      dotsJump={dotsJump}
-      initialPage={initialPage}
+      color="primary"
+      dotsJump={1}
+      initialPage={total}
       page={currentPage}
-      radius="sm"
-      showControls={showControls}
-      size={size}
+      showControls={true}
+      size="md"
+      total={total}
       onChange={handlePageChange}
     />
   );

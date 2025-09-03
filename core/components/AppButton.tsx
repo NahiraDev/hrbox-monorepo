@@ -69,7 +69,6 @@ const AppButton = ({ props }: { props: any }) => {
       startContent={startContent}
       type={type}
       variant={variant}
-      onClick={handlePress}
       onPress={handlePress}
       {...rest}
     >

@@ -1,21 +1,28 @@
 import { Trash } from 'iconsax-react';
-import { useModal } from 'core/hooks';
-import { withModal } from 'core/helpers';
+import { useModalContext } from 'core/context';
 
 import AppModal from './AppModal';
 import AppButton from './AppButton';
 
-interface AppDeleteModalProps {
-  onConfirm?: () => void;
-  onCancel?: () => void;
-}
+const AppDeleteModal = () => {
+  const { getModalData, closeModal } = useModalContext();
+  const modalData = getModalData('delete');
 
-const AppDeleteModal = ({ onConfirm, onCancel }: AppDeleteModalProps) => {
+  const handleConfirm = () => {
+    console.log('Deleting:', modalData);
+    closeModal('delete');
+  };
+
+  const handleCancel = () => {
+    closeModal('delete');
+  };
+
   return (
     <AppModal
       icon={<Trash className="text-white" size="18" />}
-      size="2xl"
-      title="Would it be acceptable for you to remove this?"
+      modalType="delete"
+      size="xl"
+      title="Do you want to remove it?"
     >
       <AppModal.Footer>
         <AppButton
@@ -23,7 +30,7 @@ const AppDeleteModal = ({ onConfirm, onCancel }: AppDeleteModalProps) => {
             size: 'md',
             radius: 'lg',
             variant: 'light',
-            onPress: onCancel,
+            onPress: handleCancel,
             content: 'Cancel',
           }}
         />
@@ -32,7 +39,7 @@ const AppDeleteModal = ({ onConfirm, onCancel }: AppDeleteModalProps) => {
             size: 'md',
             radius: 'lg',
             color: 'danger',
-            onPress: onConfirm || (() => {}),
+            onPress: handleConfirm,
             content: 'Delete',
           }}
         />
@@ -41,6 +48,4 @@ const AppDeleteModal = ({ onConfirm, onCancel }: AppDeleteModalProps) => {
   );
 };
 
-AppDeleteModal.useModal = () => useModal();
-
-export default withModal(AppDeleteModal);
+export default AppDeleteModal;

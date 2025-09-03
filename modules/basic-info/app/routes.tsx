@@ -3,9 +3,9 @@ import { createProjectRoutes } from 'core/index';
 
 export const page = {
   departments: {
-    organization: lazyLoad(() => import('../features/departments/organizationDepartments')),
-    technical: lazyLoad(() => import('../features/departments/technicalDepartments')),
-    location: lazyLoad(() => import('../features/departments/organizationDepartments')),
+    organization: lazyLoad(() => import('../features/departments/OrganizationDepartments')),
+    technical: lazyLoad(() => import('../features/departments/TechnicalDepartments')),
+    location: lazyLoad(() => import('../features/departments/OrganizationDepartments')),
     employees: lazyLoad(() => import('../features/employees/EmployeeSatisfactionCalendar')),
   },
   employees: {
@@ -18,8 +18,8 @@ export const page = {
 };
 
 export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
-  organizationDepartments: page.departments.organization,
-  technicalDepartments: page.departments.technical,
+  OrganizationDepartments: page.departments.organization,
+  TechnicalDepartments: page.departments.technical,
   OrganizationalLocations: page.departments.location,
   EmployeeSatisfactionCalendar: page.employees.satisfaction,
   PersonalInformation: page.employees.personalInformation,

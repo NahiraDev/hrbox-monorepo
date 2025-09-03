@@ -1,58 +1,54 @@
-import { createContext, useState, useContext } from 'react';
+import React, { createContext, type ReactNode, useContext, useState } from 'react';
 
-interface AppState {
-  isEditMode: boolean;
-  isShowMode: boolean;
-  activateEditMode: () => void;
-  activateShowMode: () => void;
-  deactivateModes: () => void;
+type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
+
+interface ModalContextType {
+  openModal: (type: ModalType | string, data: string) => void;
+  closeModal: (type: ModalType | string) => void;
+  getModalData: (type: ModalType | string) => any;
+  isModalOpen: (type: ModalType | string) => boolean;
 }
 
-const ModalManagementContext = createContext<AppState | undefined>(undefined);
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalManagementProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [isShowMode, setIsShowMode] = useState(false);
+export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [modals, setModals] = useState<any[]>([]);
 
-  const activateEditMode = () => {
-    setIsEditMode(true);
-    setIsShowMode(false);
+  const openModal = (type: ModalType, data: any) => {
+    setModals((prev) => [...prev.filter((m) => m.type !== type), { type, data }]);
   };
 
-  const activateShowMode = () => {
-    setIsShowMode(true);
-    setIsEditMode(false);
+  const closeModal = (type: ModalType) => {
+    setModals((prev) => prev.filter((m) => m.type !== type));
   };
 
-  const deactivateModes = () => {
-    setIsEditMode(false);
-    setIsShowMode(false);
+  const getModalData = (type: ModalType) => {
+    return modals.find((m) => m.type === type)?.data;
+  };
+
+  const isModalOpen = (type: ModalType) => {
+    return modals.some((m) => m.type === type);
   };
 
   return (
-    <ModalManagementContext.Provider
+    <ModalContext.Provider
       value={{
-        isEditMode,
-        isShowMode,
-        activateEditMode,
-        activateShowMode,
-        deactivateModes,
+        openModal,
+        closeModal,
+        getModalData,
+        isModalOpen,
       }}
     >
       {children}
-    </ModalManagementContext.Provider>
+    </ModalContext.Provider>
   );
 };
 
-export const useModalManagement = () => {
-  const context = useContext(ModalManagementContext);
+export const useModalContext = () => {
+  const context = useContext(ModalContext);
 
   if (!context) {
-    throw new Error('useAppState must be used within an AppStateProvider');
+    throw new Error('useModalContext must be used within a ModalProvider');
   }
 
   return context;
