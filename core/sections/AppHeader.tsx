@@ -12,15 +12,15 @@ import AppBreadcrumb from './AppBreadCrumb';
 import { AppButton } from 'core/components';
 
 const AppHeader = () => {
-  const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [currentPages, setCurrentPages] = useState<string[]>([]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    console.log('Switching theme to:', newTheme);
+
     setTheme(newTheme);
   };
 
@@ -35,17 +35,15 @@ const AppHeader = () => {
     document.documentElement.classList.add(theme);
     document.body.classList.remove('light', 'dark');
     document.body.classList.add(theme);
-
     document.documentElement.style.colorScheme = theme;
     document.body.style.background = theme === 'dark' ? '#04070E' : '#FFFFFF';
     document.body.style.color = theme === 'dark' ? '#FFFFFF' : '#04070E';
-
     localStorage.setItem('heroui-theme', theme);
   }, [theme]);
 
   return (
     <div className="flex items-center justify-between pb-8 pt-4 gap-10">
-      <button className="flex justify-center items-center w-[80px]" onClick={() => navigate('/')}>
+      <button className="flex justify-center items-center w-[100px] cursor-pointer" onClick={() => navigate('/')}>
         <Logo />
       </button>
       <div className="flex flex-col w-full">

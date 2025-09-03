@@ -1,5 +1,5 @@
 import AppAutoComplete from './AppAutoComplete';
-import AppSideBar from './AppSideBar';
+import AppSideBar from '../sections/AppSideBar';
 import AppSupportButton from './AppSupportButton';
 import AppDatePicker from './AppDatePicker';
 import AppInput from './AppInput';
