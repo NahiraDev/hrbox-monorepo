@@ -1,13 +1,30 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { AppSupportButton, AppSideBar } from '../components';
 import { AppDocs, AppHeader } from '../sections';
 
 interface BaseLayoutProps {
   content: React.ReactNode;
-  subHeader?: React.ReactNode;
 }
 
-export const BaseLayout = ({ content, subHeader }: BaseLayoutProps) => {
+export const BaseLayout = ({ content }: BaseLayoutProps) => {
+  const location = useLocation();
+
+  const getSubHeader = () => {
+    const routePath = location.pathname.split('/').pop() || '';
+
+    if (routePath) {
+      const SubHeaderComponent = routePath;
+
+      return <SubHeaderComponent />;
+    }
+
+    return null;
+  };
+
+  const subHeader = getSubHeader();
+
   return (
     <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode bg-blend-screen bg-no-repeat bg-center">
       <AppHeader />
