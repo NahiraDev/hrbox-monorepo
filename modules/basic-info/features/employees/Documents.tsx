@@ -1,16 +1,21 @@
 import { Avatar, Card } from '@heroui/react';
 import { identityCard } from 'mock';
-import { AppButton } from 'core/components';
+import { AppButton, AppDeleteModal } from 'core/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
 
 import { BasicInfoLayout } from '../common';
 
 const Documents = () => {
+  const deleteModal = AppDeleteModal.useModal()
+
+  const handleDeleteDocument = (user:any) =>{
+    console.log(user);
+  }
   return (
     <BasicInfoLayout
       content={
         <div className="grid grid-cols-4 gap-4 w-full">
-          {identityCard.map((user, index) => (
+          {identityCard.map((user:any, index) => (
             <Card key={index} className="p-3 w-full h-full ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between">
@@ -26,6 +31,10 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
+                          onPress: () => deleteModal.open({
+                            onConfirm: handleDeleteDocument(user),
+                            onCancel: deleteModal.close,
+                          }),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-red-500 transition-all duration-200',
                         }}
@@ -64,6 +73,7 @@ const Documents = () => {
               </div>
             </Card>
           ))}
+          <AppDeleteModal />
         </div>
       }
     />

@@ -34,7 +34,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
 
   return (
     <div>
-      <div className="bg-primary-400 w-full rounded-t-2xl px-4 pt-4">
+      <div className="bg-primary-400 w-full rounded-t-xl px-4 pt-4">
         <div className="flex items-center justify-between gap-7">
           <div
             className="w-36 h-36 rounded-lg"
@@ -132,7 +132,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                 </div>
                 <div className="flex flex-col gap-1 items-center">
                   <span className="text-info-400 text-xs">Zahra Pakniyat</span>
-                  <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary text-[10px] w-full ">
+                  <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
                     uiUx designer
                   </Button>
                 </div>

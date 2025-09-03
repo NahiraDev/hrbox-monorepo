@@ -23,7 +23,7 @@ const AppDeleteModal = ({ onConfirm, onCancel }: AppDeleteModalProps) => {
             size: 'md',
             radius: 'lg',
             variant: 'light',
-            onPress: onCancel || (() => {}),
+            onPress: onCancel,
             content: 'Cancel',
           }}
         />

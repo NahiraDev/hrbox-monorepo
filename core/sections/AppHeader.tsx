@@ -1,5 +1,5 @@
 import { ElementEqual, Moon, Notification, Play, SmsNotification } from 'iconsax-react';
-import { Button, Avatar, Divider } from '@heroui/react';
+import { Avatar, Divider } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -67,7 +67,7 @@ const AppHeader = () => {
                 props={{
                   color: 'primary',
                   variant: 'bordered',
-                  size: 'md',
+                  size: 'xs',
                   radius: 'md',
                   content: <Play size="24" />,
                 }}
@@ -96,6 +96,7 @@ const AppHeader = () => {
                 props={{
                   isIconOnly: true,
                   variant: 'solid',
+                  color:'white',
                   radius: 'md',
                   size: 'md',
                   onPress: () => toggleTheme(),
@@ -106,6 +107,7 @@ const AppHeader = () => {
                 props={{
                   isIconOnly: true,
                   variant: 'solid',
+                  color:'white',
                   radius: 'md',
                   size: 'md',
                   content: <Notification size="20" />,
@@ -115,6 +117,7 @@ const AppHeader = () => {
                 props={{
                   isIconOnly: true,
                   variant: 'solid',
+                  color:'white',
                   radius: 'md',
                   size: 'md',
                   content: <SmsNotification size="20" />,
@@ -124,6 +127,7 @@ const AppHeader = () => {
                 props={{
                   isIconOnly: true,
                   variant: 'solid',
+                  color:'white',
                   radius: 'md',
                   size: 'md',
                   content: <HourGlass size="20" />,
