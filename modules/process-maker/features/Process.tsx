@@ -1,10 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import  { useCallback, useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useTranslation } from 'react-i18next';
 
-import { ProcessModal } from '../features/modals/ProcessModal;
-import { AddEventModal } from '../features/modals/AddEventModal';
-import { AddActionsModall } from '../features/modals/ActionsModal';
+import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals;
 
 import './bpmnstyle.css';
 
@@ -288,7 +286,7 @@ export default function Bpmn() {
         />
       )}{' '}
       {activeModal?.type === 'bpmn:EndEvent' && (
-        <EventModall
+        <EventModal
           data={currentData}
           headerText="add_event"
           isOpen={true}
@@ -297,7 +295,7 @@ export default function Bpmn() {
         />
       )}{' '}
       {editModal?.type === 'bpmn:EndEvent' && (
-        <EventModall
+        <EventModal
           data={currentData}
           headerText="edit_end_event"
           isOpen={true}

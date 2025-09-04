@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { useModal } from '@heroui/react';
 
-import { AppModal, AppButton, FormProvider, withModal, useModal } from '../../../../core/';
+import { withModal } from '../../../../core';
+import { AppModal, AppButton, FormProvider } from '../../../../core/';
 import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '../forms';
 
 const NewOneModal = () => {
