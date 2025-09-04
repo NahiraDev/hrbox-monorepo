@@ -21,9 +21,7 @@ export const loadModules = async (pluginNames: string[]) => {
     }
   }
 
-  storeInstance.replaceReducer(
-    createRootReducer(serviceRegistry.getAllReducers()),
-  );
+  storeInstance.replaceReducer(createRootReducer(serviceRegistry.getAllReducers()));
 
   serviceRegistry.getAllApis().forEach((api) => {
     storeInstance.dispatch(api.util.resetApiState());

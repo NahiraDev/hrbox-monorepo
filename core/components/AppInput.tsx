@@ -9,6 +9,8 @@ interface AppInputProps {
   name?: string;
   type?: string;
   value?: string;
+  variant?:any;
+  color?:any;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -55,7 +57,9 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     error,
     name,
     type = 'text',
+    variant = 'solid',
     value,
+    color,
     startContent,
     endContent,
     onFocus,
@@ -66,12 +70,12 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     className,
     ...rest
   } = props;
-
   const inputWrapperClassNames = clsx(
-    '!bg-white dark:!bg-info-1000',
+    `${modalType === 'view' && 'bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)]'}`,
+    'bg-white',
     'border border-primary-0 !backdrop_blur[35px]',
     'dark:border-primary-0 dark:!shadow-secondary',
-    error && '!border-red-500 !bg-red-100 dark:bg-red-800',
+    error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
     className,
@@ -105,6 +109,8 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
         placeholder={`Please enter ${label ?? 'value'} ...`}
         startContent={startContent}
         type={type}
+        variant={variant}
+        color={color}
         value={value}
         onBlur={onBlur}
         onChange={onChange}

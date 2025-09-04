@@ -23,6 +23,9 @@ export const baseConfig = defineConfig((_env: any) => {
       port: 5173,
       strictPort: true,
     },
+    define: {
+      'process.env': {}
+    },
     resolve: {
       alias: {
         '@core': path.resolve(__dirname, 'core'),

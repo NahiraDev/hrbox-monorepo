@@ -1,26 +1,21 @@
 import { type RouteObject, Navigate } from 'react-router-dom';
 import * as React from 'react';
+
 import RouteResolver from './RouteResolver';
 
 interface ProjectComponents {
   [key: string]: React.ComponentType<any>;
 }
 
-export function createProjectRoutes(
-  basePath: string,
-  components: ProjectComponents,
-  indexRedirect?: string,
-) {
-  const children: RouteObject[] = Object.entries(components).map(
-    ([path, Component]) => ({
-      path,
-      element: (
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <RouteResolver Component={Component} />
-        </React.Suspense>
-      ),
-    }),
-  );
+export function createProjectRoutes(basePath: string, components: ProjectComponents, indexRedirect?: string) {
+  const children: RouteObject[] = Object.entries(components).map(([path, Component]) => ({
+    path,
+    element: (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <RouteResolver Component={Component} />
+      </React.Suspense>
+    ),
+  }));
 
   if (indexRedirect) {
     children.unshift({
@@ -28,12 +23,6 @@ export function createProjectRoutes(
       element: <Navigate replace to={indexRedirect} />,
     });
   }
-
-  const menu = Object.keys(components).map((key ,icon) => ({
-    label: key,
-    path: `${basePath}/${key}`,
-    icon: icon,
-  }));
 
   return {
     routes: [
@@ -50,6 +39,5 @@ export function createProjectRoutes(
         element: <div>404 - Not Found</div>,
       },
     ],
-    menu,
   };
 }

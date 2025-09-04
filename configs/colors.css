@@ -97,7 +97,7 @@
   --color-warning-1000: #241400;
 
   /* Danger Colors */
-  --color-danger: #FDE1E1;
+  --color-danger: #F23030;
   --color-danger-50: #FBC3C3;
   --color-danger-150: #F9A6A6;
   --color-danger-200: #F78888;
@@ -249,7 +249,7 @@
 
 @layer base {
   :root {
-
+    --color-white: hsl(var(--heroui-white));
     --color-primary: hsl(var(--heroui-primary));
     --color-primary-foreground: hsl(var(--heroui-primary-foreground));
     --color-primary-900: hsl(var(--heroui-primary-900));
