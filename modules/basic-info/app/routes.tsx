@@ -14,6 +14,8 @@ export const page = {
     personalInformation: lazyLoad(() => import('../features/employees/PersonalInformation')),
     Documents: lazyLoad(() => import('../features/employees/Documents')),
     Jobs: lazyLoad(() => import('../features/employees/Jobs')),
+    Education: lazyLoad(() => import('../features/employees/Education')),
+    skills: lazyLoad(() => import('../features/employees/Skills')),
   },
 };
 
@@ -25,4 +27,6 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   PersonalInformation: page.employees.personalInformation,
   Documents: page.employees.Documents,
   Jobs: page.employees.Jobs,
+  education: page.employees.Education,
+  skills: page.employees.skills,
 });
