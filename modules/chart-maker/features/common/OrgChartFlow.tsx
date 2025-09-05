@@ -21,15 +21,16 @@ const defaultEdgeOptions = {
 export const OrgChartFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const onConnect: OnConnect= useCallback((params:any) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect: OnConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), []);
+
   return (
     <ReactFlow
       fitView
       defaultEdgeOptions={defaultEdgeOptions}
-      nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
-      nodes={nodes}
       edges={edges}
+      nodeTypes={nodeTypes}
+      nodes={nodes}
       onConnect={onConnect}
       onEdgesChange={onEdgesChange}
       onNodesChange={onNodesChange}

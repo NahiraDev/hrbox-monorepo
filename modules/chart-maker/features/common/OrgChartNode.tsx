@@ -1,30 +1,52 @@
 import { memo } from 'react';
-import { Avatar } from '@heroui/react';
-import { User } from 'iconsax-react';
-import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
+import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
+import { ArrowDown2, Briefcase, Trash, User } from 'iconsax-react';
+import { Handle, Position } from '@xyflow/react';
 
-export type OrgChartData = {
-  avatar?: string;
-  title: string;
-  description?: string;
-  members?: string;
-};
-
-const OrgChartNode = ({ data }: NodeProps<Node<OrgChartData>>) => {
+const OrgChartNode = () => {
   return (
     <div>
-      <div className="flex border-l-[2px] border-primary-400 items-start flex-col gap-2 bg-white rounded-xl shadow-light-tight-1 dark:shadow-dark-tight-1 py-2 px-3">
-        <div className="flex items-center gap-[10px] pb-1 border-b-0.5 border-neutral-100 dark:border-neutral-700">
-          <Avatar radius="sm" size="sm" src={data.avatar} />
-          <h3 className="text-base font-semibold text-secondary-1000 wrap-break-word ">{data.title}</h3>
-        </div>
-        <div className=" flex flex-col gap-1.5 items-start ">
-          <p className="text-xs text-secondary-1000 font-bold wrap-break-word">{data.description}</p>
-          <div className="flex items-center gap-4">
-            <User className="items-center text-primary-400 dark:text-gold" size="18" />
-            <p className="text-sm font-normal text-primary-400 dark:text-gold  leading-normal gap-2">
-              {data.members} people
-            </p>
+      <div className="px-4 py-[20px] flex rounded-lg">
+        <div className="relative bg-white rounded-xl shadow-md  p-4 flex flex-col justify-between border-l-4 border-red-500">
+          <button className="absolute top-2 right-2 text-gray-400 pt-3 hover:text-red-500">
+            <Trash size={18} />
+          </button>
+          <div className="flex items-start flex-col gap-3">
+            <img alt="" className="w-[26px] h-[26px] rounded-lg " src="https://placehold.co/28x28" />
+            <div className="flex flex-row items-center gap-[62px]">
+              <h3 className="text-sm font-semibold text-gray-800"> Zahra Pakniyat</h3>
+              <Chip color="primary" variant="bordered">
+                UIUX Designer
+              </Chip>
+            </div>
+          </div>
+          <div className="flex justify-end items-center gap-2 mt-4 text-sm  text-gray-600">
+            <div className="flex items-center gap-1 border-2 border-blue-500 px-2 py-[2px] rounded-[6px]">
+              <Briefcase size={12} />
+              <span>0</span>
+            </div>
+            <div className="flex items-center gap-1 border-2 border-dashed rounded-[5px] px-1 py-[2px] border-primary-400">
+              <span>0</span>
+            </div>
+            <div className="relative">
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button className="!rounded-2 !px-1 !py-0.5 !min-w-fit !h-auto" color="primary" variant="solid">
+                    <div className="flex items-center gap-1">
+                      <User size={12} />
+                      <span className="text-xs text-white">0</span>
+                      <ArrowDown2 size={12} />
+                    </div>
+                  </Button>
+                </DropdownTrigger>
+
+                <DropdownMenu>
+                  <DropdownItem key={1} className="hover:bg-blue-100">
+                    1
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
         </div>
       </div>

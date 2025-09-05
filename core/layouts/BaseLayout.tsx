@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { AppSupportButton, AppSideBar } from '../components';
-import { AppDocs, AppHeader } from '../sections';
+import { AppSupportButton } from '../components';
+import { AppDocs, AppHeader , AppSideBar} from '../sections';
 
 interface BaseLayoutProps {
   content: React.ReactNode;
@@ -36,7 +36,7 @@ export const BaseLayout = ({ content }: BaseLayoutProps) => {
 
             <div className="flex flex-1 min-h-0 gap-8">
               <AppSideBar />
-              <div className="flex-1 rounded-xl border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-light-tight-2 dark:shadow-dark-tight-2 overflow-hidden p-4">
+              <div className="flex-1 rounded-xl border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-light-tight-2 dark:shadow-dark-tight-2 overflow-hidden p-4 relative">
                 {content}
               </div>
             </div>

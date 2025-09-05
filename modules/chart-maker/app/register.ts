@@ -1,9 +1,7 @@
 import type { PluginModule } from '../../../core';
 
-import { convertMenuStructure } from '../../../core';
-
+import { ChartMakerMenu } from './menu';
 import { ChartMakerReducers } from './reducer';
-import { getChartMakerMenuData } from './menu';
 import { ChartMakerRoutes } from './routes';
 
 const ChartMakerPlugin: PluginModule = {
@@ -11,7 +9,7 @@ const ChartMakerPlugin: PluginModule = {
   reducers: ChartMakerReducers,
   apis: [],
   routes: ChartMakerRoutes.routes,
-  menu: convertMenuStructure(getChartMakerMenuData()),
+  menu: ChartMakerMenu(),
 };
 
 export default ChartMakerPlugin;
