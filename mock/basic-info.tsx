@@ -889,3 +889,115 @@ export const Jobss = [
     location: 'Tehran',
   },
 ];
+export const education = [
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+];
+export const skills = [
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  }, {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+
+];
