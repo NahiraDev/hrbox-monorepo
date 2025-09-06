@@ -1,7 +1,4 @@
-import {
-  type Node,
-  type Edge,
-} from '@xyflow/react';
+import { type Node, type Edge } from '@xyflow/react';
 
 export type OrgChartData = {
   avatar?: string;
@@ -61,7 +58,6 @@ export const initialNodes: Node<OrgChartData>[] = [
     type: 'orgChart',
     data: { avatar: '', title: 'HRBox', description: 'Nahira Develolop Team', members: '10' },
     position: { x: 250, y: 250 },
-
   },
   {
     id: '5',
@@ -74,7 +70,7 @@ export const initialNodes: Node<OrgChartData>[] = [
     type: 'orgChart',
     data: { avatar: '', title: 'HRBox', description: 'Nahira Develolop Team', members: '10' },
     position: { x: 750, y: 125 },
-  }
+  },
 ];
 
 export const initialEdges: Edge[] = [
@@ -104,3 +100,14 @@ export const initialEdges: Edge[] = [
     target: '6',
   },
 ];
+
+export const departmentUnit = [
+  { value: 'all', label: 'All', color: 'black' },
+  { value: 'finance', label: 'Finance', color: 'red' },
+  { value: 'sale', label: 'Sale', color: 'yellow' },
+  { value: 'it', label: 'IT', color: 'green' },
+  { value: 'software', label: 'Software', color: 'sky_blue' },
+  { value: 'VP Of Planing', label: 'VP Of Planing', color: 'blue' },
+  { value: 'hr', label: 'HR', color: 'orange' },
+];
+

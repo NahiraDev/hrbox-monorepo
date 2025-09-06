@@ -9,6 +9,6 @@ export const page = {
 };
 
 export const ChartMakerRoutes = createProjectRoutes('/chart-maker', {
-  organizationChartList: page.organizationChart.list,
+  OrganizationChartList: page.organizationChart.list,
   OrgChart: page.organizationChart.chart,
 });
