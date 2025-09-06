@@ -993,11 +993,209 @@ export const skills = [
     Level: 'A',
     Grad: '80%',
     present: '',
-  }, {
+  },
+  {
     skill: 'Adobe PS',
     Level: 'A',
     Grad: '80%',
     present: '',
   },
-
+];
+export const courses = [
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+];
+export const achivements = [
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+];
+export const dataWorker = [
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+];
+export const dataWorker2 = [
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+];
+export const Spouse = [
+  {
+    firstName: 'Negative',
+    lastName: 'Negative',
+    job: 'A+',
+    id: '2025/01/01',
+    education: '400.000.00',
+    mobile: '1234',
+    birth: '12345',
+  },
 ];

@@ -16,6 +16,9 @@ export const page = {
     Jobs: lazyLoad(() => import('../features/employees/Jobs')),
     Education: lazyLoad(() => import('../features/employees/Education')),
     skills: lazyLoad(() => import('../features/employees/Skills')),
+    courses: lazyLoad(() => import('../features/employees/Courses')),
+    Achievements: lazyLoad(() => import('../features/employees/Achievements')),
+    Dependents: lazyLoad(() => import('../features/employees/Dependents')),
   },
 };
 
@@ -29,4 +32,7 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   Jobs: page.employees.Jobs,
   education: page.employees.Education,
   skills: page.employees.skills,
+  courses: page.employees.courses,
+  Achievements: page.employees.Achievements,
+  Dependents: page.employees.Dependents,
 });

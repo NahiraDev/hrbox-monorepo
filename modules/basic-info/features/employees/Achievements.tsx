@@ -1,19 +1,19 @@
 import { Card } from '@heroui/react';
-import { dataWorker } from 'mock';
+import { achivements } from 'mock';
 import { AppButton, AppDeleteModal } from 'core/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
 
-const Courses = () => {
+const Achievements = () => {
   const { openModal } = useModalContext();
 
   return (
     <BasicInfoLayout
       content={
         <div className="grid grid-cols-4 gap-4 w-full">
-          {dataWorker.map((user: any, index) => (
+          {achivements.map((user: any, index) => (
             <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between border-b border-gray-200 p-1">
@@ -74,4 +74,5 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Achievements;
+Achievements

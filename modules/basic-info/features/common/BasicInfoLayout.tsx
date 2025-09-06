@@ -34,7 +34,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
 
   return (
     <div>
-      <div className="bg-primary-400 w-full rounded-t-xl px-4 pt-4">
+      <div className="bg-primary-400 w-full rounded-t-xl px-4 pt-4 fixed top-0">
         <div className="flex items-center justify-between gap-7">
           <div
             className="w-36 h-36 rounded-lg"
