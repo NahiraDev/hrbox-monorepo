@@ -38,7 +38,6 @@ const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
 
     return React.cloneElement(child as any, {
       close: closeModal,
-      modalData: ,
     });
   });
 
