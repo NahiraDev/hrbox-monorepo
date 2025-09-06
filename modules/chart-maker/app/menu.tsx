@@ -1,34 +1,41 @@
-import { Setting3 } from 'iconsax-react';
+import type { ReactNode } from 'react';
 
-import { type MenuStructure, useMenu } from '../../../core';
-import { wrapIcons } from '../../../core';
+import { Briefcase, Building, Chart2, Data2, LocationAdd, Profile2User, ReceiveSquare, Setting3 } from 'iconsax-react';
 
-import { ChartMakerPaths } from './paths';
-
-const MenuIcons = wrapIcons({
-  list: <Setting3 size="24" />,
-});
-
-export const ChartMakerMenu = () => {
-  return useMenu('chart-maker', ChartMakerPaths.routes, MenuIcons);
+const MenuIcons = {
+  dashboard: Chart2,
+  departments: Building,
+  locations: LocationAdd,
+  employees: Profile2User,
+  jobs: Briefcase,
+  orgChart: Data2,
+  export: ReceiveSquare,
+  setting: Setting3,
 };
 
-export const getChartMakerMenuData = (): MenuStructure => {
+export const ChartMakerMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
   const moduleName = 'chart-maker';
-  const paths = ChartMakerPaths.routes;
+  const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
-  const menu: MenuStructure = {};
+  const menuConfig: Record<string, string> = {
+    Dashboard: '/Dashboard',
+    Departments: '/OrganizationDepartments',
+    Locations: '/OrganizationalLocations',
+    Employees: '/PersonalInformation',
+    OrgChart: '/OrganizationChartList',
+    setting: '/Setting',
+  };
 
-  for (const [feature, pages] of Object.entries(paths)) {
-    menu[feature] = {};
-    for (const [pageKey, route] of Object.entries(pages)) {
-      menu[feature][pageKey] = {
-        name: pageKey,
-        route: `/${moduleName}/${feature}${route}`,
-        icon: null,
-      };
-    }
-  }
+  Object.entries(menuConfig).forEach(([feature, route]) => {
+    const iconKey = feature.toLowerCase() as keyof typeof MenuIcons;
+    const IconComponent = MenuIcons[iconKey];
 
-  return menu;
+    menuArray.push({
+      label: feature,
+      path: `/${moduleName}${route}`,
+      icon: IconComponent ? <IconComponent /> : null,
+    });
+  });
+
+  return menuArray;
 };
