@@ -24,13 +24,11 @@ const AddActionsModall = () => {
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              className: 'bg-[rgba(0,0,0,0)] ',
               text: t('cancel'),
             }}
           />
           <AppButton
             props={{
-              className: 'px-[12px] py-[6px] gap-[6px] bg-[#0A9AD7] dark:bg-[#0D4D6A] rounded-[8px] text-white ',
               type: 'submit',
               text: t('submit'),
             }}

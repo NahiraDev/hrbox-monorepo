@@ -1,36 +1,50 @@
-import { type MenuStructure, useMenu } from '../../../core';
-import { JobOffersIcon } from '../icons';
-import { wrapIcons } from '../../../core';
+import type { ReactNode } from 'react';
 
-import { ProcessMakerRoutes } from './routes';
+import {
+  Briefcase,
+  Building,
+  Chart2,
+  LocationAdd,
+  Profile2User,
+  ReceiveSquare,
+  Setting3,
+  Hierarchy3,
+} from 'iconsax-react';
 
-const MenuIcons = wrapIcons({
-  offers: JobOffersIcon,
-  detail: JobOffersIcon,
-  opportunities: JobOffersIcon,
-});
-
-export const ProcessMakerMenu = () => {
-  return useMenu('process-maker', ProcessMakerRoutes.routes, MenuIcons);
+const MenuIcons = {
+  dashboard: Chart2,
+  departments: Building,
+  locations: LocationAdd,
+  employees: Profile2User,
+  jobs: Briefcase,
+  export: ReceiveSquare,
+  setting: Setting3,
+  processMaker: Hierarchy3,
 };
 
+export const BasicInfoMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
+  const moduleName = 'process-maker';
+  const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
-export const getProcessMenuData = (): MenuStructure => {
-  const moduleName = 'processmaker';
-  const paths = ProcessMakerRoutes.routes;
+  const menuConfig: Record<string, string> = {
+    Dashboard: '/Dashboard',
+    Departments: '/OrganizationDepartments',
+    Locations: '/OrganizationalLocations',
+    Employees: '/PersonalInformation',
+    setting: '/Setting',
+    processMaker: '/process-maker',
+  };
 
-  const menu: MenuStructure = {};
+  Object.entries(menuConfig).forEach(([feature, route]) => {
+    const iconKey = feature.toLowerCase() as keyof typeof MenuIcons;
+    const IconComponent = MenuIcons[iconKey];
 
-  for (const [feature, pages] of Object.entries(paths)) {
-    menu[feature] = {};
-    for (const [pageKey, route] of Object.entries(pages)) {
-      menu[feature][pageKey] = {
-        name: pageKey,
-        route: `/${moduleName}/${feature}${route}`,
-        icon: null,
-      };
-    }
-  }
+    menuArray.push({
+      label: feature,
+      path: `/${moduleName}${route}`,
+      icon: IconComponent ? <IconComponent /> : null,
+    });
+  });
 
-  return menu;
+  return menuArray;
 };

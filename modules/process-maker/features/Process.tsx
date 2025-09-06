@@ -6,7 +6,7 @@ import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './mod
 
 import './bpmnstyle.css';
 
-interface MyFormValues {
+interface FormsValueBpmn {
   name: string;
   title?: string;
   type?: number;
@@ -34,7 +34,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
 
-export default function Bpmn() {
+export const Bpmn=()=> {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const modelerRef = useRef<BpmnModeler | null>(null);
   const [activeModal, setActiveModal] = useState<{
@@ -46,7 +46,7 @@ export default function Bpmn() {
     element: any;
   } | null>(null);
   const { t, i18n } = useTranslation();
-  const [elementData, setElementData] = useState<Record<string, MyFormValues>>({});
+  const [elementData, setElementData] = useState<Record<string, FormsValueBpmn>>({});
   const observerRef = useRef<MutationObserver | null>(null);
   const getTranslatedTitleForEntry = useCallback(
     (el: HTMLElement) => {
@@ -207,7 +207,7 @@ export default function Bpmn() {
     setEditModal(null);
   };
 
-  const handleSave = (values: MyFormValues) => {
+  const handleSave = (values: FormsValueBpmn) => {
     if (!activeModal) return;
 
     const { element } = activeModal;
@@ -227,7 +227,6 @@ export default function Bpmn() {
     handleCloseModal();
   };
 
-  const currentData = activeModal ? elementData[activeModal.element.id] : undefined;
 
   return (
     <>
@@ -235,73 +234,28 @@ export default function Bpmn() {
         <div ref={canvasRef} className="w-[100%] bg-white h-full" />
       </div>
       {activeModal?.type === 'bpmn:StartEvent' && (
-        <ProcessModal
-          buttonText="Submit"
-          data={currentData}
-          headerText={'Add Start'}
-          isOpen={true}
-          onClose={handleCloseModal}
-          onSubmit={handleSave}
-        />
+        <ProcessModal/>
       )}{' '}
       {editModal?.type === 'bpmn:StartEvent' && (
-        <ProcessModal
-          buttonText="Submit"
-          data={currentData}
-          headerText={t('edit_starting_point')}
-          isOpen={true}
-          onClose={handleCloseEditModal}
-          onSubmit={handleSave}
-        />
+        <ProcessModal />
       )}{' '}
       {activeModal?.type === 'bpmn:Task' && (
-        <AddEventModal
-          buttonText="Submit"
-          headerText={t('Add Event')}
-          isOpen={true}
-          data={currentData}
-          onClose={handleCloseModal}
-          onSubmit={handleSave}
-        />
+        <AddEventModal/>
       )}{' '}
       {editModal?.type === 'bpmn:Task' && (
-        <AddEventModal
-          buttonText="Submit"
-          onClose={handleCloseEditModal}
-          headerText={t('Edit Event')}
-          isOpen={true}
-        />
+        <AddEventModal/>
       )}{' '}
       {activeModal?.type === 'bpmn:SequenceFlow' && (
-        <AddActionsModall
-          isOpen={true}
-          onClose={handleCloseModal}
-        />
+        <AddActionsModall/>
       )}{' '}
       {editModal?.type === 'bpmn:SequenceFlow' && (
-        <AddActionsModall
-          isOpen={true}
-          onClose={handleCloseEditModal}
-          headerText={t('edit_action')}
-        />
+        <AddActionsModall/>
       )}{' '}
       {activeModal?.type === 'bpmn:EndEvent' && (
-        <EventModal
-          data={currentData}
-          headerText="add_event"
-          isOpen={true}
-          onClose={handleCloseModal}
-          onSubmit={handleSave}
-        />
+        <EventModal/>
       )}{' '}
       {editModal?.type === 'bpmn:EndEvent' && (
-        <EventModal
-          data={currentData}
-          headerText="edit_end_event"
-          isOpen={true}
-          onClose={handleCloseEditModal}
-          onSubmit={handleSave}
-        />
+        <EventModal/>
       )}
     </>
   );
