@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModalContext } from 'core/context';
@@ -10,7 +10,6 @@ interface ModalProps {
   icon?: React.ReactNode;
   size?: ModalSize;
   children?: React.ReactNode;
-  modalType: string;
 }
 
 const sizeClasses: Record<ModalSize, string> = {
@@ -24,23 +23,35 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = ({ title, icon, size = 'md', children, modalType}: ModalProps) => {
-  const { isModalOpen, closeModal } = useModalContext();
+const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
+  const { getOpenModal , isModalOpen, closeModal } = useModalContext();
+  const modalData = getOpenModal();
+
   const handleBackdropClick = () => {
-    if (closeModal) {
-      closeModal(modalType);
+    if (modalData) {
+      closeModal(modalData.type, modalData.name);
     }
   };
+
   const content = React.Children.map(children, (child) => {
     if (!React.isValidElement(child)) return child;
 
-    return React.cloneElement(child as any, { close: closeModal });
+    return React.cloneElement(child as any, {
+      close: closeModal,
+      modalData: ,
+    });
   });
+
+
+  if (!modalData) return null;
+
+  const { type, name } = modalData;
 
   return createPortal(
     <AnimatePresence>
-      {isModalOpen(modalType) && (
+      {isModalOpen(type, name) && (
         <motion.div
+          key={`${type}-${name}`}
           animate={{ opacity: 1 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
           exit={{ opacity: 0 }}
@@ -58,7 +69,7 @@ const AppModal = ({ title, icon, size = 'md', children, modalType}: ModalProps) 
               {(title || icon) && (
                 <div className="flex items-center">
                   <div
-                    className={`shadow-light-tight/1 dark:shadow-dark-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit items-center bg-${modalType === 'delete' ? 'danger' : 'primary'}`}
+                    className={`shadow-light-tight/1 dark:shadow-dark-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit items-center bg-${type === 'delete' ? 'danger' : 'primary'}`}
                   >
                     {icon}
                     <span className="text-white font-normal text-xl">{title}</span>

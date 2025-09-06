@@ -5,14 +5,16 @@ import { useState } from 'react';
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 
 import { departmentUnit } from '../../../../mock';
+import { useModalContext } from '../../../../core';
 
-const users = [
+export const users = [
   { id: 1, name: 'Haircut', position: 'Front End Developer' },
   { id: 2, name: 'Nails', position: 'Front End Developer' },
   { id: 3, name: 'Facial', position: 'Front End Developer' },
 ];
 
 export const OrgChartHeader = ({ wrapperRef }: any) => {
+  const { openModal } = useModalContext();
   const [query, setQuery] = useState('');
 
   const results = users.filter((item: any) => item.name.toLowerCase().includes(query.toLowerCase()));
@@ -26,6 +28,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
     }
   };
 
+
   return (
     <div>
       <div className="grid grid-cols-3 items-center px-3 py-4 bg-white shadow-light-tight-2 absolute z-50 w-full justify-between top-0 left-0">
@@ -35,6 +38,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
               size: 'xs',
               color: 'primary',
               variant: 'bordered',
+              onPress: () => openModal('confirm', 'Test'),
               content: <Edit className="text-secondary-1000" size={24} />,
             }}
           />
@@ -43,6 +47,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
               size: 'xs',
               color: 'primary',
               variant: 'solid',
+              onPress: () => openModal('custom', 'Attention'),
               content: <Eye className="text-white" size={24} />,
             }}
           />
@@ -95,7 +100,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
           </div>
           <Dropdown>
             <DropdownTrigger>
-              <Button className="" variant="bordered" color="primary">
+              <Button className="" color="primary" variant="bordered">
                 <div className="flex items-center justify-between gap-2 w-full">
                   <div className="flex items-center gap-2">
                     <Setting4 className="w-5 h-5 text-black dark:text-white" />
@@ -108,10 +113,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
 
             <DropdownMenu>
               {departmentUnit.map((item) => (
-                <DropdownItem
-                  key={item.value}
-                  className="px-3 py-2 cursor-pointer hover:bg-blue-100"
-                >
+                <DropdownItem key={item.value} className="px-3 py-2 cursor-pointer hover:bg-blue-100">
                   {item.label}
                 </DropdownItem>
               ))}

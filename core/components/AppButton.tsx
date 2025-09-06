@@ -11,7 +11,7 @@ const baseClasses = `
 const sizeClasses: Record<string, string> = {
   xs: 'p-1.5 text-xs',
   sm: 'px-2 py-1 text-sm',
-  md: 'px-3 py-2 text-base',
+  md: 'px-3 py-1.5 text-base',
   lg: 'px-4 py-3 text-lg',
   xl: 'px-6 py-4 text-xl',
 };
