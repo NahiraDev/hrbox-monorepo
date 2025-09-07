@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals;
 
 import './bpmnstyle.css';
+import { useModalContext } from 'core/context';
 
 interface FormsValueBpmn {
   name: string;
@@ -35,6 +36,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 </bpmn:definitions>`;
 
 export const Bpmn=()=> {
+  const { openModal } = useModalContext();
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const modelerRef = useRef<BpmnModeler | null>(null);
   const [activeModal, setActiveModal] = useState<{
@@ -134,7 +136,7 @@ export const Bpmn=()=> {
     modeler.on('element.changed', (event: any) => {
       const element = event.element;
       const businessObject = element.businessObject;
-      const type = businessObject.$type;
+      const name = businessObject.$type;
 
       if (
         [
@@ -147,16 +149,16 @@ export const Bpmn=()=> {
           'bpmn:Task',
           'bpmn:ExclusiveGateway',
           'bpmn:EndEvent',
-        ].includes(type)
+        ].includes(name)
       ) {
-        setActiveModal({ type, element });
+        openModal('confirm',name,element);
       }
     });
 
     modeler.on('element.dblclick', (event: any) => {
       const element = event.element;
       const businessObject = element.businessObject;
-      const type = businessObject.$type;
+      const name = businessObject.$type;
 
       if (
         [
@@ -169,9 +171,9 @@ export const Bpmn=()=> {
           'bpmn:Task',
           'bpmn:ExclusiveGateway',
           'bpmn:EndEvent',
-        ].includes(type)
+        ].includes(name)
       ) {
-        setEditModal({ type, element });
+        openModal('edit',name,element);
       }
     });
 

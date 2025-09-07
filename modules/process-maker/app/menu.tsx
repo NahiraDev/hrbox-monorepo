@@ -22,7 +22,7 @@ const MenuIcons = {
   processMaker: Hierarchy3,
 };
 
-export const BasicInfoMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
+export const ProcessMakerMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
   const moduleName = 'process-maker';
   const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
