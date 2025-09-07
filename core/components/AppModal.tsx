@@ -24,7 +24,7 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = ({ title, icon, size = 'md', children, modalType}: ModalProps) => {
+const AppModal = ({ title, icon, size = 'md', children, modalType }: ModalProps) => {
   const { isModalOpen, closeModal } = useModalContext();
   const handleBackdropClick = () => {
     if (closeModal) {
