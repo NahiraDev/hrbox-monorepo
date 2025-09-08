@@ -1,10 +1,10 @@
 import { Hierarchy3 } from 'iconsax-react';
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, AppModal, FormProvider, useModal, withModal } from '../../../../core';
+import { AppButton, AppModal, FormProvider } from '../../../../core';
 import { formValidationPoint, handleSubmitPoint, initialValuesPoint, PointForm } from '../forms';
 
-const PointModal = () => {
+export const PointModal = () => {
   const { t } = useTranslation();
 
   return (
@@ -20,351 +20,23 @@ const PointModal = () => {
           <PointForm />
         </FormProvider>
       </AppModal.Body>
-      {/*<div className="flex flex-col gap-[24px]">*/}
-      {/*  <InputGrid columns={1}>*/}
-      {/*    <div>*/}
-      {/*      <AppInput*/}
-      {/*        props={{*/}
-      {/*          type: 'text',*/}
-      {/*          label: t('title'),*/}
-      {/*          name: 'title',*/}
-      {/*          formik: formik,*/}
-      {/*          disabled: disabledForm,*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*    <div>*/}
-      {/*      <AppInput*/}
-      {/*        props={{*/}
-      {/*          type: 'text',*/}
-      {/*          label: t('type'),*/}
-      {/*          name: 'type',*/}
-      {/*          formik: formik,*/}
-      {/*          disabled: disabledForm,*/}
-      {/*          value: disabledForm ? 'Submit for signature' : formik.values.type,*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*    <div>*/}
-      {/*      <AppAutoComplete*/}
-      {/*        props={{*/}
-      {/*          type: 'Select',*/}
-      {/*          label: t('type'),*/}
-      {/*          name: 'type',*/}
-      {/*          formik: formik,*/}
-      {/*          disabled: disabledForm,*/}
-
-      {/*          data: [*/}
-      {/*            { Id: 1, Name: 'Tehran' },*/}
-      {/*            { Id: 2, Name: 'rasht' },*/}
-      {/*          ],*/}
-      {/*          valueKey: 'Id',*/}
-      {/*          displayKey: 'Name',*/}
-      {/*          className: 'border-[1px] border-[#DCF0F9] rounded-[12px]' + ' ',*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*  </InputGrid>*/}
-      {/*  <div className=" flex items-center flex-row justify-between w-[100%] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-[8px]">*/}
-      {/*    <div className="py-[12px] px-[24px] ">*/}
-      {/*      <p>{t('Veto Authority?  ')}</p>*/}
-      {/*    </div>*/}
-      {/*    <div className="  w-[320px]  gap-[8px]">*/}
-      {/*      <AppCheckBox*/}
-      {/*        multiple={false}*/}
-      {/*        disabled={disabledForm}*/}
-      {/*        formik={formik}*/}
-      {/*        name="authority"*/}
-      {/*        options={[*/}
-      {/*          { id: 1, label: 'yes' },*/}
-      {/*          { id: 2, label: 'no' },*/}
-      {/*        ]}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*  <div>*/}
-      {/*    <AppTextArea*/}
-      {/*      props={{*/}
-      {/*        label: t('descriptions'),*/}
-      {/*        name: 'description',*/}
-      {/*        formik: formik,*/}
-      {/*        disabled: disabledForm,*/}
-      {/*      }}*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*  <div className=" flex items-center flex-row justify-between w-[100%] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-[8px]">*/}
-      {/*    <div className="py-[12px] px-[24px] ">*/}
-      {/*      <p>{t('Type of signature:  ')}</p>*/}
-      {/*    </div>*/}
-      {/*    <div className="  w-[398px] pr-[60px]  gap-[8px]">*/}
-      {/*      <AppCheckBox*/}
-      {/*        multiple={false}*/}
-      {/*        disabled={disabledForm}*/}
-      {/*        formik={formik}*/}
-      {/*        name="signature"*/}
-      {/*        options={[*/}
-      {/*          { id: 1, label: 'Hrbox Sign' },*/}
-      {/*          { id: 2, label: 'Digital Sign' },*/}
-      {/*        ]}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*  <InputGrid columns={2}>*/}
-      {/*    <div>*/}
-      {/*      <AppInput*/}
-      {/*        props={{*/}
-      {/*          type: 'text',*/}
-      {/*          label: t('Organization'),*/}
-      {/*          name: 'organization',*/}
-      {/*          formik: formik,*/}
-      {/*          disabled: disabledForm,*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*    <div>*/}
-      {/*      <AppInput*/}
-      {/*        props={{*/}
-      {/*          type: 'text',*/}
-      {/*          label: t('Depatment'),*/}
-      {/*          name: 'depatment',*/}
-      {/*          formik: formik,*/}
-      {/*          disabled: disabledForm,*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*  </InputGrid>*/}
-      {/*  <div className="p-[16px] w-full">*/}
-      {/*    <div className="flex flex-row gap-[40px] w-full justify-between py-[12px] w-full  ">*/}
-      {/*      <div className="flex">*/}
-      {/*        <p>Actioners:</p>*/}
-      {/*      </div>*/}
-      {/*      <div className="flex">*/}
-      {/*        <AppAutoComplete*/}
-      {/*          props={{*/}
-      {/*            type: 'text',*/}
-      {/*            label: t('full_name'),*/}
-      {/*            name: 'full_name',*/}
-      {/*            formik: formik,*/}
-      {/*            disabled: disabledForm,*/}
-      {/*            className: 'border-[1px] border-[#DCF0F9] rounded-[12px]',*/}
-      {/*          }}*/}
-      {/*        />*/}
-      {/*      </div>*/}
-      {/*      <div className="flex">*/}
-      {/*        <AppAutoComplete*/}
-      {/*          props={{*/}
-      {/*            type: 'number',*/}
-      {/*            label: t('national_code'),*/}
-      {/*            name: 'national_code',*/}
-      {/*            formik: formik,*/}
-      {/*            disabled: disabledForm,*/}
-      {/*            className: 'border-[1px] border-[#DCF0F9] rounded-[12px]',*/}
-      {/*          }}*/}
-      {/*        />*/}
-      {/*      </div>*/}
-      {/*      <div className="flex">*/}
-      {/*        <AppAutoComplete*/}
-      {/*          props={{*/}
-      {/*            type: 'number',*/}
-      {/*            label: t('phone_num'),*/}
-      {/*            name: 'phone_num.',*/}
-      {/*            formik: formik,*/}
-      {/*            disabled: disabledForm,*/}
-      {/*            className: 'border-[1px] border-[#DCF0F9] rounded-[12px]',*/}
-      {/*          }}*/}
-      {/*        />*/}
-      {/*      </div>*/}
-      {/*      <button className="rounded-[4px] flex items-center justify-center border-[1px] border-[#0A9AD7] w-[32px] h-[32px] p-[6px]">*/}
-      {/*        <Add />*/}
-      {/*      </button>*/}
-      {/*    </div>*/}
-      {/*    {formik.values.type === 'Submit for signature' && !disabledForm ? (*/}
-      {/*      <AppTablecustom*/}
-      {/*        props={{*/}
-      {/*          data: sampleData,*/}
-      {/*          columns,*/}
-      {/*        }}*/}
-      {/*      />*/}
-      {/*    ) : null}*/}
-      {/*    {disabledForm ? (*/}
-      {/*      <>*/}
-      {/*        <div className="gap-[8px] flex flex-col">*/}
-      {/*          <div className="px-[12px] py-[8px] border-[1px] border-[rgba(220,240,249,0.40)] dark:border-[1px] dark:border-[rgba(4,66,92,0.60)] dark:bg-[linear-gradient(90deg,rgb(1,16,26)_5%,rgb(2,44,61)_50%,rgb(1,16,26)_95%)] rounded-[8px] flex flex-row justify-between rgba(220, 240, 249, 0.40) bg-[linear-gradient(90deg,rgba(255,255,255,1)_5%,rgba(238,249,255,1)_48%,rgba(255,255,255,1)_95%)] ">*/}
-      {/*            <div className="">1.</div>*/}
-      {/*            <div className="flex flex-col gap-[24px]">*/}
-      {/*              <div className="flex flex-row gap-[80px] pr-[108px]">*/}
-      {/*                <div className="flex flex-row gap-[32px]">*/}
-      {/*                  <div className="flex gap-[10px]">*/}
-      {/*                    <span>*/}
-      {/*                      <User />*/}
-      {/*                    </span>*/}
-      {/*                    <span>{t('full_name')}</span>*/}
-      {/*                  </div>*/}
-      {/*                  <div>*/}
-      {/*                    <p>Zahra Pakniyat</p>*/}
-      {/*                  </div>*/}
-      {/*                </div>{' '}*/}
-      {/*                <div className="flex flex-row gap-[32px]">*/}
-      {/*                  <div className="flex gap-[10px]">*/}
-      {/*                    <span>*/}
-      {/*                      <CallCalling />*/}
-      {/*                    </span>*/}
-      {/*                    <span>{t('veto_authority')}:</span>*/}
-      {/*                  </div>*/}
-      {/*                  <div>*/}
-      {/*                    <p>0912***2224</p>*/}
-      {/*                  </div>*/}
-      {/*                </div>{' '}*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*          <div className="px-[12px] py-[8px] border-[1px] border-[rgba(220,240,249,0.40)] dark:border-[1px] dark:border-[rgba(4,66,92,0.60)] dark:bg-[linear-gradient(90deg,rgb(1,16,26)_5%,rgb(2,44,61)_50%,rgb(1,16,26)_95%)] rounded-[8px] flex flex-row justify-between rgba(220, 240, 249, 0.40) bg-[linear-gradient(90deg,rgba(255,255,255,1)_5%,rgba(238,249,255,1)_48%,rgba(255,255,255,1)_95%)] ">*/}
-      {/*            <div className="">2.</div>*/}
-      {/*            <div className="flex flex-col gap-[24px]">*/}
-      {/*              <div className="flex flex-row gap-[80px] pr-[108px]">*/}
-      {/*                <div className="flex flex-row gap-[32px]">*/}
-      {/*                  <div className="flex gap-[10px]">*/}
-      {/*                    <span>*/}
-      {/*                      <User />*/}
-      {/*                    </span>*/}
-      {/*                    <span>{t('full_name')}</span>*/}
-      {/*                  </div>*/}
-      {/*                  <div>*/}
-      {/*                    <p>Zahra Pakniyat</p>*/}
-      {/*                  </div>*/}
-      {/*                </div>{' '}*/}
-      {/*                <div className="flex flex-row gap-[32px]">*/}
-      {/*                  <div className="flex gap-[10px]">*/}
-      {/*                    <span>*/}
-      {/*                      <CallCalling />*/}
-      {/*                    </span>*/}
-      {/*                    <span>{t('veto_authority')}:</span>*/}
-      {/*                  </div>*/}
-      {/*                  <div>*/}
-      {/*                    <p>0912***2224</p>*/}
-      {/*                  </div>*/}
-      {/*                </div>{' '}*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*        </div>*/}
-      {/*      </>*/}
-      {/*    ) : null}*/}
-      {/*  </div>*/}
-      {/*  <p>{t('notifications')}</p>*/}
-      {/*  <div className=" w-full">*/}
-      {/*    <AppCheckBox*/}
-      {/*      name="notifications"*/}
-      {/*      formik={formik}*/}
-      {/*      options={[*/}
-      {/*        { id: 1, label: 'Default' },*/}
-      {/*        { id: 2, label: 'Customization' },*/}
-      {/*      ]}*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*  {formik.values.notifications === 2 && (*/}
-      {/*    <div className="flex flex-col gap-[6px] ">*/}
-      {/*      <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">*/}
-      {/*        <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">*/}
-      {/*          <AppCheckBox*/}
-      {/*            options={[{ id: 1, label: 'Exporter' }]}*/}
-      {/*            formik={formik}*/}
-      {/*            name="exporter"*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex mx-auto mt-[13px] mb-[11px] w-full">*/}
-      {/*          <AppTextArea*/}
-      {/*            props={{*/}
-      {/*              formik: { formik },*/}
-      {/*              placeholder: 'Descriptions',*/}
-      {/*              name: 'descriptionexporter',*/}
-      {/*            }}*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex flex-row gap-2 mt-3 mb-11 mr-6 ml-[38px]">*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Notification />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Sms />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Message />*/}
-      {/*          </button>*/}
-      {/*        </div>*/}
-      {/*      </div>{' '}*/}
-      {/*      <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">*/}
-      {/*        <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">*/}
-      {/*          <AppCheckBox*/}
-      {/*            options={[{ id: 1, label: 'Eecipient' }]}*/}
-      {/*            formik={formik}*/}
-      {/*            name="eecipient"*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex mx-auto mt-[13px] mb-[11px] w-full">*/}
-      {/*          <AppTextArea*/}
-      {/*            props={{*/}
-      {/*              formik: { formik },*/}
-      {/*              placeholder: 'Descriptions',*/}
-      {/*              name: 'descriptionexporter',*/}
-      {/*            }}*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex flex-row gap-2 mt-3 mb-11 mr-6 ml-[38px]">*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Notification />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Sms />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Message />*/}
-      {/*          </button>*/}
-      {/*        </div>*/}
-      {/*      </div>{' '}*/}
-      {/*      <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">*/}
-      {/*        <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">*/}
-      {/*          <AppCheckBox*/}
-      {/*            options={[{ id: 1, label: 'Referrer' }]}*/}
-      {/*            formik={formik}*/}
-      {/*            name="referrer"*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex mx-auto mt-[13px] mb-[11px] w-full">*/}
-      {/*          <AppTextArea*/}
-      {/*            props={{*/}
-      {/*              formik: { formik },*/}
-      {/*              placeholder: 'Descriptions',*/}
-      {/*              name: 'descriptionexporter',*/}
-      {/*            }}*/}
-      {/*          />*/}
-      {/*        </div>*/}
-      {/*        <div className="flex flex-row gap-2 mt-3 mb-11 mr-6 ml-[38px]">*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Notification />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Sms />*/}
-      {/*          </button>{' '}*/}
-      {/*          <button className="bg-white dark:bg-[#01101A] flex pt-[10.5px] pr-[10px] pb-[9.5px] pl-[10px] rounded-4 w-10 h-10 items-center">*/}
-      {/*            <Message />*/}
-      {/*          </button>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  )}*/}
-      {/*</div>*/}
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              text: t('cancel'),
+              color: 'white',
+              size: 'md',
+              radius: 'lg',
+              content: t('cancel'),
             }}
           />
           <AppButton
             props={{
+              color: 'primary',
               type: 'submit',
-              text: t('submit'),
+              size: 'md',
+              radius: 'lg',
+              content: t('submit'),
             }}
           />
         </div>
@@ -372,6 +44,3 @@ const PointModal = () => {
     </AppModal>
   );
 };
-
-PointModal.useModal = () => useModal();
-export default withModal(PointModal);

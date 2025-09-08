@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { EventForm } from '@module/process-maker/features/forms';
 
-import { AppModal, AppButton, FormProvider, withModal, useModal } from '../../../../core';
+import { AppModal, AppButton, FormProvider } from '../../../../core';
 import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '../forms';
 
-const AddEventModal = () => {
+export const AddEventModal = () => {
   const { t } = useTranslation();
 
   return (
@@ -19,194 +19,24 @@ const AddEventModal = () => {
         >
           <EventForm />
         </FormProvider>
-        {/*<div className="flex flex-col gap-[24px]">*/}
-        {/*  <InputGrid columns={2}>*/}
-        {/*    <div>*/}
-        {/*      <AppInput*/}
-        {/*        props={{*/}
-        {/*          type: "text",*/}
-        {/*          label: t("title"),*/}
-        {/*          name: "title",*/}
-        {/*          disabled: disabled,*/}
-        {/*          formik: formik,*/}
-        {/*          placeholder: t("choose_sth."),*/}
-        {/*          className: `border-[1px] border-[#DCF0F9] rounded-[12px] ${disabled ? "bg-[linear-gradient(90deg,rgba(255,255,255,1)_5%,rgba(238,249,255,1)_48%,rgba(255,255,255,1)_95%)]" : ""}  `,*/}
-        {/*        }}*/}
-        {/*      />*/}
-        {/*    </div>{" "}*/}
-        {/*    <div>*/}
-        {/*      <AppAutoComplete*/}
-        {/*        props={{*/}
-        {/*          type: "text",*/}
-        {/*          label: t("related_forms"),*/}
-        {/*          name: "related_forms",*/}
-        {/*          placeholder: t("choose_sth."),*/}
-        {/*          data: [*/}
-        {/*            { Id: 1, Name: "Tehran" },*/}
-        {/*            { Id: 2, Name: "rasht" },*/}
-        {/*          ],*/}
-        {/*          valueKey: "Id",*/}
-        {/*          displayKey: "Name",*/}
-        {/*          className: `border-[1px] border-[#DCF0F9] rounded-[12px] ${disabled ? "bg-[linear-gradient(90deg,rgba(255,255,255,1)_5%,rgba(238,249,255,1)_48%,rgba(255,255,255,1)_95%)]" : ""}  `,*/}
-        {/*          disabled: disabled,*/}
-        {/*        }}*/}
-        {/*      />*/}
-        {/*    </div>{" "}*/}
-        {/*    <div>*/}
-        {/*      <AppAutoComplete*/}
-        {/*        props={{*/}
-        {/*          type: "text",*/}
-        {/*          label: t("undertaking"),*/}
-        {/*          name: "undertaking",*/}
-        {/*          placeholder: t("choose_sth."),*/}
-        {/*          data: [*/}
-        {/*            { Id: 1, Name: "Tehran" },*/}
-        {/*            { Id: 2, Name: "rasht" },*/}
-        {/*          ],*/}
-        {/*          valueKey: "Id",*/}
-        {/*          displayKey: "Name",*/}
-        {/*          className: `border-[1px] border-[#DCF0F9] rounded-[12px] ${disabled ? "bg-[linear-gradient(90deg,rgba(255,255,255,1)_5%,rgba(238,249,255,1)_48%,rgba(255,255,255,1)_95%)]" : ""}  `,*/}
-        {/*          disabled: disabled,*/}
-        {/*        }}*/}
-        {/*      />*/}
-        {/*    </div>*/}
-        {/*  </InputGrid>*/}
-        {/*  <div>*/}
-        {/*    {showModal ? (*/}
-        {/*      <div className="gap-[8px] flex flex-col">*/}
-        {/*        <div className="px-[12px] py-[8px] border-[1px] border-[rgba(220,240,249,0.40)] rounded-[8px] flex rgba(220, 240, 249, 0.40)">*/}
-        {/*          <div className="flex flex-row justify-between w-[95%]">*/}
-        {/*            <div className="">1.</div>*/}
-        {/*            <div className="flex flex-col gap-[24px] w-[718px]">*/}
-        {/*              <div className="flex flex-row gap-[155px] pr-[108px] w-[100%] ">*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <Firstline />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("title")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("review")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <Settings />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("type")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("rejection")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*              </div>*/}
-        {/*              <div className="flex flex-row gap-[36px] pr-[104px]">*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <User />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("undertaking")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>Zahra Pakniyat</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <SecurityUser />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("veto_authority")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("yes")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*              </div>*/}
-        {/*            </div>*/}
-        {/*          </div>*/}
-        {/*        </div>*/}
-        {/*        <div className="px-[12px] py-[8px] border-[1px] border-[rgba(220,240,249,0.40)] rounded-[8px] flex flex-row justify-between rgba(220, 240, 249, 0.40)">*/}
-        {/*          <div className="flex flex-row justify-between w-[95%]">*/}
-        {/*            <div className="">2.</div>*/}
-        {/*            <div className="flex flex-col gap-[24px] w-[718px]">*/}
-        {/*              <div className="flex flex-row gap-[155px] pr-[108px] w-[100%] ">*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <Firstline />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("title")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("review")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <Settings />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("type")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("rejection")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*              </div>*/}
-        {/*              <div className="flex flex-row gap-[36px] pr-[104px]">*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <User />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("undertaking")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>Zahra Pakniyat</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*                <div className="flex flex-row gap-[32px]">*/}
-        {/*                  <div className="flex gap-[10px]">*/}
-        {/*                  <span>*/}
-        {/*                    <SecurityUser />*/}
-        {/*                  </span>*/}
-        {/*                    <span>{t("veto_authority")}:</span>*/}
-        {/*                  </div>*/}
-        {/*                  <div>*/}
-        {/*                    <p>{t("yes")}</p>*/}
-        {/*                  </div>*/}
-        {/*                </div>{" "}*/}
-        {/*              </div>*/}
-        {/*            </div>*/}
-        {/*          </div>*/}
-        {/*        </div>*/}
-        {/*      </div>*/}
-        {/*    ) : (*/}
-        {/*      <AppTablecustom*/}
-        {/*        props={{*/}
-        {/*          data: sampleData,*/}
-        {/*          columns,*/}
-        {/*        }}*/}
-        {/*      />*/}
-        {/*    )}*/}
-        {/*  </div>*/}
-        {/*</div>*/}
       </AppModal.Body>
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              text: t('cancel'),
+              color: 'white',
+              size: 'md',
+              radius: 'lg',
+              content: t('cancel'),
             }}
           />
           <AppButton
             props={{
+              color: 'primary',
               type: 'submit',
-              text: t('submit'),
+              size: 'md',
+              radius: 'lg',
+              content: t('submit'),
             }}
           />
         </div>
@@ -214,6 +44,3 @@ const AddEventModal = () => {
     </AppModal>
   );
 };
-
-AddEventModal.useModal = () => useModal();
-export default withModal(AddEventModal);

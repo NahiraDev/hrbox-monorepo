@@ -1,11 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { useModal } from '@heroui/react';
 
-import { withModal } from '../../../../core';
 import { AppModal, AppButton, FormProvider } from '../../../../core/';
 import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '../forms';
 
-const NewOneModal = () => {
+export const NewOneModal = () => {
   const { t } = useTranslation();
 
   return (
@@ -25,20 +23,23 @@ const NewOneModal = () => {
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              text: t('cancel'),
+              color: 'white',
+              size: 'md',
+              radius: 'lg',
+              content: t('cancel'),
             }}
           />
           <AppButton
             props={{
-              type: 'Submit',
-              text: t(`submit`),
+              color: 'primary',
+              type: 'submit',
+              size: 'md',
+              radius: 'lg',
+              content: t('submit'),
             }}
-          />{' '}
+          />
         </div>
       </AppModal.Footer>
     </AppModal>
   );
 };
-
-NewOneModal.useModal = () => useModal();
-export default withModal(NewOneModal);

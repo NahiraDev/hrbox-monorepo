@@ -1,10 +1,10 @@
 import { Hierarchy3 } from 'iconsax-react';
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, useModal, withModal, AppModal, FormProvider } from '../../../../core';
+import { AppButton, AppModal, FormProvider } from '../../../../core';
 import { EventForm, formValidationEvent, handleSubmitEvent, initialValuesEvent } from '../forms';
 
-const EventModal = () => {
+export const EventModal = () => {
   const { t } = useTranslation();
 
   return (
@@ -24,13 +24,19 @@ const EventModal = () => {
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              text: t('cancel'),
+              color: 'white',
+              size: 'md',
+              radius: 'lg',
+              content: t('cancel'),
             }}
           />
           <AppButton
             props={{
+              color: 'primary',
               type: 'submit',
-              text: t('submit'),
+              size: 'md',
+              radius: 'lg',
+              content: t('submit'),
             }}
           />
         </div>
@@ -38,6 +44,3 @@ const EventModal = () => {
     </AppModal>
   );
 };
-
-EventModal.useModal = () => useModal();
-export default withModal(EventModal);

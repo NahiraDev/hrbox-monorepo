@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { FormProvider } from 'core/context';
 
 import { ActionsForm, formValidationAction, handleSubmitAction, initialValuesAction } from '../forms';
-import { AppModal, AppButton, withModal, useModal } from '../../../../core';
+import { AppModal, AppButton } from '../../../../core';
 
-const AddActionsModall = () => {
+export const AddActionsModall = () => {
   const { t } = useTranslation();
 
   return (
@@ -24,13 +24,19 @@ const AddActionsModall = () => {
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
             props={{
-              text: t('cancel'),
+              color: 'white',
+              size: 'md',
+              radius: 'lg',
+              content: t('cancel'),
             }}
           />
           <AppButton
             props={{
+              color: 'primary',
               type: 'submit',
-              text: t('submit'),
+              size: 'md',
+              radius: 'lg',
+              content: t('submit'),
             }}
           />
         </div>
@@ -38,6 +44,3 @@ const AddActionsModall = () => {
     </AppModal>
   );
 };
-
-AddActionsModall.useModal = () => useModal();
-export default withModal(AddActionsModall);

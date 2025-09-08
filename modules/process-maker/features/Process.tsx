@@ -1,11 +1,11 @@
-import  { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useTranslation } from 'react-i18next';
 
-import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals;
+import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals';
 
 import './bpmnstyle.css';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '../../../core';
 
 interface FormsValueBpmn {
   name: string;
@@ -35,18 +35,10 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
 
-export const Bpmn=()=> {
-  const { openModal } = useModalContext();
+export const Bpmn = () => {
+  const { openModal, closeModal, isModalOpen, getModalData } = useModalContext();
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const modelerRef = useRef<BpmnModeler | null>(null);
-  const [activeModal, setActiveModal] = useState<{
-    type: string;
-    element: any;
-  } | null>(null);
-  const [editModal, setEditModal] = useState<{
-    type: string;
-    element: any;
-  } | null>(null);
   const { t, i18n } = useTranslation();
   const [elementData, setElementData] = useState<Record<string, FormsValueBpmn>>({});
   const observerRef = useRef<MutationObserver | null>(null);
@@ -133,7 +125,7 @@ export const Bpmn=()=> {
 
     modeler.importXML(xml);
 
-    modeler.on('element.changed', (event: any) => {
+    modeler.on('element.added', (event: any) => {
       const element = event.element;
       const businessObject = element.businessObject;
       const name = businessObject.$type;
@@ -151,7 +143,7 @@ export const Bpmn=()=> {
           'bpmn:EndEvent',
         ].includes(name)
       ) {
-        openModal('confirm',name,element);
+        openModal('confirm', name, element);
       }
     });
 
@@ -173,7 +165,7 @@ export const Bpmn=()=> {
           'bpmn:EndEvent',
         ].includes(name)
       ) {
-        openModal('edit',name,element);
+        openModal('edit', name, element);
       }
     });
 
@@ -203,16 +195,16 @@ export const Bpmn=()=> {
   }, [i18n.language, applyPaletteTranslations]);
 
   const handleCloseModal = () => {
-    setActiveModal(null);
+    closeModal('confirm', 'bpmn:Task');
   };
   const handleCloseEditModal = () => {
-    setEditModal(null);
+    closeModal('edit', 'bpmn:Task');
   };
 
-  const handleSave = (values: FormsValueBpmn) => {
-    if (!activeModal) return;
+  const handleSave = (values: FormsValueBpmn, name: string) => {
+    const { element } = getModalData('confirm', name) || getModalData('edit', name);
 
-    const { element } = activeModal;
+    if (!element) return;
 
     setElementData((prev) => ({
       ...prev,
@@ -227,38 +219,22 @@ export const Bpmn=()=> {
 
     console.log('Saved data for element:', element.id, values);
     handleCloseModal();
+    handleCloseEditModal();
   };
-
 
   return (
     <>
       <div className="w-full h-[600px] border p-3 border-1 border-[#0A9AD7] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.40)] dark:border-1 dark:border-[#0D4D6A] rounded-6">
-        <div ref={canvasRef} className="w-[100%] bg-white h-full" />
+        <div ref={canvasRef} className="w-[100%] bg-white rounded-6 h-full" />
       </div>
-      {activeModal?.type === 'bpmn:StartEvent' && (
-        <ProcessModal/>
-      )}{' '}
-      {editModal?.type === 'bpmn:StartEvent' && (
-        <ProcessModal />
-      )}{' '}
-      {activeModal?.type === 'bpmn:Task' && (
-        <AddEventModal/>
-      )}{' '}
-      {editModal?.type === 'bpmn:Task' && (
-        <AddEventModal/>
-      )}{' '}
-      {activeModal?.type === 'bpmn:SequenceFlow' && (
-        <AddActionsModall/>
-      )}{' '}
-      {editModal?.type === 'bpmn:SequenceFlow' && (
-        <AddActionsModall/>
-      )}{' '}
-      {activeModal?.type === 'bpmn:EndEvent' && (
-        <EventModal/>
-      )}{' '}
-      {editModal?.type === 'bpmn:EndEvent' && (
-        <EventModal/>
-      )}
+      {isModalOpen('confirm', 'bpmn:StartEvent') && <ProcessModal />}
+      {isModalOpen('edit', 'bpmn:StartEvent') && <ProcessModal />}
+      {isModalOpen('confirm', 'bpmn:Task') && <AddEventModal />}
+      {isModalOpen('edit', 'bpmn:Task') && <AddEventModal />}
+      {isModalOpen('confirm', 'bpmn:SequenceFlow') && <AddActionsModall />}
+      {isModalOpen('edit', 'bpmn:SequenceFlow') && <AddActionsModall />}
+      {isModalOpen('confirm', 'bpmn:EndEvent') && <EventModal />}
+      {isModalOpen('edit', 'bpmn:EndEvent') && <EventModal />}
     </>
   );
-}
+};
