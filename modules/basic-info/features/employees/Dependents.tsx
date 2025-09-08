@@ -17,6 +17,7 @@ import {
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
+import { SpouseModal } from '../../features/employees/modals/SpouseModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -40,7 +41,6 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit', user),
                       className: 'bg-white border-1 border-primary-400',
                       content: <MessageEdit className="text-secondary-900" size="20" />,
                     }}
@@ -52,6 +52,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
+                      onPress: () => openModal('edit'),
                       className: 'bg-white border-1 border-primary-400',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
@@ -145,6 +146,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
+                      onPress: () => openModal('edit'),
                       className: 'bg-white border-1 border-primary-400',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
@@ -153,7 +155,7 @@ const Dependents = () => {
               </div>
               <div className="w-full">
                 {dataWorker.map((user: any, index) => (
-                  <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
+                  <Card key={index} className="p-3 w-full  shadow-light-tight-1 bg-white ">
                     <div className="flex flex-col gap-2 ">
                       <div className="flex justify-between border-b border-gray-200 p-1.5">
                         <div className="flex items-center text-lg font-semibold">
@@ -340,6 +342,7 @@ const Dependents = () => {
                 </Card>
               ))}
               <AppDeleteModal />
+              <SpouseModal />
             </div>
           </div>
         </div>

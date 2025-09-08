@@ -3,9 +3,9 @@ import { Profile2User, Trash } from 'iconsax-react';
 
 export const SpouseModal = () => {
   return (
-    <AppModal icon={<Profile2User />} modalType={} size="3xl" title="Spouse">
+    <AppModal icon={<Profile2User />} modalType="" size="3xl" title="Spouse">
       <AppModal.Body>
-
+        <div>hi</div>
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton

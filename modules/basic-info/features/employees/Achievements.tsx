@@ -75,4 +75,3 @@ const Achievements = () => {
 };
 
 export default Achievements;
-Achievements

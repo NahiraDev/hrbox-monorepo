@@ -3,12 +3,11 @@ import React, { createContext, type ReactNode, useContext, useState } from 'reac
 type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
 
 interface ModalContextType {
-  openModal: (type: ModalType | string, data: string) => void;
+  openModal: (type: ModalType | string, data?: unknown) => void;
   closeModal: (type: ModalType | string) => void;
-  getModalData: (type: ModalType | string) => any;
+  getModalData: (type: ModalType | string) => unknown;
   isModalOpen: (type: ModalType | string) => boolean;
 }
-
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

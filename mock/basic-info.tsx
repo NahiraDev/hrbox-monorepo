@@ -1160,11 +1160,6 @@ export const dataWorker = [
     job: 'National Referee',
     num: '2020',
   },
-  {
-    worker: 'Sahar Sharifi',
-    job: 'National Referee',
-    num: '2020',
-  },
 ];
 export const dataWorker2 = [
   {

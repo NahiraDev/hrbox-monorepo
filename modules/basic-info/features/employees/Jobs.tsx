@@ -1,11 +1,14 @@
 import { Card } from '@heroui/react';
 import { Jobss } from 'mock';
-import { AppButton } from 'core/components';
+import { AppButton, AppDeleteModal } from 'core/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
+import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../../features/common';
 
 const Jobs = () => {
+  const { openModal } = useModalContext();
+
   return (
     <>
       <BasicInfoLayout
@@ -16,7 +19,7 @@ const Jobs = () => {
                 <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
                   <div className="flex items-center gap-2">
                     <Designtools />
-                    <span className='font-bold'>{user.job}</span>
+                    <span className="font-bold">{user.job}</span>
                   </div>
                   <div>
                     <AppButton
@@ -25,7 +28,7 @@ const Jobs = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => console.log('ss'),
+                        onPress: () => openModal('delete', user),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                         className: 'hover:!bg-red-500 transition-all duration-200',
                       }}
@@ -63,6 +66,7 @@ const Jobs = () => {
                 </div>
               </Card>
             ))}
+            <AppDeleteModal />
           </div>
         }
       />
