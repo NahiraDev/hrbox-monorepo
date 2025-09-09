@@ -18,9 +18,11 @@ const sizeClasses: Record<string, string> = {
 
 const radiusClasses: Record<string, string> = {
   none: 'rounded-none',
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
   full: 'rounded-full',
 };
 
