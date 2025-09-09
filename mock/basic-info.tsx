@@ -1194,3 +1194,73 @@ export const Spouse = [
     birth: '12345',
   },
 ];
+export const specificInformation = [
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+];
+export const onBoarding = [
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+];
+export const DNNSupervisor = [
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+];
+export const dataReportWorker = [
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+];

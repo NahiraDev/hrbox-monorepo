@@ -1,10 +1,12 @@
+import type { Key } from 'react';
+
 import { TickIcon } from 'core/icons';
 import { AppButton } from 'core/components';
 import { FolderCross, MessageEdit, Trash } from 'iconsax-react';
-import { Avatar } from '@heroui/react';
-import { Button } from '@heroui/button';
+import { Avatar, Listbox, ListboxItem, Button } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { dataReportWorker } from 'mock';
 
 import { AppTabs } from '../../../../core';
 
@@ -17,15 +19,41 @@ const EmployeesTab = [
   { key: 'courses', title: 'Courses', href: '/basic-info/Courses' },
   { key: 'achievements', title: 'Achievements', href: '/basic-info/Achievements' },
   { key: 'dependents', title: 'Dependents', href: '/basic-info/Dependents' },
-  { key: 'more', title: 'More', href: '/basic-info/More' },
+  { key: 'more', title: 'More' },
 ];
+
+const moreItems = [
+  { key: '1', label: 'Organization-Specific Information', href: '/basic-info/SpecificInformation' },
+  { key: '2', label: 'Onboarding', href: '/basic-info/Onboarding' },
+  { key: '3', label: 'Offboarding' },
+  { key: '4', label: 'Guidlines' },
+  { key: '5', label: 'Test Report' },
+  { key: '6', label: 'Contract List' },
+  { key: '7', label: 'Request List' },
+  { key: '8', label: 'Health Records' },
+];
+
+const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => {
+  return (
+    <Listbox aria-label="More Actions" items={moreItems} onAction={onSelect}>
+      {(item) => (
+        <ListboxItem key={item.key} className="text-[#04070E]" color="primary">
+          {item.label}
+        </ListboxItem>
+      )}
+    </Listbox>
+  );
+};
+
+////////////////////////////////////////////////////////////////////////////////
 
 export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   const { pathname } = useLocation();
   const [selectedTab, setSelectedTab] = useState('personal-information');
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    const currentTab = EmployeesTab.find((tab) => pathname.includes(tab.href));
+    const currentTab = EmployeesTab.find((tab) => tab.href && pathname.includes(tab.href));
 
     if (currentTab) {
       setSelectedTab(currentTab.key);
@@ -93,24 +121,47 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                 />
               </div>
             </div>
-            <AppTabs
-              fullWidth
-              classNames={{
-                base: '!p-0',
-                tabList: '0 bg-transparent !p-0 rounded-none',
-                cursor: '!rounded-b-none bg-[#F1F9FD]',
-                panel: 'p-0',
-                tab: '!p-3 h-[46px] !rounded-0',
-                tabContent: 'group-data-[selected=true]:!text-primary text-white text-base font-semibold',
-              }}
-              color="default"
-              radius="sm"
-              selectedKey={selectedTab}
-              size="xl"
-              tabs={EmployeesTab}
-              variant="solid"
-              onSelectionChange={(key: string) => setSelectedTab(key)}
-            />
+
+            {/* تب‌ها */}
+            <div className="relative">
+              <AppTabs
+                fullWidth
+                classNames={{
+                  base: '!p-0',
+                  tabList: '0 bg-transparent !p-0 rounded-none',
+                  cursor: '!rounded-b-none bg-[#F1F9FD]',
+                  panel: 'p-0',
+                  tab: '!p-3 h-[46px] !rounded-0',
+                  tabContent: 'group-data-[selected=true]:!text-primary text-white text-base font-semibold',
+                }}
+                color="default"
+                radius="sm"
+                selectedKey={selectedTab}
+                size="xl"
+                tabs={EmployeesTab}
+                variant="solid"
+                onSelectionChange={(key: string) => {
+                  if (key === 'more') {
+                    setShowMore((prev) => !prev);
+                  } else {
+                    setSelectedTab(key);
+                    setShowMore(false);
+                  }
+                }}
+              />
+
+              {/* لیست بازشونده زیر more */}
+              {showMore && (
+                <div className="absolute top-full left-0 mt-1 bg-white shadow-lg rounded-lg z-50 w-48">
+                  <ListMore
+                    onSelect={(key) => {
+                      alert(`Clicked: ${key}`);
+                      setShowMore(false);
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -120,23 +171,25 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
             className="p-4 overflow-y-auto w-70
             [&::-webkit-scrollbar]:w-3
             [&::-webkit-scrollbar-track]:rounded-full
-          [&::-webkit-scrollbar-track]:bg-gray-100
+            [&::-webkit-scrollbar-track]:bg-gray-100
             [&::-webkit-scrollbar-thumb]:rounded-full
-          [&::-webkit-scrollbar-thumb]:bg-gray-300"
+            [&::-webkit-scrollbar-thumb]:bg-gray-300"
           >
             <div>
               <span>Report To</span>
-              <div className="flex justify-between items-center  mb-4 mt-2">
-                <div>
-                  <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+              {dataReportWorker.map((worker, index) => (
+                <div key={index} className="flex justify-between items-center  mb-4 mt-2">
+                  <div>
+                    <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                  </div>
+                  <div className="flex flex-col gap-1 items-center">
+                    <span className="text-info-400 text-xs">{worker.name}</span>
+                    <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
+                      {worker.job}
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1 items-center">
-                  <span className="text-info-400 text-xs">Zahra Pakniyat</span>
-                  <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
-                    uiUx designer
-                  </Button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
