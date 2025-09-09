@@ -127,7 +127,7 @@ const DoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
           left: '50%',
           transform: 'translate(-50%, -50%)',
           fontWeight: '900',
-          fontSize: '18px',
+          fontSize: `${size / 4}px`,
           color: strokeColor,
           fontFamily: 'Nunito',
         }}

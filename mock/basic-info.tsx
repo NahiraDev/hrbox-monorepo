@@ -993,11 +993,274 @@ export const skills = [
     Level: 'A',
     Grad: '80%',
     present: '',
-  }, {
+  },
+  {
     skill: 'Adobe PS',
     Level: 'A',
     Grad: '80%',
     present: '',
   },
-
+];
+export const courses = [
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+  {
+    job: 'Coaching',
+    title: 'National Referee',
+    date: '2020',
+    description: 'I participated as a judge in the national womens Kung Fu competitions.',
+  },
+];
+export const achivements = [
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+  {
+    champion: 'champion',
+    title: 'champion',
+    date: '2012 till now',
+    description:
+      'Champion of 20 editions of competitions from 2012 until now in the age categories of juniors, youth, and adults.',
+  },
+];
+export const dataWorker = [
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+];
+export const dataWorker2 = [
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+];
+export const Spouse = [
+  {
+    firstName: 'Negative',
+    lastName: 'Negative',
+    job: 'A+',
+    id: '2025/01/01',
+    education: '400.000.00',
+    mobile: '1234',
+    birth: '12345',
+  },
+];
+export const specificInformation = [
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+  { answer: 'Negative' },
+];
+export const onBoarding = [
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+  { title: 'DNN Supervisor', date: '2024/11/12' },
+];
+export const DNNSupervisor = [
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+  {
+    title: 'DNN Supervisor',
+    tit: 'Familiarity',
+    result: 'Interview',
+    Description: 'Interview',
+    Issuer: 'Interview',
+    SendDate: '2020/02/12',
+    DueDate: '2 Months',
+    Time: '12:00',
+  },
+];
+export const dataReportWorker = [
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+  { name: 'zahra pakniyat', job: 'UiUx Desinger' },
 ];

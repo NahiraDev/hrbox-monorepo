@@ -1,11 +1,15 @@
 import { skills } from 'mock';
 import { Avatar, Card } from '@heroui/react';
-import { AppButton } from 'core/components';
+import { AppButton, AppDeleteModal } from 'core/components';
 import { LampCharge, Trash } from 'iconsax-react';
 import { AppCircularChart } from 'core/sections';
+import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../../features/common';
+
 const Education = () => {
+  const { openModal } = useModalContext();
+
   const SkillCard = (skill: any, index: number) => (
     <Card key={index} className="p-3 flex gap-1.5 shadow-light-tight-1 bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
@@ -20,8 +24,8 @@ const Education = () => {
               radius: 'sm',
               variant: 'light',
               isIconOnly: true,
-              onPress: () => console.log('ss'),
-              content: <Trash className="text-secondary-1000" />,
+              onPress: () => openModal('delete'),
+              content: <Trash className="text-secondary-1000 group-hover:text-white" />,
               className: 'hover:!bg-red-500 transition-all duration-200',
             }}
           />
@@ -71,6 +75,7 @@ const Education = () => {
           </div>
         }
       />
+      <AppDeleteModal />
     </>
   );
 };
