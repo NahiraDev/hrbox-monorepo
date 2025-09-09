@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 const AppPagination = ({ total }: { total: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = searchParams.get("");
+    const pageParam = searchParams.get('');
 
     return pageParam ? parseInt(pageParam, 10) : 1;
   });
@@ -16,7 +16,7 @@ const AppPagination = ({ total }: { total: number }) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
 
-        newParams.set(page.toString(""));
+        newParams.set(page.toString(''));
 
         return newParams;
       });

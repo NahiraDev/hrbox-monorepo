@@ -1,10 +1,4 @@
-export const createPaginatedEndpoint = (
-  build: any,
-  endpoint: string,
-  method: string,
-  tags: string[],
-) => {
-
+export const createPaginatedEndpoint = (build: any, endpoint: string, method: string, tags: string[]) => {
   if (method === 'GET') {
     return build.query({
       query: (params: any) => {
