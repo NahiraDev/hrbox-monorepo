@@ -4,7 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StrictMode } from 'react';
-import { ModalManagementProvider } from 'core/context';
+import { ModalProvider } from 'core/context';
 
 import { i18n } from '../translate';
 import { createRootReducer } from '../redux';
@@ -35,9 +35,9 @@ export const renderApp = (id: string) => {
             <HeroProviderWrapper>
               <ReduxProvider store={store}>
                 <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-                  <ModalManagementProvider>
+                  <ModalProvider>
                     <RootRouterLoader />
-                  </ModalManagementProvider>
+                  </ModalProvider>
                 </PersistGate>
               </ReduxProvider>
             </HeroProviderWrapper>

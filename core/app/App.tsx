@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { AuthLayout, BaseLayout } from '../layouts';
 import { useAppSelector } from '../redux';
 import { AppErrorToast } from '../components';
-import { useTheme } from '@heroui/use-theme';
 
 interface AppProps {
   children: React.ReactNode;
@@ -33,7 +32,7 @@ export const App = ({ children }: AppProps) => {
         initial={{ opacity: 0 }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
       >
-        <Layout content={children} props={undefined} />
+        <Layout content={children} />
         <AppErrorToast />
       </motion.div>
     </AnimatePresence>

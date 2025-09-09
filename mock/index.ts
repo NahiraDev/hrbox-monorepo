@@ -1,3 +1,3 @@
-export * from './basic-info.ts';
+export * from './basic-info';
 export * from './chart-maker'
 export * from './hrlink'

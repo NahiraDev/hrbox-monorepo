@@ -1,7 +1,8 @@
 import { LayoutLoader } from '../layouts';
 
 const RouteResolver = ({ Component }: { Component: any }) => {
-  if (Component?.layout || Component?.subHeader || Component?.content) {
+
+  if (Component?.layout || Component?.content) {
     return (
       <LayoutLoader
         content={Component.content}
