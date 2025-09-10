@@ -208,7 +208,7 @@ export const users = [
 ];
 
 export const ListboxWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-full px-1 py-2">{children}</div>
+  <div>{children}</div>
 );
 export default function Repport() {
   const [values, setValues] = React.useState<Selection>(new Set(['1']));
@@ -225,7 +225,7 @@ export default function Repport() {
     <ListboxWrapper>
       <Listbox
         classNames={{
-          list: ' overflow-y-scroll',
+          list: 'overflow-y-scroll',
         }}
         items={users}
         label="Assigned to"
@@ -236,16 +236,16 @@ export default function Repport() {
       >
         {(item) => (
           <ListboxItem key={item.id} textValue={item.name}>
-            <div className="flex gap-5 items-center">
-              <Avatar alt={item.name} className="shrink-0" color="primary" radius="sm" size="sm" src="" />
-              <div className="flex flex-col">
+            <div className="flex gap-2.5 items-center">
+              <Avatar alt={item.name} color="primary" radius="sm" size="sm" src="" />
+              <div className="flex flex-col gap-1">
                 <span className="text-xs">{item.name}</span>
                 <AppButton
                   props={{
-                    className: 'border-1 w-full text-[7px]',
+                    className: 'border-1 w-full text-[10px] py-2 px-3  w-[60px] h-[12px]',
                     color: 'primary',
                     variant: 'bordered',
-                    size: 'xs',
+                    size: 'sm',
                     radius: 'lg',
                     content: <span>UiUx Designer</span>,
                   }}
