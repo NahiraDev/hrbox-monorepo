@@ -5,3 +5,4 @@ export * from './InstagramIcon';
 export * from './WhatsAppIcon';
 export * from './CupStarIcon';
 export * from './AcademyIcon';
+export * from './JobOppertunitiesIcon';

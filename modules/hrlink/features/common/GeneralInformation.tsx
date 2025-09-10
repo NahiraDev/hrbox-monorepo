@@ -3,7 +3,6 @@ import { Edit } from 'iconsax-react';
 import { Avatar } from '@heroui/react';
 
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from '../../icons';
-import WhatsAppIcon from '../../assets/img/whats-app-logo.png';
 import AvatarUser from '../../assets/img/whats-app-logo.png';
 import { useAppSelector } from '../../../../core';
 
@@ -69,7 +68,6 @@ export const GeneralInformation = () => {
                 size: 'xs',
                 radius: 'xs',
                 isIconOnly: true,
-                content: <img className="w-2.5 h-2.5" src={WhatsAppIcon} />,
               }}
             />
           </div>

@@ -16,7 +16,7 @@ export const Awards = () => {
     <div className="mx-auto w-full">
       <div className="flex justify-between">
         <div className="flex">
-          <div className="flex items-center gap-2 rounded-4 bg-primary-400 dark:bg-surface-200 shadow-light-tight-1 px-3 py-1.5 w-fit mb-6">
+          <div className="flex items-center gap-2 rounded-4 bg-secondary-400 shadow-light-tight-1 px-3 py-1.5 w-fit mb-6">
             <CupStarIcon color="#fff" />
             <span className="text-white text-xl font-normal">Achievements and accolades</span>
           </div>
@@ -77,7 +77,7 @@ export const Awards = () => {
         <div className="col-span-3">
           <div className="flex flex-col h-full justify-between">
             <div className="grid grid-cols-2 gap-3">
-              {data.map((achievement: any, index: number) => (
+              {data && data.map((achievement: any, index: number) => (
                 <Card key={index} className="rounded-5 shadow-light-tight-1 p-4 bg-white flex flex-col gap-2.5">
                   <CardHeader className="flex flex-col gap-1.5 border-b-1 border-neutral-100 pb-1.5">
                     <div className="flex justify-between">

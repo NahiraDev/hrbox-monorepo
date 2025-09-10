@@ -12,8 +12,8 @@ export const page = {
   },
   dashboard: lazyLoad(()=> import('../features/dashboard')),
   job: {
-    offers: lazyLoad(() => import('../features/jobs/offers')),
-    detail: lazyLoad(() => import('../features/jobs/jobDetail')),
+    offers: lazyLoad(() => import('../features/jobs/Offers')),
+    detail: lazyLoad(() => import('../features/jobs/JobDetail')),
     opportunities: lazyLoad(
       () => import('../features/jobs/opportunities'),
     ),

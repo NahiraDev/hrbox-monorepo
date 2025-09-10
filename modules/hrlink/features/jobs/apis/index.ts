@@ -1,6 +1,6 @@
 import createBaseApi from '../../../../../core/apis/baseApi';
 import { createEndpoint } from '../../../../../core';
-import { HRLinkApiEndpoints } from '../../../app/endpoints.ts';
+import { HRLinkApiEndpoints } from '../../../app/endpoints';
 
 const BaseApi = createBaseApi('https://api.hrbox.com', 'Jobs', [
   'Jobs',
@@ -26,7 +26,7 @@ export const JobsApi = BaseApi.injectEndpoints({
 });
 
 export const {
-  useJobOffersQuery,
-  useJobDetailQuery,
-  useJobOpportunitiesQuery,
+  useLazyJobOffersQuery,
+  useLazyJobDetailQuery,
+  useLazyJobOpportunitiesQuery,
 } = JobsApi;
