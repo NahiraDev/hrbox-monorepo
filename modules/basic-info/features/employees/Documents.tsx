@@ -12,13 +12,13 @@ const Documents = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-4 gap-4 w-full p-4">
           {identityCard.map((user: any, index) => (
             <Card key={index} className="p-3 w-full h-full ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar radius="sm" size="lg" />
+                    <Avatar radius="sm" size="lg" color='primary'/>
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">

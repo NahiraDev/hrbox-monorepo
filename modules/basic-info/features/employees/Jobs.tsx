@@ -13,7 +13,7 @@ const Jobs = () => {
     <>
       <BasicInfoLayout
         content={
-          <div className="grid grid-cols-4 gap-3 w-full">
+          <div className="grid grid-cols-4 gap-3 w-full p-4">
             {Jobss.map((user, index) => (
               <Card key={index} className="py-2 px-3">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
