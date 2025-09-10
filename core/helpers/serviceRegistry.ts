@@ -1,12 +1,10 @@
 import type { Reducer } from '@reduxjs/toolkit';
 import type { RouteObject } from 'react-router-dom';
-import type { Api } from '@reduxjs/toolkit/query/react';
-import plugin from 'eslint-plugin-react';
 
 export interface PluginModule {
   name: string;
-  reducers?: Reducer;
-  apis?: Api<any, any, any, any>[];
+  reducers?: Record<any, Reducer>;
+  apis?: any[];
   routes?: RouteObject[];
   menu?: { label: string; path: string; icon?: React.ReactNode }[];
   middleware?: any[];
@@ -27,10 +25,7 @@ export class ServiceRegistry {
         routes: [...(existing.routes || []), ...(plugin.routes || [])],
         reducers: { ...(existing.reducers || {}), ...(plugin.reducers || {}) },
         apis: [...(existing.apis || []), ...(plugin.apis || [])],
-        middleware: [
-          ...(existing.middleware || []),
-          ...(plugin.middleware || []),
-        ],
+        middleware: [...(existing.middleware || []), ...(plugin.middleware || [])],
       });
     } else {
       this.plugins.set(plugin.name, plugin);
@@ -55,8 +50,14 @@ export class ServiceRegistry {
     return reducers;
   }
 
-  getAllApis(): Api<any, any, any, any>[] {
-    return Array.from(this.plugins.values()).flatMap((p) => p.apis || []);
+  getAllApis(): any[] {
+    const apis = Array.from(this.plugins.values()).flatMap((p) => p.apis || []);
+    console.log('🔥 ServiceRegistry.getAllApis():', apis.map(api => ({
+      reducerPath: api.reducerPath,
+      hasReducer: !!api.reducer,
+      hasMiddleware: !!api.middleware
+    })));
+    return apis;
   }
 
   getAllRoutes(): RouteObject[] {
@@ -71,7 +72,7 @@ export class ServiceRegistry {
     return routes;
   }
 
-  getActiveMenu(moduleName:string) {
+  getActiveMenu(moduleName: string) {
     const plugin = this.plugins.get(moduleName);
 
     if (!plugin || !plugin.menu) return [];

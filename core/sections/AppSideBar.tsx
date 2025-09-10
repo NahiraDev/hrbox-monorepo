@@ -12,7 +12,7 @@ const AppSideBar = () => {
   const { t } = useTranslation();
   const [fullWidth, setFullWidth] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string | undefined>('Home');
-  const [menuItems, setMenuItems] = useState<any[]>([]); // ✅ استیت جدید برای منو
+  const [menuItems, setMenuItems] = useState<any[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentLang = useAppSelector((state) => state.language.lang);

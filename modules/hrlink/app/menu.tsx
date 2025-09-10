@@ -1,36 +1,34 @@
-import { type MenuStructure, useMenu } from '../../../core';
-import { JobOffersIcon } from '../icons';
-import { wrapIcons } from '../../../core';
+import type { ReactNode } from 'react';
 
-import { HRLinkPaths } from './paths';
+import {
+  Chart2,
+  Personalcard,
+} from 'iconsax-react';
 
-const MenuIcons = wrapIcons({
-  offers: JobOffersIcon,
-  detail: JobOffersIcon,
-  opportunities: JobOffersIcon,
-});
-
-export const HRLinkMenu = () => {
-  return useMenu('hrlink', HRLinkPaths.routes, MenuIcons);
+const MenuIcons = {
+  dashboard: Chart2,
+  userInformation: Personalcard,
 };
 
-
-export const getHRLinkMenuData = (): MenuStructure => {
+export const HRLinkMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
   const moduleName = 'hrlink';
-  const paths = HRLinkPaths.routes;
+  const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
-  const menu: MenuStructure = {};
+  const menuConfig: Record<string, string> = {
+    Dashboard: '/Dashboard',
+    userInformation: '/OrganizationDepartments',
+  };
 
-  for (const [feature, pages] of Object.entries(paths)) {
-    menu[feature] = {};
-    for (const [pageKey, route] of Object.entries(pages)) {
-      menu[feature][pageKey] = {
-        name: pageKey,
-        route: `/${moduleName}/${feature}${route}`,
-        icon: null,
-      };
-    }
-  }
+  Object.entries(menuConfig).forEach(([feature, route]) => {
+    const iconKey = feature.toLowerCase() as keyof typeof MenuIcons;
+    const IconComponent = MenuIcons[iconKey];
 
-  return menu;
+    menuArray.push({
+      label: feature,
+      path: `/${moduleName}${route}`,
+      icon: IconComponent ? <IconComponent /> : null,
+    });
+  });
+
+  return menuArray;
 };

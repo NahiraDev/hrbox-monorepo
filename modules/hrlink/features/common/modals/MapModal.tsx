@@ -7,9 +7,8 @@ import {
   useAddLocationMutation,
   useEditLocationMutation,
 } from '../../common';
-import { useModal, withModal } from '../../../../../core';
 
-const MapModal = ({
+export const MapModal = ({
   position,
   setPosition,
   isEdit,
@@ -64,7 +63,3 @@ const MapModal = ({
     </AppModal>
   );
 };
-
-MapModal.useModal = () => useModal();
-
-export default withModal(MapModal);

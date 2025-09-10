@@ -2,7 +2,7 @@ import { skills } from 'mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from 'core/components';
 import { LampCharge, Trash } from 'iconsax-react';
-import { AppCircularChart } from 'core/sections';
+import { AppDoubleLineProgress } from 'core/sections';
 
 import { BasicInfoLayout } from '../../features/common';
 const Education = () => {
@@ -39,7 +39,7 @@ const Education = () => {
           </div>
         </div>
         <div>
-          <AppCircularChart value={80} />
+          <AppDoubleLineProgress value={80} />
         </div>
       </div>
     </Card>

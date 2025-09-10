@@ -42,4 +42,4 @@ export const AwardApi = BaseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useFetchAwardsQuery , useSearchAwardsQuery , useFetchAwardDetailQuery , useCreateAwardMutation , useEditAwardMutation , useDeleteAwardMutation } = AwardApi;
+export const { useLazyFetchAwardsQuery , useLazyFetchAwardDetailQuery , useCreateAwardMutation , useEditAwardMutation , useDeleteAwardMutation } = AwardApi;

@@ -1,7 +1,8 @@
 import { useFormContext } from 'core/context';
 import { Form } from '@heroui/react';
-import { AppInput } from '../../../../../core';
 import * as Yup from 'yup';
+
+import { AppInput } from '../../../../../core';
 
 export const initialValuesForm = {
   CurrentPassWord: '',
@@ -11,9 +12,7 @@ export const initialValuesForm = {
 
 export const formValidationError = Yup.object().shape({
   CurrentPassWord: Yup.string().required('Current password is required'),
-  NewPassWord: Yup.string()
-    .required('New password is required')
-    .min(6, 'New password must be at least 6 characters'),
+  NewPassWord: Yup.string().required('New password is required').min(6, 'New password must be at least 6 characters'),
   RepeatPassWord: Yup.string()
     .oneOf([Yup.ref('newPass')], 'Passwords must match')
     .required('Please confirm your new password'),
@@ -27,22 +26,11 @@ export const handleChangePasswordSubmit = (values: any) => {
   };
 };
 
-export const ChangePasswordForm = () =>{
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = useFormContext();
+export const ChangePasswordForm = () => {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
 
-  return(
-    <Form
-      className="w-full flex flex-col gap-6"
-      id="change-password-form"
-      onSubmit={handleSubmit}
-    >
+  return (
+    <Form className="w-full flex flex-col gap-6" id="change-password-form" onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-[52px] w-full">
         <div className="col-span-1 flex flex-col gap-1">
           <AppInput
@@ -90,5 +78,5 @@ export const ChangePasswordForm = () =>{
         </div>
       </div>
     </Form>
-  )
-}
+  );
+};

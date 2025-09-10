@@ -6,7 +6,6 @@ import {
   UserOctagon,
 } from 'iconsax-react';
 import { useEffect } from 'react';
-import EducationModal from '@module/hrlink/features/resume/modals/EducationModal';
 import {useNavigate} from 'react-router-dom';
 import { UserLocation, GeneralInformation } from '../common';
 import {
@@ -14,19 +13,19 @@ import {
   AppTable,
   AppButton,
   AppSearchInput,
-  AppLoader,
+  AppLoader, useModalContext
 } from '../../../../core';
 
 import { useDeleteEducationMutation, useLazyFetchEducationQuery } from './apis';
 
 export const Education = () => {
+  const { openModal } = useModalContext();
   const navigate = useNavigate();
   const [deleteEducation] = useDeleteEducationMutation();
-  const educationModal = EducationModal.useModal();
   const [fetchEducation, { isLoading, data, isError }] = useLazyFetchEducationQuery();
 
   const handleEdit = (row: any) => {
-    educationModal.open({ row, isEditMode: true });
+    openModal('edit', row);
   };
 
   useEffect(() => {

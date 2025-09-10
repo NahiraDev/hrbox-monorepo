@@ -53,7 +53,7 @@ const radiusClasses: Record<string, string> = {
 const AppInput = ({ props }: { props: AppInputProps }) => {
   const {
     label,
-    required,
+    required = true,
     error,
     name,
     type = 'text',

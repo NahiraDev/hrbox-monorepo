@@ -1,33 +1,48 @@
-import { Form } from '@heroui/react';
-import { Link21 } from 'iconsax-react';
-import { AppDatePicker, AppInput, AppTextArea } from 'core/components';
-import { useFormContext } from 'core/context';
 import * as Yup from 'yup';
+import { useFormContext } from 'core/context';
+import { Form } from '@heroui/react';
+import { AppDatePicker, AppInput, AppTextArea } from 'core/components';
+import { Link21 } from 'iconsax-react';
 
-export const initialValuesAward = {
-  Title: null,
-  Date: null,
-  Description: '',
-  FileId: null,
+export const initialValuesCourse = {
+  UniversityId: null,
+  FieldOfStudy: null,
+  thesisTitle: '',
+  Degree: null,
+  PlaceOfStudy: null,
+  Gpa: null,
+  UniversityType: null,
+  StartDate: null,
+  EndDate: null,
 };
 
-export const formValidationAward = Yup.object().shape({
-  Title: Yup.string().required(),
-  Date: Yup.string().required(),
-  Description: Yup.string().required(),
-  FileId: Yup.string().required(),
+export const formValidationCourse = Yup.object().shape({
+  UniversityId: Yup.string().required(),
+  FieldOfStudy: Yup.string().required(),
+  thesisTitle: Yup.string().required(),
+  Degree: Yup.string().required(),
+  PlaceOfStudy: Yup.string().required(),
+  Gpa: Yup.string().required(),
+  UniversityType: Yup.string().required(),
+  StartDate: Yup.string().required(),
+  EndDate: Yup.string().required(),
 });
 
-export const handleSubmitAward = (values: any) => {
+export const handleSubmitCourse = (values: any) => {
   return {
-    Title: values.Title,
-    Date: values.Date,
-    Description: values.Description,
-    FileId: values.FileId,
+    UniversityId: values.UniversityId,
+    FieldOfStudy: values.FieldOfStudy,
+    thesisTitle: values.thesisTitle,
+    Degree: values.thesisTitle,
+    PlaceOfStudy: values.thesisTitle,
+    Gpa: values.thesisTitle,
+    UniversityType: values.thesisTitle,
+    StartDate: values.thesisTitle,
+    EndDate: values.thesisTitle,
   };
 };
 
-export const AwardForm = () => {
+export const CourseForm = () => {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
 
   return (

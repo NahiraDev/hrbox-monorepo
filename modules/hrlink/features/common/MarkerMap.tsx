@@ -2,10 +2,8 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { Icon, LatLng, Marker as LeafletMarker } from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
 
-import markerIcon from '*.png';
-
 export const MarkerIcon = new Icon({
-  iconUrl: markerIcon,
+  iconUrl: '',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],

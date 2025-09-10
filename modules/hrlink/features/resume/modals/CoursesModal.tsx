@@ -1,24 +1,24 @@
 import { AppButton, AppModal } from 'core/components';
 import { Personalcard } from 'iconsax-react';
 import { FormProvider } from 'core/context';
+import { useCreateCourseMutation } from '@module/hrlink/features/resume/apis';
 
-import { EducationForm, formValidationEducation, handleSubmitEducation, initialValuesEducation } from '../forms';
-import { useCreateEducationMutation } from '../apis';
+import { CourseForm, formValidationCourse, handleSubmitCourse, initialValuesCourse } from '../forms';
 
-export const EducationModal = () => {
-  const [createEducation] = useCreateEducationMutation();
+export const CourseModal = () => {
+  const [createCourse] = useCreateCourseMutation();
 
   return (
     <AppModal icon={<Personalcard className="text-white" size="22" />} size="3xl" title="Edit General Informations">
       <AppModal.Body>
         <FormProvider
-          initialValues={initialValuesEducation}
-          validationSchema={formValidationEducation}
+          initialValues={initialValuesCourse}
+          validationSchema={formValidationCourse}
           onSubmitAsync={async (values: any) => {
-            await createEducation(handleSubmitEducation(values)).unwrap();
+            await createCourse(handleSubmitCourse(values)).unwrap();
           }}
         >
-          <EducationForm />
+          <CourseForm />
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>

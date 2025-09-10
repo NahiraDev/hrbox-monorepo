@@ -7,7 +7,7 @@ interface DoubleLineProgressProps {
   duration?: number;
 }
 
-const DoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
+const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
   value,
   size = 80,
   gap = 2,
@@ -138,4 +138,4 @@ const DoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
   );
 };
 
-export default DoubleLineProgress;
+export default AppDoubleLineProgress;
