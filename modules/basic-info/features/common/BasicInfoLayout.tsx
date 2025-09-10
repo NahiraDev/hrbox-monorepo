@@ -3,12 +3,13 @@ import type { Key } from 'react';
 import { TickIcon } from 'core/icons';
 import { AppButton } from 'core/components';
 import { FolderCross, MessageEdit, Trash } from 'iconsax-react';
-import { Avatar, Listbox, ListboxItem, Button } from '@heroui/react';
+import { Listbox, ListboxItem } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { dataReportWorker } from 'mock';
+// import { dataReportWorker } from 'mock';
 
 import { AppTabs } from '../../../../core';
+import Repport from '../common/Repport';
 
 const EmployeesTab = [
   { key: 'personal-information', title: 'Personal Information', href: '/basic-info/PersonalInformation' },
@@ -149,8 +150,6 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                   }
                 }}
               />
-
-              {/* لیست بازشونده زیر more */}
               {showMore && (
                 <div className="absolute top-full left-0 mt-1 bg-white shadow-lg rounded-lg z-50 w-48">
                   <ListMore
@@ -176,20 +175,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
             [&::-webkit-scrollbar-thumb]:bg-gray-300"
           >
             <div>
-              <span>Report To</span>
-              {dataReportWorker.map((worker, index) => (
-                <div key={index} className="flex justify-between items-center  mb-4 mt-2">
-                  <div>
-                    <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                  </div>
-                  <div className="flex flex-col gap-1 items-center">
-                    <span className="text-info-400 text-xs">{worker.name}</span>
-                    <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
-                      {worker.job}
-                    </Button>
-                  </div>
-                </div>
-              ))}
+              <Repport />
             </div>
           </div>
         </div>
@@ -198,3 +184,17 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
     </div>
   );
 };
+// <span>Report To</span>
+// {dataReportWorker.map((worker, index) => (
+//   <div key={index} className="flex justify-between items-center  mb-4 mt-2">
+//     <div>
+//       <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+//     </div>
+//     <div className="flex flex-col gap-1 items-center">
+//       <span className="text-info-400 text-xs">{worker.name}</span>
+//       <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
+//         {worker.job}
+//       </Button>
+//     </div>
+//   </div>
+// ))}

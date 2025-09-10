@@ -12,7 +12,7 @@ const Courses = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-4 gap-4 w-full p-4">
           {dataWorker.map((user: any, index) => (
             <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
