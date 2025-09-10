@@ -21,6 +21,9 @@ export const page = {
     Dependents: lazyLoad(() => import('../features/employees/Dependents')),
     SpecificInformation: lazyLoad(() => import('../features/employees/More/SpecificInformation')),
     Onboarding: lazyLoad(() => import('../features/employees/More/Onboarding')),
+    Guidlines: lazyLoad(() => import('../features/employees/More/Guidlines')),
+    TestReport: lazyLoad(() => import('../features/employees/More/TestReport')),
+    ContractList: lazyLoad(()=>import('../features/employees/More/ContractList')),
   },
 };
 
@@ -39,4 +42,7 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   Dependents: page.employees.Dependents,
   SpecificInformation: page.employees.SpecificInformation,
   Onboarding: page.employees.Onboarding,
+  Guidlines: page.employees.Guidlines,
+  TestReport: page.employees.TestReport,
+  ContractList: page.employees.ContractList,
 });
