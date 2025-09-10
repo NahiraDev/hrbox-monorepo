@@ -242,7 +242,7 @@ export default function Repport() {
                 <span className="text-xs">{item.name}</span>
                 <AppButton
                   props={{
-                    className: 'border-1 w-full text-[10px] py-2 px-3  w-[60px] h-[12px]',
+                    className: 'border-1 border-[#DCF0F9]  w-full text-[10px] py-2 px-3  w-[60px] h-[12px]',
                     color: 'primary',
                     variant: 'bordered',
                     size: 'sm',

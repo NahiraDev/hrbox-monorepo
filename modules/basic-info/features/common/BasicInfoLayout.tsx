@@ -122,8 +122,6 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                 />
               </div>
             </div>
-
-            {/* تب‌ها */}
             <div className="relative">
               <AppTabs
                 fullWidth

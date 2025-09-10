@@ -23,8 +23,9 @@ export const page = {
     Onboarding: lazyLoad(() => import('../features/employees/More/Onboarding')),
     Guidlines: lazyLoad(() => import('../features/employees/More/Guidlines')),
     TestReport: lazyLoad(() => import('../features/employees/More/TestReport')),
-    ContractList: lazyLoad(()=> import('../features/employees/More/ContractList')),
+    ContractList: lazyLoad(() => import('../features/employees/More/ContractList')),
     HealthRecord: lazyLoad(() => import('../features/employees/More/HealthRecord')),
+    RequestList: lazyLoad(() => import('../features/employees/More/RequestList')),
   },
 };
 
@@ -47,4 +48,5 @@ export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
   TestReport: page.employees.TestReport,
   ContractList: page.employees.ContractList,
   HealthRecord: page.employees.HealthRecord,
+  RequestList:page.employees.RequestList,
 });
