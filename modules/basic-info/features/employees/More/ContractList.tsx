@@ -120,19 +120,11 @@ const ContractList = () => {
     <BasicInfoLayout
       content={
         <>
-          <div className="flex items-center gap-1 text-xl text-secondary-900 font-semibold py-5">
+          <div className="flex items-center gap-1 p-3 text-xl text-secondary-900 font-semibold">
             <Setting size="24" />
             <span>Contract List</span>
           </div>
-          <Table
-            removeWrapper
-            aria-label="Contracts Table with 8 columns"
-            classNames={{
-              th: 'bg-primary text-white py-3 px-2 text-sm font-semibold',
-              tr: 'text-secondary-400 text-xs font-bold',
-              td: 'py-5',
-            }}
-          >
+          <Table aria-label="Contracts Table with 8 columns">
             <TableHeader columns={columns}>
               {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
             </TableHeader>

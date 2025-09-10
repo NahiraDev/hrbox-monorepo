@@ -1199,8 +1199,7 @@ export const dataWorker = [
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
-  },
-  {
+  },  {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
@@ -1209,14 +1208,15 @@ export const dataWorker = [
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
-  },
-  {
+  },  {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
   },
+
+
 ];
-export const dataWorker2 =  [
+export const dataWorker2 = [
   {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
@@ -1599,33 +1599,4 @@ export const testReport = [
     status: 'Done',
   },
 ];
-export const healthy = [
-  {
-    title: 'Blood Type',
-    titleButton: 'Pre-Employment',
-    type: 'A+',
-    date: '2025/02/05',
-    question: 'Yes',
-  },
-  {
-    title: 'Blood Type',
-    titleButton: 'Pre-Employment',
-    type: 'A+',
-    date: '2025/02/05',
-    question: 'Yes',
-  },
-  {
-    title: 'Blood Type',
-    titleButton: 'Pre-Employment',
-    type: 'A+',
-    date: '2025/02/05',
-    question: 'Yes',
-  },
-  {
-    title: 'Blood Type',
-    titleButton: 'Pre-Employment',
-    type: 'A+',
-    date: '2025/02/05',
-    question: 'Yes',
-  },
-];
+
