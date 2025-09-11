@@ -1,13 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  Tooltip,
-} from '@heroui/react';
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
 import { usePaginationManager } from 'core/helpers';
 
@@ -16,6 +8,7 @@ import { loader } from '../lottie';
 
 import AppButton from './AppButton';
 import AppPagination from './AppPagination';
+import { useModalContext } from 'core/context';
 
 interface AppTableProps {
   data: any;
@@ -44,7 +37,6 @@ const AppTable = ({
   data,
   columns,
   onEdit,
-  onDelete,
   hasPagination = true,
   paginationConfig,
   enableActions = true,
@@ -52,8 +44,7 @@ const AppTable = ({
   error,
   pageSize = 10,
 }: AppTableProps) => {
-  const deleteModal = AppDeleteModal.useModal();
-  const showModeModal = AppShowModeModal.useModal();
+  const { openModal } = useModalContext();
   const [LottieComponent, setLottieComponent] = useState<any>(null);
 
   const pagination = usePaginationManager({
@@ -62,10 +53,9 @@ const AppTable = ({
 
   const paginatedData = useMemo(() => {
     if (!hasPagination) return data;
-
     const startIndex = (pagination.currentPage - 1) * pageSize;
-
-    return data.slice(startIndex, startIndex + pageSize);
+    // return data.slice(startIndex, startIndex + pageSize);
+    return []
   }, [data, pagination.currentPage, pageSize, hasPagination]);
 
   useEffect(() => {
@@ -83,9 +73,7 @@ const AppTable = ({
           .filter((key) => key !== 'id')
           .map((key) => ({
             key,
-            label: key
-              .replace(/([A-Z])/g, ' $1')
-              .replace(/^./, (str) => str.toUpperCase()),
+            label: key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()),
             sortable: false,
             searchable: true,
           }))
@@ -122,10 +110,7 @@ const AppTable = ({
         return acc;
       }, []);
 
-      showModeModal.open({
-        columnPairs: columnPairs,
-        selectedRow: row,
-      });
+      openModal('view' , 'test' , columnPairs)
     }
   };
 
@@ -134,9 +119,7 @@ const AppTable = ({
       <div
         className={`p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl shadow-light-tight/1`}
       >
-        <div className="text-center text-red-600 dark:text-red-400">
-          Error: {error}
-        </div>
+        <div className="text-center text-red-600 dark:text-red-400">Error: {error}</div>
       </div>
     );
   }
@@ -153,9 +136,7 @@ const AppTable = ({
 
   if (!data || data.length === 0) {
     return (
-      <div
-        className={`p-4 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1`}
-      >
+      <div className={`p-4 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1`}>
         <div className="text-center text-gray-500">No data available</div>
       </div>
     );
@@ -184,10 +165,7 @@ const AppTable = ({
             radius: 'full',
             variant: 'light',
             onPress: () => {
-              deleteModal.open({
-                onConfirm: onDelete?.(row),
-                onCancel: deleteModal.close,
-              });
+              openModal('delete' , 'test' , row)
             },
             content: (
               <span className="text-lg cursor-pointer">
@@ -221,61 +199,41 @@ const AppTable = ({
   const tableRows = (row: { [x: string]: any }) => (
     <>
       {autoColumns.map((col, index) => (
-        <TableCell
-          key={row.id ?? index}
-          className="text-xs font-normal text-black text-center"
-        >
+        <TableCell key={row.id ?? index} className="text-xs font-normal text-black text-center">
           {renderCell(row[col.key], row, col.key)}
         </TableCell>
       ))}
-      {enableActions && (
-        <TableCell className="text-xs text-secondary-400">
-          {renderActions(row)}
-        </TableCell>
-      )}
+      {enableActions && <TableCell className="text-xs text-secondary-400">{renderActions(row)}</TableCell>}
     </>
   );
 
   return (
     <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
-      <Table
-        className="!h-full min-h-[300px]"
-        onRowAction={(row: any) => handleRowClick?.(row)}
-      >
+      <Table className="!h-full min-h-[300px]" onRowAction={(row: any) => handleRowClick?.(row)}>
         <TableHeader className="!rounded-0">{tableColumns}</TableHeader>
         <TableBody>
           {paginatedData.length === 0 ? (
             <TableRow>
-              <TableCell
-                className="text-center py-8"
-                colSpan={autoColumns.length + (enableActions ? 1 : 0)}
-              >
+              <TableCell className="text-center py-8" colSpan={autoColumns.length + (enableActions ? 1 : 0)}>
                 No data available
               </TableCell>
             </TableRow>
           ) : (
-            paginatedData.map(
-              (row: { [x: string]: any; id?: any }, index: any) => (
-                <TableRow
-                  key={row.id ?? index}
-                  className="hover:bg-surface dark:hover:bg-[#04425c66] !rounded-4 transition-colors !h-12 cursor-pointer"
-                >
-                  {tableRows(row)}
-                </TableRow>
-              ),
-            )
+            paginatedData.map((row: { [x: string]: any; id?: any }, index: any) => (
+              <TableRow
+                key={row.id ?? index}
+                className="hover:bg-surface dark:hover:bg-[#04425c66] !rounded-md transition-colors !h-12 cursor-pointer"
+              >
+                {tableRows(row)}
+              </TableRow>
+            ))
           )}
         </TableBody>
       </Table>
 
       {hasPagination && paginationConfig && (
         <div className="flex justify-end mt-4">
-          <AppPagination
-            props={{
-              total: Math.ceil((data?.length || 0) / pageSize),
-              size: 'md',
-            }}
-          />
+          <AppPagination total={Math.ceil((data?.length || 0) / pageSize)} />
         </div>
       )}
 

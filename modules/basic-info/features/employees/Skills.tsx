@@ -7,7 +7,7 @@ import { AppDoubleLineProgress } from 'core/sections';
 import { BasicInfoLayout } from '../../features/common';
 const Education = () => {
   const SkillCard = (skill: any, index: number) => (
-    <Card key={index} className="p-3 flex gap-1.5 shadow-light-tight-1 bg-white">
+    <Card key={index} className="p-3 flex gap-1.5 shdow-theme-sm bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
         <div className="flex items-center gap-2">
           <Avatar radius="sm" size="sm" />

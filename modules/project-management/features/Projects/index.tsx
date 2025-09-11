@@ -127,7 +127,7 @@ export default function Projects() {
           <div className="mx-auto w-full h-[calc(100%-132px)]">
             <div className="flex flex-col gap-3 h-[calc(100vh-270px)]">
               <div className="flex justify-between">
-                <Button className="flex items-center gap-2 bg-primary-400 dark:bg-surface-200 !rounded-4 !px-3 !py-1.5 w-fit">
+                <Button className="flex items-center gap-2 bg-primary-400 dark:bg-surface-200 !rounded-md !px-3 !py-1.5 w-fit">
                   <Candle2 className="text-white" size="18" />
                   <span className="text-white text-xl font-normal">
                     All Projects
@@ -139,7 +139,7 @@ export default function Projects() {
                       {!isSearchOpen && (
                         <Button
                           isIconOnly
-                          className="!rounded-4 border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2"
+                          className="!rounded-md border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2"
                           color="default"
                           variant="light"
                           onPress={() => setIsSearchOpen(true)}
@@ -164,7 +164,7 @@ export default function Projects() {
                             <Input
                               classNames={{
                                 inputWrapper:
-                                  '!bg-white dark:!bg-secondary-1000 p-1.5 !rounded-4 border-1 border-primary-400',
+                                  '!bg-white dark:!bg-secondary-1000 p-1.5 !rounded-md border-1 border-primary-400',
                               }}
                               endContent={
                                 <button onClick={() => setIsSearchOpen(false)}>
@@ -188,14 +188,14 @@ export default function Projects() {
                       </AnimatePresence>
                     </div>
                     <Button
-                      className="!rounded-4 border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2"
+                      className="!rounded-md border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2"
                       color="default"
                       variant="light"
                     >
                       <Setting4 className="text-secondary-1000 dark:text-white" />
                     </Button>
                     <Button
-                      className="!rounded-4 border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2"
+                      className="!rounded-md border-1 border-primary-400 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2"
                       color="default"
                       variant="light"
                     >

@@ -15,7 +15,7 @@ const Inpersonate = () => {
           <div className="flex flex-col gap-3">
             <span className="text-secondary-1000 text-sm font-semibold">Jahan Hatami</span>
             <span className="text-tertiar-700 text-sm font-semibold">Dev Chapter Leader</span>
-            <div className="px-[10px] py-0.5 border-1 border-tertiar-0 rounded-4 w-fit bg-[#fedee666]">
+            <div className="px-[10px] py-0.5 border-1 border-tertiar-0 rounded-md w-fit bg-[#fedee666]">
               <span className="text-tertiar-700 text-sm font-semibold">Hr-Link</span>
             </div>
           </div>
@@ -27,7 +27,7 @@ const Inpersonate = () => {
           <div className="flex flex-col gap-3">
             <span className="text-secondary-1000 text-sm font-semibold">Jahan Hatami</span>
             <span className="text-primary-700 text-sm font-semibold">Dev Chapter Leader</span>
-            <div className="px-[10px] py-0.5 border-1 border-[#DCF0F9] rounded-4 w-fit bg-[#dcf0f966]">
+            <div className="px-[10px] py-0.5 border-1 border-[#DCF0F9] rounded-md w-fit bg-[#dcf0f966]">
               <span className="text-primary-400 text-sm font-semibold">Hrbox Holding</span>
             </div>
           </div>

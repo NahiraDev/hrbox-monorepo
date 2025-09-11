@@ -50,3 +50,35 @@ html[lang='fa'] {
 .react-flow {
   overflow: unset !important;
 }
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-control-container {
+  z-index: 1000;
+}
+
+.min-h-200 {
+  min-height: 200px;
+}
+
+/* رفع مشکل نمایش نقشه */
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.leaflet-tile {
+  filter: inherit;
+  visibility: hidden;
+}
+
+.leaflet-tile-loaded {
+  visibility: inherit;
+}

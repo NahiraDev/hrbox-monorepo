@@ -79,10 +79,10 @@ const Offers = () => {
           />
         </div>
         <div className="flex gap-3">
-          <Button className="!rounded-4 !px-3 !py-1.5 w-fit !bg-white">
+          <Button className="!rounded-md !px-3 !py-1.5 w-fit !bg-white">
             <span className="text-secondary-1000 text-xl font-normal">Complete the job form</span>
           </Button>
-          <Button className="flex items-center gap-2 !rounded-4 bg-white shadow-shadow-light-tight/1 !px-3 !py-1.5 w-fit">
+          <Button className="flex items-center gap-2 !rounded-md bg-white shadow-shadow-light-tight/1 !px-3 !py-1.5 w-fit">
             <Heart className="text-secondary-1000" size="22" />
             <span className="text-secondary-1000 text-xl font-normal">Favorites</span>
           </Button>

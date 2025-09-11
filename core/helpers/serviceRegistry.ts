@@ -1,12 +1,27 @@
 import type { Reducer } from '@reduxjs/toolkit';
 import type { RouteObject } from 'react-router-dom';
+import type { ReactNode, LazyExoticComponent, ComponentType } from 'react';
+
+export interface SubHeaderConfig {
+  path: string;
+  component: React.ComponentType<any>;
+  props?: Record<string, any>;
+}
+
+export interface ContentConfig {
+  path: string;
+  component: LazyExoticComponent<ComponentType<any>>;
+  props?: Record<string, any>;
+}
 
 export interface PluginModule {
   name: string;
-  reducers?: Record<any, Reducer>;
+  reducers?: Record<string, Reducer>;
   apis?: any[];
   routes?: RouteObject[];
-  menu?: { label: string; path: string; icon?: React.ReactNode }[];
+  contents?: ContentConfig[];
+  menu?: { label: string; path: string; icon?: ReactNode }[];
+  subHeaders?: SubHeaderConfig[];
   middleware?: any[];
   dependencies?: string[];
   prefetch?: () => void | Promise<void>;
@@ -26,10 +41,73 @@ export class ServiceRegistry {
         reducers: { ...(existing.reducers || {}), ...(plugin.reducers || {}) },
         apis: [...(existing.apis || []), ...(plugin.apis || [])],
         middleware: [...(existing.middleware || []), ...(plugin.middleware || [])],
+        subHeaders: [...(existing.subHeaders || []), ...(plugin.subHeaders || [])],
       });
     } else {
       this.plugins.set(plugin.name, plugin);
     }
+  }
+
+  getSubHeaderForPath(path: string): SubHeaderConfig | undefined {
+    for (const plugin of this.plugins.values()) {
+      if (plugin.subHeaders) {
+        const matchedSubHeader = plugin.subHeaders.find((subHeader) => this.isPathMatch(path, subHeader.path));
+
+        if (matchedSubHeader) {
+          return matchedSubHeader;
+        }
+      }
+    }
+
+    return undefined;
+  }
+  getContentForPath(path: string): ContentConfig | undefined {
+    for (const plugin of this.plugins.values()) {
+      if (plugin.contents) {
+        const matchedContent = plugin.contents.find((content) => this.isPathMatch(path, content.path));
+
+        if (matchedContent) {
+          return matchedContent;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  getAllContents(): ContentConfig[] {
+    const contents: ContentConfig[] = [];
+
+    for (const plugin of this.plugins.values()) {
+      if (plugin.contents) {
+        contents.push(...plugin.contents);
+      }
+    }
+
+    return contents;
+  }
+  getAllSubHeaders(): SubHeaderConfig[] {
+    const subHeaders: SubHeaderConfig[] = [];
+
+    for (const plugin of this.plugins.values()) {
+      if (plugin.subHeaders) {
+        subHeaders.push(...plugin.subHeaders);
+      }
+    }
+    return subHeaders;
+  }
+
+  private isPathMatch(currentPath: string, pattern: string): boolean {
+    const patternParts = pattern.split('/').filter(Boolean);
+    const pathParts = currentPath.split('/').filter(Boolean);
+
+    if (patternParts.length !== pathParts.length) return false;
+
+    return patternParts.every((part, index) => {
+      if (part.startsWith(':')) return true;
+
+      return part === pathParts[index];
+    });
   }
 
   getModuleName() {
@@ -52,11 +130,7 @@ export class ServiceRegistry {
 
   getAllApis(): any[] {
     const apis = Array.from(this.plugins.values()).flatMap((p) => p.apis || []);
-    console.log('🔥 ServiceRegistry.getAllApis():', apis.map(api => ({
-      reducerPath: api.reducerPath,
-      hasReducer: !!api.reducer,
-      hasMiddleware: !!api.middleware
-    })));
+
     return apis;
   }
 

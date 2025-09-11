@@ -1,4 +1,4 @@
-export const JobOppertunitiesIcon = ({ color }: { color: string }) => {
+export const JobOpportunitiesIcon = ({ color }: { color: string }) => {
 
   return (
     <svg

@@ -38,7 +38,6 @@ export const ChangePasswordForm = () => {
               label: 'Current password',
               name: 'CurrentPassWord',
               type: 'text',
-              required: true,
               error: touched.CurrentPassWord && errors.CurrentPassWord,
               value: values.CurrentPassWord,
               onChange: handleChange,
@@ -50,7 +49,6 @@ export const ChangePasswordForm = () => {
           <AppInput
             props={{
               label: 'New password',
-              required: true,
               name: 'NewPassWord',
               type: 'text',
               error: touched.NewPassWord && errors.NewPassWord,
@@ -68,7 +66,6 @@ export const ChangePasswordForm = () => {
               label: 'Repeat password',
               name: 'RepeatPassWord',
               type: 'text',
-              required: true,
               error: touched.RepeatPassWord && errors.RepeatPassWord,
               value: values.RepeatPassWord,
               onChange: handleChange,

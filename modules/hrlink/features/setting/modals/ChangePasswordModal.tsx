@@ -1,45 +1,27 @@
 import { MedalStar } from 'iconsax-react';
 
 import { useChangePasswordMutation } from '../apis';
-import {
-  ChangePasswordForm,
-  formValidationError,
-  handleChangePasswordSubmit,
-  initialValuesForm,
-} from '../forms';
-import {
-  AppModal,
-  AppButton,
-  FormProvider,
-  useModal,
-  withModal,
-} from '../../../../../core';
+import { ChangePasswordForm, formValidationError, handleChangePasswordSubmit, initialValuesForm } from '../forms';
+import { AppModal, AppButton, FormProvider } from '../../../../../core';
 
-const ChangePasswordModal = () => {
+export const ChangePasswordModal = () => {
   const [changePassword] = useChangePasswordMutation();
 
   return (
-    <AppModal
-      icon={<MedalStar className="text-secondary-400" size="22" />}
-      size="3xl"
-      title="Rulles"
-    >
+    <AppModal icon={<MedalStar className="text-secondary-400" size="22" />} size="3xl" title="Rulles">
       <div className="flex flex-col gap-8">
         <AppModal.Body>
           <div className="flex flex-col gap-8">
             <p className="text-secondary-900 text-base font-normal leading-normal">
-              To change your password, go to account settings and select
-              &#34;Change Password.&#34; Enter your current password, then
-              create a new strong password. Confirm the new password and save
-              the changes to enhance your account security.
+              To change your password, go to account settings and select &#34;Change Password.&#34; Enter your current
+              password, then create a new strong password. Confirm the new password and save the changes to enhance your
+              account security.
             </p>
             <FormProvider
               initialValues={initialValuesForm}
               validationSchema={formValidationError}
               onSubmitAsync={async (values: any) => {
-                await changePassword(
-                  handleChangePasswordSubmit(values),
-                ).unwrap();
+                await changePassword(handleChangePasswordSubmit(values)).unwrap();
               }}
             >
               <ChangePasswordForm />
@@ -70,7 +52,3 @@ const ChangePasswordModal = () => {
     </AppModal>
   );
 };
-
-ChangePasswordModal.useModal = () => useModal();
-
-export default withModal(ChangePasswordModal);

@@ -10,7 +10,7 @@ const OrganizationDepartments = () => {
   const renderOrganizationDepartments = (user: any, index: number) => (
     <Card
       key={index}
-      className="bg-white rounded-xl border-l-2 border-primary-400 py-2 px-3 shadow-light-tight-1 hover:bg-[#D6F2FF] flex flex-col gap-2"
+      className="bg-white rounded-xl border-l-2 border-primary-400 py-2 px-3 shdow-theme-sm hover:bg-[#D6F2FF] flex flex-col gap-2"
     >
       <CardHeader className="flex items-center gap-2 border-b border-neutral-100 dark:border-neutral-700 !p-0 !pb-1">
         <Avatar radius="sm" size="sm" src="" />

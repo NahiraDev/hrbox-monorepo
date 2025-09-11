@@ -71,10 +71,7 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     ...rest
   } = props;
   const inputWrapperClassNames = clsx(
-    // `${modalType === 'view' && 'bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)]'}`,
-    'bg-white',
-    '!backdrop_blur[35px]',
-    'dark:!shadow-secondary',
+    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
     error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
@@ -82,7 +79,7 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
   );
 
   const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 lg:placeholder:leading-5 placeholder:leading-normal',
+    'placeholder:text-secondary-1000',
     'placeholder:font-medium',
     error && 'text-red-500',
     sizeClasses[size]?.input,

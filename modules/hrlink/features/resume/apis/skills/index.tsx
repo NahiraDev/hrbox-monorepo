@@ -2,7 +2,7 @@ import createBaseApi from '../../../../../../core/apis/baseApi';
 import { createEndpoint, createPaginatedEndpoint } from '../../../../../../core';
 import { HRLinkApiEndpoints } from '../../../../app/endpoints';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'Skills', ['Skills'] as const);
+const BaseApi = createBaseApi('https://hrlink.hrbox.me:50443', 'Skills', ['Skills'] as const);
 
 export const SkillsApi = BaseApi.injectEndpoints({
   endpoints: (build) => ({

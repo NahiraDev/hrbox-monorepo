@@ -2,14 +2,7 @@ import { Form } from '@heroui/react';
 import { useFormContext } from 'core/context';
 import { useTranslation } from 'react-i18next';
 
-import {
-  AppAutoComplete,
-  AppDatePicker,
-  AppInput,
-  AppTextArea,
-  genderOptions,
-  maritalStatusOptions,
-} from 'core/index';
+import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea, genderOptions, maritalStatusOptions } from 'core/index';
 import * as Yup from 'yup';
 
 export const initialValuesGeneralInformation = {
@@ -63,18 +56,12 @@ export const handleSubmitGeneralInformation = (values: any) => {
   };
 };
 
-
 export const GeneralInformationForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
   const { t } = useTranslation();
-  const lang = 'en'
+  const lang = 'en';
   return (
-    <Form
-      className="w-full flex flex-col gap-6"
-      id="edit-general-information"
-      onSubmit={handleSubmit}
-    >
+    <Form className="w-full flex flex-col gap-6" id="edit-general-information" onSubmit={handleSubmit}>
       <div className="flex gap-14 w-full">
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput

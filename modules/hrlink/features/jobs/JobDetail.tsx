@@ -1,4 +1,3 @@
-import { Button } from "@heroui/react";
 import {
   Airplane,
   ArrowLeft2,
@@ -16,235 +15,129 @@ import {
   ReceiptItem,
   Share,
   TickCircle,
-} from "iconsax-react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+} from 'iconsax-react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { AppButton } from 'core/components';
+
+import { BuildingIcon, JobOffersIcon } from '../../icons';
 
 const JobDetail = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<"like" | "dislike" | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const buttonStyle = (type: "like" | "dislike") => {
+  const [selected, setSelected] = useState<'like' | 'dislike' | null>(null);
+  const buttonStyle = (type: 'like' | 'dislike') => {
     const isActive = selected === type;
 
     return `
       !h-[22px] !w-[54px] !min-w-fit flex items-center gap-2 !px-2 !py-1 !rounded-2 shadow-shadow-light-tight/1
-      ${isActive ? "bg-secondary-400" : "bg-white dark:bg-info-1000"}
+      ${isActive ? 'bg-secondary-400' : 'bg-white dark:bg-info-1000'}
     `;
   };
 
-  const textStyle = (type: "like" | "dislike") => {
+  const textStyle = (type: 'like' | 'dislike') => {
     const isActive = selected === type;
 
-    return `text-base font-normal ${
-      isActive ? "text-white" : "text-secondary-1000 dark:text-white "
-    }`;
+    return `text-base font-normal ${isActive ? 'text-white' : 'text-secondary-1000 dark:text-white '}`;
   };
 
-  const iconStyle = (type: "like" | "dislike") => {
+  const iconStyle = (type: 'like' | 'dislike') => {
     const isActive = selected === type;
 
-    return `${isActive ? "text-white" : "text-secondary-1000 dark:text-white"}`;
+    return `${isActive ? 'text-white' : 'text-secondary-1000 dark:text-white'}`;
   };
 
   const handleOpenCompany = (name: string) => {
-    navigate("/company/general-info/" + name);
+    navigate('/company/general-info/' + name);
   };
 
   return (
-    <div className="mx-auto w-full h-[calc(100%-132px)] flex flex-col gap-3">
+    <div className="mx-auto w-full flex flex-col gap-3">
       <div className="flex justify-between">
         <div className="flex items-center">
-          <Button
-            className="!min-w-fit !w-6 !h-6 !rounded-2 flex justify-center !px-0"
-            variant="light"
-            onPress={() => history.back()}
-          >
-            <ArrowLeft2
-              className="text-[#292D32] dark:text-white"
-              size="24"
-            />
-          </Button>
-          <div className="flex items-center gap-2 rounded-4 px-3 py-1.5 w-fit">
-            <JobOffersIcon
-              props={{
-                color: darkMode ? "#fff" : "#1E3363",
-              }}
-            />
-            <span className="text-secondary-400 dark:text-white text-xl font-normal">
-                    Accounting expert (Offered)
-                  </span>
+          <AppButton
+            props={{
+              isIconOnly: true,
+              color: 'white',
+              size: 'md',
+              radius: 'sm',
+              content: <ArrowLeft2 className="text-[#292D32]" size="24" />,
+            }}
+          />
+          <div className="flex items-center gap-2 rounded-md px-3 py-1.5 w-fit">
+            <JobOffersIcon color="#fff" />
+            <span className="text-secondary-400 dark:text-white text-xl font-normal">Accounting expert (Offered)</span>
           </div>
         </div>
         <div className="flex gap-1">
-          <Button
-            className="py-1.5 px-3 h-10 shadow-shadow-light-tight/1 !rounded-[10px] bg-white dark:bg-info-1000"
-            color="default"
-            startContent={  <Heart
-              className="text-[#292D32] dark:text-white"
-              size="22"
-            />}
-            variant="light"
-            onPress={() => handleFollowAndUnfollowCompany("3250")}
-          >
-            Follow
-          </Button>
-          <div className="flex items-center gap-2 relative">
-            {!isOpen && (
-              <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2 flex gap-2 border-1 hover:border-secondary-400 transition "
-                color="default"
-                variant="light"
-                onPress={() => setIsOpen(true)}
-              >
-                <Share className="text-secondary-1000 dark:text-white" />
-              </Button>
-            )}
-
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  key="share-menu"
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                  className="z-10 flex gap-3 bg-[#1E33630F] dark:bg-[#1e33600f] backdrop-blur-[20px] rounded-4"
-                  exit={{ opacity: 0, scale: 1, x: 0 }}
-                  initial={{ opacity: 0, scale: 1, x: 0 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                  <Button
-                    isIconOnly
-                    className="!rounded-4 shadow-shadow-light-tight/1 min-w-fit p-2 bg-secondary-400"
-                    color="default"
-                    variant="light"
-                    onPress={() => setIsOpen(false)}
-                  >
-                    <Share className="text-white" />
-                  </Button>
-
-                  <div className="flex gap-1.5">
-                    <Button
-                      className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2"
-                      color="default"
-                      variant="light"
-                    >
-                      <TelegramIcon />
-                    </Button>
-                    <Button
-                      className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2"
-                      color="default"
-                      variant="light"
-                    >
-                      <LinkedinIcon />
-                    </Button>
-                    <Button
-                      className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2"
-                      color="default"
-                      variant="light"
-                    >
-                      <InstagramIcon />
-                    </Button>
-                    <Button
-                      className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2"
-                      color="default"
-                      variant="light"
-                    >
-                      <WhatssAppIcon />
-                    </Button>
-                    <Button
-                      className="!rounded-4 shadow-shadow-light-tight/1 bg-white dark:bg-secondary-1000 min-w-fit p-2"
-                      color="default"
-                      variant="light"
-                    >
-                      <AddIcon />
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <Share />
+          <AppButton
+            props={{
+              color: 'white',
+              size: 'md',
+              radius: 'sm',
+              startContent: <Heart className="text-[#292D32]" size="22" />,
+              content: 'Follow',
+            }}
+          />
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3 h-full">
-        <div className="rounded-[14px] shadow-shadow-light-tight/1 bg-white dark:bg-info-1000 px-4 py-3 flex flex-col gap-4">
+        <div className="rounded-[14px] shadow-shadow-light-tight/1 bg-white px-4 py-3 flex flex-col gap-4">
           <div className="border-b-1 border-neutral-100 dark:border-neutral-700 pb-2 flex flex-col gap-6">
             <div className="grid grid-cols-2 justify-between">
               <div className="flex gap-6">
                 <div>
-                  <button
-                    className="!w-[80px] !h-[80px] rounded-5"
-                    onClick={() => handleOpenCompany("Nahira")}
-                  >
-                    <img
-                      alt=""
-                      className="w-full h-full rounded-5"
-                      src={jobCompanyLogo}
-                    />
+                  <button className="!w-[80px] !h-[80px] rounded-5" onClick={() => handleOpenCompany('Nahira')}>
+                    <img alt="" className="w-full h-full rounded-5" src={''} />
                   </button>
                 </div>
                 <div className="flex flex-col gap-1 w-full">
-                        <span className="text-secondary-400 dark:text-white font-semibold text-xl">
-                          Sales Clerk
-                        </span>
+                  <span className="text-secondary-400 font-semibold text-xl">Sales Clerk</span>
                   <div className="flex justify-between">
-                          <span className="text-base font-semibold text-secondary-400 dark:text-white leading-normal">
-                            Degital Solution
-                          </span>
+                    <span className="text-base font-semibold text-secondary-400">Degital Solution</span>
                     <div className="flex items-center gap-1">
-                      <Location
-                        className="text-secondary-400 dark:text-white"
-                        size="16"
-                      />
-                      <span className="text-sm font-normal text-secondary-400 dark:text-white leading-normal">
-                              Tehran
-                            </span>
+                      <Location className="text-secondary-400" size="16" />
+                      <span className="text-sm text-secondary-400">Tehran</span>
                     </div>
                   </div>
-                  <span className="text-tertiar-400 text-sm font-normal">
-                          7 Days ago
-                        </span>
+                  <span className="text-tertiar-400 text-sm">7 Days ago</span>
                 </div>
               </div>
               <div className="flex gap-3 justify-end">
-                <Button
-                  className={buttonStyle("dislike")}
-                  variant="light"
-                  onPress={() =>
-                    setSelected(selected === "dislike" ? null : "dislike")
-                  }
-                >
-                  <span className={textStyle("dislike")}>Dislike</span>
-                  <Dislike
-                    className={iconStyle("dislike")}
-                    size="12"
-                    variant="Bold"
-                  />
-                </Button>
-
-                <Button
-                  className={buttonStyle("like")}
-                  variant="light"
-                  onPress={() =>
-                    setSelected(selected === "like" ? null : "like")
-                  }
-                >
-                  <span className={textStyle("like")}>Like</span>
-                  <Like1
-                    className={iconStyle("like")}
-                    size="12"
-                    variant="Bold"
-                  />
-                </Button>
+                <AppButton
+                  props={{
+                    color: 'white',
+                    size: 'md',
+                    radius: 'sm',
+                    className: buttonStyle('dislike'),
+                    onPress: () => setSelected(selected === 'dislike' ? null : 'dislike'),
+                    content: (
+                      <>
+                        <span className={textStyle('dislike')}>Dislike</span>
+                        <Dislike className={iconStyle('dislike')} size="12" variant="Bold" />
+                      </>
+                    ),
+                  }}
+                />
+                <AppButton
+                  props={{
+                    color: 'white',
+                    size: 'md',
+                    radius: 'sm',
+                    className: buttonStyle('like'),
+                    onPress: () => setSelected(selected === 'like' ? null : 'like'),
+                    content: (
+                      <>
+                        <span className={textStyle('like')}>Like</span>
+                        <Like1 className={iconStyle('like')} size="12" variant="Bold" />
+                      </>
+                    ),
+                  }}
+                />
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-4 bg-secondary-400 dark:bg-surface-200 shadow-shadow-light-tight/1 px-2 py-1 w-fit">
-              <svg
-                fill="none"
-                height="16"
-                viewBox="0 0 16 16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+            <div className="flex items-center gap-2 rounded-md bg-secondary-400 dark:bg-surface-200 shadow-shadow-light-tight/1 px-2 py-1 w-fit">
+              <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M9.7207 7.79688C9.99435 7.79688 10.2023 7.84109 10.3408 7.93164C10.4784 8.02159 10.5488 8.15795 10.5488 8.34473C10.5488 8.54846 10.475 8.69823 10.3359 8.79785C10.196 8.898 9.98848 8.94823 9.7207 8.94824H9.18457V7.79688H9.7207Z"
                   fill="white"
@@ -277,253 +170,152 @@ const JobDetail = () => {
                 />
               </svg>
 
-              <span className="text-white text-base font-normal">
-                      Job Descriptions
-                    </span>
+              <span className="text-white text-base">Job Descriptions</span>
             </div>
           </div>
           <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-neutral-100">
             <div className="grid grid-cols-2">
               <div className="flex gap-6">
-                <DollarCircle
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
-                <span className="text-[#353535] dark:text-white text-base font-light">
-                        Salary
-                      </span>
+                <DollarCircle className="text-[#292D32]" size="20" />
+                <span className="text-[#353535] text-base font-light">Salary</span>
               </div>
               <div>
-                      <span className="text-base text-[#353535] dark:text-white font-normal">
-                        Monthly salary from 15 to 20 Million Toman
-                      </span>
+                <span className="text-base text-[#353535]">Monthly salary from 15 to 20 Million Toman</span>
               </div>
             </div>
             <div className="grid grid-cols-2">
               <div className="flex gap-6">
-                <Calendar
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
-                <span className="text-[#353535] dark:text-white text-base font-light">
-                        Working days and hours
-                      </span>
+                <Calendar className="text-[#292D32]" size="20" />
+                <span className="text-[#353535] text-base font-light">Working days and hours</span>
               </div>
               <div>
-                      <span className="text-base text-[#353535] dark:text-white font-normal">
-                        March 15, 2024, 9:00 AM
-                      </span>
+                <span className="text-base text-[#353535]">March 15, 2024, 9:00 AM</span>
               </div>
             </div>
             <div className="grid grid-cols-2">
               <div className="flex gap-6">
-                <LampCharge
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
-                <span className="text-[#353535] dark:text-white text-base font-light">
-                        Benefits and facilities
-                      </span>
+                <LampCharge className="text-[#292D32]" size="20" />
+                <span className="text-[#353535] text-base font-light">Benefits and facilities</span>
               </div>
               <div>
-                      <span className="text-base text-[#353535] dark:text-white font-normal">
-                        loan ,Bonus ,Insurance
-                      </span>
+                <span className="text-base text-[#353535]">loan ,Bonus ,Insurance</span>
               </div>
             </div>
             <div className="grid grid-cols-2">
               <div className="flex gap-6">
-                <Airplane
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
-                <span className="text-[#353535] dark:text-white text-base font-light">
-                        Business trips
-                      </span>
+                <Airplane className="text-[#292D32]" size="20" />
+                <span className="text-[#353535] text-base font-light">Business trips</span>
               </div>
               <div>
-                      <span className="text-base text-[#353535] dark:text-white font-normal">
-                        Yes
-                      </span>
+                <span className="text-base text-[#353535]">Yes</span>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2.5 pb-4 border-b-1 border-neutral-100 dark:border-neutral-700">
             <div className="flex gap-4">
-              <LampCharge
-                className="text-[#292D32] dark:text-white"
-                size="20"
-              />
+              <LampCharge className="text-[#292D32]" size="20" />
               <span>Proficient in accounting principles</span>
             </div>
             <div className="flex gap-4">
-              <LampCharge
-                className="text-[#292D32] dark:text-white"
-                size="20"
-              />
-              <span>
-                      Familiar with insurance and tax ,Familiar with insurance
-                      and tax laws
-                    </span>
+              <LampCharge className="text-[#292D32]" size="20" />
+              <span>Familiar with insurance and tax ,Familiar with insurance and tax laws</span>
             </div>
             <div className="flex gap-4">
-              <LampCharge
-                className="text-[#292D32] dark:text-white"
-                size="20"
-              />
-              <span>
-                      Proficient in accounting Familiar with insurance and tax
-                      laws.
-                    </span>
+              <LampCharge className="text-[#292D32]" size="20" />
+              <span>Proficient in accounting Familiar with insurance and tax laws.</span>
             </div>
           </div>
           <div className="pb-4 border-b-1 border-neutral-100">
             <div className="flex flex-col gap-1.5">
               <div className="flex gap-4">
-                <TickCircle
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
-                <span>
-                        1 year of work experience in a similar job group
-                      </span>
+                <TickCircle className="text-[#292D32]" size="20" />
+                <span>1 year of work experience in a similar job group</span>
               </div>
               <div className="flex gap-4">
-                <TickCircle
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
+                <TickCircle className="text-[#292D32]" size="20" />
                 <span>Microsoft Excel - Intermediate</span>
               </div>
               <div className="flex gap-4">
-                <TickCircle
-                  className="text-[#292D32] dark:text-white"
-                  size="20"
-                />
+                <TickCircle className="text-[#292D32]" size="20" />
                 <span>Preferably a resident of Mashhad</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white dark:bg-secondary-1000 shadow-shadow-light-tight/1 rounded-[14px] p-4">
+        <div className="bg-white shadow-shadow-light-tight/1 rounded-[14px] p-4">
           <div className="flex justify-between items-center border-b border-neutral-100 pb-2 mb-4">
-                  <span className="text-secondary-900 dark:text-white text-xl font-semibold leading-normal">
-                    About the company
-                  </span>
-            <Button
-              className="w-[26px] h-[26px] !min-w-fit !rounded-2 shadow-shadow-light-tight/1 dark:shadow-none !px-2 !py-1"
-              variant="light"
-              onPress={() => handleOpenCompany("Nahira")}
-            >
-                    <span className="text-secondary-1000 dark:text-white text-base font-normal leading-normal">
-                      See More
-                    </span>
-              <ArrowRight
-                className="text-secondary-1000 dark:text-white"
-                size="18"
-              />
-            </Button>
+            <span className="text-secondary-900 text-xl font-semibold">About the company</span>
+            <AppButton
+              props={{
+                isIconOnly: true,
+                color: 'white',
+                size: 'md',
+                radius: 'sm',
+                content: (
+                  <>
+                    <span className="text-secondary-1000 text-base">See More</span>
+                    <ArrowRight className="text-secondary-1000" size="18" />
+                  </>
+                ),
+              }}
+            />
           </div>
 
           <div className="flex flex-col gap-8">
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
                 <BuildingIcon />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Establishment
-                      </span>
+                <span className="text-secondary-900 text-base font-light">Establishment</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      1400
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">1400</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <Profile
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        No. Employees
-                      </span>
+                <Profile className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">No. Employees</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      120
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">120</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <Link2
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Website
-                      </span>
+                <Link2 className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">Website</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      hrbox.me
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">hrbox.me</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <ReceiptItem
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Industrial
-                      </span>
+                <ReceiptItem className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">Industrial</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      IT
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">IT</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <LampCharge
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Advantages
-                      </span>
+                <LampCharge className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">Advantages</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      Bachelor
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">Bachelor</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <Location
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Address
-                      </span>
+                <Location className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">Address</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      Female
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">Female</span>
             </div>
             <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
               <div className="flex items-center gap-1.5">
-                <Call
-                  className="text-[#292D32] dark:text-white"
-                  size="16"
-                />
-                <span className="text-secondary-900 dark:text-white text-base font-light leading-normal">
-                        Phone Number
-                      </span>
+                <Call className="text-[#292D32]" size="16" />
+                <span className="text-secondary-900 text-base font-light">Phone Number</span>
               </div>
-              <span className="text-secondary-900 dark:text-white text-base font-semibold leading-normal">
-                      None
-                    </span>
+              <span className="text-secondary-900 text-base font-semibold">None</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default JobDetail;

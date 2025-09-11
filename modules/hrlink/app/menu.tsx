@@ -1,34 +1,70 @@
 import type { ReactNode } from 'react';
-
 import {
+  Building,
   Chart2,
+  DeviceMessage,
+  FavoriteChart,
+  Heart,
+  LampCharge,
   Personalcard,
+  UserOctagon,
 } from 'iconsax-react';
+import {
+  AcademyIcon,
+  CupStarIcon,
+  JobOffersIcon,
+  JobOpportunitiesIcon,
+} from '../icons';
 
-const MenuIcons = {
+const DashboardIcons = {
   dashboard: Chart2,
-  userInformation: Personalcard,
+};
+
+const ResumeIcons = {
+  information: Personalcard,
+  experience: FavoriteChart,
+  education: UserOctagon,
+  hardskills: LampCharge,
+  softskills: LampCharge,
+  awards: CupStarIcon,
+  courses: AcademyIcon,
+};
+
+const JobIcons = {
+  offers: JobOffersIcon,
+  opportunities: JobOpportunitiesIcon,
+};
+
+const CompanyIcons = {
+  companies: Building,
+  requested: DeviceMessage,
+  favorites: Heart,
+  offers: DeviceMessage,
+  companyinfo: Building,
+};
+
+const iconGroups: Record<string, Record<string, any>> = {
+  dashboard: DashboardIcons,
+  resume: ResumeIcons,
+  job: JobIcons,
+  company: CompanyIcons,
 };
 
 export const HRLinkMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const moduleName = 'hrlink';
-  const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
-  const menuConfig: Record<string, string> = {
-    Dashboard: '/Dashboard',
-    userInformation: '/OrganizationDepartments',
-  };
+  const parts = pathname.split('/').filter(Boolean);
+  const section = parts[1] as keyof typeof iconGroups;
 
-  Object.entries(menuConfig).forEach(([feature, route]) => {
-    const iconKey = feature.toLowerCase() as keyof typeof MenuIcons;
-    const IconComponent = MenuIcons[iconKey];
+  const groupIcons = iconGroups[section] ?? DashboardIcons;
 
-    menuArray.push({
-      label: feature,
-      path: `/${moduleName}${route}`,
+  return Object.keys(groupIcons).map((key) => {
+    const IconComponent = groupIcons[key as keyof typeof groupIcons];
+    return {
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      path: `/${moduleName}/${section}/${key.toLowerCase()}`,
       icon: IconComponent ? <IconComponent /> : null,
-    });
+    };
   });
-
-  return menuArray;
 };

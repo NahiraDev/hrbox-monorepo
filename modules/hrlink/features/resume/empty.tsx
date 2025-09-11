@@ -55,7 +55,7 @@ const ResumeEmpty = () => {
                       variant: "light",
                       onClick: onOpen,
                       className:
-                        "text-black text-base font-semibold p-2 shadow-shadow-light-tight/1 rounded-4 mt-6",
+                        "text-black text-base font-semibold p-2 shadow-shadow-light-tight/1 rounded-md mt-6",
                     }}
                   />
                 </div>
@@ -80,7 +80,7 @@ const ResumeEmpty = () => {
                   <>
                     <ModalHeader className="flex flex-col gap-1">
                       <div className="flex justify-between">
-                        <div className="bg-secondary-400 shadow-shadow-light-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit">
+                        <div className="bg-secondary-400 shadow-shadow-light-tight/1 rounded-md flex gap-2 px-3 py-1.5 w-fit">
                           <Personalcard className="text-white" size="22" />
                           <span className="text-white font-normal text-xl">
                             Add General Informations

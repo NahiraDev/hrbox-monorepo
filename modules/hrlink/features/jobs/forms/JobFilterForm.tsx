@@ -5,7 +5,7 @@ import { iranProvinces, militaryStatusOptions, sortByOptions } from 'core/helper
 import { useFormContext } from 'core/context';
 import { useState } from 'react';
 
-export const JobOfferForm = () => {
+export const JobFilterForm = () => {
   const [salaryValue, setSalaryValue] = useState<any>([100, 300]);
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
   return (

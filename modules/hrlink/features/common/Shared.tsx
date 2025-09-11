@@ -41,7 +41,7 @@ export const Shared = () =>{
     <div className="flex items-center gap-2 relative">
       {!isOpen && (
         <Button
-          className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2 flex gap-2 border-1 hover:border-secondary-400 transition "
+          className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2 flex gap-2 border-1 hover:border-secondary-400 transition "
           color="default"
           variant="light"
           onPress={() => setIsOpen(true)}
@@ -55,14 +55,14 @@ export const Shared = () =>{
           <motion.div
             key="share-menu"
             animate={{ opacity: 1, scale: 1, x: 0 }}
-            className="z-10 flex gap-3 bg-[#1E33630F] dark:bg-[#1e33600f] backdrop-blur-[20px] rounded-4"
+            className="z-10 flex gap-3 bg-[#1E33630F] dark:bg-[#1e33600f] backdrop-blur-[20px] rounded-md"
             exit={{ opacity: 0, scale: 1, x: 0 }}
             initial={{ opacity: 0, scale: 1, x: 0 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
             <Button
               isIconOnly
-              className="!rounded-4 shadow-shadow-light-tight/1 min-w-fit p-2 bg-secondary-400"
+              className="!rounded-md shadow-shadow-light-tight/1 min-w-fit p-2 bg-secondary-400"
               color="default"
               variant="light"
               onPress={() => setIsOpen(false)}
@@ -72,31 +72,31 @@ export const Shared = () =>{
 
             <div className="flex gap-1.5">
               <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
+                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
                 onClick={() => shareTo('telegram')}
               >
                 <TelegramIcon />
               </Button>
               <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
+                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
                 onClick={() => shareTo('linkedin')}
               >
                 <LinkedinIcon />
               </Button>
               <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
+                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
                 onClick={() => shareTo('instagram')}
               >
                 <InstagramIcon />
               </Button>
               <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
+                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
                 onClick={() => shareTo('whatsapp')}
               >
                 <WhatsAppIcon />
               </Button>
               <Button
-                className="!rounded-4 shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
+                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
                 onClick={() => shareTo('copy')}
               >
                 <Add

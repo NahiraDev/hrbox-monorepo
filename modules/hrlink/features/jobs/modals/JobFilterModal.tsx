@@ -1,7 +1,7 @@
 import { AppButton, AppModal } from 'core/components';
 import { Setting4 } from 'iconsax-react';
 
-export const JobOfferModal = () =>{
+export const JobFilterModal = () =>{
   return(
     <AppModal
       title="Filter"

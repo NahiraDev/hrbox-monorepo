@@ -1,7 +1,7 @@
 import { AppButton, AppModal } from 'core/components';
 import { Personalcard } from 'iconsax-react';
 import { FormProvider } from 'core/context';
-import { useCreateCourseMutation } from '@module/hrlink/features/resume/apis';
+import { useCreateCourseMutation } from '../apis';
 
 import { CourseForm, formValidationCourse, handleSubmitCourse, initialValuesCourse } from '../forms';
 

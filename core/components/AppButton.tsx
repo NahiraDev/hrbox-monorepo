@@ -2,12 +2,6 @@ import { Button } from '@heroui/react';
 import clsx from 'clsx';
 import React from 'react';
 
-const baseClasses = `
-  leading-5 font-normal
-  transition-colors duration-200 ease-in-out
-  flex min-w-fit
-`;
-
 const sizeClasses: Record<string, string> = {
   xs: 'p-1.5 text-xs',
   sm: 'px-2 py-1 text-sm',
@@ -18,9 +12,10 @@ const sizeClasses: Record<string, string> = {
 
 const radiusClasses: Record<string, string> = {
   none: 'rounded-none',
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
   full: 'rounded-full',
 };
 
@@ -53,7 +48,13 @@ const AppButton = React.forwardRef<HTMLButtonElement, { props: any }>(({ props }
   return (
     <Button
       ref={ref}
-      className={clsx(baseClasses, sizeClasses[size], radiusClasses[radius], className)}
+      className={clsx(
+        'leading-5 font-normal transition-colors duration-200 ease-in-out flex min-w-fit h-fit',
+        variant !== 'light' && 'shadow-theme-sm',
+        sizeClasses[size],
+        radiusClasses[radius],
+        className
+      )}
       color={color}
       disableRipple={disableRipple}
       endContent={endContent}

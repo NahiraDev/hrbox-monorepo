@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModalContext } from 'core/context';
+import { serviceRegistry } from 'core/helpers';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 
@@ -24,6 +25,7 @@ const sizeClasses: Record<ModalSize, string> = {
 };
 
 const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
+  const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const { getOpenModal , isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
 
@@ -68,7 +70,7 @@ const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
               {(title || icon) && (
                 <div className="flex items-center">
                   <div
-                    className={`shadow-light-tight/1 dark:shadow-dark-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit items-center bg-${type === 'delete' ? 'danger' : 'primary'}`}
+                    className={`shadow-theme-md rounded-md flex gap-2 px-3 py-1.5 w-fit items-center bg-${type === 'delete' ? 'danger' : getModuleName === 'hrlink' ? 'secondary' : 'primary'}`}
                   >
                     {icon}
                     <span className="text-white font-normal text-xl">{title}</span>

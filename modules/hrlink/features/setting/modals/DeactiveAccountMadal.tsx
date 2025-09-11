@@ -1,9 +1,8 @@
 import { MedalStar, UserRemove } from 'iconsax-react';
-import { withModal } from 'core/helpers/withModal.tsx';
 
-import { AppButton, AppModal, useModal } from '../../../../../core';
+import { AppButton, AppModal } from '../../../../../core';
 
-const DeactiveAccountModal = () => {
+export const DeactiveAccountModal = () => {
   return (
     <AppModal
       icon={<UserRemove className="text-white" size="18" />}
@@ -51,7 +50,3 @@ const DeactiveAccountModal = () => {
     </AppModal>
   );
 };
-
-DeactiveAccountModal.useModal = () => useModal();
-
-export default withModal(DeactiveAccountModal);

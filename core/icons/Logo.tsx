@@ -1,5 +1,3 @@
-import { useTheme } from '@heroui/use-theme';
-
 const Logo = () => {
   const theme = localStorage.getItem('heroui-theme');
 

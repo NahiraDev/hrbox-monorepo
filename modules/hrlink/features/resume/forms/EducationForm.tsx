@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
-import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '@module/hrlink/features/common';
-import { useLazyFetchUniversityQuery } from '@module/hrlink/features/resume/apis';
+import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '../../common/apis';
+import { useLazyFetchUniversityQuery } from '../apis';
 import { useEffect } from 'react';
 
 import { AppAutoComplete, AppDatePicker, AppInput, useFormContext } from '../../../../../core';

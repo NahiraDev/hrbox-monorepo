@@ -1,6 +1,6 @@
 import { AppButton } from 'core/components';
 import { Edit } from 'iconsax-react';
-import { Avatar } from '@heroui/react';
+import { Avatar, Card } from '@heroui/react';
 
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from '../../icons';
 import AvatarUser from '../../assets/img/whats-app-logo.png';
@@ -10,19 +10,19 @@ export const GeneralInformation = () => {
   const profileData: any = useAppSelector((state) => state.profile);
 
   return (
-    <div className="relative shadow-shadow-light-tight/1 rounded-[14px] p-4 h-3/5">
-      <img
-        alt=""
-        className="w-full h-full absolute left-0 top-0 opacity-[0.2] blur rounded-[14px] object-cover"
-        src={AvatarUser}
-      />
-      <div className="w-full h-full absolute top-0 left-0 bg-secondary-400 dark:bg-surface-200 opacity-[0.2] rounded-[14px]" />
-      <div className="absolute top-0 right-0 w-full h-full rounded-4 bg-[position:-59px_0px] blur-sm opacity-50" />
-      <div className="flex justify-between items-center border-b border-secondary-400  pb-2 mb-4">
+    <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
+      {/*<img*/}
+      {/*  alt=""*/}
+      {/*  className="w-full h-full absolute left-0 top-0 opacity-[0.2] blur rounded-[14px] object-cover"*/}
+      {/*  src={AvatarUser}*/}
+      {/*/>*/}
+      {/*<div className="w-full h-full absolute top-0 left-0 bg-secondary-400 dark:bg-surface-200 opacity-[0.2] rounded-[14px]" />*/}
+      {/*<div className="absolute top-0 right-0 w-full h-full rounded-md bg-[position:-59px_0px] blur-sm opacity-50" />*/}
+      <div className="flex justify-between items-center border-b border-secondary-400 pb-2 mb-4">
         <AppButton
           props={{
             color: 'white',
-            size: 'sm',
+            size: 'xs',
             content: <Edit className="text-secondary-1000" size="14" />,
           }}
         />
@@ -37,37 +37,29 @@ export const GeneralInformation = () => {
           <div className="flex flex-col gap-1">
             <AppButton
               props={{
-                color: 'white',
+                color: 'default',
                 size: 'xs',
-                radius: 'xs',
+                radius: 'sm',
                 isIconOnly: true,
                 content: <TelegramIcon />,
               }}
             />
             <AppButton
               props={{
-                color: 'white',
+                color: 'default',
                 size: 'xs',
-                radius: 'xs',
+                radius: 'sm',
                 isIconOnly: true,
                 content: <LinkedinIcon />,
               }}
             />
             <AppButton
               props={{
-                color: 'white',
+                color: 'default',
                 size: 'xs',
-                radius: 'xs',
+                radius: 'sm',
                 isIconOnly: true,
                 content: <InstagramIcon />,
-              }}
-            />
-            <AppButton
-              props={{
-                color: 'white',
-                size: 'xs',
-                radius: 'xs',
-                isIconOnly: true,
               }}
             />
           </div>
@@ -94,6 +86,6 @@ export const GeneralInformation = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };

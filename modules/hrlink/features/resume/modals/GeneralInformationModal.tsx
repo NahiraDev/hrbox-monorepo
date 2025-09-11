@@ -1,12 +1,11 @@
-import { AppModal } from 'core/components';
+import { AppButton, AppModal } from 'core/components';
 import { Personalcard } from 'iconsax-react';
 import { FormProvider } from 'core/context';
 import {
   GeneralInformationForm,
   formValidationGeneralInformation,
-  handleSubmitGeneralInformation,
   initialValuesGeneralInformation,
-} from '@module/hrlink/features/resume/forms';
+} from '../forms';
 
 export const GeneralInformationModal = () =>{
   return(
@@ -22,6 +21,25 @@ export const GeneralInformationModal = () =>{
           <GeneralInformationForm />
         </FormProvider>
       </AppModal.Body>
+      <AppModal.Footer>
+        <AppButton
+          props={{
+            color: 'default',
+            size: 'md',
+            radius: 'md',
+            content:'Cancel',
+          }}
+        />
+        <AppButton
+          props={{
+            color: 'secondary',
+            type: 'submit',
+            size: 'md',
+            radius: 'md',
+            content:'Save Changes',
+          }}
+        />
+      </AppModal.Footer>
     </AppModal>
   )
 }
