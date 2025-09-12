@@ -6,6 +6,7 @@ const Dashboard = lazyLoad(() => import('../features/dashboard'));
 const Setting = lazyLoad(() => import('../features/setting'));
 const AllCompanies = lazyLoad(() => import('../features/companies/Companies'));
 const CompanyJobOffers = lazyLoad(() => import('../features/companies/Offers'));
+const CompanyEvents = lazyLoad(() => import('../features/companies/CompanyEvents'));
 const CompanyFavorites = lazyLoad(() => import('../features/companies/Favorites'));
 const CompanyRequested = lazyLoad(() => import('../features/companies/Requested'));
 const CompanyInformation= lazyLoad(() => import('../features/companies/CompanyInfo'));
@@ -80,6 +81,10 @@ export const HRLinkContents: any = [
   {
     path: HRLinkPaths.CompanyJobOffers,
     component: CompanyJobOffers,
+  },
+  {
+    path: HRLinkPaths.CompanyEvents,
+    component: CompanyEvents,
   },
   {
     path: HRLinkPaths.CompanyFavorites,

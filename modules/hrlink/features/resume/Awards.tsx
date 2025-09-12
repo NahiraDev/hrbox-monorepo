@@ -1,13 +1,21 @@
 import { Edit, Trash } from 'iconsax-react';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 import { AppButton, AppPagination } from 'core/components';
+import { useLazyFetchAwardsQuery } from './apis';
+import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '../common';
 import { CupStarIcon } from '../../icons';
 
 const Awards = () => {
+  const [fetchAwards, { data }] = useLazyFetchAwardsQuery();
+
+  useEffect(() => {
+    fetchAwards({});
+  }, []);
+
   return (
-    <div className="grid grid-cols-4 gap-3 w-full">
+    <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-3">
@@ -47,28 +55,24 @@ const Awards = () => {
                       <div className="flex justify-between">
                         <div className="flex flex-col gap-2">
                           <div className="flex gap-4">
-                              <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
-                                title:
-                              </span>
+                            <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">title:</span>
                             <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
-                                {achievement.Name}
-                              </span>
+                              {achievement.Name}
+                            </span>
                           </div>
                           <div className="flex gap-4">
-                              <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
-                                Date:
-                              </span>
+                            <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">Date:</span>
                             <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
-                                {achievement.GainYear + '/' + achievement.GainMonth}
-                              </span>
+                              {achievement.GainYear + '/' + achievement.GainMonth}
+                            </span>
                           </div>
                           <div className="flex gap-4">
-                              <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
-                                Description:
-                              </span>
+                            <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-light">
+                              Description:
+                            </span>
                             <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
-                                {achievement.Comment}
-                              </span>
+                              {achievement.Comment}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -89,6 +93,5 @@ const Awards = () => {
     </div>
   );
 };
-
 
 export default Awards;

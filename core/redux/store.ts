@@ -2,9 +2,9 @@ import type { Persistor } from 'redux-persist/es/types';
 
 import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore, type PersistConfig } from 'redux-persist';
+import { serviceRegistry } from 'core/helpers';
 
 import { createRootReducer } from './rootReducer';
-import { serviceRegistry } from 'core/helpers';
 
 const asyncLocalStorage = {
   getItem: (key: string) => {
@@ -23,11 +23,13 @@ const storageInstance = typeof window !== 'undefined' ? asyncLocalStorage : unde
 export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Persistor } => {
   const rootReducer = createRootReducer({});
   const pluginApis: any[] = serviceRegistry.getAllApis();
+  const uniqueMiddlewares = Array.from(new Set(pluginApis.map((api) => api.middleware)));
+
   if (!storageInstance) {
     const store = configureStore({
       reducer: rootReducer,
       devTools: { name: 'HRBOX' },
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...pluginApis.map((api) => api.middleware)),
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(uniqueMiddlewares),
     });
 
     return { store, persistor: null as unknown as Persistor };
@@ -56,7 +58,7 @@ export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Pe
             'persist/REGISTER',
           ],
         },
-      }).concat(...pluginApis.map((api) => api.middleware)),
+      }).concat(uniqueMiddlewares),
   });
 
   const persistor = persistStore(store);

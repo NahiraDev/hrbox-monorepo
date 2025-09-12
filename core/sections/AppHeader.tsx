@@ -135,8 +135,8 @@ const AppHeader = () => {
               />
             )}
           </div>
-          <div className="flex gap-2 mb-3">
-            <div className="flex gap-2">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <AppButton
                 props={{
                   color: HRBoxPanel ? 'primary' : 'default',
@@ -165,7 +165,7 @@ const AppHeader = () => {
                 }}
               />
             </div>
-            <div className="flex gap-1">
+            <div className="flex items-center gap-1">
               <AppButton
                 props={{
                   isIconOnly: true,

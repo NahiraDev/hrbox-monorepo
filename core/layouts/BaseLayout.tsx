@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { serviceRegistry } from 'core/helpers';
 import { useLocation } from 'react-router-dom';
 
 import { AppSupportButton } from '../components';
 import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '../sections';
 
-interface BaseLayoutProps {
-  content: React.ReactNode;
-}
-
-export const BaseLayout = ({ content }: BaseLayoutProps) => {
+export const BaseLayout = () => {
   const location = useLocation();
   const [showDoc, setShowDoc] = useState<boolean>(false);
 
@@ -32,16 +28,10 @@ export const BaseLayout = ({ content }: BaseLayoutProps) => {
               <AppSideBar />
               <div className="flex flex-col gap-3 w-full">
                 <AppSubHeader />
-                <div
-                  className={`${showDoc ? 'border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-theme-md' : 'rounded-xl'} flex-1 overflow-hidden relative`}
-                >
-                  {content}
-                </div>
-
                 <AppContent
                   fallback={
                     <div className="flex items-center justify-center h-full">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
+                      <div className={`${showDoc ? 'border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-theme-md' : 'rounded-xl'} flex-1 overflow-hidden relative`} />
                     </div>
                   }
                 />

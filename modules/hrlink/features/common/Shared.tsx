@@ -1,34 +1,36 @@
-import { Button } from '@heroui/button';
 import { Add, Share } from 'iconsax-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { InstagramIcon, LinkedinIcon, TelegramIcon , WhatsAppIcon} from '../../icons';
+import { AppButton } from 'core/components';
 
-export const Shared = () =>{
+import { InstagramIcon, LinkedinIcon, TelegramIcon } from '../../icons';
+
+export const Shared = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentUrl = encodeURIComponent(window.location.href);
   const shareTo = (platform: string) => {
-    const text = encodeURIComponent('بیا این صفحه رو ببین!');
 
     let url = '';
 
     switch (platform) {
       case 'telegram':
-        url = `https://t.me/share/url?url=${currentUrl}&text=${text}`;
+        url = `https://t.me/share/${currentUrl}`;
         break;
       case 'whatsapp':
-        url = `https://wa.me/?text=${text}%20${currentUrl}`;
+        url = `https://wa.me/${currentUrl}`;
         break;
       case 'linkedin':
-        url = `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${text}`;
+        url = `https://www.linkedin.com/shareArticle?mini=true&${currentUrl}`;
         break;
       case 'instagram':
-        alert('اشتراک‌گذاری مستقیم در اینستاگرام از وب ممکن نیست. لینک کپی شد.');
+        alert('');
         navigator.clipboard.writeText(window.location.href);
+
         return;
       case 'copy':
         navigator.clipboard.writeText(window.location.href);
-        alert('لینک کپی شد!');
+        alert('');
+
         return;
       default:
         return;
@@ -37,18 +39,18 @@ export const Shared = () =>{
     window.open(url, '_blank');
   };
 
-  return(
+  return (
     <div className="flex items-center gap-2 relative">
-      {!isOpen && (
-        <Button
-          className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2 flex gap-2 border-1 hover:border-secondary-400 transition "
-          color="default"
-          variant="light"
-          onPress={() => setIsOpen(true)}
-        >
-          <Share className="text-secondary-1000" />
-        </Button>
-      )}
+      <AppButton
+        props={{
+          isIconOnly: true,
+          size: 'xs',
+          variant: 'solid',
+          color: 'secondary',
+          onPress: () => setIsOpen(!isOpen),
+          content: <Share color="#fff" />,
+        }}
+      />
 
       <AnimatePresence>
         {isOpen && (
@@ -60,53 +62,51 @@ export const Shared = () =>{
             initial={{ opacity: 0, scale: 1, x: 0 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            <Button
-              isIconOnly
-              className="!rounded-md shadow-shadow-light-tight/1 min-w-fit p-2 bg-secondary-400"
-              color="default"
-              variant="light"
-              onPress={() => setIsOpen(false)}
-            >
-              <Share className="text-white" />
-            </Button>
-
             <div className="flex gap-1.5">
-              <Button
-                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
-                onClick={() => shareTo('telegram')}
-              >
-                <TelegramIcon />
-              </Button>
-              <Button
-                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
-                onClick={() => shareTo('linkedin')}
-              >
-                <LinkedinIcon />
-              </Button>
-              <Button
-                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
-                onClick={() => shareTo('instagram')}
-              >
-                <InstagramIcon />
-              </Button>
-              <Button
-                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
-                onClick={() => shareTo('whatsapp')}
-              >
-                <WhatsAppIcon />
-              </Button>
-              <Button
-                className="!rounded-md shadow-shadow-light-tight/1 bg-white min-w-fit p-2"
-                onClick={() => shareTo('copy')}
-              >
-                <Add
-                  size="22"
-                />
-              </Button>
+              <AppButton
+                props={{
+                  isIconOnly: true,
+                  size: 'xs',
+                  variant: 'solid',
+                  color: 'default',
+                  onPress: () => shareTo('telegram'),
+                  content: <TelegramIcon />,
+                }}
+              />
+              <AppButton
+                props={{
+                  isIconOnly: true,
+                  size: 'xs',
+                  variant: 'solid',
+                  color: 'default',
+                  onPress: () => shareTo('linkedin'),
+                  content: <LinkedinIcon />,
+                }}
+              />
+              <AppButton
+                props={{
+                  isIconOnly: true,
+                  size: 'xs',
+                  variant: 'solid',
+                  color: 'default',
+                  onPress: () => shareTo('instagram'),
+                  content: <InstagramIcon />,
+                }}
+              />
+              <AppButton
+                props={{
+                  isIconOnly: true,
+                  size: 'xs',
+                  variant: 'solid',
+                  color: 'default',
+                  onPress: () => shareTo('copy'),
+                  content: <Add />,
+                }}
+              />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};

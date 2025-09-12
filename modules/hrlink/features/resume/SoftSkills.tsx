@@ -1,25 +1,29 @@
 import { Edit, Trash } from 'iconsax-react';
 import { AppButton, AppPagination } from 'core/components';
+import { Card, CardBody, CardHeader } from '@heroui/react';
+import { useEffect } from 'react';
+
 import { GeneralInformation, UserLocation } from '../common';
 import { AppDoubleLineProgress } from '../../../../core/sections';
 import { SoftSkillsIcon } from '../../icons';
+
 import { useLazyFetchSoftSkillsQuery } from './apis';
-import { Card, CardBody, CardHeader } from '@heroui/react';
 
 const SoftSkills = () => {
   const [fetchSkills, { data }] = useLazyFetchSoftSkillsQuery();
 
+  useEffect(() => {
+    fetchSkills({});
+  }, []);
+
   return (
-    <div className="grid grid-cols-4 gap-3 w-full">
+    <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-3 gap-3">
             {data &&
               data.data.map((skill: any, index: number) => (
-                <Card
-                  key={index}
-                  className="rounded-lg shadow-theme-sm p-4"
-                >
+                <Card key={index} className="rounded-lg shadow-theme-sm p-4">
                   <CardHeader className="flex flex-col gap-1.5">
                     <div className="flex justify-between">
                       <div className="flex gap-1.5">
@@ -55,9 +59,7 @@ const SoftSkills = () => {
                         </div>
                         <div className="flex gap-4">
                           <span className="text-secondary-1000 text-sm font-light">Grad:</span>
-                          <span className="text-secondary-1000 text-sm font-normal">
-                            {skill.grade}%
-                          </span>
+                          <span className="text-secondary-1000 text-sm font-normal">{skill.grade}%</span>
                         </div>
                       </div>
                       <div>

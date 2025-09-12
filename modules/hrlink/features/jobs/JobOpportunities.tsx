@@ -1,14 +1,18 @@
-import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Setting4, Status } from 'iconsax-react';
+import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { useNavigate } from 'react-router-dom';
 import { AppPagination } from 'core/components';
 
 import { useLazyJobOffersQuery } from './apis';
+import { useEffect } from 'react';
 
 const JobOpportunities = () => {
   const [fetchJobOpportunities, { data }] = useLazyJobOffersQuery();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchJobOpportunities({})
+  }, []);
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="grid grid-cols-3 gap-3">
@@ -33,16 +37,14 @@ const JobOpportunities = () => {
                 </div>
                 <div className="flex justify-between pt-2">
                   <div className="flex flex-col gap-1">
-                        <span className="text-secondary-800 font-bold text-sm leading-normal">
-                          {oppertunitie.title}
-                        </span>
+                    <span className="text-secondary-800 font-bold text-sm leading-normal">{oppertunitie.title}</span>
                     <div className="flex items-center gap-2">
                       <Location className="text-secondary-1000" size="16" />
                       <span className="text-secondary-1000 text-sm font-normal">
-                            {oppertunitie.adress.length > 50
-                              ? `${oppertunitie.adress.slice(0, 50)}...`
-                              : oppertunitie.adress}
-                          </span>
+                        {oppertunitie.adress.length > 50
+                          ? `${oppertunitie.adress.slice(0, 50)}...`
+                          : oppertunitie.adress}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="text-secondary-1000" size="16" />

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { AppButton, AppPagination } from 'core/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 
+import { HRLinkPaths } from '../../app/paths';
+
 import { useLazyFetchCompanyQuery, useSendRequestMutation } from './apis';
 
 const Companies = () => {
@@ -11,13 +13,8 @@ const Companies = () => {
   const [sendRequest] = useSendRequestMutation();
   const [likedItems, setLikedItems] = useState<number[]>([]);
   const navigate = useNavigate();
-
   const toggleLike = (id: number) => {
     setLikedItems((prev) => (prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]));
-  };
-
-  const handleOpenCompany = (id: string) => {
-    navigate('/company/general-info/' + id);
   };
 
   useEffect(() => {
@@ -34,21 +31,25 @@ const Companies = () => {
             return (
               <Card
                 key={company.OrgId}
-                className="rounded-5 shdow-theme-sm px-5 py-4 flex flex-col gap-2 bg-[#FFF5F0] dark:bg-info-1000"
+                className="rounded-xl shdow-theme-sm px-5 py-4 flex flex-col gap-2 bg-[#FFF5F0] dark:bg-info-1000"
               >
                 <CardHeader className="flex justify-between border-b-1 border-neutral-100 dark:border-netuaral-700 pb-1">
-                  <div className="flex items-center gap-2">
-                    <img
-                      alt={`${company.Name} Logo`}
-                      className="rounded-2 w-[22px] h-[22px]"
-                      src={company.GetLogoUrl}
-                    />
-                    <button onClick={() => handleOpenCompany(company.Name)}>
-                      <span className="text-base font-semibold text-secondary-1000 leading-normal">
-                        {company.GetIndustryName}
-                      </span>
-                    </button>
-                  </div>
+                  <AppButton
+                    props={{
+                      className: '!p-0',
+                      onPress: () => navigate(HRLinkPaths.CompanyInformation),
+                      content: (
+                        <>
+                          <img
+                            alt={`${company.Name} Logo`}
+                            className="rounded-2 w-[22px] h-[22px]"
+                            src={company.GetLogoUrl}
+                          />
+                          <span className="font-semibold text-secondary-1000">{company.GetIndustryName}</span>
+                        </>
+                      ),
+                    }}
+                  />
                   <div className="flex gap-1">
                     <AppButton
                       props={{

@@ -1,19 +1,10 @@
-import createBaseApi from '../../../../../core/apis/baseApi';
 import { createEndpoint } from '../../../../../core';
 import { HRLinkApiEndpoints } from '../../../app/endpoints';
+import { HRLinkBaseApi } from '../../../app/baseApiConfig';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'Dashboard', [
-  'Dashboard',
-] as const);
-
-export const DashboardApi = BaseApi.injectEndpoints({
+export const DashboardApi = HRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({
-    dashboard: createEndpoint(
-      build,
-      HRLinkApiEndpoints.dashboard.getData,
-      'GET',
-      ['Dashboard'],
-    ),
+    dashboard: createEndpoint(build, HRLinkApiEndpoints.dashboard.getData, 'GET', ['Dashboard']),
   }),
   overrideExisting: false,
 });

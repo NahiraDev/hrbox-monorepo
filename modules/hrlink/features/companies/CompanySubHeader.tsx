@@ -1,8 +1,13 @@
 import { AppButton, AppSearchInput } from 'core/components';
 import { Buildings, DeviceMessage, Heart, Setting4 } from 'iconsax-react';
+import { useNavigate } from 'react-router-dom';
 
-const CompanySubHeader = () =>{
-  return(
+import { HRLinkPaths } from '../../app/paths';
+
+const CompanySubHeader = (props: any) => {
+  const navigate = useNavigate();
+
+  return (
     <div className="flex justify-between">
       <div className="flex gap-2">
         <AppButton
@@ -10,11 +15,11 @@ const CompanySubHeader = () =>{
             color: 'white',
             size: 'md',
             radius: 'md',
-            // onPress: () => navigate('/company/all-companies'),
+            onPress: () => navigate(HRLinkPaths.AllCompanies),
             content: (
               <>
                 <Buildings className="text-secondary-400" size="22" />
-                <span className="text-secondary-400 text-xl font-normal">All Companies</span>
+                <span className="text-secondary-400 text-xl">All Companies</span>
               </>
             ),
           }}
@@ -24,10 +29,11 @@ const CompanySubHeader = () =>{
             color: 'secondary',
             size: 'md',
             radius: 'md',
+            onPress: () => navigate(HRLinkPaths.CompanyRequested),
             content: (
               <>
                 <DeviceMessage className="text-white" size="22" />
-                <span className="text-white text-xl font-normal">Requested</span>
+                <span className="text-white text-xl">Requested</span>
               </>
             ),
           }}
@@ -37,20 +43,18 @@ const CompanySubHeader = () =>{
             color: 'secondary',
             size: 'md',
             radius: 'md',
-            // onPress: ()=>navigate('/company/favorites'),
+            onPress: () => navigate(HRLinkPaths.CompanyFavorites),
             content: (
               <>
                 <Heart className="text-secondary-400" size="22" />
-                <span className="text-secondary-400 text-xl font-normal">Followed</span>
+                <span className="text-secondary-400 text-xl">Followed</span>
               </>
             ),
           }}
         />
       </div>
       <div className="flex gap-3">
-        <div className="flex items-center gap-2">
-          <AppSearchInput placeholder="Education" onSearch={(query) => console.log(query)} />
-        </div>
+        <AppSearchInput onSearch={props.onSearch} />
         <AppButton
           props={{
             color: 'white',
@@ -62,7 +66,7 @@ const CompanySubHeader = () =>{
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CompanySubHeader
+export default CompanySubHeader;

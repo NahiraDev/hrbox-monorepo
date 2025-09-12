@@ -9,6 +9,7 @@ export const page = {
   company: {
     companies: lazyLoad(() => import('../features/companies/Companies')),
     offers: lazyLoad(() => import('../features/companies/Offers')),
+    events: lazyLoad(() => import('../features/companies/CompanyEvents')),
     favorites: lazyLoad(() => import('../features/companies/Favorites')),
     requested: lazyLoad(() => import('../features/companies/Requested')),
     companyInfo: lazyLoad(() => import('../features/companies/CompanyInfo')),
@@ -34,6 +35,7 @@ export const HRLinkRoutes = createProjectRoutes('/hrlink', {
   [HRLinkPaths.Impersonate]: page.impersonate,
   [HRLinkPaths.AllCompanies]: page.company.companies,
   [HRLinkPaths.CompanyFavorites]: page.company.favorites,
+  [HRLinkPaths.CompanyEvents]: page.company.events,
   [HRLinkPaths.CompanyInformation]: page.company.companyInfo,
   [HRLinkPaths.CompanyJobOffers]: page.company.offers,
   [HRLinkPaths.CompanyRequested]: page.company.requested,

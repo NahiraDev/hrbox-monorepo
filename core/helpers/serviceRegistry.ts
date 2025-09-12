@@ -4,14 +4,13 @@ import type { ReactNode, LazyExoticComponent, ComponentType } from 'react';
 
 export interface SubHeaderConfig {
   path: string;
-  component: React.ComponentType<any>;
+  component: ComponentType<any>;
   props?: Record<string, any>;
 }
 
 export interface ContentConfig {
   path: string;
   component: LazyExoticComponent<ComponentType<any>>;
-  props?: Record<string, any>;
 }
 
 export interface PluginModule {

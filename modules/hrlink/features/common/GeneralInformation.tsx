@@ -18,7 +18,7 @@ export const GeneralInformation = () => {
       {/*/>*/}
       {/*<div className="w-full h-full absolute top-0 left-0 bg-secondary-400 dark:bg-surface-200 opacity-[0.2] rounded-[14px]" />*/}
       {/*<div className="absolute top-0 right-0 w-full h-full rounded-md bg-[position:-59px_0px] blur-sm opacity-50" />*/}
-      <div className="flex justify-between items-center border-b border-secondary-400 pb-2 mb-4">
+      <div className="flex justify-between items-center border-b border-neutral-100 pb-2 mb-4">
         <AppButton
           props={{
             color: 'white',

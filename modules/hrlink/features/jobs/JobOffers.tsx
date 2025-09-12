@@ -1,22 +1,15 @@
-import {
-  Buildings2,
-  Clock,
-  Dislike,
-  DollarCircle,
-  Like1,
-  Location,
-  Status,
-} from 'iconsax-react';
+import { Buildings2, Clock, Dislike, DollarCircle, Like1, Location, Status } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AppButton } from '../../../../core';
 import { AppPagination } from '../../../../core/components';
+
 import { useLazyJobOffersQuery } from './apis';
 import { JobFilterModal } from './modals';
 
 const JobOffers = () => {
-  const [fetchJobOffers , {data}] = useLazyJobOffersQuery()
+  const [fetchJobOffers, { data }] = useLazyJobOffersQuery();
   const [selectedStates, setSelectedStates] = useState<Record<number, 'like' | 'dislike' | null>>({});
   const buttonStyle = (current: 'like' | 'dislike' | null, type: 'like' | 'dislike') => {
     const isActive = current === type;
@@ -40,6 +33,10 @@ const JobOffers = () => {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchJobOffers({});
+  }, []);
 
   return (
     <div className="flex flex-col w-full">
@@ -87,7 +84,7 @@ const JobOffers = () => {
                         size: 'md',
                         radius: 'sm',
                         className: buttonStyle(selectedStates[job.id], 'like'),
-                        onPress:(e:any) => {
+                        onPress: (e: any) => {
                           e.stopPropagation();
                           setSelectedStates((prev) => ({
                             ...prev,
@@ -126,7 +123,7 @@ const JobOffers = () => {
                   </div>
                   <div className="flex flex-col gap-3">
                     <div className="flex justify-end">
-                      <img alt="" className="w-[84px] h-[84px] rounded-5" src={""} />
+                      <img alt="" className="w-[84px] h-[84px] rounded-5" src={''} />
                     </div>
                   </div>
                 </div>
@@ -137,9 +134,9 @@ const JobOffers = () => {
       <div className="flex justify-center">
         <AppPagination total={100} />
       </div>
-      <JobFilterModal/>
+      <JobFilterModal />
     </div>
   );
 };
 
-export default JobOffers
+export default JobOffers;

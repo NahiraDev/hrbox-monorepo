@@ -1,31 +1,21 @@
-import createBaseApi from '../../../../../core/apis/baseApi';
-import { createEndpoint } from '../../../../../core';
+import { createEndpoint, createPaginatedEndpoint } from '../../../../../core';
 import { HRLinkApiEndpoints } from '../../../app/endpoints';
+import { HRLinkBaseApi } from '../../../app/baseApiConfig';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'Company', ['Company'] as const);
-console.log('🔥 BaseApi created:', {
-  reducerPath: BaseApi.reducerPath,
-  hasReducer: !!BaseApi.reducer,
-  hasMiddleware: !!BaseApi.middleware
-})
-export const CompanyApi = BaseApi.injectEndpoints({
+export const CompanyApi = HRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchCompany: createEndpoint(build, HRLinkApiEndpoints.company.getList, 'GET', ['Company']),
+    fetchCompany: createPaginatedEndpoint(build, HRLinkApiEndpoints.company.getList, 'GET', ['Company']),
+    fetchEvents: createPaginatedEndpoint(build, HRLinkApiEndpoints.company.getEvents, 'GET', ['Company']),
     fetchCompanyDetail: createEndpoint(build, HRLinkApiEndpoints.company.getDetail, 'GET', ['Company']),
     sendRequest: createEndpoint(build, HRLinkApiEndpoints.company.sendRequest, 'POST', ['Company']),
     followAndUnfollow: createEndpoint(build, HRLinkApiEndpoints.company.followOrUnfollow, 'POST', ['Company']),
   }),
   overrideExisting: false,
 });
-console.log('🔥 CompanyApi created:', {
-  reducerPath: CompanyApi.reducerPath,
-  hasReducer: !!CompanyApi.reducer,
-  hasMiddleware: !!CompanyApi.middleware,
-  endpoints: Object.keys(CompanyApi.endpoints)
-}); // Debug log
 
 export const {
   useLazyFetchCompanyQuery,
+  useLazyFetchEventsQuery,
   useLazyFetchCompanyDetailQuery,
   useSendRequestMutation,
   useFollowAndUnfollowMutation,

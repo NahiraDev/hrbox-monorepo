@@ -1,10 +1,8 @@
-import createBaseApi from '../../../../../../core/apis/baseApi';
 import { createEndpoint, createPaginatedEndpoint } from '../../../../../../core';
 import { HRLinkApiEndpoints } from '../../../../app/endpoints';
+import { HRLinkBaseApi } from '../../../../app/baseApiConfig';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'Experience', ['Experience'] as const);
-
-export const ExperienceApi = BaseApi.injectEndpoints({
+export const ExperienceApi = HRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({
     fetchExperience: createPaginatedEndpoint(build, HRLinkApiEndpoints.resume.experience.getList, 'GET', [
       'Experience',

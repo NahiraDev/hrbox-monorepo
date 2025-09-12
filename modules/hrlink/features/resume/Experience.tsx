@@ -14,7 +14,7 @@ const Experience = () => {
   }, [fetchExperience]);
 
   return (
-    <div className="grid grid-cols-4 gap-6 w-full">
+    <div className="grid grid-cols-4 gap-6 h-full">
       <div className="col-span-3">
         {isLoading ? (
           <div>

@@ -30,7 +30,6 @@ const AppSubHeader: React.FC = () => {
   );
 };
 
-// تابع استخراج پارامترها
 function extractParams(currentPath: string, pattern: string): Record<string, string> {
   const params: Record<string, string> = {};
   const patternParts = pattern.split('/').filter(Boolean);

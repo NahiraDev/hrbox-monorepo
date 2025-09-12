@@ -16,7 +16,7 @@ const HardSkills = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 gap-3 w-full">
+    <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-3 gap-3">

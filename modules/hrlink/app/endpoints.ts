@@ -53,6 +53,7 @@ export const HRLinkApiEndpoints = {
 
   company: {
     getList: `${BaseUrl}/Company/GetCompaniesList`,
+    getEvents: `${BaseUrl}/Company/GetEvents`,
     sendRequest: `${BaseUrl}/Company/SendRequest`,
     getDetail: `${BaseUrl}/Company/GetDetail`,
     followOrUnfollow: `${BaseUrl}/Company/FollowAndUnFollowCompany`,
