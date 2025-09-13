@@ -1,14 +1,15 @@
 import type { PluginModule } from '../../../core';
 
-import { SSOHRLinkRoutes } from '@module/sso/router';
-import { SSOHRLinkApi } from '@module/sso/features/HRLink/apis';
-import { reducers } from '@module/sso/reducers/rootReducer';
+import { SSOHRLinkApi } from '../features/HRLink/apis';
+
+import { SSOHRLinkRoutes } from './routes';
+import { HRLinkReducers } from './reducers';
 
 const SSOPlugin: PluginModule = {
   name: 'sso',
-  reducers: reducers,
+  reducers: HRLinkReducers,
   apis: [SSOHRLinkApi as any],
-  routes: SSOHRLinkRoutes,
+  routes: SSOHRLinkRoutes.routes,
 };
 
 export default SSOPlugin;

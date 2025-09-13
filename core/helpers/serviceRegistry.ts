@@ -15,7 +15,7 @@ export interface ContentConfig {
 
 export interface PluginModule {
   name: string;
-  reducers?: Record<string, Reducer>;
+  reducers?: Record<string, any>;
   apis?: any[];
   routes?: RouteObject[];
   contents?: ContentConfig[];
