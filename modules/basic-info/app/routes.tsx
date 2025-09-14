@@ -5,7 +5,7 @@ export const page = {
   departments: {
     organization: lazyLoad(() => import('../features/departments/OrganizationDepartments')),
     technical: lazyLoad(() => import('../features/departments/TechnicalDepartments')),
-    location: lazyLoad(() => import('../features/departments/OrganizationDepartments')),
+    location: lazyLoad(() => import('../features/departments/OrganizationalLocations')),
     employees: lazyLoad(() => import('../features/employees/EmployeeSatisfactionCalendar')),
   },
   employees: {

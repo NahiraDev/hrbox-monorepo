@@ -204,7 +204,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -212,7 +212,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -220,7 +220,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -228,7 +228,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -236,7 +236,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',

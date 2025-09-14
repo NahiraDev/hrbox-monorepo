@@ -1,6 +1,6 @@
-import { Button } from '@heroui/button';
 import { technicalDepartment } from 'mock';
 import { Avatar, Card } from '@heroui/react';
+import { AppButton } from 'core/components';
 // import { CloseCircle } from 'iconsax-react';
 // import SubHeader from '@module/basic-info/features/SubHeader.tsx';
 
@@ -9,16 +9,26 @@ const TechnicalDepartments = () => {
     <>
       {/*<SubHeader/>*/}
       {/*<OrganizationColor />*/}
-      <div className="w-full gap-3 rounded-2xl flex flex-wrap items-center content-start p-3">
+      <div className="w-full gap-3 rounded-2xl flex flex-wrap items-center content-start p-4">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
-            className="w-39 h-55 bg-white rounded-2xl shadow-[0_1px_2px_1px_#080E1C4D] flex items-center justify-center gap-2 relative"
+            className="w-39 h-55 bg-white rounded-2xl shadow-sm
+            flex items-center justify-center gap-2 relative"
           >
-            <Avatar className="w-30 h-30" radius="sm" src="" />
-            {/* <img src={user.diactive} alt="avatar" className="absolute" /> */}
-            <span>{user.name}</span>
-            <Button className="w-10 h-5 bg-primary-400 border-1 border-primary-400 text-sky-500 dark:text-gold">{user.job}</Button>
+            <Avatar className="w-30 h-30 " color="primary" radius="lg" src="" />
+            {/*<img src={user.diactive} alt="avatar" className="absolute" />*/}
+            <span className="text-xs font-semibold">{user.name}</span>
+            <AppButton
+              props={{
+                className: 'px-1.5 py-[2px] text-xs bg-primary-50 border border-primary-100 text-primary-400',
+                size: '',
+                color: '',
+                radius: 'lg',
+                onPress: () => {},
+                content: <span>{user.job}</span>,
+              }}
+            />
           </Card>
         ))}
         <span className="text-9xl absolute top-175 left-455 font-bold text-[#04070E]/10">200</span>
