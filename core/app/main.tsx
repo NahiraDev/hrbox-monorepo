@@ -1,3 +1,6 @@
+import type { EnhancedStore } from '@reduxjs/toolkit';
+import type { Persistor } from 'redux-persist/es/types';
+
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -7,18 +10,12 @@ import { StrictMode } from 'react';
 import { ModalProvider } from 'core/context';
 
 import { i18n } from '../translate';
-import { createRootReducer } from '../redux';
-import { createStoreWithReducers } from '../redux';
 import { AuthProvider } from '../context';
 import { RootRouterLoader } from '../routes';
 
 import { HeroProviderWrapper } from './provider';
 
-const rootReducer = createRootReducer();
-
-const { store, persistor } = createStoreWithReducers(rootReducer);
-
-export const renderApp = (id: string) => {
+export const renderApp = (id: string, { store, persistor }: { store: EnhancedStore; persistor: Persistor }) => {
   const rootEl = document.getElementById(id);
 
   if (!rootEl) {

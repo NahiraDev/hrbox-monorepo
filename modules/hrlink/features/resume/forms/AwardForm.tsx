@@ -1,25 +1,47 @@
 import { Form } from '@heroui/react';
 import { Link21 } from 'iconsax-react';
+import { AppDatePicker, AppInput, AppTextArea } from 'core/components';
+import { useFormContext } from 'core/context';
+import * as Yup from 'yup';
 
-export const AwardForm = () =>{
-  return(
-    <Form
-      className="w-full flex flex-col gap-6"
-      id="create-award-form"
-      onSubmit={formikCreateAward.handleSubmit}
-    >
+export const initialValuesAward = {
+  Title: null,
+  Date: null,
+  Description: '',
+  FileId: null,
+};
+
+export const formValidationAward = Yup.object().shape({
+  Title: Yup.string().required(),
+  Date: Yup.string().required(),
+  Description: Yup.string().required(),
+  FileId: Yup.string().required(),
+});
+
+export const handleSubmitAward = (values: any) => {
+  return {
+    Title: values.Title,
+    Date: values.Date,
+    Description: values.Description,
+    FileId: values.FileId,
+  };
+};
+
+export const AwardForm = () => {
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+
+  return (
+    <Form className="w-full flex flex-col gap-6" id="create-award-form" onSubmit={handleSubmit}>
       <div className="flex gap-[52px] w-full">
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
               label: 'Title',
-              required: true,
-              error: formikCreateAward.errors.Name,
               name: 'Name',
-              placeholder: 'Please Enter Name ...',
-              type: 'text',
-              value: formikCreateAward.values.Name,
-              formik: formikCreateAward,
+              error: touched.Name && errors.Name,
+              value: values.Name,
+              onChange: handleChange,
+              onBlur: handleBlur,
             }}
           />
         </div>
@@ -27,11 +49,11 @@ export const AwardForm = () =>{
           <AppDatePicker
             props={{
               label: 'Date',
-              required: true,
-              error: formikCreateAward.errors.Date,
               name: 'Date',
-              placeholder: 'Please Enter Date ...',
-              formik: formikCreateAward,
+              value: values.Date,
+              error: touched.Date && errors.Date,
+              onChange: handleChange,
+              onBlur: handleBlur,
             }}
           />
         </div>
@@ -41,14 +63,12 @@ export const AwardForm = () =>{
           <AppInput
             props={{
               label: 'Upload portfolio',
-              required: true,
-              error: formikCreateAward.errors.AttachmentUrl,
-              name: 'AttachmentUrl',
-              placeholder: 'Please Enter Attachment Portfolio ...',
-              type: 'text',
-              value: formikCreateAward.values.AttachmentUrl,
-              formik: formikCreateAward,
+              name: 'FileId',
               endContent: <Link21 size="24" />,
+              error: touched.FileId && errors.FileId,
+              value: values.FileId,
+              onChange: handleChange,
+              onBlur: handleBlur,
             }}
           />
         </div>
@@ -59,16 +79,15 @@ export const AwardForm = () =>{
           <AppTextArea
             props={{
               label: 'Description',
-              required: true,
-              error: formikCreateAward.errors.Comment,
-              name: 'Comment',
-              placeholder: 'Please Enter Description ...',
-              value: formikCreateAward.values.Comment,
-              formik: formikCreateAward,
+              name: 'Description',
+              error: touched.Description && errors.Description,
+              value: values.Description,
+              onChange: handleChange,
+              onBlur: handleBlur,
             }}
           />
         </div>
       </div>
     </Form>
-  )
-}
+  );
+};

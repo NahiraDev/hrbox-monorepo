@@ -1,36 +1,70 @@
-import { type MenuStructure, useMenu } from '../../../core';
-import { JobOffersIcon } from '../icons';
-import { wrapIcons } from '../../../core';
+import type { ReactNode } from 'react';
+import {
+  Building,
+  Chart2,
+  DeviceMessage,
+  FavoriteChart,
+  Heart,
+  LampCharge,
+  Personalcard,
+  UserOctagon,
+} from 'iconsax-react';
+import {
+  AcademyIcon,
+  CupStarIcon,
+  JobOffersIcon,
+  JobOpportunitiesIcon,
+} from '../icons';
 
-import { HRLinkPaths } from './paths';
-
-const MenuIcons = wrapIcons({
-  offers: JobOffersIcon,
-  detail: JobOffersIcon,
-  opportunities: JobOffersIcon,
-});
-
-export const HRLinkMenu = () => {
-  return useMenu('hrlink', HRLinkPaths.routes, MenuIcons);
+const DashboardIcons = {
+  dashboard: Chart2,
 };
 
+const ResumeIcons = {
+  information: Personalcard,
+  experience: FavoriteChart,
+  education: UserOctagon,
+  hardskills: LampCharge,
+  softskills: LampCharge,
+  awards: CupStarIcon,
+  courses: AcademyIcon,
+};
 
-export const getHRLinkMenuData = (): MenuStructure => {
+const JobIcons = {
+  offers: JobOffersIcon,
+  opportunities: JobOpportunitiesIcon,
+};
+
+const CompanyIcons = {
+  companies: Building,
+  requested: DeviceMessage,
+  favorites: Heart,
+  offers: DeviceMessage,
+  companyinfo: Building,
+};
+
+const iconGroups: Record<string, Record<string, any>> = {
+  dashboard: DashboardIcons,
+  resume: ResumeIcons,
+  job: JobIcons,
+  company: CompanyIcons,
+};
+
+export const HRLinkMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const moduleName = 'hrlink';
-  const paths = HRLinkPaths.routes;
 
-  const menu: MenuStructure = {};
+  const parts = pathname.split('/').filter(Boolean);
+  const section = parts[1] as keyof typeof iconGroups;
 
-  for (const [feature, pages] of Object.entries(paths)) {
-    menu[feature] = {};
-    for (const [pageKey, route] of Object.entries(pages)) {
-      menu[feature][pageKey] = {
-        name: pageKey,
-        route: `/${moduleName}/${feature}${route}`,
-        icon: null,
-      };
-    }
-  }
+  const groupIcons = iconGroups[section] ?? DashboardIcons;
 
-  return menu;
+  return Object.keys(groupIcons).map((key) => {
+    const IconComponent = groupIcons[key as keyof typeof groupIcons];
+    return {
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      path: `/${moduleName}/${section}/${key.toLowerCase()}`,
+      icon: IconComponent ? <IconComponent /> : null,
+    };
+  });
 };

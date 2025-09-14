@@ -5,7 +5,6 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import { Calendar } from 'iconsax-react';
 import gregorian_en from 'react-date-object/locales/gregorian_en';
 import gregorian from 'react-date-object/calendars/gregorian';
-import DateObject from 'react-date-object';
 
 const persianHolidays = ['1403/01/01', '1403/01/12', '1403/03/14'];
 
@@ -24,7 +23,7 @@ const AppDatePicker = ({ props }: { props: any }) => {
   return (
     <>
       <span
-        className={`text-secondary-1000 lg:text-sm text-xs lg:font-medium font-semibold leading-5 dark:text-white`}
+        className={`text-secondary-1000 text-xs lg:font-medium font-semibold`}
       >
         {label} {required && '*'}
       </span>
@@ -65,9 +64,6 @@ const AppDatePicker = ({ props }: { props: any }) => {
             <Calendar color="#04070E" size="24" />
           </button>
         )}
-        value={
-          formik.values[name] ? new DateObject(formik.values[name]) : undefined
-        }
         onChange={(value) => {
           formik.setFieldValue(name, value?.format('YYYY/MM/DD'));
         }}

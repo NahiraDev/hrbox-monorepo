@@ -1,22 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Pagination as HeroPagination } from '@heroui/react';
 import { useSearchParams } from 'react-router-dom';
+import { serviceRegistry } from 'core/helpers';
 
 const AppPagination = ({ total }: { total: number }) => {
+  const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = searchParams.get("");
+    const pageParam = searchParams.get('');
 
     return pageParam ? parseInt(pageParam, 10) : 1;
   });
-
   const handlePageChange = useCallback(
     (page: number) => {
       setCurrentPage(page);
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
 
-        newParams.set(page.toString(""));
+        newParams.set(page.toString(''));
 
         return newParams;
       });
@@ -44,7 +45,7 @@ const AppPagination = ({ total }: { total: number }) => {
         next: 'bg-white rounded-md cursor-pointer',
         prev: 'bg-white rounded-md cursor-pointer',
       }}
-      color="primary"
+      color={getModuleName === 'hrlink' ? 'secondary' : 'primary'}
       dotsJump={1}
       initialPage={total}
       page={currentPage}

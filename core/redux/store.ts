@@ -1,15 +1,8 @@
 import type { Persistor } from 'redux-persist/es/types';
 
-import {
-  configureStore,
-  type Reducer,
-  type EnhancedStore,
-} from '@reduxjs/toolkit';
-import {
-  persistReducer,
-  persistStore,
-  type PersistConfig,
-} from 'redux-persist';
+import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore, type PersistConfig } from 'redux-persist';
+import { serviceRegistry } from 'core/helpers';
 
 import { createRootReducer } from './rootReducer';
 
@@ -25,20 +18,18 @@ const asyncLocalStorage = {
   },
 };
 
-const storageInstance =
-  typeof window !== 'undefined' ? asyncLocalStorage : undefined;
+const storageInstance = typeof window !== 'undefined' ? asyncLocalStorage : undefined;
 
-export const createStoreWithReducers = (
-  additionalReducers?: Reducer,
-): { store: EnhancedStore; persistor: Persistor } => {
-  const rootReducer = createRootReducer(
-    additionalReducers ? { additional: additionalReducers } : {},
-  );
+export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Persistor } => {
+  const rootReducer = createRootReducer({});
+  const pluginApis: any[] = serviceRegistry.getAllApis();
+  const uniqueMiddlewares = Array.from(new Set(pluginApis.map((api) => api.middleware)));
 
   if (!storageInstance) {
     const store = configureStore({
       reducer: rootReducer,
       devTools: { name: 'HRBOX' },
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(uniqueMiddlewares),
     });
 
     return { store, persistor: null as unknown as Persistor };
@@ -67,15 +58,12 @@ export const createStoreWithReducers = (
             'persist/REGISTER',
           ],
         },
-      }),
+      }).concat(uniqueMiddlewares),
   });
 
   const persistor = persistStore(store);
 
   return { store, persistor };
 };
-
 export type RootState = ReturnType<ReturnType<typeof createRootReducer>>;
-export type AppDispatch = ReturnType<
-  typeof createStoreWithReducers
->['store']['dispatch'];
+export type AppDispatch = ReturnType<typeof createStoreWithReducers>['store']['dispatch'];

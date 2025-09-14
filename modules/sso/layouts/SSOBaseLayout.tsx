@@ -9,7 +9,7 @@ import { AppButton } from '../../../core';
 import { useAppDispatch, useAppSelector } from '../../../core';
 import { useTheme } from '@heroui/use-theme';
 
-import { SliderSSO } from '../components';
+import { SliderSSO } from '../features/common';
 import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
 import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
 

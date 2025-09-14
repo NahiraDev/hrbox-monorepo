@@ -1,48 +1,34 @@
-import { Button } from '@heroui/button';
-import { Form } from '@heroui/react';
-import { Link21 } from 'iconsax-react';
+import {
+  AwardForm, formValidationAward, handleSubmitAward,
+  initialValuesAward
+} from '../forms';
+import { AppButton, AppModal, FormProvider } from '../../../../../core';
+import { CupStarIcon } from '../../../icons';
+import { useCreateCourseMutation } from '../apis';
 
-export const AwardModal = () =>{
-  return(
-    <AppModal
-      footer={
-        <div>
-          <Button
-            className="text-xl font-normal"
-            color="default"
-            variant="light"
-            onPress={() => setOpenCreateModal(false)}
-          >
-            Close
-          </Button>
-          <Button
-            className="bg-secondary-400 text-xl font-normal text-white"
-            form="create-award-form"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </div>
-      }
-      header={
-        <div className="flex flex-col gap-1">
-          <div className="flex justify-between items-center">
-            <div className="bg-secondary-400 shadow-shadow-light-tight/1 rounded-4 flex gap-2 px-3 py-1.5 w-fit">
-              <CupStar
-                props={{
-                  color: '#fff',
-                }}
-              />
-              <span className="text-white font-normal text-xl">Add Achievements and accolades</span>
-            </div>
-          </div>
-        </div>
-      }
-      isOpen={openCreateModal}
-      size="3xl"
-      onClose={() => setOpenCreateModal(false)}
-    >
+export const AwardModal = () => {
+  const [createCourse] = useCreateCourseMutation();
 
+  return (
+    <AppModal icon={<CupStarIcon color="#fff" />} size="3xl" title="Add Achievements and accolades">
+      <AppModal.Body>
+        <FormProvider
+          initialValues={initialValuesAward}
+          validationSchema={formValidationAward}
+          onSubmitAsync={async (values: any) => {
+            await createCourse(handleSubmitAward(values)).unwrap();
+          }}
+        >
+          <AwardForm />
+        </FormProvider>
+      </AppModal.Body>
+      <AppModal.Footer>
+        <AppButton
+          props={{
+            content: 'Close',
+          }}
+        />
+      </AppModal.Footer>
     </AppModal>
-  )
-}
+  );
+};

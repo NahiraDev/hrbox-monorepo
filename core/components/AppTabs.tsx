@@ -1,6 +1,7 @@
 import { Tabs, Tab } from '@heroui/react';
 import React from 'react';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type TabRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
@@ -28,9 +29,7 @@ interface AppTabsProps {
   placement?: 'top' | 'bottom' | 'start' | 'end';
   selectedKey?: string | number;
   defaultSelectedKey?: string | number;
-  disallowEmptySelection?: boolean;
   destroyInactiveTabPanel?: boolean;
-  onSelectionChange?: (key: string) => void;
   ariaLabel?: string;
   fullWidth?: boolean;
   isVertical?: boolean;
@@ -43,6 +42,7 @@ interface AppTabsProps {
     cursor?: string;
     panel?: string;
   };
+  onTabChange?: (key: string | number) => void;
 }
 
 const sizeClasses: Record<TabSize, string> = {
@@ -74,14 +74,28 @@ const AppTabs: React.FC<AppTabsProps> = ({
   selectedKey,
   defaultSelectedKey,
   destroyInactiveTabPanel = false,
-  onSelectionChange,
   ariaLabel = 'Dynamic Tabs',
   fullWidth = false,
   isVertical = false,
   motionProps,
   classNames,
+  onTabChange,
   ...rest
 }) => {
+  const navigate = useNavigate();
+
+  const handleSelectionChange = (key: string | number) => {
+    if (onTabChange) {
+      onTabChange(key);
+    }
+
+    // اگر تب href داشته باشد، navigation انجام می‌دهد
+    const selectedTab = tabs.find((tab) => tab.key === key || tab.href === key);
+    if (selectedTab?.href) {
+      navigate(selectedTab.href);
+    }
+  };
+
   return (
     <Tabs
       aria-label={ariaLabel}
@@ -96,7 +110,7 @@ const AppTabs: React.FC<AppTabsProps> = ({
       placement={placement}
       selectedKey={selectedKey}
       variant={variant}
-      onSelectionChange={onSelectionChange}
+      onSelectionChange={handleSelectionChange}
       {...rest}
     >
       {tabs.map((tab, index) => (

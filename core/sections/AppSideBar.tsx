@@ -12,7 +12,7 @@ const AppSideBar = () => {
   const { t } = useTranslation();
   const [fullWidth, setFullWidth] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string | undefined>('Home');
-  const [menuItems, setMenuItems] = useState<any[]>([]); // ✅ استیت جدید برای منو
+  const [menuItems, setMenuItems] = useState<any[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentLang = useAppSelector((state) => state.language.lang);
@@ -81,12 +81,12 @@ const AppSideBar = () => {
 
   return (
     <div
-      className={`flex relative rounded-lg py-4 px-4 bg-white shadow-light-tight-2 dark:shadow-dark-tight-2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
+      className={`flex relative rounded-lg py-4 px-4 bg-white shadow-theme-md dark:shadow-dark-tight-2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
     >
       <AppButton
         props={{
-          className: 'absolute top-[50px] right-[-10px] shadow-light-tight-1 bg-white',
-          color: 'white',
+          className: 'absolute top-[50px] right-[-10px] shadow-theme-sm bg-white',
+          color: 'default',
           variant: 'solid',
           size: 'xs',
           radius: 'full',
@@ -111,12 +111,12 @@ const AppSideBar = () => {
                 props={{
                   className: 'flex justify-center items-center !gap-1 p-3 transition-all border-b-1 group-hover border-transparent duration-200 hover:text-primary-400 hover:border-primary-400`',
                   isIconOnly: true,
-                  color: 'white',
+                  color: 'default',
                   size: 'xs',
+                  variant:'light',
                   radius: 'none',
                   disableRipple: true,
                   onPress: () => handleNavigatePage({ name: item.label, route: item.path }),
-                  variant: 'flat',
                   content: (
                     <>
                       <div
@@ -150,7 +150,7 @@ const AppSideBar = () => {
             <div
               key={item.name}
               className={`${
-                activeTab === item.name ? 'border-b border-tertiar-400 dark:border-white' : 'border-transparent'
+                activeTab === item.name ? 'border-b border-tertiar-400' : 'border-transparent'
               }`}
             >
               <AppButton
@@ -158,8 +158,9 @@ const AppSideBar = () => {
                   className:
                     'flex justify-center items-center !gap-2 p-3 !h-fit !w-full bg-transparent transition-all duration-200',
                   isIconOnly: true,
-                  color: 'white',
-                  size: '',
+                  color: 'default',
+                  size: 'md',
+                  variant: 'light',
                   radius: 'none',
                   onPress: () => {
                     if (item.name === t('english') || item.name === t('persian')) {
@@ -174,7 +175,7 @@ const AppSideBar = () => {
                     <>
                       <div
                         className={`cursor-pointer ${
-                          activeTab === item.name ? 'text-tertiar-400' : 'text-secondary-1000 dark:text-white'
+                          activeTab === item.name ? 'text-tertiar-400' : 'text-secondary-1000'
                         }`}
                       >
                         {item?.icon}

@@ -2,31 +2,24 @@ import { Form } from '@heroui/react';
 import { useFormContext } from 'core/context';
 import { useTranslation } from 'react-i18next';
 
-import {
-  AppAutoComplete,
-  AppDatePicker,
-  AppInput,
-  AppTextArea,
-  genderOptions,
-  maritalStatusOptions,
-} from 'core/index';
+import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea, genderOptions, maritalStatusOptions } from 'core/index';
 import * as Yup from 'yup';
 
 export const initialValuesGeneralInformation = {
-  FirstName: profileData?.profile?.name || '',
-  LastName: profileData?.profile?.lastName || '',
-  NationalCode: profileData?.profile?.nationalCode || '',
-  MilitaryStatusId: profileData?.profile?.MaritalStatusName || '',
-  MaritalStatus: profileData?.profile?.MaritalStatusName || '',
-  BirthDate: profileData?.profile?.birthDate || '',
+  FirstName: '',
+  LastName: '',
+  NationalCode: '',
+  MilitaryStatusId: '',
+  MaritalStatus: '',
+  BirthDate: '',
   Address: '',
-  AddressCityId: profileData?.profile?.city || '',
-  Gender: profileData?.profile?.gender || '',
-  OtherSocials: profileData?.profile?.OtherSocials || '',
-  Biography: profileData?.profile?.OtherSocials || '',
-  UserjobGroup: profileData?.profile?.jobGroupNames || '',
-  UserJobCategory: profileData?.profile?.JobCategoriesName || '',
-  RequestedSalary: profileData?.profile?.RequestedSalary || '',
+  AddressCityId: '',
+  Gender: '',
+  OtherSocials: '',
+  Biography: '',
+  UserjobGroup: '',
+  UserJobCategory: '',
+  RequestedSalary: '',
 };
 
 export const formValidationGeneralInformation = Yup.object().shape({
@@ -45,7 +38,7 @@ export const formValidationGeneralInformation = Yup.object().shape({
   RequestedSalary: Yup.string(),
 });
 
-export const handleEditGeneralInformation = (values: any) => {
+export const handleSubmitGeneralInformation = (values: any) => {
   return {
     FirstName: values.FirstName,
     LastName: values.LastName,
@@ -63,18 +56,12 @@ export const handleEditGeneralInformation = (values: any) => {
   };
 };
 
-
 export const GeneralInformationForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
   const { t } = useTranslation();
-
+  const lang = 'en';
   return (
-    <Form
-      className="w-full flex flex-col gap-6"
-      id="edit-general-information"
-      onSubmit={handleSubmit}
-    >
+    <Form className="w-full flex flex-col gap-6" id="edit-general-information" onSubmit={handleSubmit}>
       <div className="flex gap-14 w-full">
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
@@ -167,11 +154,11 @@ export const GeneralInformationForm = () => {
               label: 'Military Status',
               displayKey: 'Namde',
               valueKey: 'Id',
+              data: [],
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.MilitaryStatusId,
               error: touched.MilitaryStatusId && errors.MilitaryStatusId,
-              data: profileData?.military,
             }}
           />
         </div>
@@ -182,11 +169,11 @@ export const GeneralInformationForm = () => {
               label: 'city',
               displayKey: 'Name',
               valueKey: 'Id',
+              data: [],
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.AddressCityId,
               error: touched.AddressCityId && errors.AddressCityId,
-              data: profileData?.cities,
             }}
           />
         </div>
@@ -223,11 +210,11 @@ export const GeneralInformationForm = () => {
               label: t('working_category'),
               valueKey: 'Id',
               displayKey: 'Name',
+              data: [],
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.UserJobCategory,
               error: touched.UserJobCategory && errors.UserJobCategory,
-              data: profileData?.jobCategory,
             }}
           />
         </div>
@@ -238,11 +225,11 @@ export const GeneralInformationForm = () => {
               label: t('organizational_category'),
               displayKey: 'Name',
               valueKey: 'Id',
+              data: [],
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.UserjobGroup,
               error: touched.UserjobGroup && errors.UserjobGroup,
-              data: profileData?.jobGroups,
             }}
           />
         </div>

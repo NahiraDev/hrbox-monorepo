@@ -6,8 +6,7 @@ import * as Yup from 'yup';
 
 import { JobOffersIcon } from '../../../icons';
 import { companyPeopleOptions } from '../../../../../mock';
-import { useAppSelector, useFormContext } from '../../../../../core';
-import { DeactiveAccountModal } from '../modals';
+import { useFormContext } from '../../../../../core';
 
 export const initialValuesEditGeralSetting = {
   NotificationByEmail: true,
@@ -41,40 +40,26 @@ export const validationErrorEditGeneralSetting = Yup.object().shape({
     )
     .required('Company size is required'),
 
-  AdaptationDistanceLimit: Yup.number()
-    .min(0, 'Must be at least 0')
-    .required('Required'),
+  AdaptationDistanceLimit: Yup.number().min(0, 'Must be at least 0').required('Required'),
 });
 
 export const GeneralSettingForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormContext();
-  const [showGeneralSettingButton, setShowGeneralSettingButton] =
-    useState<boolean>(false);
-  const setting = useAppSelector((state) => state.setting.data);
-  const industries = useAppSelector(
-    (state) => state.resume.jobExperience.industries,
-  );
-  const deactiveModal = DeactiveAccountModal.useModal();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const [showGeneralSettingButton, setShowGeneralSettingButton] = useState<boolean>(false);
 
   return (
     <Form onSubmit={handleSubmit}>
       <div className="flex justify-between border-b-1 border-neutral-100 dark:border-neutral-700 pb-1.5 w-full">
-        <span className="text-secondary-900 dark:text-white text-xl font-normal leading-normal">
-          General Setting
-        </span>
+        <span className="text-secondary-900 dark:text-white text-xl font-normal leading-normal">General Setting</span>
         <div className="flex gap-1.5">
           <AppButton
             props={{
               size: 'md',
               color: 'info',
-              onPress: deactiveModal.open,
               content: (
                 <>
                   <UserRemove className="" size="16" />
-                  <span className="text-secondary-1000 text-base">
-                    Deactivate Account
-                  </span>
+                  <span className="text-secondary-1000 text-base">Deactivate Account</span>
                 </>
               ),
             }}
@@ -84,8 +69,7 @@ export const GeneralSettingForm = () => {
               size: 'md',
               color: 'white',
               isIconOnly: true,
-              onPress: () =>
-                setShowGeneralSettingButton(!showGeneralSettingButton),
+              onPress: () => setShowGeneralSettingButton(!showGeneralSettingButton),
               content: <Edit className="text-secondary-1000" size="18" />,
             }}
           />
@@ -93,11 +77,9 @@ export const GeneralSettingForm = () => {
       </div>
 
       <div className="flex flex-col gap-6 mt-4 px-6">
-        <div className="bg-secondary-400 !h-10 !rounded-4 px-3 py-1.5 w-fit flex gap-2 items-center">
+        <div className="bg-secondary-400 !h-10 !rounded-md px-3 py-1.5 w-fit flex gap-2 items-center">
           <VolumeHigh className="text-white" size="22" />
-          <span className="text-white text-xl font-normal leading-normal">
-            Notifications
-          </span>
+          <span className="text-white text-xl font-normal leading-normal">Notifications</span>
         </div>
 
         <div className="flex flex-col gap-3 px-5">
@@ -111,7 +93,7 @@ export const GeneralSettingForm = () => {
               onBlur: handleBlur,
               isSelected: values.NotificationByEmail,
               error: touched.NotificationByEmail && errors.NotificationByEmail,
-              values: setting.Panel || values.NotificationByEmail,
+              values: values.NotificationByEmail,
             }}
           />
           <AppSwitch
@@ -124,7 +106,7 @@ export const GeneralSettingForm = () => {
               onBlur: handleBlur,
               isSelected: values.NotificationBySms,
               error: touched.NotificationBySms && errors.NotificationBySms,
-              values: setting.Sms || values.NotificationBySms,
+              values: values.NotificationBySms,
             }}
           />
           <AppSwitch
@@ -142,12 +124,8 @@ export const GeneralSettingForm = () => {
           />
         </div>
 
-        <div className="bg-secondary-400 !h-10 !rounded-4 shadow-light-tight/1 px-3 py-1.5 w-fit flex gap-2 items-center">
-          <JobOffersIcon
-            props={{
-              color: '#fff',
-            }}
-          />
+        <div className="bg-secondary-400 !h-10 !rounded-md shadow-light-tight/1 px-3 py-1.5 w-fit flex gap-2 items-center">
+          <JobOffersIcon color="#fff" />
           <span className="text-white text-xl">Offers</span>
         </div>
 
@@ -161,9 +139,7 @@ export const GeneralSettingForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               isSelected: values.AdaptationWithOldCompanies,
-              error:
-                touched.AdaptationWithOldCompanies &&
-                errors.AdaptationWithOldCompanies,
+              error: touched.AdaptationWithOldCompanies && errors.AdaptationWithOldCompanies,
               values: values.AdaptationWithOldCompanies,
             }}
           />
@@ -179,9 +155,7 @@ export const GeneralSettingForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.AdaptationWithCompanyPersonal,
-              error:
-                touched.AdaptationWithCompanyPersonal &&
-                errors.AdaptationWithCompanyPersonal,
+              error: touched.AdaptationWithCompanyPersonal && errors.AdaptationWithCompanyPersonal,
               data: companyPeopleOptions,
             }}
           />
@@ -195,10 +169,8 @@ export const GeneralSettingForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.AdaptationWithCurrentCompanies,
-              error:
-                touched.AdaptationWithCurrentCompanies &&
-                errors.AdaptationWithCurrentCompanies,
-              data: industries,
+              error: touched.AdaptationWithCurrentCompanies && errors.AdaptationWithCurrentCompanies,
+              data: [],
             }}
           />
         </div>
@@ -212,9 +184,7 @@ export const GeneralSettingForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               value: values.AdaptationWithOldCompanies,
-              error:
-                touched.AdaptationWithOldCompanies &&
-                errors.AdaptationWithOldCompanies,
+              error: touched.AdaptationWithOldCompanies && errors.AdaptationWithOldCompanies,
               data: companyPeopleOptions,
             }}
           />
@@ -232,7 +202,7 @@ export const GeneralSettingForm = () => {
               <AppButton
                 props={{
                   size: 'md',
-                  color: 'primary',
+                  color: 'secondary',
                   content: 'Save Changes',
                   type: 'submit',
                 }}

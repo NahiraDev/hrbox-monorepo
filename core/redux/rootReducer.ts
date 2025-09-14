@@ -16,10 +16,8 @@ export const baseReducers: ReducersMapObject = {
 export const createRootReducer = (
   additionalReducers: ReducersMapObject = {},
 ) => {
-  const pluginReducers: Record<string, Reducer> =
-    serviceRegistry.getAllReducers();
-  const pluginApis: { reducerPath: string; reducer: Reducer }[] =
-    serviceRegistry.getAllApis();
+  const pluginReducers: Record<any, Reducer> = serviceRegistry.getAllReducers();
+  const pluginApis: any[] = serviceRegistry.getAllApis();
 
   return combineReducers({
     ...baseReducers,

@@ -3,6 +3,34 @@ import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { AnimateClock } from '../../../../../core';
+import * as Yup from 'yup';
+
+export const initialValuesForm = {
+  UsernameOrMobile: '',
+  ClientOtpCode: '',
+  Mobile: '',
+};
+
+export const formValidationError = () => {
+  Yup.object({
+    ClientOtpCode: Yup.string().required(t('otp_is_required')),
+  });
+};
+
+export const handleFormSubmit = (values: any) => {
+  if (authType === 'login' || authType === 'register') {
+    return {
+      UsernameOrMobile: mobile,
+      ClientOtpCode: values.ClientOtpCode,
+    };
+  } else {
+    return {
+      Mobile: mobile,
+      ClientOtpCode: values.ClientOtpCode,
+    };
+  }
+};
+
 
 const OneTimePasswordForm = () => {
   const {
@@ -12,7 +40,6 @@ const OneTimePasswordForm = () => {
     handleBlur,
     handleSubmit,
     isSubmitting,
-    formError,
     setFieldValue,
     submitForm,
   } = useFormContext<{ ClientOtpCode: string }>();
@@ -110,7 +137,6 @@ const OneTimePasswordForm = () => {
           </div>
         </div>
       </div>
-      {formError && <div className="text-red-500 text-sm">{formError}</div>}
     </Form>
   );
 };

@@ -1,20 +1,32 @@
-import { AppButton } from '../../../../../core';
 import { Avatar, Form, Input, Select, SelectItem } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { Flag } from '../../../components';
-import { useAppSelector } from '../../../../../core';
+import * as Yup from 'yup';
+import { t } from 'i18next';
+
+import { AppButton } from '../../../../../core';
+import { Flag } from '../../common';
 import { useFormContext } from '../../../../../core';
 
-const LoginByOtpForm = () => {
-  const {
-    values,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-    setFieldValue,
-  } = useFormContext();
+export const initialValuesLoginByOtp = {
+  UsernameOrMobile: '',
+};
+
+export const validationErrorLoginByOtp = () => {
+  Yup.object({
+    UsernameOrMobile: Yup.string().required(t('phone_number_is_required')),
+  });
+};
+
+export const handleSubmitLoginByOtp = (values: any) => {
+  return {
+    UsernameOrMobile: values.UsernameOrMobile,
+  };
+};
+
+export const LoginByOtpForm = () => {
+  const { values, handleBlur, handleSubmit, isSubmitting, setFieldValue } = useFormContext();
   const { t } = useTranslation();
-  const lang = useAppSelector((state) => state.language.lang);
+  const lang = localStorage.getItem('lang');
   const handleChangeInputPhoneNumber = (e: any) => {
     const phoneNumber = e.target.value.replace(values.countryCode, '').trim();
 
@@ -22,10 +34,7 @@ const LoginByOtpForm = () => {
   };
 
   return (
-    <Form
-      className="w-full max-w-xs flex flex-col gap-6"
-      onSubmit={handleSubmit}
-    >
+    <Form className="w-full max-w-xs flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-col gap-1">
           <div className="flex w-full !px-0">
@@ -33,7 +42,8 @@ const LoginByOtpForm = () => {
               className="rounded-5 !px-0"
               classNames={{
                 input: `${lang === 'fa' && 'text-left'}`,
-                inputWrapper: '!bg-white dark:!bg-info-1000 border border-primary-0 rounded-5 !backdrop_blur[35px] dark:border-none dark:!shadow-secondary w-full px-0',
+                inputWrapper:
+                  '!bg-white dark:!bg-info-1000 border border-primary-0 rounded-5 !backdrop_blur[35px] dark:border-none dark:!shadow-secondary w-full px-0',
               }}
               endContent={
                 lang === 'fa' ? (
@@ -67,12 +77,7 @@ const LoginByOtpForm = () => {
                       {(user) => (
                         <SelectItem key={user.id} textValue={user.name}>
                           <div className="flex gap-2 items-center">
-                            <Avatar
-                              alt={user.name}
-                              className="flex-shrink-0 w-6 h-4"
-                              radius="none"
-                              src={user.avatar}
-                            />
+                            <Avatar alt={user.name} className="flex-shrink-0 w-6 h-4" radius="none" src={user.avatar} />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>
                             </div>
@@ -120,12 +125,7 @@ const LoginByOtpForm = () => {
                       {(user) => (
                         <SelectItem key={user.id} textValue={user.name}>
                           <div className="flex gap-2 items-center">
-                            <Avatar
-                              alt={user.name}
-                              className="flex-shrink-0 w-6 h-4"
-                              radius="none"
-                              src={user.avatar}
-                            />
+                            <Avatar alt={user.name} className="flex-shrink-0 w-6 h-4" radius="none" src={user.avatar} />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>
                             </div>
@@ -148,13 +148,13 @@ const LoginByOtpForm = () => {
       <div className="pb-32 w-full">
         <AppButton
           props={{
-            text: t('send_code'),
-            className:
-              'bg-secondary-400 dark:bg-surface-200 text-white font-semibold text-base leading-[20px] !py-4 h-14',
+            content: t('send_code'),
+            className: 'font-semibold',
             fullWidth: true,
-            size: 'lg',
+            size: 'xl',
             type: 'submit',
-            variant: 'primary',
+            radius: 'md',
+            variant: 'solid',
             isLoading: isSubmitting,
           }}
         />
@@ -162,5 +162,3 @@ const LoginByOtpForm = () => {
     </Form>
   );
 };
-
-export default LoginByOtpForm;

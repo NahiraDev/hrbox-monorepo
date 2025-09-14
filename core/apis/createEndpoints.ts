@@ -1,8 +1,5 @@
 import type { EndpointBuilder } from '@reduxjs/toolkit/query';
-import type {
-  QueryDefinition,
-  MutationDefinition,
-} from '@reduxjs/toolkit/query';
+import type { QueryDefinition, MutationDefinition } from '@reduxjs/toolkit/query';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 

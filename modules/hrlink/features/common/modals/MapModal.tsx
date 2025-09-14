@@ -7,9 +7,10 @@ import {
   useAddLocationMutation,
   useEditLocationMutation,
 } from '../../common';
-import { useModal, withModal } from '../../../../../core';
+import { useEffect, useState } from 'react';
+import { useModalContext } from 'core/context';
 
-const MapModal = ({
+export const MapModal = ({
   position,
   setPosition,
   isEdit,
@@ -20,28 +21,53 @@ const MapModal = ({
 }) => {
   const [editLocation] = useEditLocationMutation();
   const [addLocation] = useAddLocationMutation();
+  const { closeModal } = useModalContext();
+  const [currentPosition, setCurrentPosition] = useState(
+    position || { lat: 35.6892, lng: 51.3890 }
+  );
 
+  useEffect(() => {
+    if (position) {
+      setCurrentPosition(position);
+    }
+  }, [position]);
+
+  const handleSave = async () => {
+    try {
+      if (isEdit) {
+        await editLocation(currentPosition).unwrap();
+      } else {
+        await addLocation(currentPosition).unwrap();
+      }
+      setPosition(currentPosition);
+      closeModal('confirm' , '');
+    } catch (error) {
+      console.error('Error saving location:', error);
+    }
+  };
   return (
     <AppModal
       icon={<Location className="text-white" size="22" />}
       size="2xl"
-      title="Edit Location"
+      title={isEdit ? "Edit Location" : "Add Location"}
     >
       <AppModal.Body>
-        {position && (
+        <div className="h-[400px] w-full rounded-md overflow-hidden">
           <MapContainer
-            center={position}
-            className="h-[304px] w-full !rounded-4 overflow-hidden"
-            scrollWheelZoom={false}
+            center={currentPosition}
+            className="h-full w-full"
+            scrollWheelZoom={true}
             zoom={13}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <DraggableMarker position={position} setPosition={setPosition} />
+            <DraggableMarker
+              position={currentPosition}
+              setPosition={setCurrentPosition}
+            />
           </MapContainer>
-        )}
+        </div>
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton
@@ -49,7 +75,7 @@ const MapModal = ({
             size: 'md',
             color: 'secondary',
             content: 'Cancel',
-            onPress: close,
+            onPress:()=> closeModal('confirm' , ''),
           }}
         />
         <AppButton
@@ -57,14 +83,10 @@ const MapModal = ({
             size: 'md',
             color: 'primary',
             content: 'Save',
-            onPress: isEdit ? editLocation(position) : addLocation(position),
+            onPress:()=> handleSave(),
           }}
         />
       </AppModal.Footer>
     </AppModal>
   );
 };
-
-MapModal.useModal = () => useModal();
-
-export default withModal(MapModal);

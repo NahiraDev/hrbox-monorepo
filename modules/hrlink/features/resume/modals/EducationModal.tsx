@@ -1,22 +1,15 @@
-import { useModal } from 'core/hooks';
-import { withModal } from 'core/helpers';
-import {
-  AppButton,
-  AppModal
-} from 'core/components';
+import { AppButton, AppModal } from 'core/components';
 import { Personalcard } from 'iconsax-react';
 import { FormProvider } from 'core/context';
+
 import { EducationForm, formValidationEducation, handleSubmitEducation, initialValuesEducation } from '../forms';
 import { useCreateEducationMutation } from '../apis';
 
-const EducationModal = () => {
-  const [createEducation] = useCreateEducationMutation()
+export const EducationModal = () => {
+  const [createEducation] = useCreateEducationMutation();
+
   return (
-    <AppModal
-      size="3xl"
-      title="Edit General Informations"
-      icon={<Personalcard className="text-white" size="22" />}
-    >
+    <AppModal icon={<Personalcard className="text-white" size="22" />} size="3xl" title="Edit General Informations">
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesEducation}
@@ -34,7 +27,7 @@ const EducationModal = () => {
             props={{
               size: 'md',
               variant: 'light',
-              color:'default',
+              color: 'default',
               content: 'Close',
             }}
           />
@@ -42,7 +35,7 @@ const EducationModal = () => {
             props={{
               size: 'md',
               variant: 'light',
-              color:'secondary',
+              color: 'secondary',
               type: 'submit',
               content: 'Submit',
             }}
@@ -52,7 +45,3 @@ const EducationModal = () => {
     </AppModal>
   );
 };
-
-EducationModal.useModal = () => useModal();
-
-export default withModal(EducationModal);

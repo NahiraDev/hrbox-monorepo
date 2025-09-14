@@ -2,8 +2,8 @@ import { skills } from 'mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton, AppDeleteModal } from 'core/components';
 import { LampCharge, Trash } from 'iconsax-react';
-import { AppCircularChart } from 'core/sections';
 import { useModalContext } from 'core/context';
+import { AppDoubleLineProgress } from 'core/sections';
 
 import { BasicInfoLayout } from '../../features/common';
 
@@ -11,7 +11,7 @@ const Education = () => {
   const { openModal } = useModalContext();
 
   const SkillCard = (skill: any, index: number) => (
-    <Card key={index} className="p-3 flex gap-1.5 shadow-light-tight-1 bg-white">
+    <Card key={index} className="p-3 flex gap-1.5 shdow-theme-sm bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
         <div className="flex items-center gap-2">
           <Avatar radius="sm" size="sm" />
@@ -43,7 +43,7 @@ const Education = () => {
           </div>
         </div>
         <div>
-          <AppCircularChart value={80} />
+          <AppDoubleLineProgress value={80} />
         </div>
       </div>
     </Card>

@@ -3,7 +3,6 @@ import { Avatar } from '@heroui/react';
 import React, { useRef, useState } from 'react';
 
 import { AppButton, FormProvider } from '../../../../core';
-import AvatarUser from '../assets/img/Avatar.jpg';
 
 import { ChangePasswordModal, DeactiveAccountModal } from './modals';
 import {
@@ -17,9 +16,9 @@ import {
 } from './forms';
 import { useEditGeneralSettingMutation, useEditProfileMutation } from './apis';
 
-export const Setting = () => {
+const Setting = () => {
   const [showSubmitButton, setShowSubmitButton] = useState<boolean>(false);
-  const [avatarSrc, setAvatarSrc] = useState<string | undefined>(AvatarUser);
+  const [avatarSrc, setAvatarSrc] = useState<string | undefined>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [editProfile] = useEditProfileMutation();
@@ -49,7 +48,7 @@ export const Setting = () => {
           <img
             alt=""
             className="h-full absolute left-0 top-0 opacity-[0.2] blur rounded-[14px] object-cover"
-            src={AvatarUser}
+            src={''}
           />
           <div className="flex justify-between border-b-1 border-neutral-100 dark:border-neutral-700 pb-1.5">
             <span className="text-secondary-900 text-xl">General Details</span>
@@ -62,9 +61,7 @@ export const Setting = () => {
                   content: (
                     <>
                       <Lock className="" size="16" />
-                      <span className="text-secondary-1000 text-base">
-                        Edit Password
-                      </span>
+                      <span className="text-secondary-1000 text-base">Edit Password</span>
                     </>
                   ),
                 }}
@@ -83,18 +80,8 @@ export const Setting = () => {
           </div>
           <div className="flex flex-col gap-6 mt-3 px-[63px]">
             <div className="flex justify-center">
-              <Avatar
-                className="w-[72px] h-[72px] cursor-pointer"
-                src={avatarSrc}
-                onClick={handleAvatarClick}
-              />
-              <input
-                ref={fileInputRef}
-                accept="image/*"
-                className="hidden"
-                type="file"
-                onChange={handleFileChange}
-              />
+              <Avatar className="w-[72px] h-[72px] cursor-pointer" src={avatarSrc} onClick={handleAvatarClick} />
+              <input ref={fileInputRef} accept="image/*" className="hidden" type="file" onChange={handleFileChange} />
             </div>
             <FormProvider
               initialValues={initialValuesEditProfile}
@@ -126,3 +113,5 @@ export const Setting = () => {
     </div>
   );
 };
+
+export default Setting;

@@ -1,20 +1,13 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchNormal1 } from 'iconsax-react';
-import { Input } from '@heroui/react';
-import { useAppSelector } from 'core/redux';
+import { AppInput } from 'core/components/index';
 
 import { CloseIcon } from '../icons';
 
 import AppButton from './AppButton';
 
-interface SearchInputProps {
-  placeholder?: string;
-  onSearch?: (query: string) => void;
-}
-
-const AppSearchInput = ({ placeholder, onSearch }: SearchInputProps) => {
-  const lang = useAppSelector((state) => state.language);
+const AppSearchInput = ({ onSearch }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -43,15 +36,11 @@ const AppSearchInput = ({ placeholder, onSearch }: SearchInputProps) => {
       {!isOpen && (
         <AppButton
           props={{
-            color: 'white',
-            size: 'md',
+            color: 'default',
+            size: 'xs',
+            isIconOnly: true,
             onPress: handleOpen,
-            content: (
-              <SearchNormal1
-                className="text-secondary-1000 dark:text-white"
-                size={24}
-              />
-            ),
+            content: <SearchNormal1 className="text-secondary-1000" size={24} />,
           }}
         />
       )}
@@ -66,30 +55,23 @@ const AppSearchInput = ({ placeholder, onSearch }: SearchInputProps) => {
             initial={{ opacity: 0, width: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
           >
-            <Input
-              classNames={{
-                inputWrapper: '!bg-white p-1.5 !rounded-4',
+            <AppInput
+              props={{
+                value: query,
+                onKeyDown: handleKeyDown,
+                onValueChange: setQuery,
+                endContent: (
+                  <AppButton
+                    props={{
+                      color: 'default',
+                      size: 'xs',
+                      isIconOnly: true,
+                      onPress: handleClose,
+                      content: <CloseIcon size={20} />,
+                    }}
+                  />
+                ),
               }}
-              endContent={
-                <AppButton
-                  props={{
-                    isIconOnly: true,
-                    onPress: handleClose,
-                    content: <CloseIcon size={20} />,
-                  }}
-                />
-              }
-              placeholder={
-                lang === 'en '
-                  ? `Search ${placeholder} ...`
-                  : `${placeholder}جستجو در `
-              }
-              startContent={
-                <SearchNormal1 className="text-secondary-1000" size={22} />
-              }
-              value={query}
-              onKeyDown={handleKeyDown}
-              onValueChange={setQuery}
             />
           </motion.div>
         )}

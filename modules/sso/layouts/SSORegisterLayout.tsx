@@ -16,7 +16,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from '../../../core';
-import { SSOHRLinkPaths } from '../router';
+import { SSOHRLinkPaths } from '../app/routes';
 import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
 import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
 
@@ -39,17 +39,6 @@ export const SSORegisterLayout = ({ props }: { props: any }) => {
     }
   };
 
-  const handleOpenLoginWithPhoneNumber = () => {
-    navigate(SSOHRLinkPaths.LoginByOtp);
-  };
-
-  const handleOpenLoginByUserName = () => {
-    navigate(SSOHRLinkPaths.Login);
-  };
-
-  const handleOpenRegister = () => {
-    navigate(SSOHRLinkPaths.Register);
-  };
   const toggleLanguage = (language: string) => {
     dispatch(setLanguage(language));
     i18n.changeLanguage(language);
