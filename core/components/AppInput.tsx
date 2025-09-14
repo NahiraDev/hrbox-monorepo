@@ -9,8 +9,8 @@ interface AppInputProps {
   name?: string;
   type?: string;
   value?: string;
-  variant?:any;
-  color?:any;
+  variant?: any;
+  color?: any;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -21,10 +21,7 @@ interface AppInputProps {
   className?: string;
 }
 
-const sizeClasses: Record<
-  string,
-  { wrapper: string; input: string; label: string }
-> = {
+const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
   sm: {
     wrapper: 'h-8 px-2 text-xs',
     input: 'text-xs',
@@ -99,6 +96,7 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
           inputWrapper: inputWrapperClassNames,
           input: inputClassNames,
         }}
+        color={color}
         endContent={endContent}
         errorMessage={error}
         isRequired={required}
@@ -106,9 +104,8 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
         placeholder={`Please enter ${label ?? 'value'} ...`}
         startContent={startContent}
         type={type}
-        variant={variant}
-        color={color}
         value={value}
+        variant={variant}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
