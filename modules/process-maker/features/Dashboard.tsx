@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AppButton } from '../../../core';
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { i18n } = useTranslation();
 
   return (
@@ -51,3 +51,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard;

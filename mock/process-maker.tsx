@@ -1,4 +1,4 @@
-const columns = [
+export const columns = [
   { key: 'id', label: 'id' },
   { key: 'title', label: 'title' },
   { key: 'Process_Builder', label: 'Process_Builder' },
@@ -7,7 +7,7 @@ const columns = [
   { key: 'status', label: 'Status' },
   { key: 'Category', label: 'category' },
 ];
-const sampleData = [
+export const sampleData = [
   {
     id: 1,
     title: 'process_a',

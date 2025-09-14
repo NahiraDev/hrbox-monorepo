@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { EventForm } from '@module/process-maker/features/forms';
+import { EventForm } from '../forms';
 
 import { AppModal, AppButton, FormProvider } from '../../../../core';
 import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '../forms';
