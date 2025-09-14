@@ -1,5 +1,3 @@
-import type { Selection } from '@react-types/shared';
-
 import React from 'react';
 import { Listbox, ListboxItem, Avatar } from '@heroui/react';
 import { AppButton } from 'core/components';
@@ -211,16 +209,6 @@ export const ListboxWrapper = ({ children }: { children: React.ReactNode }) => (
   <div>{children}</div>
 );
 export default function Repport() {
-  const [values, setValues] = React.useState<Selection>(new Set(['1']));
-
-  const arrayValues = Array.from(values);
-
-  const topContent = React.useMemo(() => {
-    if (!arrayValues.length) {
-      return null;
-    }
-  }, [arrayValues.length]);
-
   return (
     <ListboxWrapper>
       <Listbox
@@ -230,9 +218,7 @@ export default function Repport() {
         items={users}
         label="Assigned to"
         selectionMode="multiple"
-        topContent={topContent}
         variant="flat"
-        onSelectionChange={setValues}
       >
         {(item) => (
           <ListboxItem key={item.id} textValue={item.name}>
@@ -242,7 +228,7 @@ export default function Repport() {
                 <span className="text-xs">{item.name}</span>
                 <AppButton
                   props={{
-                    className: 'border-1 border-[#DCF0F9]  w-full text-[10px] py-2 px-3  w-[60px] h-[12px]',
+                    className: 'border-1 border-[#DCF0F9] w-full text-[10px] py-2 px-3 w-[60px] h-[12px]',
                     color: 'primary',
                     variant: 'bordered',
                     size: 'sm',
