@@ -1,17 +1,20 @@
-import AppCircularChart from './AppCircularChart';
+import AppHeader from './AppHeader';
+import AppSideBar from './AppSideBar';
+import AppSubHeader from './AppSubHeader';
+import AppContent from './AppContent';
+import AppDoubleLineProgress from './AppDoubleLineProgress';
 import AppDocItems from './AppDocItems';
 import AppDocs from './AppDocs';
-import AppHeader from './AppHeader';
 import App404 from './App404';
-import AppPageHeader from './AppPageHeader';
-import AppPageHeaderTab from './AppPageHeaderTab';
+
 
 export {
   AppHeader,
-  AppCircularChart,
+  AppSubHeader,
+  AppSideBar,
+  AppContent,
+  AppDoubleLineProgress,
   AppDocItems,
   AppDocs,
   App404,
-  AppPageHeader,
-  AppPageHeaderTab,
 };

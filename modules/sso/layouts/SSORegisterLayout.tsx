@@ -16,7 +16,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from '../../../core';
-import { SSOHRLinkPaths } from '../router';
+import { SSOHRLinkPaths } from '../app/routes';
 import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
 import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
 
@@ -39,17 +39,6 @@ export const SSORegisterLayout = ({ props }: { props: any }) => {
     }
   };
 
-  const handleOpenLoginWithPhoneNumber = () => {
-    navigate(SSOHRLinkPaths.LoginByOtp);
-  };
-
-  const handleOpenLoginByUserName = () => {
-    navigate(SSOHRLinkPaths.Login);
-  };
-
-  const handleOpenRegister = () => {
-    navigate(SSOHRLinkPaths.Register);
-  };
   const toggleLanguage = (language: string) => {
     dispatch(setLanguage(language));
     i18n.changeLanguage(language);
@@ -104,7 +93,7 @@ export const SSORegisterLayout = ({ props }: { props: any }) => {
     >
       <div className="bg-cover bg-center min-h-screen lg:px-10 px-4 lg:flex items-center justify-center">
         <div className="w-full" style={{ zoom: !isXLargeScreen ? '1' : '1.3' }}>
-          <div className="lg:hidden flex justify-center py-4 fixed top-0 left-0 w-full border-b border-netural-150 bg-mobile-header dark:border-[rgba(51,51,51,0.4)] dark:bg-[linear-gradient(245deg,_rgba(2,44,61,0.8)_28.83%,_rgba(1,16,26,0.8)_85.57%)] backdrop-blur-md z-40">
+          <div className="lg:hidden flex justify-center py-4 fixed top-0 left-0 w-full border-b border-neutral-150 bg-mobile-header dark:border-[rgba(51,51,51,0.4)] dark:bg-[linear-gradient(245deg,_rgba(2,44,61,0.8)_28.83%,_rgba(1,16,26,0.8)_85.57%)] backdrop-blur-md z-40">
             <div className="p-2">
               <LogoMobile />
             </div>
@@ -165,11 +154,11 @@ export const SSORegisterLayout = ({ props }: { props: any }) => {
                     {children}
                     {!isRegister && (
                       <div className="flex items-center justify-center gap-3 w-full">
-                        <hr className="lg:w-[128px] w-full h-[1px] text-netural-400" />
-                        <span className="text-netural-400 dark:netural-250 text-sm font-bold">
+                        <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
+                        <span className="text-neutral-400 dark:neutral-250 text-sm font-bold">
                           {t('or')}
                         </span>
-                        <hr className="lg:w-[128px] w-full h-[1px] text-netural-400" />
+                        <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
                       </div>
                     )}
                     <div className="w-full md:max-w-xs flex flex-col gap-3">

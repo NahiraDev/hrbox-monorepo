@@ -50,10 +50,10 @@ const AppTextArea = ({ props }: { props: any }) => {
   } = props;
 
   const inputWrapperClassNames = clsx(
-    '!bg-white dark:!bg-info-1000',
-    'border border-primary-0 !backdrop_blur[35px]',
-    'dark:border-primary-0 dark:!shadow-secondary',
-    error && '!border-red-500 !bg-red-100 dark:bg-red-800',
+    'bg-white',
+    '!backdrop_blur[35px]',
+    'dark:!shadow-secondary',
+    error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
     className,
@@ -67,6 +67,7 @@ const AppTextArea = ({ props }: { props: any }) => {
   );
 
   const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
+
 
   return (
     <div className="flex flex-col gap-1">

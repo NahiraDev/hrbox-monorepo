@@ -31,7 +31,9 @@ const radiusClasses: Record<string, string> = {
 const AppSwitch = ({ props }: { props: any }) => {
   const {
     isSelected,
-    handleChange,
+    onChange,
+    onBlur,
+    value,
     label,
     size = 'sm',
     radius = 'full',
@@ -63,7 +65,9 @@ const AppSwitch = ({ props }: { props: any }) => {
       }}
       isSelected={isSelected}
       size={size}
-      onValueChange={handleChange}
+      onValueChange={onChange}
+      onBlur={onBlur}
+      value={value}
       {...rest}
     >
       <span

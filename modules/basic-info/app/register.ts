@@ -1,13 +1,15 @@
-import type { PluginModule } from '../../../core';
+import { type PluginModule } from '../../../core';
 
-import { reducers } from './index.ts';
-import { BasicInfoRoutes } from './index.ts';
+import { BasicInfoRoutes } from './routes';
+import { reducers } from './reducers';
+import { BasicInfoMenu } from './menu';
 
 const BasicInfoPlugin: PluginModule = {
   name: 'basic-info',
-  reducers: { basicInfo: reducers },
+  reducers: reducers,
   apis: [],
   routes: BasicInfoRoutes.routes,
+  menu: BasicInfoMenu(),
 };
 
 export default BasicInfoPlugin;

@@ -1,49 +1,74 @@
-interface DocItemProps {
-  props: {
-    to?: string;
-    icon: any;
-    title?: string;
-    outlined?: boolean;
-    isActive?: boolean;
-  };
+import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
+
+interface AppDocItemProps {
+  icon: React.ComponentType<any>;
+  module: string;
+  outlined?: boolean;
+  mouseX: any;
+  index: number;
 }
 
-export const DocItem = ({ props }: DocItemProps) => {
-  const {
-    to = '/',
-    icon: Icon,
-    title = '',
-    outlined = false,
-    isActive = false,
-  } = props;
+const AppDocItem: React.FC<AppDocItemProps> = ({
+                                                 icon: Icon,
+                                                 module,
+                                                 outlined = false,
+                                               }) => {
+  const location = useLocation();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const handleClick = () => {
-    if (to) {
-    }
-  };
+  const currentPath = location.pathname.split('/')[1] || '';
+  const isActive = module.toLowerCase() === currentPath.toLowerCase();
 
   return (
-    <div>
-      <button
-        className={`w-12 h-12 flex items-center justify-center rounded-[10px]
-          ${
+    <motion.div
+      ref={ref}
+      className="relative flex flex-col items-center justify-center"
+      whileHover={{ y: -8 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <motion.button className="group flex flex-col items-center justify-center w-20">
+        <motion.div
+          className={`
+            flex items-center justify-center rounded-xl transition-all duration-200 relative overflow-hidden
+            w-16 h-16
+            ${
             outlined
-              ? 'border border-dashed border-secondary-400 bg-transparent text-secondary-400'
+              ? 'border border-dashed dark:border-white bg-transparent dark:text-white'
               : isActive
-                ? 'bg-[linear-gradient(0deg,_#1E3363_0%,_#3D68C9_126.58%)] text-white dark:from-info-700 dark:to-[#BAD9EC] w-[60px] h-[60px]'
-                : 'bg-gradient-to-t from-[#DCE0E3] to-[#FFFFFF] text-secondary-1000 dark:text-neutral-50 dark:from-surface-150 dark:to-[rgba(4,66,92,0.4)] drop-shadow-[0px_0.945px_2.835px_rgba(0,0,0,0.30)]'
-          }`}
-        onClick={handleClick}
-      >
-        <Icon size={isActive ? '32' : '24'} />
-      </button>
-      {isActive && (
-        <span className="text-xs font-semibold text-center absolute text-secondary-1000 dark:text-white">
-          {title}
-        </span>
-      )}
-    </div>
+                ? 'bg-gradient-to-b from-[#1E3363] to-[#3D68C9] text-white dark:bg-gradient-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:text-white'
+                : 'bg-gradient-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-gradient-to-b hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white'
+          }
+          `}
+        >
+          <div className="absolute rounded-xl" />
+
+          {isActive && (
+            <motion.div
+              className="absolute inset-0 rounded-xl"
+            />
+          )}
+
+          <Icon className="relative z-10 transition-all duration-200" size={32} />
+        </motion.div>
+
+        {/* Label */}
+        <motion.span
+          className={`
+            whitespace-nowrap text-xs font-semibold mt-1 transition-all duration-200
+            ${
+            isActive
+              ? 'opacity-100 text-[#1E3363] dark:text-white'
+              : 'opacity-0 group-hover:opacity-100 dark:text-gray-300'
+          }
+          `}
+        >
+          {module}
+        </motion.span>
+      </motion.button>
+    </motion.div>
   );
 };
 
-export default DocItem;
+export default AppDocItem;

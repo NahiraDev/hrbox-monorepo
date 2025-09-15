@@ -4,15 +4,13 @@ import { useLocation, type RouteObject } from 'react-router-dom';
 import { RoutesProvider } from '../context';
 import { AppLoader } from '../components';
 import { App } from '../app';
+import { ProjectRoutesMap } from '../../configs/routeMaps';
 
 import { MotionRouter } from './motionRouter';
-import { ProjectRoutesMap } from './routeMaps';
 
 export const RootRouterLoader = () => {
   const location = useLocation();
-  const [currentRoutes, setCurrentRoutes] = useState<RouteObject[] | null>(
-    null,
-  );
+  const [currentRoutes, setCurrentRoutes] = useState<RouteObject[] | null>(null);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {

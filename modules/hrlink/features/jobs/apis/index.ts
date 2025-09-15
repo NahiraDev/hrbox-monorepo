@@ -1,32 +1,14 @@
-import createBaseApi from '../../../../../core/apis/baseApi';
-import { createEndpoint } from '../../../../../core';
-import { HRLinkApiEndpoints } from '../../../app/endpoints.ts';
+import { createEndpoint, createPaginatedEndpoint } from '../../../../../core';
+import { HRLinkApiEndpoints } from '../../../app/endpoints';
+import { HRLinkBaseApi } from '../../../app/baseApiConfig';
 
-const BaseApi = createBaseApi('https://api.hrbox.com', 'Jobs', [
-  'Jobs',
-] as const);
-
-export const JobsApi = BaseApi.injectEndpoints({
+export const JobsApi = HRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({
-    jobOffers: createEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', [
-      'Jobs',
-    ]),
-
-    jobDetail: createEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', [
-      'Jobs',
-    ]),
-    jobOpportunities: createEndpoint(
-      build,
-      HRLinkApiEndpoints.job.opportunities,
-      'GET',
-      ['Jobs'],
-    ),
+    jobOffers: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
+    jobOpportunities: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.opportunities, 'GET', ['Jobs']),
+    jobDetail: createEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
   }),
   overrideExisting: false,
 });
 
-export const {
-  useJobOffersQuery,
-  useJobDetailQuery,
-  useJobOpportunitiesQuery,
-} = JobsApi;
+export const { useLazyJobOffersQuery, useLazyJobDetailQuery, useLazyJobOpportunitiesQuery } = JobsApi;

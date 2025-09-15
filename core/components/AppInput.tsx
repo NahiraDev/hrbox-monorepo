@@ -1,10 +1,27 @@
 import { Input } from '@heroui/react';
 import clsx from 'clsx';
+import React from 'react';
 
-const sizeClasses: Record<
-  string,
-  { wrapper: string; input: string; label: string }
-> = {
+interface AppInputProps {
+  label?: string;
+  required?: boolean;
+  error?: any;
+  name?: string;
+  type?: string;
+  value?: string;
+  variant?: any;
+  color?: any;
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  size?: 'sm' | 'md' | 'lg';
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  className?: string;
+}
+
+const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
   sm: {
     wrapper: 'h-8 px-2 text-xs',
     input: 'text-xs',
@@ -30,14 +47,16 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppInput = ({ props }: { props: any }) => {
+const AppInput = ({ props }: { props: AppInputProps }) => {
   const {
     label,
-    required,
+    required = true,
     error,
     name,
     type = 'text',
+    variant = 'solid',
     value,
+    color,
     startContent,
     endContent,
     onFocus,
@@ -48,19 +67,16 @@ const AppInput = ({ props }: { props: any }) => {
     className,
     ...rest
   } = props;
-
   const inputWrapperClassNames = clsx(
-    '!bg-white dark:!bg-info-1000',
-    'border border-primary-0 !backdrop_blur[35px]',
-    'dark:border-primary-0 dark:!shadow-secondary',
-    error && '!border-red-500 !bg-red-100 dark:bg-red-800',
+    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
+    error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
     className,
   );
 
   const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 lg:placeholder:leading-5 placeholder:leading-normal',
+    'placeholder:text-secondary-1000',
     'placeholder:font-medium',
     error && 'text-red-500',
     sizeClasses[size]?.input,
@@ -80,6 +96,7 @@ const AppInput = ({ props }: { props: any }) => {
           inputWrapper: inputWrapperClassNames,
           input: inputClassNames,
         }}
+        color={color}
         endContent={endContent}
         errorMessage={error}
         isRequired={required}
@@ -88,6 +105,7 @@ const AppInput = ({ props }: { props: any }) => {
         startContent={startContent}
         type={type}
         value={value}
+        variant={variant}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}

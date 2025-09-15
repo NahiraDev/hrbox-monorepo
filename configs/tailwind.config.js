@@ -1,6 +1,6 @@
 import { heroui } from '@heroui/react';
-
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     '../modules/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
@@ -8,16 +8,28 @@ export default {
     '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
     '../modules/**/index.html',
   ],
+  darkMode: 'class',
   theme: {
-    layout: {
+    extend: {
+
+      // Enhanced Background Images
+      backgroundImage: {
+        'light-mode': `url('../core/assets/img/lightmode-bg.png')`,
+        'dark-mode': `url('../core/assets/img/darkmode-bg.png')`,
+      },
+
+      // Enhanced Colors - Using static values for Tailwind v4 compatibility
       colors: {
-        primary: {
-          0: '#DCF0F9',
+        // Primary colors with static values
+        'primary': {
+          DEFAULT: '#0A9AD7',
+          50: '#B8E2F3',
           100: '#B8E2F3',
           150: '#96D3ED',
           200: '#73C5E8',
           250: '#50B6E2',
           300: '#2DA8DC',
+          400: '#2DA8DC',
           500: '#0884B8',
           600: '#076E99',
           700: '#05587A',
@@ -25,8 +37,10 @@ export default {
           900: '#022C3D',
           1000: '#01161E',
         },
-        secondary: {
-          0: '#DEE1E8',
+
+        'secondary': {
+          DEFAULT: '#1E3363',
+          50: '#BEC4D2',
           100: '#BEC4D2',
           150: '#9EA7BC',
           200: '#7E8AA5',
@@ -38,8 +52,10 @@ export default {
           700: '#111D38',
           800: '#0C152A',
           900: '#080E1C',
+          1000: '#04070E',
         },
-        neutral: {
+
+        'neutral': {
           50: '#F6F6F6',
           100: '#E5E5E5',
           150: '#CCCCCC',
@@ -54,155 +70,98 @@ export default {
           900: '#111111',
           1000: '#090909',
         },
-        info: {
-          0: '#DCEBF4',
+
+        'surface': {
+          DEFAULT: '#F5FBFE',
+          50: 'rgba(220, 240, 249, 0.4)',
+          100: 'rgba(4, 66, 92, 0.4)',
+          200: '#044566',
+        },
+
+        'white': '#ffffff',
+        'gold': '#DDBA69',
+
+        // Semantic colors
+        'success': {
+          DEFAULT: '#DFF3E7',
+          50: '#BFE7D0',
+          100: '#BFE7D0',
+          900: '#09311A',
+        },
+        'warning': {
+          DEFAULT: '#FEEFDA',
+          50: '#FEDFB6',
+          100: '#FEDFB6',
+          900: '#482800',
+        },
+        'danger': {
+          DEFAULT: '#F23030',
+          50: '#FBC3C3',
+          100: '#FBC3C3',
+          900: '#450D0D',
+        },
+        'info': {
+          DEFAULT: '#DCEBF4',
           50: '#B9D7EA',
-          150: '#96C4E0',
-          200: '#73B0D5',
-          250: '#509DCB',
-          300: '#2D89C1',
-          400: '#0B76B7',
-          500: '#09659C',
-          600: '#075482',
-          700: '#064368',
-          800: '#04324E',
+          100: '#B9D7EA',
           900: '#032134',
           1000: '#01101A',
         },
-        success: {
-          0: '#DFF3E7',
-          50: '#BFE7D0',
-          150: '#A0DBB9',
-          200: '#80D0A1',
-          250: '#61C48A',
-          300: '#41B873',
-          400: '#22AD5C',
-          500: '#1D944E',
-          600: '#187B41',
-          700: '#136234',
-          800: '#0E4A27',
-          900: '#09311A',
-          1000: '#04180D',
-        },
-        warning: {
-          0: '#FEEFDA',
-          100: '#FEDFB6',
-          150: '#FECF92',
-          200: '#FDBF6E',
-          250: '#FDAF4A',
-          300: '#FD9F26',
-          400: '#FD8F02',
-          500: '#D87A01',
-          600: '#B46601',
-          700: '#905101',
-          800: '#6C3D00',
-          900: '#482800',
-          1000: '#241400',
-        },
-        danger: {
-          0: '#FDE1E1',
-          50: '#FBC3C3',
-          150: '#F9A6A6',
-          200: '#F78888',
-          250: '#F56B6B',
-          300: '#F34D4D',
-          400: '#F23030',
-          500: '#CF2929',
-          600: '#AC2222',
-          700: '#8A1B1B',
-          800: '#671414',
-          900: '#450D0D',
-          1000: '#220606',
-        },
-        tertiar: {
-          0: '#FEDEE6',
+        'tertiary': {
+          DEFAULT: '#FEDEE6',
           100: '#FEBDCD',
-          150: '#FE9DB4',
-          200: '#FD7C9B',
-          250: '#FD5C82',
-          300: '#FD3B69',
           400: '#FD1B51',
-          500: '#D81745',
-          600: '#B41339',
-          700: '#900F2E',
-          800: '#6C0B22',
           900: '#480717',
-          1000: '#24030B',
         },
-        surface: {
-          0: '#F5FBFE',
-          50: '#DCF0F966',
-          100: '#04425C66',
-          150: '#044566',
-        },
-        gold: '#DDBA69',
-      },
-      borderRadius: {
-        1: '2px',
-        2: '4px',
-        3: '6px',
-        4: '8px',
-        5: '12px',
-        6: '16px',
-        7: '24px',
-        8: '32px',
-        9: '40px',
-        10: '48px',
-        11: '56px',
-        12: '64px',
-      },
-      boxShadow: {
-        'shadow-light-tight/1': '0px 1px 3px 0px #080E1C4D',
-        'shadow-light-tight/2': '0px 1.25px 4px 0px #080E1C40',
-        'shadow-light-tight/3': '0px 2px 6px 0px #080E1C38',
-        'shadow-light-tight/4': '0px 2px 7px 0px #080E1C3D',
-        'shadow-light-tight/5': '0px 3px 12px 0px #080E1C33',
-        'shadow-light-tight/6': '0px 3.5px 14px 0px #080E1C33',
-        'shadow-light-tight/7': '0px 7px 18px 0px #080E1C2B',
-        'shadow-light-tight/8': '0px 12px 28px 0px #080E1C33',
-        'shadow-light-tight/9': '0px 13px 36px 0px #080E1C38',
       },
     },
   },
-  darkMode: "class",
+
   plugins: [
     heroui({
-      prefix: "heroui", // prefix for themes variables
-      addCommonColors: true, // override common colors (e.g. "blue", "green", "pink").
-      defaultTheme: "light", // default theme from the themes object
-      defaultExtendTheme: "light", // default theme to extend on custom themes
-      layout: {
-        radius: {
-          small: '4px',
-          medium: '6px',
-          large: '8px',
-        },
-      },
+      prefix: "heroui",
+      addCommonColors: false,
+      defaultTheme: "light",
+      defaultExtendTheme: "light",
       themes: {
         light: {
           colors: {
-            black: '#000000',
+            default: '#ffffff',
+            foreground: "#04070E",
+            background: "#F5FBFE",
             navy_blue: {
               400: '#1E3363',
             },
+            info: {
+              1000: '#01101A'
+            },
             secondary: {
+              DEFAULT: '#1E3363',
               1000: '#04070E',
             },
             primary: {
+              DEFAULT: '#0A9AD7',
               400: '#0A9AD7',
             },
           },
         },
         dark: {
           colors: {
-            black: '#fff',
+            default: '#01101A',
+            foreground: "#FFF",
+            background: "#01101A",
             navy_blue: {
               400: '#044566',
             },
+            info: {
+              1000: '#FFF'
+            },
             secondary: {
+              DEFAULT: '#FFF',
               1000: '#FFF',
             },
             primary: {
+              DEFAULT: '#044566',
               400: '#044566',
             },
           },

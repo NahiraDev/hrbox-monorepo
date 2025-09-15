@@ -55,7 +55,7 @@ const AppErrorToast = () => {
                 ),
               }}
             />
-            <div className="bg-warning-400 py-1.5 px-3 rounded-4 flex gap-1.5">
+            <div className="bg-warning-400 py-1.5 px-3 rounded-md flex gap-1.5">
               <Warning2 color="#fff" size="32" />
               <span className="text-white text-xl">Error!</span>
             </div>

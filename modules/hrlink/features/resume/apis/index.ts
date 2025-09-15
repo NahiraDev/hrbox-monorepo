@@ -1,1 +1,5 @@
 export * from './award'
+export * from './education'
+export * from './course'
+export * from './skills'
+export * from './experience'

@@ -1,2 +1,3 @@
 export * from './BaseLayout';
-export * from './BaseContentLayout';
+export * from './AuthLayout';
+export * from './LayoutLoader';
