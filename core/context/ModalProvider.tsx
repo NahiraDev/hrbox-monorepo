@@ -7,7 +7,7 @@ interface ModalContextType {
   closeModal: (type: ModalType | string | undefined, name: string | undefined) => void;
   getModalData: (type: ModalType | string | undefined, name: string | undefined) => any;
   isModalOpen: (type: ModalType | string | undefined, name: string | undefined) => boolean;
-  getOpenModal: () => { type: ModalType | string | undefined; name: string | undefined} | null;
+  getOpenModal: () => { type: ModalType | string | undefined; name: string | undefined } | null;
 }
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
