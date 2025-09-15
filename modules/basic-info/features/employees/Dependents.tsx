@@ -17,7 +17,7 @@ import {
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
-import { SpouseModal } from '../../features/employees/modals/SpouseModal';
+import { RelativesModal } from './modals/RelativesModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -52,7 +52,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit'),
+                      onPress: () => openModal('edit',undefined),
                       className: 'bg-white border-1 border-primary-400',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
@@ -146,7 +146,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit'),
+                      onPress: () => openModal('edit', undefined),
                       className: 'bg-white border-1 border-primary-400',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
@@ -341,8 +341,10 @@ const Dependents = () => {
                   </div>
                 </Card>
               ))}
-              <AppDeleteModal />
-              <SpouseModal />
+              {/*<AppDeleteModal />*/}
+              {/*<SpouseModal />*/}
+              {/*<DependentsModal/>*/}
+              <RelativesModal/>
             </div>
           </div>
         </div>

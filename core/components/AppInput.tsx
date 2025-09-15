@@ -11,6 +11,7 @@ interface AppInputProps {
   value?: string;
   variant?: any;
   color?: any;
+  // placeholder?: string;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -64,6 +65,7 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     onChange,
     size = 'md',
     radius = 'md',
+    // placeholder,
     className,
     ...rest
   } = props;

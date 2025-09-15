@@ -5,13 +5,15 @@ import { Button } from '@heroui/button';
 import { useState } from 'react';
 
 import { AppPagination } from '../../../../core';
+import { OrgLocation } from './modals/OrgLocation';
+import SubHeader from '../../features/SubHeader';
 
 const OrganizationalLocations = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);
 
   return (
     <>
-      {/*<SubHeader />*/}
+      <SubHeader />
       <div className="flex flex-col justify-between w-full h-full p-4">
         <div className="grid grid-cols-5 gap-4 w-full h-full">
           {OrganizationalLocation.map((detail, index) => (
@@ -86,6 +88,7 @@ const OrganizationalLocations = () => {
             onChange={() => console.log('page changed')}
           />
         </div>
+        <OrgLocation/>
       </div>
     </>
   );
