@@ -166,14 +166,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
       </div>
       <div className="grid grid-cols-12">
         <div className="col-span-2">
-          <div
-            className="p-4 overflow-y-auto w-70
-            [&::-webkit-scrollbar]:w-3
-            [&::-webkit-scrollbar-track]:rounded-full
-            [&::-webkit-scrollbar-track]:bg-gray-100
-            [&::-webkit-scrollbar-thumb]:rounded-full
-            [&::-webkit-scrollbar-thumb]:bg-gray-300"
-          >
+          <div className="py-4 pl-4 overflow-y-auto">
             <div>
               <Repport />
             </div>
