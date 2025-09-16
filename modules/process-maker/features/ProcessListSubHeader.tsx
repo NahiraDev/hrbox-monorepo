@@ -9,14 +9,15 @@ const ProcessListSubHeader = () => {
 
   return (
     <div className="flex flex-row-reverse w-full justify-between">
-      <div className="flex">
+      <div className="flex flex-row-reverse gap-2">
         <AppButton
           props={{
-            color: 'primary',
+            color: 'white',
             size: 'md',
             radius: 'lg',
             startContent: <Add />,
             onPress: () => openModal('confirm', 'NewOneModal'),
+            className: 'border-1 border-primary',
             content: 'Add new One',
           }}
         />
@@ -26,6 +27,7 @@ const ProcessListSubHeader = () => {
             color: 'bg-white',
             size: 'md',
             radius: 'lg',
+            className: 'border-1 border-primary',
             startContent: <Setting4 />,
           }}
         />
@@ -34,6 +36,7 @@ const ProcessListSubHeader = () => {
             color: 'bg-white',
             size: 'md',
             radius: 'lg',
+            className: 'border-1 border-primary',
             startContent: <SearchNormal />,
           }}
         />
@@ -45,6 +48,7 @@ const ProcessListSubHeader = () => {
             size: 'md',
             radius: 'lg',
             startContent: <Hierarchy3 />,
+            content: 'Processes',
           }}
         />
       </div>

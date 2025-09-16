@@ -4,11 +4,12 @@ import { Personalcard } from 'iconsax-react';
 import { ProcessMakerPath } from './paths';
 
 const ProcessListSubHeader = lazyLoad(() => import('../features/ProcessListSubHeader'));
+const DashboardSubHeader = lazyLoad(() => import('../features/DashboardSubHeader'));
 
 export const ProcessMakerSubHeaders: any = [
   {
     path: ProcessMakerPath.Dashboard,
-    component: null,
+    component: DashboardSubHeader,
   },
   {
     path: ProcessMakerPath.ProcessMaker,

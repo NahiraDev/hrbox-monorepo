@@ -26,7 +26,7 @@ const sizeClasses: Record<ModalSize, string> = {
 
 const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();
-  const { getOpenModal , isModalOpen, closeModal } = useModalContext();
+  const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
 
   const handleBackdropClick = () => {
@@ -42,7 +42,6 @@ const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
       close: closeModal,
     });
   });
-
 
   if (!modalData) return null;
 

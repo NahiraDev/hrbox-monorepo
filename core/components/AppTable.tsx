@@ -2,13 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
 import { usePaginationManager } from 'core/helpers';
+import { useModalContext } from 'core/context';
 
 import { AppDeleteModal, AppShowModeModal } from '../components';
 import { loader } from '../lottie';
 
 import AppButton from './AppButton';
 import AppPagination from './AppPagination';
-import { useModalContext } from 'core/context';
 
 interface AppTableProps {
   data: any;
@@ -54,8 +54,9 @@ const AppTable = ({
   const paginatedData = useMemo(() => {
     if (!hasPagination) return data;
     const startIndex = (pagination.currentPage - 1) * pageSize;
+
     // return data.slice(startIndex, startIndex + pageSize);
-    return []
+    return [];
   }, [data, pagination.currentPage, pageSize, hasPagination]);
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const AppTable = ({
         return acc;
       }, []);
 
-      openModal('view' , 'test' , columnPairs)
+      openModal('view', 'test', columnPairs);
     }
   };
 
@@ -165,7 +166,7 @@ const AppTable = ({
             radius: 'full',
             variant: 'light',
             onPress: () => {
-              openModal('delete' , 'test' , row)
+              openModal('delete', 'test', row);
             },
             content: (
               <span className="text-lg cursor-pointer">
