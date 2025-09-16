@@ -2,10 +2,9 @@ import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-react';
 
 import { AppButton, useModalContext } from '../../../core';
 
-import { NewOneModal } from './modals';
 
 const ProcessListSubHeader = () => {
-  const { openModal, isModalOpen } = useModalContext();
+  const { openModal } = useModalContext();
 
   return (
     <div className="flex flex-row-reverse w-full justify-between">
@@ -21,7 +20,7 @@ const ProcessListSubHeader = () => {
             content: 'Add new One',
           }}
         />
-        {isModalOpen('confirm', 'NewOneModal') && <NewOneModal />}
+        {/*{isModalOpen('confirm', 'NewOneModal') && <NewOneModal />}*/}
         <AppButton
           props={{
             color: 'bg-white',

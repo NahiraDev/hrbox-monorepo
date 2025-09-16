@@ -3,10 +3,10 @@ import React, { createContext, type ReactNode, useContext, useState } from 'reac
 type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
 
 interface ModalContextType {
-  openModal: (type: ModalType | string | undefined, name: string | undefined, data?: any) => void;
-  closeModal: (type: ModalType | string | undefined, name: string | undefined) => void;
-  getModalData: (type: ModalType | string | undefined, name: string | undefined) => any;
-  isModalOpen: (type: ModalType | string | undefined, name: string | undefined) => boolean;
+  openModal: (type: ModalType, name: string, data?: any) => void;
+  closeModal: (type: ModalType, name: string) => void;
+  getModalData: (type: ModalType, name: string) => any;
+  isModalOpen: (type: ModalType, name: string) => boolean;
   getOpenModal: () => { type: ModalType | string | undefined; name: string | undefined } | null;
 }
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -14,7 +14,7 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [modals, setModals] = useState<any[]>([]);
 
-  const openModal = (type: ModalType | string, name: string, data?: any) => {
+  const openModal = (type: ModalType, name: string, data?: any) => {
     setModals((prev) => {
       const filtered = prev.filter((modal) => !(modal.type === type && modal.name === name));
 
@@ -22,15 +22,15 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     });
   };
 
-  const closeModal = (type: ModalType, name: any) => {
-    setModals((prev) => prev.filter((modal) => modal.type !== type && modal.name !== name));
+  const closeModal = (type: ModalType, name: string) => {
+    setModals((prev) => prev.filter((modal) => !(modal.type === type && modal.name === name)));
   };
 
-  const getModalData = (type: ModalType, name: any) => {
+  const getModalData = (type: ModalType, name: string) => {
     return modals.find((modal) => modal.type === type && modal.name === name)?.data;
   };
 
-  const isModalOpen = (type: ModalType, name: any) => {
+  const isModalOpen = (type: ModalType, name: string) => {
     return modals.some((modal) => modal.type === type && modal.name === name);
   };
   const getOpenModal = (): { type: string; name: string } | null => {
