@@ -1,6 +1,7 @@
 import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-react';
 
 import { AppButton, useModalContext } from '../../../core';
+import { NewOneModal } from './modals';
 
 
 const ProcessListSubHeader = () => {
@@ -15,7 +16,7 @@ const ProcessListSubHeader = () => {
             size: 'md',
             radius: 'lg',
             startContent: <Add />,
-            onPress: () => openModal('confirm', 'NewOneModal'),
+            onPress: () => openModal('confirm', 'NewOneModal', <NewOneModal/>),
             className: 'border-1 border-primary',
             content: 'Add new One',
           }}

@@ -7,7 +7,8 @@ export const NewOneModal = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal size="4xl" title="New One Modal">
+    <>
+    {/*// <AppModal size="4xl" title="New One Modal">*/}
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesNewOne}
@@ -40,6 +41,7 @@ export const NewOneModal = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    {/*// </AppModal>*/}
+      </>
   );
 };

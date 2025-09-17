@@ -35,8 +35,8 @@ export const NewOneForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-[24px]">
-        <div>
+      <div className="flex flex-col gap-[24px] w-full">
+        <div className="flex flex-row justify-between">
           <AppInput
             props={{
               error: touched.title && errors.title,
@@ -44,11 +44,10 @@ export const NewOneForm = () => {
               name: 'title',
               value: values.title,
               onBlur: handleBlur,
+              className: 'w-full',
               onChange: handleChange,
             }}
           />
-        </div>
-        <div>
           <AppInput
             props={{
               error: touched.type && errors.type,
@@ -60,7 +59,7 @@ export const NewOneForm = () => {
             }}
           />
         </div>
-        <div>
+        <div className="flex flex-row justify-between">
           <AppAutoComplete
             props={{
               type: 'text',
@@ -72,8 +71,6 @@ export const NewOneForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'text',

@@ -1,10 +1,10 @@
 import AppTable from '../../../core/components/AppTable';
-import { sampleData, columns } from '../../../mock';
+import { sampleData } from '../../../mock';
 const ProcessList = () => {
   return (
-    <div className="h-full">
-      <AppTable columns={columns} data={sampleData} />
-    </div>
+    // <div className="h-full ">
+      <AppTable data={sampleData} />
+    // </div>
   );
 };
 

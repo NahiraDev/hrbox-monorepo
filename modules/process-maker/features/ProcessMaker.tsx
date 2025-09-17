@@ -2,12 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modeler from 'bpmn-js/lib/Modeler';
 
-import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals';
+import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from './modals';
 
-import './bpmnstyle.css';
+import '../app/index.css';
 import { AppButton, AppInput, useModalContext } from '../../../core';
 
 import { DocumentDownload, DocumentUpload } from 'iconsax-react';
+
 
 interface FormsValueBpmn {
   name: string;
@@ -175,6 +176,7 @@ const ProcessMaker = () => {
   }, [getTranslatedTitleForEntry]);
 
   useEffect(() => {
+    console.log('Modeler is being initialized...');
     if (!canvasRef.current) return;
     const modeler = new Modeler({
       container: canvasRef.current,
@@ -183,6 +185,10 @@ const ProcessMaker = () => {
     modelerRef.current = modeler;
 
     modeler.importXML(xml).then(() => {
+      const palette = document.querySelector('.djs-palette');
+      if (palette) {
+        palette.classList.add('two-column');
+      }
       modeler.on('element.added', (event: any) => {
         const element = event.element;
         const businessObject = element.businessObject;
@@ -279,7 +285,7 @@ const ProcessMaker = () => {
 
   return (
     <>
-      <div className="w-full h-[600px] border p-3 border-1 border-[#0A9AD7] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.40)] dark:border-1 dark:border-[#0D4D6A] rounded-6">
+      <div className="w-full h-full  p-3 border-1 border-[#0A9AD7] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.40)] dark:border-1 dark:border-[#0D4D6A] rounded-6">
         <div ref={canvasRef} className="w-[100%] bg-white rounded-6 h-full" />
         <div className={i18n.language === 'en' ? 'bpmn-toolbar-en' : 'bpmn-toolbar-fa'}>
           <AppButton
@@ -302,8 +308,8 @@ const ProcessMaker = () => {
       </div>
       {isModalOpen('confirm', 'bpmn:StartEvent') && <ProcessModal />}
       {isModalOpen('edit', 'bpmn:StartEvent') && <ProcessModal />}
-      {isModalOpen('confirm', 'bpmn:Task') && <AddEventModal />}
-      {isModalOpen('edit', 'bpmn:Task') && <AddEventModal />}
+      {isModalOpen('confirm', 'bpmn:Task') && <NewEventModal />}
+      {isModalOpen('edit', 'bpmn:Task') && <NewEventModal />}
       {isModalOpen('confirm', 'bpmn:SequenceFlow') && <AddActionsModall />}
       {isModalOpen('edit', 'bpmn:SequenceFlow') && <AddActionsModall />}
       {isModalOpen('confirm', 'bpmn:EndEvent') && <EventModal />}
