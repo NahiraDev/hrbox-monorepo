@@ -4,7 +4,7 @@ import { useModalContext } from 'core/context';
 
 const colors = ['#000000', '#A61111', '#F4D082', '#05856F', '#0ED2F7', '#2F80ED', '#DB5918', '#9F9C90'];
 
-export const OrgLocation = () => {
+export const OrganizationDepartmentModal = () => {
   const { openModal } = useModalContext();
 
   return (

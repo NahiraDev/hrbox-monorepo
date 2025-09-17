@@ -1,16 +1,14 @@
 import { technicalDepartment } from 'mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from 'core/components';
-import SubHeader from '../../features/SubHeader';
-import { OrgDepartments } from './modals/OrgDepartments';
+import { OrganizationDepartmentModal } from './modals/OrganizationDepartmentModal';
 
 // import { CloseCircle } from 'iconsax-react';
 
 const TechnicalDepartments = () => {
   return (
     <>
-      <SubHeader/>
-      {/*<OrganizationColor />*/}
+
       <div className="w-full gap-3 rounded-2xl flex flex-wrap items-center content-start p-4">
         {technicalDepartment.map((user, index) => (
           <Card
@@ -34,7 +32,7 @@ const TechnicalDepartments = () => {
           </Card>
         ))}
         <span className="text-9xl absolute top-175 left-455 font-bold text-[#04070E]/10">200</span>
-        <OrgDepartments/>
+        <OrganizationDepartmentModal/>
       </div>
     </>
   );

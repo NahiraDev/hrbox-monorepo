@@ -3,7 +3,7 @@ import { Card, Avatar } from '@heroui/react';
 import { UserSearch } from 'iconsax-react';
 
 import { BasicInfoLayout } from '../../common';
-const Guidlines = () => {
+const Guidelines = () => {
   return (
     <BasicInfoLayout
       content={
@@ -27,4 +27,4 @@ const Guidlines = () => {
   );
 };
 
-export default Guidlines;
+export default Guidelines;

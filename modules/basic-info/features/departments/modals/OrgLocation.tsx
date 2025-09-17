@@ -2,7 +2,6 @@ import { AppAutoComplete, AppButton, AppModal, AppTextArea } from 'core/componen
 import { Add, Location } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 import { Avatar } from '@heroui/react';
-import { UserLocation } from '../../../features/common';
 
 export const OrgLocation = () => {
   const { openModal } = useModalContext();
@@ -100,8 +99,7 @@ export const OrgLocation = () => {
               radius: 'lg',
             }}
           />
-          <UserLocation />
-        </div>
+         </div>
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton

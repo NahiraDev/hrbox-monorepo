@@ -1,5 +1,6 @@
 import { lazyLoad } from 'core/index';
 import { createProjectRoutes } from 'core/index';
+import { BasicInfoPaths } from './paths';
 
 export const page = {
   departments: {
@@ -9,7 +10,7 @@ export const page = {
     employees: lazyLoad(() => import('../features/employees/EmployeeSatisfactionCalendar')),
   },
   employees: {
-    all: lazyLoad(() => import('../features/employees/Employees')),
+    allEmployees: lazyLoad(() => import('../features/employees/Employees')),
     satisfaction: lazyLoad(() => import('../features/employees/EmployeeSatisfactionCalendar')),
     personalInformation: lazyLoad(() => import('../features/employees/PersonalInformation')),
     Documents: lazyLoad(() => import('../features/employees/Documents')),
@@ -21,7 +22,7 @@ export const page = {
     Dependents: lazyLoad(() => import('../features/employees/Dependents')),
     SpecificInformation: lazyLoad(() => import('../features/employees/More/SpecificInformation')),
     Onboarding: lazyLoad(() => import('../features/employees/More/Onboarding')),
-    Guidlines: lazyLoad(() => import('../features/employees/More/Guidlines')),
+    Guidelines: lazyLoad(() => import('../features/employees/More/Guidelines')),
     TestReport: lazyLoad(() => import('../features/employees/More/TestReport')),
     ContractList: lazyLoad(() => import('../features/employees/More/ContractList')),
     HealthRecord: lazyLoad(() => import('../features/employees/More/HealthRecord')),
@@ -30,23 +31,24 @@ export const page = {
 };
 
 export const BasicInfoRoutes = createProjectRoutes('/basic-info', {
-  OrganizationDepartments: page.departments.organization,
-  TechnicalDepartments: page.departments.technical,
-  OrganizationalLocations: page.departments.location,
-  EmployeeSatisfactionCalendar: page.employees.satisfaction,
-  PersonalInformation: page.employees.personalInformation,
-  Documents: page.employees.Documents,
-  Jobs: page.employees.Jobs,
-  education: page.employees.Education,
-  skills: page.employees.skills,
-  courses: page.employees.courses,
-  Achievements: page.employees.Achievements,
-  Dependents: page.employees.Dependents,
-  SpecificInformation: page.employees.SpecificInformation,
-  Onboarding: page.employees.Onboarding,
-  Guidlines: page.employees.Guidlines,
-  TestReport: page.employees.TestReport,
-  ContractList: page.employees.ContractList,
-  HealthRecord: page.employees.HealthRecord,
-  RequestList:page.employees.RequestList,
+  [BasicInfoPaths.OrganizationDepartments]: page.departments.organization,
+  [BasicInfoPaths.TechnicalDepartment]: page.departments.technical,
+  [BasicInfoPaths.OrganizationalLocations]: page.departments.location,
+  [BasicInfoPaths.SatisfactionStatus]: page.employees.satisfaction,
+  [BasicInfoPaths.PersonalInformation]: page.employees.personalInformation,
+  [BasicInfoPaths.AllEmployees]: page.departments.allEmployees,
+  [BasicInfoPaths.Documents]: page.employees.Documents,
+  [BasicInfoPaths.Jobs]: page.employees.Jobs,
+  [BasicInfoPaths.Educations]: page.employees.Education,
+  [BasicInfoPaths.Skills]: page.employees.skills,
+  [BasicInfoPaths.Courses]: page.employees.courses,
+  [BasicInfoPaths.Achievements]: page.employees.Achievements,
+  [BasicInfoPaths.Dependents]: page.employees.Dependents,
+  [BasicInfoPaths.OrganizationSpecificInformation]: page.employees.SpecificInformation,
+  [BasicInfoPaths.Onboarding]: page.employees.Onboarding,
+  [BasicInfoPaths.Guidelines]: page.employees.Guidelines,
+  [BasicInfoPaths.TestReport]: page.employees.TestReport,
+  [BasicInfoPaths.ContractList]: page.employees.ContractList,
+  [BasicInfoPaths.HealthRecords]: page.employees.HealthRecord,
+  [BasicInfoPaths.RequestList]: page.employees.RequestList,
 });

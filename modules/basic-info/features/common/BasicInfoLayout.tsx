@@ -27,7 +27,7 @@ const moreItems = [
   { key: '1', label: 'Organization-Specific Information', href: '/basic-info/SpecificInformation' },
   { key: '2', label: 'Onboarding', href: '/basic-info/Onboarding' },
   { key: '3', label: 'Offboarding' },
-  { key: '4', label: 'Guidlines' },
+  { key: '4', label: 'Guidelines' },
   { key: '5', label: 'Test Report' },
   { key: '6', label: 'Contract List' },
   { key: '7', label: 'Request List' },
