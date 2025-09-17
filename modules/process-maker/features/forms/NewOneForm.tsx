@@ -5,11 +5,12 @@ import { AppAutoComplete, AppInput, AppTextArea, useFormContext } from '../../..
 import AppCheckbox from '../../../../core/components/AppCheckBox';
 
 export const initialValuesNewOne = {
-  title: null,
-  type: null,
-  processbuilder: null,
-  category_process: null,
-  textarea: null,
+  title: '',
+  type: '',
+  processbuilder: '',
+  category_process: '',
+  textarea: '',
+  processModal: '',
 };
 export const formValidationNewOne = Yup.object().shape({
   title: Yup.string().required(),
@@ -17,6 +18,7 @@ export const formValidationNewOne = Yup.object().shape({
   processbuilder: Yup.string().required(),
   category_process: Yup.string().required(),
   textarea: Yup.string().required(),
+  processModal: Yup.string().required(),
 });
 export const handleSubmitNewOne = (values: any) => {
   return {
@@ -25,6 +27,7 @@ export const handleSubmitNewOne = (values: any) => {
     processbuilder: values.processbuilder,
     category_process: values.category_process,
     textarea: values.textarea,
+    processModal: values.processModal,
   };
 };
 export const NewOneForm = () => {
@@ -32,34 +35,31 @@ export const NewOneForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-[24px]">
-        <div>
+      <div className="flex flex-col gap-[24px] w-full">
+        <div className="flex flex-row justify-between">
           <AppInput
             props={{
-              type: 'text',
+              error: touched.title && errors.title,
               label: 'title',
               name: 'title',
               value: values.title,
-              error: touched.title && errors.title,
-              onChange: handleChange,
               onBlur: handleBlur,
+              className: 'w-full',
+              onChange: handleChange,
             }}
           />
-        </div>
-        <div>
           <AppInput
             props={{
-              type: 'text',
+              error: touched.type && errors.type,
               label: 'type',
               name: 'type',
               value: values.type,
-              error: touched.type && errors.type,
-              onChange: handleChange,
               onBlur: handleBlur,
+              onChange: handleChange,
             }}
           />
         </div>
-        <div>
+        <div className="flex flex-row justify-between">
           <AppAutoComplete
             props={{
               type: 'text',
@@ -71,8 +71,6 @@ export const NewOneForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'text',
@@ -91,9 +89,14 @@ export const NewOneForm = () => {
           </div>
           <div className="flex items-center justify-between gap-[8px]">
             <CheckboxGroup>
-              <AppCheckbox>
-                <option>0</option>
-              </AppCheckbox>
+              <AppCheckbox
+                props={{
+                  name: 'processModal',
+                  isSelected: values.is_notification_of_steps_on,
+                  onChange: handleChange,
+                  children: 'Notify me',
+                }}
+              />
             </CheckboxGroup>
           </div>
         </div>

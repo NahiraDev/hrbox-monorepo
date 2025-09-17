@@ -92,10 +92,16 @@ export const PointForm = () => {
             <p>Veto Authority?</p>
           </div>
           <div className="w-[320px] gap-[8px]">
-            <AppCheckBox>
-              <option>yes</option>
-              <option>no</option>
-            </AppCheckBox>
+            <AppCheckBox
+              props={{
+                children: (
+                  <>
+                    <option>yes</option>
+                    <option>no</option>
+                  </>
+                ),
+              }}
+            />
           </div>
         </div>
         <div>
@@ -115,10 +121,16 @@ export const PointForm = () => {
             <p>Type of signature:</p>
           </div>
           <div className="  w-[398px] pr-[60px]  gap-[8px]">
-            <AppCheckBox>
-              <option>Hrbox Sign</option>
-              <option>Digital Sign</option>
-            </AppCheckBox>
+            <AppCheckBox
+              props={{
+                children: (
+                  <>
+                    <option>Hrbox Sign</option>
+                    <option>Digital Sign</option>
+                  </>
+                ),
+              }}
+            />
           </div>
         </div>
         <div>
@@ -270,18 +282,30 @@ export const PointForm = () => {
         </div>
         <p>notifications</p>
         <div className=" w-full">
-          <AppCheckBox>
-            <option>Default</option>
-            <option>Customization</option>
-          </AppCheckBox>
+          <AppCheckBox
+            props={{
+              children: (
+                <>
+                  <option>Default</option>
+                  <option>Customization</option>
+                </>
+              ),
+            }}
+          />
         </div>
-        {formik.values.notifications === 2 && (
+        {values.notifications === 2 && (
           <div className="flex flex-col gap-[6px] ">
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Exporter</option>
-                </AppCheckBox>
+                <AppCheckBox
+                  props={{
+                    children: (
+                      <>
+                        <option>Exporter</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -309,9 +333,15 @@ export const PointForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Exporter</option>
-                </AppCheckBox>
+                <AppCheckBox
+                  props={{
+                    children: (
+                      <>
+                        <option>Exporter</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -339,9 +369,15 @@ export const PointForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Referrer</option>
-                </AppCheckBox>
+                <AppCheckBox
+                  props={{
+                    children: (
+                      <>
+                        <option>Referrer</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -373,3 +409,4 @@ export const PointForm = () => {
     </Form>
   );
 };
+

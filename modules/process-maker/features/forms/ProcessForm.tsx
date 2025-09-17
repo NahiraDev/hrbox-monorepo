@@ -108,9 +108,15 @@ export const ProcessForm = () => {
           </div>
           <div className="flex items-center justify-between gap-[8px]">
             <CheckboxGroup>
-              <AppCheckBox>
-                <option>0</option>
-              </AppCheckBox>
+              <AppCheckBox
+                props={{
+                  children: (
+                    <>
+                      <option>0</option>
+                    </>
+                  ),
+                }}
+              />
             </CheckboxGroup>
           </div>
         </div>

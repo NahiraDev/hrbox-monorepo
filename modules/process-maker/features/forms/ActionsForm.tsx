@@ -1,9 +1,10 @@
-import { Form } from '@heroui/react';
-import { AppAutoComplete, AppInput, AppTextArea } from 'core/components';
+import { CheckboxGroup, Form } from '@heroui/react';
 import { Add, Message, Notification, Sms } from 'iconsax-react';
 import * as Yup from 'yup';
-import AppCheckbox from 'core/components/AppCheckBox';
 import { useFormContext } from 'core/context';
+import AppCheckbox from 'core/components/AppCheckBox';
+
+import { AppAutoComplete, AppInput, AppTextArea } from '../../../../core/components';
 
 export const initialValuesAction = {
   title: null,
@@ -11,12 +12,18 @@ export const initialValuesAction = {
   actionType: null,
   workflowImplementation: null,
   textarea: null,
-  organization: null,
   depatment: null,
   FullName: null,
   NationalCode: null,
   PhoneNum: null,
   descriptionexporter: null,
+  Authority: null,
+  processType: null,
+  organization: null,
+  signature: null,
+  notification: null,
+  eecipient: null,
+  referrer: null,
 };
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
@@ -24,12 +31,18 @@ export const formValidationAction = Yup.object().shape({
   actionType: Yup.string().required(),
   workflowImplementation: Yup.string().required(),
   textarea: Yup.string().required(),
-  organization: Yup.string().required(),
   depatment: Yup.string().required(),
   FullName: Yup.string().required(),
   NationalCode: Yup.string().required(),
   PhoneNum: Yup.string().required(),
   descriptionexporter: Yup.string().required(),
+  Authority: Yup.string().required(),
+  processType: Yup.string().required(),
+  organization: Yup.string().required(),
+  signature: Yup.string().required(),
+  notification: Yup.string().required(),
+  eecipient: Yup.string().required(),
+  referrer: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
   return {
@@ -38,12 +51,18 @@ export const handleSubmitAction = (values: any) => {
     actionType: values.actionType,
     workflowImplementation: values.workflowImplementation,
     textarea: values.textarea,
-    organization: values.organization,
     depatment: values.depatment,
     FullName: values.FullName,
     NationalCode: values.NationalCode,
     PhoneNum: values.PhoneNum,
     descriptionexporter: values.descriptionexporter,
+    Authority: values.Authority,
+    processType: values.processType,
+    organization: values.organization,
+    signature: values.signature,
+    notification: values.notification,
+    eecipient: values.eecipient,
+    referrer: values.referrer,
   };
 };
 export const ActionsForm = () => {
@@ -109,10 +128,19 @@ export const ActionsForm = () => {
             <p>veto_authority</p>
           </div>
           <div className="w-[320px]  gap-[8px]">
-            <AppCheckBox>
-              <option>yes</option>
-              <option>no</option>
-            </AppCheckBox>
+            <CheckboxGroup>
+              <AppCheckbox
+                props={{
+                  name: 'Authority',
+                  children: (
+                    <>
+                      <span>Yes</span>
+                      <span>No</span>
+                    </>
+                  ),
+                }}
+              />
+            </CheckboxGroup>
           </div>
         </div>
         <div>
@@ -133,11 +161,18 @@ export const ActionsForm = () => {
               <p>Sign Type:</p>
             </div>
             <div className="">
-              <AppCheckbox>
-                <option>constant</option>
-                <option>duringtheprocess</option>
-                <option>duringtheissued</option>
-              </AppCheckbox>
+              <AppCheckbox
+                props={{
+                  name: 'processType',
+                  children: (
+                    <>
+                      <option>constant</option>
+                      <option>duringtheprocess</option>
+                      <option>duringtheissued</option>
+                    </>
+                  ),
+                }}
+              />
             </div>
           </>
         )}
@@ -147,10 +182,17 @@ export const ActionsForm = () => {
               <p>add_an_employee_outside_the_organization</p>
             </div>
             <div className="w-[320px]  gap-[8px]">
-              <AppCheckBox>
-                <option>yes</option>
-                <option>no</option>
-              </AppCheckBox>
+              <AppCheckbox
+                props={{
+                  name: 'organization',
+                  children: (
+                    <>
+                      <option>yes</option>
+                      <option>no</option>
+                    </>
+                  ),
+                }}
+              />
             </div>
           </div>
         )}
@@ -163,10 +205,17 @@ export const ActionsForm = () => {
               <p>type_of_signature</p>
             </div>
             <div className="  w-[398px] pr-[60px]  gap-[8px]">
-              <AppCheckBox>
-                <option>Hrbox Sign</option>
-                <option>Digital Sign</option>
-              </AppCheckBox>
+              <AppCheckbox
+                props={{
+                  name: 'signature',
+                  children: (
+                    <>
+                      <option>Hrbox Sign</option>
+                      <option>Digital Sign</option>
+                    </>
+                  ),
+                }}
+              />
             </div>
           </div>
         )}
@@ -254,17 +303,32 @@ export const ActionsForm = () => {
         )}
         <p>notification</p>
         <div className=" w-full">
-          <AppCheckBox>
-            <option>Default</option>
-            <option>Customization</option>
-          </AppCheckBox>
+          <AppCheckbox
+            props={{
+              name: 'notification',
+              children: (
+                <>
+                  <option>Default</option>
+                  <option>Customization</option>
+                </>
+              ),
+            }}
+          />
+
           {/*{custom ? (*/}
           <div className="flex flex-col gap-[6px] ">
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Exporter</option>
-                </AppCheckBox>
+                <AppCheckbox
+                  props={{
+                    name: 'eecipient',
+                    children: (
+                      <>
+                        <option>Exporter</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -292,9 +356,16 @@ export const ActionsForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Eecipient</option>
-                </AppCheckBox>
+                <AppCheckbox
+                  props={{
+                    name: 'employee',
+                    children: (
+                      <>
+                        <option>Eecipient</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -322,9 +393,16 @@ export const ActionsForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckBox>
-                  <option>Referrer</option>
-                </AppCheckBox>
+                <AppCheckbox
+                  props={{
+                    name: 'referrer',
+                    children: (
+                      <>
+                        <option>Referrer</option>
+                      </>
+                    ),
+                  }}
+                />
               </div>
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
@@ -365,3 +443,4 @@ export const ActionsForm = () => {
     </Form>
   );
 };
+
