@@ -2,9 +2,13 @@ import { testReport } from 'mock';
 import { TickSquare, User, ArrowDown, DollarCircle, Status } from 'iconsax-react';
 import { Card } from '@heroui/react';
 import { AppButton } from 'core/components';
+import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../../common';
+import { TestReportModal } from '../modals/TestReportModal';
 const TestReport = () => {
+  const { openModal } = useModalContext();
+
   return (
     <BasicInfoLayout
       content={
@@ -26,9 +30,7 @@ const TestReport = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => {
-                          console.log('clicked');
-                        },
+                        onPress: () => openModal('edit', undefined),
                         content: <span>{worker.job}</span>,
                       }}
                     />
@@ -74,6 +76,7 @@ const TestReport = () => {
               </Card>
             ))}
           </div>
+          <TestReportModal/>
         </div>
       }
     />

@@ -5,6 +5,7 @@ import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
+import DocumentModal from '../employees/modals/DocumentsModal';
 
 const Documents = () => {
   const { openModal } = useModalContext();
@@ -18,7 +19,16 @@ const Documents = () => {
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar radius="sm" size="lg" color='primary'/>
+                    <AppButton
+                      props={{
+                        size: 'xs',
+                        radius: 'sm',
+                        variant: 'light',
+                        isIconOnly: true,
+                        onPress: () => openModal('edit', undefined),
+                        content: <Avatar radius="sm" size="lg" color='primary'/>,
+                      }}
+                    />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
@@ -70,6 +80,7 @@ const Documents = () => {
             </Card>
           ))}
           <AppDeleteModal />
+          <DocumentModal/>
         </div>
       }
     />

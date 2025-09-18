@@ -2,18 +2,21 @@ import type { Key } from 'react';
 
 import { TickIcon } from 'core/icons';
 import { AppButton } from 'core/components';
-import { FolderCross, MessageEdit, Trash } from 'iconsax-react';
+import { Add, FolderCross, MessageEdit, Trash } from 'iconsax-react';
 import { Listbox, ListboxItem } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 // import { dataReportWorker } from 'mock';
 
-import { AppTabs } from '../../../../core';
+import { AppTabs, useModalContext } from '../../../../core';
 import Repport from '../common/Repport';
+// import EducationModals from '../employees/modals/EducationModals';
+import AddNewCourses from '../employees/modals/AddNewCourses';
+import { BasicInfoPaths } from '../../../basic-info/app/paths';
 
 const EmployeesTab = [
   { key: 'personal-information', title: 'Personal Information', href: '/basic-info/PersonalInformation' },
-  { key: 'documents', title: 'Documents', href: '/basic-info/Documents' },
+  { key: 'documents', title: 'Documents', href: BasicInfoPaths.Documents },
   { key: 'jobs', title: 'Jobs', href: '/basic-info/Jobs' },
   { key: 'education', title: 'Educations', href: '/basic-info/Education' },
   { key: 'skills', title: 'Skills', href: '/basic-info/Skills' },
@@ -49,6 +52,7 @@ const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => {
 ////////////////////////////////////////////////////////////////////////////////
 
 export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
+  const { openModal } = useModalContext();
   const { pathname } = useLocation();
   const [selectedTab, setSelectedTab] = useState('personal-information');
   const [showMore, setShowMore] = useState(false);
@@ -120,6 +124,20 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                     ),
                   }}
                 />
+                <AppButton
+                  props={{
+                    size: 'md',
+                    radius: 'lg',
+                    color: 'white',
+                    onPress: () => openModal('edit', undefined),
+                    content: (
+                      <>
+                        <Add size={22} />
+                        <span>Add New One</span>
+                      </>
+                    ),
+                  }}
+                />
               </div>
             </div>
             <div className="relative">
@@ -172,6 +190,8 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
         </div>
         <div className="col-span-10">{content}</div>
       </div>
+      {/*<EducationModals/>*/}
+      <AddNewCourses/>
     </div>
   );
 };

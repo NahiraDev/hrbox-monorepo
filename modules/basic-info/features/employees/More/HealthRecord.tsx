@@ -4,8 +4,14 @@ import { AppButton } from 'core/components';
 import { Calendar, Drop, NotificationFavorite, HeartAdd, Hospital, Add, HeartEdit } from 'iconsax-react';
 
 import { BasicInfoLayout } from '../../common';
+import PreEmploymentHealthRecordsModals from '../modals/PreEmploymentHealthRecordsModals';
+import { useModalContext } from 'core/context';
+import AddNewOnDutyHealthRecords from '../modals/AddNewOnDutyHealthRecords';
+import OnDutyHealthRecords from '../modals/OnDutyHealthRecords';
 
 const HealthRecord = () => {
+  const { openModal } = useModalContext();
+
   return (
     <BasicInfoLayout
       content={
@@ -21,9 +27,7 @@ const HealthRecord = () => {
                   isIconOnly: true,
                   color: 'white',
                   className: 'border border-primary',
-                  onPress: () => {
-                    console.log('clicked');
-                  },
+                  onPress: () => openModal('edit', undefined),
                   content: <Add />,
                 }}
               />
@@ -38,9 +42,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => {
-                          console.log('clicked');
-                        },
+                        onPress: () => openModal('edit', undefined),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
@@ -92,9 +94,7 @@ const HealthRecord = () => {
                   isIconOnly: true,
                   color: 'white',
                   className: 'border border-primary',
-                  onPress: () => {
-                    console.log('clicked');
-                  },
+                  onPress: () => openModal('edit', undefined),
                   content: <Add />,
                 }}
               />
@@ -109,9 +109,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => {
-                          console.log('clicked');
-                        },
+                        onPress: () => openModal('edit', undefined),  
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
@@ -152,6 +150,9 @@ const HealthRecord = () => {
               ))}
             </div>
           </div>
+          <PreEmploymentHealthRecordsModals/>
+          <AddNewOnDutyHealthRecords/>
+          <OnDutyHealthRecords/>
         </div>
       }
     />
