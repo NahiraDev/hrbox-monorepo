@@ -210,6 +210,47 @@ const ProcessMaker = () => {
           openModal('confirm', name, element);
         }
       });
+      setTimeout(() => {
+        const paletteEntries = document.querySelector('.djs-palette-entries');
+        if (!paletteEntries) return;
+
+        // اولین group (tools) رو پیدا کن و حفظ کن
+        const toolsGroup = paletteEntries.querySelector('.group[data-group="tools"]');
+        if (!toolsGroup) return;
+
+        // یک group جدید برای همه المان‌های BPMN بساز
+        const newBpmnGroup = document.createElement('div');
+        newBpmnGroup.className = 'group';
+        newBpmnGroup.setAttribute('data-group', 'bpmn-elements');
+        newBpmnGroup.style.marginTop = '8px';
+
+        // تمام groupهای غیر از tools رو جمع کن و entryهایشون رو به group جدید اضافه کن
+        const otherGroups = Array.from(paletteEntries.querySelectorAll('.group:not([data-group="tools"])'));
+
+        otherGroups.forEach(group => {
+          const entries = Array.from(group.querySelectorAll('.entry'));
+          entries.forEach(entry => {
+            newBpmnGroup.appendChild(entry);
+          });
+          // group قدیمی رو حذف کن
+          group.remove();
+        });
+
+        // separator قبل از group جدید اضافه کن (اختیاری)
+        // const separator = document.createElement('hr');
+        // separator.className = 'separator';
+        // paletteEntries.appendChild(separator);
+
+        // group جدید رو به palette اضافه کن
+        paletteEntries.appendChild(newBpmnGroup);
+
+        // CSS کلاس two-column رو به palette اضافه کن (اگر قبلاً نکردی)
+        const palette = document.querySelector('.djs-palette');
+        palette?.classList.add('two-column');
+
+        // استایل دو ستونه رو فقط روی group جدید اعمال کن
+        applyBpmnGroupStyling(); // تابع استایل‌دهی (پایین تعریف شده)
+      }, 0);
 
       modeler.on('element.dblclick', (event: any) => {
         const element = event.element;

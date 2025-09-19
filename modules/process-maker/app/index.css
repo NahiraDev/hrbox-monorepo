@@ -33,24 +33,39 @@
     .bjs-powered-by {
       display: none !important;
       }
-      .djs-palette .djs-palette-entries {
-        display: flex;
-        flex-wrap: wrap;
-      }
 
-      .djs-palette .djs-palette-entries .group {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-      }
+  .djs-palette.two-column .group[data-group="bpmn-elements"] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 8px;
+  }
 
-      .djs-palette .djs-palette-entries .entry {
-        width: 50% !important;   /* همیشه نصف ردیف → دو تا تو هر ردیف */
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry {
+    width: calc(50% - 2px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: grab;
+    transition: background-color 0.2s ease;
+  }
+
+  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry:hover {*/
+  /*  background-color: #e0f7ff;*/
+  /*}*/
+
+  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry img,
+  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry svg {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
 
   /*.djs-palette {*/
   /*  display: flex;*/

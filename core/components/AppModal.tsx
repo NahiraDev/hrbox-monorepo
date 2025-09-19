@@ -6,13 +6,6 @@ import { serviceRegistry } from 'core/helpers';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 
-// interface ModalProps {
-//   title?: string;
-//   icon?: React.ReactNode;
-//   size?: ModalSize;
-//   children?: React.ReactNode;
-// }
-
 const sizeClasses: Record<ModalSize, string> = {
   sm: 'max-w-sm',
   md: 'max-w-md',
@@ -33,21 +26,15 @@ const AppModal = () => {
       closeModal(modalData.type, modalData.name);
     }
   };
-  //
-  // const content = React.Children.map(children, (child) => {
-  //   if (!React.isValidElement(child)) return child;
-  //
-  //   return React.cloneElement(child as any, {
-  //     close: closeModal,
-  //   });
-  // });
-  // ${sizeClasses[size]}
+
   if (!modalData) return null;
 
   const { type, name, component } = modalData;
+
   console.log(modalData);
   console.log(isModalOpen);
   const size: ModalSize = '2xl';
+
   return createPortal(
     <AnimatePresence>
       {isModalOpen(type, name) && (
