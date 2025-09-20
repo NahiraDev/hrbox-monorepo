@@ -1,0 +1,108 @@
+  /*@import 'bpmn-js/dist/assets/diagram-js.css';*/
+  /*@import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';*/
+  /*@import 'bpmn-js/dist/assets/bpmn-js.css';*/
+
+    /*.djs-palette .djs-palette-entries {*/
+    /*  display: flex !important;*/
+    /*  flex-wrap: wrap !important;*/
+    /*  gap: 8px !important;*/
+    /*  padding: 8px !important;*/
+    /*}*/
+
+
+    /*.djs-palette .entry {*/
+    /*  flex: 0 0 calc(50% - 4px) !important; !* دوتا دوتا *!*/
+    /*  height: 40px !important;*/
+    /*  display: flex !important;*/
+    /*  align-items: center !important;*/
+    /*  justify-content: center !important;*/
+    /*  box-sizing: border-box !important;*/
+    /*  border-radius: 4px !important;*/
+    /*  width: calc(50% - 4px) !important;*/
+    /*}*/
+
+    /*.djs-palette .entry:hover {*/
+    /*  background-color: #f0f0f0 !important;*/
+    /*}*/
+
+    /*.djs-palette .entry img,*/
+    /*.djs-palette .entry svg {*/
+    /*  width: 24px !important;*/
+    /*  height: 24px !important;*/
+    /*}*/
+    .bjs-powered-by {
+      display: none !important;
+      }
+      .djs-palette .djs-palette-entries {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .djs-palette .djs-palette-entries .group {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .djs-palette .djs-palette-entries .entry {
+        width: 50% !important;   /* همیشه نصف ردیف → دو تا تو هر ردیف */
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+  /*.djs-palette {*/
+  /*  display: flex;*/
+  /*  flex-direction: column;*/
+  /*}*/
+
+  /*.djs-palette-entries {*/
+  /*  display: flex;*/
+  /*  flex-wrap: wrap; !* این باعث میشه دوتا دوتا برن کنار هم *!*/
+  /*  gap: 4px; !* فاصله بینشون *!*/
+  /*}*/
+
+  /*.djs-palette .entry {*/
+  /*  flex: 0 0 48%; !* یعنی هر دکمه نصف عرض بگیره *!*/
+  /*  box-sizing: border-box;*/
+  /*}*/
+
+    /*!* استایل Toolbar عمودی شبیه bpmn.io *!*/
+    /*.bpmn-toolbar-en {*/
+    /*  position: absolute;*/
+    /*  left: 160px;*/
+    /*  bottom: 50px;*/
+    /*  display: flex;*/
+    /*  flex-direction: row;*/
+    /*  border-radius: 10px;*/
+    /*  gap: 4px;*/
+    /*  background-color: whitesmoke;*/
+    /*}*/
+
+    /*.bpmn-toolbar-fa {*/
+    /*  position: absolute;*/
+    /*  right: 175px;*/
+    /*  bottom: 60px;*/
+    /*  display: flex;*/
+    /*  flex-direction: row;*/
+    /*  border-radius: 10px;*/
+    /*  gap: 4px;*/
+    /*  background-color: whitesmoke;*/
+    /*  padding: 0 !important;*/
+    /*  margin: 0 !important;*/
+    /*}*/
+
+    /*.bpmn-toolbar-en .djs-button, .bpmn-toolbar-fa .djs-button {*/
+    /*  padding: 0 !important;*/
+    /*  margin: 0 !important;*/
+    /*  display: flex;*/
+    /*  align-items: center;*/
+    /*  justify-content: center;*/
+    /*  color: black;*/
+    /*  background-color: transparent;*/
+    /*}*/
+
+    /*.bpmn-toolbar-en .djs-button:hover, .bpmn-toolbar-fa .djs-button:hover {*/
+    /*  color: cornflowerblue;*/
+    /*}*/

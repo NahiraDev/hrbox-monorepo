@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useTranslation } from 'react-i18next';
+import Modeler from 'bpmn-js/lib/Modeler';
 
-import { ProcessModal, EventModal, AddEventModal, AddActionsModall } from './modals';
+import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from './modals';
 
-import './bpmnstyle.css';
-import { useModalContext } from '../../../core';
+import '../app/index.css';
+import { AppButton, AppInput, useModalContext } from '../../../core';
+
+import { DocumentDownload, DocumentUpload } from 'iconsax-react';
+
 
 interface FormsValueBpmn {
   name: string;
@@ -35,13 +38,14 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
 
-export const Bpmn = () => {
+const ProcessMaker = () => {
   const { openModal, closeModal, isModalOpen, getModalData } = useModalContext();
   const canvasRef = useRef<HTMLDivElement | null>(null);
-  const modelerRef = useRef<BpmnModeler | null>(null);
+  const modelerRef = useRef<Modeler | null>(null);
   const { t, i18n } = useTranslation();
   const [elementData, setElementData] = useState<Record<string, FormsValueBpmn>>({});
   const observerRef = useRef<MutationObserver | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const getTranslatedTitleForEntry = useCallback(
     (el: HTMLElement) => {
       const candidates: string[] = [];
@@ -83,6 +87,62 @@ export const Bpmn = () => {
     },
     [t],
   );
+  const handleDownloadAndSubmit = useCallback(async () => {
+    if (!modelerRef.current) return;
+
+    try {
+      const { xml } = await modelerRef.current.saveXML({ format: true });
+      const blob = new Blob([xml], { type: 'application/bpmn+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+
+      a.href = url;
+      a.download = 'HrBox.bpmn';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      const payload = {
+        duagramxml: xml,
+        elements: { ...elementData },
+        submittedat: new Date().toISOString(),
+      };
+      const res = JSON.stringify(payload);
+
+      console.log(res);
+    } catch (err) {
+      console.error('Error exporting XML:', err);
+      alert('Failed to export diagram!');
+    }
+    localStorage.removeItem('bpmndiagram');
+    localStorage.removeItem('bpmnElementData');
+  }, [elementData]);
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file || !modelerRef.current) return;
+
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const xmlStr = e.target?.result as string;
+
+      try {
+        await modelerRef.current?.importXML(xmlStr);
+        console.log('Diagram imported successfully');
+      } catch (err) {
+        console.error('Error importing XML:', err);
+        alert('Failed to import diagram!');
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  };
 
   const applyPaletteTranslations = useCallback(() => {
     const entries = document.querySelectorAll(
@@ -116,76 +176,79 @@ export const Bpmn = () => {
   }, [getTranslatedTitleForEntry]);
 
   useEffect(() => {
+    console.log('Modeler is being initialized...');
     if (!canvasRef.current) return;
-    const modeler = new BpmnModeler({
+    const modeler = new Modeler({
       container: canvasRef.current,
     });
 
     modelerRef.current = modeler;
 
-    modeler.importXML(xml);
-
-    modeler.on('element.added', (event: any) => {
-      const element = event.element;
-      const businessObject = element.businessObject;
-      const name = businessObject.$type;
-
-      if (
-        [
-          'bpmn:StartEvent',
-          'bpmn:UserTask',
-          'bpmn:ServiceTask',
-          'bpmn:ParallelGateway',
-          'bpmn:SubProcess',
-          'bpmn:SequenceFlow',
-          'bpmn:Task',
-          'bpmn:ExclusiveGateway',
-          'bpmn:EndEvent',
-        ].includes(name)
-      ) {
-        openModal('confirm', name, element);
+    modeler.importXML(xml).then(() => {
+      const palette = document.querySelector('.djs-palette');
+      if (palette) {
+        palette.classList.add('two-column');
       }
+      modeler.on('element.added', (event: any) => {
+        const element = event.element;
+        const businessObject = element.businessObject;
+        const name = businessObject.$type;
+
+        if (
+          [
+            'bpmn:StartEvent',
+            'bpmn:UserTask',
+            'bpmn:ServiceTask',
+            'bpmn:ParallelGateway',
+            'bpmn:SubProcess',
+            'bpmn:SequenceFlow',
+            'bpmn:Task',
+            'bpmn:ExclusiveGateway',
+            'bpmn:EndEvent',
+          ].includes(name)
+        ) {
+          openModal('confirm', name, element);
+        }
+      });
+
+      modeler.on('element.dblclick', (event: any) => {
+        const element = event.element;
+        const businessObject = element.businessObject;
+        const name = businessObject.$type;
+
+        if (
+          [
+            'bpmn:StartEvent',
+            'bpmn:UserTask',
+            'bpmn:ServiceTask',
+            'bpmn:ParallelGateway',
+            'bpmn:SubProcess',
+            'bpmn:SequenceFlow',
+            'bpmn:Task',
+            'bpmn:ExclusiveGateway',
+            'bpmn:EndEvent',
+          ].includes(name)
+        ) {
+          openModal('edit', name, element);
+        }
+      });
+      modeler.on('import.done', () => {
+        applyPaletteTranslations();
+        setTimeout(() => applyPaletteTranslations(), 150);
+      });
+      const obs = new MutationObserver(() => {
+        applyPaletteTranslations();
+      });
+
+      observerRef.current = obs;
+      obs.observe(document.body, { childList: true, subtree: true });
+
+      return () => {
+        obs.disconnect();
+        modeler.destroy();
+        observerRef.current = null;
+      };
     });
-
-    modeler.on('element.dblclick', (event: any) => {
-      const element = event.element;
-      const businessObject = element.businessObject;
-      const name = businessObject.$type;
-
-      if (
-        [
-          'bpmn:StartEvent',
-          'bpmn:UserTask',
-          'bpmn:ServiceTask',
-          'bpmn:ParallelGateway',
-          'bpmn:SubProcess',
-          'bpmn:SequenceFlow',
-          'bpmn:Task',
-          'bpmn:ExclusiveGateway',
-          'bpmn:EndEvent',
-        ].includes(name)
-      ) {
-        openModal('edit', name, element);
-      }
-    });
-
-    modeler.on('import.done', () => {
-      applyPaletteTranslations();
-      setTimeout(() => applyPaletteTranslations(), 150);
-    });
-
-    const obs = new MutationObserver(() => {
-      applyPaletteTranslations();
-    });
-
-    observerRef.current = obs;
-    obs.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      obs.disconnect();
-      modeler.destroy();
-      observerRef.current = null;
-    };
   }, []);
   useEffect(() => {
     applyPaletteTranslations();
@@ -216,25 +279,52 @@ export const Bpmn = () => {
     if (modeling && values.title) {
       modeling.updateProperties(element, { name: values.title });
     }
-
-    console.log('Saved data for element:', element.id, values);
     handleCloseModal();
     handleCloseEditModal();
   };
 
   return (
     <>
-      <div className="w-full h-[600px] border p-3 border-1 border-[#0A9AD7] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.40)] dark:border-1 dark:border-[#0D4D6A] rounded-6">
+      <div className="w-full h-full  p-3 border-1 border-[#0A9AD7] bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.40)] dark:border-1 dark:border-[#0D4D6A] rounded-6">
         <div ref={canvasRef} className="w-[100%] bg-white rounded-6 h-full" />
+        <div className={i18n.language === 'en' ? 'bpmn-toolbar-en' : 'bpmn-toolbar-fa'}>
+          <AppButton
+            props={{
+              onClick: handleDownloadAndSubmit,
+              className: 'djs-button',
+              size: 'sm',
+              text: <DocumentDownload />,
+            }}
+          />
+          <AppButton
+            props={{
+              onClick: handleImportClick,
+              className: 'djs-button',
+              size: 'sm',
+              text: <DocumentUpload />,
+            }}
+          />
+        </div>
       </div>
       {isModalOpen('confirm', 'bpmn:StartEvent') && <ProcessModal />}
       {isModalOpen('edit', 'bpmn:StartEvent') && <ProcessModal />}
-      {isModalOpen('confirm', 'bpmn:Task') && <AddEventModal />}
-      {isModalOpen('edit', 'bpmn:Task') && <AddEventModal />}
+      {isModalOpen('confirm', 'bpmn:Task') && <NewEventModal />}
+      {isModalOpen('edit', 'bpmn:Task') && <NewEventModal />}
       {isModalOpen('confirm', 'bpmn:SequenceFlow') && <AddActionsModall />}
       {isModalOpen('edit', 'bpmn:SequenceFlow') && <AddActionsModall />}
       {isModalOpen('confirm', 'bpmn:EndEvent') && <EventModal />}
       {isModalOpen('edit', 'bpmn:EndEvent') && <EventModal />}
+      <AppInput
+        props={{
+          type: 'file',
+          onChange: handleFileChange,
+          className: 'hidden',
+          accept: '.bpmn,.xml',
+          ref: fileInputRef,
+        }}
+      />
     </>
   );
 };
+
+export default ProcessMaker;

@@ -1,53 +1,9 @@
-import { Add, Chart, SearchNormal, Setting4 } from 'iconsax-react';
-import { useTranslation } from 'react-i18next';
-
-import { AppButton } from '../../../core';
-
-export const Dashboard = () => {
-  const { i18n } = useTranslation();
-
+const Dashboard = () => {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-row-reverse justify-between ">
-        <div className={i18n.language === 'en' ? 'flex flex-row-reverse' : 'flex flex-row'}>
-          <AppButton
-            props={{
-              color: 'primary',
-              size: 'md',
-              radius: 'lg',
-              content: 'Add new One',
-              startContent: <Add />,
-            }}
-          />
-          <AppButton
-            props={{
-              color: 'primary',
-              size: 'md',
-              radius: 'lg',
-              content: <Setting4 />,
-            }}
-          />
-          <AppButton
-            props={{
-              color: 'primary',
-              size: 'md',
-              radius: 'lg',
-              content: <SearchNormal />,
-            }}
-          />
-        </div>
-        <div className="flex">
-          <AppButton
-            props={{
-              color: 'primary',
-              size: 'md',
-              radius: 'lg',
-              content: 'Dashboard',
-              startContent: <Chart />,
-            }}
-          />
-        </div>
-      </div>
+    <div className="flex flex-col h-full w-full ">
+      <div className="flex w-[100%] mt-[15px] h-full dark:bg-[rgba(4,66,92,0.60)] bg-sky-100 border-1 border-solid rounded-xl border-primary" />
     </div>
   );
 };
+
+export default Dashboard;

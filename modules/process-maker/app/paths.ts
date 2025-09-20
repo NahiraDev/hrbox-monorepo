@@ -1,6 +1,6 @@
 import { createPaths } from '../../../core';
 export const ProcessMakerPath = createPaths('/process-maker', {
-    dashboard: '/dashboard',
-    process: '/process',
-    processList: '/processList',
+    Dashboard: '/dashboard',
+    ProcessMaker: '/process',
+    ProcessList: '/process-list',
 });
