@@ -5,6 +5,7 @@ import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsa
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
+import AddNewCourses from './modals/AddNewCourses';
 
 const Achievements = () => {
   const { openModal } = useModalContext();
@@ -67,6 +68,7 @@ const Achievements = () => {
               </div>
             </Card>
           ))}
+          <AddNewCourses/>
           <AppDeleteModal />
         </div>
       }

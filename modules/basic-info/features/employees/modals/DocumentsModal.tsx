@@ -1,10 +1,10 @@
 import {  AppButton, AppModal } from 'core/components';
 
-const DocumentModal = () => {
+const DocumentsModal = () => {
   return (
     <AppModal  size="3xl" title="Add New On-Duty Health Records">
       <AppModal.Body>
-        <div className="bg-primary-400 ">
+        <div className="bg-primary-400">
           no data
         </div>
       </AppModal.Body>
@@ -14,7 +14,6 @@ const DocumentModal = () => {
             size: 'xs',
             radius: 'sm',
             variant: 'light',
-            onPress: () => console.log('a'),
             content: <span>Upload File</span>,
             className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
           }}
@@ -24,4 +23,4 @@ const DocumentModal = () => {
   );
 };
 
-export default DocumentModal;
+export default DocumentsModal;

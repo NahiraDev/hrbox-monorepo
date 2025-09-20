@@ -46,7 +46,6 @@ const AddNewCourses = () => {
                 radius: 'lg',
               }}
             />
-
           </div>
           <div>
             <AppTextArea

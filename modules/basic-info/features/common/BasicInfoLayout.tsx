@@ -15,14 +15,14 @@ import AddNewCourses from '../employees/modals/AddNewCourses';
 import { BasicInfoPaths } from '../../../basic-info/app/paths';
 
 const EmployeesTab = [
-  { key: 'personal-information', title: 'Personal Information', href: '/basic-info/PersonalInformation' },
+  { key: 'personal-information', title: 'Personal Information', href: BasicInfoPaths.PersonalInformation },
   { key: 'documents', title: 'Documents', href: BasicInfoPaths.Documents },
-  { key: 'jobs', title: 'Jobs', href: '/basic-info/Jobs' },
-  { key: 'education', title: 'Educations', href: '/basic-info/Education' },
-  { key: 'skills', title: 'Skills', href: '/basic-info/Skills' },
-  { key: 'courses', title: 'Courses', href: '/basic-info/Courses' },
-  { key: 'achievements', title: 'Achievements', href: '/basic-info/Achievements' },
-  { key: 'dependents', title: 'Dependents', href: '/basic-info/Dependents' },
+  { key: 'jobs', title: 'Jobs', href: BasicInfoPaths.Jobs },
+  { key: 'education', title: 'Educations', href: BasicInfoPaths.Educations },
+  { key: 'skills', title: 'Skills', href: BasicInfoPaths.Skills },
+  { key: 'courses', title: 'Courses', href: BasicInfoPaths.Courses },
+  { key: 'achievements', title: 'Achievements', href: BasicInfoPaths.Achievements },
+  { key: 'dependents', title: 'Dependents', href: BasicInfoPaths.Dependents },
   { key: 'more', title: 'More' },
 ];
 
