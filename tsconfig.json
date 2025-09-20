@@ -3,13 +3,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "core/*": ["core/*"],
-      "@module/*": ["modules/*"],
-      "@configs/*": ["configs/*"],
-      "@mock/*": ["mock/*"],
+      "@core/*": ["./core/*"],
+      "@module/*": ["./modules/*"],
+      "@configs/*": ["./configs/*"],
+      "@mock/*": ["./mock/*"]
     },
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["vite/client"]
   },
-  "include": ["core", "modules", "configs", "mock"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "core/**/*",
+    "modules/**/*",
+    "configs/**/*",
+    "mock/**/*",
+    "**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "**/dist"]
 }

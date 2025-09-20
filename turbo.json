@@ -1,15 +1,16 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "*.d.ts"],
-      "cache": false
-    },
     "dev": {
-      "dependsOn": ["^node_modules"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^build"],
+      "env": ["NODE_ENV", "PORT"]
+    },
+    "dev:standalone": {
+      "cache": false,
+      "persistent": true,
+      "outputs": []
     },
     "lint": {
       "outputs": [],

@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -9,7 +8,12 @@ import { imagetools } from 'vite-imagetools';
 
 export const baseConfig = defineConfig((_env: any) => {
   return {
-    plugins: [react(), tsconfigPaths(), tailwindcss(), imagetools()],
+    plugins: [
+      react(),
+      tsconfigPaths(),
+      tailwindcss(),
+      imagetools()
+    ],
     server: {
       https: {
         key: fs.readFileSync(
@@ -28,11 +32,13 @@ export const baseConfig = defineConfig((_env: any) => {
     },
     resolve: {
       alias: {
-        '@core': path.resolve(__dirname, 'core'),
-        '@module': path.resolve(__dirname, 'modules'),
-        '@configs': path.resolve(__dirname, 'configs'),
-        '@mock': path.resolve(__dirname, 'mock'),
+        '@core': path.resolve(__dirname, './core'),
+        '@module': path.resolve(__dirname, './modules'),
+        '@configs': path.resolve(__dirname, './configs'),
+        '@mock': path.resolve(__dirname, './mock'),
       },
     },
   };
 });
+
+export default baseConfig;

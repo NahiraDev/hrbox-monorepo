@@ -28,3 +28,9 @@ declare module '*.svg' {
     React.SVGProps<SVGSVGElement>
   >;
 }
+
+
+declare module '@core/*';
+declare module '@module/*';
+declare module '@configs/*';
+declare module '@mock/*';

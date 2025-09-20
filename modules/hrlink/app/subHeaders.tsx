@@ -1,4 +1,4 @@
-import { lazyLoad } from 'core/routes';
+import { lazyLoad } from '@core/routes';
 import {
   Briefcase,
   Buildings,

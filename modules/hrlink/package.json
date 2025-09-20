@@ -1,20 +1,25 @@
 {
-  "name": "@module/htlink",
+  "name": "@module/hrlink",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "./app/main.tsx",
+  "module": "./app/main.tsx",
+  "types": "./app/main.tsx",
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./src/index.js",
-      "types": "./src/index.d.ts"
+      "import": "./app/main.tsx",
+      "types": "./app/main.tsx"
     }
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "vite dev --config vite.dev.config.ts",
+    "dev:standalone": "vite dev --port 3001",
+    "build": "vite build --config vite.build.config.ts",
+    "build:standalone": "vite build --config vite.standalone.config.ts",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006"
   }
 }
