@@ -12,8 +12,8 @@ export const baseConfig = defineConfig((_env: any) => {
     plugins: [react(), tsconfigPaths(), tailwindcss(), imagetools()],
     server: {
       https: {
-        key: fs.readFileSync(path.resolve('C:/Users/Moho/localhost+2-key.pem')),
-        cert: fs.readFileSync(path.resolve('C:/Users/Moho/localhost+2.pem')),
+        key: fs.readFileSync(path.resolve('C:/Users/M.anvari/localhost-key.pem')),
+        cert: fs.readFileSync(path.resolve('C:/Users/M.anvari/localhost.pem')),
       },
       host: '127.0.0.1',
       port: 5173,

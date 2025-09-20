@@ -29,7 +29,7 @@ export const EventAddForm = () => {
       <div className="flex flex-col gap-[24px]">
         <div>
           <div className="flex flex-col gap-[24px]">
-            <div>
+            <div className="flex flex-row">
               <AppInput
                 props={{
                   type: 'text',
@@ -41,8 +41,6 @@ export const EventAddForm = () => {
                   onBlur: handleBlur,
                 }}
               />
-            </div>{' '}
-            <div>
               <AppAutoComplete
                 props={{
                   type: 'text',
@@ -204,7 +202,7 @@ export const EventAddForm = () => {
             }}
           />
         </div>{' '}
-        <div>
+        <div className="flex flex-row">
           <AppAutoComplete
             props={{
               type: 'text',
@@ -216,8 +214,6 @@ export const EventAddForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>{' '}
-        <div>
           <AppAutoComplete
             props={{
               type: 'text',

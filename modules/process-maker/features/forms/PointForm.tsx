@@ -48,7 +48,7 @@ export const PointForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-[24px]">
-        <div>
+        <div className="flex-row flex">
           <AppInput
             props={{
               type: 'text',
@@ -60,8 +60,6 @@ export const PointForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppInput
             props={{
               type: 'text',
@@ -133,7 +131,7 @@ export const PointForm = () => {
             />
           </div>
         </div>
-        <div>
+        <div className="flex flex-row" >
           <AppInput
             props={{
               type: 'text',
@@ -145,8 +143,6 @@ export const PointForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppInput
             props={{
               type: 'text',
@@ -164,7 +160,7 @@ export const PointForm = () => {
             <div className="flex">
               <p>Actioners:</p>
             </div>
-            <div className="flex">
+            <div className="flex flex-row">
               <AppAutoComplete
                 props={{
                   type: 'text',
@@ -176,8 +172,6 @@ export const PointForm = () => {
                   onBlur: handleBlur,
                 }}
               />
-            </div>
-            <div className="flex">
               <AppAutoComplete
                 props={{
                   type: 'number',
@@ -189,8 +183,6 @@ export const PointForm = () => {
                   onBlur: handleBlur,
                 }}
               />
-            </div>
-            <div className="flex">
               <AppAutoComplete
                 props={{
                   type: 'number',

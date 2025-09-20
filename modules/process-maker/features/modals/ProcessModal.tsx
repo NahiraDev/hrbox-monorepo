@@ -7,7 +7,8 @@ export const ProcessModal = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal size="4xl" title="Process Modal">
+    // <AppModal size="4xl" title="Process Modal">
+    <>
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesProcess}
@@ -38,6 +39,7 @@ export const ProcessModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

@@ -1,123 +1,119 @@
-  /*@import 'bpmn-js/dist/assets/diagram-js.css';*/
-  /*@import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';*/
-  /*@import 'bpmn-js/dist/assets/bpmn-js.css';*/
-
-    /*.djs-palette .djs-palette-entries {*/
-    /*  display: flex !important;*/
-    /*  flex-wrap: wrap !important;*/
-    /*  gap: 8px !important;*/
-    /*  padding: 8px !important;*/
-    /*}*/
-
-
-    /*.djs-palette .entry {*/
-    /*  flex: 0 0 calc(50% - 4px) !important; !* دوتا دوتا *!*/
-    /*  height: 40px !important;*/
-    /*  display: flex !important;*/
-    /*  align-items: center !important;*/
-    /*  justify-content: center !important;*/
-    /*  box-sizing: border-box !important;*/
-    /*  border-radius: 4px !important;*/
-    /*  width: calc(50% - 4px) !important;*/
-    /*}*/
-
-    /*.djs-palette .entry:hover {*/
-    /*  background-color: #f0f0f0 !important;*/
-    /*}*/
-
-    /*.djs-palette .entry img,*/
-    /*.djs-palette .entry svg {*/
-    /*  width: 24px !important;*/
-    /*  height: 24px !important;*/
-    /*}*/
-    .bjs-powered-by {
+  .bjs-powered-by {
       display: none !important;
       }
 
-  .djs-palette.two-column .group[data-group="bpmn-elements"] {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding: 8px;
-  }
-
-  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry {
-    width: calc(50% - 2px);
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    cursor: grab;
-    transition: background-color 0.2s ease;
-  }
-
-  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry:hover {*/
-  /*  background-color: #e0f7ff;*/
-  /*}*/
-
-  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry img,
-  .djs-palette.two-column .group[data-group="bpmn-elements"] .entry svg {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-  }
-
-
-  /*.djs-palette {*/
+  /*.djs-palette.two-column .group[data-group="bpmn-elements"] {*/
   /*  display: flex;*/
-  /*  flex-direction: column;*/
+  /*  flex-direction: row;*/
+  /*  flex-wrap: wrap;*/
+  /*  gap: 4px;*/
+  /*  padding: 8px;*/
   /*}*/
 
-  /*.djs-palette-entries {*/
+  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry {*/
+  /*  width: calc(50% - 2px);*/
+  /*  aspect-ratio: 1 / 1;*/
   /*  display: flex;*/
-  /*  flex-wrap: wrap; !* این باعث میشه دوتا دوتا برن کنار هم *!*/
-  /*  gap: 4px; !* فاصله بینشون *!*/
-  /*}*/
-
-  /*.djs-palette .entry {*/
-  /*  flex: 0 0 48%; !* یعنی هر دکمه نصف عرض بگیره *!*/
+  /*  align-items: center;*/
+  /*  justify-content: center;*/
   /*  box-sizing: border-box;*/
+  /*  border-radius: 4px;*/
+  /*  background-color: #f9f9f9;*/
+  /*  cursor: grab;*/
+  /*  transition: background-color 0.2s ease;*/
+  /*}*/
+  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry img,*/
+  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry svg {*/
+  /*  width: 80%;*/
+  /*  height: 80%;*/
+  /*  object-fit: contain;*/
   /*}*/
 
-    /*!* استایل Toolbar عمودی شبیه bpmn.io *!*/
-    /*.bpmn-toolbar-en {*/
-    /*  position: absolute;*/
-    /*  left: 160px;*/
-    /*  bottom: 50px;*/
-    /*  display: flex;*/
-    /*  flex-direction: row;*/
-    /*  border-radius: 10px;*/
-    /*  gap: 4px;*/
-    /*  background-color: whitesmoke;*/
-    /*}*/
-
-    /*.bpmn-toolbar-fa {*/
-    /*  position: absolute;*/
-    /*  right: 175px;*/
-    /*  bottom: 60px;*/
-    /*  display: flex;*/
-    /*  flex-direction: row;*/
-    /*  border-radius: 10px;*/
-    /*  gap: 4px;*/
-    /*  background-color: whitesmoke;*/
-    /*  padding: 0 !important;*/
-    /*  margin: 0 !important;*/
-    /*}*/
-
-    /*.bpmn-toolbar-en .djs-button, .bpmn-toolbar-fa .djs-button {*/
-    /*  padding: 0 !important;*/
-    /*  margin: 0 !important;*/
-    /*  display: flex;*/
-    /*  align-items: center;*/
-    /*  justify-content: center;*/
-    /*  color: black;*/
-    /*  background-color: transparent;*/
-    /*}*/
-
-    /*.bpmn-toolbar-en .djs-button:hover, .bpmn-toolbar-fa .djs-button:hover {*/
-    /*  color: cornflowerblue;*/
-    /*}*/
+  .djs-palette-entries,.djs-palette-entries .group,.separator{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .djs-palette .entry[data-action="lasso-tool"], .djs-palette .entry[data-action="hand-tool"], .djs-palette .entry[data-action="space-tool"], .djs-palette .entry[data-action="global-connect-tool"],.djs-palette .entry[data-action="create.subprocess-expanded"],.djs-palette .entry[data-action="create.data-object"],.djs-palette .entry[data-action="create.data-store"],.djs-palette .entry[data-action="create.participant-expanded"],.djs-palette .entry[data-action="create.group"],.djs-palette .entry[data-action="create.intermediate-event"],.djs-palette .entry[data-action="create.end-event"] {
+    display: none;
+  }
+  .djs-palette .entry[data-action="create.start-event"]::before{
+    font-size: 52px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    padding: 0px;
+    margin: 0;
+  }
+  .djs-palette .entry[data-action="create.intermediate-event"]::before{
+    font-size: 52px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    padding: 0px;
+    margin: 0;
+    border: 0;
+    color: 0px;
+  }
+.bpmn-icon-intermediate-event-success{
+  font-size: 52px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  padding: 0px;
+  margin: 0;
+  border: 0;
+}.bpmn-icon-intermediate-event-unsuccess{
+  font-size: 52px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  padding: 0;
+  margin: 5px 0;
+  border: 0;
+}.bpmn-icon-intermediate-event-delete{
+  font-size: 52px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  padding: 0px;
+  margin: 0;
+  border: 0;
+}

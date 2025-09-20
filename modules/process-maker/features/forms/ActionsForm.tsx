@@ -2,7 +2,7 @@ import { CheckboxGroup, Form } from '@heroui/react';
 import { Add, Message, Notification, Sms } from 'iconsax-react';
 import * as Yup from 'yup';
 import { useFormContext } from 'core/context';
-import AppCheckbox from 'core/components/AppCheckBox';
+import AppCheckbox from '../../../../core/components/AppCheckBox';
 
 import { AppAutoComplete, AppInput, AppTextArea } from '../../../../core/components';
 
@@ -71,7 +71,7 @@ export const ActionsForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-[24px]">
-        <div>
+        <div className="flex flex-row" >
           <AppInput
             props={{
               type: 'text',
@@ -83,8 +83,6 @@ export const ActionsForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'Select',
@@ -97,7 +95,7 @@ export const ActionsForm = () => {
             }}
           />
         </div>
-        <div>
+        <div className="flex flex-row" >
           <AppAutoComplete
             props={{
               type: 'text',
@@ -109,8 +107,6 @@ export const ActionsForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'text',
@@ -223,7 +219,7 @@ export const ActionsForm = () => {
           values.processType === 'duringtheprocess' ||
           values.processType === 'duringtheissued') && (
           <>
-            <div>
+            <div className="flex flex-row">
               <AppInput
                 props={{
                   type: 'text',
@@ -235,8 +231,6 @@ export const ActionsForm = () => {
                   onBlur: handleBlur,
                 }}
               />
-            </div>
-            <div>
               <AppInput
                 props={{
                   type: 'text',
