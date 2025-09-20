@@ -1,10 +1,11 @@
 import { OrganizationalLocation } from 'mock';
 import { Avatar, Card } from '@heroui/react';
 import { Location, MoreSquare, Trash } from 'iconsax-react';
-import { Button } from '@heroui/button';
 import { useState } from 'react';
 
 // import { AppPagination } from '../../../../core';
+
+import { AppButton, AppDeleteModal } from 'core/components';
 
 import { OrgLocation } from './modals/OrgLocation';
 
@@ -22,10 +23,21 @@ const OrganizationalLocations = () => {
             >
               <div className="w-58 z-1000 flex absolute top-1 right-2 justify-end gap-2 ">
                 {activeButton === index && (
-                  <Button key={index} className="w-27 mt-9 mr-[-25px] bg-white rounded-lg">
-                    <Trash color="black" size="20" />
-                    Delete
-                  </Button>
+                  <AppButton
+                    props={{
+                      size: 'xs',
+                      radius: 'sm',
+                      variant: 'light',
+                      onPress: () => console.log('a'),
+                      content: (
+                        <div key={index} className="w-27 mr-[-25px] bg-white rounded-lg">
+                          <Trash color="black" size="20" />
+                          <span>Delete</span>
+                        </div>
+                      ),
+                      className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
+                    }}
+                  />
                 )}
                 <MoreSquare
                   color="white"
@@ -88,6 +100,7 @@ const OrganizationalLocations = () => {
           {/*/>*/}
         </div>
         <OrgLocation />
+        <AppDeleteModal />
       </div>
     </>
   );
