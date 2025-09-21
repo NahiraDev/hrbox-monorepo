@@ -1,4 +1,4 @@
-import { Hierarchy3 } from 'iconsax-react';
+
 import { useTranslation } from 'react-i18next';
 
 import { AppButton, AppModal, FormProvider } from '../../../../core';
@@ -8,7 +8,8 @@ export const EventModal = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal icon={<Hierarchy3 />} size="md" title="Event Modal">
+    // <AppModal icon={<Hierarchy3 />} size="md" title="Event Modal">
+    <>
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesEvent}
@@ -41,6 +42,7 @@ export const EventModal = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

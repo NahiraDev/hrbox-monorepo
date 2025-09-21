@@ -1,4 +1,4 @@
-import { Hierarchy3 } from 'iconsax-react';
+
 import { useTranslation } from 'react-i18next';
 
 import { AppButton, AppModal, FormProvider } from '../../../../core';
@@ -8,7 +8,8 @@ export const PointModal = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal icon={<Hierarchy3 />} size="4xl">
+    // <AppModal icon={<Hierarchy3 />} size="4xl">
+    <>
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesPoint}
@@ -41,6 +42,7 @@ export const PointModal = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

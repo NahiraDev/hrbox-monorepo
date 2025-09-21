@@ -8,6 +8,7 @@ import '../app/index.css';
 import { AppButton, AppInput, useModalContext } from '../../../core';
 
 import { DocumentDownload, DocumentUpload } from 'iconsax-react';
+import CustomPalette from './CustomPalette';
 
 
 interface FormsValueBpmn {
@@ -87,62 +88,62 @@ const ProcessMaker = () => {
     },
     [t],
   );
-  const handleDownloadAndSubmit = useCallback(async () => {
-    if (!modelerRef.current) return;
+  // const handleDownloadAndSubmit = useCallback(async () => {
+  //   if (!modelerRef.current) return;
+  //
+  //   try {
+  //     const { xml } = await modelerRef.current.saveXML({ format: true });
+  //     const blob = new Blob([xml], { type: 'application/bpmn+xml' });
+  //     const url = URL.createObjectURL(blob);
+  //     const a = document.createElement('a');
+  //
+  //     a.href = url;
+  //     a.download = 'HrBox.bpmn';
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     URL.revokeObjectURL(url);
+  //     const payload = {
+  //       duagramxml: xml,
+  //       elements: { ...elementData },
+  //       submittedat: new Date().toISOString(),
+  //     };
+  //     const res = JSON.stringify(payload);
+  //
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.error('Error exporting XML:', err);
+  //     alert('Failed to export diagram!');
+  //   }
+  //   localStorage.removeItem('bpmndiagram');
+  //   localStorage.removeItem('bpmnElementData');
+  // }, [elementData]);
 
-    try {
-      const { xml } = await modelerRef.current.saveXML({ format: true });
-      const blob = new Blob([xml], { type: 'application/bpmn+xml' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+  // const handleImportClick = () => {
+  //   fileInputRef.current?.click();
+  // };
 
-      a.href = url;
-      a.download = 'HrBox.bpmn';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      const payload = {
-        duagramxml: xml,
-        elements: { ...elementData },
-        submittedat: new Date().toISOString(),
-      };
-      const res = JSON.stringify(payload);
-
-      console.log(res);
-    } catch (err) {
-      console.error('Error exporting XML:', err);
-      alert('Failed to export diagram!');
-    }
-    localStorage.removeItem('bpmndiagram');
-    localStorage.removeItem('bpmnElementData');
-  }, [elementData]);
-
-  const handleImportClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    if (!file || !modelerRef.current) return;
-
-    const reader = new FileReader();
-
-    reader.onload = async (e) => {
-      const xmlStr = e.target?.result as string;
-
-      try {
-        await modelerRef.current?.importXML(xmlStr);
-        console.log('Diagram imported successfully');
-      } catch (err) {
-        console.error('Error importing XML:', err);
-        alert('Failed to import diagram!');
-      }
-    };
-    reader.readAsText(file);
-    event.target.value = '';
-  };
+  // const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //
+  //   if (!file || !modelerRef.current) return;
+  //
+  //   const reader = new FileReader();
+  //
+  //   reader.onload = async (e) => {
+  //     const xmlStr = e.target?.result as string;
+  //
+  //     try {
+  //       await modelerRef.current?.importXML(xmlStr);
+  //       console.log('Diagram imported successfully');
+  //     } catch (err) {
+  //       console.error('Error importing XML:', err);
+  //       alert('Failed to import diagram!');
+  //     }
+  //   };
+  //   reader.readAsText(file);
+  //   event.target.value = '';
+  // };
 
   const applyPaletteTranslations = useCallback(() => {
     const entries = document.querySelectorAll(
@@ -180,6 +181,13 @@ const ProcessMaker = () => {
     if (!canvasRef.current) return;
     const modeler = new Modeler({
       container: canvasRef.current,
+      additionalModules: [
+        {
+          __init__: ['customPalette'],
+          customPalette: ['type', CustomPalette]
+        }
+      ],
+      paletteProvider: null,
     });
 
     modelerRef.current = modeler;
@@ -189,47 +197,36 @@ const ProcessMaker = () => {
       if (palette) {
         palette.classList.add('two-column');
       }
-      modeler.on('element.added', (event: any) => {
-        const element = event.element;
-        const businessObject = element.businessObject;
-        const name = businessObject.$type;
 
-        if (
-          [
-            'bpmn:StartEvent',
-            'bpmn:UserTask',
-            'bpmn:ServiceTask',
-            'bpmn:ParallelGateway',
-            'bpmn:SubProcess',
-            'bpmn:SequenceFlow',
-            'bpmn:Task',
-            'bpmn:ExclusiveGateway',
-            'bpmn:EndEvent',
-          ].includes(name)
-        ) {
-          openModal('confirm', name, element);
+      const getModalForElement = (elementType: string) => {
+        switch (elementType) {
+          case 'bpmn:StartEvent':
+            return <ProcessModal onSave={handleSave} />;
+          case 'bpmn:Task':
+            return <NewEventModal onSave={handleSave} />;
+          case 'bpmn:SequenceFlow':
+            return <AddActionsModall onSave={handleSave} />;
+          case 'bpmn:EndEvent':
+            return <EventModal onSave={handleSave} />;
+          default:
+            return null;
+        }
+      };
+      modeler.on('element.changed', (event: any) => {
+        const elementType = event.element.businessObject.$type;
+        const modalComponent = getModalForElement(elementType);
+
+        if (modalComponent) {
+          openModal('confirm', elementType, modalComponent);
         }
       });
 
       modeler.on('element.dblclick', (event: any) => {
-        const element = event.element;
-        const businessObject = element.businessObject;
-        const name = businessObject.$type;
+        const elementType = event.element.businessObject.$type;
+        const modalComponent = getModalForElement(elementType);
 
-        if (
-          [
-            'bpmn:StartEvent',
-            'bpmn:UserTask',
-            'bpmn:ServiceTask',
-            'bpmn:ParallelGateway',
-            'bpmn:SubProcess',
-            'bpmn:SequenceFlow',
-            'bpmn:Task',
-            'bpmn:ExclusiveGateway',
-            'bpmn:EndEvent',
-          ].includes(name)
-        ) {
-          openModal('edit', name, element);
+        if (modalComponent) {
+          openModal('edit', elementType, modalComponent);
         }
       });
       modeler.on('import.done', () => {
@@ -290,7 +287,6 @@ const ProcessMaker = () => {
         <div className={i18n.language === 'en' ? 'bpmn-toolbar-en' : 'bpmn-toolbar-fa'}>
           <AppButton
             props={{
-              onClick: handleDownloadAndSubmit,
               className: 'djs-button',
               size: 'sm',
               text: <DocumentDownload />,
@@ -298,7 +294,6 @@ const ProcessMaker = () => {
           />
           <AppButton
             props={{
-              onClick: handleImportClick,
               className: 'djs-button',
               size: 'sm',
               text: <DocumentUpload />,
@@ -306,18 +301,17 @@ const ProcessMaker = () => {
           />
         </div>
       </div>
-      {isModalOpen('confirm', 'bpmn:StartEvent') && <ProcessModal />}
-      {isModalOpen('edit', 'bpmn:StartEvent') && <ProcessModal />}
-      {isModalOpen('confirm', 'bpmn:Task') && <NewEventModal />}
-      {isModalOpen('edit', 'bpmn:Task') && <NewEventModal />}
-      {isModalOpen('confirm', 'bpmn:SequenceFlow') && <AddActionsModall />}
-      {isModalOpen('edit', 'bpmn:SequenceFlow') && <AddActionsModall />}
-      {isModalOpen('confirm', 'bpmn:EndEvent') && <EventModal />}
-      {isModalOpen('edit', 'bpmn:EndEvent') && <EventModal />}
+      {/*{isModalOpen('confirm', 'bpmn:StartEvent') && openModal('confirm', 'bpmn:StartEvent', <ProcessModal/>)}*/}
+      {/*{isModalOpen('edit', 'bpmn:StartEvent') && <ProcessModal />}*/}
+      {/*{isModalOpen('confirm', 'bpmn:Task') && <NewEventModal />}*/}
+      {/*{isModalOpen('edit', 'bpmn:Task') && <NewEventModal />}*/}
+      {/*{isModalOpen('confirm', 'bpmn:SequenceFlow') && <AddActionsModall />}*/}
+      {/*{isModalOpen('edit', 'bpmn:SequenceFlow') && <AddActionsModall />}*/}
+      {/*{isModalOpen('confirm', 'bpmn:EndEvent') && <EventModal />}*/}
+      {/*{isModalOpen('edit', 'bpmn:EndEvent') && <EventModal />}*/}
       <AppInput
         props={{
           type: 'file',
-          onChange: handleFileChange,
           className: 'hidden',
           accept: '.bpmn,.xml',
           ref: fileInputRef,
