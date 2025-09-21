@@ -3,10 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["./core/*"],
-      "@module/*": ["./modules/*"],
-      "@configs/*": ["./configs/*"],
-      "@mock/*": ["./mock/*"]
+      "@core/*": ["core/*"],
+      "@module/*": ["modules/*"],
+      "@configs/*": ["configs/*"],
+      "@mock/*": ["mock/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["vite/client"]

@@ -23,7 +23,8 @@
     "preserveConstEnums": true,
     "useDefineForClassFields": true,
     "jsxImportSource": "react",
-    "sourceMap": true
+    "sourceMap": true,
+    "composite": true,
   },
   "include": ["declarations.d.ts"]
 }

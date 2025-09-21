@@ -12,7 +12,7 @@ export const baseConfig: Options = {
   tsconfig: '../tsconfig.json',
   external: ['react', 'react-dom', 'react/jsx-runtime', 'react-redux'],
   esbuildOptions(options) {
-    options.tsconfig = './tsconfig.json';
+    options.tsconfig = '../tsconfig.json';
   }
 };
 

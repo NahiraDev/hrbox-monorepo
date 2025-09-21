@@ -4,22 +4,30 @@
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "type": "module",
-  "main": "./app/main.tsx",
-  "module": "./app/main.tsx",
-  "types": "./app/main.tsx",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "import": "./app/main.tsx",
-      "types": "./app/main.tsx"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "dev": "vite dev --config vite.dev.config.ts",
+    "dev": "vite dev",
     "dev:standalone": "vite dev --port 3001",
-    "build": "vite build --config vite.build.config.ts",
-    "build:standalone": "vite build --config vite.standalone.config.ts",
+    "build": "vite build",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   }
 }

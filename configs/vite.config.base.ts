@@ -30,14 +30,6 @@ export const baseConfig = defineConfig((_env: any) => {
     define: {
       'process.env': {}
     },
-    resolve: {
-      alias: {
-        '@core': path.resolve(__dirname, './core'),
-        '@module': path.resolve(__dirname, './modules'),
-        '@configs': path.resolve(__dirname, './configs'),
-        '@mock': path.resolve(__dirname, './mock'),
-      },
-    },
   };
 });
 

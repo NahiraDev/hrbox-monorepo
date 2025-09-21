@@ -2,10 +2,10 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { baseConfig } from '../../configs/vite.config.base';
+import { baseConfig } from '@configs/vite.config.base';
 
 export default defineConfig((env) => {
-  const config = typeof baseConfig === 'function' ? baseConfig(env) : baseConfig;
+  const config = baseConfig(env);
 
   return {
     ...config,

@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
-import { usePaginationManager } from 'core/helpers';
+import { usePaginationManager } from '../helpers';
 
 import { AppDeleteModal, AppShowModeModal } from '../components';
 import { loader } from '../lottie';
 
 import AppButton from './AppButton';
 import AppPagination from './AppPagination';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '../context';
 
 interface AppTableProps {
   data: any;

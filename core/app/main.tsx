@@ -7,7 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StrictMode } from 'react';
-import { ModalProvider } from '@core/context';
+import { ModalProvider } from '../context';
 
 import { i18n } from '../translate';
 import { AuthProvider } from '../context';

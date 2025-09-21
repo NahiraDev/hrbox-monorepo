@@ -2,7 +2,7 @@ import type { Persistor } from 'redux-persist/es/types';
 
 import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
 import { type PersistConfig, persistReducer, persistStore } from 'redux-persist';
-import { serviceRegistry } from '@core/helpers';
+import { serviceRegistry } from '../helpers';
 
 import { createRootReducer } from './rootReducer';
 
