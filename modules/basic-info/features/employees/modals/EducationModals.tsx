@@ -1,19 +1,19 @@
 import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
-import { Profile2User } from 'iconsax-react';
+import { Category } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 
-export const SpouseModal = () => {
+const EducationModals = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<Profile2User color="white" />} size="3xl" title="Spouse">
+    <AppModal icon={<Category color="white" />} size="3xl" title="Software Management">
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
-          <div className="grid grid-cols-2 gap-y-6 gap-x-10">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-6">
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'First Name',
+                label: 'Degree Level',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -22,7 +22,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Last Name',
+                label: 'Educational Institution',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -31,7 +31,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'National ID',
+                label: 'University Type',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -40,7 +40,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Education',
+                label: 'Field of Study',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -49,7 +49,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Mobile',
+                label: 'Thesis Title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -58,7 +58,34 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Date of Birth',
+                label: 'GPA',
+                size: 'lg',
+                color: 'primary',
+                radius: 'lg',
+              }}
+            />
+            <AppInput
+              props={{
+                className: ' border border-[#DCF0F9]',
+                label: 'From Year',
+                size: 'lg',
+                color: 'primary',
+                radius: 'lg',
+              }}
+            />
+            <AppInput
+              props={{
+                className: ' border border-[#DCF0F9]',
+                label: 'To Year',
+                size: 'lg',
+                color: 'primary',
+                radius: 'lg',
+              }}
+            />
+            <AppInput
+              props={{
+                className: ' border border-[#DCF0F9]',
+                label: 'Province',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -69,7 +96,7 @@ export const SpouseModal = () => {
             <AppTextArea
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Descriptions and Achievements*',
+                label: 'Descriptions*',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -104,3 +131,5 @@ export const SpouseModal = () => {
     </AppModal>
   );
 };
+
+export default EducationModals;

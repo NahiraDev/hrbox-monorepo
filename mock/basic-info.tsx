@@ -204,7 +204,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -212,7 +212,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -220,7 +220,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -228,7 +228,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -236,7 +236,7 @@ export const OrganizationalLocation = [
   {
     img: '',
     title: 'Headquarters',
-    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh Qazvin',
+    Address: 'Qazvin, Valiasr, Tan va Ravan Sazman Varzesh',
     email: 'example.user123@gmail.com',
     webLink: 'https://www.hrbox.m...',
     visible: 'Yes',
@@ -1160,8 +1160,63 @@ export const dataWorker = [
     job: 'National Referee',
     num: '2020',
   },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
+  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },
 ];
-export const dataWorker2 = [
+export const dataWorker2 =  [
   {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
@@ -1263,4 +1318,314 @@ export const dataReportWorker = [
   { name: 'zahra pakniyat', job: 'UiUx Desinger' },
   { name: 'zahra pakniyat', job: 'UiUx Desinger' },
   { name: 'zahra pakniyat', job: 'UiUx Desinger' },
+];
+export const guidlines = [
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+  {
+    job: 'Business Book',
+  },
+];
+export const testReport = [
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+  {
+    titleJob: 'Create Workflow',
+    job: 'Organizational Test',
+    name: 'Zahra Pakniyat',
+    price: '7.500.000 Rial',
+    status: 'Done',
+  },
+];
+export const healthy = [
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
 ];

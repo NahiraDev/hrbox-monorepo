@@ -2,23 +2,27 @@ import type { Key } from 'react';
 
 import { TickIcon } from 'core/icons';
 import { AppButton } from 'core/components';
-import { FolderCross, MessageEdit, Trash } from 'iconsax-react';
-import { Avatar, Listbox, ListboxItem, Button } from '@heroui/react';
+import { Add, FolderCross, MessageEdit, Trash } from 'iconsax-react';
+import { Listbox, ListboxItem } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { dataReportWorker } from 'mock';
+// import { dataReportWorker } from 'mock';
 
-import { AppTabs } from '../../../../core';
+import { AppTabs, useModalContext } from '../../../../core';
+import Repport from '../common/Repport';
+// import EducationModals from '../employees/modals/EducationModals';
+import AddNewCourses from '../employees/modals/AddNewCourses';
+import { BasicInfoPaths } from '../../../basic-info/app/paths';
 
 const EmployeesTab = [
-  { key: 'personal-information', title: 'Personal Information', href: '/basic-info/PersonalInformation' },
-  { key: 'documents', title: 'Documents', href: '/basic-info/Documents' },
-  { key: 'jobs', title: 'Jobs', href: '/basic-info/Jobs' },
-  { key: 'education', title: 'Educations', href: '/basic-info/Education' },
-  { key: 'skills', title: 'Skills', href: '/basic-info/Skills' },
-  { key: 'courses', title: 'Courses', href: '/basic-info/Courses' },
-  { key: 'achievements', title: 'Achievements', href: '/basic-info/Achievements' },
-  { key: 'dependents', title: 'Dependents', href: '/basic-info/Dependents' },
+  { key: 'personal-information', title: 'Personal Information', href: BasicInfoPaths.PersonalInformation },
+  { key: 'documents', title: 'Documents', href: BasicInfoPaths.Documents },
+  { key: 'jobs', title: 'Jobs', href: BasicInfoPaths.Jobs },
+  { key: 'education', title: 'Educations', href: BasicInfoPaths.Educations },
+  { key: 'skills', title: 'Skills', href: BasicInfoPaths.Skills },
+  { key: 'courses', title: 'Courses', href: BasicInfoPaths.Courses },
+  { key: 'achievements', title: 'Achievements', href: BasicInfoPaths.Achievements },
+  { key: 'dependents', title: 'Dependents', href: BasicInfoPaths.Dependents },
   { key: 'more', title: 'More' },
 ];
 
@@ -26,7 +30,7 @@ const moreItems = [
   { key: '1', label: 'Organization-Specific Information', href: '/basic-info/SpecificInformation' },
   { key: '2', label: 'Onboarding', href: '/basic-info/Onboarding' },
   { key: '3', label: 'Offboarding' },
-  { key: '4', label: 'Guidlines' },
+  { key: '4', label: 'Guidelines' },
   { key: '5', label: 'Test Report' },
   { key: '6', label: 'Contract List' },
   { key: '7', label: 'Request List' },
@@ -48,6 +52,7 @@ const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => {
 ////////////////////////////////////////////////////////////////////////////////
 
 export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
+  const { openModal } = useModalContext();
   const { pathname } = useLocation();
   const [selectedTab, setSelectedTab] = useState('personal-information');
   const [showMore, setShowMore] = useState(false);
@@ -119,10 +124,22 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                     ),
                   }}
                 />
+                <AppButton
+                  props={{
+                    size: 'md',
+                    radius: 'lg',
+                    color: 'white',
+                    onPress: () => openModal('edit', undefined),
+                    content: (
+                      <>
+                        <Add size={22} />
+                        <span>Add New One</span>
+                      </>
+                    ),
+                  }}
+                />
               </div>
             </div>
-
-            {/* تب‌ها */}
             <div className="relative">
               <AppTabs
                 fullWidth
@@ -149,8 +166,6 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                   }
                 }}
               />
-
-              {/* لیست بازشونده زیر more */}
               {showMore && (
                 <div className="absolute top-full left-0 mt-1 bg-white shadow-lg rounded-lg z-50 w-48">
                   <ListMore
@@ -167,34 +182,30 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
       </div>
       <div className="grid grid-cols-12">
         <div className="col-span-2">
-          <div
-            className="p-4 overflow-y-auto w-70
-            [&::-webkit-scrollbar]:w-3
-            [&::-webkit-scrollbar-track]:rounded-full
-            [&::-webkit-scrollbar-track]:bg-gray-100
-            [&::-webkit-scrollbar-thumb]:rounded-full
-            [&::-webkit-scrollbar-thumb]:bg-gray-300"
-          >
+          <div className="py-4 pl-4 overflow-y-auto">
             <div>
-              <span>Report To</span>
-              {dataReportWorker.map((worker, index) => (
-                <div key={index} className="flex justify-between items-center  mb-4 mt-2">
-                  <div>
-                    <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-                  </div>
-                  <div className="flex flex-col gap-1 items-center">
-                    <span className="text-info-400 text-xs">{worker.name}</span>
-                    <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
-                      {worker.job}
-                    </Button>
-                  </div>
-                </div>
-              ))}
+              <Repport />
             </div>
           </div>
         </div>
         <div className="col-span-10">{content}</div>
       </div>
+      {/*<EducationModals/>*/}
+      <AddNewCourses/>
     </div>
   );
 };
+// <span>Report To</span>
+// {dataReportWorker.map((worker, index) => (
+//   <div key={index} className="flex justify-between items-center  mb-4 mt-2">
+//     <div>
+//       <Avatar className="w-10 h-10" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+//     </div>
+//     <div className="flex flex-col gap-1 items-center">
+//       <span className="text-info-400 text-xs">{worker.name}</span>
+//       <Button className="h-5 text-primary-400 bg-[#DCF0F966]/40 border-1 border-primary-400 text-[10px] w-full ">
+//         {worker.job}
+//       </Button>
+//     </div>
+//   </div>
+// ))}
