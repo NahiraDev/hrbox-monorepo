@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@heroui/use-theme';
-import { AppButton, AppTabs } from 'core/components';
-import { serviceRegistry } from 'core/helpers';
+import { AppButton, AppTabs } from '../components';
+import { serviceRegistry } from '../helpers';
 
 import AvatarUser from '../assets/img/inpersonate-avatar.png';
 import { HourGlass, Logo, LogoHRLink } from '../icons';

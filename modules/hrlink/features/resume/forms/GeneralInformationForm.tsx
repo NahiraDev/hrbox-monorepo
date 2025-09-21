@@ -1,8 +1,9 @@
 import { Form } from '@heroui/react';
-import { useFormContext } from 'core/context';
+import { useFormContext } from '@core/context';
 import { useTranslation } from 'react-i18next';
 
-import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea, genderOptions, maritalStatusOptions } from 'core/index';
+import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea } from '@core/components';
+import {genderOptions, maritalStatusOptions} from '@core/helpers';
 import * as Yup from 'yup';
 
 export const initialValuesGeneralInformation = {

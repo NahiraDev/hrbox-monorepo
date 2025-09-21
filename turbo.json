@@ -3,29 +3,43 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "*.d.ts"],
-      "cache": false
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", "storybook-static/**"],
+      "cache": true
     },
     "dev": {
-      "dependsOn": ["^node_modules"],
+      "dependsOn": ["^build"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["NODE_ENV", "PORT"]
     },
     "lint": {
+      "inputs": ["src/**/*.{ts,tsx}", "eslint.config.js", "tsconfig.json"],
       "outputs": [],
       "cache": true
     },
-    "clean": {
-      "dependsOn": ["^dist", "^node_modules", "^.turbo"]
+    "type-check": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.{ts,tsx}", "tsconfig.json"],
+      "outputs": [],
+      "cache": true
     },
     "test": {
       "dependsOn": ["^build"],
-      "outputs": [],
+      "inputs": ["src/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
+      "outputs": ["coverage/**"],
       "cache": true
     },
-    "typecheck": {
-      "outputs": [],
-      "cache": true
+    "clean": {
+      "cache": false
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV"],
+  "globalDependencies": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "turbo.json",
+    "tsconfig.json",
+    ".env*"
+  ]
 }

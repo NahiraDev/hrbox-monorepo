@@ -1,0 +1,11 @@
+dist/
+build/
+coverage/
+node_modules/
+.next/
+.turbo/
+.vite/
+*.config.js
+*.config.ts
+!eslint.config.js
+!vite.config.ts

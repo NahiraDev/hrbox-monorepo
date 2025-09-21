@@ -1,8 +1,8 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useModalContext } from 'core/context';
-import { serviceRegistry } from 'core/helpers';
+import { useModalContext } from '../context';
+import { serviceRegistry } from '../helpers';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 

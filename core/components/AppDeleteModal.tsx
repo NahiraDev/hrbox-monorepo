@@ -1,5 +1,5 @@
 import { Trash } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '../context';
 
 import AppModal from './AppModal';
 import AppButton from './AppButton';

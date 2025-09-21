@@ -1,5 +1,4 @@
-import { lazyLoad } from 'core/index';
-import { createProjectRoutes } from 'core/index';
+import { lazyLoad , createProjectRoutes } from '@core/routes';
 
 import { SSOHRLinkPaths } from './paths';
 

@@ -1,20 +1,33 @@
 {
-  "name": "@module/htlink",
+  "name": "@module/hrlink",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "import": "./src/index.js",
-      "types": "./src/index.d.ts"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "vite dev",
+    "dev:standalone": "vite dev --port 3001",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   }
 }

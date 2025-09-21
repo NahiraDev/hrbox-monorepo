@@ -1,20 +1,26 @@
-version: '3.8'
+  version: '3.8'
+  services:
+    app:
+      build: .
+      ports:
+        - "3000:3000"
+      volumes:
+        - .:/app
+        - /app/node_modules
+      environment:
+        - NODE_ENV=development
+      command: pnpm dev
 
-services:
-  project-management:
-    build:
-      context: ..
-    ports:
-      - '3000:3000'
-    command: node apps/project-management/dist/index
-    environment:
-      NODE_ENV: production
+    storybook:
+      build: .
+      ports:
+        - "6006:6006"
+      volumes:
+        - .:/app
+        - /app/node_modules
+      command: pnpm storybook
 
-  payroll:
-    build:
-      context: ..
-    ports:
-      - '3001:3000'
-    command: node apps/payroll/dist/index
-    environment:
-      NODE_ENV: production
+    redis:
+      image: redis:alpine
+      ports:
+        - "6379:6379"

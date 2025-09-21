@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { serviceRegistry } from 'core/helpers';
+import { serviceRegistry } from '../helpers';
 
 import { AppButton } from '../components';
 import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '../redux';

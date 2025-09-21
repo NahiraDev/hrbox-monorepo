@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
-import { usePaginationManager } from 'core/helpers';
-import { useModalContext } from 'core/context';
+import { usePaginationManager } from '../helpers';
+import { useModalContext } from '../context';
 
 import { AppDeleteModal, AppShowModeModal } from '../components';
 import { loader } from '../lottie';
@@ -210,7 +210,7 @@ const AppTable = ({
       );
     }
 
-    return cells; // ✅ مستقیماً آرایه از TableCell ها برگردانده می‌شود
+    return cells;
   };
 
   return (

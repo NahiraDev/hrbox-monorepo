@@ -1,20 +1,23 @@
 {
-  "name": "core",
+  "name": "@hrbox/core",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/index.ts",
-  "module": "src/index.src",
-  "types": "src/index.d.ts",
+  "main": "index.ts",
+  "module": "index.ts",
+  "types": "index.d.ts",
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./src/index.js"
+      "import": "index.ts"
     }
   },
   "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
     "clean": "rm -rf dist .turbo",
-    "prebuild": "pnpm turbo run clean && tsc --build --clean",
-    "build": "tsc --build && tsup"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
   }
 }

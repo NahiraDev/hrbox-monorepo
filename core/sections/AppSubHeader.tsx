@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
-import { serviceRegistry } from 'core/helpers';
+import { serviceRegistry } from '../helpers';
 
 const AppSubHeader: React.FC = () => {
   const location = useLocation();

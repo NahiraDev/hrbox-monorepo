@@ -1,12 +1,12 @@
 import type { Persistor } from 'redux-persist/es/types';
 
 import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore, type PersistConfig } from 'redux-persist';
-import { serviceRegistry } from 'core/helpers';
+import { type PersistConfig, persistReducer, persistStore } from 'redux-persist';
+import { serviceRegistry } from '../helpers';
 
 import { createRootReducer } from './rootReducer';
 
-const asyncLocalStorage = {
+const storageInstance = {
   getItem: (key: string) => {
     return Promise.resolve(window.localStorage.getItem(key));
   },
@@ -17,8 +17,6 @@ const asyncLocalStorage = {
     return Promise.resolve(window.localStorage.removeItem(key));
   },
 };
-
-const storageInstance = typeof window !== 'undefined' ? asyncLocalStorage : undefined;
 
 export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Persistor } => {
   const rootReducer = createRootReducer({});

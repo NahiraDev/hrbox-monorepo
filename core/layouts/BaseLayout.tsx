@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { serviceRegistry } from 'core/helpers';
+import { serviceRegistry } from '../helpers';
 import { useLocation } from 'react-router-dom';
 
 import { AppSupportButton } from '../components';

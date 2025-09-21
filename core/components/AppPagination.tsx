@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Pagination as HeroPagination } from '@heroui/react';
 import { useSearchParams } from 'react-router-dom';
-import { serviceRegistry } from 'core/helpers';
+import { serviceRegistry } from '../helpers';
 
 const AppPagination = ({ total }: { total: number }) => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchNormal1 } from 'iconsax-react';
-import { AppInput } from 'core/components/index';
+import { AppInput } from '../components';
 
 import { CloseIcon } from '../icons';
 
