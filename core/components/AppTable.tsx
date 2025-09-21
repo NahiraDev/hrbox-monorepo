@@ -2,13 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
 import { usePaginationManager } from '../helpers';
+import { useModalContext } from '../context';
 
 import { AppDeleteModal, AppShowModeModal } from '../components';
 import { loader } from '../lottie';
 
 import AppButton from './AppButton';
 import AppPagination from './AppPagination';
-import { useModalContext } from '../context';
 
 interface AppTableProps {
   data: any;
@@ -52,10 +52,9 @@ const AppTable = ({
   });
 
   const paginatedData = useMemo(() => {
-    if (!hasPagination) return data;
+    if (!hasPagination) return data || [];
     const startIndex = (pagination.currentPage - 1) * pageSize;
-    // return data.slice(startIndex, startIndex + pageSize);
-    return []
+    return (data || []).slice(startIndex, startIndex + pageSize);
   }, [data, pagination.currentPage, pageSize, hasPagination]);
 
   useEffect(() => {
@@ -110,7 +109,7 @@ const AppTable = ({
         return acc;
       }, []);
 
-      openModal('view' , 'test' , columnPairs)
+      openModal('view', 'test', columnPairs);
     }
   };
 
@@ -142,7 +141,7 @@ const AppTable = ({
     );
   }
   const renderActions = (row: any) => (
-    <div className="relative flex items-center justify-center gap-2">
+    <div className="relative h-full flex items-center justify-center gap-2">
       <Tooltip content="Edit">
         <AppButton
           props={{
@@ -165,7 +164,7 @@ const AppTable = ({
             radius: 'full',
             variant: 'light',
             onPress: () => {
-              openModal('delete' , 'test' , row)
+              openModal('delete', 'test', row);
             },
             content: (
               <span className="text-lg cursor-pointer">
@@ -196,20 +195,27 @@ const AppTable = ({
     </>
   );
 
-  const tableRows = (row: { [x: string]: any }) => (
-    <>
-      {autoColumns.map((col, index) => (
-        <TableCell key={row.id ?? index} className="text-xs font-normal text-black text-center">
-          {renderCell(row[col.key], row, col.key)}
+  const tableRows = (row: { [x: string]: any }) => {
+    const cells = autoColumns.map((col, index) => (
+      <TableCell key={col.key} className="text-xs font-normal text-black text-center">
+        {renderCell(row[col.key], row, col.key)}
+      </TableCell>
+    ));
+
+    if (enableActions) {
+      cells.push(
+        <TableCell key="actions" className="text-xs text-secondary-400">
+          {renderActions(row)}
         </TableCell>
-      ))}
-      {enableActions && <TableCell className="text-xs text-secondary-400">{renderActions(row)}</TableCell>}
-    </>
-  );
+      );
+    }
+
+    return cells;
+  };
 
   return (
-    <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
-      <Table className="!h-full min-h-[300px]" onRowAction={(row: any) => handleRowClick?.(row)}>
+    <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 h-full dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
+      <Table className="!h-full" onRowAction={(row: any) => handleRowClick?.(row)}>
         <TableHeader className="!rounded-0">{tableColumns}</TableHeader>
         <TableBody>
           {paginatedData.length === 0 ? (

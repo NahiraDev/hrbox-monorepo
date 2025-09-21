@@ -16,14 +16,10 @@ export const baseConfig = defineConfig((_env: any) => {
     ],
     server: {
       https: {
-        key: fs.readFileSync(
-          path.resolve(process.env.HOME || '', './localhost+2-key.pem'),
-        ),
-        cert: fs.readFileSync(
-          path.resolve(process.env.HOME || '', './localhost+2.pem'),
-        ),
+        key: fs.readFileSync(path.resolve('C:/Users/M.anvari/localhost-key.pem')),
+        cert: fs.readFileSync(path.resolve('C:/Users/M.anvari/localhost.pem')),
       },
-      host: '0.0.0.0',
+      host: '127.0.0.1',
       port: 5173,
       strictPort: true,
     },

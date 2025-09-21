@@ -37,7 +37,7 @@ export const ProcessForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-[24px]">
-        <div>
+        <div className="flex-row flex">
           <AppInput
             props={{
               type: 'text',
@@ -49,8 +49,6 @@ export const ProcessForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'Select',
@@ -63,7 +61,7 @@ export const ProcessForm = () => {
             }}
           />
         </div>
-        <div>
+        <div className="flex flex-row">
           <AppAutoComplete
             props={{
               type: 'text',
@@ -75,8 +73,6 @@ export const ProcessForm = () => {
               onBlur: handleBlur,
             }}
           />
-        </div>
-        <div>
           <AppAutoComplete
             props={{
               type: 'text',
@@ -108,9 +104,15 @@ export const ProcessForm = () => {
           </div>
           <div className="flex items-center justify-between gap-[8px]">
             <CheckboxGroup>
-              <AppCheckBox>
-                <option>0</option>
-              </AppCheckBox>
+              <AppCheckBox
+                props={{
+                  children: (
+                    <>
+                      <option>0</option>
+                    </>
+                  ),
+                }}
+              />
             </CheckboxGroup>
           </div>
         </div>

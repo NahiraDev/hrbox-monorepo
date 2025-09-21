@@ -1,14 +1,15 @@
 import { useTranslation } from 'react-i18next';
-import { EventForm } from '@module/process-maker/features/forms';
 
+import { EventAddForm } from '../forms';
 import { AppModal, AppButton, FormProvider } from '../../../../core';
 import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '../forms';
 
-export const AddEventModal = () => {
+export const NewEventModal = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal size="4xl" title="AddEvent Modal">
+    // <AppModal size="4xl" title="AddEvent Modal">
+    <>
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesEventAdd}
@@ -17,7 +18,7 @@ export const AddEventModal = () => {
             handleSubmitEventAdd(values);
           }}
         >
-          <EventForm />
+          <EventAddForm/>
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -41,6 +42,7 @@ export const AddEventModal = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

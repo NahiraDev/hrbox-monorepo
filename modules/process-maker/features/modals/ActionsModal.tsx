@@ -8,7 +8,8 @@ export const AddActionsModall = () => {
   const { t } = useTranslation();
 
   return (
-    <AppModal size="4xl" title="Actioon Modal">
+    // <AppModal size="4xl" title="Actioon Modal">
+    <>
       <AppModal.Body>
         <FormProvider
           initialValues={initialValuesAction}
@@ -41,6 +42,7 @@ export const AddActionsModall = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

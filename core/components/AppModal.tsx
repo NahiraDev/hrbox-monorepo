@@ -6,13 +6,6 @@ import { serviceRegistry } from '../helpers';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 
-interface ModalProps {
-  title?: string;
-  icon?: React.ReactNode;
-  size?: ModalSize;
-  children?: React.ReactNode;
-}
-
 const sizeClasses: Record<ModalSize, string> = {
   sm: 'max-w-sm',
   md: 'max-w-md',
@@ -24,29 +17,23 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
+const AppModal = () => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();
-  const { getOpenModal , isModalOpen, closeModal } = useModalContext();
+  const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
-
   const handleBackdropClick = () => {
     if (modalData) {
       closeModal(modalData.type, modalData.name);
     }
   };
 
-  const content = React.Children.map(children, (child) => {
-    if (!React.isValidElement(child)) return child;
-
-    return React.cloneElement(child as any, {
-      close: closeModal,
-    });
-  });
-
-
   if (!modalData) return null;
 
-  const { type, name } = modalData;
+  const { type, name, component } = modalData;
+
+  console.log(modalData);
+  console.log(isModalOpen);
+  const size: ModalSize = '2xl';
 
   return createPortal(
     <AnimatePresence>
@@ -61,23 +48,23 @@ const AppModal = ({ title, icon, size = 'md', children }: ModalProps) => {
         >
           <motion.div
             animate={{ scale: 1, opacity: 1 }}
-            className={`bg-[#fff] rounded-2xl shadow p-10 w-full backdrop-blur-[20px] ${sizeClasses[size]}`}
+            className={`bg-[#fff] rounded-2xl shadow p-10 w-full backdrop-blur-[20px]  ${sizeClasses[size]}`}
             exit={{ scale: 0.95, opacity: 0 }}
             initial={{ scale: 0.95, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col gap-6">
-              {(title || icon) && (
-                <div className="flex items-center">
-                  <div
-                    className={`shadow-theme-md rounded-md flex gap-2 px-3 py-1.5 w-fit items-center bg-${type === 'delete' ? 'danger' : getModuleName === 'hrlink' ? 'secondary' : 'primary'}`}
-                  >
-                    {icon}
-                    <span className="text-white font-normal text-xl">{title}</span>
-                  </div>
-                </div>
-              )}
-              {content}
+              {/*{(title || icon) && (*/}
+              {/*  <div className="flex items-center">*/}
+              {/*    <div*/}
+              {/*      className={`shadow-theme-md rounded-md flex gap-2 px-3 py-1.5 w-fit items-center bg-${type === 'delete' ? 'danger' : getModuleName === 'hrlink' ? 'secondary' : 'primary'}`}*/}
+              {/*    >*/}
+              {/*      {icon}*/}
+              {/*      <span className="text-white font-normal text-xl">{title}</span>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*)}*/}
+              {component}
             </div>
           </motion.div>
         </motion.div>
