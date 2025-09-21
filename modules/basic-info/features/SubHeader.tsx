@@ -1,19 +1,34 @@
-import { Button } from '@heroui/button';
-
-const SubHeader = () => {
+import { AppButton } from 'core/components';
+import { Add, MessageEdit } from 'iconsax-react';
+import { useModalContext } from 'core/context';
+  const SubHeader = () => {
+  const { openModal } = useModalContext();
   return (
-    <div className="w-340 mb-4 p-1 flex items-center justify-between">
-      <div>
-        <Button color="primary">Organization Departments</Button>
-      </div>
-      <div className="flex gap-2">
-        <Button color="primary" variant="bordered" className="text-black">
-          Bordered
-        </Button>
-        <Button color="primary" variant="bordered" className="text-black">
-          Bordered
-        </Button>
-      </div>
+    <div>
+      <AppButton
+        props={{
+          size: 'xs',
+          radius: 'sm',
+          color: 'white',
+          variant: 'solid',
+          isIconOnly: true,
+          onPress: () => openModal('edit',undefined),
+          className: 'bg-white border-1 border-primary-400',
+          content: <MessageEdit className="text-secondary-900" size="20" />,
+        }}
+      />
+      <AppButton
+        props={{
+          size: 'xs',
+          radius: 'sm',
+          color: 'white',
+          variant: 'solid',
+          isIconOnly: true,
+          onPress: () => openModal('edit',undefined),
+          className: 'bg-white border-1 border-primary-400',
+          content: <Add className="text-secondary-900" size="20" />,
+        }}
+      />
     </div>
   );
 };

@@ -1,19 +1,18 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
-import { Profile2User } from 'iconsax-react';
+import { AppAutoComplete, AppButton, AppInput, AppModal } from 'core/components';
+import { HeartEdit } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 
-export const SpouseModal = () => {
+const AddNewOnDutyHealthRecords = () => {
   const { openModal } = useModalContext();
-
   return (
-    <AppModal icon={<Profile2User color="white" />} size="3xl" title="Spouse">
+    <AppModal icon={<HeartEdit color="white" />} size="3xl" title="Add New On-Duty Health Records">
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
-          <div className="grid grid-cols-2 gap-y-6 gap-x-10">
-            <AppInput
+          <div className="grid grid-cols-2 gap-x-10 gap-y-6">
+            <AppAutoComplete
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'First Name',
+                label: 'title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -22,7 +21,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'Last Name',
+                label: 'Amount',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -31,45 +30,7 @@ export const SpouseModal = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                label: 'National ID',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-              }}
-            />
-            <AppInput
-              props={{
-                className: ' border border-[#DCF0F9]',
-                label: 'Education',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-              }}
-            />
-            <AppInput
-              props={{
-                className: ' border border-[#DCF0F9]',
-                label: 'Mobile',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-              }}
-            />
-            <AppInput
-              props={{
-                className: ' border border-[#DCF0F9]',
-                label: 'Date of Birth',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-              }}
-            />
-          </div>
-          <div>
-            <AppTextArea
-              props={{
-                className: ' border border-[#DCF0F9]',
-                label: 'Descriptions and Achievements*',
+                label: 'Amount',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -104,3 +65,5 @@ export const SpouseModal = () => {
     </AppModal>
   );
 };
+
+export default AddNewOnDutyHealthRecords;

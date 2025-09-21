@@ -1,10 +1,11 @@
 import { Avatar, Card } from '@heroui/react';
 import { identityCard } from 'mock';
-import { AppButton, AppDeleteModal } from 'core/components';
+import { AppButton, } from 'core/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
 import { useModalContext } from 'core/context';
 
 import { BasicInfoLayout } from '../common';
+// import DocumentsModal from '../employees/modals/DocumentsModal';
 
 const Documents = () => {
   const { openModal } = useModalContext();
@@ -12,13 +13,22 @@ const Documents = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-4 gap-4 w-full p-4">
           {identityCard.map((user: any, index) => (
             <Card key={index} className="p-3 w-full h-full ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar radius="sm" size="lg" />
+                    <AppButton
+                      props={{
+                        size: 'xs',
+                        radius: 'sm',
+                        variant: 'light',
+                        isIconOnly: true,
+                        onPress: () => openModal('custom', user),
+                        content: <Avatar radius="sm" size="lg" color='primary'/>,
+                      }}
+                    />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
@@ -29,7 +39,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('delete', user),
+                          // onPress: () => openModal('delete', user),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-red-500 transition-all duration-200',
                         }}
@@ -42,7 +52,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('edit', user),
+                          // onPress: () => openModal('edit', user),
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-primary-400 transition-all duration-200',
                         }}
@@ -56,7 +66,7 @@ const Documents = () => {
                 </div>
                 <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-sm">{user.Publication}</span>
+                  <span className="text-sm">{user.Edit}</span>
                 </div>
                 <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
                   <Calendar className="w-4 h-4" />
@@ -69,7 +79,8 @@ const Documents = () => {
               </div>
             </Card>
           ))}
-          <AppDeleteModal />
+          {/*<DocumentsModal />*/}
+          {/*<AppDeleteModal />*/}
         </div>
       }
     />
