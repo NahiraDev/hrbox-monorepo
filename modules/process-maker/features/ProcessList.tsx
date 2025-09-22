@@ -1,11 +1,7 @@
 import AppTable from '../../../core/components/AppTable';
 import { sampleData } from '../../../mock';
 const ProcessList = () => {
-  return (
-    // <div className="h-full ">
-      <AppTable data={sampleData} />
-    // </div>
-  );
+  return <AppTable data={sampleData} />;
 };
 
 export default ProcessList;

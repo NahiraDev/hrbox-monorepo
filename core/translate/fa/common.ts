@@ -132,8 +132,7 @@ export const faCommon = {
   please_sign_in_to_our_hrbox_account: 'لطفاً به حساب "HRBox" خود وارد شوید.',
   please_sign_in_to_our_hrlink_account: 'لطفاً به حساب "HRLink" خود وارد شوید.',
   pick_your_country: 'کشور خود را انتخاب کنید',
-  please_enter_the_code_sent_your_phone_number:
-    'لطفاً کد ارسال شده به شماره تلفن خود را وارد کنید',
+  please_enter_the_code_sent_your_phone_number: 'لطفاً کد ارسال شده به شماره تلفن خود را وارد کنید',
   login_with_phone_number: 'ورود با شماره تلفن!',
   send_code: 'ارسال کد',
   transferring_to_user_panel: 'انتقال به پنل کاربری',
@@ -147,8 +146,6 @@ export const faCommon = {
   employers_registration: 'ثبت نام کارفرمایان',
   job_seekers_registration: 'ثبت نام کارجویان',
   resend_code: 'ارسال مجدد',
-  otp_is_correct_redirecting:
-    'کد یکبار مصرف صحیح است. در حال هدایت به پنل کاربری...',
-  lorem:
-    'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است',
+  otp_is_correct_redirecting: 'کد یکبار مصرف صحیح است. در حال هدایت به پنل کاربری...',
+  lorem: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است',
 };

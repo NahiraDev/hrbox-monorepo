@@ -25,6 +25,9 @@ const ChartDashboard = () => {
       height: '100%',
       stacked: true,
     },
+    grid:{
+      show:false,
+    },
     colors: ['rgb(255, 99, 71)', 'rgb(32, 208, 255)', 'rgb(255, 165, 0)'],
     plotOptions: {
       bar: {
@@ -37,7 +40,7 @@ const ChartDashboard = () => {
         breakpoint: 480,
         options: {
           legend: {
-            position: 'bottom',
+              position: 'bottom',
             offsetX: -10,
             offsetY: 0,
           },
@@ -58,6 +61,17 @@ const ChartDashboard = () => {
         '2012 Q9',
         '2012 Q8',
       ],
+      labels:{
+        style:{
+          colors:'#DEE1E8',
+        },
+      },
+    }, yaxis: {
+      labels:{
+        style:{
+          colors:'#DEE1E8',
+        },
+      },
     },
     fill: {
       opacity: 1,
@@ -70,7 +84,7 @@ const ChartDashboard = () => {
   });
 
   return (
-    <div className="h-full" id="chart">
+    <div className="h-full rounded-2xl" id="chart">
       <ReactApexChart height="100%" options={options} series={series} type="bar" />
     </div>
   );

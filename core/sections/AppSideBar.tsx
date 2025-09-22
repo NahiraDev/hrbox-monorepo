@@ -65,7 +65,8 @@ const AppSideBar = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const activeItem = menuItems.find(item => item.path === location.pathname);
+    const activeItem = menuItems.find((item) => item.path === location.pathname);
+
     if (activeItem) {
       setActiveTab(activeItem.label);
     }
@@ -109,11 +110,12 @@ const AppSideBar = () => {
             <div key={item.label} className="border-transparent">
               <AppButton
                 props={{
-                  className: 'flex justify-center items-center !gap-1 p-3 transition-all border-b-1 group-hover border-transparent duration-200 hover:text-primary-400 hover:border-primary-400`',
+                  className:
+                    'flex justify-center items-center !gap-1 p-3 transition-all border-b-1 group-hover border-transparent duration-200 hover:text-primary-400 hover:border-primary-400`',
                   isIconOnly: true,
                   color: 'default',
                   size: 'xs',
-                  variant:'light',
+                  variant: 'light',
                   radius: 'none',
                   disableRipple: true,
                   onPress: () => handleNavigatePage({ name: item.label, route: item.path }),
@@ -149,9 +151,7 @@ const AppSideBar = () => {
           {bottomMenu.map((item) => (
             <div
               key={item.name}
-              className={`${
-                activeTab === item.name ? 'border-b border-tertiar-400' : 'border-transparent'
-              }`}
+              className={`${activeTab === item.name ? 'border-b border-tertiar-400' : 'border-transparent'}`}
             >
               <AppButton
                 props={{

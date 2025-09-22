@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation, useRoutes } from 'react-router-dom';
+
 import { serviceRegistry } from '../helpers';
 
 export const MotionRouter = () => {
@@ -9,14 +10,13 @@ export const MotionRouter = () => {
 
   return (
     <>
-
       <AnimatePresence mode="wait">
         <motion.div
           key={location.key}
           animate={{ opacity: 1 }}
+          className="h-full"
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
-          className="h-full"
           transition={{ duration: 0.5 }}
         >
           {element}

@@ -1,5 +1,4 @@
 import { AppButton } from '../../core';
-
 import { useAppSelector } from '../redux';
 import { SupportIcon } from '../icons';
 

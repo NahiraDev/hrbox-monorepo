@@ -57,17 +57,17 @@ const AppDocs: React.FC = () => {
             className="flex items-center bg-surface rounded-xl w-fit shadow-light-tight-2 px-8 py-2"
             exit={{ opacity: 0, y: 100 }}
             initial={{ opacity: 0, y: 100 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="flex items-center gap-3 h-full overflow-x-auto scrollbar-hide">
               {MenuItems.map((item, index) => (
                 <AppDocItem
                   key={item.module}
                   icon={item.icon}
-                  module={item.module}
-                  outlined={item.outline}
-                  mouseX={null}
                   index={index}
+                  module={item.module}
+                  mouseX={null}
+                  outlined={item.outline}
                 />
               ))}
 
@@ -77,24 +77,24 @@ const AppDocs: React.FC = () => {
               {/* Additional Items */}
               <AppDocItem
                 icon={Setting2}
-                module="General Setting"
-                outlined={true}
-                mouseX={null}
                 index={MenuItems.length}
+                module="General Setting"
+                mouseX={null}
+                outlined={true}
               />
               <AppDocItem
                 icon={HashtagSquare}
-                module="Dashboard"
-                outlined={true}
-                mouseX={null}
                 index={MenuItems.length + 1}
+                module="Dashboard"
+                mouseX={null}
+                outlined={true}
               />
               <AppDocItem
                 icon={SmsTracking}
-                module="Messages"
-                outlined={true}
-                mouseX={null}
                 index={MenuItems.length + 2}
+                module="Messages"
+                mouseX={null}
+                outlined={true}
               />
             </div>
           </motion.div>
@@ -106,14 +106,14 @@ const AppDocs: React.FC = () => {
           className="flex items-center justify-center py-2"
           exit={{ opacity: 0, y: -50 }}
           initial={{ opacity: 0, y: -50 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
         >
           <motion.button
             className="bg-gray-300/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-full w-32 h-1.5 hover:bg-gray-400/80 dark:hover:bg-gray-600/80 transition-colors shadow-sm"
-            onClick={() => setCloseDocs(true)}
+            transition={{ duration: 0.1 }}
             whileHover={{ scale: 1.05, width: 140 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.1 }}
+            onClick={() => setCloseDocs(true)}
           />
         </motion.div>
       )}

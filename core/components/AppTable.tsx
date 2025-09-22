@@ -54,6 +54,7 @@ const AppTable = ({
   const paginatedData = useMemo(() => {
     if (!hasPagination) return data || [];
     const startIndex = (pagination.currentPage - 1) * pageSize;
+
     return (data || []).slice(startIndex, startIndex + pageSize);
   }, [data, pagination.currentPage, pageSize, hasPagination]);
 
@@ -206,7 +207,7 @@ const AppTable = ({
       cells.push(
         <TableCell key="actions" className="text-xs text-secondary-400">
           {renderActions(row)}
-        </TableCell>
+        </TableCell>,
       );
     }
 

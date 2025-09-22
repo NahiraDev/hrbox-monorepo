@@ -1,17 +1,7 @@
 export const Google = () => {
   return (
-    <svg
-      fill="none"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect
-        height="22.2609"
-        transform="translate(0.913086 0.782715)"
-        width="22.2609"
-      />
+    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <rect height="22.2609" transform="translate(0.913086 0.782715)" width="22.2609" />
       <path
         clipRule="evenodd"
         d="M22.2835 12.1557C22.2835 11.3993 22.2156 10.6721 22.0895 9.97388H12.0435V14.0999H17.7841C17.5368 15.4333 16.7853 16.563 15.6556 17.3193V19.9957H19.1029C21.1198 18.1387 22.2835 15.4042 22.2835 12.1557Z"

@@ -1,6 +1,4 @@
-export const createPaths = <
-  T extends Record<string, string | Record<string, any>>,
->(
+export const createPaths = <T extends Record<string, string | Record<string, any>>>(
   root: string,
   subRoutes: T = {} as T,
 ) => {
@@ -15,19 +13,14 @@ export const createPaths = <
     };
   };
 
-  function buildRoutes<R extends Record<string, any>>(
-    routes: R,
-    base: string,
-  ): R {
+  function buildRoutes<R extends Record<string, any>>(routes: R, base: string): R {
     const result: Record<string, any> = {};
 
     for (const [key, value] of Object.entries(routes)) {
       if (typeof value === 'string') {
         result[key] = `${base}${value}`;
       } else if (typeof value === 'object') {
-        const newBase = (value as any).root
-          ? `${base}${(value as any).root}`
-          : base;
+        const newBase = (value as any).root ? `${base}${(value as any).root}` : base;
 
         result[key] = buildRoutes(value, newBase);
       }
@@ -38,24 +31,15 @@ export const createPaths = <
 
   const nestedRoutes = buildRoutes(subRoutes, root);
 
-  const extractRoutes = (
-    obj: Record<string, any>,
-  ): Record<string, Record<string, string>> => {
+  const extractRoutes = (obj: Record<string, any>): Record<string, Record<string, string>> => {
     const routes: Record<string, Record<string, string>> = {};
 
     for (const [key, value] of Object.entries(obj)) {
-      if (
-        typeof value === 'object' &&
-        value !== null &&
-        !['root', 'path', 'link'].includes(key)
-      ) {
+      if (typeof value === 'object' && value !== null && !['root', 'path', 'link'].includes(key)) {
         const subRoutes: Record<string, string> = {};
 
         for (const [subKey, subValue] of Object.entries(value)) {
-          if (
-            typeof subValue === 'string' &&
-            !['root', 'path', 'link'].includes(subKey)
-          ) {
+          if (typeof subValue === 'string' && !['root', 'path', 'link'].includes(subKey)) {
             subRoutes[subKey] = subValue;
           }
         }

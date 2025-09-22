@@ -12,9 +12,9 @@ import { ModalProvider } from 'core/context';
 import { i18n } from '../translate';
 import { AuthProvider } from '../context';
 import { RootRouterLoader } from '../routes';
+import { AppModal } from '../components';
 
 import { HeroProviderWrapper } from './provider';
-import { AppModal } from '../components';
 
 export const renderApp = (id: string, { store, persistor }: { store: EnhancedStore; persistor: Persistor }) => {
   const rootEl = document.getElementById(id);
@@ -35,7 +35,7 @@ export const renderApp = (id: string, { store, persistor }: { store: EnhancedSto
               <ReduxProvider store={store}>
                 <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
                   <ModalProvider>
-                    <AppModal/>
+                    <AppModal />
                     <RootRouterLoader />
                   </ModalProvider>
                 </PersistGate>
@@ -44,7 +44,7 @@ export const renderApp = (id: string, { store, persistor }: { store: EnhancedSto
           </AuthProvider>
         </I18nextProvider>
       </BrowserRouter>
-      </>
+    </>,
     // </StrictMode>,
   );
 };

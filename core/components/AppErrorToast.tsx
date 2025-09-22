@@ -1,8 +1,8 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Warning2 } from 'iconsax-react';
-import { AppButton } from '../../core';
 
+import { AppButton } from '../../core';
 import { CloseIcon } from '../icons';
 import { clearError, useAppDispatch, useAppSelector } from '../redux';
 

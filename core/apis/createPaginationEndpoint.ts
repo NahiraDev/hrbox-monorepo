@@ -2,9 +2,7 @@ export const createPaginatedEndpoint = (build: any, endpoint: string, method: st
   if (method === 'GET') {
     return build.query({
       query: (params: any) => {
-        const safeParams = typeof params === 'string'
-          ? { Search: params }
-          : params;
+        const safeParams = typeof params === 'string' ? { Search: params } : params;
 
         const paginationParams = {
           Page: safeParams.Page || 1,

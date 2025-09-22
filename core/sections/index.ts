@@ -7,14 +7,4 @@ import AppDocItems from './AppDocItems';
 import AppDocs from './AppDocs';
 import App404 from './App404';
 
-
-export {
-  AppHeader,
-  AppSubHeader,
-  AppSideBar,
-  AppContent,
-  AppDoubleLineProgress,
-  AppDocItems,
-  AppDocs,
-  App404,
-};
+export { AppHeader, AppSubHeader, AppSideBar, AppContent, AppDoubleLineProgress, AppDocItems, AppDocs, App404 };

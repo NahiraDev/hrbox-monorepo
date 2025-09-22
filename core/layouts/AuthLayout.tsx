@@ -21,12 +21,9 @@ export const AuthLayout = ({ content }: any) => {
   if (!mounted) return null;
 
   return (
-    <div
-    >
+    <div>
       <div className="bg-cover bg-center min-h-screen lg:px-10 px-4 lg:flex items-center justify-center">
-        <div
-          className="flex lg:flex-row flex-col justify-between lg:gap-[156px]"
-        >
+        <div className="flex lg:flex-row flex-col justify-between lg:gap-[156px]">
           <div className="lg:hidden flex justify-center py-4 fixed top-0 left-0 w-full border-b border-neutral-150 bg-mobile-header dark:border-[rgba(51,51,51,0.4)] dark:bg-[linear-gradient(245deg,_rgba(2,44,61,0.8)_28.83%,_rgba(1,16,26,0.8)_85.57%)] backdrop-blur-md">
             <div className="p-2">
               <LogoMobile />
@@ -35,23 +32,11 @@ export const AuthLayout = ({ content }: any) => {
           <div className="flex flex-col align-centger gap-10">
             <div className="lg:flex items-end gap-[38px]">
               <div className="lg:flex hidden flex-col gap-4">
-                <Button
-                  className="p-3 !w-[52px] !h-[52px] min-w-fit"
-                  variant="light"
-                >
-                  <Moon
-                    className="text-secondary-1000 dark:text-white"
-                    size="28"
-                  />
+                <Button className="p-3 !w-[52px] !h-[52px] min-w-fit" variant="light">
+                  <Moon className="text-secondary-1000 dark:text-white" size="28" />
                 </Button>
-                <Button
-                  className="p-3 !w-[52px] !h-[52px] min-w-fit"
-                  variant="light"
-                >
-                  <Global
-                    className="text-secondary-1000 dark:text-white"
-                    size="28"
-                  />
+                <Button className="p-3 !w-[52px] !h-[52px] min-w-fit" variant="light">
+                  <Global className="text-secondary-1000 dark:text-white" size="28" />
                 </Button>
               </div>
               <div className="flex flex-col items-center gap-10 pt-[72px] lg:pt-0">
@@ -77,7 +62,7 @@ export const AuthLayout = ({ content }: any) => {
                     {/*  />*/}
                     {/*)}*/}
                     <span className="text-secondary-1000 lg:text-xl text-base lg:font-bold font-semibold dark:text-white">
-                      {""}
+                      {''}
                     </span>
                   </div>
                   {content}
@@ -184,12 +169,7 @@ export const AuthLayout = ({ content }: any) => {
                   props={{
                     className: 'p-1 !w-4 !h-4 min-w-fit',
                     variant: 'light',
-                    startContent: (
-                      <Global
-                        className="text-secondary-1000 dark:text-white"
-                        size="16"
-                      />
-                    ),
+                    startContent: <Global className="text-secondary-1000 dark:text-white" size="16" />,
                   }}
                 />
               </div>
@@ -203,10 +183,7 @@ export const AuthLayout = ({ content }: any) => {
               width="100%"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M0 0.666667L144 0L288 0.75L144 1L0 0.666667Z"
-                fill="#B2B2B2"
-              />
+              <path d="M0 0.666667L144 0L288 0.75L144 1L0 0.666667Z" fill="#B2B2B2" />
             </svg>
           </div>
           {/*<SliderSSO />*/}

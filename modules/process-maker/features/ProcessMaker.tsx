@@ -9,7 +9,6 @@ import { AppButton, AppInput, useModalContext } from '../../../core';
 
 import { DocumentDownload, DocumentUpload } from 'iconsax-react';
 
-
 interface FormsValueBpmn {
   name: string;
   title?: string;
@@ -186,6 +185,7 @@ const ProcessMaker = () => {
 
     modeler.importXML(xml).then(() => {
       const palette = document.querySelector('.djs-palette');
+
       if (palette) {
         palette.classList.add('two-column');
       }

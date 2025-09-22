@@ -83,7 +83,7 @@ export default {
 
         // Semantic colors
         'success': {
-          DEFAULT: '#DFF3E7',
+          DEFAULT: '#22AD5C',
           50: '#BFE7D0',
           100: '#BFE7D0',
           900: '#09311A',

@@ -31,7 +31,9 @@ export const BaseLayout = () => {
                 <AppContent
                   fallback={
                     <div className="flex items-center justify-center h-full">
-                      <div className={`${showDoc ? 'border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-theme-md' : 'rounded-xl'} flex-1 overflow-hidden relative`} />
+                      <div
+                        className={`${showDoc ? 'border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-theme-md' : 'rounded-xl'} flex-1 overflow-hidden relative`}
+                      />
                     </div>
                   }
                 />

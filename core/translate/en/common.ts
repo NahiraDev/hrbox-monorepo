@@ -127,13 +127,10 @@ export const enCommon = {
   dont_have_an_account: 'Dont have an account?',
   please_enter_your_information: 'Please Enter Your Information!',
   welcome_back: 'Welcome Back!',
-  please_sign_in_to_our_hrbox_account:
-    'Please Sign in to your “HRBOX“ account.',
-  please_sign_in_to_our_hrlink_account:
-    'Please Sign in to your “HRLink“ account.',
+  please_sign_in_to_our_hrbox_account: 'Please Sign in to your “HRBOX“ account.',
+  please_sign_in_to_our_hrlink_account: 'Please Sign in to your “HRLink“ account.',
   pick_your_country: 'Pick your Country',
-  please_enter_the_code_sent_your_phone_number:
-    'Please enter the code sent to your phone number',
+  please_enter_the_code_sent_your_phone_number: 'Please enter the code sent to your phone number',
   login_with_phone_number: 'Login with phone number!',
   send_code: 'Send Code',
   transferring_to_user_panel: 'Transferring to the user panel.',
@@ -143,8 +140,7 @@ export const enCommon = {
   enter_new_password: 'Enter new password!',
   forget_password: 'Forget Password!',
   phone_number_is_required: 'Phone number is required',
-  phone_number_must_contain_only_digits:
-    'Phone number must contain only digits',
+  phone_number_must_contain_only_digits: 'Phone number must contain only digits',
   employers_registration: 'Employers Registration',
   job_seekers_registration: 'Job Seekers Registration',
   resend_code: 'Resend Code',

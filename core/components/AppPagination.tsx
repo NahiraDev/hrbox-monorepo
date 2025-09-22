@@ -26,7 +26,7 @@ const AppPagination = ({ total }: { total: number }) => {
   );
 
   useEffect(() => {
-    const pageParam = searchParams.get("");
+    const pageParam = searchParams.get('');
 
     if (pageParam) {
       const page = parseInt(pageParam, 10);

@@ -22,9 +22,7 @@ const AppDatePicker = ({ props }: { props: any }) => {
 
   return (
     <>
-      <span
-        className={`text-secondary-1000 text-xs lg:font-medium font-semibold`}
-      >
+      <span className={`text-secondary-1000 text-xs lg:font-medium font-semibold`}>
         {label} {required && '*'}
       </span>
 
@@ -34,8 +32,7 @@ const AppDatePicker = ({ props }: { props: any }) => {
         locale={locale}
         mapDays={({ date }) => {
           const isHoliday = holidays.includes(date.format('YYYY/MM/DD'));
-          const isFriday =
-            date.weekDay.name === 'جمعه' || date.weekDay.index === 6;
+          const isFriday = date.weekDay.name === 'جمعه' || date.weekDay.index === 6;
 
           if (isHoliday || isFriday) {
             return {
@@ -72,4 +69,4 @@ const AppDatePicker = ({ props }: { props: any }) => {
   );
 };
 
-export default AppDatePicker
+export default AppDatePicker;

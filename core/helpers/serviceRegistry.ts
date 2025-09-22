@@ -93,6 +93,7 @@ export class ServiceRegistry {
         subHeaders.push(...plugin.subHeaders);
       }
     }
+
     return subHeaders;
   }
 

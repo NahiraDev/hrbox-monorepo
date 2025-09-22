@@ -33,6 +33,7 @@ const AppModal = () => {
       closeModal(modalData.type, modalData.name);
     }
   };
+
   //
   // const content = React.Children.map(children, (child) => {
   //   if (!React.isValidElement(child)) return child;
@@ -45,9 +46,11 @@ const AppModal = () => {
   if (!modalData) return null;
 
   const { type, name, component } = modalData;
+
   console.log(modalData);
   console.log(isModalOpen);
   const size: ModalSize = '2xl';
+
   return createPortal(
     <AnimatePresence>
       {isModalOpen(type, name) && (

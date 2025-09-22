@@ -1,24 +1,12 @@
 import { useTheme } from '@heroui/use-theme';
 
-export function FilterButton({
-  color = '#04070E',
-  size = 24,
-}: {
-  color?: string;
-  size?: number | string;
-}) {
+export function FilterButton({ color = '#04070E', size = 24 }: { color?: string; size?: number | string }) {
   const { theme } = useTheme();
 
   theme === 'dark' ? (color = '#ffffff') : color;
 
   return (
-    <svg
-      fill="none"
-      height={size}
-      viewBox={`0 0 24 24`}
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg fill="none" height={size} viewBox={`0 0 24 24`} width={size} xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_4418_9932)">
         <path
           d="M22 6.5H16"

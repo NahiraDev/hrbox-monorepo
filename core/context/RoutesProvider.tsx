@@ -20,11 +20,6 @@ interface RoutesProviderProps {
   routes: RouteObject[];
 }
 
-export const RoutesProvider: React.FC<RoutesProviderProps> = ({
-  children,
-  routes,
-}) => {
-  return (
-    <RoutesContext.Provider value={routes}>{children}</RoutesContext.Provider>
-  );
+export const RoutesProvider: React.FC<RoutesProviderProps> = ({ children, routes }) => {
+  return <RoutesContext.Provider value={routes}>{children}</RoutesContext.Provider>;
 };

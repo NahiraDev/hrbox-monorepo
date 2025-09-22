@@ -91,6 +91,7 @@ const AppTabs: React.FC<AppTabsProps> = ({
 
     // اگر تب href داشته باشد، navigation انجام می‌دهد
     const selectedTab = tabs.find((tab) => tab.key === key || tab.href === key);
+
     if (selectedTab?.href) {
       navigate(selectedTab.href);
     }

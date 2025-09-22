@@ -1,12 +1,6 @@
 export const TaskIcon = () => {
   return (
-    <svg
-      fill="none"
-      height="22"
-      viewBox="0 0 22 22"
-      width="22"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg fill="none" height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.53418 13.4753L9.90918 14.8503L13.5758 11.1836"
         stroke="#1E3363"

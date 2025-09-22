@@ -1,10 +1,7 @@
 import { Textarea } from '@heroui/react';
 import clsx from 'clsx';
 
-const sizeClasses: Record<
-  string,
-  { wrapper: string; input: string; label: string }
-> = {
+const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
   sm: {
     wrapper: 'h-8 px-2 text-xs',
     input: 'text-xs',
@@ -67,7 +64,6 @@ const AppTextArea = ({ props }: { props: any }) => {
   );
 
   const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
-
 
   return (
     <div className="flex flex-col gap-1">

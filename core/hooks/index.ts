@@ -1,1 +1,1 @@
-export * from './usePaginationQuery'
+export * from './usePaginationQuery';

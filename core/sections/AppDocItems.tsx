@@ -10,11 +10,7 @@ interface AppDocItemProps {
   index: number;
 }
 
-const AppDocItem: React.FC<AppDocItemProps> = ({
-                                                 icon: Icon,
-                                                 module,
-                                                 outlined = false,
-                                               }) => {
+const AppDocItem: React.FC<AppDocItemProps> = ({ icon: Icon, module, outlined = false }) => {
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,21 +30,17 @@ const AppDocItem: React.FC<AppDocItemProps> = ({
             flex items-center justify-center rounded-xl transition-all duration-200 relative overflow-hidden
             w-16 h-16
             ${
-            outlined
-              ? 'border border-dashed dark:border-white bg-transparent dark:text-white'
-              : isActive
-                ? 'bg-gradient-to-b from-[#1E3363] to-[#3D68C9] text-white dark:bg-gradient-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:text-white'
-                : 'bg-gradient-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-gradient-to-b hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white'
-          }
+              outlined
+                ? 'border border-dashed dark:border-white bg-transparent dark:text-white'
+                : isActive
+                  ? 'bg-gradient-to-b from-[#1E3363] to-[#3D68C9] text-white dark:bg-gradient-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:text-white'
+                  : 'bg-gradient-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-gradient-to-b hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white'
+            }
           `}
         >
           <div className="absolute rounded-xl" />
 
-          {isActive && (
-            <motion.div
-              className="absolute inset-0 rounded-xl"
-            />
-          )}
+          {isActive && <motion.div className="absolute inset-0 rounded-xl" />}
 
           <Icon className="relative z-10 transition-all duration-200" size={32} />
         </motion.div>
@@ -58,10 +50,10 @@ const AppDocItem: React.FC<AppDocItemProps> = ({
           className={`
             whitespace-nowrap text-xs font-semibold mt-1 transition-all duration-200
             ${
-            isActive
-              ? 'opacity-100 text-[#1E3363] dark:text-white'
-              : 'opacity-0 group-hover:opacity-100 dark:text-gray-300'
-          }
+              isActive
+                ? 'opacity-100 text-[#1E3363] dark:text-white'
+                : 'opacity-0 group-hover:opacity-100 dark:text-gray-300'
+            }
           `}
         >
           {module}

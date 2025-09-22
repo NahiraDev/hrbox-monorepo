@@ -1,10 +1,4 @@
-export const Card = ({
-  color = '#04070E',
-  size = 24,
-}: {
-  color?: string;
-  size?: string | number;
-}) => {
+export const Card = ({ color = '#04070E', size = 24 }: { color?: string; size?: string | number }) => {
   return (
     <svg
       fill="transparent"

@@ -54,7 +54,7 @@ const AppButton = React.forwardRef<HTMLButtonElement, { props: any }>(({ props }
         variant !== 'light' && 'shadow-theme-sm',
         sizeClasses[size],
         radiusClasses[radius],
-        className
+        className,
       )}
       color={color}
       disableRipple={disableRipple}

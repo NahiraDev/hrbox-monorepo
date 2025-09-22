@@ -14,10 +14,7 @@ export const usePaginationQuery = ({
   const [searchParams] = useSearchParams();
 
   const page = parseInt(searchParams.get(pageKey) || '1', 10);
-  const pageSize = parseInt(
-    searchParams.get(sizeKey) || defaultSize.toString(),
-    10,
-  );
+  const pageSize = parseInt(searchParams.get(sizeKey) || defaultSize.toString(), 10);
 
   return {
     [pageKey]: page,

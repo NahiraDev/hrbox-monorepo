@@ -6,10 +6,7 @@ interface PaginationManagerProps {
   onPageChange?: (page: number, pageSize: number) => void;
 }
 
-export const usePaginationManager = ({
-  total,
-  onPageChange,
-}: PaginationManagerProps) => {
+export const usePaginationManager = ({ total, onPageChange }: PaginationManagerProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const pageParam = searchParams.get('Page');

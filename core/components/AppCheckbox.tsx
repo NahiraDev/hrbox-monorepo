@@ -25,25 +25,12 @@ const radiusClasses: Record<string, string> = {
 };
 
 export default function AppCheckbox({ props }: { props: any }) {
-  const {
-    disabled,
-    isSelected,
-    radius = 'md',
-    size = 'md',
-    children,
-    className,
-    onChange,
-    ...rest
-  } = props;
+  const { disabled, isSelected, radius = 'md', size = 'md', children, className, onChange, ...rest } = props;
 
   return (
     <Checkbox
       classNames={{
-        wrapper: clsx(
-          sizeClasses[size]?.wrapper,
-          radiusClasses[radius],
-          className,
-        ),
+        wrapper: clsx(sizeClasses[size]?.wrapper, radiusClasses[radius], className),
         label: clsx(sizeClasses[size]?.label),
       }}
       disabled={disabled}

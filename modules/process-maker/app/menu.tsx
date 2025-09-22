@@ -4,8 +4,8 @@ import { Chart2, Setting3, Hierarchy3 } from 'iconsax-react';
 
 const MenuIcons = {
   dashboard: Chart2,
+  processlist: Hierarchy3,
   setting: Setting3,
-  ProcessList: Hierarchy3,
 };
 
 export const ProcessMakerMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
@@ -14,8 +14,8 @@ export const ProcessMakerMenu = (): { label: string; path: string; icon?: ReactN
 
   const menuConfig: Record<string, string> = {
     Dashboard: '/dashboard',
-    setting: '/setting',
     ProcessList: '/process-list',
+    setting: '/setting',
   };
 
   Object.entries(menuConfig).forEach(([feature, route]) => {

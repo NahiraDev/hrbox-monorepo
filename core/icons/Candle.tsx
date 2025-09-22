@@ -1,18 +1,6 @@
-export const Candle = ({
-  color = '#04070E',
-  size = 24,
-}: {
-  color?: string;
-  size?: string | number;
-}) => {
+export const Candle = ({ color = '#04070E', size = 24 }: { color?: string; size?: string | number }) => {
   return (
-    <svg
-      fill="none"
-      height={size}
-      viewBox={`0 0 24 24`}
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg fill="none" height={size} viewBox={`0 0 24 24`} width={size} xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_4418_9928)">
         <path
           d="M22 17.5H15"

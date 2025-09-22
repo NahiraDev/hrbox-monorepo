@@ -15,10 +15,7 @@ const AppLoader = () => {
 
   return (
     <div className="bg-white dark:bg-black w-full h-full z-50 absolute">
-      <div
-        className="w-8 h-8 absolute left-1/2 top-1/2"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      >
+      <div className="w-8 h-8 absolute left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%)' }}>
         <LottieComponent animationData={loader} loop={true} />
       </div>
     </div>

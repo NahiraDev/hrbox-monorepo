@@ -12,9 +12,7 @@ const AppBreadcrumb = ({ pages }: { pages: string[] }) => {
               key={index}
               classNames={{
                 item: `${
-                  index === pages.length - 1
-                    ? 'text-secondary-400 dark:text-gold'
-                    : 'text-neutral-400 dark:text-white'
+                  index === pages.length - 1 ? 'text-secondary-400 dark:text-gold' : 'text-neutral-400 dark:text-white'
                 }`,
                 separator: 'text-neutral-400 dark:text-neutral-600',
               }}

@@ -5,9 +5,7 @@ const AppNoData = ({ props }: { props: any }) => {
 
   return (
     <div className="text-center flex flex-col items-center justify-center w-full">
-      <p className="text-secondary-1000 dark:text-white text-xl font-medium">
-        {message}
-      </p>
+      <p className="text-secondary-1000 dark:text-white text-xl font-medium">{message}</p>
       <Image height={size.height} src="" width={size.width} />
     </div>
   );

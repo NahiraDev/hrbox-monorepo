@@ -12,6 +12,7 @@ const AppSubHeader: React.FC = () => {
 
     if (!config || !config.component) {
       setSubHeaderComponent(null);
+
       return;
     }
 
@@ -24,7 +25,7 @@ const AppSubHeader: React.FC = () => {
   if (!SubHeaderComponent) return null;
 
   return (
-    <Suspense fallback={<div className="h-16 bg-gray-100 animate-pulse"></div>}>
+    <Suspense fallback={<div className="h-16 bg-gray-100 animate-pulse" />}>
       <SubHeaderComponent {...componentProps} />
     </Suspense>
   );
@@ -38,6 +39,7 @@ function extractParams(currentPath: string, pattern: string): Record<string, str
   patternParts.forEach((part, index) => {
     if (part.startsWith(':')) {
       const paramName = part.slice(1);
+
       params[paramName] = pathParts[index];
     }
   });

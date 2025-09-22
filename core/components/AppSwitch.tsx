@@ -29,17 +29,7 @@ const radiusClasses: Record<string, string> = {
 };
 
 const AppSwitch = ({ props }: { props: any }) => {
-  const {
-    isSelected,
-    onChange,
-    onBlur,
-    value,
-    label,
-    size = 'sm',
-    radius = 'full',
-    className,
-    ...rest
-  } = props;
+  const { isSelected, onChange, onBlur, value, label, size = 'sm', radius = 'full', className, ...rest } = props;
 
   const lang = useAppSelector((state) => state.language.lang);
 
@@ -65,16 +55,12 @@ const AppSwitch = ({ props }: { props: any }) => {
       }}
       isSelected={isSelected}
       size={size}
-      onValueChange={onChange}
-      onBlur={onBlur}
       value={value}
+      onBlur={onBlur}
+      onValueChange={onChange}
       {...rest}
     >
-      <span
-        className={cn('text-secondary-1000 font-semibold', sizeLabel[size])}
-      >
-        {label}
-      </span>
+      <span className={cn('text-secondary-1000 font-semibold', sizeLabel[size])}>{label}</span>
     </Switch>
   );
 };

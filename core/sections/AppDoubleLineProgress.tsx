@@ -7,12 +7,7 @@ interface DoubleLineProgressProps {
   duration?: number;
 }
 
-const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
-  value,
-  size = 80,
-  gap = 2,
-  duration = 2000,
-}) => {
+const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({ value, size = 80, gap = 2, duration = 2000 }) => {
   const [animatedValue, setAnimatedValue] = useState(0);
   const requestRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
@@ -76,23 +71,9 @@ const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
       }}
     >
       <svg height={size} width={size}>
-        <circle
-          cx={center}
-          cy={center}
-          fill="none"
-          r={outerRadius}
-          stroke="#dcf0f966"
-          strokeWidth={strokeWidth}
-        />
+        <circle cx={center} cy={center} fill="none" r={outerRadius} stroke="#dcf0f966" strokeWidth={strokeWidth} />
 
-        <circle
-          cx={center}
-          cy={center}
-          fill="none"
-          r={innerRadius}
-          stroke="#dcf0f966"
-          strokeWidth={strokeWidth}
-        />
+        <circle cx={center} cy={center} fill="none" r={innerRadius} stroke="#dcf0f966" strokeWidth={strokeWidth} />
 
         <circle
           cx={center}

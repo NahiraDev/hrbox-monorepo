@@ -1,18 +1,6 @@
-export const LinearChart = ({
-  color = '#04070E',
-  size = 24,
-}: {
-  color?: string;
-  size?: string | number;
-}) => {
+export const LinearChart = ({ color = '#04070E', size = 24 }: { color?: string; size?: string | number }) => {
   return (
-    <svg
-      fill={color}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg fill={color} height={size} viewBox={`0 0 ${size} ${size}`} width={size} xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_4418_7623)">
         <path
           d="M22 22.75H2C1.59 22.75 1.25 22.41 1.25 22C1.25 21.59 1.59 21.25 2 21.25H22C22.41 21.25 22.75 21.59 22.75 22C22.75 22.41 22.41 22.75 22 22.75Z"

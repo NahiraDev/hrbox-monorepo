@@ -9,9 +9,7 @@ import {
 
 import { setError } from '../redux';
 
-const createBaseQuery = (
-  baseUrl: string,
-): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
+const createBaseQuery = (baseUrl: string): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
     credentials: 'include',

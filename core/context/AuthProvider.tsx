@@ -11,17 +11,13 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [authType, setAuthType] = useState<string>('');
   const [mobile, setMobile] = useState<string>('');
   const [otp, setOtp] = useState<string>('');
 
   return (
-    <AuthContext.Provider
-      value={{ authType, setAuthType, mobile, setMobile, otp, setOtp }}
-    >
+    <AuthContext.Provider value={{ authType, setAuthType, mobile, setMobile, otp, setOtp }}>
       {children}
     </AuthContext.Provider>
   );
