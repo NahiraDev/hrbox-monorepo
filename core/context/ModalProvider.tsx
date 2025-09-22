@@ -4,10 +4,10 @@ type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
 
 interface ModalContextType {
   openModal: (type: ModalType, name: string,component:React.ReactNode, data?: any ) => void;
-  closeModal: (type: ModalType, name: string) => void;
+  closeModal: (type: string, name: string) => void;
   getModalData: (type: ModalType, name: string) => any;
   isModalOpen: (type: ModalType, name: string) => boolean;
-  getOpenModal: () => { type: ModalType | string | undefined; name: string | undefined ,component: React.ReactNode} | null;
+  getOpenModal: () => {title:string , icon:string , size:string , type: string; name: string ,component: React.ReactNode} | null;
 }
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 

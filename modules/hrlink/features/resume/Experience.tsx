@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '../common';
-import { AppLoader, AppTable, useModalContext } from '../../../../core';
+import { AppLoader, AppTable } from '@core/components';
+import { useModalContext } from '@core/context';
 
 import { useLazyFetchExperienceQuery } from './apis';
 

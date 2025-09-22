@@ -1,7 +1,7 @@
 import { Add, Share } from 'iconsax-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from '../../icons';
 

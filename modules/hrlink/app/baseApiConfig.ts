@@ -1,4 +1,4 @@
-import createBaseApi from 'core/apis/baseApi';
+import createBaseApi from '@core/apis/baseApi';
 
 const HRLinkTags = [
   'Company',

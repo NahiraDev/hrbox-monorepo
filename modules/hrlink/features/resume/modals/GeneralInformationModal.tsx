@@ -1,6 +1,6 @@
-import { AppButton, AppModal } from 'core/components';
+import { AppButton, AppModal } from '@core/components';
 import { Personalcard } from 'iconsax-react';
-import { FormProvider } from 'core/context';
+import { FormProvider } from '@core/context';
 import {
   GeneralInformationForm,
   formValidationGeneralInformation,

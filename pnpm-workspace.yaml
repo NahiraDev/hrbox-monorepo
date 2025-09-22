@@ -1,5 +1,18 @@
 packages:
   - configs
   - core
-  - modules
+  - modules/*
   - mock
+
+onlyBuiltDependencies:
+  - '@heroui/shared-utils'
+  - '@tailwindcss/oxide'
+  - cwebp-bin
+  - esbuild
+  - gifsicle
+  - jpegtran-bin
+  - mozjpeg
+  - optipng-bin
+  - pngquant-bin
+  - sharp
+  - unrs-resolver

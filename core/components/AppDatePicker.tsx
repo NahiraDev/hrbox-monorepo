@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import DatePicker from 'react-multi-date-picker';
+import * as DatePickerModule from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { Calendar } from 'iconsax-react';
@@ -19,6 +19,7 @@ const AppDatePicker = ({ props }: { props: any }) => {
   const locale = lang === 'fa' ? persian_fa : gregorian_en;
 
   const holidays = lang === 'fa' ? persianHolidays : gregorianHolidays;
+  const DatePicker = (DatePickerModule as any).default || (DatePickerModule as any).DatePicker || DatePickerModule;
 
   return (
     <>
@@ -32,7 +33,7 @@ const AppDatePicker = ({ props }: { props: any }) => {
         calendar={calendar}
         calendarPosition="bottom-right"
         locale={locale}
-        mapDays={({ date }) => {
+        mapDays={({ date }:any) => {
           const isHoliday = holidays.includes(date.format('YYYY/MM/DD'));
           const isFriday =
             date.weekDay.name === 'جمعه' || date.weekDay.index === 6;

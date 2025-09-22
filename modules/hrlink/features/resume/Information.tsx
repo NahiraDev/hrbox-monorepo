@@ -1,6 +1,4 @@
 import {
-  ArrowLeft2,
-  ArrowRight2,
   Calendar,
   DollarCircle,
   Flag,

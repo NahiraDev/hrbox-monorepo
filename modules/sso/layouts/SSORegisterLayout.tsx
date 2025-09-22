@@ -17,8 +17,8 @@ import {
   useAppDispatch,
 } from '../../../core';
 import { SSOHRLinkPaths } from '../app/routes';
-import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
-import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
+import DarkModeBg from '../../../public/assets/hrlink/darkmode-bg.webp';
+import LightModeBg from '../../../public/assets/hrlink/lightmode-bg.webp';
 
 export const SSORegisterLayout = ({ props }: { props: any }) => {
   const { children, formTitle, signInWithPhone, arrowBack, isRegister } = props;

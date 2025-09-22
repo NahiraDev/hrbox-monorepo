@@ -1,6 +1,6 @@
-import { createEndpoint } from '../../../../../core';
-import { HRLinkApiEndpoints } from '../../../app/endpoints';
-import { HRLinkBaseApi } from '../../../app/baseApiConfig';
+import { createEndpoint } from '@core/apis';
+import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
+import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
 
 export const SettingApi = HRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({

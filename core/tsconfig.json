@@ -1,6 +1,22 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "composite": true
-  }
+    "composite": true,
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "../modules/process-maker/**/*",
+    "../modules/hrlink/**/*",
+    "../modules/sso/**/*",
+    "../modules/chart-maker/**/*",
+    "../modules/basic-info/**/*",
+  ],
+  "references": [
+    { "path": "../mock" },
+    { "path": "../configs" },
+  ]
 }

@@ -1,4 +1,4 @@
-declare module 'core' {
+declare module '@core/index' {
   export * from '../core';
 }
 

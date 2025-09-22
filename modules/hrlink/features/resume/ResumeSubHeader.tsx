@@ -1,4 +1,4 @@
-import { AppButton, AppSearchInput } from 'core/components';
+import { AppButton, AppSearchInput } from '@core/components';
 import { Add, ArrowLeft2, ArrowRight2, ReceiveSquare } from 'iconsax-react';
 
 const ResumeSubHeader = (props:any) => {

@@ -1,10 +1,10 @@
 import { Button } from '@heroui/react';
 import { ArrowRight } from 'iconsax-react';
 
-import CoWorksImage1 from '../assets/img/Co-Works/1.png';
-import CoWorksImage2 from '../assets/img/Co-Works/2.png';
-import CoWorksImage3 from '../assets/img/Co-Works/3.png';
-import CoWorksImage4 from '../assets/img/Co-Works/4.png';
+import CoWorksImage1 from '../../../public/assets/img/Co-Works/1.png';
+import CoWorksImage2 from '../../../public/assets/img/Co-Works/2.png';
+import CoWorksImage3 from '../../../public/assets/img/Co-Works/3.png';
+import CoWorksImage4 from '../../../public/assets/img/Co-Works/4.png';
 
 export const AppCoWorks = () => {
   return (

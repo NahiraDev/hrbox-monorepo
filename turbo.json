@@ -3,30 +3,52 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", "storybook-static/**"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "package.json",
+        "tsconfig.json",
+        "vite.config.ts"
+      ],
+      "outputs": ["dist/**", "build/**", "storybook-static/**"],
       "cache": true
     },
     "dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "cache": false,
       "persistent": true,
-      "env": ["NODE_ENV", "PORT"]
+      "outputs": [],
+      "env": ["NODE_ENV", "PORT", "VITE_*"]
     },
     "lint": {
-      "inputs": ["src/**/*.{ts,tsx}", "eslint.config.js", "tsconfig.json"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "eslint.config.js",
+        "tsconfig.json"
+      ],
       "outputs": [],
       "cache": true
     },
     "type-check": {
-      "dependsOn": ["^build"],
-      "inputs": ["src/**/*.{ts,tsx}", "tsconfig.json"],
+      "dependsOn": [],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "app/**/*.{ts,tsx}",
+        "tsconfig.json"
+      ],
       "outputs": [],
       "cache": true
     },
     "test": {
-      "dependsOn": ["^build"],
-      "inputs": ["src/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
+      "dependsOn": [],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "app/**/*.{ts,tsx}",
+        "**/*.test.{ts,tsx}",
+        "**/*.spec.{ts,tsx}"
+      ],
       "outputs": ["coverage/**"],
       "cache": true
     },
@@ -34,10 +56,11 @@
       "cache": false
     }
   },
-  "globalEnv": ["NODE_ENV"],
+  "globalEnv": ["NODE_ENV", "CI", "VERCEL"],
   "globalDependencies": [
     "package.json",
     "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
     "turbo.json",
     "tsconfig.json",
     ".env*"

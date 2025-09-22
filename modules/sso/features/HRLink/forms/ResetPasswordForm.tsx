@@ -3,7 +3,7 @@ import { Form } from '@heroui/react';
 import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 
-const ResetPasswordForm = () => {
+export const ResetPasswordForm = () => {
   const {
     values,
     errors,
@@ -73,5 +73,3 @@ const ResetPasswordForm = () => {
     </Form>
   );
 };
-
-export default ResetPasswordForm;

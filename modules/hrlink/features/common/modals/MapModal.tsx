@@ -1,4 +1,4 @@
-import { AppButton, AppModal } from 'core/components';
+import { AppButton, AppModal } from '@core/components';
 import { Location } from 'iconsax-react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
@@ -6,9 +6,9 @@ import {
   DraggableMarker,
   useAddLocationMutation,
   useEditLocationMutation,
-} from '../../common';
+} from '@module/hrlink/features/common';
 import { useEffect, useState } from 'react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 export const MapModal = ({
   position,

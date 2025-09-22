@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AppButton, AppInput } from '../../../../../core';
 import { useFormContext } from '../../../../../core';
 
-const ForgetPasswordForm = () => {
+export const ForgetPasswordForm = () => {
   const {
     values,
     errors,
@@ -54,5 +54,3 @@ const ForgetPasswordForm = () => {
     </Form>
   );
 };
-
-export default ForgetPasswordForm;

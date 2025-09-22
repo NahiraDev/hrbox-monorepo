@@ -1,5 +1,4 @@
-import { lazyLoad } from '../../../core';
-import { createProjectRoutes } from '../../../core';
+import { lazyLoad , createProjectRoutes } from '@core/routes';
 import { HRLinkPaths } from './paths';
 
 export const page = {

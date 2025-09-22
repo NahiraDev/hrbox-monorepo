@@ -14,7 +14,7 @@ import {
   CupStarIcon,
   JobOffersIcon,
   JobOpportunitiesIcon,
-} from '../icons';
+} from '@module/hrlink/icons';
 
 const DashboardIcons = {
   dashboard: Chart2,

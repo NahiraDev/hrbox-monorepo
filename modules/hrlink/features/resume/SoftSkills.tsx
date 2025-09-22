@@ -1,11 +1,11 @@
 import { Edit, Trash } from 'iconsax-react';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 import { useEffect } from 'react';
 
-import { GeneralInformation, UserLocation } from '../common';
-import { AppDoubleLineProgress } from '../../../../core/sections';
-import { SoftSkillsIcon } from '../../icons';
+import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
+import { AppDoubleLineProgress } from '@core/sections';
+import { SoftSkillsIcon } from '@module/hrlink/icons';
 
 import { useLazyFetchSoftSkillsQuery } from './apis';
 

@@ -3,9 +3,9 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
-import SlideImage1 from '../../assets/auth/slide-1.png';
-import SlideImage2 from '../../assets/auth/slide-2.png';
-import SlideImage3 from '../../assets/auth/slide-3.png';
+import SlideImage1 from '../../../../public/assets/auth/slide-1.png';
+import SlideImage2 from '../../../../public/assets/auth/slide-2.png';
+import SlideImage3 from '../../../../public/assets/auth/slide-3.png';
 
 const SliderSSO = () => {
   const { t } = useTranslation();
