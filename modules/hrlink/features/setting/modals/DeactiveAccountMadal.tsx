@@ -1,6 +1,6 @@
 import { MedalStar, UserRemove } from 'iconsax-react';
 
-import { AppButton, AppModal } from '../../../../../core';
+import { AppButton, AppModal } from '@core/components';
 
 export const DeactiveAccountModal = () => {
   return (

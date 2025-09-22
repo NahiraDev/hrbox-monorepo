@@ -1,7 +1,7 @@
 import { onBoarding, DNNSupervisor } from 'mock';
 import { Calendar, Clipboard, UserAdd } from 'iconsax-react';
 import { Card } from '@heroui/react';
-import { AppCircularChart } from 'core/sections';
+import { AppDoubleLineProgress } from 'core/sections';
 
 import { BasicInfoLayout } from '../../common';
 const Onboarding = () => {
@@ -43,7 +43,7 @@ const Onboarding = () => {
               <details key={index} className="w-full bg-white border border-primary-400 p-6 rounded-5">
                 <summary className="font-semibold flex justify-between items-center cursor-pointer">
                   <span>{box.title}</span>
-                  <AppCircularChart size={30} value={80} />
+                  <AppDoubleLineProgress size={30} value={80} />
                 </summary>
                 <div>
                   <div className="flex w-full items-center justify-between bg-[#E5E5E5] py-3 px-2 rounded-4">

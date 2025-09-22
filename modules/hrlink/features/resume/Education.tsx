@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
 import { UserLocation, GeneralInformation } from '../common';
-import { AppTable, AppLoader, useModalContext } from '../../../../core';
+import { AppTable, AppLoader } from '@core/components';
+import { useModalContext } from '@core/context';
 
 import { useDeleteEducationMutation, useLazyFetchEducationQuery } from './apis';
 

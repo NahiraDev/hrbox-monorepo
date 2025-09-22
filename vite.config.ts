@@ -1,20 +1,13 @@
-import { type ConfigEnv, defineConfig } from 'vite';
+import { defineConfig, mergeConfig } from 'vitest/config';
+import { baseConfig } from './vite.config.base';
 
-import { baseConfig } from './configs/vite.config.base';
-import path from "path";
-
-export default defineConfig((env: ConfigEnv) => {
-  const config = baseConfig(env);
-
-  return {
-    ...config,
-    resolve: {
-      alias: {
-        '@core': path.resolve(__dirname, 'core'),
-        '@module': path.resolve(__dirname, 'modules'),
-        '@configs': path.resolve(__dirname, 'configs'),
-        '@mock': path.resolve(__dirname, 'mock'),
-      },
-    },
-  };
-});
+export default mergeConfig(
+  baseConfig({ mode: 'test', command: 'build' }),
+  defineConfig({
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./vitest.setup.ts']
+    }
+  })
+);

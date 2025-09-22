@@ -1,8 +1,8 @@
-import { renderApp } from '../../../core/app';
-import '../../../configs/index.css';
-import '../../../core/translate';
-import { serviceRegistry } from '../../../core/helpers';
-import { createStoreWithReducers } from '../../../core/redux/store';
+import { renderApp } from '@core/app';
+import '@configs/index.css';
+import '@core/translate';
+import { serviceRegistry } from '@core/helpers';
+import { createStoreWithReducers } from '@core/redux/store';
 
 import HRLinkPlugin from './register';
 

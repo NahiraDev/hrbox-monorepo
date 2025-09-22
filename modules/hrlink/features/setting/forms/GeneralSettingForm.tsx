@@ -1,12 +1,12 @@
-import { AppAutoComplete, AppButton, AppSwitch } from 'core/components';
+import { AppAutoComplete, AppButton, AppSwitch } from '@core/components';
 import { Edit, UserRemove, VolumeHigh } from 'iconsax-react';
 import { Form } from '@heroui/react';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-import { JobOffersIcon } from '../../../icons';
-import { companyPeopleOptions } from '../../../../../mock';
-import { useFormContext } from '../../../../../core';
+import { JobOffersIcon } from '@module/hrlink/icons';
+import { companyPeopleOptions } from '@mock/hrlink';
+import { useFormContext } from '@core/context';
 
 export const initialValuesEditGeralSetting = {
   NotificationByEmail: true,

@@ -10,7 +10,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Button } from '@heroui/react';
 import { ArrowRight, ClipboardTick, Designtools } from 'iconsax-react';
 
-import TodoListImage from '../assets/img/todoList.png';
+import TodoListImage from '../../../public/assets/img/todoList.png';
 
 const SortableTaskCard = ({ id }: { id: string }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =

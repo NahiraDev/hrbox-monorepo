@@ -1,10 +1,10 @@
-import { createRootReducer } from '../../../core';
-import { JobsApi } from '../features/jobs/apis';
-import { DashboardApi } from '../features/dashboard/apis';
-import { AwardApi, EducationApi, SkillsApi, CourseApi, ExperienceApi } from '../features/resume/apis';
-import { CompanyApi } from '../features/companies/apis';
-import { SettingApi } from '../features/setting/apis';
-import { CommonApi } from '../features/common/apis';
+import { createRootReducer } from '@core/redux';
+import { JobsApi } from '@module/hrlink/features/jobs/apis';
+import { DashboardApi } from '@module/hrlink/features/dashboard/apis';
+import { AwardApi, EducationApi, SkillsApi, CourseApi, ExperienceApi } from '@module/hrlink/features/resume/apis';
+import { CompanyApi } from '@module/hrlink/features/companies/apis';
+import { SettingApi } from '@module/hrlink/features/setting/apis';
+import { CommonApi } from '@module/hrlink/features/common/apis';
 
 export const HRLinkReducers = createRootReducer({
   [CommonApi.reducerPath]: CommonApi.reducer,

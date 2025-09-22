@@ -1,7 +1,31 @@
 {
-  "extends": "./configs/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "ES2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "preserveConstEnums": true,
+    "useDefineForClassFields": true,
+    "jsxImportSource": "react",
+    "sourceMap": true,
+    "composite": true,
+    "baseUrl": "./",
     "paths": {
       "@core/*": ["core/*"],
       "@module/*": ["modules/*"],
@@ -9,7 +33,6 @@
       "@mock/*": ["mock/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["vite/client"]
   },
   "include": [
     "core/**/*",
@@ -18,5 +41,5 @@
     "mock/**/*",
     "**/*.d.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/dist"]
+  "exclude": ["node_modules", "dist", "build", "declarations.d.ts" , ".turbo"]
 }

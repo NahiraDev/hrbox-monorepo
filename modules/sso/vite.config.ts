@@ -1,8 +1,5 @@
-import path from 'path';
-
 import { defineConfig } from 'vite';
-
-import { baseConfig } from '../../configs/vite.config.base.ts';
+import { baseConfig } from '../../vite.config.base';
 
 export default defineConfig((env) => {
   const config = baseConfig(env);
@@ -10,23 +7,13 @@ export default defineConfig((env) => {
   return {
     ...config,
     base: '/sso',
-    build: {
-      outDir: 'dist',
-      lib: {
-        entry: path.resolve(__dirname, 'app/index.ts'),
-        name: 'SSOModule',
-        formats: ['es'],
-        fileName: (format) => `index.${format}.js`,
-      },
-      rollupOptions: {
-        external: ['react', 'react-dom'],
-        output: {
-          globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-          },
-        },
-      },
-    },
+
+    plugins: [
+      ...(config.plugins || []),
+    ],
+
+    resolve: {
+      ...config.resolve,
+    }
   };
 });

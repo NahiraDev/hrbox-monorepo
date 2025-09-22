@@ -3,16 +3,12 @@
   "compilerOptions": {
     "composite": true
   },
-  "include": [
-    "features/**/*",
-    "app/**/*",
-    "index.html"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-  ],
   "references": [
-    { "path": "../../core" }
+    { "path": "../../core" },
+    { "path": "../../mock" },
+    { "path": "../../configs" },
+  ],
+  "include": [
+    "../../vite.config.ts"
   ]
 }

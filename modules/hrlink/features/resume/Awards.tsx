@@ -1,11 +1,11 @@
 import { Edit, Trash } from 'iconsax-react';
 import { Card, CardBody, CardHeader } from '@heroui/react';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 import { useLazyFetchAwardsQuery } from './apis';
 import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '../common';
-import { CupStarIcon } from '../../icons';
+import { CupStarIcon } from '@module/hrlink/icons';
 
 const Awards = () => {
   const [fetchAwards, { data }] = useLazyFetchAwardsQuery();

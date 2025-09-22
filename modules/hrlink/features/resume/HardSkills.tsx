@@ -1,10 +1,10 @@
 import { Edit, Trash } from 'iconsax-react';
-import { AppButton, AppPagination } from 'core/components';
-import AppDoubleLineProgress from 'core/sections/AppDoubleLineProgress';
+import { AppButton, AppPagination } from '@core/components';
+import { AppDoubleLineProgress } from '@core/sections';
 import { useEffect } from 'react';
 import { Card } from '@heroui/react';
 
-import { GeneralInformation, UserLocation } from '../common';
+import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 
 import { useLazyFetchHardSkillsQuery } from './apis';
 

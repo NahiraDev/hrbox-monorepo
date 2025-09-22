@@ -2,7 +2,8 @@ import { MedalStar } from 'iconsax-react';
 
 import { useChangePasswordMutation } from '../apis';
 import { ChangePasswordForm, formValidationError, handleChangePasswordSubmit, initialValuesForm } from '../forms';
-import { AppModal, AppButton, FormProvider } from '../../../../../core';
+import { AppModal, AppButton } from '@core/components';
+import { FormProvider } from '@core/context';
 
 export const ChangePasswordModal = () => {
   const [changePassword] = useChangePasswordMutation();

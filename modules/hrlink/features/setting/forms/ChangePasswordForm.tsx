@@ -1,8 +1,8 @@
-import { useFormContext } from 'core/context';
-import { Form } from '@heroui/react';
 import * as Yup from 'yup';
 
-import { AppInput } from '../../../../../core';
+import { useFormContext } from '@core/context';
+import { AppInput } from '@core/components';
+import { Form } from '@heroui/react';
 
 export const initialValuesForm = {
   CurrentPassWord: '',

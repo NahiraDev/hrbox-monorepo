@@ -11,7 +11,7 @@ import {
   Star,
   UserOctagon,
 } from 'iconsax-react';
-import { CupStarIcon, JobOffersIcon } from '../icons';
+import { CupStarIcon, JobOffersIcon } from '@module/hrlink/icons';
 
 import {
   useLazyFetchExperienceQuery,

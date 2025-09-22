@@ -1,4 +1,4 @@
-import { createPaths } from '../../../core';
+import { createPaths } from '@core/routes';
 
 export const HRLinkPaths = createPaths('/hrlink', {
   Impersonate: '/impersonate',

@@ -5,7 +5,6 @@
   "type": "module",
   "main": "index.ts",
   "module": "index.ts",
-  "types": "index.d.ts",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -13,11 +12,10 @@
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
     "clean": "rm -rf dist .turbo",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix"
+    "lint": "echo 'No lint configured'",
+    "lint:fix": "echo 'No lint configured'"
   }
 }

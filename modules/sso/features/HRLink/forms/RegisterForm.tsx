@@ -5,7 +5,7 @@ import { useFormContext } from '../../../../../core';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const {
     values,
     errors,
@@ -155,5 +155,3 @@ const RegisterForm = () => {
     </Form>
   );
 };
-
-export default RegisterForm;

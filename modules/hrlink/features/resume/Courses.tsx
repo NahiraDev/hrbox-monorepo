@@ -1,8 +1,8 @@
 import { Edit, Trash } from 'iconsax-react';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 import { useEffect } from 'react';
 
-import { AcademyIcon } from '../../icons';
+import { AcademyIcon } from '@module/hrlink/icons';
 import { GeneralInformation, UserLocation } from '../common';
 
 import { useLazyFetchCoursesQuery } from './apis';

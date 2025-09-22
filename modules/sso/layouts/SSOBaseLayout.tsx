@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../../core';
 import { useTheme } from '@heroui/use-theme';
 
 import { SliderSSO } from '../features/common';
-import LightModeBg from '../assets/hrlink/lightmode-bg.webp';
-import DarkModeBg from '../assets/hrlink/darkmode-bg.webp';
+import LightModeBg from '../../../public/assets/hrlink/lightmode-bg.webp';
+import DarkModeBg from '../../../public/assets/hrlink/darkmode-bg.webp';
 
 export const SSOBaseLayout = ({ props }: { props: any }) => {
   const [mounted, setMounted] = useState(false);

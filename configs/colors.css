@@ -176,7 +176,7 @@
   --color-current-surface: var(--color-surface);
 
   /* Background Images */
-  --bg-current-theme: url('../core/assets/img/lightmode-bg.png');
+  --bg-current-theme: url('../public/img/lightmode-bg.png');
 
   /* Font Variables */
   --font-current: var(--font-display);

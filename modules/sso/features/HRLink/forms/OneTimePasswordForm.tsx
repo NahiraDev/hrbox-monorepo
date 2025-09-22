@@ -5,34 +5,34 @@ import { useEffect, useState } from 'react';
 import { AnimateClock } from '../../../../../core';
 import * as Yup from 'yup';
 
-export const initialValuesForm = {
-  UsernameOrMobile: '',
-  ClientOtpCode: '',
-  Mobile: '',
-};
+// export const initialValuesForm = {
+//   UsernameOrMobile: '',
+//   ClientOtpCode: '',
+//   Mobile: '',
+// };
+//
+// export const formValidationError = () => {
+//   Yup.object({
+//     ClientOtpCode: Yup.string().required(t('otp_is_required')),
+//   });
+// };
+//
+// export const handleFormSubmit = (values: any) => {
+//   if (authType === 'login' || authType === 'register') {
+//     return {
+//       UsernameOrMobile: mobile,
+//       ClientOtpCode: values.ClientOtpCode,
+//     };
+//   } else {
+//     return {
+//       Mobile: mobile,
+//       ClientOtpCode: values.ClientOtpCode,
+//     };
+//   }
+// };
 
-export const formValidationError = () => {
-  Yup.object({
-    ClientOtpCode: Yup.string().required(t('otp_is_required')),
-  });
-};
 
-export const handleFormSubmit = (values: any) => {
-  if (authType === 'login' || authType === 'register') {
-    return {
-      UsernameOrMobile: mobile,
-      ClientOtpCode: values.ClientOtpCode,
-    };
-  } else {
-    return {
-      Mobile: mobile,
-      ClientOtpCode: values.ClientOtpCode,
-    };
-  }
-};
-
-
-const OneTimePasswordForm = () => {
+export const OneTimePasswordForm = () => {
   const {
     values,
     errors,
@@ -140,5 +140,3 @@ const OneTimePasswordForm = () => {
     </Form>
   );
 };
-
-export default OneTimePasswordForm;

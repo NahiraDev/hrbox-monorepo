@@ -1,7 +1,7 @@
 import { CallCalling, Profile, Sms } from 'iconsax-react';
-import { AppButton, AppInput } from 'core/components';
+import { AppButton, AppInput } from '@core/components';
 import { useTranslation } from 'react-i18next';
-import { useFormContext } from 'core/context';
+import { useFormContext } from '@core/context';
 import { Form } from '@heroui/react';
 import * as Yup from 'yup';
 
