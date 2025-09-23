@@ -5,7 +5,7 @@ import { Calendar2, Chart2, Key, PasswordCheck, ReceiveSquare2, Setting3 } from 
 const MenuIcons = {
   dashboard: Chart2,
   entryexitregistration: PasswordCheck,
-  trafficcalender: Calendar2,
+  attendececalenders: Calendar2,
   listofapprovals: Key,
   export: ReceiveSquare2,
   shiftallocation: Setting3,
@@ -18,7 +18,7 @@ export const AttendenceMenu = (): { label: string; path: string; icon?: ReactNod
   const menuConfig: Record<string, string> = {
     Dashboard: '/dashboard',
     EntryExitRegistration: '/entry-exit',
-    TrafficCalender: '/traffic-calender',
+    AttendeceCalenders: '/attendece-calender',
     ListOfApprovals: '/list-of-approvals',
     Export: '/export',
     ShiftAllocation: '/shift-allocation',

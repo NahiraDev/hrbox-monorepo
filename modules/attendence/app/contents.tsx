@@ -4,6 +4,7 @@ import { AttendencePath } from './paths';
 
 const Dashboard = lazyLoad(() => import('../features/dashboard/Dashboard'));
 const EntryExit = lazyLoad(() => import('../features/registration/EntryExit'));
+const AttendeceCAlender = lazyLoad(() => import('../features/attendenceCalender/AttendenceCalenders'));
 
 export const AttendenceContents: any = [
   {
@@ -13,5 +14,9 @@ export const AttendenceContents: any = [
   {
     path: AttendencePath.EntryExitRegistration,
     component: EntryExit,
+  },
+  {
+    path: AttendencePath.AttendeceCalenders,
+    component: AttendeceCAlender,
   },
 ];

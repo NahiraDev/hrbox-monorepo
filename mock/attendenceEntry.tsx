@@ -8,7 +8,7 @@ export const EntryExitData = [
     Type: 'Clock out',
     Type2: (
       <div className="flex items-center justify-center text-center gap-1">
-          <Global /> <span>Ip</span>
+        <Global /> <span>Ip</span>
       </div>
     ),
     Ip: '127.0.0.1',
