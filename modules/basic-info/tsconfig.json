@@ -1,8 +1,18 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
   "compilerOptions": {
-    "outDir": "./dist",
-    "composite": true
-  }
+    "composite": true,
+    "rootDir": ".",
+    "DeclarationDir": "./dist/types"
+  },
+  "references": [
+    { "path": "../../core" },
+    { "path": "../../mock" },
+    { "path": "../../configs" },
+  ],
+  "include": [
+    "app",
+    "features",
+    "icons"
+  ]
 }

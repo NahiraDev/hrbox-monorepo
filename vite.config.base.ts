@@ -1,13 +1,25 @@
-import { type ConfigEnv, defineConfig } from 'vite';
+import { type ConfigEnv, defineConfig, type UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from "path";
+import path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import tailwindcss from '@tailwindcss/vite';
 import { imagetools } from 'vite-imagetools';
 
-export const baseConfig = defineConfig((_env: ConfigEnv) => {
-  const isDev = _env.mode === 'development';
-  const isProd = _env.mode === 'production';
+const spaFallback = () => ({
+  name: 'spa-fallback',
+  configureServer(server: any) {
+    server.middlewares.use((req: any, _res: any, next: any) => {
+      if (req.method === 'GET' && !req.url.includes('.') && !req.url.startsWith('/api')) {
+        req.url = '/index.html';
+      }
+      next();
+    });
+  }
+});
+
+export const baseConfig = (env: ConfigEnv): UserConfig => {
+  const isDev = env.mode === 'development';
+  const isProd = env.mode === 'production';
 
   return {
     plugins: [
@@ -20,7 +32,8 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
         }
       }),
       tsconfigPaths({
-        projects: ['./tsconfig.json', './core/tsconfig.json', './modules/*/tsconfig.json']
+        projects: ['./tsconfig.json', './core/tsconfig.json' , './modules/hrlink/tsconfig.json' , './modules/sso/tsconfig.json' , './modules/process-maker/tsconfig.json' , './modules/chart-maker/tsconfig.json' , './modules/basic-info/tsconfig.json' , './luncher/tsconfig.json'],
+        ignoreConfigErrors: true
       }),
       tailwindcss(),
       imagetools({
@@ -33,9 +46,12 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
           }
           return new URLSearchParams();
         }
-      })
+      }),
+      spaFallback()
     ],
 
+    root: './',
+    base: '/',
     resolve: {
       alias: {
         '@core': path.resolve(__dirname, 'core'),
@@ -49,16 +65,30 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
     server: {
       port: 5173,
       host: '0.0.0.0',
-      open: '/sso/index.html',
+      open: true,
       cors: true,
-      hmr: { overlay: false },
+      hmr: {
+        overlay: false,
+        port: 5273
+      },
+      proxy: {
+        '/DesktopModules/Freelancer/api': 'http://localhost:3000'
+      },
       fs: {
         allow: [
-          './modules',
-          './core'
+          process.cwd(),
+          'core',
+          'modules/hrlink',
+          'modules//sso',
+          'modules//basic-info',
+          'modules//process-maker',
+          'modules//chart-maker'
         ]
       }
     },
+
+    appType: 'spa',
+    assetsInclude: ['**/*.html'],
 
     build: {
       target: 'es2020',
@@ -66,12 +96,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
       sourcemap: isDev,
       rollupOptions: {
         input: {
-          sso: path.resolve(__dirname, './modules/sso/index.html'),
-          hrlink: path.resolve(__dirname, './modules/hrlink/index.html'),
-          basicInfo: path.resolve(__dirname, './modules/basic-info/index.html'),
-          chartMaker: path.resolve(__dirname, './modules/chart-maker/index.html'),
-          processMaker: path.resolve(__dirname, './modules/process-maker/index.html'),
-          projectManagement: path.resolve(__dirname, './modules/project-management/index.html'),
+          main: path.resolve(__dirname, 'index.html')
         },
         output: {
           manualChunks: {
@@ -108,7 +133,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
         'date-fns'
       ],
       exclude: [
-        '@hrbox/core',
+        '@core',
         'bpmn-js/lib/Modeler'
       ]
     },
@@ -125,13 +150,19 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
 
     esbuild: {
       drop: isProd ? ['console', 'debugger'] : [],
-      legalComments: 'none' as const
+      legalComments: 'none'
     },
 
     worker: {
       format: 'es'
+    },
+
+    preview: {
+      port: 4173,
+      host: '0.0.0.0',
+      open: true
     }
   };
-});
+}
 
-export default baseConfig;
+export default defineConfig(baseConfig);

@@ -2,19 +2,24 @@
   "name": "@module/basic-info",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.esm.js",
       "types": "./dist/index.d.ts"
     }
   },
+  "dependencies": {
+    "@hrbox/core": "workspace:*"
+  },
   "scripts": {
-    "dev": "vite"
+    "dev": "echo Dev mode runs",
+    "build": "tsup",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.cache"
   }
 }

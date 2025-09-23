@@ -1,8 +1,9 @@
 packages:
   - configs
-  - core
+  - core/*
   - modules/*
   - mock
+  - launcher
 
 onlyBuiltDependencies:
   - '@heroui/shared-utils'

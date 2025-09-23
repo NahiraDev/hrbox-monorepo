@@ -10,8 +10,6 @@ import { useAppDispatch, useAppSelector } from '../../../core';
 import { useTheme } from '@heroui/use-theme';
 
 import { SliderSSO } from '../features/common';
-import LightModeBg from '../../../public/assets/hrlink/lightmode-bg.webp';
-import DarkModeBg from '../../../public/assets/hrlink/darkmode-bg.webp';
 
 export const SSOBaseLayout = ({ props }: { props: any }) => {
   const [mounted, setMounted] = useState(false);
@@ -83,13 +81,6 @@ export const SSOBaseLayout = ({ props }: { props: any }) => {
         currentLang === 'en' ? 'ltr' : 'rtl'
       } dark:bg-mobile-bg-dark bg-mobile-bg lg:bg-cover lg:bg-center lg:bg-no-repeat`}
       dir={currentLang === 'en' ? 'ltr' : 'rtl'}
-      style={
-        isLargeScreen
-          ? {
-              backgroundImage: `url(${theme === 'dark' ? DarkModeBg : LightModeBg})`,
-            }
-          : {}
-      }
     >
       <div className="bg-cover bg-center min-h-screen lg:px-10 px-4 lg:flex items-center justify-center">
         <div

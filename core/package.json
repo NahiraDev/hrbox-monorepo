@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "index.ts",
-  "module": "index.ts",
+  "main": "./dist/index.js",
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "index.ts"
+      "import": "./dist/index.js"
     }
   },
   "scripts": {

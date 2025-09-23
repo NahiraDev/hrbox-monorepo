@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "DeclarationDir": "./dist/types"
+  },
+  "include": [
+    "../modules/**/*",
+    "../core/**/*",
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+  ],
+  "references": [
+    { "path": "../core" },
+    { "path": "../mock" },
+    { "path": "../configs" },
+    { "path": "../modules" },
+  ]
+}

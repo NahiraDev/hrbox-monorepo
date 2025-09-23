@@ -4,7 +4,7 @@ import { useLocation, type RouteObject } from 'react-router-dom';
 import { RoutesProvider } from '../context';
 import { AppLoader } from '../components';
 import { App } from '../app';
-import { ProjectRoutesMap } from '../../configs/routeMaps';
+import { ProjectRoutesMap } from '../../launcher/routeMaps';
 
 import { MotionRouter } from './motionRouter';
 

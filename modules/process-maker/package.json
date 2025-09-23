@@ -1,20 +1,28 @@
 {
-  "name": "@module/htlink",
+  "name": "@module/process-maker",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
-  "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "types": "src/index.d.ts",
   "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./src/index.js",
-      "types": "./src/index.d.ts"
+      "import": "./dist/index.esm.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "echo Dev mode runs",
+    "build": "tsup",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.cache"
+  },
+  "dependencies": {
+    "@hrbox/core": "workspace:*"
+  },
+  "devDependencies": {
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

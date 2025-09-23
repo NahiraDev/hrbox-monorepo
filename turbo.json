@@ -2,29 +2,45 @@
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "inputs": [
         "$TURBO_DEFAULT$",
         ".env*",
-        "app/**/*.{ts,tsx,js,jsx}",
+        "modules/**/*.{ts,tsx,js,jsx}",
+        "core/**/*.{ts,tsx,js,jsx}",
+        "luncher/**/*.{ts,tsx,js,jsx}",
+        "mock/**/*.{ts,tsx,js,jsx}",
+        "configs/**/*.{ts,tsx,js,jsx}",
         "package.json",
         "tsconfig.json",
         "vite.config.ts"
       ],
-      "outputs": ["dist/**", "build/**", "storybook-static/**"],
-      "cache": true
+      "outputs": [
+        "dist/**",
+        "build/**",
+        "storybook-static/**"
+      ],
+      "cache": true,
+      "env": ["VITE_ENABLED_MODULES"]
     },
     "dev": {
-      "dependsOn": [],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": false,
       "persistent": true,
       "outputs": [],
-      "env": ["NODE_ENV", "PORT", "VITE_*"]
+      "env": ["VITE_ENABLED_MODULES"]
     },
     "lint": {
       "inputs": [
-        "src/**/*.{ts,tsx,js,jsx}",
-        "app/**/*.{ts,tsx,js,jsx}",
+        "modules/**/*.{ts,tsx,js,jsx}",
+        "core/**/*.{ts,tsx,js,jsx}",
+        "luncher/**/*.{ts,tsx,js,jsx}",
+        "mock/**/*.{ts,tsx,js,jsx}",
+        "configs/**/*.{ts,tsx,js,jsx}",
         "eslint.config.js",
         "tsconfig.json"
       ],
@@ -34,8 +50,11 @@
     "type-check": {
       "dependsOn": [],
       "inputs": [
-        "src/**/*.{ts,tsx}",
-        "app/**/*.{ts,tsx}",
+        "modules/**/*.{ts,tsx,js,jsx}",
+        "core/**/*.{ts,tsx,js,jsx}",
+        "luncher/**/*.{ts,tsx,js,jsx}",
+        "mock/**/*.{ts,tsx,js,jsx}",
+        "configs/**/*.{ts,tsx,js,jsx}",
         "tsconfig.json"
       ],
       "outputs": [],
@@ -44,19 +63,27 @@
     "test": {
       "dependsOn": [],
       "inputs": [
-        "src/**/*.{ts,tsx}",
-        "app/**/*.{ts,tsx}",
+        "modules/**/*.{ts,tsx,js,jsx}",
+        "core/**/*.{ts,tsx,js,jsx}",
+        "luncher/**/*.{ts,tsx,js,jsx}",
+        "mock/**/*.{ts,tsx,js,jsx}",
+        "configs/**/*.{ts,tsx,js,jsx}",
         "**/*.test.{ts,tsx}",
         "**/*.spec.{ts,tsx}"
       ],
-      "outputs": ["coverage/**"],
+      "outputs": [
+        "coverage/**"
+      ],
       "cache": true
     },
     "clean": {
       "cache": false
     }
   },
-  "globalEnv": ["NODE_ENV", "CI", "VERCEL"],
+  "globalEnv": [
+    "NODE_ENV",
+    "VITE_ENABLED_MODULES"
+  ],
   "globalDependencies": [
     "package.json",
     "pnpm-lock.yaml",
