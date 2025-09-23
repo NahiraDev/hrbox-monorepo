@@ -3,7 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "DeclarationDir": "./dist/types"
+    "declarationDir": "./dist/types"
   },
   "include": [
     "../modules/**/*",
