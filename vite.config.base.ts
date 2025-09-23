@@ -19,9 +19,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
           ] : []
         }
       }),
-      tsconfigPaths({
-        projects: ['./tsconfig.json', './core/tsconfig.json', './modules/*/tsconfig.json']
-      }),
+      tsconfigPaths(),
       tailwindcss(),
       imagetools({
         defaultDirectives: (url) => {
@@ -35,7 +33,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
         }
       })
     ],
-
+    root:'./',
     resolve: {
       alias: {
         '@core': path.resolve(__dirname, 'core'),
@@ -49,7 +47,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
     server: {
       port: 5173,
       host: '0.0.0.0',
-      open: '/sso/index.html',
+      open: true,
       cors: true,
       hmr: { overlay: false },
       fs: {
@@ -66,6 +64,7 @@ export const baseConfig = defineConfig((_env: ConfigEnv) => {
       sourcemap: isDev,
       rollupOptions: {
         input: {
+          main: path.resolve(__dirname, './modules/apps/index.html'),
           sso: path.resolve(__dirname, './modules/sso/index.html'),
           hrlink: path.resolve(__dirname, './modules/hrlink/index.html'),
           basicInfo: path.resolve(__dirname, './modules/basic-info/index.html'),

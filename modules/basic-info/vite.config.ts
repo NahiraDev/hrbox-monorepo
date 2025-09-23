@@ -14,6 +14,12 @@ export default defineConfig((env) => {
     ],
     build: {
       outDir: 'dist',
+      lib: {
+        entry: 'app/main.ts',
+        name: 'BasicInfoModule',
+        fileName: 'basic-info',
+        formats: ['es', 'cjs'],
+      },
     },
     resolve: {
       ...config.resolve,

@@ -39,7 +39,6 @@
     "modules/**/*",
     "configs/**/*",
     "mock/**/*",
-    "**/*.d.ts"
   ],
   "exclude": ["node_modules", "dist", "build", "declarations.d.ts" , ".turbo"]
 }

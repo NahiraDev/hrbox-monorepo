@@ -12,7 +12,15 @@ export default defineConfig((env) => {
     plugins: [
       ...(config.plugins || []),
     ],
-
+    build: {
+      outDir: 'dist',
+      lib: {
+        entry: 'app/main.ts',
+        name: 'HRLinkModule',
+        fileName: 'chart-maker',
+        formats: ['es', 'cjs'],
+      },
+    },
     resolve: {
       ...config.resolve,
     }

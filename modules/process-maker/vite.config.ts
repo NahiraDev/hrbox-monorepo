@@ -7,6 +7,7 @@ export default defineConfig((env) => {
   return {
     ...config,
     base: '/process-maker',
+    root: 'modules/process-maker',
 
     plugins: [
       ...(config.plugins || []),

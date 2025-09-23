@@ -7,11 +7,21 @@ export default defineConfig((env) => {
   return {
     ...config,
     base: '/project-management',
+    root: 'modules/process-maker',
 
     plugins: [
       ...(config.plugins || []),
     ],
 
+    build: {
+      outDir: 'dist',
+      lib: {
+        entry: 'app/main.ts',
+        name: 'ProjectManagementModule',
+        fileName: 'project-management',
+        formats: ['es', 'cjs'],
+      },
+    },
     resolve: {
       ...config.resolve,
     }

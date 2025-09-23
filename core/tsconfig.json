@@ -9,9 +9,10 @@
   "exclude": [
     "dist",
     "node_modules",
-    "../modules/process-maker/**/*",
-    "../modules/hrlink/**/*",
     "../modules/sso/**/*",
+    "../modules/hrlink/**/*",
+    "../modules/process-maker/**/*",
+    "../modules/project-management/**/*",
     "../modules/chart-maker/**/*",
     "../modules/basic-info/**/*",
   ],

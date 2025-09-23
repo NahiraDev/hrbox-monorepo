@@ -1,10 +1,10 @@
 import type { RouteObject } from 'react-router-dom';
 
-import { HRLinkRoutes } from '../modules/hrlink/app/routes';
-import { SSOHRLinkRoutes } from '../modules/sso/app/routes';
-import { BasicInfoRoutes } from '../modules/basic-info/app/routes';
-import { ChartMakerRoutes } from '../modules/chart-maker/app/routes';
-import { ProcessMakerRoutes } from '../modules/process-maker/app/routes';
+import { HRLinkRoutes } from '../hrlink/app/routes.tsx';
+import { SSOHRLinkRoutes } from '../sso/app/routes.tsx';
+import { BasicInfoRoutes } from '../basic-info/app/routes.tsx';
+import { ChartMakerRoutes } from '../chart-maker/app/routes.tsx';
+import { ProcessMakerRoutes } from '../process-maker/app/routes.tsx';
 
 const routeImporters: Record<string, () => Promise<{ routes: RouteObject[] }>> = {
   '/sso': async () => ({ routes: SSOHRLinkRoutes.routes }),
