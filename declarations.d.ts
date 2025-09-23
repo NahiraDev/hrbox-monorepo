@@ -1,7 +1,3 @@
-declare module '@core/index' {
-  export * from '../core';
-}
-
 declare module '*.png' {
   const value: string;
   export default value;

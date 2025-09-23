@@ -2,27 +2,27 @@
   "name": "@module/process-maker",
   "version": "1.0.0",
   "private": true,
+  "sideEffects": false,
   "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
-  "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.esm.js",
       "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "echo Dev mode runs",
+    "build": "tsup",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "clean": "rm -rf dist node_modules/.cache"
+  },
+  "dependencies": {
+    "@hrbox/core": "workspace:*"
+  },
+  "devDependencies": {
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

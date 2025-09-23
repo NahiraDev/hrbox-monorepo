@@ -3,10 +3,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
-import SlideImage1 from '../../../../public/assets/auth/slide-1.png';
-import SlideImage2 from '../../../../public/assets/auth/slide-2.png';
-import SlideImage3 from '../../../../public/assets/auth/slide-3.png';
-
 const SliderSSO = () => {
   const { t } = useTranslation();
 
@@ -51,13 +47,13 @@ const SliderSSO = () => {
       <div ref={emblaRef} className="embla">
         <div className="embla__container">
           <div className="embla__slide">
-            <img alt="Welcome Image1" className="w-[430px]" src={SlideImage1} />
+            <img alt="Welcome Image1" className="w-[430px]" src="/images/slide-1.webp" />
           </div>
           <div className="embla__slide">
-            <img alt="Welcome Image2" className="w-[500px]" src={SlideImage2} />
+            <img alt="Welcome Image2" className="w-[500px]" src="/images/slide-2.webp" />
           </div>
           <div className="embla__slide">
-            <img alt="Welcome Image3" className="w-[446px]" src={SlideImage3} />
+            <img alt="Welcome Image3" className="w-[446px]" src="/images/slide-3.webp" />
           </div>
         </div>
         <div className="flex justify-center gap-1.5 mt-4">

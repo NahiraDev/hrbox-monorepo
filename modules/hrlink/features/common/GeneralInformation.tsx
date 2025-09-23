@@ -3,7 +3,6 @@ import { Edit } from 'iconsax-react';
 import { Avatar, Card } from '@heroui/react';
 
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from '@module/hrlink/icons';
-import AvatarUser from '../../../../public/img/whats-app-logo.png';
 import { useAppSelector } from '@core/redux';
 
 export const GeneralInformation = () => {
@@ -32,7 +31,7 @@ export const GeneralInformation = () => {
         <div className="flex justify-between">
           <div />
           <div>
-            <Avatar className="w-[70px] h-[70px]" src={AvatarUser} />
+            <Avatar className="w-[70px] h-[70px]" src="" />
           </div>
           <div className="flex flex-col gap-1">
             <AppButton

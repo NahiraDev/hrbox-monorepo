@@ -17,8 +17,6 @@ import {
   useAppDispatch,
 } from '../../../core';
 import { SSOHRLinkPaths } from '../app/routes';
-import DarkModeBg from '../../../public/assets/hrlink/darkmode-bg.webp';
-import LightModeBg from '../../../public/assets/hrlink/lightmode-bg.webp';
 
 export const SSORegisterLayout = ({ props }: { props: any }) => {
   const { children, formTitle, signInWithPhone, arrowBack, isRegister } = props;
@@ -83,13 +81,6 @@ export const SSORegisterLayout = ({ props }: { props: any }) => {
   return (
     <div
       className="relative dark:bg-mobile-bg-dark bg-mobile-bg lg:bg-cover lg:bg-center lg:bg-no-repeat"
-      style={
-        isLargeScreen
-          ? {
-              backgroundImage: `url(${theme === 'dark' ? DarkModeBg : LightModeBg})`,
-            }
-          : {}
-      }
     >
       <div className="bg-cover bg-center min-h-screen lg:px-10 px-4 lg:flex items-center justify-center">
         <div className="w-full" style={{ zoom: !isXLargeScreen ? '1' : '1.3' }}>

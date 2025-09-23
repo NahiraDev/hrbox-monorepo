@@ -1,23 +1,28 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "DeclarationDir": "./dist/types",
+    "skipLibCheck": true
   },
   "include": [
-    "./**/*"
+    "./**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    "../modules/**/*",
+    "../launcher/**/*",
   ],
   "exclude": [
     "dist",
     "node_modules",
-    "../modules/sso/**/*",
-    "../modules/hrlink/**/*",
-    "../modules/process-maker/**/*",
-    "../modules/project-management/**/*",
-    "../modules/chart-maker/**/*",
-    "../modules/basic-info/**/*",
   ],
   "references": [
-    { "path": "../mock" },
-    { "path": "../configs" },
+    { "path": "../launcher/tsconfig.json" },
+    { "path": "../modules/hrlink/tsconfig.json" },
+    { "path": "../modules/sso/tsconfig.json" },
+    { "path": "../modules/process-maker/tsconfig.json" },
+    { "path": "../modules/basic-info/tsconfig.json" },
+    { "path": "../modules/chart-maker/tsconfig.json" }
   ]
 }

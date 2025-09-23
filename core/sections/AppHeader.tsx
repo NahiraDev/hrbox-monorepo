@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '@heroui/use-theme';
 import { AppButton, AppTabs } from '../components';
 import { serviceRegistry } from '../helpers';
-
-import AvatarUser from '../../public/img/inpersonate-avatar.png';
 import { HourGlass, Logo, LogoHRLink } from '../icons';
 
 import AppBreadcrumb from './AppBreadCrumb';
@@ -211,7 +209,7 @@ const AppHeader = () => {
               )}
             </div>
             <div>
-              <Avatar radius="sm" src={AvatarUser} />
+              <Avatar radius="sm" src="" />
             </div>
           </div>
         </div>

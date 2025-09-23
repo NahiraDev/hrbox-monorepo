@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "DeclarationDir": "./dist/types"
   },
   "references": [
     { "path": "../../core" },
@@ -12,8 +13,6 @@
   "include": [
     "app",
     "features",
-    "icons",
-    "vite.config.ts",
-    "index.html"
+    "icons"
   ]
 }

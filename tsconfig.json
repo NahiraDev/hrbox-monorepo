@@ -16,7 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
@@ -32,13 +32,25 @@
       "@configs/*": ["configs/*"],
       "@mock/*": ["mock/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./types"],
+    "typeRoots": ["./node_modules/@types", "./types" , "vite/client", "vitest/globals", "@testing-library/jest-dom"],
   },
   "include": [
     "core/**/*",
     "modules/**/*",
     "configs/**/*",
     "mock/**/*",
+    "launcher/**/*",
+    "*.ts",
+    "*.tsx",
+  ],
+  "references": [
+    { "path": "core/tsconfig.json" },
+    { "path": "launcher/tsconfig.json" },
+    { "path": "modules/hrlink/tsconfig.json" },
+    { "path": "modules/sso/tsconfig.json" },
+    { "path": "modules/process-maker/tsconfig.json" },
+    { "path": "modules/basic-info/tsconfig.json" },
+    { "path": "modules/chart-maker/tsconfig.json" }
   ],
   "exclude": ["node_modules", "dist", "build", "declarations.d.ts" , ".turbo"]
 }
