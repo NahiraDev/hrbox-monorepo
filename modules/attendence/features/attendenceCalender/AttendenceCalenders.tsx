@@ -1,9 +1,15 @@
-const AttendenceCalenders=()=>{
-  return(
+import PersonalCalenderList from './PersonalCalenderList';
+import Comprehensivereport from '@module/attendence/features/attendenceCalender/Comprehensivereport';
+
+const AttendenceCalenders = () => {
+  return (
     <>
-      <h1>hello-world</h1>
+      <div className="w-full h-full flex flex-row gap-3">
+        <PersonalCalenderList />
+        <Comprehensivereport/>
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default AttendenceCalenders;

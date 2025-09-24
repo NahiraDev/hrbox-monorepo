@@ -11,7 +11,7 @@ import ActionsModal from '../modals/ActionsModal';
 const UserLocationModal = () => {
   const position = [51.505, -0.09];
   const mapRef = useRef<LeafletMap | null>(null);
-  const { closeModal,openModal } = useModalContext();
+  const { closeModal, openModal } = useModalContext();
 
   return (
     <>
@@ -70,7 +70,7 @@ const UserLocationModal = () => {
               type: 'submit',
               size: 'md',
               radius: 'lg',
-              onClick: () => openModal('confirm', 'ActionsModal' , <ActionsModal/>),
+              onClick: () => openModal('confirm', 'ActionsModal', <ActionsModal />),
               content: 'Submit Again',
             }}
           />

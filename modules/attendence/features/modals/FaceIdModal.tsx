@@ -1,9 +1,10 @@
 import { Avatar } from '@heroui/react';
 import AvatarUser from 'core/assets/img/inpersonate-avatar.png';
 import { useModalContext } from 'core/context';
+import { Repeat } from 'iconsax-react';
 
 import { AppButton, AppModal } from '../../../../core/components';
-import CameraView from '@module/attendence/features/registration/CameraView';
+import CameraView from '../registration/CameraView';
 
 const FaceIdModal = () => {
   const { closeModal } = useModalContext();
@@ -19,7 +20,16 @@ const FaceIdModal = () => {
               <p className="text-sm font-medium">192.168.1.1</p>
             </div>
           </div>
-          <div className="rounded-lg">
+          <div className="rounded-lg relative">
+            <div className="w-[100%] h-[100%] absolute bg-[#00000080] rounded-lg flex items-center justify-center ">
+              <AppButton
+                props={{
+                  color: 'none',
+                  className: 'shadow-none w-[488px] h-[303px]',
+                  content: <Repeat color="white" size="xl" />,
+                }}
+              />
+            </div>
             <CameraView />
           </div>
           <div className="text-center font-semibold text-xl">

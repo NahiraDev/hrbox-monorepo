@@ -30,7 +30,7 @@ const CameraView = () => {
       autoPlay
       muted
       playsInline
-      style={{ width: '100%', maxWidth: '600px' , borderRadius: '12px' }}
+      style={{ width: '100%', maxWidth: '600px', borderRadius: '12px' }}
     />
   );
 };

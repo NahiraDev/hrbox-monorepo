@@ -1,8 +1,23 @@
-import { Export, People, Profile } from 'iconsax-react';
+import { Calendar, Export, People, Profile } from 'iconsax-react';
+import AppDropDown from 'core/components/AppDropDown';
+import { useModalContext } from 'core/context';
+import AddPermisionTime from '@module/attendence/features/modals/AddPermisionTime';
 
 import { AppButton } from '../../../../core/components';
 
 const CalenderSubHeader = () => {
+  const years = [
+    { key: '2025', label: '2025', icon: <Calendar size={33} /> },
+    { key: '2024', label: '2024', icon: <Calendar size={33} /> },
+    { key: '2023', label: '2023', icon: <Calendar size={33} /> },
+  ];
+  const month = [
+    { key: 'Januray', label: 'Januray', icon: <Calendar size={33} /> },
+    { key: 'February', label: 'February', icon: <Calendar size={33} /> },
+    { key: 'March', label: 'March', icon: <Calendar size={33} /> },
+  ];
+  const { openModal } = useModalContext();
+
   return (
     <>
       <div className="w-full flex flex-row justify-between">
@@ -11,7 +26,7 @@ const CalenderSubHeader = () => {
             props={{
               color: 'primary',
               size: 'md',
-              radius:'lg',
+              radius: 'lg',
               startContent: (
                 <span>
                   <Profile />
@@ -34,18 +49,20 @@ const CalenderSubHeader = () => {
             }}
           />
         </div>
-        <div className="flex flex-row justify-between">
-          <AppButton
+        <div className="flex flex-row justify-between gap-2">
+          <AppDropDown
             props={{
-              color: 'white',
-              variant: 'solid',
-              size: 'md',
-              startContent: (
-                <span>
-                  <Profile />
-                </span>
-              ),
-              content: 'Personal attendence calendar',
+              title: '2025',
+              item: month,
+              title: 'Month',
+              className: 'border-1 border-primary px-xl ',
+            }}
+          />{' '}
+          <AppDropDown
+            props={{
+              title: '2025',
+              item: years,
+              className: 'border-1 border-primary px-xl ',
             }}
           />
           <AppButton
@@ -60,6 +77,7 @@ const CalenderSubHeader = () => {
                   <Export />
                 </span>
               ),
+              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />),
               content: 'Export ',
             }}
           />
