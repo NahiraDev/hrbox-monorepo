@@ -2,6 +2,7 @@ import { Calendar, Export, People, Profile } from 'iconsax-react';
 import AppDropDown from 'core/components/AppDropDown';
 import { useModalContext } from 'core/context';
 import AddPermisionTime from '@module/attendence/features/modals/AddPermisionTime';
+import PersonnelReportModal from '@module/attendence/features/modals/PersonnelReportModal';
 
 import { AppButton } from '../../../../core/components';
 
@@ -27,6 +28,7 @@ const CalenderSubHeader = () => {
               color: 'primary',
               size: 'md',
               radius: 'lg',
+              onPress:()=> openModal('confirm', 'PersonalReport', <PersonnelReportModal />),
               startContent: (
                 <span>
                   <Profile />
