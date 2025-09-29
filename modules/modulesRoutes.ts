@@ -5,6 +5,7 @@ import { SSOHRLinkRoutes } from '@module/sso/app/routes';
 import { BasicInfoRoutes } from '@module/basic-info/app/routes';
 import { ChartMakerRoutes } from '@module/chart-maker/app/routes';
 import { ProcessMakerRoutes } from '@module/process-maker/app/routes';
+import { AttendanceRoutes } from '@module/attendance/app/routes';
 
 const routeImporters: Record<string, () => Promise<{ routes: RouteObject[] }>> = {
   '/sso': async () => ({ routes: SSOHRLinkRoutes.routes }),
@@ -12,6 +13,7 @@ const routeImporters: Record<string, () => Promise<{ routes: RouteObject[] }>> =
   '/hrlink': async () => ({ routes: HRLinkRoutes.routes }),
   '/chart-maker': async () => ({ routes: ChartMakerRoutes.routes }),
   '/process-maker': async () => ({ routes: ProcessMakerRoutes.routes }),
+  '/attendance': async () => ({ routes: AttendanceRoutes.routes }),
 };
 
 export const ProjectRoutesMap = routeImporters;
