@@ -1,7 +1,8 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { Add, MessageEdit } from 'iconsax-react';
-import { useModalContext } from 'core/context';
-  const SubHeader = () => {
+import { useModalContext } from '@core/context';
+
+const SubHeader = () => {
   const { openModal } = useModalContext();
   return (
     <div>

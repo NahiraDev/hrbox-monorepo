@@ -6,12 +6,11 @@ const getValueByPath = (obj: any, path: string): any => {
   return path.split('.').reduce((acc, part) => acc?.[part], obj);
 };
 
-const AppAutoComplete = ({ props }: { props: any }) => {
+export const AppAutoComplete = ({ props }: { props: any }) => {
   const {
     name,
     label,
     required = false,
-    placeholder = '',
     data = [],
     displayKey = 'Name',
     valueKey = 'Id',
@@ -38,10 +37,8 @@ const AppAutoComplete = ({ props }: { props: any }) => {
       )}
 
       <Autocomplete
-        aria-label={!label ? placeholder : undefined}
         aria-labelledby={label ? labelId : undefined}
         className="custom-autocomplete"
-        placeholder={placeholder}
         selectedKey={selectedKey}
         variant="flat"
         onSelectionChange={handleSelectionChange}
@@ -58,5 +55,3 @@ const AppAutoComplete = ({ props }: { props: any }) => {
     </div>
   );
 };
-
-export default AppAutoComplete;

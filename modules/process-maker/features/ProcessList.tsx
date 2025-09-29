@@ -1,5 +1,5 @@
-import AppTable from '../../../core/components/AppTable';
-import { sampleData } from '../../../mock';
+import { AppTable } from '@core/components';
+import { sampleData } from '@module/process-maker/app/mock';
 const ProcessList = () => {
   return (
     // <div className="h-full ">

@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { AppModal, AppButton, FormProvider } from '../../../../core/';
-import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '../forms';
+import { AppModal, AppButton } from '@core/components';
+import { FormProvider } from '@core/context'
+import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '@module/process-maker/features/forms';
 
 export const NewOneModal = () => {
   const { t } = useTranslation();

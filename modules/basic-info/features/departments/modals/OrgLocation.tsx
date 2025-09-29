@@ -1,13 +1,14 @@
-import { AppAutoComplete, AppButton, AppModal, AppTextArea } from 'core/components';
+import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@core/components';
 import { Add, Location } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 import { Avatar } from '@heroui/react';
 
 export const OrgLocation = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<Location color="white" />} size="3xl" title="Organizational Locations">
+    // <AppModal icon={<Location color="white" />} size="3xl" title="Organizational Locations">
+    <>
       <AppModal.Body>
         <div className="grid grid-cols-2 gap-6">
           <div className="flex gap-3">
@@ -99,7 +100,7 @@ export const OrgLocation = () => {
               radius: 'lg',
             }}
           />
-         </div>
+        </div>
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton
@@ -124,6 +125,7 @@ export const OrgLocation = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // {/*</AppModal>*/}
   );
 };

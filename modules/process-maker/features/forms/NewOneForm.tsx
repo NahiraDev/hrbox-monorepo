@@ -1,8 +1,8 @@
 import { CheckboxGroup, Form } from '@heroui/react';
 import * as Yup from 'yup';
 
-import { AppAutoComplete, AppInput, AppTextArea, useFormContext } from '../../../../core';
-import AppCheckbox from '../../../../core/components/AppCheckBox';
+import { AppAutoComplete, AppInput, AppTextArea , AppCheckBox } from '@core/components';
+import {useFormContext} from '@core/context'
 
 export const initialValuesNewOne = {
   title: '',
@@ -42,7 +42,6 @@ export const NewOneForm = () => {
               error: touched.title && errors.title,
               label: 'title',
               name: 'title',
-              value: values.title,
               onBlur: handleBlur,
               className: 'w-full',
               onChange: handleChange,
@@ -53,7 +52,6 @@ export const NewOneForm = () => {
               error: touched.type && errors.type,
               label: 'type',
               name: 'type',
-              value: values.type,
               onBlur: handleBlur,
               onChange: handleChange,
             }}
@@ -65,7 +63,6 @@ export const NewOneForm = () => {
               type: 'text',
               label: 'Process_Builder',
               name: 'processbuilder',
-              value: values.processbuilder,
               error: touched.processbuilder && errors.processbuilder,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -76,7 +73,6 @@ export const NewOneForm = () => {
               type: 'text',
               label: 'category_process',
               name: 'category_process',
-              value: values.category_process,
               error: touched.category_process && errors.category_process,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -89,7 +85,7 @@ export const NewOneForm = () => {
           </div>
           <div className="flex items-center justify-between gap-[8px]">
             <CheckboxGroup>
-              <AppCheckbox
+              <AppCheckBox
                 props={{
                   name: 'processModal',
                   isSelected: values.is_notification_of_steps_on,
@@ -105,7 +101,6 @@ export const NewOneForm = () => {
             props={{
               label: 'descriptions',
               name: 'textarea',
-              value: values.textarea,
               error: touched.textarea && errors.textarea,
               onChange: handleChange,
               onBlur: handleBlur,

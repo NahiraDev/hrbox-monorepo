@@ -1,28 +1,28 @@
-import { lazyLoad } from 'core/routes';
+import { lazyLoad } from '@core/routes';
 
-import { BasicInfoPaths } from './paths';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
-const OrganizationDepartments = lazyLoad(() => import('../features/departments/OrganizationDepartments'));
-const TechnicalDepartments = lazyLoad(() => import('../features/departments/TechnicalDepartments'));
-const OrganizationalLocations = lazyLoad(() => import('../features/departments/OrganizationalLocations'));
-const AllEmployees = lazyLoad(() => import('../features/employees/sub-header/EmployeesSubHeader'));
-const TestReport = lazyLoad(() => import('../features/employees/More/TestReport'));
-const HealthRecords = lazyLoad(() => import('../features/employees/More/HealthRecord'));
-const Documents = lazyLoad(() => import('../features/employees/Documents'));
-const Achievements = lazyLoad(() => import('../features/employees/Achievements'));
-const RequestList = lazyLoad(() => import('../features/employees/More/RequestList'));
-const Guidelines = lazyLoad(() => import('../features/employees/More/Guidelines'));
-const Onboarding = lazyLoad(() => import('../features/employees/More/Onboarding'));
-// const OrganizationSpecificInformation = lazyLoad(() => import('../features/employees/OrganizationSpecificInformation'));
-const Courses = lazyLoad(() => import('../features/employees/Courses'));
-const Skills = lazyLoad(() => import('../features/employees/Skills'));
-const Jobs = lazyLoad(() => import('../features/employees/Jobs'));
-const Educations = lazyLoad(() => import('../features/employees/Education'));
-const PersonalInformation = lazyLoad(() => import('../features/employees/PersonalInformation'));
-// const SatisfactionStatus = lazyLoad(() => import('../features/employees/SatisfactionStatus'));
-const ContractList = lazyLoad(() => import('../features/employees/More/ContractList'));
-const Dependents = lazyLoad(() => import('../features/employees/Dependents'));
-const EmployeeSatisfactionCalendar = lazyLoad(() => import('../features/employees/EmployeeSatisfactionCalendar'));
+const OrganizationDepartments = lazyLoad(() => import('@module/basic-info/features/departments/OrganizationDepartments'));
+const TechnicalDepartments = lazyLoad(() => import('@module/basic-info/features/departments/TechnicalDepartments'));
+const OrganizationalLocations = lazyLoad(() => import('@module/basic-info/features/departments/OrganizationalLocations'));
+const AllEmployees = lazyLoad(() => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'));
+const TestReport = lazyLoad(() => import('@module/basic-info/features/employees/More/TestReport'));
+const HealthRecords = lazyLoad(() => import('@module/basic-info/features/employees/More/HealthRecord'));
+const Documents = lazyLoad(() => import('@module/basic-info/features/employees/Documents'));
+const Achievements = lazyLoad(() => import('@module/basic-info/features/employees/Achievements'));
+const RequestList = lazyLoad(() => import('@module/basic-info/features/employees/More/RequestList'));
+const Guidelines = lazyLoad(() => import('@module/basic-info/features/employees/More/Guidelines'));
+const Onboarding = lazyLoad(() => import('@module/basic-info/features/employees/More/Onboarding'));
+// const OrganizationSpecificInformation = lazyLoad(() => import('@module/basic-info/features/employees/OrganizationSpecificInformation'));
+const Courses = lazyLoad(() => import('@module/basic-info/features/employees/Courses'));
+const Skills = lazyLoad(() => import('@module/basic-info/features/employees/Skills'));
+const Jobs = lazyLoad(() => import('@module/basic-info/features/employees/Jobs'));
+const Educations = lazyLoad(() => import('@module/basic-info/features/employees/Education'));
+const PersonalInformation = lazyLoad(() => import('@module/basic-info/features/employees/PersonalInformation'));
+// const SatisfactionStatus = lazyLoad(() => import('@module/basic-info/features/employees/SatisfactionStatus'));
+const ContractList = lazyLoad(() => import('@module/basic-info/features/employees/More/ContractList'));
+const Dependents = lazyLoad(() => import('@module/basic-info/features/employees/Dependents'));
+const EmployeeSatisfactionCalendar = lazyLoad(() => import('@module/basic-info/features/employees/EmployeeSatisfactionCalendar'));
 
 export const BasicInfoContents: any = [
   {

@@ -1,4 +1,4 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { Buildings, Heart, Medal } from 'iconsax-react';
 import { JobOffersIcon } from '@module/hrlink/icons';
 import { Shared } from '@module/hrlink/features/common';

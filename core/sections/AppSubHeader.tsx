@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 
-const AppSubHeader: React.FC = () => {
+export const AppSubHeader: React.FC = () => {
   const location = useLocation();
   const [SubHeaderComponent, setSubHeaderComponent] = React.useState<React.ComponentType<any> | null>(null);
   const [componentProps, setComponentProps] = React.useState<any>({});
@@ -44,5 +44,3 @@ function extractParams(currentPath: string, pattern: string): Record<string, str
 
   return params;
 }
-
-export default AppSubHeader;

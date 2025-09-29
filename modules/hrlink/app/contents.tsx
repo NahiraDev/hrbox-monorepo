@@ -1,5 +1,5 @@
 import { lazyLoad } from '@core/routes';
-import { HRLinkPaths } from './paths';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
 const Impersonate = lazyLoad(() => import('../features/impersonate'));
 const Dashboard = lazyLoad(() => import('../features/dashboard'));

@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
-import { AppLoader } from '../components';
+import { AppLoader } from '@core/components';
 
 export function lazyLoad(
   importFunc: () => Promise<{ default: React.ComponentType<any> }>,

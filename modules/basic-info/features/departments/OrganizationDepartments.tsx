@@ -1,11 +1,11 @@
 import { User } from 'iconsax-react';
-import { organizationDepartment } from 'mock';
+import { organizationDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 
-import { AppPagination } from '../../../../core';
+import { AppPagination } from '@core/components';
 import { useNavigate } from 'react-router-dom';
-import { BasicInfoPaths } from '../../app/paths';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
 const OrganizationDepartments = () => {
   const { t } = useTranslation();

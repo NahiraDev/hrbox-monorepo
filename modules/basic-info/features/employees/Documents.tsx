@@ -1,10 +1,10 @@
 import { Avatar, Card } from '@heroui/react';
-import { identityCard } from 'mock';
-import { AppButton, } from 'core/components';
+import { identityCard } from '@module/basic-info/app/mock';
+import { AppButton, } from '@core/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
-import { BasicInfoLayout } from '../common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 // import DocumentsModal from '../employees/modals/DocumentsModal';
 
 const Documents = () => {

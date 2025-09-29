@@ -24,7 +24,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-export default function AppCheckbox({ props }: { props: any }) {
+export const AppCheckBox = ({ props }: { props: any })=> {
   const {
     disabled,
     isSelected,

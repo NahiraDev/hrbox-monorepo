@@ -1,6 +1,6 @@
 import { InfoCircle } from 'iconsax-react';
 
-import { AppButton, AppModal } from '../../../../core';
+import { AppButton, AppModal } from '@core/components';
 
 export const AttentionModal = () => {
   // const { getOpenModals } = useModalContext();
@@ -13,7 +13,8 @@ export const AttentionModal = () => {
   // };
 
   return (
-    <AppModal icon={<InfoCircle color="white" size={18} />} size="xl" title="Attention">
+    // <AppModal icon={<InfoCircle color="white" size={18} />} size="xl" title="Attention">
+    <>
       <AppModal.Body>
         <div className="bg-surface-50 px-6 py-3 w-full rounded-lg">
           <span className="text-secondary-1000 text-xl font-semibold">Should the offboarding process take place?</span>
@@ -40,6 +41,7 @@ export const AttentionModal = () => {
           />
         </div>
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

@@ -2,17 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "rootDir": ".",
-    "declarationDir": "./dist/types"
+    "outDir": "../../dist/modules/hrlink",
+    "declarationDir": "../../dist/types"
   },
-  "references": [
-    { "path": "../../core" },
-    { "path": "../../mock" },
-    { "path": "../../configs" },
-  ],
-  "include": [
-    "app",
-    "features",
-    "icons"
-  ]
+  "include": ["."]
 }

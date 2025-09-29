@@ -1,8 +1,8 @@
-import { FormProvider } from '../../../../core';
+import { FormProvider } from '@core/context';
 
-import { formValidationErrorLogin, initialValuesFormLogin, LoginForm } from './forms';
-import { useLoginMutation } from './apis';
-import { handleSubmitLogin } from './forms';
+import { formValidationErrorLogin, initialValuesFormLogin, LoginForm } from '@module/sso/features/HRLink/forms';
+import { useLoginMutation } from '@module/sso/features/HRLink/apis';
+import { handleSubmitLogin } from '@module/sso/features/HRLink/forms';
 
 const Login = () => {
   const [login] = useLoginMutation();

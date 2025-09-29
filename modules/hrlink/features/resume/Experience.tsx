@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import { GeneralInformation, UserLocation } from '../common';
+import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 import { AppLoader, AppTable } from '@core/components';
 import { useModalContext } from '@core/context';
 
-import { useLazyFetchExperienceQuery } from './apis';
+import { useLazyFetchExperienceQuery } from '@module/hrlink/features/resume/apis';
 
 const Experience = () => {
   const { openModal } = useModalContext();

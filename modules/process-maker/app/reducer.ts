@@ -1,4 +1,4 @@
-import { createRootReducer } from '../../../core';
+import { createRootReducer } from '@core/redux';
 
 export const ProcessMakerReducers = createRootReducer({
 });

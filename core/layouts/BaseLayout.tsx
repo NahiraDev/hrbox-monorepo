@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 import { useLocation } from 'react-router-dom';
 
-import { AppSupportButton } from '../components';
-import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '../sections';
+import { AppSupportButton } from '@core/components';
+import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '@core/sections';
 
 export const BaseLayout = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ export const BaseLayout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode bg-blend-screen bg-no-repeat bg-center pb-10">
+    <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode dark:bg-dark-mode bg-cover bg-blend-screen bg-no-repeat bg-center pb-10">
       <AppHeader />
 
       <div className="flex flex-1 min-h-0 gap-4">

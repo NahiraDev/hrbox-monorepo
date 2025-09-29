@@ -1,12 +1,13 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { Category } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 const EducationModals = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<Category color="white" />} size="3xl" title="Software Management">
+    // <AppModal icon={<Category color="white" />} size="3xl" title="Software Management">
+    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
@@ -128,7 +129,8 @@ const EducationModals = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };
 

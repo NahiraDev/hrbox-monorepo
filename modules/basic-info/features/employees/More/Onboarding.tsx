@@ -1,9 +1,9 @@
-import { onBoarding, DNNSupervisor } from 'mock';
+import { onBoarding, DNNSupervisor } from '@module/basic-info/app/mock';
 import { Calendar, Clipboard, UserAdd } from 'iconsax-react';
 import { Card } from '@heroui/react';
-import { AppDoubleLineProgress } from 'core/sections';
+import { AppDoubleLineProgress } from '@core/sections';
 
-import { BasicInfoLayout } from '../../common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 const Onboarding = () => {
   return (
     <BasicInfoLayout

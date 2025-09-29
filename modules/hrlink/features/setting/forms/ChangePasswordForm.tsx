@@ -39,7 +39,6 @@ export const ChangePasswordForm = () => {
               name: 'CurrentPassWord',
               type: 'text',
               error: touched.CurrentPassWord && errors.CurrentPassWord,
-              value: values.CurrentPassWord,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -52,7 +51,6 @@ export const ChangePasswordForm = () => {
               name: 'NewPassWord',
               type: 'text',
               error: touched.NewPassWord && errors.NewPassWord,
-              value: values.NewPassWord,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -67,7 +65,6 @@ export const ChangePasswordForm = () => {
               name: 'RepeatPassWord',
               type: 'text',
               error: touched.RepeatPassWord && errors.RepeatPassWord,
-              value: values.RepeatPassWord,
               onChange: handleChange,
               onBlur: handleBlur,
             }}

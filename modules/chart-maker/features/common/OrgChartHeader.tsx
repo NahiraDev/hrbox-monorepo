@@ -1,11 +1,10 @@
-import { AppButton, AppInput } from 'core/components';
+import { AppButton, AppInput } from '@core/components';
 import { ArrowDown2, Edit, Eye, LayoutMaximize, SearchNormal1, Setting4, User } from 'iconsax-react';
-import Counter from 'core/components/Counter';
 import { useState } from 'react';
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 
-import { departmentUnit } from '../../../../mock';
-import { useModalContext } from '../../../../core';
+import { departmentUnit } from '@module/chart-maker/app/mock';
+import { useModalContext } from '@core/context';
 
 export const users = [
   { id: 1, name: 'Haircut', position: 'Front End Developer' },
@@ -61,7 +60,7 @@ export const OrgChartHeader = ({ wrapperRef }: any) => {
               content: <ArrowDown2 className="text-secondary-1000" size={24} />,
             }}
           />
-          <Counter />
+          {/*<Counter />*/}
           <AppButton
             props={{
               color: 'primary',

@@ -1,5 +1,4 @@
 import { Tabs, Tab } from '@heroui/react';
-import React from 'react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -62,7 +61,7 @@ const radiusClasses: Record<TabRadius, string> = {
   full: 'rounded-full',
 };
 
-const AppTabs: React.FC<AppTabsProps> = ({
+export const AppTabs: React.FC<AppTabsProps> = ({
   tabs,
   color = 'primary',
   isDisabled = false,
@@ -89,7 +88,6 @@ const AppTabs: React.FC<AppTabsProps> = ({
       onTabChange(key);
     }
 
-    // اگر تب href داشته باشد، navigation انجام می‌دهد
     const selectedTab = tabs.find((tab) => tab.key === key || tab.href === key);
     if (selectedTab?.href) {
       navigate(selectedTab.href);

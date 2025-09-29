@@ -1,4 +1,4 @@
-import { createPaths } from 'core/routes';
+import { createPaths } from '@core/routes';
 
 export const SSOHRLinkPaths = createPaths('/sso', {
   login: '/login',

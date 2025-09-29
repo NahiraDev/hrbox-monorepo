@@ -1,7 +1,7 @@
-import { FormProvider } from '../../../../core';
+import { FormProvider } from '@core/context';
 
-import { handleSubmitLoginByOtp, initialValuesLoginByOtp, LoginByOtpForm, validationErrorLoginByOtp } from './forms';
-import { useSendOtpMutation } from './apis';
+import { handleSubmitLoginByOtp, initialValuesLoginByOtp, LoginByOtpForm, validationErrorLoginByOtp } from '@module/sso/features/HRLink/forms';
+import { useSendOtpMutation } from '@module/sso/features/HRLink/apis';
 
 const LoginByOtp = () => {
   const [sendCode] = useSendOtpMutation();

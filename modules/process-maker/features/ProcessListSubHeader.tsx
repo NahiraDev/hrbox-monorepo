@@ -1,8 +1,8 @@
 import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-react';
 
-import { AppButton, useModalContext } from '../../../core';
-import { NewOneModal } from './modals';
-
+import { AppButton } from '@core/components';
+import { useModalContext } from '@core/context';
+import { NewOneModal } from '@module/process-maker/features/modals';
 
 const ProcessListSubHeader = () => {
   const { openModal } = useModalContext();

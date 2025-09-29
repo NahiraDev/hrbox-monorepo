@@ -1,13 +1,11 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchNormal1 } from 'iconsax-react';
-import { AppInput } from '../components';
+import { AppInput , AppButton } from '@core/components';
 
-import { CloseIcon } from '../icons';
+// import { CloseIcon } from '../../public/icons';
 
-import AppButton from './AppButton';
-
-const AppSearchInput = ({ onSearch }: any) => {
+export const AppSearchInput = ({ onSearch }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -67,7 +65,7 @@ const AppSearchInput = ({ onSearch }: any) => {
                       size: 'xs',
                       isIconOnly: true,
                       onPress: handleClose,
-                      content: <CloseIcon size={20} />,
+                      // content: <CloseIcon size={20} />,
                     }}
                   />
                 ),
@@ -79,5 +77,3 @@ const AppSearchInput = ({ onSearch }: any) => {
     </div>
   );
 };
-
-export default AppSearchInput;

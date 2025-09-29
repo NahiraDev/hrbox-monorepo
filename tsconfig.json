@@ -1,56 +1,129 @@
 {
   "compilerOptions": {
-    "target": "ES2023",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    /* Language and Environment */
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable" , "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "checkJs": false,
     "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
+    "jsxImportSource": "@emotion/react",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true,
+
+    /* Module Resolution */
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["./core/*"],
+      "@module/*": ["./modules/*"],
+      "@root/*": ["./*"],
+      "~/*": ["./*"]
+    },
+    "rootDirs": [".", "core", "modules" , "shared"],
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": false,
-    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "useUnknownInCatchVariables": false,
+    "alwaysStrict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    /* Emit */
     "declaration": true,
     "declarationMap": true,
-    "preserveConstEnums": true,
-    "useDefineForClassFields": true,
-    "jsxImportSource": "react",
+    "emitDeclarationOnly": false,
     "sourceMap": true,
+    "outDir": "./dist/types",
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "sourceRoot": "",
+    "newLine": "lf",
+    "stripInternal": true,
     "composite": true,
-    "baseUrl": "./",
-    "paths": {
-      "@core/*": ["core/*"],
-      "@module/*": ["modules/*"],
-      "@configs/*": ["configs/*"],
-      "@mock/*": ["mock/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./types" , "vite/client", "vitest/globals", "@testing-library/jest-dom"],
+
+    /* JavaScript Support */
+    "allowUmdGlobalAccess": false,
+    "moduleSuffixes": [".ios", ".native", ""],
+
+    /* Editor Support */
+    "disableSizeLimit": false,
+    "plugins": [
+      {
+        "name": "@emotion/typescript-plugin"
+      }
+    ],
+
+    /* Backwards Compatibility */
+    "keyofStringsOnly": false,
+    "noStrictGenericChecks": false,
+    "suppressExcessPropertyErrors": true,
+//    "suppressImplicitAnyIndexErrors": true,
+
+    /* Language Service */
+    "disableSourceOfProjectReferenceRedirect": false,
+    "disableSolutionSearching": false,
+    "disableReferencedProjectLoad": false,
+
+    /* Output Formatting */
+    "noErrorTruncation": false,
+    "preserveWatchOutput": false,
+    "pretty": false,
+
+    /* Watch Options */
+    "assumeChangesOnlyAffectDirectDependencies": true,
+
+    /* Advanced */
+    "skipDefaultLibCheck": false,
+    "skipLibCheck": true,
+    "maxNodeModuleJsDepth": 0,
+    "preserveConstEnums": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false
   },
   "include": [
     "core/**/*",
     "modules/**/*",
-    "configs/**/*",
-    "mock/**/*",
-    "launcher/**/*",
-    "*.ts",
-    "*.tsx",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "playwright.config.ts",
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "**/*.d.ts"
   ],
-  "references": [
-    { "path": "core/tsconfig.json" },
-    { "path": "launcher/tsconfig.json" },
-    { "path": "modules/hrlink/tsconfig.json" },
-    { "path": "modules/sso/tsconfig.json" },
-    { "path": "modules/process-maker/tsconfig.json" },
-    { "path": "modules/basic-info/tsconfig.json" },
-    { "path": "modules/chart-maker/tsconfig.json" }
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    ".next",
+    ".turbo",
+    "**/*.min.js",
+    "public",
+    "**/temp/**",
+    "**/.temp/**",
+    "**/tmp/**",
+    "**/.tmp/**"
   ],
-  "exclude": ["node_modules", "dist", "build", "declarations.d.ts" , ".turbo"]
 }

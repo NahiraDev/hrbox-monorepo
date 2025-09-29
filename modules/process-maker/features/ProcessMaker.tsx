@@ -2,13 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modeler from 'bpmn-js/lib/Modeler';
 
-import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from './modals';
+import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from '@module/process-maker/features/modals';
 
-import '../app/index.css';
-import { AppButton, AppInput, useModalContext } from '../../../core';
+import { AppButton, AppInput } from '@core/components';
+import { useModalContext } from '@core/context';
 
 import { DocumentDownload, DocumentUpload } from 'iconsax-react';
-import CustomPalette from './CustomPalette';
+import CustomPalette from '@module/process-maker/features/CustomPalette';
 
 
 interface FormsValueBpmn {
@@ -201,13 +201,13 @@ const ProcessMaker = () => {
       const getModalForElement = (elementType: string) => {
         switch (elementType) {
           case 'bpmn:StartEvent':
-            return <ProcessModal onSave={handleSave} />;
+            return <ProcessModal />;
           case 'bpmn:Task':
-            return <NewEventModal onSave={handleSave} />;
+            return <NewEventModal />;
           case 'bpmn:SequenceFlow':
-            return <AddActionsModall onSave={handleSave} />;
+            return <AddActionsModall />;
           case 'bpmn:EndEvent':
-            return <EventModal onSave={handleSave} />;
+            return <EventModal />;
           default:
             return null;
         }
@@ -274,6 +274,7 @@ const ProcessMaker = () => {
     const modeling = modelerRef.current?.get('modeling');
 
     if (modeling && values.title) {
+      // @ts-ignore
       modeling.updateProperties(element, { name: values.title });
     }
     handleCloseModal();
@@ -313,7 +314,6 @@ const ProcessMaker = () => {
         props={{
           type: 'file',
           className: 'hidden',
-          accept: '.bpmn,.xml',
           ref: fileInputRef,
         }}
       />

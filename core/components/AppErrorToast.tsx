@@ -1,12 +1,12 @@
-import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Warning2 } from 'iconsax-react';
-import { AppButton } from '../../core';
+import { AppButton } from '@core/components';
 
-import { CloseIcon } from '../icons';
-import { clearError, useAppDispatch, useAppSelector } from '../redux';
+// import { CloseIcon } from '../../public/icons';
+import { clearError, useAppDispatch, useAppSelector } from '@core/redux';
+import { useEffect } from 'react';
 
-const AppErrorToast = () => {
+export const AppErrorToast = () => {
   const errorMessage = useAppSelector((state) => state.error.message);
   const dispatch = useAppDispatch();
 
@@ -14,7 +14,7 @@ const AppErrorToast = () => {
     dispatch(clearError());
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onCloseToast();
     };
@@ -50,7 +50,7 @@ const AppErrorToast = () => {
                 },
                 content: (
                   <div>
-                    <CloseIcon />
+                    {/*<CloseIcon />*/}
                   </div>
                 ),
               }}
@@ -66,5 +66,3 @@ const AppErrorToast = () => {
     </AnimatePresence>
   );
 };
-
-export default AppErrorToast;

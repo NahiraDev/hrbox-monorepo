@@ -1,12 +1,11 @@
-import { lazyLoad } from '../../../core';
-import { createProjectRoutes } from '../../../core';
+import { lazyLoad , createProjectRoutes } from '@core/routes';
 
-import { ProcessMakerPath } from './paths';
+import { ProcessMakerPath } from '@module/process-maker/app/paths';
 
 export const page = {
-  dashboard: lazyLoad(() => import('../features/Dashboard')),
-  process: lazyLoad(() => import('../features/ProcessMaker')),
-  processList: lazyLoad(() => import('../features/ProcessList')),
+  dashboard: lazyLoad(() => import('@module/process-maker/features/Dashboard')),
+  process: lazyLoad(() => import('@module/process-maker/features/ProcessMaker')),
+  processList: lazyLoad(() => import('@module/process-maker/features/ProcessList')),
 };
 
 export const ProcessMakerRoutes = createProjectRoutes('/process-maker', {

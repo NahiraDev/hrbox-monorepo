@@ -20,15 +20,15 @@ import {
   useLazyFetchAwardsQuery,
   useLazyFetchHardSkillsQuery,
   useLazyFetchSoftSkillsQuery,
-} from '../features/resume/apis';
+} from '@module/hrlink/features/resume/apis';
 
-import { HRLinkPaths } from './paths';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
-const ResumeSubHeader = lazyLoad(() => import('../features/resume/ResumeSubHeader'));
-const JobSubHeader = lazyLoad(() => import('../features/jobs/JobSubHeader'));
-const JobDetailSubHeader = lazyLoad(() => import('../features/jobs/JobDetailSubHeader'));
-const CompanySubHeader = lazyLoad(() => import('../features/companies/CompanySubHeader'));
-const CompanyInformationSubHeader = lazyLoad(() => import('../features/companies/CompanyInformationSubHeader'));
+const ResumeSubHeader = lazyLoad(() => import('@module/hrlink/features/resume/ResumeSubHeader'));
+const JobSubHeader = lazyLoad(() => import('@module/hrlink/features/jobs/JobSubHeader'));
+const JobDetailSubHeader = lazyLoad(() => import('@module/hrlink/features/jobs/JobDetailSubHeader'));
+const CompanySubHeader = lazyLoad(() => import('@module/hrlink/features/companies/CompanySubHeader'));
+const CompanyInformationSubHeader = lazyLoad(() => import('@module/hrlink/features/companies/CompanyInformationSubHeader'));
 
 function createResumeSubHeaderWithHook(useHook: () => any, name: string) {
   const Wrapper = (props: any) => {

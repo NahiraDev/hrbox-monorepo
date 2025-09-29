@@ -1,6 +1,5 @@
-import { AppButton, AppModal } from 'core/components';
+import { AppButton, AppModal } from '@core/components';
 import { ArrowDown, Personalcard } from 'iconsax-react';
-import { Chip } from '@heroui/react';
 import { useState } from 'react';
 
 export const SkillModal = () => {

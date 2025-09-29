@@ -1,11 +1,11 @@
-import { testReport } from 'mock';
+import { testReport } from '@module/basic-info/app/mock';
 import { TickSquare, User, ArrowDown, DollarCircle, Status } from 'iconsax-react';
 import { Card } from '@heroui/react';
-import { AppButton } from 'core/components';
-import { useModalContext } from 'core/context';
+import { AppButton } from '@core/components';
+import { useModalContext } from '@core/context';
 
-import { BasicInfoLayout } from '../../common';
-import { TestReportModal } from '../modals/TestReportModal';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
+import { TestReportModal } from '@module/basic-info/features/employees/modals/TestReportModal';
 const TestReport = () => {
   const { openModal } = useModalContext();
 

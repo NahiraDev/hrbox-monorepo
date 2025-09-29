@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { serviceRegistry } from '../helpers/serviceRegistry';
+import { serviceRegistry } from '@core/helpers';
 
 interface AppContentProps {
   fallback?: React.ReactNode;
 }
 
-const AppContent: React.FC<AppContentProps> = ({ fallback = <div>Loading...</div> }) => {
+export const AppContent: React.FC<AppContentProps> = ({ fallback = <div>Loading...</div> }) => {
   const location = useLocation();
   const [ContentComponent, setContentComponent] = React.useState<React.ComponentType<any> | null>(null);
   const [componentProps, setComponentProps] = React.useState<any>({});
@@ -53,5 +53,3 @@ function extractParams(currentPath: string, pattern: string): Record<string, str
 
   return params;
 }
-
-export default AppContent;

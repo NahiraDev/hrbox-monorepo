@@ -1,29 +1,28 @@
-import { Trash } from 'iconsax-react';
-import { useModalContext } from '../context';
+import { useModalContext } from '@core/context';
 
-import AppModal from './AppModal';
-import AppButton from './AppButton';
+import { AppButton , AppModal } from '@core/components';
 
-const AppDeleteModal = () => {
+export const AppDeleteModal = ({props}:any) => {
+  const {handleDelete , name} = props;
   const { getModalData, closeModal } = useModalContext();
-  const modalData = getModalData('delete');
+  const modalData = getModalData('delete' , name);
 
   const handleConfirm = () => {
     console.log('Deleting:', modalData);
-    closeModal('delete');
+    closeModal('delete' , name);
   };
 
   const handleCancel = () => {
-    closeModal('delete');
+    closeModal('delete' , name);
   };
 
   return (
-    <AppModal
-      icon={<Trash className="text-white" size="18" />}
-      modalType="delete"
-      size="xl"
-      title="Do you want to remove it?"
-    >
+    // <AppModal
+    //   icon={<Trash className="text-white" size="18" />}
+    //   modalType="delete"
+    //   size="xl"
+    //   title="Do you want to remove it?"
+    // >
       <AppModal.Footer>
         <AppButton
           props={{
@@ -44,8 +43,6 @@ const AppDeleteModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    // </AppModal>
   );
 };
-
-export default AppDeleteModal;

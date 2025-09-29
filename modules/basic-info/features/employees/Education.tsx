@@ -1,10 +1,10 @@
 import { Card } from '@heroui/react';
-import { education } from 'mock';
-import { AppButton, AppDeleteModal } from 'core/components';
+import { education } from '@module/basic-info/app/mock';
+import { AppButton, AppDeleteModal } from '@core/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
-import { BasicInfoLayout } from '../../features/common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const Education = () => {
   const { openModal } = useModalContext();

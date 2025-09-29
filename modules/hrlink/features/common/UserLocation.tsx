@@ -7,8 +7,8 @@ import { AppButton } from '@core/components';
 import { useModalContext } from '@core/context';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 
-import { MarkerIcon } from './MarkerMap';
-import { MapModal } from './modals/MapModal';
+import { MarkerIcon } from '@module/hrlink/features/common/MarkerMap';
+import { MapModal } from '@module/hrlink/features/common/modals/MapModal';
 
 export const UserLocation = () => {
   const profileString = localStorage.getItem('profile');

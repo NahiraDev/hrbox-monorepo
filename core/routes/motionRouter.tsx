@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation, useRoutes } from 'react-router-dom';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 
 export const MotionRouter = () => {
   const location = useLocation();

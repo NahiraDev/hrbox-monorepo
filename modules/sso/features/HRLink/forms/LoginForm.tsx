@@ -7,9 +7,9 @@ import * as Yup from 'yup';
 import { t } from 'i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { useFormContext } from '../../../../../core';
-import { AppButton, AppSwitch, AppInput } from '../../../../../core';
-import { SSOHRLinkPaths } from '../../../app/paths';
+import { useFormContext } from '@core/context';
+import { AppButton, AppSwitch, AppInput } from '@core/components';
+import { SSOHRLinkPaths } from '@module/sso/app/paths';
 
 export const initialValuesFormLogin = {
   Username: '',
@@ -29,7 +29,7 @@ export const handleSubmitLogin = (values: any) => {
 };
 
 export const LoginForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, formError } = useFormContext();
+  const { errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, formError } = useFormContext();
   const { t } = useTranslation();
   const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -52,7 +52,6 @@ export const LoginForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Username && errors.Username,
-              value: values.Username,
             }}
           />
         </div>
@@ -65,7 +64,6 @@ export const LoginForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Password && errors.Password,
-              value: values.Password,
               endContent: (
                 <AppButton
                   props={{
@@ -99,16 +97,15 @@ export const LoginForm = () => {
       </div>
       <AppButton
         props={{
-          text: t('sign_in'),
+          content: t('sign_in'),
           size: 'lg',
           fullWidth: true,
           type: 'submit',
           variant: 'solid',
-          color: 'navy_blue',
+          color: 'info',
           isLoading: isSubmitting,
         }}
       />
-      {formError && <div className="text-red-500 text-sm">{formError}</div>}
     </Form>
   );
 };

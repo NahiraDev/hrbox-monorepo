@@ -1,4 +1,4 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { Edit } from 'iconsax-react';
 import { Avatar, Card } from '@heroui/react';
 

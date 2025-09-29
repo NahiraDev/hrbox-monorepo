@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
-import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '../../common/apis';
-import { useLazyFetchUniversityQuery } from '../apis';
+import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '@module/hrlink/features/common/apis';
+import { useLazyFetchUniversityQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
 
-import { AppAutoComplete, AppDatePicker, AppInput, useFormContext } from '../../../../../core';
-import { Degree, FieldOfStudyType } from '../../../../../mock';
+import { AppAutoComplete, AppDatePicker, AppInput } from '@core/components';
+import { useFormContext } from '@core/context'
+import { Degree, FieldOfStudyType } from '@module/hrlink/app/mock';
 
 export const initialValuesEducation = {
   UniversityId: null,
@@ -67,7 +68,6 @@ export const EducationForm = () => {
               name: 'Gpa',
               label: 'GPA',
               error: touched.Gpa && errors.Gpa,
-              value: values.Gpa,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -79,7 +79,6 @@ export const EducationForm = () => {
               label: 'Thesis title',
               name: 'thesisTitle',
               error: touched.thesisTitle && errors.thesisTitle,
-              value: values.thesisTitle,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -92,7 +91,6 @@ export const EducationForm = () => {
             props={{
               name: 'Grade',
               label: 'Degree',
-              value: values.Degree,
               error: touched.Degree && errors.Degree,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -107,7 +105,6 @@ export const EducationForm = () => {
               name: 'UniversityType',
               label: 'University Type',
               displayKey: 'name',
-              value: values.UniversityType,
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.UniversityType && errors.UniversityType,
@@ -125,7 +122,6 @@ export const EducationForm = () => {
               displayKey: 'Name',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.FieldOfStudy,
               error: touched.FieldOfStudy && errors.FieldOfStudy,
               data: !universityIsLoading && universityData,
             }}
@@ -139,7 +135,6 @@ export const EducationForm = () => {
               displayKey: 'Name',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.UniversityId,
               error: touched.UniversityId && errors.UniversityId,
               data: !educationGetFieldIsLoading && educationGetFieldData,
             }}
@@ -155,7 +150,6 @@ export const EducationForm = () => {
               displayKey: 'Name',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.City,
               error: touched.City && errors.City,
               data: !cityIsLoading && cityData,
             }}
@@ -171,7 +165,6 @@ export const EducationForm = () => {
               name: 'StartDate',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.StartDate,
               error: touched.StartDate && errors.StartDate,
             }}
           />
@@ -183,7 +176,6 @@ export const EducationForm = () => {
               name: 'EndDate',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.EndDate,
               error: touched.EndDate && errors.EndDate,
             }}
           />

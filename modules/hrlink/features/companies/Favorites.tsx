@@ -1,9 +1,9 @@
 import { ArrowRight, Heart, Location, Star1 } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 
-import { useLazyFetchCompanyQuery } from './apis';
+import { useLazyFetchCompanyQuery } from '@module/hrlink/features/companies/apis';
 
 const Favorites = () => {
   const [fetchCompanies, { data }] = useLazyFetchCompanyQuery();

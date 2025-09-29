@@ -7,13 +7,13 @@ import { CompanyApi } from '@module/hrlink/features/companies/apis';
 import { SettingApi } from '@module/hrlink/features/setting/apis';
 import { AwardApi, EducationApi, SkillsApi, CourseApi, ExperienceApi } from '@module/hrlink/features/resume/apis';
 
-import { HRLinkRoutes } from './routes';
-import { HRLinkMenu } from './menu';
-import { HRLinkReducers } from './reducer';
-import { HRLinkContents } from './contents';
-import { HRLinkSubHeaders } from './subHeaders';
+import { HRLinkRoutes } from '@module/hrlink/app/routes';
+import { HRLinkMenu } from '@module/hrlink/app/menu';
+import { HRLinkReducers } from '@module/hrlink/app/reducer';
+import { HRLinkContents } from '@module/hrlink/app/contents';
+import { HRLinkSubHeaders } from '@module/hrlink/app/subHeaders';
 
-const HRLinkPlugin: PluginModule = {
+export const HRLinkPlugin: PluginModule = {
   name: 'hrlink',
   reducers: HRLinkReducers,
   apis: [

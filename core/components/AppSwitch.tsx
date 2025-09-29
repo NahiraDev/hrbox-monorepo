@@ -1,6 +1,6 @@
 import { cn, Switch } from '@heroui/react';
 
-import { useAppSelector } from '../redux';
+import { useAppSelector } from '@core/redux';
 
 const sizeWrapper: Record<string, string> = {
   sm: '!w-[30px] !h-[18px]',
@@ -28,7 +28,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppSwitch = ({ props }: { props: any }) => {
+export const AppSwitch = ({ props }: { props: any }) => {
   const {
     isSelected,
     onChange,
@@ -78,5 +78,3 @@ const AppSwitch = ({ props }: { props: any }) => {
     </Switch>
   );
 };
-
-export default AppSwitch;

@@ -10,7 +10,7 @@ interface AppDocItemProps {
   index: number;
 }
 
-const AppDocItem: React.FC<AppDocItemProps> = ({
+export const AppDocItem: React.FC<AppDocItemProps> = ({
                                                  icon: Icon,
                                                  module,
                                                  outlined = false,
@@ -70,5 +70,3 @@ const AppDocItem: React.FC<AppDocItemProps> = ({
     </motion.div>
   );
 };
-
-export default AppDocItem;

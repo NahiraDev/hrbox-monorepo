@@ -1,6 +1,7 @@
 import { Button } from '@heroui/react';
+import { ReactRef } from '@heroui/react-utils';
 import clsx from 'clsx';
-import React from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 const sizeClasses: Record<string, string> = {
   xs: 'p-1.5 text-xs',
@@ -20,7 +21,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppButton = React.forwardRef<HTMLButtonElement, { props: any }>(({ props }, ref) => {
+export const AppButton = ({ props }: any) => {
   if (!props) return null;
 
   const {
@@ -42,13 +43,17 @@ const AppButton = React.forwardRef<HTMLButtonElement, { props: any }>(({ props }
     spinner,
     spinnerPlacement,
     disableRipple,
-    ...rest
   } = props;
   const handlePress = onPress || onClick;
-
+  const { ref: forwardedRef, ...rest } = props;
+  if (forwardedRef && typeof forwardedRef === 'object' && forwardedRef.hasOwnProperty('current')) {
+    useImperativeHandle(forwardedRef, () => ({
+      // Exposed methods
+    }));
+  }
   return (
     <Button
-      ref={ref}
+      ref={forwardedRef}
       className={clsx(
         'leading-5 font-normal transition-colors duration-200 ease-in-out flex min-w-fit h-fit',
         variant !== 'light' && 'shadow-theme-sm',
@@ -76,8 +81,6 @@ const AppButton = React.forwardRef<HTMLButtonElement, { props: any }>(({ props }
       {content}
     </Button>
   );
-});
+}
 
 AppButton.displayName = 'AppButton';
-
-export default AppButton;

@@ -1,7 +1,7 @@
 import { Form } from '@heroui/react';
-import { AppAutoComplete, AppInput } from 'core/components';
+import { AppAutoComplete, AppInput } from '@core/components';
 import * as Yup from 'yup';
-import { useFormContext } from 'core/context';
+import { useFormContext } from '@core/context';
 
 export const initialValuesEventAdd = {
   title: null,
@@ -35,7 +35,6 @@ export const EventAddForm = () => {
                   type: 'text',
                   label: 'title',
                   name: 'title',
-                  value: values.title,
                   error: touched.title && errors.title,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -46,7 +45,6 @@ export const EventAddForm = () => {
                   type: 'text',
                   label: 'related_forms',
                   name: 'related_forms',
-                  value: values.related_forms,
                   error: touched.related_forms && errors.related_forms,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -59,7 +57,6 @@ export const EventAddForm = () => {
                   type: 'text',
                   label: 'undertaking',
                   name: 'undertaking',
-                  value: values.undertaking,
                   error: touched.undertaking && errors.undertaking,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -195,7 +192,6 @@ export const EventAddForm = () => {
               type: 'text',
               label: 'title',
               name: 'title',
-              value: values.title,
               error: touched.title && errors.title,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -208,7 +204,6 @@ export const EventAddForm = () => {
               type: 'text',
               label: 'related_forms',
               name: 'related_forms',
-              value: values.related_forms,
               error: touched.related_forms && errors.related_forms,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -219,7 +214,6 @@ export const EventAddForm = () => {
               type: 'text',
               label: 'undertaking',
               name: 'undertaking',
-              value: values.undertaking,
               error: touched.undertaking && errors.undertaking,
               onChange: handleChange,
               onBlur: handleBlur,

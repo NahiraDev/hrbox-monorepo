@@ -22,7 +22,7 @@ import {
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import AppDocItem from './AppDocItems';
+import { AppDocItem } from '@core/sections';
 
 const MenuItems = [
   { module: 'Home', icon: ElementEqual, outline: false },
@@ -44,7 +44,7 @@ const MenuItems = [
   { module: 'All Report', icon: PresentionChart, outline: false },
 ];
 
-const AppDocs: React.FC = () => {
+export const AppDocs: React.FC = () => {
   const [closeDocs, setCloseDocs] = useState<boolean>(true);
 
   return (
@@ -120,5 +120,3 @@ const AppDocs: React.FC = () => {
     </AnimatePresence>
   );
 };
-
-export default AppDocs;

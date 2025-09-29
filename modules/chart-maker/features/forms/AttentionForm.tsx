@@ -1,7 +1,7 @@
 import { Form } from '@heroui/react';
-import { departmentUnit } from '@mock/chart-maker';
+import { departmentUnit } from '@module/chart-maker/app/mock';
 
-import { AppAutoComplete } from '../../../../core';
+import { AppAutoComplete } from '@core/components';
 import * as Yup from 'yup';
 
 export const initialValuesForm = {
@@ -36,7 +36,6 @@ export const AttentionForm = () => {
           label: 'Job Title',
           data: departmentUnit,
           name: 'JobTitle',
-          value: values.JobTitle,
         }}
       />
     </Form>

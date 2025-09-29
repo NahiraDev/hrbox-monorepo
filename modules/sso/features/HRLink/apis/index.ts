@@ -1,6 +1,6 @@
-import { createEndpoint } from '../../../../../core';
-import { ApiEndpointsHRLink } from '../../../app/endpoints';
-import { SSOHRLinkBaseApi } from '../../../app/baseApiConfig';
+import { createEndpoint } from '@core/apis';
+import { ApiEndpointsHRLink } from '@module/sso/app/endpoints';
+import { SSOHRLinkBaseApi } from '@module/sso/app/baseApiConfig';
 
 export const SSOHRLinkApi = SSOHRLinkBaseApi.injectEndpoints({
   endpoints: (build) => ({

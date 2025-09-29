@@ -1,5 +1,5 @@
-import { AppInput } from 'core/components/index';
-import { useFormContext } from 'core/context';
+import { AppInput } from '@core/components';
+import { useFormContext } from '@core/context';
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
 
@@ -27,7 +27,6 @@ export const EventForm = () => {
           type: 'text',
           label: 'Title',
           name: 'title',
-          value: values.title,
           error: touched.title && errors.title,
           onChange: handleChange,
           onBlur: handleBlur,

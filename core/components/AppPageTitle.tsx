@@ -1,12 +1,10 @@
-import React from 'react';
-
 interface ModalProps {
   title: string;
   icon?: React.ReactNode;
 }
 
 
-const AppPageTitle = ({title , icon} : ModalProps) => {
+export const AppPageTitle = ({title , icon} : ModalProps) => {
   return (
     <div className="flex items-center gap-2 rounded-md bg-secondary-400 shadow-light-tight/1 px-3 py-1.5 w-fit">
       {icon}
@@ -14,5 +12,3 @@ const AppPageTitle = ({title , icon} : ModalProps) => {
     </div>
   )
 }
-
-export default AppPageTitle

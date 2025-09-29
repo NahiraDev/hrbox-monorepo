@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
-import { useFormContext } from 'core/context';
-import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea } from 'core/components';
+import { useFormContext } from '@core/context';
+import { AppAutoComplete, AppDatePicker, AppInput } from '@core/components';
 
 export const initialValuesExperience = {
   Id: null,
@@ -82,7 +82,6 @@ export const ExperienceForm = () => {
               type: 'text',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.Title,
               error: touched.Title && errors.Title,
             }}
           />
@@ -93,7 +92,6 @@ export const ExperienceForm = () => {
               label: 'Company Name',
               name: 'CompanyName',
               error: errors.CompanyName,
-              value: values.CompanyName,
             }}
           />
         </div>
@@ -104,13 +102,11 @@ export const ExperienceForm = () => {
             props={{
               name: 'IndustryId',
               label: 'Industry',
-              value: values.IndustryId,
               displayKey: 'Name',
               valueKey: 'Id',
               error:
                 touched.IndustryId &&
                 errors.IndustryId,
-              data: experienceData.industries,
             }}
           />
         </div>
@@ -118,13 +114,9 @@ export const ExperienceForm = () => {
           <AppInput
             props={{
               label: 'Salary received',
-              isNumeric: true,
-              error: formikCreateExperience.errors.Salary,
+              error: errors.Salary,
               name: 'Salary',
-              placeholder: 'Please Select Salary ...',
               type: 'text',
-              value: formikCreateExperience.values.Salary,
-              formik: formikCreateExperience,
             }}
           />
         </div>
@@ -134,10 +126,8 @@ export const ExperienceForm = () => {
           <AppDatePicker
             props={{
               label: 'Start Date',
-              error: formikCreateExperience.errors.StartDate,
+              error: errors.StartDate,
               name: 'StartDate',
-              placeholder: 'Please Enter Start Date ...',
-              formik: formikCreateExperience,
             }}
           />
         </div>
@@ -145,7 +135,6 @@ export const ExperienceForm = () => {
           <AppDatePicker
             props={{
               label: 'End Date',
-              required: true,
               error: errors.EndDate,
               name: 'EndDate',
             }}
@@ -158,7 +147,6 @@ export const ExperienceForm = () => {
             props={{
               name: 'PlaceId',
               label: 'City',
-              value: values.PlaceId,
               displayKey: `Name`,
               valueKey: 'Id',
             }}
@@ -169,7 +157,6 @@ export const ExperienceForm = () => {
             props={{
               name: 'JobGroupId',
               label: 'Occupational group',
-              value: values.JobGroupId,
               displayKey: 'Name',
               valueKey: 'Id',
             }}

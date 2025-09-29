@@ -46,11 +46,12 @@ export const MapModal = ({
     }
   };
   return (
-    <AppModal
-      icon={<Location className="text-white" size="22" />}
-      size="2xl"
-      title={isEdit ? "Edit Location" : "Add Location"}
-    >
+    // <AppModal
+    //   icon={<Location className="text-white" size="22" />}
+    //   size="2xl"
+    //   title={isEdit ? "Edit Location" : "Add Location"}
+    // >
+    <>
       <AppModal.Body>
         <div className="h-[400px] w-full rounded-md overflow-hidden">
           <MapContainer
@@ -87,6 +88,7 @@ export const MapModal = ({
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

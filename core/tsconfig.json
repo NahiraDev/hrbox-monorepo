@@ -1,28 +1,10 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "baseUrl": ".",
-    "declarationDir": "./dist/types",
-    "skipLibCheck": true
+    "composite": true,
+    "outDir": "../dist/core",
+    "rootDir": "../",
+    "declarationDir": "../dist/types"
   },
-  "include": [
-    "./**/*",
-    "**/*.ts",
-    "**/*.tsx",
-    "../modules/**/*",
-    "../launcher/**/*",
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-  ],
-  "references": [
-    { "path": "../launcher/tsconfig.json" },
-    { "path": "../modules/hrlink/tsconfig.json" },
-    { "path": "../modules/sso/tsconfig.json" },
-    { "path": "../modules/process-maker/tsconfig.json" },
-    { "path": "../modules/basic-info/tsconfig.json" },
-    { "path": "../modules/chart-maker/tsconfig.json" }
-  ]
+  "include": [".", "../*"]
 }

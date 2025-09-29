@@ -1,4 +1,4 @@
-import { LayoutLoader } from '../layouts';
+import { LayoutLoader } from '@core/layouts';
 
 const RouteResolver = ({ Component }: { Component: any }) => {
 

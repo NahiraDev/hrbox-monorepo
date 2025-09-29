@@ -1,7 +1,6 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { createContext, useContext } from 'react';
-import * as React from 'react';
 
 const RoutesContext = createContext<RouteObject[]>([]);
 

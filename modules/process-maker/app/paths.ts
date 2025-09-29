@@ -1,4 +1,5 @@
-import { createPaths } from '../../../core';
+import { createPaths } from '@core/routes';
+
 export const ProcessMakerPath = createPaths('/process-maker', {
     Dashboard: '/dashboard',
     ProcessMaker: '/process',

@@ -3,9 +3,9 @@ import { AppButton, AppPagination } from '@core/components';
 import { useEffect } from 'react';
 
 import { AcademyIcon } from '@module/hrlink/icons';
-import { GeneralInformation, UserLocation } from '../common';
+import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 
-import { useLazyFetchCoursesQuery } from './apis';
+import { useLazyFetchCoursesQuery } from '@module/hrlink/features/resume/apis';
 
 const Courses = () => {
   const [fetchCourses, { data }] = useLazyFetchCoursesQuery();

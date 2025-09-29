@@ -1,7 +1,7 @@
 import { Building, TickSquare } from 'iconsax-react';
-import { specificInformation } from 'mock';
+import { specificInformation } from '@module/basic-info/app/mock';
 
-import { BasicInfoLayout } from '../../common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const SpecificInformation = () => {
   return (

@@ -75,11 +75,10 @@ A properly managed monorepo offers atomic commits, centralized dependency manage
 
 ```
 hrbox-monorepo/
-├── 📁 configs/                    # Shared configurations
 │   ├── eslint.config.js          # ESLint configuration
-│   ├── tailwind.config.js        # Tailwind CSS configuration
+│   ├── tailwind.config.ts        # Tailwind CSS configuration
 │   ├── tsconfig.base.json        # Base TypeScript configuration
-│   ├── vite.config.base.ts       # Base Vite configuration
+│   ├── vite.config.ts       # Base Vite configuration
 │   ├── jest.config.js            # Jest testing configuration
 │   └── storybook/                # Storybook configuration
 ├── 📁 core/                      # Core utilities and business logic
@@ -120,13 +119,6 @@ hrbox-monorepo/
 │       ├── package.json
 │       ├── vite.config.ts
 │       └── tsconfig.json
-├── 📁 mock/                      # Mock data and API responses
-│   ├── api/                      # Mock API endpoints
-│   ├── data/                     # Mock data sets
-│   │   ├── companies.json
-│   │   ├── users.json
-│   │   └── events.json
-│   └── servers/                  # Mock server configurations
 ├── 📁 .github/                   # GitHub configurations
 │   └── workflows/                # CI/CD workflows
 │       ├── ci.yml               # Continuous Integration
@@ -151,10 +143,8 @@ hrbox-monorepo/
 
 | Package | Description | Type | Dependencies |
 |---------|-------------|------|--------------|
-| `configs` | Shared configuration files (ESLint, Tailwind, TypeScript, Vite, Jest) | Config | - |
 | `core` | Core business logic, utilities, shared components, and services | Library | React, TypeScript |
 | `modules/hrlink` | HR Link Management - companies, offers, events, partnerships | Application | core, React Router |
-| `mock` | Development and testing mock data, API responses, and servers | Data | - |
 
 ### Path Mapping & Aliases
 
@@ -170,15 +160,11 @@ import { api } from '../../../../core/api/client'
 import { utils } from '@core/utils'
 import { Button } from '@module/ui/button'
 import { api } from '@core/api/client'
-import { mockData } from '@mock/companies'
-import { theme } from '@configs/theme'
 ```
 
 **Available Global Aliases:**
 - `@core/*` → `core/*` - Core utilities, components, and business logic
 - `@module/*` → `modules/*` - Feature modules and specialized components
-- `@configs/*` → `configs/*` - Shared configurations and settings
-- `@mock/*` → `mock/*` - Mock data, API responses, and test fixtures
 
 ## 🛠 Tech Stack
 
@@ -368,13 +354,10 @@ The monorepo uses TypeScript path mapping for clean imports. If experiencing imp
     "baseUrl": ".",
     "paths": {
       "@core/*": ["./core/*"],
-      "@module/*": ["./modules/*"],
-      "@configs/*": ["./configs/*"],
-      "@mock/*": ["./mock/*"]
+      "@module/*": ["./modules/*"]
     },
     "types": ["vite/client", "@testing-library/jest-dom"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "**/dist", "**/build"]
 }
 ```
@@ -394,8 +377,6 @@ export default defineConfig({
     alias: {
       '@core': path.resolve(__dirname, './core'),
       '@module': path.resolve(__dirname, './modules'),
-      '@configs': path.resolve(__dirname, './configs'),
-      '@mock': path.resolve(__dirname, './mock'),
     },
   },
 });
@@ -627,9 +608,7 @@ cat > tsconfig.json << EOF
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
   },
-  "include": ["src/**/*", "dev/**/*"],
   "exclude": ["dist", "node_modules"]
 }
 EOF

@@ -1,11 +1,10 @@
-import { AppButton, AppInput } from '../../../../../core';
+import { AppButton, AppInput } from '@core/components';
 import { Form } from '@heroui/react';
-import { useFormContext } from '../../../../../core';
+import { useFormContext } from '@core/context';
 import { useTranslation } from 'react-i18next';
 
 export const ResetPasswordForm = () => {
   const {
-    values,
     errors,
     touched,
     handleChange,
@@ -34,7 +33,6 @@ export const ResetPasswordForm = () => {
               label: t('password'),
               name: 'Password',
               error: touched.UsernameOrMobile ? errors.Password : undefined,
-              value: values.Password,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -49,7 +47,6 @@ export const ResetPasswordForm = () => {
               error: touched.PasswordConfirm
                 ? errors.PasswordConfirm
                 : undefined,
-              value: values.PasswordConfirm,
               onChange: handleChange,
               onBlur: handleBlur,
             }}

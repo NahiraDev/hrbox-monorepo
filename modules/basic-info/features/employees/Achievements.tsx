@@ -1,11 +1,11 @@
 import { Card } from '@heroui/react';
-import { achivements } from 'mock';
-import { AppButton, AppDeleteModal } from 'core/components';
+import { achivements } from '@module/basic-info/app/mock';
+import { AppButton, AppDeleteModal } from '@core/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
-import { BasicInfoLayout } from '../common';
-import AddNewCourses from './modals/AddNewCourses';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
+import AddNewCourses from '@module/basic-info/features/employees/modals/AddNewCourses';
 
 const Achievements = () => {
   const { openModal } = useModalContext();

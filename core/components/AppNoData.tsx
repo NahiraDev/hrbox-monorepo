@@ -1,6 +1,6 @@
 import { Image } from '@heroui/react';
 
-const AppNoData = ({ props }: { props: any }) => {
+export const AppNoData = ({ props }: { props: any }) => {
   const { message, size = { height: 300, width: 450 } } = props;
 
   return (
@@ -12,5 +12,3 @@ const AppNoData = ({ props }: { props: any }) => {
     </div>
   );
 };
-
-export default AppNoData;

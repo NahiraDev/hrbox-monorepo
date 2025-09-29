@@ -1,6 +1,6 @@
-import React, { Fragment, Suspense } from "react";
-import { BaseLayout } from "./BaseLayout";
-import { AuthLayout } from "./AuthLayout";
+import { Fragment, Suspense } from "react";
+import { BaseLayout } from "@core/layouts/BaseLayout";
+import { AuthLayout } from "@core/layouts/AuthLayout";
 
 const layouts: Record<string, React.ComponentType<any>> = {
   BaseLayout,

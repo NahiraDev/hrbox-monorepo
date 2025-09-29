@@ -1,4 +1,4 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { Add, Chart, SearchNormal, Setting4 } from 'iconsax-react';
 
 const DashboardSubHeader = () => {

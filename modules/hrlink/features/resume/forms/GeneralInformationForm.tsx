@@ -72,7 +72,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.FirstName && errors.FirstName,
-              value: values.FirstName,
             }}
           />
         </div>
@@ -84,7 +83,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.LastName && errors.LastName,
-              value: values.LastName,
             }}
           />
         </div>
@@ -98,7 +96,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.NationalCode && errors.NationalCode,
-              value: values.NationalCode,
             }}
           />
         </div>
@@ -110,7 +107,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.BirthDate && errors.BirthDate,
-              value: values.BirthDate,
             }}
           />
         </div>
@@ -125,7 +121,6 @@ export const GeneralInformationForm = () => {
               valueKey: 'key',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.Gender,
               error: touched.Gender && errors.Gender,
               data: genderOptions,
             }}
@@ -140,7 +135,6 @@ export const GeneralInformationForm = () => {
               valueKey: 'id',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.MaritalStatus,
               error: touched.MaritalStatus && errors.MaritalStatus,
               data: maritalStatusOptions,
             }}
@@ -158,7 +152,6 @@ export const GeneralInformationForm = () => {
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.MilitaryStatusId,
               error: touched.MilitaryStatusId && errors.MilitaryStatusId,
             }}
           />
@@ -173,7 +166,6 @@ export const GeneralInformationForm = () => {
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.AddressCityId,
               error: touched.AddressCityId && errors.AddressCityId,
             }}
           />
@@ -186,7 +178,6 @@ export const GeneralInformationForm = () => {
               label: t('address'),
               name: 'Address',
               error: touched.Address && errors.Address,
-              value: values.Address,
             }}
           />
         </div>
@@ -198,7 +189,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.RequestedSalary && errors.RequestedSalary,
-              value: values.RequestedSalary,
             }}
           />
         </div>
@@ -214,7 +204,6 @@ export const GeneralInformationForm = () => {
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.UserJobCategory,
               error: touched.UserJobCategory && errors.UserJobCategory,
             }}
           />
@@ -229,7 +218,6 @@ export const GeneralInformationForm = () => {
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.UserjobGroup,
               error: touched.UserjobGroup && errors.UserjobGroup,
             }}
           />
@@ -244,7 +232,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: errors.OtherSocials,
-              value: values.OtherSocials,
             }}
           />
         </div>
@@ -258,7 +245,6 @@ export const GeneralInformationForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               error: errors.Biography,
-              value: values.Biography,
             }}
           />
         </div>

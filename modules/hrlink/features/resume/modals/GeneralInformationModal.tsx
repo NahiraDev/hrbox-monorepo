@@ -5,41 +5,43 @@ import {
   GeneralInformationForm,
   formValidationGeneralInformation,
   initialValuesGeneralInformation,
-} from '../forms';
+} from '@module/hrlink/features/resume/forms';
 
 export const GeneralInformationModal = () =>{
   return(
-    <AppModal title="Add General Informations" icon={<Personalcard className="text-white" size="22" />} size="xl">
-      <AppModal.Body>
-        <FormProvider
-          initialValues={initialValuesGeneralInformation}
-          validationSchema={formValidationGeneralInformation}
-          onSubmitAsync={async (values: any) => {
-            // await createGeneralInformation(handleSubmitGeneralInformation(values)).unwrap();
-          }}
-        >
-          <GeneralInformationForm />
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            color: 'default',
-            size: 'md',
-            radius: 'md',
-            content:'Cancel',
-          }}
-        />
-        <AppButton
-          props={{
-            color: 'secondary',
-            type: 'submit',
-            size: 'md',
-            radius: 'md',
-            content:'Save Changes',
-          }}
-        />
-      </AppModal.Footer>
-    </AppModal>
+    // <AppModal title="Add General Informations" icon={<Personalcard className="text-white" size="22" />} size="xl">
+      <>
+        <AppModal.Body>
+          <FormProvider
+            initialValues={initialValuesGeneralInformation}
+            validationSchema={formValidationGeneralInformation}
+            onSubmitAsync={async (values: any) => {
+              // await createGeneralInformation(handleSubmitGeneralInformation(values)).unwrap();
+            }}
+          >
+            <GeneralInformationForm />
+          </FormProvider>
+        </AppModal.Body>
+        <AppModal.Footer>
+          <AppButton
+            props={{
+              color: 'default',
+              size: 'md',
+              radius: 'md',
+              content:'Cancel',
+            }}
+          />
+          <AppButton
+            props={{
+              color: 'secondary',
+              type: 'submit',
+              size: 'md',
+              radius: 'md',
+              content:'Save Changes',
+            }}
+          />
+        </AppModal.Footer>
+      </>
+    // </AppModal>
   )
 }

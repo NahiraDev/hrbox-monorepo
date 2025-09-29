@@ -1,12 +1,11 @@
 import { Form } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, AppInput } from '../../../../../core';
-import { useFormContext } from '../../../../../core';
+import { AppButton, AppInput } from '@core/components';
+import { useFormContext } from '@core/context';
 
 export const ForgetPasswordForm = () => {
   const {
-    values,
     errors,
     touched,
     handleChange,
@@ -19,11 +18,11 @@ export const ForgetPasswordForm = () => {
 
   return (
     <Form
-      className="w-full max-w-xs flex flex-col gap-6"
+      className='w-full max-w-xs flex flex-col gap-6'
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-1">
+      <div className='flex flex-col gap-4 w-full'>
+        <div className='flex flex-col gap-1'>
           <AppInput
             props={{
               label: t('user_name'),
@@ -35,7 +34,6 @@ export const ForgetPasswordForm = () => {
               onChange: handleChange,
               onBlur: handleBlur,
               type: 'text',
-              value: values.UsernameOrMobile,
             }}
           />
         </div>
@@ -50,7 +48,7 @@ export const ForgetPasswordForm = () => {
           isLoading: isSubmitting,
         }}
       />
-      {formError && <div className="text-red-500 text-sm">{formError}</div>}
+      {formError && <div className='text-red-500 text-sm'>{formError}</div>}
     </Form>
   );
 };

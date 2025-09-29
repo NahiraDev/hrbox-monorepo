@@ -2,9 +2,9 @@ import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-rea
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { AppButton, AppPagination } from '../../../../core';
+import { AppButton, AppPagination } from '@core/components';
 
-import { useLazyFetchCompanyQuery } from './apis';
+import { useLazyFetchCompanyQuery } from '@module/hrlink/features/companies/apis';
 
 const Requested = () => {
   const [fetchCompanies, { data }] = useLazyFetchCompanyQuery();

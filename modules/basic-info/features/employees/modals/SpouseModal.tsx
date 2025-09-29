@@ -1,12 +1,13 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { Profile2User } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 export const SpouseModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<Profile2User color="white" />} size="3xl" title="Spouse">
+    // <AppModal icon={<Profile2User color="white" />} size="3xl" title="Spouse">
+    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
@@ -101,6 +102,7 @@ export const SpouseModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };

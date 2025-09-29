@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import createBaseQuery from './createBaseQuery';
+import createBaseQuery from '@core/apis/createBaseQuery';
 
-const createBaseApi = (
+export const createBaseApi = (
   baseUrl: string,
   reducerPath: string,
   tagTypes: readonly string[],
@@ -14,5 +14,3 @@ const createBaseApi = (
     endpoints: () => ({}),
   });
 };
-
-export default createBaseApi;

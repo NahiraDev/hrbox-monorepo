@@ -30,7 +30,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppTextArea = ({ props }: { props: any }) => {
+export const AppTextArea = ({ props }: { props: any }) => {
   const {
     label,
     required,
@@ -97,5 +97,3 @@ const AppTextArea = ({ props }: { props: any }) => {
     </div>
   );
 };
-
-export default AppTextArea;

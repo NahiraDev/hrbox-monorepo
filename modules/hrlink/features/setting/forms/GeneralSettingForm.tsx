@@ -5,7 +5,7 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 
 import { JobOffersIcon } from '@module/hrlink/icons';
-import { companyPeopleOptions } from '@mock/hrlink';
+import { companyPeopleOptions } from '@module/hrlink/app/mock';
 import { useFormContext } from '@core/context';
 
 export const initialValuesEditGeralSetting = {
@@ -150,11 +150,9 @@ export const GeneralSettingForm = () => {
             props={{
               name: 'AdaptationWithCompanyPersonal',
               label: 'Resume for Small Companies',
-              placeholder: 'Please Select Resume For Small Companies ...',
               displayKey: 'label',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.AdaptationWithCompanyPersonal,
               error: touched.AdaptationWithCompanyPersonal && errors.AdaptationWithCompanyPersonal,
               data: companyPeopleOptions,
             }}
@@ -168,7 +166,6 @@ export const GeneralSettingForm = () => {
               label: 'Resume for Selected Industries',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.AdaptationWithCurrentCompanies,
               error: touched.AdaptationWithCurrentCompanies && errors.AdaptationWithCurrentCompanies,
               data: [],
             }}
@@ -179,11 +176,9 @@ export const GeneralSettingForm = () => {
             props={{
               name: 'AdaptationWithOldCompanies',
               label: 'Resume for Selected Companies',
-              placeholder: 'Please Select Companies ...',
               displayKey: 'label',
               onChange: handleChange,
               onBlur: handleBlur,
-              value: values.AdaptationWithOldCompanies,
               error: touched.AdaptationWithOldCompanies && errors.AdaptationWithOldCompanies,
               data: companyPeopleOptions,
             }}

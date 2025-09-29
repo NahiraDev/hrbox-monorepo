@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Pagination as HeroPagination } from '@heroui/react';
 import { useSearchParams } from 'react-router-dom';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 
-const AppPagination = ({ total }: { total: number }) => {
+export const AppPagination = ({ total }: { total: number }) => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
@@ -56,5 +56,3 @@ const AppPagination = ({ total }: { total: number }) => {
     />
   );
 };
-
-export default AppPagination;

@@ -4,7 +4,9 @@ interface InputState {
   [key: string]: string;
 }
 
-const initialState: InputState = {};
+const initialState: InputState = {
+  key:""
+};
 
 export const AppInputSlice = createSlice({
   name: 'AppInput',
@@ -25,4 +27,3 @@ export const AppInputSlice = createSlice({
 });
 
 export const { updateAppInputValue, preloadAppModalData, resetAppModalData } = AppInputSlice.actions;
-export default AppInputSlice.reducer;

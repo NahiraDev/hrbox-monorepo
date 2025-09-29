@@ -1,20 +1,9 @@
-import AppHeader from './AppHeader';
-import AppSideBar from './AppSideBar';
-import AppSubHeader from './AppSubHeader';
-import AppContent from './AppContent';
-import AppDoubleLineProgress from './AppDoubleLineProgress';
-import AppDocItems from './AppDocItems';
-import AppDocs from './AppDocs';
-import App404 from './App404';
-
-
-export {
-  AppHeader,
-  AppSubHeader,
-  AppSideBar,
-  AppContent,
-  AppDoubleLineProgress,
-  AppDocItems,
-  AppDocs,
-  App404,
-};
+export * from '@core/sections/AppHeader';
+export * from '@core/sections/AppSideBar';
+export * from '@core/sections/AppBreadCrumb';
+export * from '@core/sections/AppSubHeader';
+export * from '@core/sections/AppContent';
+export * from '@core/sections/AppDoubleLineProgress';
+export * from '@core/sections/AppDocItems';
+export * from '@core/sections/AppDocs';
+export * from '@core/sections/App404';

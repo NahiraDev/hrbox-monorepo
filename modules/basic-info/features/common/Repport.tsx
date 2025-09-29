@@ -1,6 +1,5 @@
-import React from 'react';
 import { Listbox, ListboxItem, Avatar } from '@heroui/react';
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 
 export const users = [
   {

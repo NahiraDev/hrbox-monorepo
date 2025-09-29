@@ -1,6 +1,6 @@
 import { Edit, Lock } from 'iconsax-react';
 import { Avatar } from '@heroui/react';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { AppButton } from '@core/components';
 import { FormProvider } from '@core/context';

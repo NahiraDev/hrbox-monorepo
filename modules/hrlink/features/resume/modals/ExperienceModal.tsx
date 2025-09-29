@@ -1,9 +1,9 @@
 import { FavoriteChart } from 'iconsax-react';
-import { AppButton, AppModal } from 'core/components';
-import { FormProvider } from 'core/context';
+import { AppButton, AppModal } from '@core/components';
+import { FormProvider } from '@core/context';
 
-import { ExperienceForm, formValidationExperience, handleSubmitExperience, initialValuesExperience } from '../forms';
-import { useCreateExperienceMutation } from '../apis';
+import { ExperienceForm, formValidationExperience, handleSubmitExperience, initialValuesExperience } from '@module/hrlink/features/resume/forms';
+import { useCreateExperienceMutation } from '@module/hrlink/features/resume/apis';
 
 export const ExperienceModal = () => {
   const [createExperience] = useCreateExperienceMutation();

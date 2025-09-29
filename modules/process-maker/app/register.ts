@@ -1,10 +1,10 @@
-import type { PluginModule } from '../../../core';
-
-import { ProcessMakerReducers } from './reducer';
-import { ProcessMakerRoutes } from './routes';
-import { ProcessMakerContents } from './contents';
-import { ProcessMakerSubHeaders } from './subHeaders';
-import { ProcessMakerMenu } from './menu';
+import type { PluginModule } from '@core/helpers';
+import '@module/process-maker/app/index.css';
+import { ProcessMakerReducers } from '@module/process-maker/app/reducer';
+import { ProcessMakerRoutes } from '@module/process-maker/app/routes';
+import { ProcessMakerContents } from '@module/process-maker/app/contents';
+import { ProcessMakerSubHeaders } from '@module/process-maker/app/subHeaders';
+import { ProcessMakerMenu } from '@module/process-maker/app/menu';
 
 const ProcessMakerPlugin: PluginModule = {
   name: 'process-maker',

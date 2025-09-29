@@ -1,9 +1,9 @@
 import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-react';
 import { Button } from '@heroui/button';
 import { useNavigate } from 'react-router-dom';
-import { AppPagination } from 'core/components';
+import { AppPagination } from '@core/components';
 
-import { useLazyJobOffersQuery } from './apis';
+import { useLazyJobOffersQuery } from '@module/hrlink/features/jobs/apis';
 import { useEffect } from 'react';
 
 const JobOpportunities = () => {

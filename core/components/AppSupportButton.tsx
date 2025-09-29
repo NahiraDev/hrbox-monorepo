@@ -1,9 +1,10 @@
-import { AppButton } from '../../core';
+import { AppButton } from '@core/components';
 
-import { useAppSelector } from '../redux';
-import { SupportIcon } from '../icons';
+import { useAppSelector } from '@core/redux';
+// import { SupportIcon } from '../../public/icons';
 
-const AppSupportButton = () => {
+export const AppSupportButton = () => {
+  // @ts-ignore
   const lang = useAppSelector((state) => state.language.lang);
 
   return (
@@ -15,12 +16,10 @@ const AppSupportButton = () => {
         onPress: () => {},
         content: (
           <div>
-            <SupportIcon />
+            {/*<SupportIcon />*/}
           </div>
         ),
       }}
     />
   );
 };
-
-export default AppSupportButton;

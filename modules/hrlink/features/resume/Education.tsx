@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import { UserLocation, GeneralInformation } from '../common';
+import { UserLocation, GeneralInformation } from '@module/hrlink/features/common';
 import { AppTable, AppLoader } from '@core/components';
 import { useModalContext } from '@core/context';
 
-import { useDeleteEducationMutation, useLazyFetchEducationQuery } from './apis';
+import { useDeleteEducationMutation, useLazyFetchEducationQuery } from '@module/hrlink/features/resume/apis';
 
 const Education = () => {
   const { openModal } = useModalContext();

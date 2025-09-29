@@ -1,11 +1,9 @@
-import { FormProvider, useAuth } from '../../../../core';
+import { FormProvider, useAuth } from '@core/context';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { SSOBaseLayout } from '../../layouts';
-
-import { LoginByOtpForm } from './forms';
-import { useSendOtpMutation } from './apis';
+import { useSendOtpMutation } from '@module/sso/features/HRLink/apis';
+import { ForgetPasswordForm } from '@module/sso/features/HRLink/forms/ForgetPasswordForm';
 
 const ForgetPassword = () => {
   const { t } = useTranslation();
@@ -31,23 +29,15 @@ const ForgetPassword = () => {
   };
 
   return (
-    <SSOBaseLayout
-      props={{
-        formTitle: t('login_with_phone_number'),
-        arrowBack: true,
-        children: (
-          <FormProvider
-            initialValues={initialValuesForm}
-            validationSchema={formValidationError}
-            onSubmitAsync={async (values: any) => {
-              await sendCode(handleFormSubmit(values)).unwrap();
-            }}
-          >
-            <LoginByOtpForm />
-          </FormProvider>
-        ),
+    <FormProvider
+      initialValues={initialValuesForm}
+      validationSchema={formValidationError}
+      onSubmitAsync={async (values: any) => {
+        await sendCode(handleFormSubmit(values)).unwrap();
       }}
-    />
+    >
+      <ForgetPasswordForm />
+    </FormProvider>
   );
 };
 

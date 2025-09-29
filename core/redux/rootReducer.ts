@@ -4,9 +4,9 @@ import {
   type ReducersMapObject,
 } from '@reduxjs/toolkit';
 
-import { serviceRegistry } from '../helpers';
-
-import { languageReducers, errorReducers } from './reducers';
+import { serviceRegistry } from '@core/helpers';
+import errorReducers from "@core/redux/reducers/errors"
+import languageReducers from '@core/redux/reducers/language';
 
 export const baseReducers: ReducersMapObject = {
   language: languageReducers,

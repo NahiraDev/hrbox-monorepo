@@ -4,16 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@heroui/use-theme';
-import { AppButton, AppTabs } from '../components';
-import { serviceRegistry } from '../helpers';
-import { HourGlass, Logo, LogoHRLink } from '../icons';
+import { AppButton, AppTabs } from '@core/components';
+import { serviceRegistry } from '@core/helpers';
+// import { HourGlass, Logo, LogoHRLink } from '../../public/icons';
+import { AppBreadcrumb } from '@core/sections';
 
-import AppBreadcrumb from './AppBreadCrumb';
-
-const AppHeader = () => {
+export const AppHeader = () => {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-  const navigate = useNavigate();
   const location = useLocation();
   const [currentPages, setCurrentPages] = useState<string[]>([]);
   const [HRBoxPanel, setHRBoxPanel] = useState<boolean>(false);
@@ -96,9 +94,9 @@ const AppHeader = () => {
 
   return (
     <div className="flex items-center justify-between pb-8 pt-4 gap-10">
-      <button className="flex justify-center items-center w-[100px] cursor-pointer" onClick={() => navigate('/')}>
-        {HRBoxPanel ? <Logo /> : <LogoHRLink />}
-      </button>
+      {/*<button className="flex justify-center items-center w-[100px] cursor-pointer" onClick={() => navigate('/')}>*/}
+      {/*  {HRBoxPanel ? <Logo /> : <LogoHRLink />}*/}
+      {/*</button>*/}
       <div className="flex flex-col w-full">
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col gap-2">
@@ -203,7 +201,7 @@ const AppHeader = () => {
                     color: 'default',
                     radius: 'md',
                     size: 'xs',
-                    content: <HourGlass size="20" />,
+                    // content: <HourGlass size="20" />,
                   }}
                 />
               )}
@@ -218,5 +216,3 @@ const AppHeader = () => {
     </div>
   );
 };
-
-export default AppHeader;

@@ -1,9 +1,9 @@
-import { AppAutoComplete, AppInput, AppModal } from 'core/components';
+import { AppAutoComplete, AppInput, AppModal } from '@core/components';
 import { HeartEdit } from 'iconsax-react';
 
 const OnDutyHealthRecords = () => {
   return (
-    <AppModal icon={<HeartEdit color="white" />} size="3xl" title="On-Duty Health Records">
+    // <AppModal icon={<HeartEdit color="white" />} size="3xl" title="On-Duty Health Records">
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
@@ -37,7 +37,7 @@ const OnDutyHealthRecords = () => {
           </div>
         </div>
       </AppModal.Body>
-      </AppModal>
+    // </AppModal>
   );
 };
 

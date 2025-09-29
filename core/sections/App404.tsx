@@ -1,5 +1,3 @@
-const App404 = () => {
+export const App404 = () => {
   return <div>404</div>;
 };
-
-export default App404;

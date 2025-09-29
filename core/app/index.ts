@@ -1,2 +1,2 @@
-export * from './App';
-export * from './main';
+export * from '@core/app/App';
+export * from '@core/app/main';

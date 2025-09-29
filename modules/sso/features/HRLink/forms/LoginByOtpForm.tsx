@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { t } from 'i18next';
 
-import { AppButton } from '../../../../../core';
-import { Flag } from '../../common';
-import { useFormContext } from '../../../../../core';
+import { AppButton } from '@core/components';
+import { Flag } from '@module/sso/features/common';
+import { useFormContext } from '@core/context';
 
 export const initialValuesLoginByOtp = {
   UsernameOrMobile: '',

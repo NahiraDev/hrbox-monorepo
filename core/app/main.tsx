@@ -8,12 +8,12 @@ import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StrictMode } from 'react';
 
-import { i18n } from '../translate';
-import { AuthProvider , ModalProvider} from '../context';
-import { RootRouterLoader } from '../routes';
+import { i18n } from '@core/translate';
+import { AuthProvider , ModalProvider} from '@core/context';
+import { RootRouterLoader } from '@core/routes';
 
-import { HeroProviderWrapper } from './provider';
-import { AppModal } from '../components';
+import { HeroProviderWrapper } from '@core/app/provider';
+import { AppModal } from '@core/components';
 
 export const renderApp = (id: string, { store, persistor }: { store: EnhancedStore; persistor: Persistor }) => {
   const rootEl = document.getElementById(id);
@@ -32,7 +32,7 @@ export const renderApp = (id: string, { store, persistor }: { store: EnhancedSto
             <HeroProviderWrapper>
               <ReduxProvider store={store}>
                 <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-                  <ModalProvider>
+                  <ModalProvider store={store}>
                     <AppModal/>
                     <RootRouterLoader />
                   </ModalProvider>

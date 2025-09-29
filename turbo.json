@@ -1,5 +1,6 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
+  "$schema": "https://turborepo.build/schema.json",
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": [
@@ -10,37 +11,27 @@
         ".env*",
         "modules/**/*.{ts,tsx,js,jsx}",
         "core/**/*.{ts,tsx,js,jsx}",
-        "luncher/**/*.{ts,tsx,js,jsx}",
-        "mock/**/*.{ts,tsx,js,jsx}",
-        "configs/**/*.{ts,tsx,js,jsx}",
         "package.json",
         "tsconfig.json",
         "vite.config.ts"
       ],
       "outputs": [
-        "dist/**",
-        "build/**",
-        "storybook-static/**"
+        "dist/**"
       ],
-      "cache": true,
+      "persistent": false,
+      "cache": false,
       "env": ["VITE_ENABLED_MODULES"]
     },
     "dev": {
-      "dependsOn": [
-        "^build"
-      ],
       "cache": false,
       "persistent": true,
-      "outputs": [],
+      "dependsOn": ["^build"],
       "env": ["VITE_ENABLED_MODULES"]
     },
     "lint": {
       "inputs": [
         "modules/**/*.{ts,tsx,js,jsx}",
         "core/**/*.{ts,tsx,js,jsx}",
-        "luncher/**/*.{ts,tsx,js,jsx}",
-        "mock/**/*.{ts,tsx,js,jsx}",
-        "configs/**/*.{ts,tsx,js,jsx}",
         "eslint.config.js",
         "tsconfig.json"
       ],
@@ -52,9 +43,6 @@
       "inputs": [
         "modules/**/*.{ts,tsx,js,jsx}",
         "core/**/*.{ts,tsx,js,jsx}",
-        "luncher/**/*.{ts,tsx,js,jsx}",
-        "mock/**/*.{ts,tsx,js,jsx}",
-        "configs/**/*.{ts,tsx,js,jsx}",
         "tsconfig.json"
       ],
       "outputs": [],
@@ -65,9 +53,6 @@
       "inputs": [
         "modules/**/*.{ts,tsx,js,jsx}",
         "core/**/*.{ts,tsx,js,jsx}",
-        "luncher/**/*.{ts,tsx,js,jsx}",
-        "mock/**/*.{ts,tsx,js,jsx}",
-        "configs/**/*.{ts,tsx,js,jsx}",
         "**/*.test.{ts,tsx}",
         "**/*.spec.{ts,tsx}"
       ],

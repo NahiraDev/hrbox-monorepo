@@ -1,8 +1,9 @@
-import {  AppButton, AppModal } from 'core/components';
+import {  AppButton, AppModal } from '@core/components';
 
 const DocumentsModal = () => {
   return (
-    <AppModal  size="3xl" title="Add New On-Duty Health Records">
+    // <AppModal  size="3xl" title="Add New On-Duty Health Records">
+    <>
       <AppModal.Body>
         <div className="bg-primary-400">
           no data
@@ -19,7 +20,8 @@ const DocumentsModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };
 

@@ -1,4 +1,4 @@
-import createBaseApi from '@core/apis/baseApi';
+import { createBaseApi } from '@core/apis';
 
 const HRLinkTags = [
   'Company',
@@ -13,4 +13,8 @@ const HRLinkTags = [
   'Setting',
 ] as const;
 
-export const HRLinkBaseApi = createBaseApi('https://hrlink.hrbox.me:50443', 'HRLinkReducers', HRLinkTags);
+export const HRLinkBaseApi = createBaseApi(
+  import.meta.env.VITE_HRLINK_API_URL,
+  'HRLinkReducers',
+  HRLinkTags,
+);

@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { FormProvider, useAuth } from '../../../../core';
-import { ResetPasswordForm } from './forms';
-import { SSOBaseLayout } from '../../layouts';
+import { FormProvider, useAuth } from '@core/context';
+import { ResetPasswordForm } from '@module/sso/features/HRLink/forms';
 import * as Yup from 'yup';
 
 import { useResetPasswordCheckOtpMutation } from './apis';
@@ -35,24 +34,15 @@ const ResetPassword = () => {
   };
 
   return (
-    <SSOBaseLayout
-      props={{
-        arrowBack: true,
-        formTitle: t('enter_new_password'),
-        signInWithPhone: true,
-        children: (
-          <FormProvider
-            initialValues={initialValuesForm}
-            validationSchema={formValidationError}
-            onSubmitAsync={async (values) => {
-              await resetPassword(handleFormSubmit(values)).unwrap();
-            }}
-          >
-            <ResetPasswordForm />
-          </FormProvider>
-        ),
+    <FormProvider
+      initialValues={initialValuesForm}
+      validationSchema={formValidationError}
+      onSubmitAsync={async (values) => {
+        await resetPassword(handleFormSubmit(values)).unwrap();
       }}
-    />
+    >
+      <ResetPasswordForm />
+    </FormProvider>
   );
 };
 

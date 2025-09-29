@@ -1,40 +1,43 @@
 {
-  "printWidth": 80,
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
-  "semi": true,
-  "singleQuote": true,
   "quoteProps": "as-needed",
-  "jsxSingleQuote": true,
-  "trailingComma": "all",
   "bracketSpacing": true,
   "bracketSameLine": false,
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
-  "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxSingleQuote": true,
+  "proseWrap": "preserve",
+  "requirePragma": false,
+  "vueIndentScriptAndStyle": false,
+  "experimentalTernaries": false,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindConfig": "./tailwind.config.js",
+  "tailwindFunctions": ["clsx", "cn", "cva"],
   "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "printWidth": 120
+      }
+    },
     {
       "files": "*.md",
       "options": {
-        "printWidth": 70,
-        "useTabs": false,
-        "trailingComma": "none",
-        "arrowParens": "avoid",
+        "printWidth": 80,
         "proseWrap": "always"
       }
     },
     {
-      "files": "*.{yml,yaml}",
+      "files": "*.yml",
       "options": {
-        "tabWidth": 2,
-        "singleQuote": false
-      }
-    },
-    {
-      "files": "*.json",
-      "options": {
-        "tabWidth": 2,
         "singleQuote": false
       }
     }

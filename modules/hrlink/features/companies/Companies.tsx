@@ -1,12 +1,12 @@
 import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 
-import { HRLinkPaths } from '../../app/paths';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
-import { useLazyFetchCompanyQuery, useSendRequestMutation } from './apis';
+import { useLazyFetchCompanyQuery, useSendRequestMutation } from '@module/hrlink/features/companies/apis';
 
 const Companies = () => {
   const [fetchCompanies, { data }] = useLazyFetchCompanyQuery();

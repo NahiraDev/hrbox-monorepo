@@ -1,12 +1,13 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { People } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 export const RelativesModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<People color="white" />} size="3xl" title="Relatives">
+    // <AppModal icon={<People color="white" />} size="3xl" title="Relatives">
+    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
@@ -92,6 +93,7 @@ export const RelativesModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   )
 }

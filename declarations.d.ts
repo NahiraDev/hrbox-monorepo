@@ -19,7 +19,6 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  import * as React from 'react';
   export const ReactComponent: React.FunctionComponent<
     React.SVGProps<SVGSVGElement>
   >;
@@ -28,5 +27,3 @@ declare module '*.svg' {
 
 declare module '@core/*';
 declare module '@module/*';
-declare module '@configs/*';
-declare module '@mock/*';

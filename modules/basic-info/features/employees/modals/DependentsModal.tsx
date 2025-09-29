@@ -1,12 +1,13 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { UserSquare } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 export const DependentsModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    <AppModal icon={<UserSquare color="white" />} size="3xl" title="Dependents">
+    // <AppModal icon={<UserSquare color="white" />} size="3xl" title="Dependents">
+    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
@@ -92,6 +93,7 @@ export const DependentsModal = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   )
 }

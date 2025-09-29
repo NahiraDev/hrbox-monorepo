@@ -1,5 +1,5 @@
-import { AppPagination } from 'core/components';
-import { useLazyFetchEventsQuery } from './apis';
+import { AppPagination } from '@core/components';
+import { useLazyFetchEventsQuery } from '@module/hrlink/features/companies/apis';
 import { Buildings2, Calendar, People } from 'iconsax-react';
 import { useEffect } from 'react';
 

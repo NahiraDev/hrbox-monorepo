@@ -1,7 +1,7 @@
 import { type RouteObject, Navigate } from 'react-router-dom';
-import * as React from 'react';
 
-import RouteResolver from './RouteResolver';
+import RouteResolver from '@core/routes/RouteResolver';
+import React from 'react';
 
 interface ProjectComponents {
   [key: string]: React.ComponentType<any>;

@@ -1,17 +1,17 @@
-import { lazyLoad } from 'core/routes';
+import { lazyLoad } from '@core/routes';
 import { DocumentSketch,Location } from 'iconsax-react';
 
-import { BasicInfoPaths } from './paths';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
 const OrganizationDepartments = lazyLoad(
-  () => import('../features/departments/sub-header/OrganizationDepartmentsSubHeader'),
+  () => import('@module/basic-info/features/departments/sub-header/OrganizationDepartmentsSubHeader'),
 );
-const TechnicalDepartments = lazyLoad(() => import('../features/departments/sub-header/TechnicalDepartmentsSubHeader'));
+const TechnicalDepartments = lazyLoad(() => import('@module/basic-info/features/departments/sub-header/TechnicalDepartmentsSubHeader'));
 const OrganizationalLocations = lazyLoad(
-  () => import('../features/departments/sub-header/OrganizationLocationSubHeader'),
+  () => import('@module/basic-info/features/departments/sub-header/OrganizationLocationSubHeader'),
 );
 const AllEmployees = lazyLoad(
-  () => import('../features/employees/sub-header/EmployeesSubHeader'),
+  () => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'),
 );
 
 export const BasicInfoSubHeaders: any = [

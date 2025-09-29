@@ -1,18 +1,17 @@
 import type { Key } from 'react';
 
-import { TickIcon } from 'core/icons';
-import { AppButton } from 'core/components';
+// import { TickIcon } from '../../../../public/icons';
+import { AppButton } from '@core/components';
 import { Add, FolderCross, MessageEdit, Trash } from 'iconsax-react';
 import { Listbox, ListboxItem } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// import { dataReportWorker } from 'mock';
 
-import { AppTabs, useModalContext } from '../../../../core';
-import Repport from '../common/Repport';
-// import EducationModals from '../employees/modals/EducationModals';
-import AddNewCourses from '../employees/modals/AddNewCourses';
-import { BasicInfoPaths } from '../../../basic-info/app/paths';
+import { AppTabs } from '@core/components';
+import { useModalContext } from '@core/context';
+import Report from '@module/basic-info/features/common/Repport';
+import AddNewCourses from '@module/basic-info/features/employees/modals/AddNewCourses';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
 const EmployeesTab = [
   { key: 'personal-information', title: 'Personal Information', href: BasicInfoPaths.PersonalInformation },
@@ -74,7 +73,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
             style={{ background: `url('https://i.pravatar.cc/150?u=a04258a2462d826712d')` }}
           >
             <div className="flex flex-col justify-between items-end h-full p-1">
-              <TickIcon color="#0B76B7" />
+              {/*<TickIcon color="#0B76B7" />*/}
               <div className="flex gap-1">
                 <AppButton
                   props={{
@@ -184,7 +183,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
         <div className="col-span-2">
           <div className="py-4 pl-4 overflow-y-auto">
             <div>
-              <Repport />
+              <Report />
             </div>
           </div>
         </div>

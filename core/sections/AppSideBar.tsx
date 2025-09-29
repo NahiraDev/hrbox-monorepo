@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 
-import { AppButton } from '../components';
-import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '../redux';
+import { AppButton } from '@core/components';
+import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '@core/redux';
 
-const AppSideBar = () => {
+export const AppSideBar = () => {
   const { t } = useTranslation();
   const [fullWidth, setFullWidth] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string | undefined>('Home');
   const [menuItems, setMenuItems] = useState<any[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const currentLang = useAppSelector((state) => state.language.lang);
+  const currentLang = useAppSelector((state:any) => state.language.lang);
   const location = useLocation();
   const bottomMenu = [
     {
@@ -200,5 +200,3 @@ const AppSideBar = () => {
     </div>
   );
 };
-
-export default AppSideBar;

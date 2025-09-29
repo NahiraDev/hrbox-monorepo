@@ -1,5 +1,5 @@
-import { workerInfo } from 'mock';
-import { BasicInfoLayout } from '../common';
+import { workerInfo } from '@module/basic-info/app/mock';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const PersonalInformation = () => {
   return (

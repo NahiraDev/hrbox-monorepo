@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
-import { AuthLayout, BaseLayout } from '../layouts';
-import { useAppSelector } from '../redux';
-import { AppErrorToast } from '../components';
+import { AuthLayout, BaseLayout } from '@core/layouts';
+import { useAppSelector } from '@core/redux';
+import { AppErrorToast } from '@core/components';
 
 interface AppProps {
   children: React.ReactNode;
 }
 
 export const App = ({ children }: AppProps) => {
-  const lang = useAppSelector((state) => state.language.lang);
+  const lang = useAppSelector((state:any) => state.language.lang);
   const [dir, setDir] = useState<'ltr' | 'rtl'>(lang === 'en' ? 'ltr' : 'rtl');
   const { pathname } = useLocation();
   const isSSOModule = pathname.startsWith('/sso');

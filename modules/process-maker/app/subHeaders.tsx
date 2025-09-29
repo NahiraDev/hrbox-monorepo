@@ -1,10 +1,10 @@
-import { lazyLoad } from 'core/routes';
+import { lazyLoad } from '@core/routes';
 import { Personalcard } from 'iconsax-react';
 
-import { ProcessMakerPath } from './paths';
+import { ProcessMakerPath } from '@module/process-maker/app/paths';
 
-const ProcessListSubHeader = lazyLoad(() => import('../features/ProcessListSubHeader'));
-const DashboardSubHeader = lazyLoad(() => import('../features/DashboardSubHeader'));
+const ProcessListSubHeader = lazyLoad(() => import('@module/process-maker/features/ProcessListSubHeader'));
+const DashboardSubHeader = lazyLoad(() => import('@module/process-maker/features/DashboardSubHeader'));
 
 export const ProcessMakerSubHeaders: any = [
   {

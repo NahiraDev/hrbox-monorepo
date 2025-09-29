@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { AppButton } from '@core/components';
 
-import { InstagramIcon, LinkedinIcon, TelegramIcon } from '../../icons';
+import { InstagramIcon, LinkedinIcon, TelegramIcon } from '@module/hrlink/icons';
 
 export const Shared = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

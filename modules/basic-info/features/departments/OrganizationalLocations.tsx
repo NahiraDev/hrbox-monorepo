@@ -1,13 +1,11 @@
-import { OrganizationalLocation } from 'mock';
+import { OrganizationalLocation } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { Location, MoreSquare, Trash } from 'iconsax-react';
 import { useState } from 'react';
 
-// import { AppPagination } from '../../../../core';
+import { AppButton, AppDeleteModal } from '@core/components';
 
-import { AppButton, AppDeleteModal } from 'core/components';
-
-import { OrgLocation } from './modals/OrgLocation';
+import { OrgLocation } from '@module/basic-info/features/departments/modals/OrgLocation';
 
 const OrganizationalLocations = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);

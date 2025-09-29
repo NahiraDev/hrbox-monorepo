@@ -1,8 +1,8 @@
 import { CheckboxGroup, Form } from '@heroui/react';
-import AppCheckBox from 'core/components/AppCheckBox';
 import * as Yup from 'yup';
 
-import { AppAutoComplete, AppInput, AppTextArea, useFormContext } from '../../../../core';
+import { AppAutoComplete, AppInput, AppTextArea , AppCheckBox } from '@core/components';
+import { useFormContext } from '@core/context';
 
 export const initialValuesProcess = {
   title: null,
@@ -43,7 +43,6 @@ export const ProcessForm = () => {
               type: 'text',
               label: 'title',
               name: 'title',
-              value: values.title,
               error: touched.title && errors.title,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -54,7 +53,6 @@ export const ProcessForm = () => {
               type: 'Select',
               label: 'type',
               name: 'type',
-              value: values.type,
               error: touched.type && errors.type,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -67,7 +65,6 @@ export const ProcessForm = () => {
               type: 'text',
               label: 'action_type',
               name: 'Action_Type',
-              value: values.Action_Type,
               error: touched.Action_Type && errors.Action_Type,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -78,7 +75,6 @@ export const ProcessForm = () => {
               type: 'text',
               label: 'implementation_of_workflow',
               name: 'workflowImplementation',
-              value: values.workflowImplementation,
               error: touched.workflowImplementation && errors.workflowImplementation,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -91,7 +87,6 @@ export const ProcessForm = () => {
               type: 'text',
               label: 'cartable_start_type',
               name: 'cartableStartType',
-              value: values.cartableStartType,
               error: touched.cartableStartType && errors.cartableStartType,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -121,7 +116,6 @@ export const ProcessForm = () => {
             props={{
               label: 'descriptions',
               name: 'textarea',
-              value: values.textarea,
               error: touched.textarea && errors.textarea,
               onChange: handleChange,
               onBlur: handleBlur,

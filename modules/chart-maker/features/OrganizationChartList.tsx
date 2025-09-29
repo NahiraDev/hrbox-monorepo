@@ -1,7 +1,7 @@
-import { AppPagination } from '../../../core';
-import { organizationCharts } from '../../../mock';
+import { AppPagination } from '@core/components';
+import { organizationCharts } from '@module/chart-maker/app/mock';
 
-import { OrgChartCardListNode } from './common';
+import { OrgChartCardListNode } from '@module/chart-maker/features/common';
 
 const OrganizationChartList = () => {
   return (

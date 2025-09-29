@@ -1,11 +1,12 @@
-import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from 'core/components';
+import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { NotificationFavorite } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
 const PreEmploymentHealthRecordsModals = () => {
   const { openModal } = useModalContext();
   return (
-    <AppModal icon={<NotificationFavorite color="white" />} size="3xl" title="Add New Pre-Employment Health Records">
+    // <AppModal icon={<NotificationFavorite color="white" />} size="3xl" title="Add New Pre-Employment Health Records">
+    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
@@ -57,7 +58,7 @@ const PreEmploymentHealthRecordsModals = () => {
             <AppInput
               props={{
                 className: ' border border-[#DCF0F9]',
-                  label: 'Alcohol Consumption',
+                label: 'Alcohol Consumption',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -224,7 +225,8 @@ const PreEmploymentHealthRecordsModals = () => {
           }}
         />
       </AppModal.Footer>
-    </AppModal>
+    </>
+    // </AppModal>
   );
 };
 

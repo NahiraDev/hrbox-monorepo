@@ -7,7 +7,7 @@ import {
   type QueryReturnValue,
 } from '@reduxjs/toolkit/query';
 
-import { setError } from '../redux';
+import { setError } from '@core/redux';
 
 const createBaseQuery = (
   baseUrl: string,

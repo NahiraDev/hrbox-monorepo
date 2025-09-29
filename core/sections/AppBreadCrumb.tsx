@@ -1,6 +1,6 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
 
-const AppBreadcrumb = ({ pages }: { pages: string[] }) => {
+export const AppBreadcrumb = ({ pages }: { pages: string[] }) => {
   return (
     <div className="flex flex-col flex-wrap gap-4">
       <Breadcrumbs>
@@ -27,5 +27,3 @@ const AppBreadcrumb = ({ pages }: { pages: string[] }) => {
     </div>
   );
 };
-
-export default AppBreadcrumb;

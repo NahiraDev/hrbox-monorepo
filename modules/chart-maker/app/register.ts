@@ -1,8 +1,8 @@
-import type { PluginModule } from '../../../core';
+import type { PluginModule } from '@core/helpers';
 
-import { ChartMakerMenu } from './menu';
-import { ChartMakerReducers } from './reducer';
-import { ChartMakerRoutes } from './routes';
+import { ChartMakerMenu } from '@module/chart-maker/app/menu';
+import { ChartMakerReducers } from '@module/chart-maker/app/reducer';
+import { ChartMakerRoutes } from '@module/chart-maker/app/routes';
 
 const ChartMakerPlugin: PluginModule = {
   name: 'chart-maker',

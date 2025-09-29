@@ -1,4 +1,4 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { ArrowLeft } from 'iconsax-react';
 
 const TechnicalDepartmentsSubHeader = (props: any) => {

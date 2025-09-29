@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AnimateClock } from 'core/index';
+// import { AnimateClock } from '../../../../public/icons';
 import { useTranslation } from 'react-i18next';
 
 const OTP = () => {
@@ -19,7 +19,7 @@ const OTP = () => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
 
-      return () => clearTimeout(timer);
+    clearTimeout(timer);
     } else if (timeLeft === 0) {
       setIsTimerActive(false);
     }
@@ -31,7 +31,7 @@ const OTP = () => {
 
   return (
     <div className="flex">
-      <AnimateClock />
+      {/*<AnimateClock />*/}
       {isTimerActive ? (
         <span className="text-tertiar-400 text-sm">
           {formatTime(timeLeft)} {t('to_resend')}

@@ -1,10 +1,9 @@
-import { lazyLoad } from '../../../core';
-import { createProjectRoutes } from '../../../core';
+import { lazyLoad , createProjectRoutes } from '@core/routes';
 
 export const page = {
   organizationChart: {
-    list: lazyLoad(() => import('../features/OrganizationChartList')),
-    chart: lazyLoad(() => import('../features/OrgChart')),
+    list: lazyLoad(() => import('@module/chart-maker/features/OrganizationChartList')),
+    chart: lazyLoad(() => import('@module/chart-maker/features/OrgChart')),
   },
 };
 

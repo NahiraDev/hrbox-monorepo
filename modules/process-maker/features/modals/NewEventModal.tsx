@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
-import { EventAddForm } from '../forms';
-import { AppModal, AppButton, FormProvider } from '../../../../core';
-import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '../forms';
+import { EventAddForm } from '@module/process-maker/features/forms';
+import { AppModal, AppButton } from '@core/components';
+import { FormProvider } from '@core/context'
+import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '@module/process-maker/features/forms';
 
 export const NewEventModal = () => {
   const { t } = useTranslation();

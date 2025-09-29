@@ -4,26 +4,22 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
-  "types": "./dist/index.d.ts",
+  "main": "../dist/index.js",
+  "types": "../dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.esm.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "dependencies": {
-    "@hrbox/core": "workspace:*",
-    "@module/hrlink": "workspace:*",
-    "@module/sso": "workspace:*",
-    "@module/basic-info": "workspace:*",
-    "@module/process-maker": "workspace:*",
-    "@module/chart-maker": "workspace:*"
+    "dev": "vite --config ../vite.config.ts",
+    "dev:debug": "vite -debug --config ../vite.config.ts",
+    "dev:turbo": "vite --force --clearScreen false --config ../vite.config.ts",
+    "build": "vite build --config ../vite.config.ts",
+    "build:analyze": "VITE_ANALYZE=true vite build --config ../vite.config.ts",
+    "build:prod": "NODE_ENV=production vite build --config ../vite.config.ts",
+    "build:staging": "NODE_ENV=stagin vite build --config ../vite.config.ts",
+    "build:profile": "vite build --profile --config ../vite.config.ts",
+    "build:modern": "VITE_BUILD_TARGET=modern vite build --config ../vite.config.ts",
+    "build:legacy": "VITE_BUILD_TARGET=legacy vite build --config ../vite.config.ts",
+    "build:sourcemap": "VITE_SOURCEMAP=true vite build --config ../vite.config.ts",
+    "preview": "vite preview --config ../vite.config.ts",
+    "preview:prod": "vite build && vite preview --config ../vite.config.ts",
+    "preview:analyze": "vite preview --open /bundle-analysis.html"
   }
 }

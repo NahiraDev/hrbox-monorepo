@@ -12,7 +12,7 @@ import {
   TagUser,
 } from 'iconsax-react';
 
-import { StarRating } from '../common';
+import { StarRating } from '@module/hrlink/features/common';
 
 const CompanyInfo = () => {
   return (

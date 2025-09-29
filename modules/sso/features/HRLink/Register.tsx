@@ -1,8 +1,6 @@
 import * as Yup from 'yup';
-import { FormProvider, useAuth } from '../../../../core';
+import { FormProvider, useAuth } from '@core/context';
 import { useTranslation } from 'react-i18next';
-
-import { SSORegisterLayout } from '../../layouts';
 
 import { RegisterForm } from './forms';
 import { useRegisterUserMutation } from './apis';
@@ -50,25 +48,15 @@ const Register = () => {
   };
 
   return (
-    <SSORegisterLayout
-      props={{
-        arrowBack: true,
-        formTitle: t('job_seekers_registration'),
-        isRegister: true,
-        signInWithPhone: true,
-        children: (
-          <FormProvider
-            initialValues={initialValuesForm}
-            validationSchema={formValidationError}
-            onSubmitAsync={async (values) => {
-              await register(handleFormSubmit(values)).unwrap();
-            }}
-          >
-            <RegisterForm />
-          </FormProvider>
-        ),
+    <FormProvider
+      initialValues={initialValuesForm}
+      validationSchema={formValidationError}
+      onSubmitAsync={async (values) => {
+        await register(handleFormSubmit(values)).unwrap();
       }}
-    />
+    >
+      <RegisterForm />
+    </FormProvider>
   );
 };
 

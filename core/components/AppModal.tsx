@@ -1,12 +1,11 @@
-import React from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useModalContext } from '../context';
-import { serviceRegistry } from '../helpers';
+import { useModalContext } from '@core/context';
+import { serviceRegistry } from '@core/helpers';
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
 
-const sizeClasses: Record<ModalSize, string> = {
+const sizeClasses: Record<ModalSize, any> = {
   sm: 'max-w-sm',
   md: 'max-w-md',
   lg: 'max-w-lg',
@@ -17,7 +16,7 @@ const sizeClasses: Record<ModalSize, string> = {
   full: 'w-full h-full',
 };
 
-const AppModal = () => {
+export const AppModal = () => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
@@ -80,5 +79,3 @@ function AppModalFooter({ children }: { children: React.ReactNode }) {
 
 AppModal.Body = AppModalBody;
 AppModal.Footer = AppModalFooter;
-
-export default AppModal;

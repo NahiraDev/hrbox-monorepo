@@ -2,8 +2,10 @@ import { Form } from '@heroui/react';
 import { Add, Message, Notification, Sms } from 'iconsax-react';
 import * as Yup from 'yup';
 
-import { AppAutoComplete, AppInput, AppTextArea, useFormContext } from '../../../../core';
-import AppCheckBox from '../../../../core/components/AppCheckBox';
+import { AppAutoComplete, AppInput, AppTextArea } from '@core/components';
+import { useFormContext } from '@core/context';
+import { AppCheckBox } from '@core/components';
+
 export const initialValuesPoint = {
   title: null,
   type: null,
@@ -54,7 +56,6 @@ export const PointForm = () => {
               type: 'text',
               label: 'title',
               name: 'title',
-              value: values.title,
               error: touched.title && errors.title,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -65,7 +66,6 @@ export const PointForm = () => {
               type: 'text',
               label: 'type',
               name: 'type',
-              value: values.type,
               error: touched.type && errors.type,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -78,7 +78,6 @@ export const PointForm = () => {
               type: 'Select',
               label: 'actionType',
               name: 'actionType',
-              value: values.actionType,
               error: touched.actionType && errors.actionType,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -107,7 +106,6 @@ export const PointForm = () => {
             props={{
               label: 'descriptions',
               name: 'description',
-              value: values.description,
               error: touched.description && errors.description,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -137,7 +135,6 @@ export const PointForm = () => {
               type: 'text',
               label: 'Organization',
               name: 'organization',
-              value: values.organization,
               error: touched.organization && errors.organization,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -148,7 +145,6 @@ export const PointForm = () => {
               type: 'text',
               label: 'Depatment',
               name: 'depatment',
-              value: values.depatment,
               error: touched.depatment && errors.depatment,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -166,7 +162,6 @@ export const PointForm = () => {
                   type: 'text',
                   label: 'full_name',
                   name: 'full_name',
-                  value: values.full_name,
                   error: touched.full_name && errors.full_name,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -177,7 +172,6 @@ export const PointForm = () => {
                   type: 'number',
                   label: 'national_code',
                   name: 'national_code',
-                  value: values.national_code,
                   error: touched.national_code && errors.national_code,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -188,7 +182,6 @@ export const PointForm = () => {
                   type: 'number',
                   label: 'phone_num',
                   name: 'phone_num',
-                  value: values.phone_num,
                   error: touched.phone_num && errors.phone_num,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -302,9 +295,7 @@ export const PointForm = () => {
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
                   props={{
-                    placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,
@@ -338,9 +329,7 @@ export const PointForm = () => {
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
                   props={{
-                    placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,
@@ -374,9 +363,7 @@ export const PointForm = () => {
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
                   props={{
-                    placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,

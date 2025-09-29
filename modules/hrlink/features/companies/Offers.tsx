@@ -1,14 +1,14 @@
 import { Buildings2, Clock, DollarCircle, Heart, HomeHashtag, Location, Medal, Status } from 'iconsax-react';
 import { Button } from '@heroui/button';
-import { AppButton, AppPagination } from 'core/components';
+import { AppButton, AppPagination } from '@core/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { JobOffersIcon } from '../../icons';
-import { Shared, StarRating } from '../common';
+import { JobOffersIcon } from '@module/hrlink/icons';
+import { Shared, StarRating } from '@module/hrlink/features/common';
 
-import { useLazyFetchCompanyQuery } from './apis';
+import { useLazyFetchCompanyQuery } from '@module/hrlink/features/companies/apis';
 
 const Offers = () => {
   const [fetchCompanies, { data }] = useLazyFetchCompanyQuery();

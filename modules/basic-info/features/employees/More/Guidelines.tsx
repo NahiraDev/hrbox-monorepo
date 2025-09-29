@@ -1,8 +1,8 @@
-import { guidlines } from 'mock';
+import { guidlines } from '@module/basic-info/app/mock';
 import { Card, Avatar } from '@heroui/react';
 import { UserSearch } from 'iconsax-react';
 
-import { BasicInfoLayout } from '../../common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 const Guidelines = () => {
   return (
     <BasicInfoLayout

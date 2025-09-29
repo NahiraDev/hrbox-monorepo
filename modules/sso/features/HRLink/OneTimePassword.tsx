@@ -1,26 +1,21 @@
-import * as Yup from 'yup';
-import { useTranslation } from 'react-i18next';
-import { FormProvider, useAuth } from '../../../../core';
+import { FormProvider, useAuth } from '@core/context';
 
-import { SSOBaseLayout } from '../../layouts';
-
-import { OneTimePasswordForm } from './forms';
+import { OneTimePasswordForm } from '@module/sso/features/HRLink/forms';
 import {
   useLoginByOtpMutation,
   useRegisterOtpConfirmMutation,
   useResetPasswordCheckOtpMutation,
-} from './apis';
+} from '@module/sso/features/HRLink/apis';
 
 const OneTimePassword = () => {
-  const { t } = useTranslation();
   const [resetPassword] = useResetPasswordCheckOtpMutation();
   const [loginByOtp] = useLoginByOtpMutation();
   const [registerByOtp] = useRegisterOtpConfirmMutation();
-  const { authType, mobile } = useAuth();
+  const { authType } = useAuth();
 
   return (
     <FormProvider
-      initialValues={initialValuesForm}
+      initialValues={initialValues}
       validationSchema={formValidationError}
       onSubmitAsync={async (values: any) => {
         const payload: any = handleFormSubmit(values);

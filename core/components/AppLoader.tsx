@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { loader } from '../lottie';
+// import { loader } from '../../public/lottie';
 
-const AppLoader = () => {
+export const AppLoader = () => {
   const [LottieComponent, setLottieComponent] = useState<any>(null);
 
   useEffect(() => {
@@ -19,10 +19,8 @@ const AppLoader = () => {
         className="w-8 h-8 absolute left-1/2 top-1/2"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
-        <LottieComponent animationData={loader} loop={true} />
+        {/*<LottieComponent animationData={} loop={true} />*/}
       </div>
     </div>
   );
 };
-
-export default AppLoader;

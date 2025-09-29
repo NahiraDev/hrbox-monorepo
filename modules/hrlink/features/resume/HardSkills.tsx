@@ -6,7 +6,7 @@ import { Card } from '@heroui/react';
 
 import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 
-import { useLazyFetchHardSkillsQuery } from './apis';
+import { useLazyFetchHardSkillsQuery } from '@module/hrlink/features/resume/apis';
 
 const HardSkills = () => {
   const [fetchSkills, { data }] = useLazyFetchHardSkillsQuery();

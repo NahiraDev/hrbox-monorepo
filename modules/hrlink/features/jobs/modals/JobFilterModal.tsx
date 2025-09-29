@@ -1,4 +1,4 @@
-import { AppButton, AppModal } from 'core/components';
+import { AppButton, AppModal } from '@core/components';
 import { Setting4 } from 'iconsax-react';
 
 export const JobFilterModal = () =>{

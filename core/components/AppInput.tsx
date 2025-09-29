@@ -1,13 +1,12 @@
 import { Input } from '@heroui/react';
 import clsx from 'clsx';
-import React from 'react';
 import {updateAppInputValue , useAppDispatch, useAppSelector } from '@core/redux';
 
 interface AppInputProps {
   label?: string;
   required?: boolean;
   error?: any;
-  name?: string;
+  name: any;
   type?: string;
   variant?: any;
   color?: any;
@@ -47,7 +46,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppInput = ({ props }: { props: AppInputProps }) => {
+export const AppInput = ({ props }: { props: AppInputProps }) => {
   const {
     label,
     required = true,
@@ -67,7 +66,7 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     ...rest
   } = props;
   const dispatch = useAppDispatch();
-  const value = useAppSelector((state:any) => (name ? state.AppInput[name] : '')) || '';
+  const value = useAppSelector((state) => state?.AppInput) || '';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (name) dispatch(updateAppInputValue({ name, value: e.target.value }));
@@ -121,5 +120,3 @@ const AppInput = ({ props }: { props: AppInputProps }) => {
     </div>
   );
 };
-
-export default AppInput;

@@ -1,31 +1,31 @@
 import { lazyLoad , createProjectRoutes } from '@core/routes';
-import { HRLinkPaths } from './paths';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
 export const page = {
-  impersonate: lazyLoad(() => import('../features/impersonate')),
-  dashboard: lazyLoad(() => import('../features/dashboard')),
-  setting: lazyLoad(() => import('../features/setting')),
+  impersonate: lazyLoad(() => import('@module/hrlink/features/impersonate')),
+  dashboard: lazyLoad(() => import('@module/hrlink/features/dashboard')),
+  setting: lazyLoad(() => import('@module/hrlink/features/setting')),
   company: {
-    companies: lazyLoad(() => import('../features/companies/Companies')),
-    offers: lazyLoad(() => import('../features/companies/Offers')),
-    events: lazyLoad(() => import('../features/companies/CompanyEvents')),
-    favorites: lazyLoad(() => import('../features/companies/Favorites')),
-    requested: lazyLoad(() => import('../features/companies/Requested')),
-    companyInfo: lazyLoad(() => import('../features/companies/CompanyInfo')),
+    companies: lazyLoad(() => import('@module/hrlink/features/companies/Companies')),
+    offers: lazyLoad(() => import('@module/hrlink/features/companies/Offers')),
+    events: lazyLoad(() => import('@module/hrlink/features/companies/CompanyEvents')),
+    favorites: lazyLoad(() => import('@module/hrlink/features/companies/Favorites')),
+    requested: lazyLoad(() => import('@module/hrlink/features/companies/Requested')),
+    companyInfo: lazyLoad(() => import('@module/hrlink/features/companies/CompanyInfo')),
   },
   job: {
-    offers: lazyLoad(() => import('../features/jobs/JobOffers')),
-    detail: lazyLoad(() => import('../features/jobs/JobDetail')),
-    opportunities: lazyLoad(() => import('../features/jobs/JobOpportunities')),
+    offers: lazyLoad(() => import('@module/hrlink/features/jobs/JobOffers')),
+    detail: lazyLoad(() => import('@module/hrlink/features/jobs/JobDetail')),
+    opportunities: lazyLoad(() => import('@module/hrlink/features/jobs/JobOpportunities')),
   },
   resume: {
-    information: lazyLoad(() => import('../features/resume/Information')),
-    experience: lazyLoad(() => import('../features/resume/Experience')),
-    education: lazyLoad(() => import('../features/resume/Education')),
-    course: lazyLoad(() => import('../features/resume/Courses')),
-    awards: lazyLoad(() => import('../features/resume/Awards')),
-    hardSkills: lazyLoad(() => import('../features/resume/HardSkills')),
-    softSkills: lazyLoad(() => import('../features/resume/SoftSkills')),
+    information: lazyLoad(() => import('@module/hrlink/features/resume/Information')),
+    experience: lazyLoad(() => import('@module/hrlink/features/resume/Experience')),
+    education: lazyLoad(() => import('@module/hrlink/features/resume/Education')),
+    course: lazyLoad(() => import('@module/hrlink/features/resume/Courses')),
+    awards: lazyLoad(() => import('@module/hrlink/features/resume/Awards')),
+    hardSkills: lazyLoad(() => import('@module/hrlink/features/resume/HardSkills')),
+    softSkills: lazyLoad(() => import('@module/hrlink/features/resume/SoftSkills')),
   },
 };
 

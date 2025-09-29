@@ -1,7 +1,7 @@
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { ArrowLeft2, Heart } from 'iconsax-react';
-import { JobOffersIcon } from '../../icons';
-import { Shared } from '../common';
+import { JobOffersIcon } from '@module/hrlink/icons';
+import { Shared } from '@module/hrlink/features/common';
 
 const JobDetailSubHeader = () =>{
   return(

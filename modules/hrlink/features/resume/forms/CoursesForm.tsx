@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import { useFormContext } from 'core/context';
+import { useFormContext } from '@core/context';
 import { Form } from '@heroui/react';
-import { AppDatePicker, AppInput, AppTextArea } from 'core/components';
+import { AppDatePicker, AppInput, AppTextArea } from '@core/components';
 import { Link21 } from 'iconsax-react';
 
 export const initialValuesCourse = {
@@ -54,7 +54,6 @@ export const CourseForm = () => {
               label: 'Title',
               name: 'Name',
               error: touched.Name && errors.Name,
-              value: values.Name,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -65,7 +64,6 @@ export const CourseForm = () => {
             props={{
               label: 'Date',
               name: 'Date',
-              value: values.Date,
               error: touched.Date && errors.Date,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -81,7 +79,6 @@ export const CourseForm = () => {
               name: 'FileId',
               endContent: <Link21 size="24" />,
               error: touched.FileId && errors.FileId,
-              value: values.FileId,
               onChange: handleChange,
               onBlur: handleBlur,
             }}
@@ -96,7 +93,6 @@ export const CourseForm = () => {
               label: 'Description',
               name: 'Description',
               error: touched.Description && errors.Description,
-              value: values.Description,
               onChange: handleChange,
               onBlur: handleBlur,
             }}

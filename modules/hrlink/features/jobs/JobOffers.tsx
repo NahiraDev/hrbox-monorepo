@@ -2,11 +2,10 @@ import { Buildings2, Clock, Dislike, DollarCircle, Like1, Location, Status } fro
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { AppButton } from '../../../../core';
-import { AppPagination } from '../../../../core/components';
+import { AppButton , AppPagination } from '@core/components';
 
-import { useLazyJobOffersQuery } from './apis';
-import { JobFilterModal } from './modals';
+import { useLazyJobOffersQuery } from '@module/hrlink/features/jobs/apis';
+import { JobFilterModal } from '@module/hrlink/features/jobs/modals';
 
 const JobOffers = () => {
   const [fetchJobOffers, { data }] = useLazyJobOffersQuery();

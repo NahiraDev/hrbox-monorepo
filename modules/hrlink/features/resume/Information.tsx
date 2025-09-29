@@ -15,9 +15,9 @@ import {
 import moment from 'moment-jalaali';
 import { Card } from '@heroui/react';
 
-import { GeneralInformation, UserLocation } from '../common';
+import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 
-import { GeneralInformationModal } from './modals';
+import { GeneralInformationModal } from '@module/hrlink/features/resume/modals';
 
 const ResumeInfo = () => {
   const profileData = null;

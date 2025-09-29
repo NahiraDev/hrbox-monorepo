@@ -2,9 +2,9 @@ import type { Persistor } from 'redux-persist/es/types';
 
 import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
 import { type PersistConfig, persistReducer, persistStore } from 'redux-persist';
-import { serviceRegistry } from '../helpers';
+import { serviceRegistry } from '@core/helpers';
 
-import { createRootReducer } from './rootReducer';
+import { createRootReducer } from '@core/redux';
 
 const storageInstance = {
   getItem: (key: string) => {

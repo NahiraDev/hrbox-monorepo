@@ -1,9 +1,9 @@
-import { AppButton, AppSearchInput } from 'core/components';
+import { AppButton, AppSearchInput } from '@core/components';
 import { Setting4 } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 
-import { JobOffersIcon, JobOpportunitiesIcon } from '../../icons';
-import { HRLinkPaths } from '../../app/paths';
+import { JobOffersIcon, JobOpportunitiesIcon } from '@module/hrlink/icons';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
 const JobSubHeader = (props: any) => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const JobSubHeader = (props: any) => {
       </div>
       <div className="flex gap-3">
         <div className="flex items-center gap-2">
-          <AppSearchInput placeholder="Education" onSearch={props.onSearch} />
+          <AppSearchInput onSearch={props.onSearch} />
         </div>
         <AppButton
           props={{

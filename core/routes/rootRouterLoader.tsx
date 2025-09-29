@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, type RouteObject } from 'react-router-dom';
 
-import { RoutesProvider } from '../context';
-import { AppLoader } from '../components';
-import { App } from '../app';
-import { ProjectRoutesMap } from '../../launcher/routeMaps';
+import { RoutesProvider } from '@core/context';
+import { AppLoader } from '@core/components';
+import { App } from '@core/app';
+import { ProjectRoutesMap } from '@root/modules/modulesRoutes';
 
-import { MotionRouter } from './motionRouter';
+import { MotionRouter } from '@core/routes';
 
 export const RootRouterLoader = () => {
   const location = useLocation();

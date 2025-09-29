@@ -1,20 +1,18 @@
-import { AppButton, AppInput } from '../../../../../core';
+import { AppButton, AppInput } from '@core/components';
 import { Form } from '@heroui/react';
 import { Eye, EyeSlash } from 'iconsax-react';
-import { useFormContext } from '../../../../../core';
+import { useFormContext } from '@core/context';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 export const RegisterForm = () => {
   const {
-    values,
     errors,
     touched,
     handleChange,
     handleBlur,
     handleSubmit,
     isSubmitting,
-    formError,
   } = useFormContext<{
     FirstName: string;
     LastName: string;
@@ -40,8 +38,6 @@ export const RegisterForm = () => {
                 label: t('first_name'),
                 name: 'FirstName',
                 error: touched.FirstName ? errors.FirstName : undefined,
-                placeholder: t('enter_your_first_name'),
-                value: values.FirstName,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -56,7 +52,6 @@ export const RegisterForm = () => {
                 label: t('last_name'),
                 name: 'LastName',
                 error: touched.LastName ? errors.LastName : undefined,
-                value: values.LastName,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -69,7 +64,6 @@ export const RegisterForm = () => {
                 label: t('email'),
                 name: 'Email',
                 error: touched.Email ? errors.Email : undefined,
-                value: values.Email,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -84,7 +78,6 @@ export const RegisterForm = () => {
                 label: t('phone'),
                 name: 'Mobile',
                 error: touched.Mobile ? errors.Mobile : undefined,
-                value: values.Mobile,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -93,11 +86,9 @@ export const RegisterForm = () => {
           <div className="flex flex-col gap-1">
             <AppInput
               props={{
-                required: true,
                 label: t('national_code'),
                 name: 'NationalCode',
                 error: touched.NationalCode ? errors.NationalCode : undefined,
-                value: values.NationalCode,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -108,11 +99,9 @@ export const RegisterForm = () => {
           <div className="flex flex-col gap-1">
             <AppInput
               props={{
-                required: true,
                 label: t('password'),
                 error: touched.Password ? errors.Password : undefined,
                 type: isVisiblePassword ? 'text' : 'password',
-                value: values.Password,
                 onChange: handleChange,
                 onBlur: handleBlur,
                 endContent: (
@@ -151,7 +140,6 @@ export const RegisterForm = () => {
           isSubmitting: isSubmitting,
         }}
       />
-      {formError && <div className="text-red-500 text-sm">{formError}</div>}
     </Form>
   );
 };

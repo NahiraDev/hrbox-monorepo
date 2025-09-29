@@ -1,11 +1,11 @@
-import { skills } from 'mock';
+import { skills } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { AppButton, AppDeleteModal } from 'core/components';
+import { AppButton, AppDeleteModal } from '@core/components';
 import { LampCharge, Trash } from 'iconsax-react';
-import { useModalContext } from 'core/context';
-import { AppDoubleLineProgress } from 'core/sections';
+import { useModalContext } from '@core/context';
+import { AppDoubleLineProgress } from '@core/sections';
 
-import { BasicInfoLayout } from '../../features/common';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const Education = () => {
   const { openModal } = useModalContext();

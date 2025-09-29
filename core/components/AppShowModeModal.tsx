@@ -1,4 +1,4 @@
-import AppModal from './AppModal';
+import { AppModal } from '@core/components';
 
 interface ColumnPair {
   key: string;
@@ -11,7 +11,7 @@ interface AppShowModeModalProps {
   title?: string;
 }
 
-const AppShowModeModal = ({
+export const AppShowModeModal = ({
   columnPairs = [],
   selectedRow = {},
   title = 'Record Details',
@@ -46,5 +46,3 @@ const AppShowModeModal = ({
     </AppModal>
   );
 };
-
-export default AppShowModeModal;

@@ -2,9 +2,10 @@ import { Button } from '@heroui/react';
 import { Global, Moon } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 
-import { LogoHRLink, LogoMobile } from '../icons';
-import { setLanguage, useAppDispatch } from '../redux';
-import { AppButton } from '../components';
+import { LogoHRLink } from '@root/shared/icons/LogoHRLink';
+import { LogoMobile } from '@root/shared/icons/LogoMobile';
+import { setLanguage, useAppDispatch } from '@core/redux';
+import { AppButton } from '@core/components';
 
 export const AuthLayout = ({ content }: any) => {
   const [mounted, setMounted] = useState(false);

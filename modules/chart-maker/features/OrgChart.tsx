@@ -1,8 +1,8 @@
 import { ReactFlowProvider } from '@xyflow/react';
 import { useRef } from 'react';
 
-import { OrgChartFlow, OrgChartHeader } from './common';
-import { AttentionModal, TestModal } from './modals';
+import { OrgChartFlow, OrgChartHeader } from '@module/chart-maker/features/common';
+import { AttentionModal, TestModal } from '@module/chart-maker/features/modals';
 
 const OrgChart = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);

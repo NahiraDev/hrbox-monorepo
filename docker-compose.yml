@@ -1,0 +1,26 @@
+  version: '3.8'
+  services:
+    app:
+      build: configs
+      ports:
+        - "3000:3000"
+      volumes:
+        - .:/app
+        - /app/node_modules
+      environment:
+        - NODE_ENV=development
+      command: pnpm dev
+
+    storybook:
+      build: configs
+      ports:
+        - "6006:6006"
+      volumes:
+        - .:/app
+        - /app/node_modules
+      command: pnpm storybook
+
+    redis:
+      image: redis:alpine
+      ports:
+        - "6379:6379"

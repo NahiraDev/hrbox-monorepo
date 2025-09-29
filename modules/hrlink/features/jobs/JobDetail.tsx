@@ -15,9 +15,9 @@ import {
 } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 
-import { BuildingIcon } from '../../icons';
+import { BuildingIcon } from '@module/hrlink/icons';
 
 const JobDetail = () => {
   const navigate = useNavigate();

@@ -2,16 +2,11 @@
   "name": "@hrbox/core",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
-  "main": "./dist/index.js",
   "sideEffects": false,
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
+  "type": "module",
+  "main": "../dist/core/index.js",
+  "types": "../dist/core/index.d.ts",
   "scripts": {
-    "build": "tsup",
     "clean": "rm -rf dist .turbo",
     "type-check": "tsc --noEmit",
     "lint": "echo 'No lint configured'",

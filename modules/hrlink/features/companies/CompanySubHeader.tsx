@@ -1,8 +1,8 @@
-import { AppButton, AppSearchInput } from 'core/components';
+import { AppButton, AppSearchInput } from '@core/components';
 import { Buildings, DeviceMessage, Heart, Setting4 } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 
-import { HRLinkPaths } from '../../app/paths';
+import { HRLinkPaths } from '@module/hrlink/app/paths';
 
 const CompanySubHeader = (props: any) => {
   const navigate = useNavigate();

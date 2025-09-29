@@ -1,37 +1,18 @@
-import AppAutoComplete from './AppAutoComplete';
-import AppSupportButton from './AppSupportButton';
-import AppDatePicker from './AppDatePicker';
-import AppInput from './AppInput';
-import AppSearchInput from './AppSearchInput';
-import AppButton from './AppButton';
-import AppPagination from './AppPagination';
-import AppSwitch from './AppSwitch';
-import AppTable from './AppTable';
-import AppTextArea from './AppTextArea';
-import AppLoader from './AppLoader';
-import AppModal from './AppModal';
-import AppErrorToast from './AppErrorToast';
-import AppPageTitle from './AppPageTitle';
-import AppDeleteModal from './AppDeleteModal';
-import AppShowModeModal from './AppShowModeModal';
-import AppTabs from './AppTabs';
-
-export {
-  AppAutoComplete,
-  AppSupportButton,
-  AppInput,
-  AppSearchInput,
-  AppButton,
-  AppPagination,
-  AppSwitch,
-  AppTable,
-  AppTextArea,
-  AppLoader,
-  AppModal,
-  AppErrorToast,
-  AppDatePicker,
-  AppPageTitle,
-  AppTabs,
-  AppDeleteModal,
-  AppShowModeModal,
-};
+export * from '@core/components/AppAutoComplete';
+export * from '@core/components/AppSupportButton';
+export * from '@core/components/AppDatePicker';
+export * from '@core/components/AppInput';
+export * from '@core/components/AppSearchInput';
+export * from '@core/components/AppButton';
+export * from '@core/components/AppPagination';
+export * from '@core/components/AppSwitch';
+export * from '@core/components/AppTextArea';
+export * from '@core/components/AppLoader';
+export * from '@core/components/AppModal';
+export * from '@core/components/AppErrorToast';
+export * from '@core/components/AppPageTitle';
+export * from '@core/components/AppDeleteModal';
+export * from '@core/components/AppShowModeModal';
+export * from '@core/components/AppCheckBox';
+export * from '@core/components/AppTabs';
+export * from '@core/components/AppTable';

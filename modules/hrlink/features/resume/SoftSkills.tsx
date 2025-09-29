@@ -7,7 +7,7 @@ import { GeneralInformation, UserLocation } from '@module/hrlink/features/common
 import { AppDoubleLineProgress } from '@core/sections';
 import { SoftSkillsIcon } from '@module/hrlink/icons';
 
-import { useLazyFetchSoftSkillsQuery } from './apis';
+import { useLazyFetchSoftSkillsQuery } from '@module/hrlink/features/resume/apis';
 
 const SoftSkills = () => {
   const [fetchSkills, { data }] = useLazyFetchSoftSkillsQuery();

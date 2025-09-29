@@ -1,14 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
 import { Edit, Trash } from 'iconsax-react';
-import { usePaginationManager } from '../helpers';
-import { useModalContext } from '../context';
+import { usePaginationManager } from '@core/helpers';
+import { useModalContext } from '@core/context';
 
-import { AppDeleteModal, AppShowModeModal } from '../components';
-import { loader } from '../lottie';
-
-import AppButton from './AppButton';
-import AppPagination from './AppPagination';
+import { AppDeleteModal, AppShowModeModal , AppButton , AppPagination} from '@core/components';
+// import { loader } from '../../public/lottie';
 
 interface AppTableProps {
   data: any;
@@ -33,7 +30,7 @@ interface AppTableProps {
   enableActions?: boolean;
 }
 
-const AppTable = ({
+export const AppTable = ({
   data,
   columns,
   onEdit,
@@ -127,7 +124,7 @@ const AppTable = ({
     return (
       <div className="p-8 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1">
         <div className="flex justify-center items-center">
-          <LottieComponent animationData={loader} loop={true} />
+          {/*<LottieComponent animationData={loader} loop={true} />*/}
         </div>
       </div>
     );
@@ -248,5 +245,3 @@ const AppTable = ({
     </div>
   );
 };
-
-export default AppTable;

@@ -1,6 +1,6 @@
 import { Card } from '@heroui/react';
-import { dataWorker2, dataWorker, Spouse } from 'mock';
-import { AppButton, AppDeleteModal } from 'core/components';
+import { dataWorker2, dataWorker, Spouse } from '@module/basic-info/app/mock';
+import { AppButton, AppDeleteModal } from '@core/components';
 import {
   Settings,
   Trash,
@@ -14,10 +14,10 @@ import {
   MessageEdit,
   Add,
 } from 'iconsax-react';
-import { useModalContext } from 'core/context';
+import { useModalContext } from '@core/context';
 
-import { BasicInfoLayout } from '../common';
-import { RelativesModal } from './modals/RelativesModal';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
+import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();

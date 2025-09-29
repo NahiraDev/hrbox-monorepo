@@ -1,8 +1,8 @@
 import { Minus, Add } from "iconsax-react";
 import { useState } from "react";
-import { AppButton } from "../components";
+import { AppButton } from "@core/components";
 
-const Counter = () => {
+export const Counter = () => {
   const [count, setCount] = useState(156);
 
   return (
@@ -41,5 +41,3 @@ const Counter = () => {
     </div>
   );
 };
-
-export default Counter;

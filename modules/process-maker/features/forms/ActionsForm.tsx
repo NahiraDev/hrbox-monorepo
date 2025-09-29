@@ -1,10 +1,10 @@
 import { CheckboxGroup, Form } from '@heroui/react';
 import { Add, Message, Notification, Sms } from 'iconsax-react';
 import * as Yup from 'yup';
-import { useFormContext } from 'core/context';
-import AppCheckbox from '../../../../core/components/AppCheckBox';
+import { useFormContext } from '@core/context';
+import { AppCheckBox } from '@core/components';
 
-import { AppAutoComplete, AppInput, AppTextArea } from '../../../../core/components';
+import { AppAutoComplete, AppInput, AppTextArea } from '@core/components';
 
 export const initialValuesAction = {
   title: null,
@@ -77,7 +77,6 @@ export const ActionsForm = () => {
               type: 'text',
               label: 'title',
               name: 'title',
-              value: values.title,
               error: touched.title && errors.title,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -88,7 +87,6 @@ export const ActionsForm = () => {
               type: 'Select',
               label: 'type',
               name: 'type',
-              value: values.type,
               error: touched.type && errors.type,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -101,7 +99,6 @@ export const ActionsForm = () => {
               type: 'text',
               label: 'action_type',
               name: 'actionType',
-              value: values.actionType,
               error: touched.title && errors.actionType,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -112,7 +109,6 @@ export const ActionsForm = () => {
               type: 'text',
               label: 'implementation_of_workflow',
               name: 'workflowImplementation',
-              value: values.workflowImplementation,
               error: touched.workflowImplementation && errors.workflowImplementation,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -125,7 +121,7 @@ export const ActionsForm = () => {
           </div>
           <div className="w-[320px]  gap-[8px]">
             <CheckboxGroup>
-              <AppCheckbox
+              <AppCheckBox
                 props={{
                   name: 'Authority',
                   children: (
@@ -144,7 +140,6 @@ export const ActionsForm = () => {
             props={{
               label: 'descriptions',
               name: 'textarea',
-              value: values.textarea,
               error: touched.textarea && errors.textarea,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -157,7 +152,7 @@ export const ActionsForm = () => {
               <p>Sign Type:</p>
             </div>
             <div className="">
-              <AppCheckbox
+              <AppCheckBox
                 props={{
                   name: 'processType',
                   children: (
@@ -178,7 +173,7 @@ export const ActionsForm = () => {
               <p>add_an_employee_outside_the_organization</p>
             </div>
             <div className="w-[320px]  gap-[8px]">
-              <AppCheckbox
+              <AppCheckBox
                 props={{
                   name: 'organization',
                   children: (
@@ -201,7 +196,7 @@ export const ActionsForm = () => {
               <p>type_of_signature</p>
             </div>
             <div className="  w-[398px] pr-[60px]  gap-[8px]">
-              <AppCheckbox
+              <AppCheckBox
                 props={{
                   name: 'signature',
                   children: (
@@ -225,7 +220,6 @@ export const ActionsForm = () => {
                   type: 'text',
                   label: 'organization',
                   name: 'organization',
-                  value: values.organization,
                   error: touched.organization && errors.organization,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -236,7 +230,6 @@ export const ActionsForm = () => {
                   type: 'text',
                   label: 'depatment',
                   name: 'depatment',
-                  value: values.depatment,
                   error: touched.depatment && errors.depatment,
                   onChange: handleChange,
                   onBlur: handleBlur,
@@ -254,7 +247,6 @@ export const ActionsForm = () => {
                       type: 'text',
                       label: 'full_name',
                       name: 'FullName',
-                      value: values.FullName,
                       error: touched.FullName && errors.FullName,
                       onChange: handleChange,
                       onBlur: handleBlur,
@@ -267,7 +259,6 @@ export const ActionsForm = () => {
                       type: 'number',
                       label: 'national_code',
                       name: 'NationalCode',
-                      value: values.NationalCode,
                       error: touched.NationalCode && errors.NationalCode,
                       onChange: handleChange,
                       onBlur: handleBlur,
@@ -280,7 +271,6 @@ export const ActionsForm = () => {
                       type: 'number',
                       label: 'phone_num',
                       name: 'PhoneNum',
-                      value: values.PhoneNum,
                       error: touched.PhoneNum && errors.PhoneNum,
                       onChange: handleChange,
                       onBlur: handleBlur,
@@ -297,7 +287,7 @@ export const ActionsForm = () => {
         )}
         <p>notification</p>
         <div className=" w-full">
-          <AppCheckbox
+          <AppCheckBox
             props={{
               name: 'notification',
               children: (
@@ -313,7 +303,7 @@ export const ActionsForm = () => {
           <div className="flex flex-col gap-[6px] ">
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckbox
+                <AppCheckBox
                   props={{
                     name: 'eecipient',
                     children: (
@@ -327,9 +317,7 @@ export const ActionsForm = () => {
               <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
                 <AppTextArea
                   props={{
-                    placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,
@@ -350,7 +338,7 @@ export const ActionsForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckbox
+                <AppCheckBox
                   props={{
                     name: 'employee',
                     children: (
@@ -366,7 +354,6 @@ export const ActionsForm = () => {
                   props={{
                     placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,
@@ -387,7 +374,7 @@ export const ActionsForm = () => {
             </div>{' '}
             <div className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
               <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                <AppCheckbox
+                <AppCheckBox
                   props={{
                     name: 'referrer',
                     children: (
@@ -403,7 +390,6 @@ export const ActionsForm = () => {
                   props={{
                     placeholder: 'Descriptions',
                     name: 'descriptionexporter',
-                    value: values.descriptionexporter,
                     error: touched.descriptionexporter && errors.descriptionexporter,
                     onChange: handleChange,
                     onBlur: handleBlur,

@@ -72,7 +72,6 @@ export const EditProfileForm = ({
               props={{
                 label: 'FirstName',
                 name: 'FirstName',
-                value: values.FirstName,
                 error: touched.FirstName && errors.FirstName,
                 onChange: handleChange,
                 onBlur: handleBlur,
@@ -91,7 +90,6 @@ export const EditProfileForm = ({
                 label: 'LastName',
                 name: 'LastName',
                 error: touched.LastName && errors.LastName,
-                value: values.LastName,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -110,7 +108,6 @@ export const EditProfileForm = ({
                 type: 'email',
                 name: 'Email',
                 error: touched.Email && errors.Email,
-                value: values.Email,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}
@@ -126,7 +123,6 @@ export const EditProfileForm = ({
                 name: 'Phone',
                 label: 'Phone',
                 error: touched.Phone && errors.Phone,
-                value: values.Phone,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}

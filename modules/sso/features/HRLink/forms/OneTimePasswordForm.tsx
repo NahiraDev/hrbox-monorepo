@@ -1,35 +1,36 @@
 import { Form, InputOtp } from '@heroui/react';
-import { useFormContext } from '../../../../../core';
+import { useFormContext } from '@core/context';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { AnimateClock } from '../../../../../core';
+// import { AnimateClock } from '../../../../../public/icons';
 import * as Yup from 'yup';
+import { t } from 'i18next';
 
-// export const initialValuesForm = {
-//   UsernameOrMobile: '',
-//   ClientOtpCode: '',
-//   Mobile: '',
-// };
-//
-// export const formValidationError = () => {
-//   Yup.object({
-//     ClientOtpCode: Yup.string().required(t('otp_is_required')),
-//   });
-// };
-//
-// export const handleFormSubmit = (values: any) => {
-//   if (authType === 'login' || authType === 'register') {
-//     return {
-//       UsernameOrMobile: mobile,
-//       ClientOtpCode: values.ClientOtpCode,
-//     };
-//   } else {
-//     return {
-//       Mobile: mobile,
-//       ClientOtpCode: values.ClientOtpCode,
-//     };
-//   }
-// };
+export const initialValuesOneTimePassword = {
+  UsernameOrMobile: '',
+  ClientOtpCode: '',
+  Mobile: '',
+};
+
+export const formValidationErrorOneTimePassword = () => {
+  Yup.object({
+    ClientOtpCode: Yup.string().required(t('otp_is_required')),
+  });
+};
+
+export const handleFormSubmitOneTimePassword = (values: any) => {
+  // if (authType === 'login' || authType === 'register') {
+  //   return {
+  //     UsernameOrMobile: mobile,
+  //     ClientOtpCode: values.ClientOtpCode,
+  //   };
+  // } else {
+  //   return {
+  //     Mobile: mobile,
+  //     ClientOtpCode: values.ClientOtpCode,
+  //   };
+  // }
+};
 
 
 export const OneTimePasswordForm = () => {
@@ -86,7 +87,7 @@ export const OneTimePasswordForm = () => {
           <div className="flex flex-row justify-between items-center">
             <span className="!text-sm !font-medium">{t('enter_otp_code')}</span>
             <div className="flex">
-              <AnimateClock />
+              {/*<AnimateClock />*/}
               {isTimerActive ? (
                 <span className="text-tertiar-400 text-sm">
                   {formatTime(timeLeft)} {t('to_resend')}

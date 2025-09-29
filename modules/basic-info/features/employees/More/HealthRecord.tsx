@@ -1,13 +1,13 @@
-import { healthy } from 'mock';
+import { healthy } from '@module/basic-info/app/mock';
 import { Card } from '@heroui/react';
-import { AppButton } from 'core/components';
+import { AppButton } from '@core/components';
 import { Calendar, Drop, NotificationFavorite, HeartAdd, Hospital, Add, HeartEdit } from 'iconsax-react';
 
-import { BasicInfoLayout } from '../../common';
-import PreEmploymentHealthRecordsModals from '../modals/PreEmploymentHealthRecordsModals';
-import { useModalContext } from 'core/context';
-import AddNewOnDutyHealthRecords from '../modals/AddNewOnDutyHealthRecords';
-import OnDutyHealthRecords from '../modals/OnDutyHealthRecords';
+import { BasicInfoLayout } from '@module/basic-info/features/common';
+import PreEmploymentHealthRecordsModals from '@module/basic-info/features/employees/modals/PreEmploymentHealthRecordsModals';
+import { useModalContext } from '@core/context';
+import AddNewOnDutyHealthRecords from '@module/basic-info/features/employees/modals/AddNewOnDutyHealthRecords';
+import OnDutyHealthRecords from '@module/basic-info/features/employees/modals/OnDutyHealthRecords';
 
 const HealthRecord = () => {
   const { openModal } = useModalContext();
@@ -109,7 +109,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', undefined),  
+                        onPress: () => openModal('edit', undefined),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />

@@ -1,1 +1,1 @@
-export * from './BasicInfoLayout'
+export * from '@module/basic-info/features/common/BasicInfoLayout'
