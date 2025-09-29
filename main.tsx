@@ -9,11 +9,11 @@ import ChartMakerPlugin from '@module/chart-maker/app/register';
 import BasicInfoPlugin from '@module/basic-info/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  'hrlink',
-  'process-maker',
-  'chart-maker',
+  // 'hrlink',
+  // 'process-maker',
+  // 'chart-maker',
   'basic-info',
-  'sso'
+  // 'sso'
 ];
 
 async function bootstrap() {

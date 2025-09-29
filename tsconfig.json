@@ -18,8 +18,8 @@
     "paths": {
       "@core/*": ["./core/*"],
       "@module/*": ["./modules/*"],
-      "@root/*": ["./*"],
-      "~/*": ["./*"]
+      "@root/*": ["./*"]
+//      "~/*": ["./*"]
     },
     "rootDirs": [".", "core", "modules" , "shared"],
     "typeRoots": ["node_modules/@types"],

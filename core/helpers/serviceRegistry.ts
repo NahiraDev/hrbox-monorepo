@@ -9,6 +9,7 @@ export interface SubHeaderConfig {
 }
 
 export interface ContentConfig {
+  props: any;
   path: string;
   component: LazyExoticComponent<ComponentType<any>>;
 }

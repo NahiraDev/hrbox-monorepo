@@ -1,13 +1,13 @@
-import { Suspense } from 'react';
+import { ComponentType, FC, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { serviceRegistry } from '@core/helpers';
 
-export const AppSubHeader: React.FC = () => {
+export const AppSubHeader: FC = () => {
   const location = useLocation();
-  const [SubHeaderComponent, setSubHeaderComponent] = React.useState<React.ComponentType<any> | null>(null);
-  const [componentProps, setComponentProps] = React.useState<any>({});
+  const [SubHeaderComponent, setSubHeaderComponent] = useState<ComponentType<any> | null>(null);
+  const [componentProps, setComponentProps] = useState<any>({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const config = serviceRegistry.getSubHeaderForPath(location.pathname);
 
     if (!config || !config.component) {

@@ -1,18 +1,18 @@
-import { Suspense } from 'react';
+import { ComponentType, FC, ReactNode, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { serviceRegistry } from '@core/helpers';
 
 interface AppContentProps {
-  fallback?: React.ReactNode;
+  fallback?: ReactNode;
 }
 
-export const AppContent: React.FC<AppContentProps> = ({ fallback = <div>Loading...</div> }) => {
+export const AppContent: FC<AppContentProps> = ({ fallback = <div>Loading...</div> }) => {
   const location = useLocation();
-  const [ContentComponent, setContentComponent] = React.useState<React.ComponentType<any> | null>(null);
-  const [componentProps, setComponentProps] = React.useState<any>({});
+  const [ContentComponent, setContentComponent] = useState<ComponentType<any> | null>(null);
+  const [componentProps, setComponentProps] = useState<any>({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const config = serviceRegistry.getContentForPath(location.pathname);
 
     if (!config) {
