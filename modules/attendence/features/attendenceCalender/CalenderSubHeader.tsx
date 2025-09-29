@@ -28,7 +28,7 @@ const CalenderSubHeader = () => {
               color: 'primary',
               size: 'md',
               radius: 'lg',
-              onPress:()=> openModal('confirm', 'PersonalReport', <PersonnelReportModal />),
+              onPress: () => openModal('confirm', 'PersonalReport', <PersonnelReportModal />),
               startContent: (
                 <span>
                   <Profile />
