@@ -100,7 +100,8 @@
     "maxNodeModuleJsDepth": 0,
     "preserveConstEnums": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "rootDir": "."
   },
   "include": [
     "core/**/*",
