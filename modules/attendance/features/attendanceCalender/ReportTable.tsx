@@ -3,7 +3,7 @@ import { ReportPersonnal } from '@module/attendance/app/mock' ;
 const ReportTable=()=>{
   return(
     <>
-      <AppTable data={ReportPersonnal}/>
+
     </>
   )
 }

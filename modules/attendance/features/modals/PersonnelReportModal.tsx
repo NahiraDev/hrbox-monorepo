@@ -1,9 +1,8 @@
 import { useModalContext } from '@core/context';
 import { Avatar } from '@heroui/react';
 
-import { AppButton, AppModal } from '@core/components';
-import avatar from '@core/assets/img/inpersonate-avatar.png';
-import ReportTable from '@module/attendance/features/attendanceCalender/ReportTable';
+import { AppButton, AppModal, AppTable } from '@core/components';
+import { ReportPersonnal } from '@module/attendance/app/mock';
 const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
 
@@ -41,11 +40,11 @@ const PersonnelReportModal = () => {
                 <p className="text-sm font-medium">Sahar Najafi</p>
                 <p>مدیر منابع انسانی</p>
               </div>
-              <Avatar className="w-[64px] h-[64px]" radius="md" src={avatar} />
+              <Avatar className="w-[64px] h-[64px]" radius="md" src="/images/favicon.ico" />
             </div>
           </div>
           <div className="w-full">
-            <ReportTable/>
+            <AppTable data={ReportPersonnal}/>
           </div>
         </div>
       </AppModal.Body>
@@ -56,14 +55,13 @@ const PersonnelReportModal = () => {
               color: 'white',
               size: 'md',
               radius: 'lg',
-              onClick: () => closeModal('confirm', 'PersonalReport'),
               content: 'Cancel',
             }}
           />
           <AppButton
             props={{
               color: 'primary',
-              type: 'submit',
+              type: '',
               size: 'md',
               radius: 'lg',
               content: 'Download File',

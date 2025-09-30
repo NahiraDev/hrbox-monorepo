@@ -18,7 +18,6 @@ const CalenderSubHeader = () => {
     { key: 'March', label: 'March', icon: <Calendar size={33} /> },
   ];
   const { openModal } = useModalContext();
-
   return (
     <>
       <div className="w-full flex flex-row justify-between">
@@ -28,12 +27,12 @@ const CalenderSubHeader = () => {
               color: 'primary',
               size: 'md',
               radius: 'lg',
-              onPress: () => openModal('confirm', 'PersonalReport', <PersonnelReportModal />),
               startContent: (
                 <span>
                   <Profile />
                 </span>
               ),
+              className: "text-white",
               content: 'Personal attendance calendar',
             }}
           />
@@ -47,6 +46,7 @@ const CalenderSubHeader = () => {
                   <People />
                 </span>
               ),
+              onPress: () => openModal('confirm','personnelreport',<PersonnelReportModal/>),
               content: 'Group attendance calendar',
             }}
           />
