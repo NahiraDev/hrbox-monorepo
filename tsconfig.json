@@ -18,7 +18,8 @@
     "paths": {
       "@core/*": ["./core/*"],
       "@module/*": ["./modules/*"],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@hrbox/core/*": ["./core/*"],
 //      "~/*": ["./*"]
     },
     "rootDirs": [".", "core", "modules" , "shared"],
@@ -111,6 +112,7 @@
     "playwright.config.ts",
     "tailwind.config.ts",
     "postcss.config.js",
+    "main.tsx",
     "**/*.d.ts"
   ],
   "exclude": [
