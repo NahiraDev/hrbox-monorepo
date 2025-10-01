@@ -1,4 +1,4 @@
-import { Global, Location } from 'iconsax-react';
+import { CloseCircle, Global, Location, TickCircle } from 'iconsax-react';
 
 export const EntryExitData = [
   {
@@ -241,4 +241,347 @@ export const ReportPersonnal = [
     تعجیل: '02:00',
     درخواست: '',
   },
+];
+export const ListApprovals = [
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <CloseCircle color="red" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <CloseCircle color="red" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <CloseCircle color="red" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <CloseCircle color="red" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
+  {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )}, {No:1,"Request Type":"Hourly Leave",Issuer:"Zahra Pakniyat",Duration:"3 Hours", "From Date":"2025/01/20","Request Number":"1223425",status:(
+    <sapn>
+      <TickCircle color="green" variant="Bold"/>
+    </sapn>
+    )},
 ];

@@ -239,9 +239,6 @@ export const AppTable = ({
           <AppPagination total={Math.ceil((data?.length || 0) / pageSize)} />
         </div>
       )}
-
-      <AppDeleteModal />
-      <AppShowModeModal />
     </div>
   );
 };

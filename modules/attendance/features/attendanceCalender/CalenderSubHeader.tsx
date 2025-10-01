@@ -46,7 +46,7 @@ const CalenderSubHeader = () => {
                   <People />
                 </span>
               ),
-              onPress: () => openModal('confirm','personnelreport',<PersonnelReportModal/>),
+              onPress: () => openModal('confirm','personnelreport',<PersonnelReportModal/>,'md'),
               content: 'Group attendance calendar',
             }}
           />

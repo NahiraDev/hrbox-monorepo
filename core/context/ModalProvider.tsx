@@ -4,11 +4,11 @@ import { preloadAppModalData, resetAppModalData } from '@core/redux';
 type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
 
 interface ModalContextType {
-  openModal: (type: ModalType | string, name: string, component: React.ReactNode, data?: any) => void;
+  openModal: (type: ModalType | string, name: string, component: React.ReactNode, data?: any, size?: string, title?: string, icon?: React.ReactNode) => void;
   closeModal: (type: ModalType | string, name: string) => void;
   getModalData: (type: ModalType | string, name: string) => any;
   isModalOpen: (type: ModalType | string, name: string) => boolean;
-  getOpenModal: () => { title?: string; icon?: string; size?: string; type: ModalType | string; name: string; component: React.ReactNode } | null;
+  getOpenModal: () => { title?: string; icon?: React.ReactNode; size?: string; type: ModalType | string; name: string; component: React.ReactNode } | null;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -24,12 +24,13 @@ export const ModalProvider: React.FC<{
     name: string,
     component: React.ReactNode,
     data?: any,
+    size?:any,
   ) => {
     setModals(prev => {
       const filtered = prev.filter(
         modal => !(modal.type === type && modal.name === name),
       );
-      return [...filtered, { type, name, data, component }];
+      return [...filtered, { type, name, data, component,size }];
     });
 
     if (data) {
@@ -55,7 +56,7 @@ export const ModalProvider: React.FC<{
 
   const getOpenModal = (): {
     title?: string;
-    icon?: string;
+    icon?: React.ReactNode;
     size?: string;
     type: ModalType | string;
     name: string;
@@ -67,6 +68,7 @@ export const ModalProvider: React.FC<{
       type: latest.type,
       name: latest.name,
       component: latest.component,
+      size: latest.size,
     };
   };
 
