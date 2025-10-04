@@ -1,100 +1,235 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
+  import { AppButton, useModalContext } from '@root/core';
+  import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 
-const EmployeeSatisfactionCalendar: React.FC = () => {
-  const days = ['Sunday', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [today, setToday] = useState(parseInt(currentDate.toLocaleDateString('en-US', { day: 'numeric' }), 10));
-  const [currentTime, setCurrentTime] = useState(currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      setCurrentDate(now);
-      setToday(parseInt(now.toLocaleDateString('en-US', { day: 'numeric' }), 10));
-      setCurrentTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const getMonthYear = (date: Date) => {
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  // Reusable DynamicCircle component
+  const DynamicCircle = ({ number, size, textSize, fromColor, toColor, fontWeight = 'bold' }) => {
+    return (
+      <span
+        className={`flex items-center justify-center w-${size} h-${size} !text-[${textSize}px] !font-${fontWeight} text-white rounded-full bg-gradient-to-tl from-${fromColor} to-${toColor}`}
+      >
+        {number}
+      </span>
+    );
   };
 
-  const generateCalendar = () => {
-    const year = 2024;
-    const month = 9; // October (0-based index)
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const weeks: number[][] = [];
-    let week: number[] = new Array(firstDay).fill(0);
+  // CalendarDay component to handle each day's content
+  const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, bottomCircles, onClick }) => {
+    return (
+      <AppButton
+        props={{
+          size: 'xl',
+          onPress: onClick,
+          content: (
+            <div>
+              <div className="flex items-start justify-center gap-3 mb-[-5px]">
+                {topCircles.map((circle, index) => (
+                  <DynamicCircle
+                    key={`top-${index}`}
+                    number={circle.number}
+                    size={circle.size}
+                    textSize={circle.textSize}
+                    fromColor={circle.fromColor}
+                    toColor={circle.toColor}
+                    fontWeight={circle.fontWeight}
+                  />
+                ))}
+                <span
+                  className={`!font-semibold !text-xl ${
+                    idx === 6
+                      ? isCurrentMonth
+                        ? 'text-red-500'
+                        : 'text-red-300'
+                      : isCurrentMonth
+                        ? 'text-black'
+                        : 'text-gray-400'
+                  }`}
+                >
+                  {dayNumber.toString().padStart(2, '0')}
+                </span>
+              </div>
+              <div className="flex items-center justify-end w-full gap-5 px-11 mt-[-5px]">
+                {bottomCircles.map((circle, index) => (
+                  <DynamicCircle
+                    key={`bottom-${index}`}
+                    number={circle.number}
+                    size={circle.size}
+                    textSize={circle.textSize}
+                    fromColor={circle.fromColor}
+                    toColor={circle.toColor}
+                    fontWeight={circle.fontWeight}
+                  />
+                ))}
+              </div>
+            </div>
+          ),
+        }}
+      />
+    );
+  };
 
-    for (let day = 1; day <= daysInMonth; day++) {
-      if (week.length === 7) {
-        weeks.push([...week]);
-        week = [];
+  const EmployeeSatisfactionCalendar = () => {
+    const days = ['Sunday', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState(
+      currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+    );
+    const today = new Date();
+    const { openModal } = useModalContext();
+
+    useEffect(() => {
+      const timer = setInterval(() => {
+        const now = new Date();
+        setCurrentTime(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }));
+      }, 60000);
+      return () => clearInterval(timer);
+    }, []);
+
+    const getDay = (date) => {
+      const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+      const day = date.toLocaleDateString('en-US', { day: '2-digit' });
+      return `${month}.${day}`;
+    };
+
+    const getMonth = (date) => date.toLocaleDateString('en-US', { month: 'long' });
+    const getYear = (date) => date.toLocaleDateString('en-US', { year: 'numeric' });
+
+    const goToPreviousMonth = () => {
+      setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+    };
+
+    const goToNextMonth = () => {
+      setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+    };
+
+    const generateCalendar = () => {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+      const weeks = [];
+      let week = [];
+
+      for (let i = firstDay - 1; i >= 0; i--) {
+        week.push({ day: daysInPrevMonth - i, isCurrentMonth: false });
       }
-      week.push(day);
-    }
-    while (week.length < 7) week.push(0);
-    weeks.push(week);
 
-    return weeks;
-  };
+      for (let day = 1; day <= daysInMonth; day++) {
+        if (week.length === 7) {
+          weeks.push([...week]);
+          week = [];
+        }
+        week.push({ day, isCurrentMonth: true });
+      }
 
-  const weeks = generateCalendar();
+      let nextMonthDay = 1;
+      while (week.length < 7) {
+        week.push({ day: nextMonthDay++, isCurrentMonth: false });
+      }
+      weeks.push(week);
 
-  return (
-    <div className="border-2 border-primary-400 rounded-lg p-4">
-      <div>
-      <div className="bg-primary-400 text-white text-center p-2 rounded-lg flex justify-between items-center text-sm">
-        <span>Today: Oct.21</span>
-        <span className="mx-2">October 2024</span>
-        <span>Time: 17:00</span>
-      </div>
+      while (weeks.length < 5) {
+        const newWeek = [];
+        for (let i = 0; i < 7; i++) {
+          newWeek.push({ day: nextMonthDay++, isCurrentMonth: false });
+        }
+        weeks.push(newWeek);
+      }
+
+      return weeks;
+    };
+
+    const isToday = (day, isCurrentMonth) => {
+      return (
+        isCurrentMonth &&
+        day === today.getDate() &&
+        currentDate.getMonth() === today.getMonth() &&
+        currentDate.getFullYear() === today.getFullYear()
+      );
+    };
+
+    const weeks = generateCalendar();
+
+    // Example dynamic data for circles (this can be replaced with actual dynamic data)
+    const getCircleData = (day, isCurrentMonth) => ({
+      topCircles: [
+        { number: isCurrentMonth ? day * 2 : 17, size: 16, textSize: 24, fromColor: 'green-800', toColor: 'green-400' },
+        { number: isCurrentMonth ? day + 5 : 10, size: 11, textSize: 18, fromColor: 'orange-700', toColor: 'orange-400' },
+      ],
+      bottomCircles: [
+        { number: isCurrentMonth ? day % 5 : 2, size: 7, textSize: 14, fromColor: 'red-500', toColor: 'red-400' },
+        { number: isCurrentMonth ? day % 10 : 8, size: 9, textSize: 16, fromColor: 'red-700', toColor: 'red-400' },
+      ],
+    });
+
+    return (
+      <div className="border-2 border-primary-400 rounded-lg p-4">
+        <div>
+          <div className="bg-primary-400 text-white text-center p-2 rounded-xl flex justify-between items-center text-sm">
+            <span className="!font-bold">Today: {getDay(currentDate)}</span>
+            <div className="mx-2 flex items-center gap-[62px]">
+              <AppButton
+                props={{
+                  size: 'md',
+                  radius: 'lg',
+                  color: 'white',
+                  variant: 'light',
+                  onPress: goToPreviousMonth,
+                  content: <ArrowLeft2 />,
+                }}
+              />
+              <span className="!font-bold">{getMonth(currentDate)}</span>
+              <span className="!font-bold">{getYear(currentDate)}</span>
+              <AppButton
+                props={{
+                  size: 'md',
+                  color: 'white',
+                  radius: 'lg',
+                  variant: 'light',
+                  onPress: goToNextMonth,
+                  content: <ArrowRight2 />,
+                }}
+              />
+            </div>
+            <span className="!font-bold">Time: {currentTime}</span>
+          </div>
 
           <table className="w-full">
-        <thead>
-        <tr>
-          {days.map((day) => (
-            <th key={day} className="bg-[#DCF0F9] p-2 text-center text-sm font-semibold">{day}</th>
-          ))}
-        </tr>
-        </thead>
-        <tbody>
-        {weeks.map((week, index) => (
-          <tr key={index}>
-            {week.map((date, idx) => (
-              <td key={idx} className="p-2 text-center">
-                {date > 0 && (
-                  <div className="flex flex-col items-center justify-center p-1.5 bg-[#DCF0F9]">
-                    <div className="flex items-start justify-center gap-3  mb-[-5px]">
-                     <span className="flex items-center justify-center w-16 h-16 !text-[24px] !font-bold text-white rounded-full bg-gradient-to-tl from-green-800 to-green-400">
-                       17
-                     </span>
-                      <span className="flex items-center justify-center w-11 h-11 !text-[18px] !font-bold text-white rounded-full bg-gradient-to-tl from-orange-700 to-orange-400">
-                        10
-                      </span>
-                      <span>01</span>
-                    </div>
-                    <div className="flex items-center justify-end w-full gap-5 px-11 mt-[-5px]">
-                      <span className="flex items-center justify-center w-7 h-7 !text-[14px] !font-bold text-white rounded-full bg-gradient-to-tl from-green-500 to-green-400">
-                         2
-                     </span>
-                      <span className="flex items-center justify-center w-9 h-9 !text-[16px] !font-bold text-white rounded-full bg-gradient-to-tl from-red-700 to-red-400">
-                          8
-                     </span>
-                    </div>
-                  </div>
-                )}
-              </td>
+            <thead>
+            <tr>
+              {days.map((day) => (
+                <th key={day} className="bg-[#DCF0F9] p-2 text-center text-sm font-semibold">
+                  {day}
+                </th>
+              ))}
+            </tr>
+            </thead>
+            <tbody>
+            {weeks.map((week, index) => (
+              <tr key={index}>
+                {week.map((date, idx) => (
+                  <td key={idx} className="p-2">
+                    {date.day > 0 && (
+                      <CalendarDay
+                        dayNumber={date.day}
+                        isCurrentMonth={date.isCurrentMonth}
+                        isSaturday={idx === 6}
+                        idx={idx}
+                        topCircles={getCircleData(date.day, date.isCurrentMonth).topCircles}
+                        bottomCircles={getCircleData(date.day, date.isCurrentMonth).bottomCircles}
+                        onClick={() => openModal('delete', undefined)}
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default EmployeeSatisfactionCalendar;
+  export default EmployeeSatisfactionCalendar;

@@ -134,7 +134,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     // }) as PluginOption,
 
     // React with SWC - fastest React refresh
-    react() as PluginOption,
+    react({
+    jsxImportSource: '@emotion/react',
+    reactRefreshHost: 'http://localhost:5173',
+      plugins: [['@swc/plugin-styled-components', {}]]
+    }) as PluginOption,
 
     // Advanced TypeScript path resolution
     // tsconfigPaths({
@@ -463,14 +467,15 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           secure: false,
         },
       },
-      // hmr: {
-      //   overlay: false,
-      //   port: 5173,
-      // },
-      // watch: {
-      //   usePolling: true,
-      //   interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
-      // },
+      hmr: {
+        overlay: false,
+        clientPort: 443,
+        port: 5173,
+      },
+      watch: {
+        usePolling: true,
+        interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
+      },
     },
 
     // Preview server
