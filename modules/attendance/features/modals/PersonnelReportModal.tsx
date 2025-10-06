@@ -5,7 +5,6 @@ import { AppButton, AppModal, AppTable } from '@core/components';
 import { ReportPersonnal } from '@module/attendance/app/mock';
 const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
-
   return (
     <>
       <AppModal.Body>
@@ -55,6 +54,7 @@ const PersonnelReportModal = () => {
               color: 'white',
               size: 'md',
               radius: 'lg',
+              onPress:()=> closeModal('confirm','PersonnelReport'),
               content: 'Cancel',
             }}
           />
@@ -64,6 +64,7 @@ const PersonnelReportModal = () => {
               type: '',
               size: 'md',
               radius: 'lg',
+              className: 'text-white',
               content: 'Download File',
             }}
           />

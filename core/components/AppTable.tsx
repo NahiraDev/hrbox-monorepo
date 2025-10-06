@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
-import { Edit, Trash } from 'iconsax-react';
+import { Add, Edit, Trash } from 'iconsax-react';
 import { usePaginationManager } from '@core/helpers';
 import { useModalContext } from '@core/context';
 
@@ -28,6 +28,7 @@ interface AppTableProps {
     defaultSize?: number;
   };
   enableActions?: boolean;
+  theme?: "default" | "classic";
 }
 
 export const AppTable = ({
@@ -40,10 +41,11 @@ export const AppTable = ({
   loading = false,
   error,
   pageSize = 10,
+  theme = "default",
 }: AppTableProps) => {
   const { openModal } = useModalContext();
   const [LottieComponent, setLottieComponent] = useState<any>(null);
-
+  const [showBox, setShowBox] = useState<boolean>(false);
   const pagination = usePaginationManager({
     total: Math.ceil((data?.length || 0) / pageSize),
   });
@@ -108,6 +110,9 @@ export const AppTable = ({
 
       openModal('view', 'test', columnPairs);
     }
+  };
+  const handleShowBox=()=>{
+    setShowBox((prev)=>!prev);
   };
 
   if (error) {
@@ -176,14 +181,24 @@ export const AppTable = ({
 
   const tableColumns = (
     <>
-      {autoColumns.map((col) => (
-        <TableColumn
-          key={col.key}
-          className="text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"
-        >
-          {col.label}
-        </TableColumn>
-      ))}
+      {autoColumns.map((col, index) => {
+        let ColumnsClass = '';
+        if (index<2){
+          ColumnsClass="bg-[#999] rounded-xl ";
+        }else if (index>=2 && index<8){
+          ColumnsClass = `bg-primary ${index===2?"rounded-l-xl":index===7?"rounded-r-xl":""}`;
+        }else{
+          ColumnsClass= "bg-green-500 text-center rounded-xl text-start ";
+        }
+        return(
+          <TableColumn
+            key={col.key}
+            className={`${theme==='classic'?`${ColumnsClass}`: "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"} text-white`}
+          >
+            {col.label}
+          </TableColumn>
+        );
+      })}
       {enableActions && (
         <TableColumn className="text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12">
           Actions
@@ -212,12 +227,12 @@ export const AppTable = ({
 
   return (
     <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 h-full dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
-      <Table className="!h-full" onRowAction={(row: any) => handleRowClick?.(row)}>
-        <TableHeader className="!rounded-0">{tableColumns}</TableHeader>
+      <Table className="!h-full" >
+        <TableHeader>{tableColumns}</TableHeader>
         <TableBody>
           {paginatedData.length === 0 ? (
             <TableRow>
-              <TableCell className="text-center py-8" colSpan={autoColumns.length + (enableActions ? 1 : 0)}>
+              <TableCell className="text-center py-8 " colSpan={autoColumns.length + (enableActions ? 1 : 0)}>
                 No data available
               </TableCell>
             </TableRow>
@@ -226,14 +241,27 @@ export const AppTable = ({
               <TableRow
                 key={row.id ?? index}
                 className="hover:bg-surface dark:hover:bg-[#04425c66] !rounded-md transition-colors !h-12 cursor-pointer"
+                onClick={(row) =>
+                  theme === "classic" ? handleShowBox() : handleRowClick?.(row)
+                }
               >
                 {tableRows(row)}
               </TableRow>
             ))
           )}
+
         </TableBody>
       </Table>
-
+      {showBox && (
+        <div className="flex flex-col  bg-white px-3 py-2  ">
+          <AppButton props={{
+            startContent:<span>
+                  <Add/>
+                </span>,
+            content:"Daily Leave"
+          }}/>
+        </div>
+      )}
       {hasPagination && paginationConfig && (
         <div className="flex justify-end mt-4">
           <AppPagination total={Math.ceil((data?.length || 0) / pageSize)} />

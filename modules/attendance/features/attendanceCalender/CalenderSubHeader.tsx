@@ -1,10 +1,11 @@
-import { Calendar, Export, People, Profile } from 'iconsax-react';
-import  AppDropDown  from '@core/components/AppDropDown';
+import { Calendar, Export, Hierarchy3, People, Profile } from 'iconsax-react';
+import AppDropDown from '@core/components/AppDropDown';
 import { useModalContext } from '@core/context';
 import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';
 import PersonnelReportModal from '@module/attendance/features/modals/PersonnelReportModal';
 
 import { AppButton } from '@core/components';
+import { useTranslation } from 'react-i18next';
 
 const CalenderSubHeader = () => {
   const years = [
@@ -18,6 +19,7 @@ const CalenderSubHeader = () => {
     { key: 'March', label: 'March', icon: <Calendar size={33} /> },
   ];
   const { openModal } = useModalContext();
+  const {t}=useTranslation();
   return (
     <>
       <div className="w-full flex flex-row justify-between">
@@ -33,7 +35,7 @@ const CalenderSubHeader = () => {
                 </span>
               ),
               className: "text-white",
-              content: 'Personal attendance calendar',
+              content: t('Personal_attendance_calendar'),
             }}
           />
           <AppButton
@@ -46,7 +48,7 @@ const CalenderSubHeader = () => {
                   <People />
                 </span>
               ),
-              onPress: () => openModal('confirm','personnelreport',<PersonnelReportModal/>,'md'),
+              onPress: () => openModal('confirm','PersonnelReport',<PersonnelReportModal/>,undefined,"2xl","Add Permision Time", <Hierarchy3 color="white"/>),
               content: 'Group attendance calendar',
             }}
           />
@@ -79,7 +81,7 @@ const CalenderSubHeader = () => {
                   <Export />
                 </span>
               ),
-              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />),
+              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"2xl","Add Permision Time",<Hierarchy3 color="white"/>),
               content: 'Export ',
             }}
           />
