@@ -20,7 +20,7 @@ const clamp = (value: number): number => Math.max(1, Math.min(20, value));
 
 const DynamicCircle = ({ number, size, textSize, fromColor, toColor }) => {
   const sizeClass = sizeMap[size] || '!w-8 !h-8';
-  const textClass = textSizeMap[size] || '!text-base'; // فونت بر اساس سایز دایره
+  const textClass = textSizeMap[size] || '!text-base';
 
   const gradientStyle = {
     backgroundImage: `linear-gradient(to top left, ${fromColor}, ${toColor})`,
