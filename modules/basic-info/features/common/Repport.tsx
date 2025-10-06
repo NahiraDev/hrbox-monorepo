@@ -9,6 +9,7 @@ const users = [
   { id: '5', name: 'Zahra Pakniyat', role: 'UiUx Designer', section: 'Consultant' },
   { id: '6', name: 'Zahra Pakniyat', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
   { id: '7', name: 'Zahra Pakniyat', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
+  { id: '7', name: 'Zahra Pakniyat', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
 ];
 
 const OrganizationalChart = () => {
