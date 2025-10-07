@@ -8,7 +8,7 @@ export const AppDeleteModal = ({props}:any) => {
   const modalData = getModalData('delete' , name);
 
   const handleConfirm = () => {
-    console.log('Deleting:', modalData);
+    handleDelete();
     closeModal('delete' , name);
   };
 

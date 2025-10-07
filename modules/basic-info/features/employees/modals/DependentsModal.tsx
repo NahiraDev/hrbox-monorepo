@@ -1,5 +1,4 @@
 import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { UserSquare } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 
 export const DependentsModal = () => {

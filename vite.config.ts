@@ -463,14 +463,14 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           secure: false,
         },
       },
-      // hmr: {
-      //   overlay: false,
-      //   port: 5173,
-      // },
-      // watch: {
-      //   usePolling: true,
-      //   interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
-      // },
+      hmr: {
+        overlay: true,
+        port: 5173,
+      },
+      watch: {
+        usePolling: true,
+        interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
+      },
     },
 
     // Preview server
