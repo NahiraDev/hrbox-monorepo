@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip, cn } from '@heroui/react';
 import { Add, Edit, Trash } from 'iconsax-react';
 import { usePaginationManager } from '@core/helpers';
 import { useModalContext } from '@core/context';
@@ -28,7 +28,7 @@ interface AppTableProps {
     defaultSize?: number;
   };
   enableActions?: boolean;
-  theme?: "default" | "classic";
+  variant?: "default" | "attendance";
 }
 
 export const AppTable = ({
@@ -41,7 +41,7 @@ export const AppTable = ({
   loading = false,
   error,
   pageSize = 10,
-  theme = "default",
+  variant = "default",
 }: AppTableProps) => {
   const { openModal } = useModalContext();
   const [LottieComponent, setLottieComponent] = useState<any>(null);
@@ -184,16 +184,16 @@ export const AppTable = ({
       {autoColumns.map((col, index) => {
         let ColumnsClass = '';
         if (index<2){
-          ColumnsClass="bg-[#999] rounded-xl ";
+          ColumnsClass="bg-[#999] rounded-xl  ";
         }else if (index>=2 && index<8){
-          ColumnsClass = `bg-primary ${index===2?"rounded-l-xl":index===7?"rounded-r-xl":""}`;
+          ColumnsClass = `bg-primary ${index===2?"rounded-l-xl ":index===7?"rounded-r-xl":""}`;
         }else{
-          ColumnsClass= "bg-green-500 text-center rounded-xl text-start ";
+          ColumnsClass= "bg-green-500 rounded-xl text-start ";
         }
         return(
           <TableColumn
             key={col.key}
-            className={`${theme==='classic'?`${ColumnsClass}`: "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"} text-white`}
+            className={`${variant==='attendance'?`${ColumnsClass}`: "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] !rounded-0 text-center !h-12"} text-white`}
           >
             {col.label}
           </TableColumn>
@@ -226,9 +226,19 @@ export const AppTable = ({
   };
 
   return (
-    <div className="w-full border border-primary dark:border-[#04425c66] bg-primary-50 h-full dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4">
-      <Table className="!h-full" >
-        <TableHeader>{tableColumns}</TableHeader>
+    <div className={cn(variant === "default" ? "w-full border border-primary dark:border-[#04425c66] bg-primary-50 h-full dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4":"")}>
+      <Table>
+        {variant === "attendance" ? (
+          <div className="flex gap-3 bg-primary text-white rounded-xl px-2 py-3">
+            {autoColumns.map((col) => (
+              <div key={col.key} className="flex-1 text-center font-semibold">
+                {col.label}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <TableHeader>{tableColumns}</TableHeader>
+        )}
         <TableBody>
           {paginatedData.length === 0 ? (
             <TableRow>
@@ -242,7 +252,7 @@ export const AppTable = ({
                 key={row.id ?? index}
                 className="hover:bg-surface dark:hover:bg-[#04425c66] !rounded-md transition-colors !h-12 cursor-pointer"
                 onClick={(row) =>
-                  theme === "classic" ? handleShowBox() : handleRowClick?.(row)
+                  variant === "attendance" ? handleShowBox() : handleRowClick?.(row)
                 }
               >
                 {tableRows(row)}
