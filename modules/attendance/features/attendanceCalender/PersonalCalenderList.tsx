@@ -5,7 +5,7 @@ const PersonalCalenderList = () => {
   return (
     <>
       <div className="w-[90%]">
-      <AppTable data={PersonalList} enableActions={false} theme="classic" pageSize={20}  />
+      <AppTable data={PersonalList} enableActions={false} variant="attendance" pageSize={20}  />
       </div>
       </>
   );
