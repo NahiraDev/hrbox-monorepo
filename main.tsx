@@ -46,6 +46,7 @@ async function bootstrap() {
       console.log('✅ ProcessMaker module registered');
     }
 
+
     if (enabledModules.includes('basic-info') && location.pathname.includes("/basic-info")) {
       serviceRegistry.registerPlugin(BasicInfoPlugin);
       console.log('✅ BasicInfo module registered');

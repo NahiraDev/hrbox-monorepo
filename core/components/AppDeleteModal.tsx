@@ -1,31 +1,34 @@
 import { useModalContext } from '@core/context';
-import { AppButton, AppModal } from '@core/components';
 
-export const AppDeleteModal = (props: any) => {
-  const { onConfirm, onCancel } = props;
-  const { closeModal } = useModalContext();
+import { AppButton , AppModal } from '@core/components';
+
+export const AppDeleteModal = ({props}:any) => {
+  const {handleDelete , name} = props;
+  const { getModalData, closeModal } = useModalContext();
+  const modalData = getModalData('delete' , name);
 
   const handleConfirm = () => {
-    if (onConfirm) {
-      onConfirm();
-    }
-    closeModal('delete', '');
+    handleDelete();
+    closeModal('delete' , name);
   };
 
   const handleCancel = () => {
-    if (onCancel) {
-      onCancel();
-    }
-    closeModal('delete', '');
+    closeModal('delete' , name);
   };
 
   return (
-    <div >
-      <div className="flex gap-3 justify-end mt-6">
+    // <AppModal
+    //   icon={<Trash className="text-white" size="18" />}
+    //   modalType="delete"
+    //   size="xl"
+    //   title="Do you want to remove it?"
+    // >
+      <AppModal.Footer>
         <AppButton
           props={{
             size: 'md',
             radius: 'lg',
+            variant: 'light',
             onPress: handleCancel,
             content: 'Cancel',
           }}
@@ -39,7 +42,7 @@ export const AppDeleteModal = (props: any) => {
             content: 'Delete',
           }}
         />
-      </div>
-    </div>
+      </AppModal.Footer>
+    // </AppModal>
   );
 };
