@@ -41,7 +41,7 @@ export const AppButton = ({ props }: any) => {
     disabled,
     isSubmitting,
     spinner,
-    spinnerPlacement,
+      spinnerPlacement,
     disableRipple,
   } = props;
   const handlePress = onPress || onClick;
