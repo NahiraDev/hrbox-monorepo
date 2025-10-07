@@ -4,6 +4,6 @@ export const AttendancePath = createPaths('/attendance', {
   EntryExitRegistration: '/entry-exit',
   AttendanceCalenders: '/attendance-calender',
   ListOfApprovals: '/list-of-approvals',
-  Export: 'export',
+  Export: '/export',
   ShiftAllocation: '/shift-allocation',
 });

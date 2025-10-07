@@ -3,6 +3,7 @@ import { createStoreWithReducers } from '@core/redux';
 import '../../../configs/index.css';
 import '@core/translate';
 import { serviceRegistry } from '@core/helpers';
+import "./index.css"
 
 import AttendancePlugin from '@module/attendance/app';
 

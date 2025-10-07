@@ -34,7 +34,7 @@ const EntryExit = () => {
                 startContent: <TimerStart color="white" variant="Bold" />,
                 radius: 'lg',
                 className: 'shadow-[0_1px_3px_0_rgba(0,0,0,0.30)]',
-                onPress: () => openModal('confirm', 'UserLocationModal', <UserLocationModal />),
+                onPress: () => openModal('confirm', 'UserLocationModal', <UserLocationModal />,undefined,"lg",null,null ),
                 content: <span className="text-white">Clock in</span>,
               }}
             />

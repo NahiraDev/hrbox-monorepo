@@ -151,4 +151,5 @@ export const enCommon = {
   otp_is_correct_redirecting: 'OTP is correct. Redirecting',
   lorem:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas.',
+  Personal_attendance_calendar:'Personal attendance calendar'
 };

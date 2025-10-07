@@ -38,10 +38,11 @@ const DashboardSubHeader = () => {
         <div className="flex">
           <AppButton
             props={{
-              color: 'primary',
+              color: 'primary-400',
               size: 'md',
               radius: 'lg',
               content: 'Dashboard',
+              className: 'text-white',
               startContent: <Chart />,
             }}
           />
