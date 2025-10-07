@@ -29,7 +29,7 @@ const Courses = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('delete', user),
+                          onPress: () => openModal('delete', user, <AppDeleteModal/>),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-red-500 transition-all duration-200',
                         }}
@@ -67,7 +67,6 @@ const Courses = () => {
               </div>
             </Card>
           ))}
-          <AppDeleteModal />
         </div>
       }
     />
