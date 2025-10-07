@@ -22,5 +22,5 @@ export const BasicInfoPaths = createPaths('/basic-info', {
   ContractList: '/contract-list',
   RequestList: '/request-list',
   HealthRecords: '/health-records',
-  EmployeeSatisfactionCalendar: '/employee-satisfaction-salendar'
+  EmployeeSatisfactionCalendar: '/employee-satisfaction-calendar'
 });

@@ -1,11 +1,11 @@
 import { Avatar, Card } from '@heroui/react';
 import { identityCard } from '@module/basic-info/app/mock';
-import { AppButton, } from '@core/components';
+import { AppButton, AppDeleteModal, } from '@core/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
-// import DocumentsModal from '../employees/modals/DocumentsModal';
+import DocumentsModal from '../employees/modals/DocumentsModal';
 
 const Documents = () => {
   const { openModal } = useModalContext();
@@ -39,7 +39,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          // onPress: () => openModal('delete', user),
+                          onPress: () => openModal('delete', user, <AppDeleteModal/>),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-red-500 transition-all duration-200',
                         }}
@@ -52,7 +52,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          // onPress: () => openModal('edit', user),
+                          onPress: () => openModal('edit', user,<DocumentsModal />),
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
                           className: 'hover:!bg-primary-400 transition-all duration-200',
                         }}
@@ -79,8 +79,7 @@ const Documents = () => {
               </div>
             </Card>
           ))}
-          {/*<DocumentsModal />*/}
-          {/*<AppDeleteModal />*/}
+
         </div>
       }
     />

@@ -1,14 +1,14 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@core/components';
-import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
+// import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
+// import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
 
 
 const TechnicalDepartments = () => {
   return (
-    <>
-
-      <div className="w-full gap-3 rounded-2xl flex flex-wrap items-center content-start p-4">
+    <div className="w-340 ">
+      <div className="w-full grid grid-cols-8 gap-3">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
@@ -20,9 +20,8 @@ const TechnicalDepartments = () => {
             <span className="text-xs font-semibold">{user.name}</span>
             <AppButton
               props={{
-                className: 'px-1.5 py-[2px] text-xs bg-primary-50 border border-primary-100 text-primary-400',
-                size: '',
-                color: '',
+                className: 'bg-primary-100 bg-[#DCF0F9] text-[#0A9AD7] border-1 border-[#DCF0F9]',
+                size: 'sm',
                 radius: 'lg',
                 onPress: () => {},
                 content: <span>{user.job}</span>,
@@ -31,9 +30,9 @@ const TechnicalDepartments = () => {
           </Card>
         ))}
         <span className="text-9xl absolute top-175 left-455 font-bold text-[#04070E]/10">200</span>
-        <OrganizationDepartmentModal/>
+        {/*<OrganizationDepartmentModal/>*/}
       </div>
-    </>
+    </div>
   );
 };
 
