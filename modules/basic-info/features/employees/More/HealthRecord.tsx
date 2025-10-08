@@ -1,7 +1,16 @@
 import { healthy } from '@module/basic-info/app/mock';
 import { Card } from '@heroui/react';
-import { AppButton } from '@core/components';
-import { Calendar, Drop, NotificationFavorite, HeartAdd, Hospital, Add, HeartEdit } from 'iconsax-react';
+import { AppButton, AppDeleteModal } from '@core/components';
+import {
+  Calendar,
+  Drop,
+  NotificationFavorite,
+  HeartAdd,
+  Hospital,
+  Add,
+  HeartEdit,
+  Trash,
+} from 'iconsax-react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import PreEmploymentHealthRecordsModals from '@module/basic-info/features/employees/modals/PreEmploymentHealthRecordsModals';
@@ -27,7 +36,7 @@ const HealthRecord = () => {
                   isIconOnly: true,
                   color: 'white',
                   className: 'border border-primary',
-                  onPress: () => openModal('edit', undefined),
+                  onPress: () => openModal('edit',"", <PreEmploymentHealthRecordsModals/>,undefined ,'xl',"Add New Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                   content: <Add />,
                 }}
               />
@@ -42,7 +51,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', undefined),
+                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
@@ -94,7 +103,7 @@ const HealthRecord = () => {
                   isIconOnly: true,
                   color: 'white',
                   className: 'border border-primary',
-                  onPress: () => openModal('edit', undefined),
+                  onPress: () => openModal('edit',"", <OnDutyHealthRecords/>,undefined ,'xl',"Add New On-Duty Health Records",<HeartEdit className='text-white'/>),
                   content: <Add />,
                 }}
               />
@@ -109,7 +118,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', undefined),
+                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
@@ -150,9 +159,9 @@ const HealthRecord = () => {
               ))}
             </div>
           </div>
-          <PreEmploymentHealthRecordsModals/>
-          <AddNewOnDutyHealthRecords/>
-          <OnDutyHealthRecords/>
+
+
+
         </div>
       }
     />

@@ -1,8 +1,8 @@
 import type { Key } from 'react';
 
 // import { TickIcon } from '../../../../public/icons';
-import { AppButton } from '@core/components';
-import { Add, FolderCross, MessageEdit, Trash } from 'iconsax-react';
+import { AppButton, AppDeleteModal } from '@core/components';
+import { Add, Category, FolderCross, MessageEdit, Trash } from 'iconsax-react';
 import { Listbox, ListboxItem } from '@heroui/react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -81,8 +81,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                     radius: 'sm',
                     color: 'white',
                     variant: 'solid',
-                    isIconOnly: true,
-                    className: 'bg-white',
+                    className: 'bg-white p-1',
                     content: <MessageEdit className="text-secondary-900" size="20" />,
                   }}
                 />
@@ -92,8 +91,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                     radius: 'sm',
                     color: 'white',
                     variant: 'solid',
-                    isIconOnly: true,
-                    className: 'bg-white',
+                    className: 'bg-white p-1',
                     content: <Trash className="text-secondary-900" size="20" />,
                   }}
                 />
@@ -125,10 +123,10 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                 />
                 <AppButton
                   props={{
+                    className:"bg-white",
                     size: 'md',
-                    radius: 'lg',
-                    color: 'white',
-                    onPress: () => openModal('edit', undefined),
+                    radius: 'sm',
+                    onPress: () => openModal('edit',"",<AddNewCourses/>, undefined, 'xl',"Software Management",<Category className='text-white'/>),
                     content: (
                       <>
                         <Add size={22} />
@@ -190,7 +188,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
         <div className="col-span-10">{content}</div>
       </div>
       {/*<EducationModals/>*/}
-      <AddNewCourses/>
+
     </div>
   );
 };

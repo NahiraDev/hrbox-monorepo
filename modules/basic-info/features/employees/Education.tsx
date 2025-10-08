@@ -1,7 +1,7 @@
 import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@core/components';
-import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
+import { Buildings, Calendar,User, Designtools, Location, Trash } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
@@ -28,9 +28,9 @@ const Education = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('delete', undefined),
+                        onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'hover:!bg-red-500 transition-all duration-200',
+                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                       }}
                     />
                   </div>
@@ -69,7 +69,7 @@ const Education = () => {
           </div>
         }
       />
-      <AppDeleteModal />
+
     </>
   );
 };

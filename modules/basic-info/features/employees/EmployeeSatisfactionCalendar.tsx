@@ -1,6 +1,8 @@
-import { AppButton, useModalContext } from '@root/core';
-import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
+import { AppButton, AppDeleteModal, useModalContext } from '@root/core';
+import { ArrowLeft2, ArrowRight2, Category, Trash } from 'iconsax-react';
 import { useEffect, useState } from 'react';
+import EmployeeSatisfactionCalendarModal
+  from '@module/basic-info/features/employees/modals/EmployeeSatisfactionCalendarModal';
 
 const sizeMap: Record<number, string> = {
   7: '!w-7 !h-7',
@@ -36,7 +38,7 @@ const DynamicCircle = ({ number, size, textSize, fromColor, toColor }) => {
   );
 };
 
-const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, bottomCircles, onClick }) => {
+const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, bottomCircles, onPress }) => {
   console.log('CalendarDay Data:', { dayNumber, topCircles, bottomCircles });
 
   return (
@@ -45,7 +47,7 @@ const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, b
         className: 'bg-[#DCF0F9] p-3',
         size: 'xl',
         radius: 'none',
-        onPress: onClick,
+        onPress: onPress,
         content: (
           <div>
             <div className="flex items-start justify-center gap-3 mb-[-15px]">
@@ -242,7 +244,17 @@ const EmployeeSatisfactionCalendar = () => {
                       idx={idx}
                       topCircles={getCircleData(date.day, date.isCurrentMonth).topCircles}
                       bottomCircles={getCircleData(date.day, date.isCurrentMonth).bottomCircles}
-                      onClick={() => openModal('delete', undefined)}
+                      onPress={() =>
+                        openModal(
+                          'custom',
+                          "",
+                          <EmployeeSatisfactionCalendarModal />,
+                          undefined,
+                          'xl',
+                          "Organizational Locations",
+                          <Category className='text-white'/>
+                        )
+                      }
                     />
                   )}
                 </td>

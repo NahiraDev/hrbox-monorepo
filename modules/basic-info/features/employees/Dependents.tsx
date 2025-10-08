@@ -13,11 +13,15 @@ import {
   Profile2User,
   MessageEdit,
   Add,
+  UserSquare,
+  People,
 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';
+import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';
+import { DependentsModal } from '@module/basic-info/features/employees/modals/DependentsModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -41,7 +45,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      className: 'bg-white border-1 border-primary-400',
+                      className: 'bg-white border-1 border-primary-400 p-2',
                       content: <MessageEdit className="text-secondary-900" size="20" />,
                     }}
                   />
@@ -52,8 +56,8 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit',undefined),
-                      className: 'bg-white border-1 border-primary-400',
+                      onPress: () => openModal('edit',"", <SpouseModal />,undefined,"xl","Spouse", <Profile2User className='text-white'/> ),
+                      className: 'bg-white border-1 border-primary-400 p-2',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
                   />
@@ -129,7 +133,6 @@ const Dependents = () => {
                     </div>
                   </Card>
                 ))}
-                <AppDeleteModal />
               </div>
             </div>
             <div className="flex flex-col">
@@ -146,9 +149,9 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit', undefined),
-                      className: 'bg-white border-1 border-primary-400',
-                      content: <Add className="text-secondary-900" size="20" />,
+                      onPress: () => openModal('edit',  "",<DependentsModal/>,undefined,'xl',"Dependents", <UserSquare className='text-white'/>),
+                      className: 'bg-white border-1 border-primary-400 p-2',
+                      content: <Add className="text-secondary-900" size="20"  />,
                     }}
                   />
                 </div>
@@ -170,9 +173,9 @@ const Dependents = () => {
                                 radius: 'sm',
                                 variant: 'light',
                                 isIconOnly: true,
-                                onPress: () => openModal('delete', user),
+                                onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                                 content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                                className: 'hover:!bg-red-500 transition-all duration-200',
+                                className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                               }}
                             />
                           </div>
@@ -235,7 +238,6 @@ const Dependents = () => {
                     </div>
                   </Card>
                 ))}
-                <AppDeleteModal />
               </div>
             </div>
           </div>
@@ -253,7 +255,8 @@ const Dependents = () => {
                     color: 'white',
                     variant: 'solid',
                     isIconOnly: true,
-                    className: 'bg-white border-1 border-primary-400',
+                    onPress: () => openModal('edit',"",<RelativesModal/> , undefined, 'xl',"Relatives",<People className='text-white'/>),
+                    className: 'bg-white border-1 border-primary-400 p-2',
                     content: <Add className="text-secondary-900" size="20" />,
                   }}
                 />
@@ -276,9 +279,9 @@ const Dependents = () => {
                               radius: 'sm',
                               variant: 'light',
                               isIconOnly: true,
-                              onPress: () => openModal('delete', user),
+                              onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                               content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                              className: 'hover:!bg-red-500 transition-all duration-200',
+                              className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                             }}
                           />
                         </div>
@@ -341,11 +344,7 @@ const Dependents = () => {
                   </div>
                 </Card>
               ))}
-              {/*<AppDeleteModal />*/}
-              {/*<SpouseModal />*/}
-              {/*<DependentsModal/>*/}
-              <RelativesModal/>
-            </div>
+              </div>
           </div>
         </div>
       }

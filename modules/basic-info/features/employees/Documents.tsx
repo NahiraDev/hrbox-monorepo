@@ -25,8 +25,8 @@ const Documents = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('custom', user),
-                        content: <Avatar radius="sm" size="lg" color='primary'/>,
+                        onPress: () => openModal('custom', "", <DocumentsModal />, undefined, 'sm'),
+                        content: <Avatar radius="sm" size="lg" />,
                       }}
                     />
                     <span>Identity Card</span>
@@ -39,9 +39,9 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('delete', user, <AppDeleteModal/>),
+                          onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'hover:!bg-red-500 transition-all duration-200',
+                          className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                         }}
                       />
                     </div>
@@ -52,9 +52,9 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('edit', user,<DocumentsModal />),
+                          onPress: () => openModal('edit',"", <DocumentsModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'hover:!bg-primary-400 transition-all duration-200',
+                          className: 'p-2 hover:!bg-primary-400 transition-all duration-200',
                         }}
                       />
                     </div>

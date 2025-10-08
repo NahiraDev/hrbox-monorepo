@@ -28,9 +28,9 @@ const Jobs = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('delete', <AppDeleteModal/>),
+                        onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'hover:!bg-red-500 transition-all duration-200',
+                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                       }}
                     />
                   </div>

@@ -1,6 +1,7 @@
 import { useModalContext } from '@core/context';
 
 import { AppButton , AppModal } from '@core/components';
+// import { Trash } from 'iconsax-react';
 
 export const AppDeleteModal = (props:any) => {
   const {name} = props;
@@ -17,12 +18,6 @@ export const AppDeleteModal = (props:any) => {
   };
 
   return (
-    // <AppModal
-    //   icon={<Trash className="text-white" size="18" />}
-    //   modalType="delete"
-    //   size="xl"
-    //   title="Do you want to remove it?"
-    // >
       <AppModal.Footer>
         <AppButton
           props={{
@@ -43,6 +38,5 @@ export const AppDeleteModal = (props:any) => {
           }}
         />
       </AppModal.Footer>
-    // </AppModal>
   );
 };

@@ -6,6 +6,9 @@ import { useModalContext } from '@core/context';
 import { AppDoubleLineProgress } from '@core/sections';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
+import DocumentsModal from '@module/basic-info/features/employees/modals/DocumentsModal';
+import { A } from 'storybook/internal/components';
+import { App } from '@core/app';
 
 const Education = () => {
   const { openModal } = useModalContext();
@@ -24,9 +27,9 @@ const Education = () => {
               radius: 'sm',
               variant: 'light',
               isIconOnly: true,
-              onPress: () => openModal('delete'),
+              onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
               content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-              className: 'hover:!bg-red-500 transition-all duration-200',
+              className: 'p-2 hover:!bg-red-500 transition-all duration-200',
             }}
           />
         </div>
@@ -75,7 +78,7 @@ const Education = () => {
           </div>
         }
       />
-      <AppDeleteModal />
+
     </>
   );
 };

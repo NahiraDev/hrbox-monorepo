@@ -30,7 +30,7 @@ const TestReport = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', <TestReportModal/>),
+                        onPress: () => openModal('edit',"", <TestReportModal/>,undefined,'lg',"Test Result",<TickSquare className='text-white'/> ),
                         content: <span>{worker.job}</span>,
                       }}
                     />
