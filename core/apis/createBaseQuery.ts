@@ -8,13 +8,29 @@ import {
 } from '@reduxjs/toolkit/query';
 
 import { setError } from '@core/redux';
+import { logout, updateToken } from '@core/redux/reducers/authSlice';
+
+let isRefreshing = false;
+let refreshPromise: Promise<any> | null = null;
 
 const createBaseQuery = (
   baseUrl: string,
+  requiresAuth: boolean = true,
 ): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
     credentials: 'include',
+    prepareHeaders: (headers, { getState }) => {
+      if (requiresAuth) {
+        const token = (getState() as any).auth?.token;
+        if (token) {
+          headers.set('Authorization', `${token}`);
+        }
+      }
+      headers.set('Content-Type', 'application/json');
+      headers.set('Accept', 'application/json');
+      return headers;
+    },
   });
 
   return async (
@@ -22,12 +38,63 @@ const createBaseQuery = (
     api: BaseQueryApi,
     extraOptions: {},
   ): Promise<QueryReturnValue<unknown, FetchBaseQueryError, {}>> => {
-    const result = await rawBaseQuery(args, api, extraOptions);
+    let result = await rawBaseQuery(args, api, extraOptions);
 
+    // Handle 401 Unauthorized
+    if (result.error && result.error.status === 401) {
+      // If already refreshing, wait for it
+      if (isRefreshing && refreshPromise) {
+        await refreshPromise;
+        result = await rawBaseQuery(args, api, extraOptions);
+      } else {
+        isRefreshing = true;
+
+        refreshPromise = (async () => {
+          try {
+            const refreshToken = (api.getState() as any).auth?.refreshToken;
+
+            if (refreshToken) {
+              const refreshResult = await rawBaseQuery(
+                {
+                  url: '/auth/refresh-token',
+                  method: 'POST',
+                  body: { refreshToken },
+                },
+                api,
+                extraOptions
+              );
+
+              if (refreshResult.data) {
+                const newToken = (refreshResult.data as any).accessToken;
+                api.dispatch(updateToken(newToken));
+                return true;
+              }
+            }
+
+            api.dispatch(logout());
+            window.location.href = '/sso/login';
+            return false;
+          } finally {
+            isRefreshing = false;
+            refreshPromise = null;
+          }
+        })();
+
+        const refreshed = await refreshPromise;
+        if (refreshed) {
+          result = await rawBaseQuery(args, api, extraOptions);
+        }
+      }
+    }
+
+    // Handle errors
     if (result.error) {
       const message = (result.error as any)?.data?.msg || 'خطایی رخ داد';
+      api.dispatch(setError(message));
 
-      setError(message);
+      if (result.error.status === 403) {
+        api.dispatch(setError('دسترسی مجاز نیست'));
+      }
     }
 
     return {
