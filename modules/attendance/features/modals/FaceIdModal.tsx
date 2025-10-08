@@ -61,6 +61,7 @@ const FaceIdModal = () => {
               type: 'submit',
               size: 'md',
               radius: 'lg',
+              className: 'text-white',
               content: 'Submit Again',
             }}
           />

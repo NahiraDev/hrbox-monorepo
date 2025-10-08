@@ -18,7 +18,8 @@ const EntryExitSubHeader = () => {
               radius: 'lg',
               variant: 'solid',
               content: 'My Time',
-              onClick: () => openModal('confirm', 'FaceIdModal', <FaceIdModal />),
+              className: 'text-white',
+              onClick: () => openModal('confirm', 'FaceIdModal', <FaceIdModal />,undefined,"lg",null,null),
               startContent: <PasswordCheck />,
             }}
           />

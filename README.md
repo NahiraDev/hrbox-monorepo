@@ -1368,7 +1368,7 @@ We welcome contributions from the community! Please follow our contribution guid
 - Use clear, descriptive file and directory names
 - Group related functionality together
 - Follow established module structure
-- Export components and utilities properly
+- ExportPage components and utilities properly
 
 ### Commit Message Format
 

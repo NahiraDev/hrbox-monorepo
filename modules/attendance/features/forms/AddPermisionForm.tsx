@@ -1,16 +1,19 @@
 import { Form } from '@heroui/react';
-import { AppInput } from '@core/components';
+import { AppAutoComplete, AppInput } from '@core/components';
 
 const AddPermisionForm = () => {
   return (
     <>
-      <Form>
-        <div className="flex flex-row w-full justify-between">
+      <Form className="gap-6">
+        <div className="flex flex-row w-full justify-between gap- ">
           <AppInput
             props={{
               type: 'text',
-              label: 'Please enter the time. ',
+              label: 'From Time',
               name: 'title',
+              size: 'md',
+              variant:"solid",
+              className: 'w-full',
               // value: values.title,
               // error: touched.title && errors.title,
               // onChange: handleChange,
@@ -20,8 +23,10 @@ const AddPermisionForm = () => {
           <AppInput
             props={{
               type: 'text',
-              label: 'Please enter the time. ',
+              label: 'To Time',
               name: 'title',
+              className: 'w-full',
+
               // value: values.title,
               // error: touched.title && errors.title,
               // onChange: handleChange,
@@ -30,10 +35,10 @@ const AddPermisionForm = () => {
           />
         </div>{' '}
         <div className="flex flex-row w-full justify-between">
-          <AppInput
+          <AppAutoComplete
             props={{
               type: 'text',
-              label: 'Please enter the time. ',
+              label: 'Choose Type',
               name: 'title',
               // value: values.title,
               // error: touched.title && errors.title,

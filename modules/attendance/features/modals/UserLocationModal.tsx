@@ -69,6 +69,7 @@ const UserLocationModal = () => {
               type: 'submit',
               size: 'md',
               radius: 'lg',
+              className: 'text-white',
               onClick: () => openModal('confirm', 'ActionsModal', <ActionsModal />),
               content: 'Submit Again',
             }}

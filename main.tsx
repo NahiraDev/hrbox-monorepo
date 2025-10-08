@@ -7,6 +7,7 @@ import HRLinkPlugin from '@module/hrlink/app/register';
 import ProcessMakerPlugin from '@module/process-maker/app/register';
 import ChartMakerPlugin from '@module/chart-maker/app/register';
 import BasicInfoPlugin from '@module/basic-info/app/register';
+import AttendancePlugin from '@module/attendance/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
   // 'hrlink',
@@ -14,6 +15,7 @@ const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
   // 'chart-maker',
   'basic-info',
   // 'sso'
+  // 'attendance'
 ];
 
 async function bootstrap() {
@@ -53,6 +55,10 @@ async function bootstrap() {
     if (enabledModules.includes('chart-maker') &&location.pathname.includes("/chart-maker")) {
       serviceRegistry.registerPlugin(ChartMakerPlugin);
       console.log('✅ ChartMaker module registered');
+    }
+    if (enabledModules.includes('attendance') &&location.pathname.includes("/attendance")) {
+      serviceRegistry.registerPlugin(AttendancePlugin);
+      console.log('✅ Attendance module registered');
     }
 
     // Wait for all dynamic imports to complete

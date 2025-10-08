@@ -5,5 +5,4 @@
     "outDir": "../../dist/modules/basic-info",
     "declarationDir": "../../dist/types"
   },
-  "include": ["."]
 }
