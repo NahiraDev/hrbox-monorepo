@@ -28,3 +28,4 @@ declare module '*.svg' {
 declare module '@core/*';
 declare module '@module/*';
 declare module '@root/*';
+declare module '@hrbox/*';

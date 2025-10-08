@@ -28,7 +28,7 @@ const Jobs = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('delete', undefined),
+                        onPress: () => openModal('delete', <AppDeleteModal/>),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                         className: 'hover:!bg-red-500 transition-all duration-200',
                       }}
@@ -66,7 +66,6 @@ const Jobs = () => {
                 </div>
               </Card>
             ))}
-            <AppDeleteModal />
           </div>
         }
       />

@@ -1,5 +1,6 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
+import { AppPagination } from '@root/core';
 
 // import { AppPagination } from '../../../../core';
 // import { TickIcon } from '../../../../public/icons';
@@ -27,14 +28,14 @@ const Employees = () => {
         })}
       </div>
       <div className="flex justify-end">
-        {/*<AppPagination*/}
-        {/*  props={{*/}
-        {/*    size: 'sm',*/}
-        {/*    initialPage: 2,*/}
-        {/*    showControls: true,*/}
-        {/*    dotsJump: 5,*/}
-        {/*  }}*/}
-        {/*/>*/}
+        <AppPagination
+          props={{
+            size: 'sm',
+            initialPage: 2,
+            showControls: true,
+            dotsJump: 5,
+          }}
+        />
       </div>
 
     </div>

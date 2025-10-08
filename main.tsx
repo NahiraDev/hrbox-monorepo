@@ -13,9 +13,9 @@ const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
   // 'hrlink',
   // 'process-maker',
   // 'chart-maker',
-  // 'basic-info',
+  'basic-info',
   // 'sso'
-  'attendance'
+  // 'attendance'
 ];
 
 async function bootstrap() {

@@ -18,7 +18,8 @@
     "paths": {
       "@core/*": ["./core/*"],
       "@module/*": ["./modules/*"],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@hrbox/core/*": ["./core/*"],
 //      "~/*": ["./*"]
     },
     "rootDirs": [".", "core", "modules" , "shared"],
@@ -100,7 +101,8 @@
     "maxNodeModuleJsDepth": 0,
     "preserveConstEnums": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "rootDir": "."
   },
   "include": [
     "core/**/*",
@@ -110,6 +112,7 @@
     "playwright.config.ts",
     "tailwind.config.ts",
     "postcss.config.js",
+    "main.tsx",
     "**/*.d.ts"
   ],
   "exclude": [
