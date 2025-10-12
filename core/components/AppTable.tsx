@@ -161,11 +161,12 @@ export const AppTable = <T extends Record<string, any>>({
       const roundedClass = isOnly
         ? 'rounded-xl'
         : isFirst
-          ? 'rounded-l-xl'
+          ? 'rounded-l-xl '
           : isLast
-            ? 'rounded-r-xl'
+            ? 'rounded-r-xl '
             : '';
-      baseClass = `${group.headerClassName || ''} ${roundedClass}`;
+      const spacingClass = !isLast ? 'border-r-4 border-transparent' : '';
+      baseClass = `!text-white !text-sm !font-semibold !text-center ${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
     }
 
     if (typeof col.headerClassName === 'function') {
