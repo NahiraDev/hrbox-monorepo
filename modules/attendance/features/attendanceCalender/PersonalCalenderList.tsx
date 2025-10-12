@@ -11,7 +11,7 @@ const PersonalCalenderList = () => {
     ],
     expandable: {
       render: (row: any) => (
-        <div className="flex flex-col w-[200px] bg-white gap-2 shadow-[0_1.25px_4px_0_var(--Secondary-600,#152446)] px-2 py-4 rounded-lg">
+        <div className="flex flex-col w-[200px] bg-white gap-2 shadow-[0_1.25px_4px_0_var(--Secondary-600,#152446)] px-2 py-4 rounded-lg ">
           <AppButton props={{ startContent: <Add />, content: "Daily Leave" }} />
           <AppButton props={{ startContent: <Add />, content: "Daily Mission" }} />
           <AppButton props={{ startContent: <Add />, content: "Delete Traffic Entry" }} />
