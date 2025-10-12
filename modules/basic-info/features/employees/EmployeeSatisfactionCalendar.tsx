@@ -1,8 +1,10 @@
-import { AppButton, AppDeleteModal, useModalContext } from '@root/core';
-import { ArrowLeft2, ArrowRight2, Category, Trash } from 'iconsax-react';
+// فایل: src/module/basic-info/features/employees/EmployeeSatisfactionCalendar.tsx
+// (کد کامل با فیکس کلیک خارج و کلیک روی آیکون‌ها برای بستن مودال)
+import { AppButton, useModalContext } from '@root/core';
+import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-react';
 import { useEffect, useState } from 'react';
-import EmployeeSatisfactionCalendarModal
-  from '@module/basic-info/features/employees/modals/EmployeeSatisfactionCalendarModal';
+import EmployeeSatisfactionCalendarModal from './modals/EmployeeSatisfactionCalendarModal';
+import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/HowAreYouTodayModal';
 
 const sizeMap: Record<number, string> = {
   7: '!w-7 !h-7',
@@ -20,7 +22,7 @@ const textSizeMap: Record<number, string> = {
 
 const clamp = (value: number): number => Math.max(1, Math.min(20, value));
 
-const DynamicCircle = ({ number, size, textSize, fromColor, toColor }) => {
+const DynamicCircle = ({ number, size, textSize, fromColor, toColor }: { number: number; size: number; textSize: number; fromColor: string; toColor: string }) => {
   const sizeClass = sizeMap[size] || '!w-8 !h-8';
   const textClass = textSizeMap[size] || '!text-base';
 
@@ -38,9 +40,23 @@ const DynamicCircle = ({ number, size, textSize, fromColor, toColor }) => {
   );
 };
 
-const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, bottomCircles, onPress }) => {
-  console.log('CalendarDay Data:', { dayNumber, topCircles, bottomCircles });
-
+const CalendarDay = ({
+                       dayNumber,
+                       isCurrentMonth,
+                       isSaturday,
+                       idx,
+                       topCircles,
+                       bottomCircles,
+                       onPress
+                     }: {
+  dayNumber: number;
+  isCurrentMonth: boolean;
+  isSaturday: boolean;
+  idx: number;
+  topCircles: any[];
+  bottomCircles: any[];
+  onPress: () => void
+}) => {
   return (
     <AppButton
       props={{
@@ -101,7 +117,23 @@ const EmployeeSatisfactionCalendar = () => {
     currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
   );
   const today = new Date();
-  const { openModal } = useModalContext();
+  const { openModal, closeModal } = useModalContext();
+  const [hasOpenedMoodModal, setHasOpenedMoodModal] = useState(false);
+
+  useEffect(() => {
+    if (!hasOpenedMoodModal) {
+      openModal(
+        'custom',
+        '',
+        <HowAreYouTodayModal onMoodSelect={(mood) => console.log('Mood selected:', mood)} />,
+        undefined,
+        'lg',
+        '',
+        null
+      );
+      setHasOpenedMoodModal(true);
+    }
+  }, [openModal, hasOpenedMoodModal]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -111,14 +143,14 @@ const EmployeeSatisfactionCalendar = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const getDay = (date) => {
+  const getDay = (date: Date) => {
     const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
     const day = date.toLocaleDateString('en-US', { day: '2-digit' });
     return `${month}.${day}`;
   };
 
-  const getMonth = (date) => date.toLocaleDateString('en-US', { month: 'long' });
-  const getYear = (date) => date.toLocaleDateString('en-US', { year: 'numeric' });
+  const getMonth = (date: Date) => date.toLocaleDateString('en-US', { month: 'long' });
+  const getYear = (date: Date) => date.toLocaleDateString('en-US', { year: 'numeric' });
 
   const goToPreviousMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -134,8 +166,8 @@ const EmployeeSatisfactionCalendar = () => {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
-    const weeks = [];
-    let week = [];
+    const weeks: { day: number; isCurrentMonth: boolean }[][] = [];
+    let week: { day: number; isCurrentMonth: boolean }[] = [];
 
     for (let i = firstDay - 1; i >= 0; i--) {
       week.push({ day: daysInPrevMonth - i, isCurrentMonth: false });
@@ -143,7 +175,7 @@ const EmployeeSatisfactionCalendar = () => {
 
     for (let day = 1; day <= daysInMonth; day++) {
       if (week.length === 7) {
-        weeks.push([...week]);
+        weeks.push(week);
         week = [];
       }
       week.push({ day, isCurrentMonth: true });
@@ -156,7 +188,7 @@ const EmployeeSatisfactionCalendar = () => {
     weeks.push(week);
 
     while (weeks.length < 5) {
-      const newWeek = [];
+      const newWeek: { day: number; isCurrentMonth: boolean }[] = [];
       for (let i = 0; i < 7; i++) {
         newWeek.push({ day: nextMonthDay++, isCurrentMonth: false });
       }
@@ -166,7 +198,7 @@ const EmployeeSatisfactionCalendar = () => {
     return weeks;
   };
 
-  const isToday = (day, isCurrentMonth) => {
+  const isToday = (day: number, isCurrentMonth: boolean) => {
     return (
       isCurrentMonth &&
       day === today.getDate() &&
@@ -177,17 +209,16 @@ const EmployeeSatisfactionCalendar = () => {
 
   const weeks = generateCalendar();
 
-  // Example dynamic data for circles with numbers clamped between 1 and 20
-  const getCircleData = (day, isCurrentMonth) => ({
+  const getCircleData = (day: number, isCurrentMonth: boolean) => ({
     topCircles: [
-      { number: clamp(isCurrentMonth ? day * 2 : 17), size: 16, textSize: 24, fromColor: '#1a4731', toColor: '#68d391' },
-      { number: clamp(isCurrentMonth ? day + 5 : 10), size: 11, textSize: 18, fromColor: '#c05621', toColor: '#f6ad55' },
-    ],
-    bottomCircles: [
-      { number: clamp(isCurrentMonth ? day % 5 : 2), size: 7, textSize: 14, fromColor: '#ef4444', toColor: '#f87171' },
-      { number: clamp(isCurrentMonth ? day % 10 : 8), size: 9, textSize: 16, fromColor: '#b91c1c', toColor: '#f87171' },
-    ],
-  });
+      { number: clamp(isCurrentMonth ? day * 2 : 17), size: 16, textSize: 16, fromColor: '#1a4731', toColor: '#68d391' },
+      { number: clamp(isCurrentMonth ? day + 5 : 10), size: 11, textSize: 11, fromColor: '#c05621', toColor: '#f6ad55' },
+],
+  bottomCircles: [
+    { number: clamp(isCurrentMonth ? day % 5 : 2), size: 7, textSize: 7, fromColor: '#ef4444', toColor: '#f87171' },
+    { number: clamp(isCurrentMonth ? day % 10 : 8), size: 9, textSize: 9, fromColor: '#b91c1c', toColor: '#f87171' },
+  ],
+});
 
   return (
     <div className="border-2 border-primary-400 rounded-lg p-4">
@@ -232,8 +263,8 @@ const EmployeeSatisfactionCalendar = () => {
           </tr>
           </thead>
           <tbody>
-          {weeks.map((week, index) => (
-            <tr key={index}>
+          {weeks.map((week, weekIndex) => (
+            <tr key={weekIndex}>
               {week.map((date, idx) => (
                 <td key={idx} className="p-2">
                   {date.day > 0 && (
@@ -244,17 +275,20 @@ const EmployeeSatisfactionCalendar = () => {
                       idx={idx}
                       topCircles={getCircleData(date.day, date.isCurrentMonth).topCircles}
                       bottomCircles={getCircleData(date.day, date.isCurrentMonth).bottomCircles}
-                      onPress={() =>
+                      onPress={() => {
                         openModal(
                           'custom',
                           "",
-                          <EmployeeSatisfactionCalendarModal />,
+                          <EmployeeSatisfactionCalendarModal
+                            onItemPress={(item) => console.log('Item pressed:', item)}
+                          />,
                           undefined,
                           'xl',
                           "Organizational Locations",
                           <Category className='text-white'/>
-                        )
-                      }
+                        );
+                        closeModal(undefined, undefined); // بستن مودال mood اگر باز باشه
+                      }}
                     />
                   )}
                 </td>

@@ -17,12 +17,12 @@ const TechnicalDepartments = () => {
           >
             <Avatar className="w-30 h-30 " color="primary" radius="lg" src="" />
             {/*<img src={user.diactive} alt="avatar" className="absolute" />*/}
-            <span className="text-xs font-semibold">{user.name}</span>
+            <span className="text-sm font-semibold">{user.name}</span>
             <AppButton
               props={{
-                className: 'bg-primary-100 bg-[#DCF0F9] text-[#0A9AD7] border-1 border-[#DCF0F9]',
+                className: 'h-5 text-xs bg-primary-100 bg-primary-50 text-[#0A9AD7] border-1 border-primary-100',
                 size: 'sm',
-                radius: 'lg',
+                radius: 'sm',
                 onPress: () => {},
                 content: <span>{user.job}</span>,
               }}
