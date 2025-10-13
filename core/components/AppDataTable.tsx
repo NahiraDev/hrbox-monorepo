@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 
 export const AppDataTable=()=>{
+
   return(
     <>
       <Table aria-label="Example static collection table">

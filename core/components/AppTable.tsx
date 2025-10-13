@@ -1,5 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Tooltip } from '@heroui/react';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  Tooltip,
+} from '@heroui/react';
 import { Edit, Trash, Add } from 'iconsax-react';
 import { AppButton, AppPagination } from '@core/components';
 export interface ColumnConfig<T = any> {
@@ -67,25 +75,24 @@ export interface AppTableProps<T = any> {
   emptyMessage?: string | React.ReactNode;
 }
 
-
 export const AppTable = <T extends Record<string, any>>({
-                                                          data = [],
-                                                          columns,
-                                                          columnGroups,
-                                                          rowActions,
-                                                          expandable,
-                                                          selectable = false,
-                                                          onRowClick,
-                                                          onSelectionChange,
-                                                          rowKey = 'id',
-                                                          hasPagination = true,
-                                                          pageSize = 10,
-                                                          variant = 'default',
-                                                          styles = {},
-                                                          loading = false,
-                                                          error,
-                                                          emptyMessage = 'No data available',
-                                                        }: AppTableProps<T>) => {
+  data = [],
+  columns,
+  columnGroups,
+  rowActions,
+  expandable,
+  selectable = false,
+  onRowClick,
+  onSelectionChange,
+  rowKey = 'id',
+  hasPagination = true,
+  pageSize = 10,
+  variant = 'default',
+  styles = {},
+  loading = false,
+  error,
+  emptyMessage = 'No data available',
+}: AppTableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
@@ -95,10 +102,10 @@ export const AppTable = <T extends Record<string, any>>({
     if (data.length === 0) return [];
 
     return Object.keys(data[0])
-      .filter((key) => key !== 'id')
-      .map((key) => ({
+      .filter(key => key !== 'id')
+      .map(key => ({
         key,
-        label: key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()),
+        label: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
         align: 'center' as const,
       }));
   }, [columns, data]);
@@ -113,9 +120,9 @@ export const AppTable = <T extends Record<string, any>>({
     if (!columnGroups) return null;
 
     for (const group of columnGroups) {
-      const startIdx = autoColumns.findIndex((c) => c.key === group.startKey);
-      const endIdx = autoColumns.findIndex((c) => c.key === group.endKey);
-      const currentIdx = autoColumns.findIndex((c) => c.key === colKey);
+      const startIdx = autoColumns.findIndex(c => c.key === group.startKey);
+      const endIdx = autoColumns.findIndex(c => c.key === group.endKey);
+      const currentIdx = autoColumns.findIndex(c => c.key === colKey);
 
       if (currentIdx >= startIdx && currentIdx <= endIdx) {
         return {
@@ -136,9 +143,10 @@ export const AppTable = <T extends Record<string, any>>({
 
   const getRowClassName = (row: T, index: number): string => {
     const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer';
-    const customClass = typeof styles.rowClassName === 'function'
-      ? styles.rowClassName(row, index)
-      : styles.rowClassName || '';
+    const customClass =
+      typeof styles.rowClassName === 'function'
+        ? styles.rowClassName(row, index)
+        : styles.rowClassName || '';
     return `${baseClass} ${customClass}`;
   };
 
@@ -152,21 +160,22 @@ export const AppTable = <T extends Record<string, any>>({
   const getHeaderClassName = (col: ColumnConfig<T>): string => {
     const groupInfo = getColumnGroupInfo(col.key);
 
-    let baseClass = variant === 'default'
-      ? 'text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12'
-      : '';
+    let baseClass =
+      variant === 'default'
+        ? 'text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12'
+        : '';
 
     if (groupInfo && variant === 'attendance') {
       const { group, isFirst, isLast, isOnly } = groupInfo;
       const roundedClass = isOnly
         ? 'rounded-xl'
         : isFirst
-          ? 'rounded-l-xl '
+          ? 'rounded-l-xl'
           : isLast
-            ? 'rounded-r-xl '
+            ? 'rounded-r-xl'
             : '';
       const spacingClass = !isLast ? 'border-r-4 border-transparent' : '';
-      baseClass = `!text-white !text-sm !font-semibold !text-center ${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
+      baseClass = `${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
     }
 
     if (typeof col.headerClassName === 'function') {
@@ -198,7 +207,7 @@ export const AppTable = <T extends Record<string, any>>({
   };
 
   const toggleRowExpansion = (row: T, index: number) => {
-    setExpandedRows((prev) => {
+    setExpandedRows(prev => {
       const newSet = new Set(prev);
       const isExpanded = newSet.has(index);
 
@@ -217,7 +226,7 @@ export const AppTable = <T extends Record<string, any>>({
     if (!rowActions || rowActions.length === 0) return null;
 
     return (
-      <div className="flex items-center justify-center gap-2">
+      <div className='flex items-center justify-center gap-2'>
         {rowActions.map((action, idx) => {
           const visible = action.visible ? action.visible(row) : true;
           if (!visible) return null;
@@ -232,9 +241,7 @@ export const AppTable = <T extends Record<string, any>>({
                   color: action.color,
                   onPress: () => action.onClick(row, index),
                   content: (
-                    <span className="text-lg cursor-pointer">
-                      {action.icon || action.label}
-                    </span>
+                    <span className='cursor-pointer text-lg'>{action.icon || action.label}.</span>
                   ),
                 }}
               />
@@ -247,9 +254,11 @@ export const AppTable = <T extends Record<string, any>>({
 
   if (loading) {
     return (
-      <div className={`p-8 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl ${styles.loadingClassName || ''}`}>
-        <div className="flex justify-center items-center">
-          <div className="text-center text-gray-500">Loading...</div>
+      <div
+        className={`bg-primary-50 rounded-2xl p-8 dark:bg-[rgba(4,66,92,0.60)] ${styles.loadingClassName || ''}`}
+      >
+        <div className='flex items-center justify-center'>
+          <div className='text-center text-gray-500'>Loading...</div>
         </div>
       </div>
     );
@@ -257,28 +266,26 @@ export const AppTable = <T extends Record<string, any>>({
 
   if (error) {
     return (
-      <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl">
-        <div className="text-center text-red-600 dark:text-red-400">Error: {error}</div>
+      <div className='rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20'>
+        <div className='text-center text-red-600 dark:text-red-400'>Error: {error}</div>
       </div>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <div className={`p-4 bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl ${styles.emptyClassName || ''}`}>
-        <div className="text-center text-gray-500">{emptyMessage}</div>
+      <div
+        className={`bg-primary-50 rounded-2xl p-4 dark:bg-[rgba(4,66,92,0.60)] ${styles.emptyClassName || ''}`}
+      >
+        <div className='text-center text-gray-500'>{emptyMessage}</div>
       </div>
     );
   }
 
   // CRITICAL: Render columns directly, not in array
-  const headerColumns = autoColumns.map((col) => (
-    <TableColumn
-      key={col.key}
-      className={getHeaderClassName(col)}
-      style={{ width: col.width }}
-    >
-      {col.headerRender ? col.headerRender() : (col.label || col.key)}
+  const headerColumns = autoColumns.map(col => (
+    <TableColumn key={col.key} className={getHeaderClassName(col)} style={{ width: col.width }}>
+      {col.headerRender ? col.headerRender() : col.label || col.key}
     </TableColumn>
   ));
 
@@ -286,8 +293,8 @@ export const AppTable = <T extends Record<string, any>>({
   if (rowActions && rowActions.length > 0) {
     headerColumns.push(
       <TableColumn
-        key="actions"
-        className="text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12"
+        key='actions'
+        className='bg-primary !h-12 text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
       >
         Actions
       </TableColumn>
@@ -295,25 +302,30 @@ export const AppTable = <T extends Record<string, any>>({
   }
 
   return (
-    <div className={`w-full ${variant === 'default' ? 'border border-primary dark:border-[#04425c66] bg-primary-50 dark:bg-[rgba(4,66,92,0.60)] rounded-2xl shadow-light-tight/1 pb-4' : ''} ${styles.containerClassName || ''}`}>
-      <Table className={styles.tableClassName}>
-        <TableHeader className={styles.headerClassName}>
-          {headerColumns}
-        </TableHeader>
+    <div
+      className={`w-full ${variant === 'default' ? 'border-primary bg-primary-50 shadow-light-tight/1 rounded-2xl border pb-4 dark:border-[#04425c66] dark:bg-[rgba(4,66,92,0.60)]' : ''} ${styles.containerClassName || ''}`}
+    >
+      <Table
+        className={styles.tableClassName}
+        classNames={{
+          th: 'first:border-r-8 first:border-r-white first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-white [&:nth-of-type(3)]:border-l-white [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-white [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-white text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500',
+        }}
+      >
+        <TableHeader className={styles.headerClassName}>{headerColumns}</TableHeader>
 
         <TableBody className={styles.bodyClassName}>
           {paginatedData.map((row, index) => {
             const key = getRowKey(row, index);
             const isExpanded = expandedRows.has(index);
 
-            const cells = autoColumns.map((col) => {
+            const cells = autoColumns.map(col => {
               const value = row[col.key];
               const cellClass = getCellClassName(col, value, row, index);
 
               return (
                 <TableCell
                   key={col.key}
-                  className={`text-xs font-normal text-black text-center ${cellClass} ${styles.cellClassName || ''}`}
+                  className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ''}`}
                 >
                   {renderCellValue(col, row, index)}
                 </TableCell>
@@ -322,7 +334,7 @@ export const AppTable = <T extends Record<string, any>>({
 
             if (rowActions && rowActions.length > 0) {
               cells.push(
-                <TableCell key="actions" className="text-xs text-secondary-400">
+                <TableCell key='actions' className='text-secondary-400 text-xs'>
                   {renderRowActions(row, index)}
                 </TableCell>
               );
@@ -344,14 +356,17 @@ export const AppTable = <T extends Record<string, any>>({
                 </TableRow>
 
                 {expandable && isExpanded && (
-                  <TableRow>
-                    <TableCell
-                      colSpan={autoColumns.length + (rowActions ? 1 : 0)}
-                      className={`bg-white px-3 py-2 ${expandable.expandedRowClassName || ''}`}
-                    >
-                      {expandable.render(row, index)}
-                    </TableCell>
-                  </TableRow>
+                  <div className={`bg-white px-3 py-2 ${expandable.expandedRowClassName || ''} `}>
+                    {expandable.render(row, index)}
+                  </div>
+                  // <TableRow>
+                  //   <TableCell
+                  //     colSpan={autoColumns.length + (rowActions ? 1 : 0)}
+                  //     className={`bg-white px-3 py-2 ${expandable.expandedRowClassName || ''}`}
+                  //   >
+                  //     {expandable.render(row, index)}
+                  //   </TableCell>
+                  // </TableRow>
                 )}
               </React.Fragment>
             );
@@ -360,7 +375,7 @@ export const AppTable = <T extends Record<string, any>>({
       </Table>
 
       {hasPagination && (
-        <div className="flex justify-end mt-4 px-4">
+        <div className='mt-4 flex justify-end px-4'>
           <AppPagination
             total={Math.ceil(data.length / pageSize)}
             page={currentPage}
