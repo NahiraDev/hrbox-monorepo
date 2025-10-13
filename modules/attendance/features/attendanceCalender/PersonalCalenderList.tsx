@@ -2,6 +2,7 @@ import { PersonalList } from '@module/attendance/app/mock';
 
 import { AppButton, AppTable } from '@core/components';
 import { Add } from 'iconsax-react';
+import { AppDataTable } from '@core/components/AppDataTable';
 const PersonalCalenderList = () => {
   const attendanceConfig = {
     columnGroups: [
@@ -26,11 +27,11 @@ const PersonalCalenderList = () => {
     <>
       <div className="w-[90%]">
       {/*<AppTable data={PersonalList} enableActions={false} variant="attendance" pageSize={20}  />*/}
-        <AppTable
-          data={PersonalList}
-          variant="attendance"
-          {...attendanceConfig}
-        />
+       <AppTable
+       data={PersonalList}
+       variant="attendance"
+       {...attendanceConfig} />
+        {/* <AppDataTable/> */}
       </div>
       </>
   );
