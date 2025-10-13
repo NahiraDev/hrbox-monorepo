@@ -55,7 +55,7 @@ const EmployeeSatisfactionCalendarModal = ({ data = sampleData, onItemPress }) =
 
   return (
     <AppModal.Body>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-10 p-5">
         {data.map((item) => (
           <AppButton
             key={item.id}
@@ -66,7 +66,7 @@ const EmployeeSatisfactionCalendarModal = ({ data = sampleData, onItemPress }) =
               variant: 'solid',
               isIconOnly: true,
               onPress: () => openModal('edit',"", <FilterCalenderModal/>,undefined,"sm","Filter", <Filter className='text-white'/> ),
-              className: 'bg-white shadow-sm rounded-2xl',
+              className: 'bg-surface shadow-sm rounded-2xl',
               content: <MentorCard {...item} />,
             }}
           />

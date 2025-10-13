@@ -283,7 +283,7 @@ const EmployeeSatisfactionCalendar = () => {
                             onItemPress={(item) => console.log('Item pressed:', item)}
                           />,
                           undefined,
-                          'xl',
+                          '3xl',
                           "Organizational Locations",
                           <Category className='text-white'/>
                         );

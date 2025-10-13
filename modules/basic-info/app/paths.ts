@@ -2,7 +2,7 @@ import { createPaths } from '@core/routes';
 
 export const BasicInfoPaths = createPaths('/basic-info', {
   TechnicalDepartment: '/technical-departments',
-  OrganizationDepartments: '/organization-departments',
+    OrganizationDepartments: '/organization-departments',
   OrganizationalLocations: '/organizational-locations',
   AllEmployees: '/all-employees',
   SatisfactionStatus: '/satisfaction-status',
