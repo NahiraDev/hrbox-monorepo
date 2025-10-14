@@ -1,36 +1,37 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@core/components';
-// import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
-// import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
-
+import DocumentsModal from '@module/basic-info/features/employees/modals/DocumentsModal';
+import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
+import { useModalContext } from '@root/core';
+import { Category, TickCircle } from 'iconsax-react';
 
 const TechnicalDepartments = () => {
+  const { openModal } = useModalContext();
   return (
-    <div className="w-340 ">
-      <div className="w-full grid grid-cols-8 gap-3">
+    <div className="flex flex-col items-center justify-between p-4">
+      <div className="w-full grid grid-cols-9 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
-            className="w-39 h-55 bg-white rounded-2xl shadow-sm
-            flex items-center justify-center gap-2 relative"
-          >
-            <Avatar className="w-30 h-30 " color="primary" radius="lg" src="" />
-            {/*<img src={user.diactive} alt="avatar" className="absolute" />*/}
-            <span className="text-sm font-semibold">{user.name}</span>
+            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
+            <Avatar className="w-30 h-30 " color="primary" radius="lg" src="https://i.pravatar.cc/150?u=d04258114e29026302d" />
+            <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
+            <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton
               props={{
-                className: 'h-5 text-xs bg-primary-100 bg-primary-50 text-[#0A9AD7] border-1 border-primary-100',
+                className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary-400',
                 size: 'sm',
                 radius: 'sm',
-                onPress: () => {},
+                onPress: () => openModal('custom', "",<OrganizationDepartmentModal/> , undefined, '3xl',"Organization Depatments", <Category className='text-white'/> ),
                 content: <span>{user.job}</span>,
               }}
             />
           </Card>
         ))}
-        <span className="text-9xl absolute top-175 left-455 font-bold text-[#04070E]/10">200</span>
-        {/*<OrganizationDepartmentModal/>*/}
+      </div>
+      <div className="w-full flex items-center justify-end">
+       <span className="!text-[100px] !font-extrabold text-secondary-400/40">200</span>
       </div>
     </div>
   );

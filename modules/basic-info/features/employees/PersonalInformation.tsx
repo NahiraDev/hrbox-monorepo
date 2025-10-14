@@ -13,6 +13,8 @@ const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto ma
   const cardClass = `bg-gradient-to-r from-white via-sky-100 to-white w-full border-1 border-surface flex items-center justify-between p-4 rounded-2xl`;
 
   const PersonalInformation = () => {
+
+
     return (
       <BasicInfoLayout
         content={

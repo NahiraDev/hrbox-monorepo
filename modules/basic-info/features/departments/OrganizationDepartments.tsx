@@ -42,8 +42,8 @@ const OrganizationDepartments = () => {
       <div className="grid grid-cols-4 gap-4 technicalDepartments">
         {organizationDepartment.map((user, index) => renderOrganizationDepartments(user, index))}
       </div>
-      <div className="flex justify-end">
-        <AppPagination total={1000} />
+      <div className="flex justify-end p-2">
+          <AppPagination total={1000} />
       </div>
     </div>
   );
