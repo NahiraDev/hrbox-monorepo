@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Table,
   TableHeader,
@@ -8,8 +8,8 @@ import {
   TableCell,
   Tooltip,
 } from '@heroui/react';
-import { Edit, Trash, Add } from 'iconsax-react';
 import { AppButton, AppPagination } from '@core/components';
+import { createPortal } from 'react-dom';
 export interface ColumnConfig<T = any> {
   key: string;
   label?: string;
@@ -93,10 +93,16 @@ export const AppTable = <T extends Record<string, any>>({
   error,
   emptyMessage = 'No data available',
 }: AppTableProps<T>) => {
+  const shouldPaginate = variant === 'attendance' ? false : hasPagination;
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
-
+  const [expandedRowPosition, setExpandedRowPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    rowIndex: number;
+  }|null>(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
   const autoColumns = useMemo<ColumnConfig<T>[]>(() => {
     if (columns) return columns;
     if (data.length === 0) return [];
@@ -111,10 +117,10 @@ export const AppTable = <T extends Record<string, any>>({
   }, [columns, data]);
 
   const paginatedData = useMemo(() => {
-    if (!hasPagination) return data;
+    if (!shouldPaginate) return data;
     const startIndex = (currentPage - 1) * pageSize;
     return data.slice(startIndex, startIndex + pageSize);
-  }, [data, currentPage, pageSize, hasPagination]);
+  }, [data, currentPage, pageSize, shouldPaginate]);
 
   const getColumnGroupInfo = (colKey: string) => {
     if (!columnGroups) return null;
@@ -205,22 +211,35 @@ export const AppTable = <T extends Record<string, any>>({
 
     return String(value);
   };
+  useEffect(() => {
+    if (!expandedRowPosition) return;
 
-  const toggleRowExpansion = (row: T, index: number) => {
-    setExpandedRows(prev => {
-      const newSet = new Set(prev);
-      const isExpanded = newSet.has(index);
+    const updatePosition = () => {
+      const rowElement = document.querySelector(
+        `[data-row-index="${expandedRowPosition.rowIndex}"]`
+      ) as HTMLTableRowElement;
 
-      if (isExpanded) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
+      if (!rowElement) return;
 
-      expandable?.onExpand?.(row, index, !isExpanded);
-      return newSet;
-    });
-  };
+      const rowRect = rowElement.getBoundingClientRect();
+      setExpandedRowPosition(prev =>
+        prev ? {
+          ...prev,
+          top: rowRect.bottom + window.scrollY,
+          left: rowRect.left + window.scrollX,
+          width: rowRect.width,
+        } : null
+      );
+    };
+
+    window.addEventListener('scroll', updatePosition, true);
+    window.addEventListener('resize', updatePosition);
+
+    return () => {
+      window.removeEventListener('scroll', updatePosition,true);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [expandedRowPosition]);
 
   const renderRowActions = (row: T, index: number) => {
     if (!rowActions || rowActions.length === 0) return null;
@@ -282,14 +301,12 @@ export const AppTable = <T extends Record<string, any>>({
     );
   }
 
-  // CRITICAL: Render columns directly, not in array
   const headerColumns = autoColumns.map(col => (
     <TableColumn key={col.key} className={getHeaderClassName(col)} style={{ width: col.width }}>
       {col.headerRender ? col.headerRender() : col.label || col.key}
     </TableColumn>
   ));
 
-  // Add actions column if needed
   if (rowActions && rowActions.length > 0) {
     headerColumns.push(
       <TableColumn
@@ -303,12 +320,18 @@ export const AppTable = <T extends Record<string, any>>({
 
   return (
     <div
+      ref={tableContainerRef}
       className={`w-full ${variant === 'default' ? 'border-primary bg-primary-50 shadow-light-tight/1 rounded-2xl border pb-4 dark:border-[#04425c66] dark:bg-[rgba(4,66,92,0.60)]' : ''} ${styles.containerClassName || ''}`}
     >
       <Table
-        className={styles.tableClassName}
+        aria-label="Data table"
+        className={`${styles.tableClassName} max-h-[800px]`}
+        isHeaderSticky
+        removeWrapper={false}
         classNames={{
-          th: 'first:border-r-8 first:border-r-white first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-white [&:nth-of-type(3)]:border-l-white [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-white [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-white text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500',
+          base: "overflow-auto",
+          wrapper: "max-h-[800px]",
+          th: 'first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500',
         }}
       >
         <TableHeader className={styles.headerClassName}>{headerColumns}</TableHeader>
@@ -331,7 +354,6 @@ export const AppTable = <T extends Record<string, any>>({
                 </TableCell>
               );
             });
-
             if (rowActions && rowActions.length > 0) {
               cells.push(
                 <TableCell key='actions' className='text-secondary-400 text-xs'>
@@ -341,40 +363,67 @@ export const AppTable = <T extends Record<string, any>>({
             }
 
             return (
-              <React.Fragment key={key}>
-                <TableRow
-                  className={getRowClassName(row, index)}
-                  onClick={() => {
-                    if (expandable) {
-                      toggleRowExpansion(row, index);
-                    } else {
-                      onRowClick?.(row, index);
-                    }
-                  }}
-                >
-                  {cells}
-                </TableRow>
+              <TableRow
+                key={key}
+                data-row-index={index}
+                className={getRowClassName(row, index)}
+                onClick={(e) => {
+                  if (expandable) {
+                    const rowElement = e.currentTarget as HTMLTableRowElement;
+                    const tableContainer = tableContainerRef.current;
+                    setExpandedRows(prev => {
+                      const newSet = new Set(prev);
+                      const wasExpanded = newSet.has(index);
 
-                {expandable && isExpanded && (
-                  <div className={`bg-white px-3 py-2 ${expandable.expandedRowClassName || ''} `}>
-                    {expandable.render(row, index)}
-                  </div>
-                  // <TableRow>
-                  //   <TableCell
-                  //     colSpan={autoColumns.length + (rowActions ? 1 : 0)}
-                  //     className={`bg-white px-3 py-2 ${expandable.expandedRowClassName || ''}`}
-                  //   >
-                  //     {expandable.render(row, index)}
-                  //   </TableCell>
-                  // </TableRow>
-                )}
-              </React.Fragment>
+                      if (wasExpanded) {
+                        newSet.delete(index);
+                        setExpandedRowPosition(null);
+                      } else {
+                        newSet.add(index);
+                        const rowRect = rowElement.getBoundingClientRect();
+                        const tablerowRect = tableContainer.getBoundingClientRect();
+                        const tooltipHeight=170;
+                        const spaceBelow=tablerowRect.bottom-rowRect.bottom;
+                        const shouldShowAbove=spaceBelow<tooltipHeight;
+                        setExpandedRowPosition({
+                          top: shouldShowAbove?rowRect.top+window.scrollY-tooltipHeight-8:rowRect.bottom+scrollY,
+                          left: rowRect.left + window.scrollX,
+                          width: rowRect.width,
+                          rowIndex: index,
+                        });
+                      }
+
+                      expandable?.onExpand?.(row, index, !wasExpanded);
+                      return newSet;
+                    });
+                  } else {
+                    onRowClick?.(row, index);
+                  }
+                }}
+              >
+                {cells}
+              </TableRow>
             );
           })}
         </TableBody>
       </Table>
-
-      {hasPagination && (
+      {expandable && expandedRowPosition && expandedRows.has(expandedRowPosition.rowIndex) && createPortal(
+        <div
+          style={{
+            position: 'absolute',
+            top: `${expandedRowPosition.top}px`,
+            left: `${expandedRowPosition.left}px`,
+            zIndex: 1000,
+          }}
+        >
+          {expandable.render(
+            paginatedData[expandedRowPosition.rowIndex],
+            expandedRowPosition.rowIndex
+          )}
+        </div>,
+        document.body
+      )}
+      {shouldPaginate && (
         <div className='mt-4 flex justify-end px-4'>
           <AppPagination
             total={Math.ceil(data.length / pageSize)}
