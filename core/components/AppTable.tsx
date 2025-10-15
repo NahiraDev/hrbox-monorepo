@@ -39,7 +39,7 @@ export interface RowAction<T = any> {
 }
 
 export interface ExpandableConfig<T = any> {
-  render: (row: T, index: number) => React.ReactNode;
+  render: (row: T, index: number, cellType?: 'first' | 'second') => React.ReactNode;
   expandedRowClassName?: string;
   onExpand?: (row: T, index: number, isExpanded: boolean) => void;
   defaultExpanded?: boolean | ((row: T) => boolean);
@@ -101,6 +101,7 @@ export const AppTable = <T extends Record<string, any>>({
     left: number;
     width: number;
     rowIndex: number;
+    cellType?: 'first' | 'second';
   }|null>(null);
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const autoColumns = useMemo<ColumnConfig<T>[]>(() => {
@@ -325,12 +326,15 @@ export const AppTable = <T extends Record<string, any>>({
     >
       <Table
         aria-label="Data table"
-        className={`${styles.tableClassName} max-h-[800px]`}
-        isHeaderSticky
-        removeWrapper={false}
+        className={`${styles.tableClassName}`}
+        isHeaderSticky={variant === 'attendance'}
         classNames={{
-          base: "overflow-auto",
-          wrapper: "max-h-[800px]",
+          base: variant === 'attendance' ? "max-h-[800px]" : "",
+          wrapper: variant === 'attendance'
+            ? "max-h-[800px] overflow-y-scroll custom-scroll"
+            : "",
+          table: "min-w-full",
+          thead: "[&>tr]:first:shadow-none",
           th: 'first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500',
         }}
       >
@@ -339,16 +343,57 @@ export const AppTable = <T extends Record<string, any>>({
         <TableBody className={styles.bodyClassName}>
           {paginatedData.map((row, index) => {
             const key = getRowKey(row, index);
-            const isExpanded = expandedRows.has(index);
 
-            const cells = autoColumns.map(col => {
+            const cells = autoColumns.map((col,colIndex) => {
               const value = row[col.key];
               const cellClass = getCellClassName(col, value, row, index);
-
+              const isFirstCell=colIndex===0;
               return (
                 <TableCell
                   key={col.key}
                   className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ''}`}
+                 onClick={isFirstCell&& expandable?(e)=>{
+                   e.stopPropagation();
+                   const rowElement = e.currentTarget.closest('tr') as HTMLTableRowElement;
+
+                   if (!rowElement) return;
+
+                   setExpandedRows(prev => {
+                     const newSet = new Set(prev);
+                     const wasExpanded = newSet.has(index);
+
+                     if (wasExpanded) {
+                       newSet.delete(index);
+                       setExpandedRowPosition(null);
+                     } else {
+                       newSet.add(index);
+
+                       const tableContainer = tableContainerRef.current;
+                       const scrollWrapper = tableContainer?.querySelector('[data-slot="wrapper"]') as HTMLDivElement;
+
+                       const rowRect = rowElement.getBoundingClientRect();
+                       const tableRect = scrollWrapper?.getBoundingClientRect() || tableContainer?.getBoundingClientRect();
+
+                       if (!tableRect) return newSet;
+
+                       const tooltipHeight = 170;
+                       const spaceBelow = tableRect.bottom - rowRect.bottom;
+                       const shouldShowAbove = spaceBelow < tooltipHeight;
+
+                       setExpandedRowPosition({
+                         top: shouldShowAbove
+                           ? rowRect.top + window.scrollY - tooltipHeight - 8
+                           : rowRect.bottom + window.scrollY + 8,
+                         left: rowRect.left + window.scrollX,
+                         width: rowRect.width,
+                         rowIndex: index,
+                       });
+                     }
+
+                     expandable?.onExpand?.(row, index, !wasExpanded);
+                     return newSet;
+                   });
+                 }:undefined}
                 >
                   {renderCellValue(col, row, index)}
                 </TableCell>
@@ -367,39 +412,6 @@ export const AppTable = <T extends Record<string, any>>({
                 key={key}
                 data-row-index={index}
                 className={getRowClassName(row, index)}
-                onClick={(e) => {
-                  if (expandable) {
-                    const rowElement = e.currentTarget as HTMLTableRowElement;
-                    const tableContainer = tableContainerRef.current;
-                    setExpandedRows(prev => {
-                      const newSet = new Set(prev);
-                      const wasExpanded = newSet.has(index);
-
-                      if (wasExpanded) {
-                        newSet.delete(index);
-                        setExpandedRowPosition(null);
-                      } else {
-                        newSet.add(index);
-                        const rowRect = rowElement.getBoundingClientRect();
-                        const tablerowRect = tableContainer.getBoundingClientRect();
-                        const tooltipHeight=170;
-                        const spaceBelow=tablerowRect.bottom-rowRect.bottom;
-                        const shouldShowAbove=spaceBelow<tooltipHeight;
-                        setExpandedRowPosition({
-                          top: shouldShowAbove?rowRect.top+window.scrollY-tooltipHeight-8:rowRect.bottom+scrollY,
-                          left: rowRect.left + window.scrollX,
-                          width: rowRect.width,
-                          rowIndex: index,
-                        });
-                      }
-
-                      expandable?.onExpand?.(row, index, !wasExpanded);
-                      return newSet;
-                    });
-                  } else {
-                    onRowClick?.(row, index);
-                  }
-                }}
               >
                 {cells}
               </TableRow>
