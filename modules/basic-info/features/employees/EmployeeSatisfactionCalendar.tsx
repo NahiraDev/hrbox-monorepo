@@ -1,39 +1,39 @@
-// فایل: src/module/basic-info/features/employees/EmployeeSatisfactionCalendar.tsx
-// (کد کامل با فیکس کلیک خارج و کلیک روی آیکون‌ها برای بستن مودال)
 import { AppButton, useModalContext } from '@root/core';
 import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import EmployeeSatisfactionCalendarModal from './modals/EmployeeSatisfactionCalendarModal';
 import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/HowAreYouTodayModal';
 
-const sizeMap: Record<number, string> = {
-  7: '!w-7 !h-7',
-  9: '!w-9 !h-9',
-  11: '!w-11 !h-11',
-  16: '!w-16 !h-16',
+// Pixel-based size and text size calculation
+const getCircleSizePx = (number: number): number => {
+  const baseSizePx = 28; // Starting size (equivalent to w-7 h-7)
+  const maxSizePx = 224; // Max size (equivalent to w-56 h-56) - 56 * 4 = 224px
+  const sizePx = baseSizePx + (number - 1) * 2; // Increase by 2px per number
+  return Math.min(maxSizePx, Math.max(baseSizePx, sizePx));
 };
 
-const textSizeMap: Record<number, string> = {
-  7: '!text-xs',
-  9: '!text-sm',
-  11: '!text-base',
-  16: '!text-lg',
+const getTextSizePx = (number: number): number => {
+  const baseTextSizePx = 12; // Starting font size (equivalent to text-xs)
+  const maxTextSizePx = 48; // Max font size (equivalent to text-5xl)
+  const textSizePx = baseTextSizePx + (number - 1) * 1; // Increase by 1px per number
+  return Math.min(maxTextSizePx, Math.max(baseTextSizePx, textSizePx));
 };
 
-const clamp = (value: number): number => Math.max(1, Math.min(20, value));
-
-const DynamicCircle = ({ number, size, textSize, fromColor, toColor }: { number: number; size: number; textSize: number; fromColor: string; toColor: string }) => {
-  const sizeClass = sizeMap[size] || '!w-8 !h-8';
-  const textClass = textSizeMap[size] || '!text-base';
+const DynamicCircle = ({ number, fromColor, toColor }: { number: number; fromColor: string; toColor: string }) => {
+  const sizePx = getCircleSizePx(number);
+  const textSizePx = getTextSizePx(number);
 
   const gradientStyle = {
     backgroundImage: `linear-gradient(to top left, ${fromColor}, ${toColor})`,
+    width: `${sizePx}px`,
+    height: `${sizePx}px`,
+    fontSize: `${textSizePx}px`,
   };
 
   return (
     <span
       style={gradientStyle}
-      className={`flex items-center justify-center ${sizeClass} ${textClass} !font-bold text-white rounded-full`}
+      className="flex items-center justify-center !font-bold text-white rounded-full"
     >
       {number}
     </span>
@@ -47,7 +47,7 @@ const CalendarDay = ({
                        idx,
                        topCircles,
                        bottomCircles,
-                       onPress
+                       onPress,
                      }: {
   dayNumber: number;
   isCurrentMonth: boolean;
@@ -55,30 +55,28 @@ const CalendarDay = ({
   idx: number;
   topCircles: any[];
   bottomCircles: any[];
-  onPress: () => void
+  onPress: () => void;
 }) => {
   return (
     <AppButton
       props={{
-        className: 'bg-[#DCF0F9] p-3',
+        className: 'bg-[#DCF0F9] p-3 w-full h-full hover:bg-[#c5e4f3] transition-colors relative',
         size: 'xl',
         radius: 'none',
         onPress: onPress,
         content: (
-          <div>
-            <div className="flex items-start justify-center gap-3 mb-[-15px]">
+          <div className="flex flex-col items-center justify-between h-full">
+            <div className="flex items-start justify-start gap-1">
               {topCircles.map((circle, index) => (
                 <DynamicCircle
                   key={`top-${index}`}
                   number={circle.number}
-                  size={circle.size}
-                  textSize={circle.textSize}
                   fromColor={circle.fromColor}
                   toColor={circle.toColor}
                 />
               ))}
               <span
-                className={`!font-semibold !text-xl ${
+                className={`!font-semibold !text-xl absolute top-2 right-2 ${
                   idx === 6
                     ? isCurrentMonth
                       ? 'text-red-500'
@@ -91,13 +89,11 @@ const CalendarDay = ({
                 {dayNumber.toString().padStart(2, '0')}
               </span>
             </div>
-            <div className="flex items-center justify-end w-full gap-5 px-3 mt-[-8px]">
+            <div className="flex items-center justify-end w-full gap-1 px-3">
               {bottomCircles.map((circle, index) => (
                 <DynamicCircle
                   key={`bottom-${index}`}
                   number={circle.number}
-                  size={circle.size}
-                  textSize={circle.textSize}
                   fromColor={circle.fromColor}
                   toColor={circle.toColor}
                 />
@@ -114,26 +110,66 @@ const EmployeeSatisfactionCalendar = () => {
   const days = ['Sunday', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentTime, setCurrentTime] = useState(
-    currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+    new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
   );
   const today = new Date();
   const { openModal, closeModal } = useModalContext();
-  const [hasOpenedMoodModal, setHasOpenedMoodModal] = useState(false);
+  const [moodData, setMoodData] = useState<{
+    [key: string]: {
+      [mood: string]: { number: number; fromColor: string; toColor: string };
+    };
+  }>({});
+  const [lastMoodSubmitTime, setLastMoodSubmitTime] = useState<number | null>(null);
 
+  // بررسی و نمایش مودال هنگام باز شدن صفحه
   useEffect(() => {
-    if (!hasOpenedMoodModal) {
-      openModal(
-        'custom',
-        '',
-        <HowAreYouTodayModal onMoodSelect={(mood) => console.log('Mood selected:', mood)} />,
-        undefined,
-        'lg',
-        '',
-        null
-      );
-      setHasOpenedMoodModal(true);
-    }
-  }, [openModal, hasOpenedMoodModal]);
+    const checkAndShowModal = () => {
+      const now = Date.now();
+      const twentyFourHours = 24 * 60 * 60 * 1000;
+
+      // اگر هیچوقت جواب نداده یا 24 ساعت گذشته، مودال را نمایش بده
+      if (!lastMoodSubmitTime || (now - lastMoodSubmitTime) >= twentyFourHours) {
+        openModal(
+          'custom',
+          '',
+          <HowAreYouTodayModal
+            onMoodSelect={(mood) => {
+              const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+              setMoodData((prev) => {
+                const currentDayMoods = prev[todayKey] || {};
+                const moodConfig: { [key: string]: { fromColor: string; toColor: string } } = {
+                  'very-happy': { fromColor: '#1a4731', toColor: '#68d391' },
+                  'happy': { fromColor: '#c05621', toColor: '#f6ad55' },
+                  'neutral': { fromColor: '#68d391', toColor: '#a7f3d0' },
+                  'sad': { fromColor: '#b91c1c', toColor: '#f87171' },
+                };
+                const currentMood = currentDayMoods[mood] || { ...moodConfig[mood], number: 0 };
+                const newNumber = currentMood.number + 1;
+                return {
+                  ...prev,
+                  [todayKey]: {
+                    ...currentDayMoods,
+                    [mood]: {
+                      ...currentMood,
+                      number: newNumber,
+                    },
+                  },
+                };
+              });
+              setLastMoodSubmitTime(Date.now());
+              closeModal(undefined, undefined);
+            }}
+          />,
+          undefined,
+          'lg',
+          '',
+          null
+        );
+      }
+    };
+
+    checkAndShowModal();
+  }, [openModal, closeModal, lastMoodSubmitTime]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -198,33 +234,57 @@ const EmployeeSatisfactionCalendar = () => {
     return weeks;
   };
 
-  const isToday = (day: number, isCurrentMonth: boolean) => {
-    return (
-      isCurrentMonth &&
-      day === today.getDate() &&
-      currentDate.getMonth() === today.getMonth() &&
-      currentDate.getFullYear() === today.getFullYear()
-    );
+  const isTodayOrPast = (day: number, isCurrentMonth: boolean) => {
+    if (!isCurrentMonth) return false;
+    const currentDateObj = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return currentDateObj <= todayStart;
   };
 
   const weeks = generateCalendar();
 
-  const getCircleData = (day: number, isCurrentMonth: boolean) => ({
-    topCircles: [
-      { number: clamp(isCurrentMonth ? day * 2 : 17), size: 16, textSize: 16, fromColor: '#1a4731', toColor: '#68d391' },
-      { number: clamp(isCurrentMonth ? day + 5 : 10), size: 11, textSize: 11, fromColor: '#c05621', toColor: '#f6ad55' },
-],
-  bottomCircles: [
-    { number: clamp(isCurrentMonth ? day % 5 : 2), size: 7, textSize: 7, fromColor: '#ef4444', toColor: '#f87171' },
-    { number: clamp(isCurrentMonth ? day % 10 : 8), size: 9, textSize: 9, fromColor: '#b91c1c', toColor: '#f87171' },
-  ],
-});
+  const getCircleData = (day: number, isCurrentMonth: boolean) => {
+    const todayKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${day}`;
+    const dayMoods = moodData[todayKey] || {};
+
+    const baseCircles = {
+      topCircles: [] as any[],
+      bottomCircles: [] as any[],
+    };
+
+    if (isTodayOrPast(day, isCurrentMonth)) {
+      // Green and Orange circles at the top (very-happy, happy)
+      ['very-happy', 'happy'].forEach((mood) => {
+        if (dayMoods[mood] && dayMoods[mood].number > 0) {
+          baseCircles.topCircles.push({
+            ...dayMoods[mood],
+            size: getCircleSizePx(dayMoods[mood].number),
+            textSize: getTextSizePx(dayMoods[mood].number),
+          });
+        }
+      });
+
+      // Light Green and Red circles at the bottom (neutral, sad)
+      ['neutral', 'sad'].forEach((mood) => {
+        if (dayMoods[mood] && dayMoods[mood].number > 0) {
+          baseCircles.bottomCircles.push({
+            ...dayMoods[mood],
+            size: getCircleSizePx(dayMoods[mood].number),
+            textSize: getTextSizePx(dayMoods[mood].number),
+          });
+        }
+      });
+    }
+
+    return baseCircles;
+  };
 
   return (
-    <div className="border-2 border-primary-400 rounded-lg p-4">
-      <div>
-        <div className="bg-primary-400 text-white text-center p-2 rounded-xl flex justify-between items-center text-sm">
-          <span className="!font-bold">Today: {getDay(currentDate)}</span>
+    <div className="w-screen h-screen flex items-center justify-center p-6">
+      <div className="rounded-2xl overflow-hidden shadow-lg w-full h-full flex flex-col">
+        {/* Header */}
+        <div className="bg-primary-400 text-white text-center p-2 rounded-t-xl flex justify-between items-center text-sm">
+          <span className="!font-bold">Today: {getDay(today)}</span>
           <div className="mx-2 flex items-center gap-[62px]">
             <AppButton
               props={{
@@ -252,51 +312,60 @@ const EmployeeSatisfactionCalendar = () => {
           <span className="!font-bold">Time: {currentTime}</span>
         </div>
 
-        <table className="w-full">
-          <thead>
-          <tr>
-            {days.map((day) => (
-              <th key={day} className="bg-[#DCF0F966] p-2 text-center text-sm font-semibold">
-                {day}
-              </th>
-            ))}
-          </tr>
-          </thead>
-          <tbody>
-          {weeks.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((date, idx) => (
-                <td key={idx} className="p-2">
-                  {date.day > 0 && (
-                    <CalendarDay
-                      dayNumber={date.day}
-                      isCurrentMonth={date.isCurrentMonth}
-                      isSaturday={idx === 6}
-                      idx={idx}
-                      topCircles={getCircleData(date.day, date.isCurrentMonth).topCircles}
-                      bottomCircles={getCircleData(date.day, date.isCurrentMonth).bottomCircles}
-                      onPress={() => {
-                        openModal(
-                          'custom',
-                          "",
-                          <EmployeeSatisfactionCalendarModal
-                            onItemPress={(item) => console.log('Item pressed:', item)}
-                          />,
-                          undefined,
-                          '3xl',
-                          "Organizational Locations",
-                          <Category className='text-white'/>
-                        );
-                        closeModal(undefined, undefined); // بستن مودال mood اگر باز باشه
-                      }}
-                    />
-                  )}
-                </td>
+        {/* Calendar */}
+        <div className="bg-white flex-1 overflow-x-auto">
+          <table className="w-full h-full table-fixed">
+            <thead>
+            <tr>
+              {days.map((day, idx) => (
+                <th
+                  key={day}
+                  className={`bg-[#DCF0F966] p-2 text-center text-sm font-semibold w-[172px] ${
+                    idx === 6 ? 'text-red-500' : 'text-gray-700'
+                  }`}
+                >
+                  {day}
+                </th>
               ))}
             </tr>
-          ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="gap-3">
+            {weeks.map((week, weekIndex) => (
+              <tr key={weekIndex} className="gap-3">
+                {week.map((date, idx) => (
+                  <td key={idx} className="p-2 border-none w-[172px] h-[102px]">
+                    {date.day > 0 && (
+                      <CalendarDay
+                        dayNumber={date.day}
+                        isCurrentMonth={date.isCurrentMonth}
+                        isSaturday={idx === 6}
+                        idx={idx}
+                        topCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).topCircles : []}
+                        bottomCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).bottomCircles : []}
+                        onPress={() => {
+                          if (isTodayOrPast(date.day, date.isCurrentMonth)) {
+                            openModal(
+                              'custom',
+                              '',
+                              <EmployeeSatisfactionCalendarModal
+                                onItemPress={(item) => console.log('Item pressed:', item)}
+                              />,
+                              undefined,
+                              '3xl',
+                              'Organizational Locations',
+                              <Category className="text-white" />
+                            );
+                          }
+                        }}
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

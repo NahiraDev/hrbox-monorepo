@@ -113,6 +113,35 @@ export const organizationDepartment = [
     icon: 'people',
     people: 24,
   },
+  {
+    img: '',
+    name: 'Nahira',
+    job: 'Nahira Digital Accelerator',
+    icon: 'people',
+    people: 24,
+  },
+  {
+    img: '',
+    name: 'Nahira',
+    job: 'Nahira Digital Accelerator',
+    icon: 'people',
+    people: 24,
+  },
+  {
+    img: '',
+    name: 'Nahira',
+    job: 'Nahira Digital Accelerator',
+    icon: 'people',
+    people: 24,
+  },
+  {
+    img: '',
+    name: 'Nahira',
+    job: 'Nahira Digital Accelerator',
+    icon: 'people',
+    people: 24,
+  },
+
 ];
 export const technicalDepartment = [
   {

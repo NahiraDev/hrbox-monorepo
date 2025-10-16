@@ -1,4 +1,3 @@
-// فایل: src/module/basic-info/features/employees/modals/HowAreYouTodayModal.tsx
 import { AppButton } from '@root/core/';
 import React from 'react';
 import { BeHappy } from '@root/shared/icons/BeHappy';
@@ -19,7 +18,6 @@ interface SvgIconProps {
 }
 
 const HowAreYouTodayModal: React.FC<HowAreYouTodayModalProps> = ({ onMoodSelect }) => {
-
   const { closeModal } = useModalContext();
 
   const handleMoodSelect = (mood: string): void => {
@@ -27,15 +25,14 @@ const HowAreYouTodayModal: React.FC<HowAreYouTodayModalProps> = ({ onMoodSelect 
     closeModal(undefined, undefined);
   };
 
-  const IconWrapper: React.FC<{ iconComponent: React.FC<SvgIconProps> | React.ComponentType<SvgIconProps>}> = ({ iconComponent: Icon }) => (
+  const IconWrapper: React.FC<{ iconComponent: React.FC<SvgIconProps> | React.ComponentType<SvgIconProps> }> = ({ iconComponent: Icon }) => (
     <Icon width={80} height={80} />
   );
 
   const moods = [
     { icon: <IconWrapper iconComponent={BeHappy} />, value: 'very-happy' },
     { icon: <IconWrapper iconComponent={Happy} />, value: 'happy' },
-    {
-      icon: <IconWrapper iconComponent={Frown} />, value: 'neutral' },
+    { icon: <IconWrapper iconComponent={Frown} />, value: 'neutral' },
     { icon: <IconWrapper iconComponent={Sad} />, value: 'sad' },
   ];
 

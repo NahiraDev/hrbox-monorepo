@@ -72,9 +72,9 @@ interface AppTabsProps {
 // کامپوننت ListMore
 const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => {
   return (
-    <Listbox aria-label="More Actions" items={moreItems} onAction={onSelect} className="absolute left-192 top-13 bg-white shadow-sm rounded-lg z-10">
+    <Listbox aria-label="More Actions" items={moreItems} onAction={onSelect} className="absolute w-[216px] left-192 top-13 bg-white shadow-sm rounded-lg z-10 p-3">
       {(item: MoreItem) => (
-        <ListboxItem key={item.key} className="hover:bg-primary-50">
+        <ListboxItem key={item.key} className="hover:bg-primary-100">
           {item.label}
         </ListboxItem>
       )}
@@ -82,7 +82,6 @@ const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => {
   );
 };
 
-// کامپوننت BasicInfoLayout
 export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   const { openModal } = useModalContext();
   const { pathname } = useLocation();

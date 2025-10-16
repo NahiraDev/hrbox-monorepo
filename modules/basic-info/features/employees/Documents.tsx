@@ -7,10 +7,21 @@ import { useState } from 'react';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import DocumentsModal from '../employees/modals/DocumentsModal';
 
+interface Document {
+  name: string;
+  Publication: string;
+  Edit: string;
+  UploadStatus: string;
+  avatarSrc?: string;
+}
+
 const Documents = () => {
   const { openModal } = useModalContext();
+  const [documentsList, setDocumentsList] = useState<Document[]>(identityCard);
 
-  const [documentsList, setDocumentsList] = useState(identityCard); // ✅ تغییر نام
+  const closeAllModals = () => {
+
+  };
 
   const handleDeleteClick = (index: number) => {
     openModal(
@@ -23,14 +34,22 @@ const Documents = () => {
       undefined,
       'sm',
       'Do you want to remove it?',
-      <Trash className='text-white'/>
+      <Trash className="text-white" />
     );
   };
 
   const handleDeleteConfirm = (index: number) => {
-    setDocumentsList(prev => { // ✅ اصلاح شد
+    setDocumentsList((prev) => {
       const newDocuments = [...prev];
       newDocuments.splice(index, 1);
+      return newDocuments;
+    });
+  };
+
+  const handleImageSubmit = (index: number, imageSrc: string) => {
+    setDocumentsList((prev) => {
+      const newDocuments = [...prev];
+      newDocuments[index] = { ...newDocuments[index], avatarSrc: imageSrc };
       return newDocuments;
     });
   };
@@ -39,7 +58,7 @@ const Documents = () => {
     <BasicInfoLayout
       content={
         <div className="grid grid-cols-4 gap-4 w-full p-4">
-          {documentsList.map((user: any, index) => ( // ✅ تغییر به documentsList
+          {documentsList.map((user, index) => (
             <Card key={index} className="p-3 w-full h-full">
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
@@ -50,8 +69,25 @@ const Documents = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('custom', "", <DocumentsModal />, undefined, 'sm'),
-                        content: <Avatar radius="sm" size="lg" />,
+                        onPress: () =>
+                          openModal(
+                            'custom',
+                            '',
+                            <DocumentsModal
+                              onClose={() => {}}
+                              onCloseAll={closeAllModals}
+                              onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
+                            />,
+                            undefined,
+                            'sm'
+                          ),
+                        content: (
+                          <Avatar
+                            radius="sm"
+                            size="lg"
+                            src={user.avatarSrc || undefined}
+                          />
+                        ),
                       }}
                     />
                     <span>Identity Card</span>
@@ -64,7 +100,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => handleDeleteClick(index), // ✅ اصلاح شد
+                          onPress: () => handleDeleteClick(index),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                           className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                         }}
@@ -77,7 +113,18 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('edit', "", <DocumentsModal />, undefined, 'lg'),
+                          onPress: () =>
+                            openModal(
+                              'edit',
+                              '',
+                              <DocumentsModal
+                                onClose={() => {}}
+                                onCloseAll={closeAllModals}
+                                onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
+                              />,
+                              undefined,
+                              'lg'
+                            ),
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
                           className: 'p-2 hover:!bg-primary-400 transition-all duration-200',
                         }}
@@ -91,7 +138,7 @@ const Documents = () => {
                 </div>
                 <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-sm">{user.Edit}</span>
+                  <span className="text-sm">{user.Publication}</span>
                 </div>
                 <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
                   <Calendar className="w-4 h-4" />

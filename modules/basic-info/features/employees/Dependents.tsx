@@ -139,7 +139,7 @@ const Dependents = () => {
               <div className="flex items-center justify-between w-full py-4">
                 <div className="flex items-center gap-2 text-lg font-bold">
                   <Profile2User />
-                  <span>Spouse</span>
+                  <span>Dependents</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
@@ -245,7 +245,7 @@ const Dependents = () => {
             <div className="flex items-center justify-between w-full py-4">
               <div className="flex items-center gap-2 text-lg font-bold">
                 <Profile2User />
-                <span>Spouse</span>
+                <span>Relatives</span>
               </div>
               <div className="flex items-center gap-2">
                 <AppButton
