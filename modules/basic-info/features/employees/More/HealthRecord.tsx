@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { healthy } from '@module/basic-info/app/mock';
 import { Card } from '@heroui/react';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton } from '@core/components';
 import {
   Calendar,
   Drop,
@@ -9,7 +10,6 @@ import {
   Hospital,
   Add,
   HeartEdit,
-  Trash,
 } from 'iconsax-react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
@@ -21,41 +21,66 @@ import OnDutyHealthRecords from '@module/basic-info/features/employees/modals/On
 const HealthRecord = () => {
   const { openModal } = useModalContext();
 
+  // ✅ State برای Pre-Employment
+  const [preEmploymentRecords, setPreEmploymentRecords] = useState([]);
+
+  // ✅ Callback برای دریافت داده
+  const handlePreEmploymentSubmit = (newRecord) => {
+    setPreEmploymentRecords(prev => [...prev, newRecord]);
+  };
+
+  // ✅ Modal با callback
+  const openPreEmploymentModal = () => {
+    openModal(
+      'edit',
+      "",
+      <PreEmploymentHealthRecordsModals {...({ onSubmit: handlePreEmploymentSubmit })} />,
+      undefined,
+      'xl',
+      "Add New Pre-Employment Health Records",
+      <NotificationFavorite className='text-white'/>
+    );
+  };
+
   return (
     <BasicInfoLayout
       content={
         <div className="p-4 grid grid-cols-2 gap-15">
+          {/* Pre-Employment Section */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between">
               <div className="flex gap-1 items-center">
                 <NotificationFavorite size="24" />
-                <span className="text-xl font-semibold text-secondary-900 ">Pre-Employment Health Records</span>
+                <span className="text-xl font-semibold text-secondary-900">
+                  Pre-Employment Health Records ({preEmploymentRecords.length})
+                </span>
               </div>
               <AppButton
                 props={{
                   isIconOnly: true,
                   color: 'white',
                   className: 'border border-primary',
-                  onPress: () => openModal('edit',"", <PreEmploymentHealthRecordsModals/>,undefined ,'xl',"Add New Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
+                  onPress: openPreEmploymentModal,
                   content: <Add />,
                 }}
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {healthy.map((worker, index) => (
-                <Card key={index} className="p-3 flex flex-col gap-2">
+              {/* ✅ healthy + preEmploymentRecords */}
+              {[...healthy, ...preEmploymentRecords].map((worker, index) => (
+                <Card key={worker.id || index} className="p-3 flex flex-col gap-2">
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
                       props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
+                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
                         size: 'xs',
                         radius: 'lg',
                         onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
-                            <span className="text-[10px] text-primary-700">{worker.titleButton}</span>
+                            <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
                         ),
                       }}
@@ -92,11 +117,13 @@ const HealthRecord = () => {
               ))}
             </div>
           </div>
+
+          {/* On-Duty Section - بدون تغییر */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between">
               <div className="flex gap-1 items-center">
                 <HeartEdit size="24" />
-                <span className="text-xl font-semibold text-secondary-900 ">On-Duty Health Records</span>
+                <span className="text-xl font-semibold text-secondary-900">On-Duty Health Records</span>
               </div>
               <AppButton
                 props={{
@@ -115,14 +142,14 @@ const HealthRecord = () => {
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
                       props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px] ',
+                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
                         size: 'xs',
                         radius: 'lg',
                         onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
-                            <span className="text-[10px] text-primary-700">{worker.titleButton}</span>
+                            <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
                         ),
                       }}
@@ -159,9 +186,6 @@ const HealthRecord = () => {
               ))}
             </div>
           </div>
-
-
-
         </div>
       }
     />
