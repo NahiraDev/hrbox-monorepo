@@ -4,7 +4,7 @@ import { InfoCircle } from 'iconsax-react';
 const Comprehensivereport = () => {
   return (
     <>
-      <div className="flex w-[15%] flex-col items-center h-full bg-[#DDEEFA] rounded-xl border-1 border-primary p-3 ">
+      <div className="flex w-[20%] flex-col items-center h-full bg-[#DDEEFA] rounded-xl border-1 border-primary p-3 ">
         <div className="w-full justify-start">
           <h1 className="text-base font-semibold ">Comprehensive report</h1>
         </div>

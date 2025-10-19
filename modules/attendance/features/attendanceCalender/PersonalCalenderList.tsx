@@ -3,8 +3,23 @@ import { PersonalList } from '@module/attendance/app/mock';
 import { AppButton, AppTable } from '@core/components';
 import { Add, Trash } from 'iconsax-react';
 const PersonalCalenderList = () => {
-
+  const columns = [
+    {
+      key: 'Date',
+      label: 'Date',
+      render: (value) => value
+    },
+    { key: 'Shift', label: 'Shift' },
+    { key: 'Check in', label: 'Check In' },
+    { key: 'Check out', label: 'Check Out' },
+    { key: 'Presence', label: 'Presence' },
+    { key: 'Overdue', label: 'Overdue' },
+    { key: 'Delay', label: 'Delay' },
+    { key: 'Haste to leave', label: 'Haste to Leave' },
+    { key: 'Request', label: 'Request' },
+  ];
   const attendanceConfig = {
+    columns,
     columnGroups: [
       { startKey: 'date', endKey: 'shift', headerClassName: 'bg-[#999] text-white' },
       { startKey: 'checkIn', endKey: 'haste', headerClassName: 'bg-primary text-white' },
@@ -27,7 +42,7 @@ const PersonalCalenderList = () => {
   };
   return (
     <>
-      <div className="w-[80%]">
+      <div className="w-[70%]">
        <AppTable
        data={PersonalList}
        variant="attendance"

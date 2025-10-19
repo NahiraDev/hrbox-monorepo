@@ -149,12 +149,19 @@ export const AppTable = <T extends Record<string, any>>({
   };
 
   const getRowClassName = (row: T, index: number): string => {
-    const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer';
+    const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ';
+    let statusClass='';
+    if(variant==='attendance'){
+      const dateValue=row['Date']?.toString()||'';
+    if(dateValue.includes('Absence')){
+      statusClass='bg-red-100'
+    }
+    }
     const customClass =
       typeof styles.rowClassName === 'function'
         ? styles.rowClassName(row, index)
         : styles.rowClassName || '';
-    return `${baseClass} ${customClass}`;
+    return `${baseClass} ${statusClass} ${customClass}`;
   };
 
   const getCellClassName = (col: ColumnConfig<T>, value: any, row: T, index: number): string => {
@@ -322,19 +329,20 @@ export const AppTable = <T extends Record<string, any>>({
   return (
     <div
       ref={tableContainerRef}
-      className={`w-full ${variant === 'default' ? 'border-primary bg-primary-50 shadow-light-tight/1 rounded-2xl border pb-4 dark:border-[#04425c66] dark:bg-[rgba(4,66,92,0.60)]' : ''} ${styles.containerClassName || ''}`}
+      className={`w-full border-primary !bg-surface-50 shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66]  ${styles.containerClassName || ''}`}
     >
       <Table
         aria-label="Data table"
         className={`${styles.tableClassName}`}
         isHeaderSticky={variant === 'attendance'}
         classNames={{
-          base: variant === 'attendance' ? "max-h-[800px]" : "",
+          base: variant === 'attendance' ? "max-h-[750px] bg-transparent" : "!h-full bg-transparent",
           wrapper: variant === 'attendance'
-            ? "max-h-[800px] overflow-y-scroll custom-scroll"
-            : "",
+            ? "max-h-full overflow-y-scroll custom-scroll bg-transparent "
+            : "bg-transparent max-h-[750px]",
           table: "min-w-full",
           thead: "[&>tr]:first:shadow-none",
+          tr:'rounded-6',
           th: 'first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500',
         }}
       >
