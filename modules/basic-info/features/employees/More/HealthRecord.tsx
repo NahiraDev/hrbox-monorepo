@@ -21,22 +21,19 @@ import OnDutyHealthRecords from '@module/basic-info/features/employees/modals/On
 const HealthRecord = () => {
   const { openModal } = useModalContext();
 
-  // ✅ State برای Pre-Employment
   const [preEmploymentRecords, setPreEmploymentRecords] = useState([]);
 
-  // ✅ Callback برای دریافت داده
   const handlePreEmploymentSubmit = (newRecord) => {
     setPreEmploymentRecords(prev => [...prev, newRecord]);
   };
 
-  // ✅ Modal با callback
   const openPreEmploymentModal = () => {
     openModal(
       'edit',
       "",
       <PreEmploymentHealthRecordsModals {...({ onSubmit: handlePreEmploymentSubmit })} />,
       undefined,
-      'xl',
+      '3xl',
       "Add New Pre-Employment Health Records",
       <NotificationFavorite className='text-white'/>
     );
@@ -46,7 +43,6 @@ const HealthRecord = () => {
     <BasicInfoLayout
       content={
         <div className="p-4 grid grid-cols-2 gap-15">
-          {/* Pre-Employment Section */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between">
               <div className="flex gap-1 items-center">
@@ -66,7 +62,6 @@ const HealthRecord = () => {
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* ✅ healthy + preEmploymentRecords */}
               {[...healthy, ...preEmploymentRecords].map((worker, index) => (
                 <Card key={worker.id || index} className="p-3 flex flex-col gap-2">
                   <div className="flex flex-col gap-1">
@@ -76,7 +71,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
+                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'3xl',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
@@ -117,8 +112,6 @@ const HealthRecord = () => {
               ))}
             </div>
           </div>
-
-          {/* On-Duty Section - بدون تغییر */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between">
               <div className="flex gap-1 items-center">
@@ -145,7 +138,7 @@ const HealthRecord = () => {
                         className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'lg',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
+                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'3xl',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
                         content: (
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />

@@ -6,34 +6,32 @@ import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/Ho
 
 // Pixel-based size and text size calculation
 const getCircleSizePx = (number: number): number => {
-  const baseSizePx = 28; // Starting size (equivalent to w-7 h-7)
-  const maxSizePx = 224; // Max size (equivalent to w-56 h-56) - 56 * 4 = 224px
-  const sizePx = baseSizePx + (number - 1) * 2; // Increase by 2px per number
+  const baseSizePx = 28;
+  const maxSizePx = 224;
+  const sizePx = baseSizePx + (number - 1) * 2;
   return Math.min(maxSizePx, Math.max(baseSizePx, sizePx));
 };
 
 const getTextSizePx = (number: number): number => {
-  const baseTextSizePx = 12; // Starting font size (equivalent to text-xs)
-  const maxTextSizePx = 48; // Max font size (equivalent to text-5xl)
-  const textSizePx = baseTextSizePx + (number - 1) * 1; // Increase by 1px per number
+  const baseTextSizePx = 12;
+  const maxTextSizePx = 48;
+  const textSizePx = baseTextSizePx + (number - 1) * 1;
   return Math.min(maxTextSizePx, Math.max(baseTextSizePx, textSizePx));
 };
 
-const DynamicCircle = ({ number, fromColor, toColor }: { number: number; fromColor: string; toColor: string }) => {
+const DynamicCircle = ({ number, color }: { number: number; color: string }) => {
   const sizePx = getCircleSizePx(number);
   const textSizePx = getTextSizePx(number);
 
-  const gradientStyle = {
-    backgroundImage: `linear-gradient(to top left, ${fromColor}, ${toColor})`,
-    width: `${sizePx}px`,
-    height: `${sizePx}px`,
-    fontSize: `${textSizePx}px`,
-  };
-
   return (
     <span
-      style={gradientStyle}
-      className="flex items-center justify-center !font-bold text-white rounded-full"
+      style={{
+        backgroundColor: color,
+        width: `${sizePx}px`,
+        height: `${sizePx}px`,
+        fontSize: `${textSizePx}px`,
+      }}
+      className="flex items-center justify-center !font-bold text-white rounded-full shadow-sm"
     >
       {number}
     </span>
@@ -58,51 +56,49 @@ const CalendarDay = ({
   onPress: () => void;
 }) => {
   return (
-    <AppButton
-      props={{
-        className: 'bg-[#DCF0F9] p-3 w-full h-full hover:bg-[#c5e4f3] transition-colors relative',
-        size: 'xl',
-        radius: 'none',
-        onPress: onPress,
-        content: (
-          <div className="flex flex-col items-center justify-between h-full">
-            <div className="flex items-start justify-start gap-1">
-              {topCircles.map((circle, index) => (
-                <DynamicCircle
-                  key={`top-${index}`}
-                  number={circle.number}
-                  fromColor={circle.fromColor}
-                  toColor={circle.toColor}
-                />
-              ))}
-              <span
-                className={`!font-semibold !text-xl absolute top-2 right-2 ${
-                  idx === 6
-                    ? isCurrentMonth
-                      ? 'text-red-500'
-                      : 'text-red-300'
-                    : isCurrentMonth
-                      ? 'text-black'
-                      : 'text-gray-400'
-                }`}
-              >
-                {dayNumber.toString().padStart(2, '0')}
-              </span>
-            </div>
-            <div className="flex items-center justify-end w-full gap-1 px-3">
-              {bottomCircles.map((circle, index) => (
-                <DynamicCircle
-                  key={`bottom-${index}`}
-                  number={circle.number}
-                  fromColor={circle.fromColor}
-                  toColor={circle.toColor}
-                />
-              ))}
-            </div>
-          </div>
-        ),
-      }}
-    />
+    <button
+      onClick={onPress}
+      className="bg-[#E8F4F8] p-2.5 w-full h-full hover:bg-[#d4ebf3] transition-colors relative rounded-md"
+    >
+      <div className="flex flex-col items-start justify-between h-full w-full">
+        {/* Top section with circles */}
+        <div className="flex items-start gap-1.5">
+          {topCircles.map((circle, index) => (
+            <DynamicCircle
+              key={`top-${index}`}
+              number={circle.number}
+              color={circle.color}
+            />
+          ))}
+        </div>
+
+        {/* Day number at top right */}
+        <span
+          className={`absolute top-2 right-2 !font-semibold text-base ${
+            idx === 6
+              ? isCurrentMonth
+                ? 'text-red-500'
+                : 'text-red-300'
+              : isCurrentMonth
+                ? 'text-gray-900'
+                : 'text-gray-400'
+          }`}
+        >
+          {dayNumber.toString().padStart(2, '0')}
+        </span>
+
+        {/* Bottom section with circles */}
+        <div className="flex items-center justify-start w-full gap-1.5 mt-auto">
+          {bottomCircles.map((circle, index) => (
+            <DynamicCircle
+              key={`bottom-${index}`}
+              number={circle.number}
+              color={circle.color}
+            />
+          ))}
+        </div>
+      </div>
+    </button>
   );
 };
 
@@ -116,18 +112,16 @@ const EmployeeSatisfactionCalendar = () => {
   const { openModal, closeModal } = useModalContext();
   const [moodData, setMoodData] = useState<{
     [key: string]: {
-      [mood: string]: { number: number; fromColor: string; toColor: string };
+      [mood: string]: { number: number; color: string };
     };
   }>({});
   const [lastMoodSubmitTime, setLastMoodSubmitTime] = useState<number | null>(null);
 
-  // بررسی و نمایش مودال هنگام باز شدن صفحه
   useEffect(() => {
     const checkAndShowModal = () => {
       const now = Date.now();
       const twentyFourHours = 24 * 60 * 60 * 1000;
 
-      // اگر هیچوقت جواب نداده یا 24 ساعت گذشته، مودال را نمایش بده
       if (!lastMoodSubmitTime || (now - lastMoodSubmitTime) >= twentyFourHours) {
         openModal(
           'custom',
@@ -137,11 +131,11 @@ const EmployeeSatisfactionCalendar = () => {
               const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
               setMoodData((prev) => {
                 const currentDayMoods = prev[todayKey] || {};
-                const moodConfig: { [key: string]: { fromColor: string; toColor: string } } = {
-                  'very-happy': { fromColor: '#1a4731', toColor: '#68d391' },
-                  'happy': { fromColor: '#c05621', toColor: '#f6ad55' },
-                  'neutral': { fromColor: '#68d391', toColor: '#a7f3d0' },
-                  'sad': { fromColor: '#b91c1c', toColor: '#f87171' },
+                const moodConfig: { [key: string]: { color: string } } = {
+                  'very-happy': { color: '#10b981' },
+                  'happy': { color: '#f59e0b' },
+                  'neutral': { color: '#22c55e' },
+                  'sad': { color: '#b91c1c' },
                 };
                 const currentMood = currentDayMoods[mood] || { ...moodConfig[mood], number: 0 };
                 const newNumber = currentMood.number + 1;
@@ -253,7 +247,6 @@ const EmployeeSatisfactionCalendar = () => {
     };
 
     if (isTodayOrPast(day, isCurrentMonth)) {
-      // Green and Orange circles at the top (very-happy, happy)
       ['very-happy', 'happy'].forEach((mood) => {
         if (dayMoods[mood] && dayMoods[mood].number > 0) {
           baseCircles.topCircles.push({
@@ -264,7 +257,6 @@ const EmployeeSatisfactionCalendar = () => {
         }
       });
 
-      // Light Green and Red circles at the bottom (neutral, sad)
       ['neutral', 'sad'].forEach((mood) => {
         if (dayMoods[mood] && dayMoods[mood].number > 0) {
           baseCircles.bottomCircles.push({
@@ -280,60 +272,52 @@ const EmployeeSatisfactionCalendar = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center p-6">
-      <div className="rounded-2xl overflow-hidden shadow-lg w-full h-full flex flex-col">
+    <div className="w-screen h-screen flex items-center justify-center p-3">
+      <div className="rounded-3xl overflow-hidden border-[3px] border-[#0ea5e9] w-full h-full flex flex-col bg-white">
         {/* Header */}
-        <div className="bg-primary-400 text-white text-center p-2 rounded-t-xl flex justify-between items-center text-sm">
-          <span className="!font-bold">Today: {getDay(today)}</span>
-          <div className="mx-2 flex items-center gap-[62px]">
-            <AppButton
-              props={{
-                size: 'md',
-                radius: 'lg',
-                color: 'white',
-                variant: 'light',
-                onPress: goToPreviousMonth,
-                content: <ArrowLeft2 />,
-              }}
-            />
-            <span className="!font-bold">{getMonth(currentDate)}</span>
-            <span className="!font-bold">{getYear(currentDate)}</span>
-            <AppButton
-              props={{
-                size: 'md',
-                color: 'white',
-                radius: 'lg',
-                variant: 'light',
-                onPress: goToNextMonth,
-                content: <ArrowRight2 />,
-              }}
-            />
+        <div className="bg-[#0ea5e9] text-white px-6 py-3 flex justify-between items-center">
+          <span className="!font-bold text-sm">Today: {getDay(today)}</span>
+          <div className="flex items-center gap-16">
+            <button
+              onClick={goToPreviousMonth}
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowLeft2 size={20} />
+            </button>
+            <div className="flex items-center gap-8">
+              <span className="!font-bold text-lg">{getMonth(currentDate)}</span>
+              <span className="!font-bold text-lg">{getYear(currentDate)}</span>
+            </div>
+            <button
+              onClick={goToNextMonth}
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowRight2 size={20} />
+            </button>
           </div>
-          <span className="!font-bold">Time: {currentTime}</span>
+          <span className="!font-bold text-sm">Time: {currentTime}</span>
         </div>
 
         {/* Calendar */}
-        <div className="bg-white flex-1 overflow-x-auto">
-          <table className="w-full h-full table-fixed">
-            <thead>
-            <tr>
+        <div className="flex-1 overflow-auto bg-white">
+          <div className="w-full h-full p-3">
+            <div className="grid grid-cols-7 gap-2 h-full">
+              {/* Header Days */}
               {days.map((day, idx) => (
-                <th
+                <div
                   key={day}
-                  className={`bg-[#DCF0F966] p-2 text-center text-sm font-semibold w-[172px] ${
+                  className={`bg-[#E8F4F8]/40 p-2 text-center text-xs font-semibold rounded-md flex items-center justify-center ${
                     idx === 6 ? 'text-red-500' : 'text-gray-700'
                   }`}
                 >
                   {day}
-                </th>
+                </div>
               ))}
-            </tr>
-            </thead>
-            <tbody className="gap-3">
-            {weeks.map((week, weekIndex) => (
-              <tr key={weekIndex} className="gap-3">
-                {week.map((date, idx) => (
-                  <td key={idx} className="p-2 border-none w-[172px] h-[102px]">
+
+              {/* Calendar Days */}
+              {weeks.map((week, weekIndex) => (
+                week.map((date, idx) => (
+                  <div key={`${weekIndex}-${idx}`} className="min-h-[90px]">
                     {date.day > 0 && (
                       <CalendarDay
                         dayNumber={date.day}
@@ -359,12 +343,11 @@ const EmployeeSatisfactionCalendar = () => {
                         }}
                       />
                     )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-            </tbody>
-          </table>
+                  </div>
+                ))
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

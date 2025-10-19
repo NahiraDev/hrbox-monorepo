@@ -5,11 +5,10 @@ import { useModalContext } from '@core/context';
 const PreEmploymentHealthRecordsModals = () => {
   const { openModal } = useModalContext();
   return (
-    // <AppModal icon={<NotificationFavorite color="white" />} size="3xl" title="Add New Pre-Employment Health Records">
     <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
-          <div className="grid grid-cols-2 gap-x-10 gap-y-6">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-6 overflow-y-scroll max-h-[60vh]">
             <AppAutoComplete
               props={{
                 className: ' border border-[#DCF0F9]',
@@ -218,7 +217,6 @@ const PreEmploymentHealthRecordsModals = () => {
           props={{
             size: 'xs',
             radius: 'sm',
-            variant: 'light',
             onPress: () => console.log('a'),
             content: <span>Submit</span>,
             className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
@@ -226,7 +224,6 @@ const PreEmploymentHealthRecordsModals = () => {
         />
       </AppModal.Footer>
     </>
-    // </AppModal>
   );
 };
 
