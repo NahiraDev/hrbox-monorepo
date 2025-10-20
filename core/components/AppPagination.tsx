@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Pagination as HeroPagination } from '@heroui/react';
 import { useSearchParams } from 'react-router-dom';
 import { serviceRegistry } from '@core/helpers';
@@ -7,52 +7,53 @@ export const AppPagination = ({ total }: { total: number }) => {
   const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = searchParams.get('');
-
+    const pageParam = searchParams.get('page');
     return pageParam ? parseInt(pageParam, 10) : 1;
   });
+
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
   const handlePageChange = useCallback(
     (page: number) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set('page', page.toString());
+
       setCurrentPage(page);
-      setSearchParams((prev) => {
-        const newParams = new URLSearchParams(prev);
-
-        newParams.set(page.toString(''));
-
-        return newParams;
-      });
+      setSearchParams(newParams, { replace: true }); // ✅ replace = بدون history push
     },
-    [setSearchParams],
+    [searchParams, setSearchParams],
   );
 
   useEffect(() => {
-    const pageParam = searchParams.get("");
-
-    if (pageParam) {
-      const page = parseInt(pageParam, 10);
-
-      if (!isNaN(page) && page !== currentPage) {
-        setCurrentPage(page);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
-    }
-  }, [searchParams, currentPage]);
+    };
+  }, []);
 
   return (
-    <HeroPagination
-      classNames={{
-        item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer',
-        cursor: 'rounded-md',
-        next: 'bg-white rounded-md cursor-pointer',
-        prev: 'bg-white rounded-md cursor-pointer',
-      }}
-      color={getModuleName === 'hrlink' ? 'secondary' : 'primary'}
-      dotsJump={1}
-      initialPage={total}
-      page={currentPage}
-      showControls={true}
-      size="md"
-      total={total}
-      onChange={handlePageChange}
-    />
+    <div className="transition-all duration-150">
+      <HeroPagination
+        classNames={{
+          item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer mt-5 transition-all duration-200 ease-in-out hover:scale-105',
+          cursor: 'bg-primary text-white rounded-md mt-5 font-semibold transition-colors duration-200 ease-in-out',
+          next: 'bg-white rounded-md cursor-pointer mt-5 transition-all duration-150 hover:scale-105 hover:bg-gray-50',
+          prev: 'bg-white rounded-md cursor-pointer mt-5 transition-all duration-150 hover:scale-105 hover:bg-gray-50',
+        }}
+        color={getModuleName === 'hrlink' ? 'secondary' : 'primary'}
+        dotsJump={1}
+        initialPage={1}
+        page={currentPage}
+        showControls={true}
+        size="md"
+        total={total}
+        onChange={handlePageChange}
+      />
+    </div>
   );
 };

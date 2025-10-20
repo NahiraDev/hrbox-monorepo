@@ -1,94 +1,104 @@
 import { AppButton, useModalContext } from '@root/core';
-import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
+import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-react';
 import { useEffect, useState } from 'react';
+import EmployeeSatisfactionCalendarModal from './modals/EmployeeSatisfactionCalendarModal';
+import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/HowAreYouTodayModal';
 
-const sizeMap: Record<number, string> = {
-  7: '!w-7 !h-7',
-  9: '!w-9 !h-9',
-  11: '!w-11 !h-11',
-  16: '!w-16 !h-16',
+// Pixel-based size and text size calculation
+const getCircleSizePx = (number: number): number => {
+  const baseSizePx = 28;
+  const maxSizePx = 224;
+  const sizePx = baseSizePx + (number - 1) * 2;
+  return Math.min(maxSizePx, Math.max(baseSizePx, sizePx));
 };
 
-const textSizeMap: Record<number, string> = {
-  7: '!text-xs',
-  9: '!text-sm',
-  11: '!text-base',
-  16: '!text-lg',
+const getTextSizePx = (number: number): number => {
+  const baseTextSizePx = 12;
+  const maxTextSizePx = 48;
+  const textSizePx = baseTextSizePx + (number - 1) * 1;
+  return Math.min(maxTextSizePx, Math.max(baseTextSizePx, textSizePx));
 };
 
-const clamp = (value: number): number => Math.max(1, Math.min(20, value));
-
-const DynamicCircle = ({ number, size, textSize, fromColor, toColor }) => {
-  const sizeClass = sizeMap[size] || '!w-8 !h-8';
-  const textClass = textSizeMap[size] || '!text-base';
-
-  const gradientStyle = {
-    backgroundImage: `linear-gradient(to top left, ${fromColor}, ${toColor})`,
-  };
+const DynamicCircle = ({ number, color }: { number: number; color: string }) => {
+  const sizePx = getCircleSizePx(number);
+  const textSizePx = getTextSizePx(number);
 
   return (
     <span
-      style={gradientStyle}
-      className={`flex items-center justify-center ${sizeClass} ${textClass} !font-bold text-white rounded-full`}
+      style={{
+        backgroundColor: color,
+        width: `${sizePx}px`,
+        height: `${sizePx}px`,
+        fontSize: `${textSizePx}px`,
+      }}
+      className="flex items-center justify-center !font-bold text-white rounded-full shadow-sm"
     >
       {number}
     </span>
   );
 };
 
-const CalendarDay = ({ dayNumber, isCurrentMonth, isSaturday, idx, topCircles, bottomCircles, onClick }) => {
-  console.log('CalendarDay Data:', { dayNumber, topCircles, bottomCircles });
-
+const CalendarDay = ({
+                       dayNumber,
+                       isCurrentMonth,
+                       isSaturday,
+                       idx,
+                       topCircles,
+                       bottomCircles,
+                       onPress,
+                     }: {
+  dayNumber: number;
+  isCurrentMonth: boolean;
+  isSaturday: boolean;
+  idx: number;
+  topCircles: any[];
+  bottomCircles: any[];
+  onPress: () => void;
+}) => {
   return (
-    <AppButton
-      props={{
-        className: 'bg-[#DCF0F9] p-3',
-        size: 'xl',
-        radius: 'none',
-        onPress: onClick,
-        content: (
-          <div>
-            <div className="flex items-start justify-center gap-3 mb-[-15px]">
-              {topCircles.map((circle, index) => (
-                <DynamicCircle
-                  key={`top-${index}`}
-                  number={circle.number}
-                  size={circle.size}
-                  textSize={circle.textSize}
-                  fromColor={circle.fromColor}
-                  toColor={circle.toColor}
-                />
-              ))}
-              <span
-                className={`!font-semibold !text-xl ${
-                  idx === 6
-                    ? isCurrentMonth
-                      ? 'text-red-500'
-                      : 'text-red-300'
-                    : isCurrentMonth
-                      ? 'text-black'
-                      : 'text-gray-400'
-                }`}
-              >
-                {dayNumber.toString().padStart(2, '0')}
-              </span>
-            </div>
-            <div className="flex items-center justify-end w-full gap-5 px-3 mt-[-8px]">
-              {bottomCircles.map((circle, index) => (
-                <DynamicCircle
-                  key={`bottom-${index}`}
-                  number={circle.number}
-                  size={circle.size}
-                  textSize={circle.textSize}
-                  fromColor={circle.fromColor}
-                  toColor={circle.toColor}
-                />
-              ))}
-            </div>
-          </div>
-        ),
-      }}
-    />
+    <button
+      onClick={onPress}
+      className="bg-[#E8F4F8] p-2.5 w-full h-full hover:bg-[#d4ebf3] transition-colors relative rounded-md"
+    >
+      <div className="flex flex-col items-start justify-between h-full w-full">
+        {/* Top section with circles */}
+        <div className="flex items-start gap-1.5">
+          {topCircles.map((circle, index) => (
+            <DynamicCircle
+              key={`top-${index}`}
+              number={circle.number}
+              color={circle.color}
+            />
+          ))}
+        </div>
+
+        {/* Day number at top right */}
+        <span
+          className={`absolute top-2 right-2 !font-semibold text-base ${
+            idx === 6
+              ? isCurrentMonth
+                ? 'text-red-500'
+                : 'text-red-300'
+              : isCurrentMonth
+                ? 'text-gray-900'
+                : 'text-gray-400'
+          }`}
+        >
+          {dayNumber.toString().padStart(2, '0')}
+        </span>
+
+        {/* Bottom section with circles */}
+        <div className="flex items-center justify-start w-full gap-1.5 mt-auto">
+          {bottomCircles.map((circle, index) => (
+            <DynamicCircle
+              key={`bottom-${index}`}
+              number={circle.number}
+              color={circle.color}
+            />
+          ))}
+        </div>
+      </div>
+    </button>
   );
 };
 
@@ -96,10 +106,64 @@ const EmployeeSatisfactionCalendar = () => {
   const days = ['Sunday', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentTime, setCurrentTime] = useState(
-    currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+    new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
   );
   const today = new Date();
-  const { openModal } = useModalContext();
+  const { openModal, closeModal } = useModalContext();
+  const [moodData, setMoodData] = useState<{
+    [key: string]: {
+      [mood: string]: { number: number; color: string };
+    };
+  }>({});
+  const [lastMoodSubmitTime, setLastMoodSubmitTime] = useState<number | null>(null);
+
+  useEffect(() => {
+    const checkAndShowModal = () => {
+      const now = Date.now();
+      const twentyFourHours = 24 * 60 * 60 * 1000;
+
+      if (!lastMoodSubmitTime || (now - lastMoodSubmitTime) >= twentyFourHours) {
+        openModal(
+          'custom',
+          '',
+          <HowAreYouTodayModal
+            onMoodSelect={(mood) => {
+              const todayKey = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+              setMoodData((prev) => {
+                const currentDayMoods = prev[todayKey] || {};
+                const moodConfig: { [key: string]: { color: string } } = {
+                  'very-happy': { color: '#10b981' },
+                  'happy': { color: '#f59e0b' },
+                  'neutral': { color: '#22c55e' },
+                  'sad': { color: '#b91c1c' },
+                };
+                const currentMood = currentDayMoods[mood] || { ...moodConfig[mood], number: 0 };
+                const newNumber = currentMood.number + 1;
+                return {
+                  ...prev,
+                  [todayKey]: {
+                    ...currentDayMoods,
+                    [mood]: {
+                      ...currentMood,
+                      number: newNumber,
+                    },
+                  },
+                };
+              });
+              setLastMoodSubmitTime(Date.now());
+              closeModal(undefined, undefined);
+            }}
+          />,
+          undefined,
+          'lg',
+          '',
+          null
+        );
+      }
+    };
+
+    checkAndShowModal();
+  }, [openModal, closeModal, lastMoodSubmitTime]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -109,14 +173,14 @@ const EmployeeSatisfactionCalendar = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const getDay = (date) => {
+  const getDay = (date: Date) => {
     const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
     const day = date.toLocaleDateString('en-US', { day: '2-digit' });
     return `${month}.${day}`;
   };
 
-  const getMonth = (date) => date.toLocaleDateString('en-US', { month: 'long' });
-  const getYear = (date) => date.toLocaleDateString('en-US', { year: 'numeric' });
+  const getMonth = (date: Date) => date.toLocaleDateString('en-US', { month: 'long' });
+  const getYear = (date: Date) => date.toLocaleDateString('en-US', { year: 'numeric' });
 
   const goToPreviousMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -132,8 +196,8 @@ const EmployeeSatisfactionCalendar = () => {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
-    const weeks = [];
-    let week = [];
+    const weeks: { day: number; isCurrentMonth: boolean }[][] = [];
+    let week: { day: number; isCurrentMonth: boolean }[] = [];
 
     for (let i = firstDay - 1; i >= 0; i--) {
       week.push({ day: daysInPrevMonth - i, isCurrentMonth: false });
@@ -141,7 +205,7 @@ const EmployeeSatisfactionCalendar = () => {
 
     for (let day = 1; day <= daysInMonth; day++) {
       if (week.length === 7) {
-        weeks.push([...week]);
+        weeks.push(week);
         week = [];
       }
       week.push({ day, isCurrentMonth: true });
@@ -154,7 +218,7 @@ const EmployeeSatisfactionCalendar = () => {
     weeks.push(week);
 
     while (weeks.length < 5) {
-      const newWeek = [];
+      const newWeek: { day: number; isCurrentMonth: boolean }[] = [];
       for (let i = 0; i < 7; i++) {
         newWeek.push({ day: nextMonthDay++, isCurrentMonth: false });
       }
@@ -164,93 +228,127 @@ const EmployeeSatisfactionCalendar = () => {
     return weeks;
   };
 
-  const isToday = (day, isCurrentMonth) => {
-    return (
-      isCurrentMonth &&
-      day === today.getDate() &&
-      currentDate.getMonth() === today.getMonth() &&
-      currentDate.getFullYear() === today.getFullYear()
-    );
+  const isTodayOrPast = (day: number, isCurrentMonth: boolean) => {
+    if (!isCurrentMonth) return false;
+    const currentDateObj = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return currentDateObj <= todayStart;
   };
 
   const weeks = generateCalendar();
 
-  // Example dynamic data for circles with numbers clamped between 1 and 20
-  const getCircleData = (day, isCurrentMonth) => ({
-    topCircles: [
-      { number: clamp(isCurrentMonth ? day * 2 : 17), size: 16, textSize: 24, fromColor: '#1a4731', toColor: '#68d391' },
-      { number: clamp(isCurrentMonth ? day + 5 : 10), size: 11, textSize: 18, fromColor: '#c05621', toColor: '#f6ad55' },
-    ],
-    bottomCircles: [
-      { number: clamp(isCurrentMonth ? day % 5 : 2), size: 7, textSize: 14, fromColor: '#ef4444', toColor: '#f87171' },
-      { number: clamp(isCurrentMonth ? day % 10 : 8), size: 9, textSize: 16, fromColor: '#b91c1c', toColor: '#f87171' },
-    ],
-  });
+  const getCircleData = (day: number, isCurrentMonth: boolean) => {
+    const todayKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${day}`;
+    const dayMoods = moodData[todayKey] || {};
+
+    const baseCircles = {
+      topCircles: [] as any[],
+      bottomCircles: [] as any[],
+    };
+
+    if (isTodayOrPast(day, isCurrentMonth)) {
+      ['very-happy', 'happy'].forEach((mood) => {
+        if (dayMoods[mood] && dayMoods[mood].number > 0) {
+          baseCircles.topCircles.push({
+            ...dayMoods[mood],
+            size: getCircleSizePx(dayMoods[mood].number),
+            textSize: getTextSizePx(dayMoods[mood].number),
+          });
+        }
+      });
+
+      ['neutral', 'sad'].forEach((mood) => {
+        if (dayMoods[mood] && dayMoods[mood].number > 0) {
+          baseCircles.bottomCircles.push({
+            ...dayMoods[mood],
+            size: getCircleSizePx(dayMoods[mood].number),
+            textSize: getTextSizePx(dayMoods[mood].number),
+          });
+        }
+      });
+    }
+
+    return baseCircles;
+  };
 
   return (
-    <div className="border-2 border-primary-400 rounded-lg p-4">
-      <div>
-        <div className="bg-primary-400 text-white text-center p-2 rounded-xl flex justify-between items-center text-sm">
-          <span className="!font-bold">Today: {getDay(currentDate)}</span>
-          <div className="mx-2 flex items-center gap-[62px]">
-            <AppButton
-              props={{
-                size: 'md',
-                radius: 'lg',
-                color: 'white',
-                variant: 'light',
-                onPress: goToPreviousMonth,
-                content: <ArrowLeft2 />,
-              }}
-            />
-            <span className="!font-bold">{getMonth(currentDate)}</span>
-            <span className="!font-bold">{getYear(currentDate)}</span>
-            <AppButton
-              props={{
-                size: 'md',
-                color: 'white',
-                radius: 'lg',
-                variant: 'light',
-                onPress: goToNextMonth,
-                content: <ArrowRight2 />,
-              }}
-            />
+    <div className="w-screen h-screen flex items-center justify-center p-3">
+      <div className="rounded-3xl overflow-hidden border-[3px] border-[#0ea5e9] w-full h-full flex flex-col bg-white">
+        {/* Header */}
+        <div className="bg-[#0ea5e9] text-white px-6 py-3 flex justify-between items-center">
+          <span className="!font-bold text-sm">Today: {getDay(today)}</span>
+          <div className="flex items-center gap-16">
+            <button
+              onClick={goToPreviousMonth}
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowLeft2 size={20} />
+            </button>
+            <div className="flex items-center gap-8">
+              <span className="!font-bold text-lg">{getMonth(currentDate)}</span>
+              <span className="!font-bold text-lg">{getYear(currentDate)}</span>
+            </div>
+            <button
+              onClick={goToNextMonth}
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowRight2 size={20} />
+            </button>
           </div>
-          <span className="!font-bold">Time: {currentTime}</span>
+          <span className="!font-bold text-sm">Time: {currentTime}</span>
         </div>
 
-        <table className="w-full">
-          <thead>
-          <tr>
-            {days.map((day) => (
-              <th key={day} className="bg-[#DCF0F966] p-2 text-center text-sm font-semibold">
-                {day}
-              </th>
-            ))}
-          </tr>
-          </thead>
-          <tbody>
-          {weeks.map((week, index) => (
-            <tr key={index}>
-              {week.map((date, idx) => (
-                <td key={idx} className="p-2">
-                  {date.day > 0 && (
-                    <CalendarDay
-                      dayNumber={date.day}
-                      isCurrentMonth={date.isCurrentMonth}
-                      isSaturday={idx === 6}
-                      idx={idx}
-                      topCircles={getCircleData(date.day, date.isCurrentMonth).topCircles}
-                      bottomCircles={getCircleData(date.day, date.isCurrentMonth).bottomCircles}
-                      onClick={() => openModal('delete', undefined)}
-                    />
-                  )}
-                </td>
+        {/* Calendar */}
+        <div className="flex-1 overflow-auto bg-white">
+          <div className="w-full h-full p-3">
+            <div className="grid grid-cols-7 gap-2 h-full">
+              {/* Header Days */}
+              {days.map((day, idx) => (
+                <div
+                  key={day}
+                  className={`bg-[#E8F4F8]/40 p-2 text-center text-xs font-semibold rounded-md flex items-center justify-center ${
+                    idx === 6 ? 'text-red-500' : 'text-gray-700'
+                  }`}
+                >
+                  {day}
+                </div>
               ))}
-            </tr>
-          ))}
-          </tbody>
-        </table>
+
+              {/* Calendar Days */}
+              {weeks.map((week, weekIndex) => (
+                week.map((date, idx) => (
+                  <div key={`${weekIndex}-${idx}`} className="min-h-[90px]">
+                    {date.day > 0 && (
+                      <CalendarDay
+                        dayNumber={date.day}
+                        isCurrentMonth={date.isCurrentMonth}
+                        isSaturday={idx === 6}
+                        idx={idx}
+                        topCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).topCircles : []}
+                        bottomCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).bottomCircles : []}
+                        onPress={() => {
+                          if (isTodayOrPast(date.day, date.isCurrentMonth)) {
+                            openModal(
+                              'custom',
+                              '',
+                              <EmployeeSatisfactionCalendarModal
+                                onItemPress={(item) => console.log('Item pressed:', item)}
+                              />,
+                              undefined,
+                              '3xl',
+                              'Organizational Locations',
+                              <Category className="text-white" />
+                            );
+                          }
+                        }}
+                      />
+                    )}
+                  </div>
+                ))
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

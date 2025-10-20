@@ -6,7 +6,6 @@ const AddNewCourses = () => {
   const { openModal } = useModalContext();
 
   return (
-    // <AppModal icon={<Category color="white" />} size="3xl" title="Add New Courses">
       <>
         <AppModal.Body>
           <div className="flex flex-col gap-y-6">
@@ -46,7 +45,52 @@ const AddNewCourses = () => {
                   color: 'primary',
                   radius: 'lg',
                 }}
+              /> <AppInput
+              props={{
+                className: ' border border-[#DCF0F9]',
+                label: 'Field of Study',
+                size: 'lg',
+                color: 'primary',
+                radius: 'lg',
+              }}
+            />
+              <AppInput
+                props={{
+                  className: ' border border-[#DCF0F9]',
+                  label: 'Field of Study',
+                  size: 'lg',
+                  color: 'primary',
+                  radius: 'lg',
+                }}
               />
+              <AppInput
+                props={{
+                  className: ' border border-[#DCF0F9]',
+                  label: 'Field of Study',
+                  size: 'lg',
+                  color: 'primary',
+                  radius: 'lg',
+                }}
+              />
+              <AppInput
+                props={{
+                  className: ' border border-[#DCF0F9]',
+                  label: 'Field of Study',
+                  size: 'lg',
+                  color: 'primary',
+                  radius: 'lg',
+                }}
+              />
+              <AppInput
+                props={{
+                  className: ' border border-[#DCF0F9]',
+                  label: 'Field of Study',
+                  size: 'lg',
+                  color: 'primary',
+                  radius: 'lg',
+                }}
+              />
+
             </div>
             <div>
               <AppTextArea
@@ -67,7 +111,7 @@ const AddNewCourses = () => {
               size: 'xs',
               radius: 'sm',
               variant: 'light',
-              onPress: () => openModal('delete', undefined),
+              onPress: () =>"",
               content: <span>Cancle</span>,
               className:
                 'text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200',
@@ -85,7 +129,6 @@ const AddNewCourses = () => {
           />
         </AppModal.Footer>
       </>
-    // </AppModal>
   );
 };
 
