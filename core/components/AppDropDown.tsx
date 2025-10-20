@@ -10,9 +10,11 @@ interface AppDropDownProps {
   title?: string;
   item: AppDropDownItem[];
   className?: string;
+  EndIcon?: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
-  const { title, item, className } = props;
+  const { title, item, className,EndIcon,startIcon } = props;
   const [selected, setSelected] = React.useState<AppDropDownItem | null>(item.length > 0 ? item[0] : null);
   const handleSelect = (key: string) => {
     const found = item.find((item) => item.key === key);
@@ -25,7 +27,8 @@ const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button className={className} variant="bordered">
+        <Button className={`flex flex-row items-center ${className}`} variant="bordered">
+          <span>{startIcon}</span>
           {title
             ? title
             : selected && (
@@ -34,6 +37,7 @@ const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
                   {selected.label}
                 </span>
               )}
+          <span>{EndIcon}</span>
         </Button>
       </DropdownTrigger>
       <DropdownMenu

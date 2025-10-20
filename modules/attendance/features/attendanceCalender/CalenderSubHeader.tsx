@@ -1,4 +1,4 @@
-import { Calendar, Export, Hierarchy3, People, Profile } from 'iconsax-react';
+import { ArrowDown2, Calendar, Export, Hierarchy3, People, Profile } from 'iconsax-react';
 import AppDropDown from '@core/components/AppDropDown';
 import { useModalContext } from '@core/context';
 import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';
@@ -6,6 +6,7 @@ import PersonnelReportModal from '@module/attendance/features/modals/PersonnelRe
 
 import { AppButton } from '@core/components';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CalenderSubHeader = () => {
   const years = [
@@ -20,13 +21,16 @@ const CalenderSubHeader = () => {
   ];
   const { openModal } = useModalContext();
   const {t}=useTranslation();
+  const navigate=useNavigate();
+  const location = useLocation();
+  const isTrafficCalender = location.pathname === '/attendance/traffic-calender';
   return (
     <>
       <div className="w-full flex flex-row justify-between">
         <div className="flex flex-row justify-between">
           <AppButton
             props={{
-              color: 'primary',
+              color:isTrafficCalender?"white":"primary",
               size: 'md',
               radius: 'lg',
               startContent: (
@@ -34,21 +38,22 @@ const CalenderSubHeader = () => {
                   <Profile />
                 </span>
               ),
-              className: "text-white",
+              className:isTrafficCalender? "text-black":"text-white",
               content: t('Personal_attendance_calendar'),
             }}
           />
           <AppButton
             props={{
-              color: 'white',
+              color: isTrafficCalender?"primary":"white",
               size: 'md',
-              className: 'shadow-none',
+              className: isTrafficCalender?'shadow-none text-white':"shadow-none text-black",
               startContent: (
                 <span>
                   <People />
                 </span>
               ),
-              onPress: () => openModal('confirm','PersonnelReport',<PersonnelReportModal/>,undefined,"2xl","Add Permision Time", <Hierarchy3 color="white"/>),
+              // onPress: () => openModal('confirm','PersonnelReport',<PersonnelReportModal/>,undefined,"2xl","Add Permision Time", <Hierarchy3 color="white"/>),
+              onClick:()=>navigate('/attendance/traffic-calender'),
               content: 'Group attendance calendar',
             }}
           />
@@ -56,9 +61,9 @@ const CalenderSubHeader = () => {
         <div className="flex flex-row justify-between gap-2">
           <AppDropDown
             props={{
-              title: '2025',
               item: month,
               title: 'Month',
+              EndIcon:<ArrowDown2/>,
               className: 'border-1 border-primary px-xl ',
             }}
           />{' '}
@@ -66,6 +71,7 @@ const CalenderSubHeader = () => {
             props={{
               title: '2025',
               item: years,
+              EndIcon:<ArrowDown2/>,
               className: 'border-1 border-primary px-xl ',
             }}
           />
@@ -81,7 +87,7 @@ const CalenderSubHeader = () => {
                   <Export />
                 </span>
               ),
-              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"2xl","Add Permision Time",<Hierarchy3 color="white"/>),
+              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,[],"2xl","Add Permision Time",<Hierarchy3 color="white"/>),
               content: 'Export ',
             }}
           />
