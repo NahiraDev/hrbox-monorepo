@@ -259,7 +259,9 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
         <div className="col-span-2">
           <div className="overflow-y-auto"><Report /></div>
         </div>
-        <div className="col-span-10">{content}</div>
+        <div className="col-span-10">
+          {content}
+        </div>
       </div>
     </div>
   );

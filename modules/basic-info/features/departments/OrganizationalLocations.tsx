@@ -153,7 +153,7 @@ const OrganizationalLocations = () => {
         </div>
 
         <div className="flex justify-end p-2 mt-4">
-          <AppPagination total={locations.length} />
+          <AppPagination total={5} />
         </div>
       </div>
     </>

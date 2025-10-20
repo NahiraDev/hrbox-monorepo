@@ -33,9 +33,9 @@ const Dependents = () => {
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col ">
               <div className="flex items-center justify-between w-full py-4">
-                <div className="flex items-center gap-2 text-lg font-bold">
+                <div className="flex items-center gap-2 ">
                   <Profile2User />
-                  <span>Spouse</span>
+                  <span className='!text-lg !font-bold'>Spouse</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
@@ -63,7 +63,7 @@ const Dependents = () => {
                   />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full overflow-y-scroll">
                 {Spouse.map((user: any, index) => (
                   <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
                     <div className="flex flex-col gap-2">
@@ -137,9 +137,9 @@ const Dependents = () => {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center justify-between w-full py-4">
-                <div className="flex items-center gap-2 text-lg font-bold">
+                <div className="flex items-center gap-2">
                   <Profile2User />
-                  <span>Dependents</span>
+                  <span className='!text-lg !font-bold'>Dependents</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
@@ -156,7 +156,7 @@ const Dependents = () => {
                   />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full overflow-y-scroll h-screen">
                 {dataWorker.map((user: any, index) => (
                   <Card key={index} className="p-3 w-full  shadow-light-tight-1 bg-white ">
                     <div className="flex flex-col gap-2 ">
@@ -243,9 +243,9 @@ const Dependents = () => {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center justify-between w-full py-4">
-              <div className="flex items-center gap-2 text-lg font-bold">
+              <div className="flex items-center gap-2">
                 <Profile2User />
-                <span>Relatives</span>
+                <span className='!text-lg !font-bold'>Relatives</span>
               </div>
               <div className="flex items-center gap-2">
                 <AppButton
@@ -262,7 +262,8 @@ const Dependents = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="overflow-y-scroll h-screen">
+            <div className="grid grid-cols-2 gap-4 w-full ">
               {dataWorker2.map((user: any, index) => (
                 <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
                   <div className="flex flex-col gap-2 ">
@@ -345,6 +346,7 @@ const Dependents = () => {
                 </Card>
               ))}
               </div>
+          </div>
           </div>
         </div>
       }
