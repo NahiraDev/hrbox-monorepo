@@ -40,10 +40,10 @@ export const AppPagination = ({ total }: { total: number }) => {
   return (
     <HeroPagination
       classNames={{
-        item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer',
-        cursor: 'rounded-md',
-        next: 'bg-white rounded-md cursor-pointer',
-        prev: 'bg-white rounded-md cursor-pointer',
+        item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer mt-5',
+        cursor: 'rounded-md mt-5',
+        next: 'bg-white rounded-md cursor-pointer mt-5',
+        prev: 'bg-white rounded-md cursor-pointer mt-5',
       }}
       color={getModuleName === 'hrlink' ? 'secondary' : 'primary'}
       dotsJump={1}

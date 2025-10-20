@@ -25,9 +25,9 @@ export const BaseLayout = () => {
           <div className="flex flex-col flex-1 min-h-0 gap-4">
             <div className="flex flex-1 min-h-0 gap-8 w-full">
               <AppSideBar />
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 w-full">
                 <AppSubHeader />
-                <div className="flex flex-col gap-3 w-screen max-w-[1690px] mr-16 border border-primary-400 rounded-2xl overflow-hidden bg-surface-50 ">
+                <div className="flex flex-col gap-3 border border-primary-400 rounded-2xl overflow-hidden bg-surface-50 ">
                   <AppContent
                     fallback={
                       <div className="flex items-center justify-center h-full">
