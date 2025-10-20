@@ -19,6 +19,9 @@ export const AttendanceSubHeaders: any = [
   {
     path: AttendancePath.AttendanceCalenders,
     component: CalenderSubHeader,
+  },{
+    path: AttendancePath.TrafficCalender,
+    component: CalenderSubHeader,
   },
   {
     path: AttendancePath.ListOfApprovals,
