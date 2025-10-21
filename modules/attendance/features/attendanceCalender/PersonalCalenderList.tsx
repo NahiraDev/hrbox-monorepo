@@ -42,7 +42,7 @@ const PersonalCalenderList = () => {
   };
   return (
     <>
-      <div className="w-[70%]">
+      <div className="w-[80%]">
        <AppTable
        data={PersonalList}
        variant="attendance"

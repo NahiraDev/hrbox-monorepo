@@ -329,7 +329,7 @@ export const AppTable = <T extends Record<string, any>>({
   return (
     <div
       ref={tableContainerRef}
-      className={`w-full border-primary !bg-surface-50 shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66]  ${styles.containerClassName || ''}`}
+      className={`w-full shadow-light-tight/1 rounded-2xl  ${styles.containerClassName || ''}`}
     >
       <Table
         aria-label="Data table"

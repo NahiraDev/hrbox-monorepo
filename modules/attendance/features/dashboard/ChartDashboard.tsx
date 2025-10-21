@@ -84,7 +84,7 @@ const ChartDashboard = () => {
   });
 
   return (
-    <div className="h-full rounded-2xl" id="chart">
+    <div className="!h-full rounded-2xl" id="chart">
       <ReactApexChart height="100%" options={options} series={series} type="bar" />
     </div>
   );

@@ -6,6 +6,7 @@ const DashboardSubHeader = lazyLoad(() => import('@module/attendance/features/da
 const EntryExitSubHeader = lazyLoad(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
 const CalenderSubHeader = lazyLoad(() => import('@module/attendance/features/attendanceCalender/CalenderSubHeader'));
 const ApprovalsSubHeader = lazyLoad(() => import('@module/attendance/features/ListApprovals/ApprovalsSubHeader'));
+const Allocation = lazyLoad(() => import('@module/attendance/features/Allocation/AllocationSubheader'));
 
 export const AttendanceSubHeaders: any = [
   {
@@ -26,5 +27,8 @@ export const AttendanceSubHeaders: any = [
   {
     path: AttendancePath.ListOfApprovals,
     component:ApprovalsSubHeader ,
+  },{
+    path: AttendancePath.ShiftAllocation,
+    component:Allocation,
   },
 ];

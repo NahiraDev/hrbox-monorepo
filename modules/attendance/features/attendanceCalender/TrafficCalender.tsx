@@ -1,6 +1,5 @@
-import AppDropDown from '@core/components/AppDropDown';
-import { Add, ArrowDown, ArrowDown2, Buildings2, Calendar, Profile, Trash } from 'iconsax-react';
-import { Avatar } from '@heroui/react';
+
+import { Add, Calendar, Trash } from 'iconsax-react';
 import { AppButton, AppTable } from '@root/core';
 import { PersonalList } from '@module/attendance/app/mock';
 import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
@@ -50,34 +49,6 @@ const TrafficCalender=()=>{
   };
   return(
     <>
-      <div className="flx flex-col h-full font-bold">
-        <div className="flex flex-row items-center justify-between mb-3">
-          <div className="flex flex-row items-center gap-5">
-            <Avatar className="w-[50px] h-[50px]" radius="md" src="/images/profile.png"/>
-            <div className="flex flex-col gap-1">
-              <h1>Zahra Pakniyat</h1>
-              <div className="bg-primary-50 px-[4px] py-[1.5px] text-primary-400 rounded-md text-center flex items-center">
-                <p className="font-sans font-normal text-xs">UiUx Designer</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2">
-            <AppDropDown props={{
-              title:"Person",
-              item:month,
-              className: 'border-1 border-primary px-xl ',
-              startIcon:<Profile/>,
-              EndIcon:<ArrowDown2/>,
-            }}/>
-            <AppDropDown props={{
-              title:"Department/Unit",
-              item:month,
-              className: 'border-1 border-primary px-xl ',
-              startIcon:<Buildings2/>,
-              EndIcon:<ArrowDown2/>,
-            }}/>
-          </div>
-        </div>
         <div className="flex flex-row gap-3 h-full ">
           <AppTable
             data={PersonalList}
@@ -86,7 +57,6 @@ const TrafficCalender=()=>{
             {...attendanceConfig}/>
           <Comprehensivereport/>
         </div>
-      </div>
     </>
   )
 }
