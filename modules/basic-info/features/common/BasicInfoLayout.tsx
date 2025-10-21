@@ -9,7 +9,7 @@ import { AppTabs } from '@core/components';
 import { useModalContext } from '@core/context';
 import Report from '@module/basic-info/features/common/Repport';
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
-
+// import { BasicInfoPaths } from '@module/basic-info/app/paths';
 // ==================== INTERFACES ====================
 interface TabItem {
   key: string;

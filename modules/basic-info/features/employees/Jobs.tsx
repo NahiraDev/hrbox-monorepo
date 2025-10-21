@@ -4,7 +4,7 @@ import { AppButton, AppDeleteModal } from '@core/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 import { useState } from 'react';
-
+// import { useState } from 'react';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const Jobs = () => {

@@ -5,6 +5,7 @@ import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax
 import { useModalContext } from '@core/context';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { useState } from 'react';
+// import { useState } from 'react';
 
 const Education = () => {
   const { openModal } = useModalContext();
