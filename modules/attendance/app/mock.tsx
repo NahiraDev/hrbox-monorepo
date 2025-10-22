@@ -770,3 +770,15 @@ export const ListApprovals = [
     </sapn>
     )},
 ];
+export const  Allocatio=[
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"},
+  {"No.":1,IP:"Administrative","Matching Type":"Employee","Assigned To":"Zahra Pakniyat", "From Date":"2025/01/10","Creation Date":"2025/01/10"}
+]

@@ -8,6 +8,7 @@ const AttendanceCalender = lazyLoad(() => import('@module/attendance/features/at
 const TrafficCalender = lazyLoad(() => import('@module/attendance/features/attendanceCalender/TrafficCalender'));
 const ExportPage = lazyLoad(() => import('@module/attendance/features/Export/ExportPage'));
 const ListOfApprovals = lazyLoad(() => import('@module/attendance/features/ListApprovals/ListApprovals'));
+const ShiftAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/ShiftAllocation'));
 
 export const AttendanceContents: any = [
   {
@@ -32,5 +33,9 @@ export const AttendanceContents: any = [
   {
     path: AttendancePath.ListOfApprovals,
     component: ListOfApprovals,
+  },
+  {
+    path: AttendancePath.ShiftAllocation,
+    component: ShiftAllocation,
   },
 ];

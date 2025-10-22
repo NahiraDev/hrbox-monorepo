@@ -3,8 +3,10 @@ import { Add, Calendar, Trash } from 'iconsax-react';
 import { AppButton, AppTable } from '@root/core';
 import { PersonalList } from '@module/attendance/app/mock';
 import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
+import { useState } from 'react';
 
 const TrafficCalender=()=>{
+  const [IsReportHidden,setIsReportHidden]=useState<boolean>(false);
   const month = [
     { key: 'Januray', label: 'Januray', icon: <Calendar size={33} /> },
     { key: 'February', label: 'February', icon: <Calendar size={33} /> },
@@ -49,13 +51,14 @@ const TrafficCalender=()=>{
   };
   return(
     <>
-        <div className="flex flex-row gap-3 h-full ">
-          <AppTable
+        <div className={`${IsReportHidden?"h-full w-full":"flex flex-row gap-3 h-full w-full "}`}>
+          {!IsReportHidden && <AppTable
             data={PersonalList}
             variant="attendance"
             hasPagination={false}
-            {...attendanceConfig}/>
-          <Comprehensivereport/>
+            {...attendanceConfig}/>}
+
+          <Comprehensivereport isExpanded={IsReportHidden} onToggle={()=>setIsReportHidden(!IsReportHidden)} />
         </div>
     </>
   )

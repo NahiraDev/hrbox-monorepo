@@ -336,7 +336,7 @@ export const AppTable = <T extends Record<string, any>>({
         className={`${styles.tableClassName}`}
         isHeaderSticky={variant === 'attendance'}
         classNames={{
-          base: variant === 'attendance' ? "max-h-[750px] bg-transparent" : "!h-full bg-transparent",
+          base: variant === 'attendance' ? "max-h-[750px] bg-transparent" : "!h-full bg-transparent shadow-none",
           wrapper: variant === 'attendance'
             ? "max-h-full overflow-y-scroll custom-scroll bg-transparent "
             : "bg-transparent h-full",
