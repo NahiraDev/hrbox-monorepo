@@ -4,7 +4,7 @@ import { AppPagination } from '@root/core';
 
 // import { AppPagination } from '../../../../core';
 // import { TickIcon } from '../../../../public/icons';
-
+// import { TickIcon } from '../../../../public/icons';
 const Employees = () => {
   return (
     <div className="h-full p-4">
