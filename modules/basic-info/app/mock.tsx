@@ -113,34 +113,6 @@ export const organizationDepartment = [
     icon: 'people',
     people: 24,
   },
-  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },
-  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },
-  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },
-  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },
 
 ];
 export const technicalDepartment = [
@@ -297,7 +269,7 @@ export const workersData = [
     imgWorker: '',
     tick: '',
     nameWorker: 'Amir Miri',
-    job: 'Industrial Designer',
+    job: 'Industrial',
     isActive: true,
   },
   {
@@ -332,7 +304,7 @@ export const workersData = [
     imgWorker: '',
     tick: '',
     nameWorker: 'Amir Miri',
-    job: 'Industrial Designer',
+    job: 'Industrial ',
     isActive: true,
   },
   {

@@ -15,7 +15,7 @@ const TechnicalDepartments = () => {
           <Card
             key={index}
             className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
-            <Avatar className="w-30 h-30 " color="primary" radius="lg" src="https://i.pravatar.cc/150?u=d04258114e29026302d" />
+            <Avatar className="w-30 h-30 bg-primary-400 text-white" radius="lg" src="" />
             <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
             <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton

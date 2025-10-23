@@ -6,8 +6,7 @@ import { useModalContext } from '@core/context';
 import { useState } from 'react';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import DocumentsModal from '../employees/modals/DocumentsModal';
-// import DocumentsModal from '../employees/modals/DocumentsModal';
-interface Document {
+  interface Document {
   name: string;
   Publication: string;
   Edit: string;

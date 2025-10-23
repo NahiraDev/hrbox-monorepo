@@ -14,6 +14,7 @@ const OrganizationDepartments = () => {
   const renderOrganizationDepartments = (user: any, index: number) => (
     <Card
       key={index}
+      isPressable
       className="rounded-xl border-l-2 py-2 px-3 shadow-light-tight-1 flex flex-col gap-2 hover:bg-[#D6F2FF] hover:cursor-pointer"
       style={{ borderLeftColor: borderColors[index % borderColors.length] }}
       onPress={() => navigate(BasicInfoPaths.TechnicalDepartment)}

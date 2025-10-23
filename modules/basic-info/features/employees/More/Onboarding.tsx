@@ -8,7 +8,7 @@ const Onboarding = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-[20%_80%] gap-2 p-4"> {/* ✅ فقط این خط */}
+        <div className="grid grid-cols-[20%_80%] gap-2 p-4">
           <div className="flex flex-col gap-3 ">
             <div className="flex items-center gap-1 p-3">
               <UserAdd size="26" />

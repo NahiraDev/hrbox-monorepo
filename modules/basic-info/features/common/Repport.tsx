@@ -5,13 +5,13 @@ import { useModalContext } from '@root/core';
 
 const users = [
   { id: '1', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Report To' },
-  { id: '2', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Report To' },
-  { id: '3', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Report To' },
-  { id: '4', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Indirect Relationship With' },
-  { id: '5', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Consultant' },
-  { id: '6', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
-  { id: '7', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
-  { id: '7', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
+  { id: '2', name: 'reza Pakniyati', role: 'UiUx Designer', section: 'Report To' },
+  { id: '3', name: 'amin Pakniyati', role: 'UiUx Designer', section: 'Report To' },
+  { id: '4', name: 'ali Pakniyati', role: 'UiUx Designer', section: 'Indirect Relationship With' },
+  { id: '5', name: 'mohammad Pakniyati', role: 'UiUx Designer', section: 'Consultant' },
+  { id: '6', name: 'mehdi Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
+  { id: '7', name: 'amir Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
+  { id: '7', name: 'mahan Pakniyati', role: 'UiUx Designer', section: 'Subgroup Colleagues' },
 ];
 
 const cardContainerClass = `m-4 overflow-y-auto scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 max-h-[calc(100vh-100px)]

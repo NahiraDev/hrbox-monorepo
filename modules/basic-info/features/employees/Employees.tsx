@@ -7,20 +7,20 @@ import { AppPagination } from '@root/core';
 
 const Employees = () => {
   return (
-    <div className="">
-      <div className="grid grid-cols-8 gap-3">
+    <div className="h-full p-4">
+      <div className="grid grid-cols-9 gap-4">
         {workersData.map((worker, index) => {
           return (
             <Card
               key={index}
-              className="flex flex-col items-center justify-center gap-2 px-3 py-4 relative shadow-[0_1px_3px_0_#080E1C4D] "
+              className="flex flex-col items-center justify-center gap-2 p-5 relative shadow-[0_1px_3px_0_#080E1C4D] "
             >
-              <Avatar className="w-24 h-24 rounded-3xl" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+              <Avatar size='xl' className=" rounded-3xl" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
               <div className="absolute top-3 right-3">
-                {/*<TickIcon color={worker.isActive ? '#0B76B7' : '#CCC'} />*/}
+                {/*<TickIcon color={worker.isAct  ive ? '#0B76B7' : '#CCC'} />*/}
               </div>
               <span className="text-secondary-1000 font-medium">{worker.nameWorker}</span>
-              <Button className="h-6 text-primary-400 bg-[#DCF0F966]/40 border-2 border-primary" variant="faded">
+              <Button className="h-6 text-primary-400 bg-[#DCF0F966]/40 border border-primary-100" variant="faded">
                 {worker.job}
               </Button>
             </Card>
@@ -28,14 +28,7 @@ const Employees = () => {
         })}
       </div>
       <div className="flex justify-end">
-        <AppPagination
-          props={{
-            size: 'sm',
-            initialPage: 2,
-            showControls: true,
-            dotsJump: 5,
-          }}
-        />
+        <AppPagination total={5} />
       </div>
 
     </div>

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import EmployeeSatisfactionCalendarModal from './modals/EmployeeSatisfactionCalendarModal';
 import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/HowAreYouTodayModal';
 
-// Pixel-based size and text size calculation
 const getCircleSizePx = (number: number): number => {
   const baseSizePx = 28;
   const maxSizePx = 224;
@@ -58,10 +57,8 @@ const CalendarDay = ({
   return (
     <button
       onClick={onPress}
-      className="bg-[#E8F4F8] p-2.5 w-full h-full hover:bg-[#d4ebf3] transition-colors relative rounded-md"
-    >
+      className="bg-[#E8F4F8] p-2.5 w-full h-full hover:bg-[#d4ebf3] transition-colors relative rounded-md">
       <div className="flex flex-col items-start justify-between h-full w-full">
-        {/* Top section with circles */}
         <div className="flex items-start gap-1.5">
           {topCircles.map((circle, index) => (
             <DynamicCircle
@@ -71,8 +68,6 @@ const CalendarDay = ({
             />
           ))}
         </div>
-
-        {/* Day number at top right */}
         <span
           className={`absolute top-2 right-2 !font-semibold text-base ${
             idx === 6
@@ -86,8 +81,6 @@ const CalendarDay = ({
         >
           {dayNumber.toString().padStart(2, '0')}
         </span>
-
-        {/* Bottom section with circles */}
         <div className="flex items-center justify-start w-full gap-1.5 mt-auto">
           {bottomCircles.map((circle, index) => (
             <DynamicCircle
@@ -272,16 +265,14 @@ const EmployeeSatisfactionCalendar = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center p-3">
-      <div className="rounded-3xl overflow-hidden border-[3px] border-[#0ea5e9] w-full h-full flex flex-col bg-white">
-        {/* Header */}
+    <div className=" flex items-center justify-center h-screen ">
+      <div className="w-full h-full flex flex-col bg-white">
         <div className="bg-[#0ea5e9] text-white px-6 py-3 flex justify-between items-center">
           <span className="!font-bold text-sm">Today: {getDay(today)}</span>
           <div className="flex items-center gap-16">
             <button
               onClick={goToPreviousMonth}
-              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-            >
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <ArrowLeft2 size={20} />
             </button>
             <div className="flex items-center gap-8">
@@ -290,31 +281,23 @@ const EmployeeSatisfactionCalendar = () => {
             </div>
             <button
               onClick={goToNextMonth}
-              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-            >
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <ArrowRight2 size={20} />
             </button>
           </div>
           <span className="!font-bold text-sm">Time: {currentTime}</span>
         </div>
-
-        {/* Calendar */}
         <div className="flex-1 overflow-auto bg-white">
           <div className="w-full h-full p-3">
             <div className="grid grid-cols-7 gap-2 h-full">
-              {/* Header Days */}
               {days.map((day, idx) => (
                 <div
                   key={day}
                   className={`bg-[#E8F4F8]/40 p-2 text-center text-xs font-semibold rounded-md flex items-center justify-center ${
-                    idx === 6 ? 'text-red-500' : 'text-gray-700'
-                  }`}
-                >
+                    idx === 6 ? 'text-red-500' : 'text-gray-700'}`}>
                   {day}
                 </div>
               ))}
-
-              {/* Calendar Days */}
               {weeks.map((week, weekIndex) => (
                 week.map((date, idx) => (
                   <div key={`${weekIndex}-${idx}`} className="min-h-[90px]">

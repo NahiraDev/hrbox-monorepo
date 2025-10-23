@@ -5,7 +5,7 @@ import { BasicInfoPaths } from '@module/basic-info/app/paths';
 const OrganizationDepartments = lazyLoad(() => import('@module/basic-info/features/departments/OrganizationDepartments'));
 const TechnicalDepartments = lazyLoad(() => import('@module/basic-info/features/departments/TechnicalDepartments'));
 const OrganizationalLocations = lazyLoad(() => import('@module/basic-info/features/departments/OrganizationalLocations'));
-const AllEmployees = lazyLoad(() => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'));
+const AllEmployees = lazyLoad(() => import('@module/basic-info/features/employees/Employees'));
 const TestReport = lazyLoad(() => import('@module/basic-info/features/employees/More/TestReport'));
 const HealthRecords = lazyLoad(() => import('@module/basic-info/features/employees/More/HealthRecord'));
 const Documents = lazyLoad(() => import('@module/basic-info/features/employees/Documents'));
