@@ -15,7 +15,7 @@ const Employees = () => {
               key={index}
               className="flex flex-col items-center justify-center gap-2 p-5 relative shadow-[0_1px_3px_0_#080E1C4D] "
             >
-              <Avatar size='xl' className=" rounded-3xl" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+              <Avatar size='xl' className=" rounded-3xl" color="primary" src="" />
               <div className="absolute top-3 right-3">
                 {/*<TickIcon color={worker.isAct  ive ? '#0B76B7' : '#CCC'} />*/}
               </div>
