@@ -2,7 +2,6 @@ import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@co
 import { NotificationFavorite } from 'iconsax-react';
 import { useState } from 'react';
 
-// ✅ INTERFACE
 interface PreEmploymentHealthRecordsModalsProps {
   onSubmit: (newRecord: any) => void;
 }
@@ -15,7 +14,6 @@ const PreEmploymentHealthRecordsModals: React.FC<PreEmploymentHealthRecordsModal
     ecg: '', bloodLipid: '', bloodIron: '', attachedFile: '', date: '', description: ''
   });
 
-  // ✅ Handle Change برای همه input ها
   const handleInputChange = (field: string) => (value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -34,9 +32,8 @@ const PreEmploymentHealthRecordsModals: React.FC<PreEmploymentHealthRecordsModal
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-y-6 p-4 overflow-y-scroll max-h-[70vh]">
       <AppModal.Body>
-        <div className="flex flex-col gap-y-6 p-4 overflow-y-scroll max-h-[70vh]">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
             <AppAutoComplete
               props={{
@@ -270,7 +267,6 @@ const PreEmploymentHealthRecordsModals: React.FC<PreEmploymentHealthRecordsModal
               radius: 'lg',
             }}
           />
-        </div>
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton
@@ -294,7 +290,7 @@ const PreEmploymentHealthRecordsModals: React.FC<PreEmploymentHealthRecordsModal
           }}
         />
       </AppModal.Footer>
-    </>
+    </div>
   );
 };
 

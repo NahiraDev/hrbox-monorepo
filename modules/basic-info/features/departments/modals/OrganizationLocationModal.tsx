@@ -3,7 +3,7 @@ import { Add, Location } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 import { Avatar } from '@heroui/react';
 
-export const OrgLocation = () => {
+export const OrganizationLocationModal = () => {
   const { openModal } = useModalContext();
 
   return (
@@ -22,7 +22,7 @@ export const OrgLocation = () => {
                   size: 'xs',
                   radius: 'sm',
                   color: 'white',
-                  variant: 'solid',
+                  variant: 'light',
                   isIconOnly: true,
                   onPress: () => openModal('edit', undefined),
                   content: (

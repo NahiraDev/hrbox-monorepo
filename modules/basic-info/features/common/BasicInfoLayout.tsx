@@ -56,7 +56,7 @@ const ListMore = ({ onSelect }: { onSelect: (key: Key) => void }) => (
     aria-label="More Actions"
     items={moreItems}
     onAction={onSelect}
-    className="absolute w-[216px] bg-white shadow-sm rounded-lg z-10 p-3"
+    className="absolute w-[216px] bg-white shadow-sm rounded-sm z-10 p-2 mt-3 right-135"
   >
     {(item: MoreItem) => (
       <ListboxItem key={item.key} className="hover:bg-primary-100">

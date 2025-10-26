@@ -1,5 +1,5 @@
 import { lazyLoad } from '@core/routes';
-import { DocumentSketch,Location } from 'iconsax-react';
+import { DocumentSketch, LikeShapes, Location } from 'iconsax-react';
 
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
@@ -12,6 +12,9 @@ const OrganizationalLocations = lazyLoad(
 );
 const AllEmployees = lazyLoad(
   () => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'),
+);
+const EmployeeSatisfactionCalendarSubHeader = lazyLoad(
+  () => import('@module/basic-info/features/employees/sub-header/EmployeeSatisfactionCalendarSubHeader'),
 );
 
 export const BasicInfoSubHeaders: any = [
@@ -45,6 +48,14 @@ export const BasicInfoSubHeaders: any = [
     props: {
       name: 'AllEmployees',
       icon: Location,
+    },
+  },
+  {
+    path: BasicInfoPaths.EmployeeSatisfactionCalendar,
+    component: EmployeeSatisfactionCalendarSubHeader,
+    props: {
+      name: 'Satisfaction Status',
+      icon: LikeShapes,
     },
   },
 ];
