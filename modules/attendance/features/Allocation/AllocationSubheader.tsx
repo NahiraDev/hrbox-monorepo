@@ -1,8 +1,10 @@
 import { AppButton, AppSearchInput } from '@core/components';
-import { Add, ArrowLeft2, Refresh, Refresh2 } from 'iconsax-react';
-import { NewOneModal } from '@module/process-maker/features/modals';
+import { Add, ArrowLeft2, Hierarchy3, Refresh } from 'iconsax-react';
+import { useModalContext } from '@core/context';
+import IpAllocationModal from '@module/attendance/features/modals/IpAllocationModal';
 
 const AllocationSubheader = () => {
+  const {openModal}=useModalContext();
   return(
     <>
       <div className="w-full flex flex-row justify-between">
@@ -24,6 +26,7 @@ const AllocationSubheader = () => {
               radius: 'lg',
               startContent: <Add />,
               className: 'border-1 border-primary',
+              onClick:()=> openModal ("confirm",'IpAllocationModal',<IpAllocationModal/>,null,"2xl","Add New One",<Hierarchy3 color="white"/>),
               content: 'Add new One',
             }}
           />

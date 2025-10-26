@@ -7,8 +7,7 @@ const ShiftAllocation=()=>{
       <div className="h-full w-full flex flex-col ">
     <AppTable
       data={Allocatio}
-      hasPagination={true}
-    />
+      hasPagination={true}/>
       </div>
     </>
   )
