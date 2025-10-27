@@ -10,6 +10,7 @@ import {
 } from '@heroui/react';
 import { AppButton, AppPagination } from '@core/components';
 import { createPortal } from 'react-dom';
+import { Edit, Trash } from 'iconsax-react';
 export interface ColumnConfig<T = any> {
   key: string;
   label?: string;
@@ -73,6 +74,9 @@ export interface AppTableProps<T = any> {
   loading?: boolean;
   error?: string;
   emptyMessage?: string | React.ReactNode;
+  showStatus?: boolean;
+  onEdit?: (row: T, index: number) => void;
+  onDelete?: (row: T, index: number) => void;
 }
 
 export const AppTable = <T extends Record<string, any>>({
@@ -91,6 +95,9 @@ export const AppTable = <T extends Record<string, any>>({
   styles = {},
   loading = false,
   error,
+  showStatus = false,
+  onEdit,
+  onDelete,
   emptyMessage = 'No data available',
 }: AppTableProps<T>) => {
   const shouldPaginate = variant === 'attendance' ? false : hasPagination;
@@ -277,6 +284,32 @@ export const AppTable = <T extends Record<string, any>>({
         })}
       </div>
     );
+  }
+  const renderStatusActions = (row: T, index: number) => {
+    return (
+      <div className='flex items-center justify-center gap-2'>
+            <AppButton
+              props={{
+                size: 'sm',
+                radius: 'full',
+                variant: 'light',
+                color: 'black',
+                onPress: () => onEdit(row, index),
+                content: <Edit />,
+              }}
+            />
+            <AppButton
+              props={{
+                size: 'sm',
+                radius: 'full',
+                variant: 'light',
+                color: 'black',
+                onPress: () => onDelete(row, index),
+                content: <Trash />,
+              }}
+            />
+      </div>
+    );
   };
 
   if (loading) {
@@ -326,6 +359,16 @@ export const AppTable = <T extends Record<string, any>>({
     );
   }
 
+  if (showStatus) {
+    headerColumns.push(
+      <TableColumn
+        key='status'
+        className='bg-primary !h-12 text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
+      >
+        Status
+      </TableColumn>
+    );
+  }
   return (
     <div
       ref={tableContainerRef}
@@ -412,6 +455,14 @@ export const AppTable = <T extends Record<string, any>>({
               cells.push(
                 <TableCell key='actions' className='text-secondary-400 text-xs'>
                   {renderRowActions(row, index)}
+                </TableCell>
+              );
+            }
+
+            if (showStatus) {
+              cells.push(
+                <TableCell key='status' className='text-secondary-400 text-xs'>
+                  {renderStatusActions(row, index)}
                 </TableCell>
               );
             }

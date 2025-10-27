@@ -1,5 +1,6 @@
 import { AppTable } from '@root/core';
 import { Allocatio } from '@module/attendance/app/mock';
+import { useState } from 'react';
 
 const FaceAllocation=()=>{
   return(

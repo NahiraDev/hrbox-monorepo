@@ -1,7 +1,7 @@
 import { AppButton, AppSearchInput } from '@core/components';
 import { Add, ArrowLeft2, Hierarchy3, Refresh } from 'iconsax-react';
 import { useModalContext } from '@core/context';
-import IpAllocationModal from '@module/attendance/features/modals/IpAllocationModal';
+import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
 
 const AllocationSubheader = () => {
   const {openModal}=useModalContext();
@@ -26,7 +26,7 @@ const AllocationSubheader = () => {
               radius: 'lg',
               startContent: <Add />,
               className: 'border-1 border-primary',
-              onClick:()=> openModal ("confirm",'IpAllocationModal',<IpAllocationModal/>,null,"2xl","Add New One",<Hierarchy3 color="white"/>),
+              onClick:()=> openModal ("confirm",'ShiftAllocationModal',<ShiftAllocationModal/>,null,"2xl","Add New One",<Hierarchy3 color="white"/>),
               content: 'Add new One',
             }}
           />
