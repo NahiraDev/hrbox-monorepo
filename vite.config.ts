@@ -1,4 +1,5 @@
 import { type ConfigEnv, defineConfig, PluginOption, type UserConfig } from 'vite';
+import path from 'path'
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
@@ -463,13 +464,13 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       open: true,
       cors: true,
       https: {
-        key: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2-key.pem'),
-        cert: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2.pem'),
+        key: fs.readFileSync(path.resolve(__dirname ,'.cert/localhost+2-key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, '.cert/localhost+2.pem')),
       },
       hmr: {
         overlay: false,
-        clientPort: 443,
-        port: 5173,
+        // clientPort: 443,
+        port: 5174,
         protocol: 'wss',
         host: 'front.hrbox.me',
       },

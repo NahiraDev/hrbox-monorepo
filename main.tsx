@@ -69,7 +69,7 @@ async function bootstrap() {
 
     console.log('🏪 Creating Redux store...');
     // Create store with all reducers
-    const { store, persistor } = createStoreWithReducers(serviceRegistry.getAllReducers());
+    const { store, persistor } = createStoreWithReducers();
 
     console.log('🎨 Rendering application...');
     // Render the main application
