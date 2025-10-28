@@ -1,12 +1,14 @@
 import { lazyLoad } from '@core/routes';
 
 import { AttendancePath } from '@module/attendance/app/paths';
+import { ShiftAllocationSubheader } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
+import { Refresh2 } from 'iconsax-react';
+import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
 
 const DashboardSubHeader = lazyLoad(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));
 const EntryExitSubHeader = lazyLoad(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
 const CalenderSubHeader = lazyLoad(() => import('@module/attendance/features/attendanceCalender/CalenderSubHeader'));
 const ApprovalsSubHeader = lazyLoad(() => import('@module/attendance/features/ListApprovals/ApprovalsSubHeader'));
-const Allocation = lazyLoad(() => import('@module/attendance/features/Allocation/AllocationSubheader'));
 
 export const AttendanceSubHeaders: any = [
   {
@@ -29,6 +31,6 @@ export const AttendanceSubHeaders: any = [
     component:ApprovalsSubHeader ,
   },{
     path: AttendancePath.ShiftAllocation,
-    component:Allocation,
+    component:ShiftAllocationSubheader,
   },
 ];

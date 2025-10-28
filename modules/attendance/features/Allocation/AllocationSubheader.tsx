@@ -1,20 +1,35 @@
 import { AppButton, AppSearchInput } from '@core/components';
-import { Add, ArrowLeft2, Hierarchy3, Refresh } from 'iconsax-react';
+import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
-import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
-
-const AllocationSubheader = () => {
-  const {openModal}=useModalContext();
+// interface AllocationSubheaderProps {
+//   name: string;
+//   icon: any;
+//   modalComponent: React.ComponentType;
+// }
+interface AllocationSubheaderProps {
+  name: string;
+  subheaderIcon: React.ComponentType<any>;
+  modalComponent: React.ComponentType;
+}
+const AllocationSubheader = ({
+                               name,
+                               subheaderIcon: SubheaderIcon,
+                               modalComponent: ModalComponent
+                             }:AllocationSubheaderProps) => {
+  const {openModal} = useModalContext();
+  const handlerOpenModal=()=>{
+    openModal('confirm',name,<ModalComponent/>, null,'2xl','Add New One',<Hierarchy3 color="white"/>)
+  }
   return(
     <>
       <div className="w-full flex flex-row justify-between">
         <div className="flex flex-row gap-3 items-center">
           <span><ArrowLeft2/></span>
           <AppButton props={{
-            content:'Shift Allocation',
+            content:name,
             size:'sm',
             className:'bg-primary-400 text-white',
-            startContent:<span><Refresh size={18}/></span>,
+            startContent:<span><SubheaderIcon/></span>,
           }}/>
         </div>
         <div className="flex flex-row gap-2.5">
@@ -26,8 +41,8 @@ const AllocationSubheader = () => {
               radius: 'lg',
               startContent: <Add />,
               className: 'border-1 border-primary',
-              onClick:()=> openModal ("confirm",'ShiftAllocationModal',<ShiftAllocationModal/>,null,"2xl","Add New One",<Hierarchy3 color="white"/>),
-              content: 'Add new One',
+              onClick:handlerOpenModal,
+                content:'Add New One',
             }}
           />
         </div>

@@ -9,6 +9,9 @@ const TrafficCalender = lazyLoad(() => import('@module/attendance/features/atten
 const ExportPage = lazyLoad(() => import('@module/attendance/features/Export/ExportPage'));
 const ListOfApprovals = lazyLoad(() => import('@module/attendance/features/ListApprovals/ListApprovals'));
 const ShiftAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/ShiftAllocation'));
+const FaceAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/FaceAllocation'));
+const IpAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/IpAllocation'));
+const LocationAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/LocationAllocation'));
 
 export const AttendanceContents: any = [
   {
@@ -37,5 +40,14 @@ export const AttendanceContents: any = [
   {
     path: AttendancePath.ShiftAllocation,
     component: ShiftAllocation,
+  },{
+    path: AttendancePath.FaceAllocation,
+    component: FaceAllocation,
+  },{
+    path: AttendancePath.IpAllocation,
+    component: IpAllocation,
+  },{
+    path: AttendancePath.LocationAllocation,
+    component: LocationAllocation,
   },
 ];

@@ -1,7 +1,7 @@
 import { AppButton, AppModal } from '@core/components';
 import ShiftAllocationEdit from '@module/attendance/features/forms/ShiftAllocationEdit';
 import { FormProvider, useModalContext } from '@core/context';
-import {
+import ShiftAllocationForm, {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
@@ -13,8 +13,9 @@ const ShiftAllocationModal=()=>{
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
+          closeModal('confirm', 'ShiftAllocationModal');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
-        <ShiftAllocationEdit/>
+        <ShiftAllocationForm/>
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -34,9 +35,9 @@ const ShiftAllocationModal=()=>{
               type: 'submit',
               size: 'md',
               radius: 'lg',
+              form:'shift-allocation-form',
               className: 'text-white',
               content: 'Submit',
-              onClick: ()=>closeModal('confirm', 'ShiftAllocationModal'),
             }}
           />
         </div>

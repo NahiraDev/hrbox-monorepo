@@ -25,6 +25,13 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
+    console.log(values.title);
+    console.log(values.type);
+    console.log(values.ChooseShift);
+    console.log(values.FromDate);
+    console.log(values.organization);
+    console.log(values.Employee);
+    console.log(values.Description);
   return {
     title: values.title,
     type: values.type,
@@ -42,10 +49,10 @@ const ShiftAllocationForm=()=>{
 
   return(
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form id="shift-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
-                      defaultValue='Person' orientation='horizontal' value={values.type} >
+                      defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
             <Radio value="Person" classNames={{wrapper:'border-2 border-primary'}} >Person</Radio>
             <Radio value="Group" classNames={{wrapper:'border-2 border-primary'}}>Group</Radio>
             <Radio value="Job Title" classNames={{wrapper:'border-2 border-primary'}}>Job Title</Radio>
@@ -73,9 +80,9 @@ const ShiftAllocationForm=()=>{
           <div className='flex flex-row justify-between'>
             <AppAutoComplete props={{
               label:'Organization',
-              name:'Organization',
-              value:values.Organization,
-              error: touched.Organization && errors.Organization,
+              name:'organization',
+              value:values.organization,
+              error: touched.organization && errors.organization,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
@@ -100,11 +107,11 @@ const ShiftAllocationForm=()=>{
           </div>
           <div className="w-full">
             <AppTextArea props={{
-              label:'Descriptions',
+              label:'Description',
               className:'border border-[#DEE1E8]',
-              name:'Descriptions',
-              value:values.Descriptions,
-              error: touched.Descriptions && errors.Descriptions,
+              name:'Description',
+              value:values.Description,
+              error: touched.Description && errors.Description,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
