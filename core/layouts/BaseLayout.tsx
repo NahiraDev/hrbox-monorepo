@@ -19,28 +19,34 @@ export const BaseLayout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode dark:bg-dark-mode bg-cover bg-blend-screen bg-no-repeat bg-center pb-10 bg-white">
+    <div className='shadow-tight text-foreground bg-light-mode dark:bg-dark-mode flex h-screen flex-col bg-white bg-cover bg-center bg-no-repeat pr-16 pb-10 pl-8 bg-blend-screen'>
       <AppHeader />
-      <div className="flex flex-1 min-h-0 gap-4">
-        <div className="flex flex-1 min-h-0 gap-4 items-stretch">
-          <div className="flex flex-col flex-1 min-h-0 gap-4">
-            <div className="flex flex-1 min-h-0 gap-8 w-full">
+      <div className='flex min-h-0 flex-1 gap-4'>
+        <div className='flex min-h-0 flex-1 items-stretch gap-4'>
+          <div className='flex min-h-0 flex-1 flex-col gap-4'>
+            <div className='flex min-h-0 w-full flex-1 gap-8'>
               <AppSideBar />
-              <div className="flex flex-col gap-4 w-full">
+              <div className='flex w-full flex-col gap-4'>
                 <AppSubHeader />
-                <div className="flex flex-col gap-3 border border-primary-400 rounded-2xl overflow-hidden bg-surface-50 ">
-                  <AppContent
-                    fallback={
-                      <div className="flex items-center justify-center h-full">
-                        <div className={`${showDoc ? 'border border-primary-400 bg-surface-50 dark:bg-[rgba(4,66,92,0.60)] shadow-theme-md' : 'rounded-xl'} flex-1 overflow-hidden relative`} />
-                      </div>
+                <div className='border-primary-400 bg-surface-50 flex flex-col gap-3 overflow-hidden rounded-2xl border'>
+                  <ProtectedRoute
+                    children={
+                      <AppContent
+                        fallback={
+                          <div className='flex h-full items-center justify-center'>
+                            <div
+                              className={`${showDoc ? 'border-primary-400 bg-surface-50 shadow-theme-md border dark:bg-[rgba(4,66,92,0.60)]' : 'rounded-xl'} relative flex-1 overflow-hidden`}
+                            />
+                          </div>
+                        }
+                      />
                     }
                   />
                 </div>
               </div>
             </div>
             {showDoc && (
-              <div className="mb-4 shrink-0">
+              <div className='mb-4 shrink-0'>
                 <AppDocs />
               </div>
             )}
@@ -48,8 +54,7 @@ export const BaseLayout = () => {
         </div>
       </div>
 
-        <AppSupportButton />
-      </div>
-    </ProtectedRoute>
+      <AppSupportButton />
+    </div>
   );
 };

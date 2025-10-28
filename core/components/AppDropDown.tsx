@@ -1,5 +1,4 @@
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@heroui/react';
-import React from 'react';
 
 interface AppDropDownItem {
   key: string;
