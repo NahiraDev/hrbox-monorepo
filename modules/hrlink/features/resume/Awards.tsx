@@ -6,8 +6,10 @@ import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 import { CupStarIcon } from '@module/hrlink/icons';
+import { useModalContext } from '@core/context';
 
 const Awards = () => {
+  const { openModal } = useModalContext();
   const [fetchAwards, { data }] = useLazyFetchAwardsQuery();
   const [deleteAward] = useDeleteAwardMutation()
   useEffect(() => {
@@ -44,7 +46,9 @@ const Awards = () => {
                             color: 'white',
                             size: 'md',
                             radius: 'sm',
-                            onPress:openModal('delete' , 'deleteAward' ,  deleteAward),
+                            onPress:openModal('delete' , 'deleteAward' ,  <AppDeleteModal props={{
+                              handleDelete:deleteAward
+                            }}/>),
                             content: <Trash className="text-secondary-1000" size="14" />,
                           }}
                         />
@@ -91,7 +95,6 @@ const Awards = () => {
         <GeneralInformation />
         <UserLocation />
       </div>
-      <AppDeleteModal/>
     </div>
   );
 };

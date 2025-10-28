@@ -19,7 +19,7 @@ export const GeneralInformationModal = () =>{
               // await createGeneralInformation(handleSubmitGeneralInformation(values)).unwrap();
             }}
           >
-            <GeneralInformationForm />
+            <GeneraGeneralInformationModallInformationForm />
           </FormProvider>
         </AppModal.Body>
         <AppModal.Footer>

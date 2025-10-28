@@ -60,7 +60,7 @@ export const UserLocation = () => {
             props={{
               size: 'xs',
               color: 'white',
-              onPress: () => openModal('confirm', 'location'),
+              onPress: () => openModal('confirm', 'location' ,  <MapModal isEdit={hasLocation} position={position} setPosition={setPosition} />),
               content: hasLocation ? (
                 <Edit className="text-secondary-1000" size="14" />
               ) : (
@@ -95,7 +95,6 @@ export const UserLocation = () => {
           <div className="flex items-center justify-center h-full text-gray-500">Loading map...</div>
         )}
       </CardBody>
-      <MapModal isEdit={hasLocation} position={position} setPosition={setPosition} />
     </Card>
   );
 };

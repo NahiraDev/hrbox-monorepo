@@ -1,7 +1,7 @@
 import { createBaseApi } from '@core/apis';
 
 export const SSOHRLinkBaseApi = createBaseApi(
-  import.meta.env.VITE_SSO_API_URL,
+  "https://hrlink.hrbox.me/",
   'SSOHRLink',
-  ['SSOHRLink'] as const
+  ['SSOHRLink' , 'User'] as const
 );

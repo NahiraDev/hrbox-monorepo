@@ -23,13 +23,22 @@ export const formValidationErrorLogin = Yup.object().shape({
 
 export const handleSubmitLogin = (values: any) => {
   return {
-    UserName: values.UserName,
+    Username: values.Username,
     Password: values.Password,
   };
 };
 
 export const LoginForm = () => {
-  const { errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, formError } = useFormContext();
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting
+  } = useFormContext();
+
   const { t } = useTranslation();
   const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -49,6 +58,7 @@ export const LoginForm = () => {
             props={{
               label: t('user_name'),
               name: 'Username',
+              value: values.Username,
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Username && errors.Username,
@@ -61,6 +71,7 @@ export const LoginForm = () => {
               label: t('user_password'),
               name: 'Password',
               type: isVisiblePassword ? 'text' : 'password',
+              value: values.Password,
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Password && errors.Password,

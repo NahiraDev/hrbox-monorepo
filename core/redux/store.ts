@@ -36,7 +36,7 @@ export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Pe
   const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
     key: 'root',
     storage: storageInstance,
-    whitelist: ['language'],
+    whitelist: ['language' , 'auth' , 'formCache'],
   };
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
