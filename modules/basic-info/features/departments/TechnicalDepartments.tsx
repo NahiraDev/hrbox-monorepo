@@ -8,6 +8,7 @@ import { Category } from 'iconsax-react';
 import { TickIcon } from '@root/shared/icons/TickIcon';
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
 import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();
