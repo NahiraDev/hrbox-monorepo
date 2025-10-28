@@ -12,6 +12,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import analyzer from 'vite-bundle-analyzer';
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // Development Experience
 import { checker } from 'vite-plugin-checker';
@@ -349,6 +350,14 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           }) as PluginOption,
         ]
       : []),
+    basicSsl({
+      /** name of certification */
+      name: 'HRBox',
+      /** custom trust domains */
+      domains: ['front.hrbox.me'],
+      /** custom certification directory */
+      certDir: '/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2-key.pem',
+    }),
   ];
 
   return {
@@ -467,8 +476,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         cert: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2.pem'),
       },
       hmr: {
-        overlay: false,
-        clientPort: 443,
+        overlay: true,
         port: 5173,
         protocol: 'wss',
         host: 'front.hrbox.me',
