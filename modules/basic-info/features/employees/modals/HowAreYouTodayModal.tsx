@@ -1,5 +1,4 @@
 import { AppButton } from '@root/core/';
-import React from 'react';
 import { BeHappy } from '@root/shared/icons/BeHappy';
 import { Frown } from '@root/shared/icons/Frown';
 import { Happy } from '@root/shared/icons/Happy';

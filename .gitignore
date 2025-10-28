@@ -22,7 +22,9 @@ dist-ssr/
 
 # Local env
 .env
-.env.*
+.env.development
+.env.production
+.env.staging
 *.local
 
 # Editor files

@@ -1,5 +1,4 @@
 // @module/basic-info/features/employees/modals/DynamicAddModal.tsx
-import React from 'react';
 import AddNewJob from './AddNewJob';
 import AddNewEducation from './AddNewEducation';
 import AddNewSkill from './AddNewSkill';
