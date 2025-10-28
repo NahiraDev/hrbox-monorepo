@@ -4,26 +4,48 @@ import { AppButton } from '@core/components';
 import DocumentsModal from '@module/basic-info/features/employees/modals/DocumentsModal';
 import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
 import { useModalContext } from '@root/core';
-import { Category, TickCircle } from 'iconsax-react';
+import { Category } from 'iconsax-react';
+import { TickIcon } from '@root/shared/icons/TickIcon';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
+import { useNavigate } from 'react-router-dom';
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-between p-4">
-      <div className="w-full grid grid-cols-9 gap-4">
+      <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
-            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
-            <Avatar className="w-30 h-30 bg-primary-400 text-white" radius="lg" src="" />
-            <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
-            <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
+            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative"
+            >
+           <Avatar className="w-30 h-30 sm:w-30 sm:h-30 bg-primary-400 text-white" radius="lg" src="" />
+            <div className="absolute top-2 right-3">
+              <TickIcon color="#CCCCCC"/>
+            </div>
+            <div className="w-full text-center mt-2 group">
+              <div className="relative w-full overflow-hidden h-6 flex items-center justify-center">
+                <span className="block lg:text-sm sm:text-xs text-xs font-semibold text-secondary-1000 truncate">
+                {user.name}
+                </span>
+                {user.name.length > 13 && (
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100  pointer-events-none transition-opacity duration-200">
+                    <div className="animate-marquee whitespace-nowrap">
+                     <span className="lg:text-sm sm:text-xs text-xs font-semibold text-secondary-1000 inline-block">
+                       {user.name}&nbsp;&nbsp;
+                    </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
             <AppButton
               props={{
                 className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary-400',
                 size: 'sm',
                 radius: 'sm',
-                onPress: () => openModal('custom', "",<OrganizationDepartmentModal/> , undefined, '3xl',"Organization Depatments", <Category className='text-white'/> ),
+                onPress: () => {navigate(BasicInfoPaths.PersonalInformation)},
                 content: <span>{user.job}</span>,
               }}
             />
@@ -31,7 +53,7 @@ const TechnicalDepartments = () => {
         ))}
       </div>
       <div className="w-full flex items-center justify-end">
-       <span className="!text-[100px] !font-extrabold text-secondary-400/40">200</span>
+       <span className="!text-[100px] !font-extrabold text-secondary-400/20">200</span>
       </div>
     </div>
   );

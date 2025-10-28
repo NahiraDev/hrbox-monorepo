@@ -1,8 +1,18 @@
 import { AppButton, useModalContext } from '@root/core';
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
-import { Add, ArrowLeft2, Edit, Hierarchy3, SearchNormal, Setting4, Trash } from 'iconsax-react';
+import {
+  Add,
+  ArrowLeft2,
+  Edit,
+  Filter,
+  Hierarchy3,
+  SearchNormal,
+  Setting4,
+  Trash,
+} from 'iconsax-react';
 import { OrganizationLocationModal } from '@module/basic-info/features/departments/modals/OrganizationLocationModal';
 import { useNavigate } from 'react-router-dom';
+import FilterCalenderModal from '@module/basic-info/features/employees/modals/FilterCalenderModal';
 
 const EmployeesSubHeader = (props: any) => {
   const { openModal } = useModalContext();
@@ -41,7 +51,7 @@ const EmployeesSubHeader = (props: any) => {
             size: 'lg',
             radius: 'sm',
             isIconOnly: true,
-            onPress: () => "",
+            onPress: () => openModal('edit',"", <FilterCalenderModal/>,undefined,"sm","Filter", <Filter className='text-white'/> ),
             content: (
               <span >
                 <Setting4 size="28" />

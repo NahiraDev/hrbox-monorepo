@@ -119,8 +119,8 @@ export const technicalDepartment = [
   {
     img: '',
     diactive: ' ',
-    name: ' parisa',
-    job: ' CEO',
+    name: ' mohammad hosseinzade sahafi',
+    job: ' CEO Nahira company',
   },
   {
     img: '',

@@ -65,7 +65,7 @@ const EmployeeSatisfactionCalendarModal = ({ data = sampleData, onItemPress }) =
               color: 'white',
               variant: 'solid',
               isIconOnly: true,
-              onPress: () => openModal('edit',"", <FilterCalenderModal/>,undefined,"sm","Filter", <Filter className='text-white'/> ),
+              onPress: () =>("" ),
               className: 'shadow-sm rounded-2xl',
               content: <MentorCard {...item} />,
             }}
