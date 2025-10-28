@@ -18,7 +18,7 @@ const TestReport = () => {
             <span>Test Report</span>
           </div>
           {/*todo height*/}
-          <div className="grid grid-cols-4 gap-3 overflow-y-scroll max-h-[39vh] p-2">
+          <div className="grid grid-cols-4 gap-3 overflow-y-scroll max-h-[100vh] p-2">
             {testReport.map((worker, index) => (
               <Card key={index} className="p-3 flex flex-col gap-2 shadow-light-tight-1">
                 <div className="flex items-center justify-between gap-3">

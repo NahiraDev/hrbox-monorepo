@@ -15,7 +15,7 @@ const Employees = () => {
               key={index}
               className="flex flex-col items-center justify-center gap-2 p-5 relative shadow-[0_1px_3px_0_#080E1C4D] "
             >
-              <Avatar radius="lg"  src="" className="w-30 h-30"/>
+              <Avatar radius="lg" color="primary" src="" className="w-30 h-30 text-white"/>
               <div className="absolute top-3 right-3">
                 {/*<TickIcon color={worker.isAct  ive ? '#0B76B7' : '#CCC'} />*/}
               </div>

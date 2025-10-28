@@ -78,7 +78,7 @@ const Documents = () => {
                               onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
                             />,
                             undefined,
-                            'sm'
+                            'lg'
                           ),
                         content: (
                           <Avatar
