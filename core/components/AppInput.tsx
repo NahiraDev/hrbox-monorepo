@@ -1,12 +1,11 @@
 import { Input } from '@heroui/react';
 import clsx from 'clsx';
-import {updateAppInputValue , useAppDispatch, useAppSelector } from '@core/redux';
 
 interface AppInputProps {
   label?: string;
   required?: boolean;
   error?: any;
-  name: any;
+  name: string;
   type?: string;
   variant?: any;
   color?: any;
@@ -15,6 +14,7 @@ interface AppInputProps {
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: any;
   size?: 'sm' | 'md' | 'lg';
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
   className?: string;
@@ -60,18 +60,12 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
     onFocus,
     onBlur,
     onChange,
+    value,
     size = 'md',
     radius = 'md',
     className,
     ...rest
   } = props;
-  const dispatch = useAppDispatch();
-  const value = useAppSelector((state) => state?.AppInput) || '';
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (name) dispatch(updateAppInputValue({ name, value: e.target.value }));
-    props.onChange?.(e);
-  };
 
   const inputWrapperClassNames = clsx(
     'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
@@ -113,7 +107,7 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
         value={value}
         variant={variant}
         onBlur={onBlur}
-        onChange={handleChange}
+        onChange={onChange}
         onFocus={onFocus}
         {...rest}
       />

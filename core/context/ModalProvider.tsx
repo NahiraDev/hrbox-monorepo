@@ -1,5 +1,4 @@
 import { createContext, type ReactNode, useContext, useState } from 'react';
-import { preloadAppModalData, resetAppModalData } from '@core/redux';
 
 type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
 
@@ -34,17 +33,12 @@ export const ModalProvider: React.FC<{
       );
       return [...filtered, { type, name, data, component, size, title, icon }];
     });
-
-    if (data) {
-      store.dispatch(preloadAppModalData({ modalName: name, data }));
-    }
   };
 
   const closeModal = (type: ModalType | string, name: string) => {
     setModals(prev =>
       prev.filter(modal => !(modal.type === type && modal.name === name)),
     );
-    store.dispatch(resetAppModalData({ modalName: name }));
   };
 
   const getModalData = (type: ModalType | string, name: string) => {

@@ -33,6 +33,7 @@ import { OutputOptions } from 'rollup';
 import tailwindcss from '@tailwindcss/vite';
 import { federation } from '@module-federation/vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import * as fs from 'node:fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -190,34 +191,36 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       webp: { quality: 85 },
     }) as PluginOption,
     // Micro-frontend support with Module Federation
-    ...(isProduction ? [
-    federation({
-      name: 'hrbox',
-      filename: 'remoteEntry.js',
-      manifest: true,
-      exposes: {
-        './main': './main.tsx',
-      },
-      remotes: {
-        remote: {
-          type: 'module',
-          name: 'remote',
-          entry: 'https://localhost:5000/remoteEntry.js',
-          entryGlobalName: 'remote',
-          shareScope: 'default',
-        },
-        var_remote: 'var_remote@https://localhost:5000/remoteEntry.js',
-      },
-      shared: {
-        react: {
-          singleton: true,
-        },
-        'react/': {
-          singleton: true,
-        },
-      },
-    }),
-    ] : []),
+    ...(isProduction
+      ? [
+          federation({
+            name: 'hrbox',
+            filename: 'remoteEntry.js',
+            manifest: true,
+            exposes: {
+              './main': './main.tsx',
+            },
+            remotes: {
+              remote: {
+                type: 'module',
+                name: 'remote',
+                entry: 'https://localhost:5000/remoteEntry.js',
+                entryGlobalName: 'remote',
+                shareScope: 'default',
+              },
+              var_remote: 'var_remote@https://localhost:5000/remoteEntry.js',
+            },
+            shared: {
+              react: {
+                singleton: true,
+              },
+              'react/': {
+                singleton: true,
+              },
+            },
+          }),
+        ]
+      : []),
 
     // Static asset copying with optimization
     ...(isProduction
@@ -394,7 +397,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           unknownGlobalSideEffects: false,
         },
         output: {
-          entryFileNames: (chunkInfo) => {
+          entryFileNames: chunkInfo => {
             if (chunkInfo.name === 'main') return 'index.js';
             if (chunkInfo.name === 'core') return 'core/index.js';
             if (chunkInfo.name === 'sso') return 'modules/sso/index.js';
@@ -459,18 +462,16 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       strictPort: false,
       open: true,
       cors: true,
-
-      proxy: {
-        '/DesktopModules': {
-          target: envVars.VITE_API_URL,
-          changeOrigin: true,
-          secure: false,
-        },
+      https: {
+        key: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2-key.pem'),
+        cert: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2.pem'),
       },
       hmr: {
         overlay: false,
         clientPort: 443,
         port: 5173,
+        protocol: 'wss',
+        host: 'front.hrbox.me',
       },
       watch: {
         usePolling: true,
@@ -488,17 +489,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     },
     appType: 'spa',
     optimizeDeps: {
-      include: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        '@emotion/react',
-        '@emotion/styled',
-      ],
-      exclude: [
-        '@vite/client',
-        '@vite/env',
-      ],
+      include: ['react', 'react-dom', 'react-router-dom', '@emotion/react', '@emotion/styled'],
+      exclude: ['@vite/client', '@vite/env'],
     },
 
     // Worker configuration

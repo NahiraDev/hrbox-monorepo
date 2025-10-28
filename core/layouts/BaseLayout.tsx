@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { AppSupportButton } from '@core/components';
 import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '@core/sections';
+import { ProtectedRoute } from '@core/routes/protectedRoute';
 
 export const BaseLayout = () => {
   const location = useLocation();
@@ -47,7 +48,8 @@ export const BaseLayout = () => {
         </div>
       </div>
 
-      <AppSupportButton />
-    </div>
+        <AppSupportButton />
+      </div>
+    </ProtectedRoute>
   );
 };
