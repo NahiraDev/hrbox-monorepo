@@ -1,8 +1,6 @@
 import { TimerStart } from 'iconsax-react';
 
 import { EntryExitData } from '@module/attendance/app/mock';
-// import React from 'react';
-// import AppAlert from 'core/components/AppAlert';
 
 import { AppTable } from '@core/components';
 import { AppButton } from '@core/components';
@@ -10,7 +8,6 @@ import { useModalContext } from '@core/context';
 import UserLocationModal from '@module/attendance/features/modals/UserLocationModal';
 
 const EntryExit = () => {
-  // const [visible, setVisible] = React.useState(false);
   const { openModal } = useModalContext();
 
   return (

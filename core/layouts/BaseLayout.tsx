@@ -19,17 +19,16 @@ export const BaseLayout = () => {
   }, [location.pathname]);
 
   return (
-    <ProtectedRoute>
-      <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode dark:bg-dark-mode bg-cover bg-blend-screen bg-no-repeat bg-center pb-10">
-        <AppHeader />
-
-        <div className="flex flex-1 min-h-0 gap-4">
-          <div className="flex flex-1 min-h-0 gap-4 items-stretch">
-            <div className="flex flex-col flex-1 min-h-0 gap-4">
-              <div className="flex flex-1 min-h-0 gap-8 w-full">
-                <AppSideBar />
-                <div className="flex flex-col gap-3 w-full">
-                  <AppSubHeader />
+    <div className="flex flex-col h-screen shadow-tight pr-16 pl-8 text-foreground bg-light-mode dark:bg-dark-mode bg-cover bg-blend-screen bg-no-repeat bg-center pb-10 bg-white">
+      <AppHeader />
+      <div className="flex flex-1 min-h-0 gap-4">
+        <div className="flex flex-1 min-h-0 gap-4 items-stretch">
+          <div className="flex flex-col flex-1 min-h-0 gap-4">
+            <div className="flex flex-1 min-h-0 gap-8 w-full">
+              <AppSideBar />
+              <div className="flex flex-col gap-4 w-full">
+                <AppSubHeader />
+                <div className="flex flex-col gap-3 border border-primary-400 rounded-2xl overflow-hidden bg-surface-50 ">
                   <AppContent
                     fallback={
                       <div className="flex items-center justify-center h-full">
@@ -39,14 +38,15 @@ export const BaseLayout = () => {
                   />
                 </div>
               </div>
-              {showDoc && (
-                <div className="mb-4 shrink-0">
-                  <AppDocs />
-                </div>
-              )}
             </div>
+            {showDoc && (
+              <div className="mb-4 shrink-0">
+                <AppDocs />
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
         <AppSupportButton />
       </div>

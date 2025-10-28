@@ -18,9 +18,10 @@ export const BasicInfoMenu = (): { label: string; path: string; icon?: ReactNode
 
   const menuConfig: Record<string, string> = {
     Dashboard: '/Dashboard',
-    Departments: '/OrganizationDepartments',
-    Locations: '/OrganizationalLocations',
-    Employees: '/PersonalInformation',
+    Departments: '/organization-departments',
+    Locations: '/organizational-locations',
+    Employees: '/all-employees',
+    jobs:'/jobs',
     setting: '/Setting',
   };
 

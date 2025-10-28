@@ -13,11 +13,15 @@ import {
   Profile2User,
   MessageEdit,
   Add,
+  UserSquare,
+  People,
 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
-
+// import { useModalContext } from '@core/context';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';
+import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';
+import { DependentsModal } from '@module/basic-info/features/employees/modals/DependentsModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -29,9 +33,9 @@ const Dependents = () => {
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col ">
               <div className="flex items-center justify-between w-full py-4">
-                <div className="flex items-center gap-2 text-lg font-bold">
+                <div className="flex items-center gap-2 ">
                   <Profile2User />
-                  <span>Spouse</span>
+                  <span className='!text-lg !font-bold'>Spouse</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
@@ -41,7 +45,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      className: 'bg-white border-1 border-primary-400',
+                      className: 'bg-white border-1 border-primary-400 p-2',
                       content: <MessageEdit className="text-secondary-900" size="20" />,
                     }}
                   />
@@ -52,14 +56,14 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit',undefined),
-                      className: 'bg-white border-1 border-primary-400',
+                      onPress: () => openModal('edit',"", <SpouseModal />,undefined,"xl","Spouse", <Profile2User className='text-white'/> ),
+                      className: 'bg-white border-1 border-primary-400 p-2',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
                   />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full overflow-y-scroll">
                 {Spouse.map((user: any, index) => (
                   <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
                     <div className="flex flex-col gap-2">
@@ -129,14 +133,13 @@ const Dependents = () => {
                     </div>
                   </Card>
                 ))}
-                <AppDeleteModal />
               </div>
             </div>
             <div className="flex flex-col">
               <div className="flex items-center justify-between w-full py-4">
-                <div className="flex items-center gap-2 text-lg font-bold">
+                <div className="flex items-center gap-2">
                   <Profile2User />
-                  <span>Spouse</span>
+                  <span className='!text-lg !font-bold'>Dependents</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
@@ -146,14 +149,14 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit', undefined),
-                      className: 'bg-white border-1 border-primary-400',
-                      content: <Add className="text-secondary-900" size="20" />,
+                      onPress: () => openModal('edit',  "",<DependentsModal/>,undefined,'xl',"Dependents", <UserSquare className='text-white'/>),
+                      className: 'bg-white border-1 border-primary-400 p-2',
+                      content: <Add className="text-secondary-900" size="20"  />,
                     }}
                   />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full overflow-y-scroll h-screen">
                 {dataWorker.map((user: any, index) => (
                   <Card key={index} className="p-3 w-full  shadow-light-tight-1 bg-white ">
                     <div className="flex flex-col gap-2 ">
@@ -170,9 +173,9 @@ const Dependents = () => {
                                 radius: 'sm',
                                 variant: 'light',
                                 isIconOnly: true,
-                                onPress: () => openModal('delete', user),
+                                onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                                 content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                                className: 'hover:!bg-red-500 transition-all duration-200',
+                                className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                               }}
                             />
                           </div>
@@ -235,15 +238,14 @@ const Dependents = () => {
                     </div>
                   </Card>
                 ))}
-                <AppDeleteModal />
               </div>
             </div>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center justify-between w-full py-4">
-              <div className="flex items-center gap-2 text-lg font-bold">
+              <div className="flex items-center gap-2">
                 <Profile2User />
-                <span>Spouse</span>
+                <span className='!text-lg !font-bold'>Relatives</span>
               </div>
               <div className="flex items-center gap-2">
                 <AppButton
@@ -253,13 +255,15 @@ const Dependents = () => {
                     color: 'white',
                     variant: 'solid',
                     isIconOnly: true,
-                    className: 'bg-white border-1 border-primary-400',
+                    onPress: () => openModal('edit',"",<RelativesModal/> , undefined, 'xl',"Relatives",<People className='text-white'/>),
+                    className: 'bg-white border-1 border-primary-400 p-2',
                     content: <Add className="text-secondary-900" size="20" />,
                   }}
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="overflow-y-scroll h-screen">
+            <div className="grid grid-cols-2 gap-4 w-full ">
               {dataWorker2.map((user: any, index) => (
                 <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
                   <div className="flex flex-col gap-2 ">
@@ -276,9 +280,9 @@ const Dependents = () => {
                               radius: 'sm',
                               variant: 'light',
                               isIconOnly: true,
-                              onPress: () => openModal('delete', user),
+                              onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                               content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                              className: 'hover:!bg-red-500 transition-all duration-200',
+                              className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                             }}
                           />
                         </div>
@@ -341,11 +345,8 @@ const Dependents = () => {
                   </div>
                 </Card>
               ))}
-              {/*<AppDeleteModal />*/}
-              {/*<SpouseModal />*/}
-              {/*<DependentsModal/>*/}
-              <RelativesModal/>
-            </div>
+              </div>
+          </div>
           </div>
         </div>
       }

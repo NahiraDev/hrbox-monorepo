@@ -3,18 +3,43 @@ import { Jobss } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@core/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
 import { useModalContext } from '@core/context';
+import { useState } from 'react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 
 const Jobs = () => {
   const { openModal } = useModalContext();
+  const [jobs, setJobs] = useState(Jobss);
+
+  const handleDeleteClick = (index: number) => {
+    openModal(
+      'delete',
+      '',
+      <AppDeleteModal
+        onConfirm={() => handleDeleteConfirm(index)}
+        onCancel={() => console.log('Cancelled')}
+      />,
+      undefined,
+      'sm',
+      'Do you want to remove it?',
+      <Trash className='text-white'/>
+    );
+  };
+
+  const handleDeleteConfirm = (index: number) => {
+    setJobs(prev => { // ✅ تغییر به setJobs
+      const newJobs = [...prev];
+      newJobs.splice(index, 1);
+      return newJobs;
+    });
+  };
 
   return (
     <>
       <BasicInfoLayout
         content={
           <div className="grid grid-cols-4 gap-3 w-full p-4">
-            {Jobss.map((user, index) => (
+            {jobs.map((user, index) => (
               <Card key={index} className="py-2 px-3">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
                   <div className="flex items-center gap-2">
@@ -28,9 +53,9 @@ const Jobs = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => openModal('delete', <AppDeleteModal/>),
+                        onPress: () => handleDeleteClick(index),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'hover:!bg-red-500 transition-all duration-200',
+                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                       }}
                     />
                   </div>

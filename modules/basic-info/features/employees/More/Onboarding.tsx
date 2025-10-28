@@ -8,14 +8,14 @@ const Onboarding = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-[20%_80%] gap-2 p-4"> {/* ✅ فقط این خط */}
           <div className="flex flex-col gap-3 ">
             <div className="flex items-center gap-1 p-3">
               <UserAdd size="26" />
               <span className="text-xl font-semibold">Onboarding</span>
             </div>
             {onBoarding.map((board, index) => (
-              <Card key={index} className="p-3 flex flex-col gap-2 shadow-light-tight-1">
+              <Card key={index} className="p-3 flex flex-col gap-2 shadow-sm ">
                 <div className="flex gap-1 items-center border-b border-[#E5E5E5] text-[16px] font-semibold text-secondary-1000">
                   <Clipboard size="20" />
                   <span>{board.title}</span>
@@ -40,7 +40,7 @@ const Onboarding = () => {
               <span className="text-xl font-semibold">DNN Supervisor</span>
             </div>
             {DNNSupervisor.map((box, index) => (
-              <details key={index} className="w-full bg-white border border-primary-400 p-6 rounded-5">
+              <details key={index} className="bg-white border border-primary-400 p-6 rounded-2xl">
                 <summary className="font-semibold flex justify-between items-center cursor-pointer">
                   <span>{box.title}</span>
                   <AppDoubleLineProgress size={30} value={80} />

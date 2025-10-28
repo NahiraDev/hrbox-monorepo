@@ -6,7 +6,6 @@ export const SpouseModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    // <AppModal icon={<Profile2User color="white" />} size="3xl" title="Spouse">
     <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
@@ -103,6 +102,5 @@ export const SpouseModal = () => {
         />
       </AppModal.Footer>
     </>
-    // </AppModal>
   );
 };

@@ -3,6 +3,7 @@ import { achivements } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@core/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
 import { useModalContext } from '@core/context';
+// import { useModalContext } from '@core/context';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import AddNewCourses from '@module/basic-info/features/employees/modals/AddNewCourses';
@@ -30,9 +31,9 @@ const Achievements = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () => openModal('delete', user),
+                          onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
                           content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'hover:!bg-red-500 transition-all duration-200',
+                          className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                         }}
                       />
                     </div>

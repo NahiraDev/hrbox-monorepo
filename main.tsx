@@ -10,12 +10,12 @@ import BasicInfoPlugin from '@module/basic-info/app/register';
 import AttendancePlugin from '@module/attendance/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  'hrlink',
-  'process-maker',
-  'chart-maker',
-  'basic-info',
-  'sso'
-  // 'attendance'
+  // 'hrlink',
+  // 'process-maker',
+  // 'chart-maker',
+  // 'basic-info',
+  // 'sso'
+  'attendance'
 ];
 
 async function bootstrap() {
@@ -45,7 +45,6 @@ async function bootstrap() {
       serviceRegistry.registerPlugin(ProcessMakerPlugin);
       console.log('✅ ProcessMaker module registered');
     }
-
 
     if (enabledModules.includes('basic-info') && location.pathname.includes("/basic-info")) {
       serviceRegistry.registerPlugin(BasicInfoPlugin);
