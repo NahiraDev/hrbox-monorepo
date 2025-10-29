@@ -79,7 +79,7 @@
     /* Backwards Compatibility */
     "keyofStringsOnly": false,
     "noStrictGenericChecks": false,
-    "suppressExcessPropertyErrors": true,
+    // "suppressExcessPropertyErrors": true,
 //    "suppressImplicitAnyIndexErrors": true,
 
     /* Language Service */
