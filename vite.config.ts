@@ -484,40 +484,82 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     //   },
     // },
 
+    // server: {
+    //   port: parseInt(envVars.VITE_PORT || '5173'),
+    //   host: 'front.hrbox.me',
+    //   strictPort: false,
+    //   open: true,
+    //   cors: true,
+    //   // https: {
+    //   //   key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
+    //   //   cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
+    //   // },
+    //   // hmr:{
+    //   //   overlay: true,
+    //   //   port: 5173,
+    //   //   protocol: 'wss',
+    //   //   host: 'front.hrbox.me',
+    //   // },
+    //
+    // //   // Add proxy configuration
+    // //   proxy: {
+    // //   '/api': {
+    // //     target: 'http://hrlink.hrbox.me/',
+    // //     changeOrigin: true,
+    // //     secure: true, // allow self-signed certs if backend uses https
+    // //     rewrite: path => path.replace(/^\/api/, ''), // remove "/api" prefix
+    // //   },
+    // // },
+    //   proxy: {
+    //     '/api': {
+    //       target: 'http://localhost:3001',
+    //       changeOrigin: true,
+    //       secure: false,
+    //     },
+    //   },
+
+    // ✅ تنظیمات صحیح سرور
     server: {
       port: parseInt(envVars.VITE_PORT || '5173'),
-      host: 'front.hrbox.me',
+      host: '0.0.0.0', // ⚠️ تغییر از 'front.hrbox.me' به '0.0.0.0'
       strictPort: false,
-      open: true,
+      open: false, // ⚠️ غیرفعال کردن باز شدن خودکار
       cors: true,
-      https: {
+
+      // HTTPS configuration
+      https: fs.existsSync(path.resolve(__dirname, 'cert/key.pem')) ? {
         key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
         cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
-      },
-      hmr:{
+      } : undefined,
+
+      // HMR configuration
+      hmr: {
         overlay: true,
         port: 5173,
         protocol: 'wss',
-        host: 'front.hrbox.me',
+        host: 'front.hrbox.me', // این فقط برای HMR استفاده می‌شود
       },
- 
-    //   // Add proxy configuration
-    //   proxy: {
-    //   '/api': {
-    //     target: 'http://hrlink.hrbox.me/',
-    //     changeOrigin: true,
-    //     secure: true, // allow self-signed certs if backend uses https
-    //     rewrite: path => path.replace(/^\/api/, ''), // remove "/api" prefix
-    //   },
-    // },
-     proxy: {
-      '/api': {
-        target: 'https://10.64.65.2',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/DesktopModules') 
-      }
-    },
+
+      // ✅ Proxy configuration اصلاح شده
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3001', // ⚠️ به جای IP مستقیم، از Proxy Server استفاده کنید
+          changeOrigin: true,
+          secure: false,
+          rewrite: undefined, // ⚠️ حذف rewrite - Proxy Server این کار را انجام می‌دهد
+          configure: (proxy, options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('Proxy error:', err);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('Proxying:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('Response:', proxyRes.statusCode, req.url);
+            });
+          },
+        },
+      },
       watch: {
         usePolling: true,
         interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
