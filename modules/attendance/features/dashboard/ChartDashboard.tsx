@@ -1,5 +1,6 @@
 import type { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
+import React from 'react';
 
 const ChartDashboard = () => {
   const [series] = React.useState([
