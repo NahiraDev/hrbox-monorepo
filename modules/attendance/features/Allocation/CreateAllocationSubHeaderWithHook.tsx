@@ -1,6 +1,6 @@
 import AllocationSubheader from '@module/attendance/features/Allocation/AllocationSubheader';
 import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
-import { Refresh2 } from 'iconsax-react';
+import { GlobalEdit, LocationAdd, Refresh2 } from 'iconsax-react';
 
 function CreateAllocationSubHeaderWithHook(name:string , ModalComponent:React.ComponentType,SubheaderIcon:React.ComponentType<any>){
   const Wrapper = (props:any) => {
@@ -12,5 +12,7 @@ function CreateAllocationSubHeaderWithHook(name:string , ModalComponent:React.Co
 }
 
 export const ShiftAllocationSubheader=CreateAllocationSubHeaderWithHook('ShiftAllocation',ShiftAllocationModal,Refresh2);
+export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('LocationAllocation',ShiftAllocationModal,LocationAdd);
+export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('IpAllocation',ShiftAllocationModal,GlobalEdit);
 
 

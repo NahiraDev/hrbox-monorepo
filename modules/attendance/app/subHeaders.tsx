@@ -1,7 +1,10 @@
 import { lazyLoad } from '@core/routes';
 
 import { AttendancePath } from '@module/attendance/app/paths';
-import { ShiftAllocationSubheader } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
+import {
+  IpAllocationSubheader,
+  ShiftAllocationSubheader,
+} from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
 import { Refresh2 } from 'iconsax-react';
 import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
 
@@ -32,5 +35,8 @@ export const AttendanceSubHeaders: any = [
   },{
     path: AttendancePath.ShiftAllocation,
     component:ShiftAllocationSubheader,
+  },{
+    path: AttendancePath.IpAllocation,
+    component:IpAllocationSubheader,
   },
 ];

@@ -1,21 +1,16 @@
 import { AppButton, AppSearchInput } from '@core/components';
 import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
-// interface AllocationSubheaderProps {
-//   name: string;
-//   icon: any;
-//   modalComponent: React.ComponentType;
-// }
 interface AllocationSubheaderProps {
   name: string;
   subheaderIcon: React.ComponentType<any>;
   modalComponent: React.ComponentType;
 }
 const AllocationSubheader = ({
-                               name,
-                               subheaderIcon: SubheaderIcon,
-                               modalComponent: ModalComponent
-                             }:AllocationSubheaderProps) => {
+ name,
+ subheaderIcon: SubheaderIcon,
+ modalComponent: ModalComponent
+}:AllocationSubheaderProps) => {
   const {openModal} = useModalContext();
   const handlerOpenModal=()=>{
     openModal('confirm',name,<ModalComponent/>, null,'2xl','Add New One',<Hierarchy3 color="white"/>)
