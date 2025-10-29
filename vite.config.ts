@@ -521,16 +521,16 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     // ✅ تنظیمات صحیح سرور
     server: {
       port: parseInt(envVars.VITE_PORT || '5173'),
-      host: '0.0.0.0', // ⚠️ تغییر از 'front.hrbox.me' به '0.0.0.0'
+      host: 'front.hrbox.me', // ⚠️ تغییر از 'front.hrbox.me' به '0.0.0.0'
       strictPort: false,
-      open: false, // ⚠️ غیرفعال کردن باز شدن خودکار
+      open: true, // ⚠️ غیرفعال کردن باز شدن خودکار
       cors: true,
 
       // HTTPS configuration
-      https: fs.existsSync(path.resolve(__dirname, 'cert/key.pem')) ? {
-        key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
-      } : undefined,
+      // https: fs.existsSync(path.resolve(__dirname, 'cert/key.pem')) ? {
+      //   key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
+      //   cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
+      // } : undefined,
 
       // HMR configuration
       hmr: {

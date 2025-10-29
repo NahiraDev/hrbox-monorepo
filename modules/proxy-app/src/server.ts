@@ -60,7 +60,7 @@ app.use(
       console.log(`Proxying: ${req.method} ${req.url} -> ${proxyConfig.target}${req.url}`);
 
       proxyReq.setHeader('Origin', proxyConfig.target);
-      proxyReq.setHeader('Referer', proxyConfig.target);
+      proxyReq.removeHeader('Referer');
 
       if (req.body && Object.keys(req.body).length > 0) {
         const bodyData = JSON.stringify(req.body);
