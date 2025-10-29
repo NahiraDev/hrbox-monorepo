@@ -1,5 +1,6 @@
 import { type ConfigEnv, defineConfig, PluginOption, type UserConfig } from 'vite';
 import { resolve, dirname } from 'path';
+import path from 'path'
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import imagemin from 'vite-plugin-imagemin';
@@ -12,6 +13,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import analyzer from 'vite-bundle-analyzer';
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // Development Experience
 import { checker } from 'vite-plugin-checker';
@@ -349,6 +351,14 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           }) as PluginOption,
         ]
       : []),
+    basicSsl({
+      /** name of certification */
+      name: 'HRBox',
+      /** custom trust domains */
+      domains: ['*.hrbox.me'],
+      /** custom certification directory */
+      certDir: path.resolve(__dirname, 'certs'),
+    }),
   ];
 
   return {
@@ -463,12 +473,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       open: true,
       cors: true,
       https: {
-        key: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2-key.pem'),
-        cert: fs.readFileSync('/home/nima/Projects/hrbox-monorepo/certs/front.hrbox.me+2.pem'),
+        key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
       },
       hmr: {
-        overlay: false,
-        clientPort: 443,
+        overlay: true,
         port: 5173,
         protocol: 'wss',
         host: 'front.hrbox.me',
@@ -479,6 +488,63 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       },
     },
 
+    // // Development server configuration with proxy for hrlink.hrbox.me
+    // server: {
+    //   port: parseInt(envVars.VITE_PORT || '5173'),
+    //   host: '0.0.0.0',
+    //   strictPort: false,
+    //   open: true,
+    //   cors: true,
+    //   https: {
+    //     key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
+    //     cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
+    //   },
+    //   hmr: {
+    //     overlay: true,
+    //     port: 5173,
+    //     protocol: 'wss',
+    //     host: 'front.hrbox.me',
+    //   },
+    //   // Add proxy configuration for hrlink API
+    //   proxy: {
+    //     '/DesktopModules': {
+    //       target: 'https://hrlink.hrbox.me',
+    //       changeOrigin: true,
+    //       secure: true, // Set to false if hrlink has self-signed certificates
+    //       ws: true, // Enable WebSocket proxying if needed
+    //       configure: (proxy, _options) => {
+    //         proxy.on('error', (err, _req, _res) => {
+    //           console.log('❌ Proxy error:', err);
+    //         });
+    //         proxy.on('proxyReq', (proxyReq, req, _res) => {
+    //           console.log('📤 Proxying:', req.method, req.url, '→', 'https://hrlink.hrbox.me' + req.url);
+    //         });
+    //         proxy.on('proxyRes', (proxyRes, req, _res) => {
+    //           console.log('📥 Response:', proxyRes.statusCode, req.url);
+    //         });
+    //       },
+    //     },
+    //     // Alternative: Create a dedicated /api proxy if you prefer
+    //     '/api/hrlink': {
+    //       target: 'https://hrlink.hrbox.me',
+    //       changeOrigin: true,
+    //       secure: true,
+    //       rewrite: (path) => path.replace(/^\/api\/hrlink/, ''),
+    //       configure: (proxy, _options) => {
+    //         proxy.on('error', (err, _req, _res) => {
+    //           console.log('❌ API Proxy error:', err);
+    //         });
+    //         proxy.on('proxyReq', (proxyReq, req, _res) => {
+    //           console.log('📤 API Proxying:', req.method, req.url);
+    //         });
+    //       },
+    //     },
+    //   },
+    //   watch: {
+    //     usePolling: true,
+    //     interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
+    //   },
+    // },
     // Preview server
     preview: {
       port: parseInt(envVars.VITE_PREVIEW_PORT || '4173'),
