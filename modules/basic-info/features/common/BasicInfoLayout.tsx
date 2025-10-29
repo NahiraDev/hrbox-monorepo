@@ -174,10 +174,10 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   return (
     <div>
       {/* Header */}
-      <div className="bg-primary-400 w-full rounded-t-xl px-4 pt-4">
+      <div className="bg-primary-400 w-full rounded-t-xl px-[26PX] pt-4">
         <div className="flex items-center justify-between gap-7">
           {/* Profile Image & Actions */}
-          <div className="w-36 h-36 rounded-lg relative"
+          <div className="w-36 h-36 rounded-lg relative mb-4"
                style={{ backgroundImage: `url('https://i.pravatar.cc/150?u=a04258a2462d826712d')`, backgroundSize: 'cover' }}>
             <div className="absolute top-1 right-1">
               <ProfileActions openModal={openModal} />

@@ -10,11 +10,11 @@ import BasicInfoPlugin from '@module/basic-info/app/register';
 import AttendancePlugin from '@module/attendance/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  'hrlink',
-  'process-maker',
-  'chart-maker',
+  // 'hrlink',
+  // 'process-maker',
+  // 'chart-maker',
   'basic-info',
-  'sso'
+  // 'sso'
   // 'attendance'
 ];
 
@@ -70,7 +70,7 @@ async function bootstrap() {
 
     console.log('🏪 Creating Redux store...');
     // Create store with all reducers
-    const { store, persistor } = createStoreWithReducers(serviceRegistry.getAllReducers());
+    const { store, persistor } = createStoreWithReducers();
 
     console.log('🎨 Rendering application...');
     // Render the main application
