@@ -1,9 +1,10 @@
 import { useModalContext } from '@core/context';
 import { AppButton, AppModal } from '@core/components';
 
-export const AppDeleteModal = (props: any) => {
-  const { onConfirm, onCancel } = props;
-  const { closeModal } = useModalContext();
+export const AppDeleteModal = (props:any) => {
+  const {handleDelete , name , onConfirm, onCancel} = props;
+  const { getModalData, closeModal } = useModalContext();
+  const modalData = getModalData('delete' , name);
 
   const handleConfirm = () => {
     if (onConfirm) {
@@ -26,6 +27,7 @@ export const AppDeleteModal = (props: any) => {
           props={{
             size: 'md',
             radius: 'lg',
+            variant: 'light',
             onPress: handleCancel,
             content: 'Cancel',
           }}

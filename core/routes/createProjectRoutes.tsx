@@ -1,7 +1,7 @@
 import { type RouteObject, Navigate } from 'react-router-dom';
 
 import RouteResolver from '@core/routes/RouteResolver';
-import React from 'react';
+import { Suspense } from 'react';
 
 interface ProjectComponents {
   [key: string]: React.ComponentType<any>;
@@ -11,9 +11,9 @@ export function createProjectRoutes(basePath: string, components: ProjectCompone
   const children: RouteObject[] = Object.entries(components).map(([path, Component]) => ({
     path,
     element: (
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <RouteResolver Component={Component} />
-      </React.Suspense>
+      </Suspense>
     ),
   }));
 

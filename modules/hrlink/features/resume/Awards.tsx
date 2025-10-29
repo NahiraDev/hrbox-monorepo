@@ -1,15 +1,17 @@
 import { Edit, Trash } from 'iconsax-react';
 import { Card, CardBody, CardHeader } from '@heroui/react';
-import { AppButton, AppPagination } from '@core/components';
-import { useLazyFetchAwardsQuery } from '@module/hrlink/features/resume/apis';
+import { AppButton, AppDeleteModal, AppPagination } from '@core/components';
+import { useDeleteAwardMutation, useLazyFetchAwardsQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 import { CupStarIcon } from '@module/hrlink/icons';
+import { useModalContext } from '@core/context';
 
 const Awards = () => {
+  const { openModal } = useModalContext();
   const [fetchAwards, { data }] = useLazyFetchAwardsQuery();
-
+  const [deleteAward] = useDeleteAwardMutation()
   useEffect(() => {
     fetchAwards({});
   }, []);
@@ -44,6 +46,9 @@ const Awards = () => {
                             color: 'white',
                             size: 'md',
                             radius: 'sm',
+                            onPress:openModal('delete' , 'deleteAward' ,  <AppDeleteModal props={{
+                              handleDelete:deleteAward
+                            }}/>),
                             content: <Trash className="text-secondary-1000" size="14" />,
                           }}
                         />

@@ -5,12 +5,16 @@ import {
 } from '@reduxjs/toolkit';
 
 import { serviceRegistry } from '@core/helpers';
-import errorReducers from "@core/redux/reducers/errors"
+import errorReducers from '@core/redux/reducers/errors';
 import languageReducers from '@core/redux/reducers/language';
+import authReducers from '@core/redux/reducers/authSlice';
+import formCacheReducers from '@core/redux/reducers/formCache';
 
 export const baseReducers: ReducersMapObject = {
   language: languageReducers,
   error: errorReducers,
+  auth: authReducers,
+  formCache: formCacheReducers,
 };
 
 export const createRootReducer = (
