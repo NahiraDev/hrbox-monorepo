@@ -484,37 +484,33 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     server: {
       port: parseInt(envVars.VITE_PORT || '5173'),
-      host: '0.0.0.0',
+      host: 'front.hrbox.me',
       strictPort: false,
       open: true,
       cors: true,
+      allowedHosts: ['front.hrbox.me'],
       https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
+        key: fs.readFileSync(path.resolve(__dirname, '.cert/front.hrbox.me+1-key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, '.cert/front.hrbox.me+1.pem')),
       },
-      hmr: {
-        overlay: false,
+      hmr:
+      {
+        overlay: true,
+        port: 5173,
+        protocol: 'wss',
+        host: 'front.hrbox.me',
       },
+ 
       // Add proxy configuration
       proxy: {
-        '/api': {
-          target: 'https://hrlink.hrbox.me',
-          changeOrigin: true,
-          secure: false, // Set to false if hrlink.hrbox.me has self-signed cert
-          rewrite: (path) => path.replace(/^\/api/, ''),
-          configure: (proxy, _options) => {
-            proxy.on('error', (err, _req, _res) => {
-              console.log('proxy error', err);
-            });
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('Sending Request to the Target:', req.method, req.url);
-            });
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-            });
-          },
-        },
+      '/api': {
+        target: 'https://hrlink.hrbox.me/',
+        changeOrigin: true,
+        secure: true, // allow self-signed certs if backend uses https
+        rewrite: path => path.replace(/^\/api/, ''), // remove "/api" prefix
       },
+    },
+    
       watch: {
         usePolling: true,
         interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
