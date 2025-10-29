@@ -4,6 +4,8 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import imagemin from 'vite-plugin-imagemin';
+import mkcert from 'vite-plugin-mkcert'
+
 // Core plugins
 import react from '@vitejs/plugin-react-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -488,29 +490,34 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       strictPort: false,
       open: true,
       cors: true,
-      allowedHosts: ['front.hrbox.me'],
       https: {
-        key: fs.readFileSync(path.resolve(__dirname, '.cert/front.hrbox.me+1-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, '.cert/front.hrbox.me+1.pem')),
+        key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
       },
-      hmr:
-      {
+      hmr:{
         overlay: true,
         port: 5173,
         protocol: 'wss',
         host: 'front.hrbox.me',
       },
  
-      // Add proxy configuration
-      proxy: {
+    //   // Add proxy configuration
+    //   proxy: {
+    //   '/api': {
+    //     target: 'http://hrlink.hrbox.me/',
+    //     changeOrigin: true,
+    //     secure: true, // allow self-signed certs if backend uses https
+    //     rewrite: path => path.replace(/^\/api/, ''), // remove "/api" prefix
+    //   },
+    // },
+     proxy: {
       '/api': {
-        target: 'https://hrlink.hrbox.me/',
+        target: 'https://10.64.65.2',
         changeOrigin: true,
-        secure: true, // allow self-signed certs if backend uses https
-        rewrite: path => path.replace(/^\/api/, ''), // remove "/api" prefix
-      },
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/DesktopModules') 
+      }
     },
-    
       watch: {
         usePolling: true,
         interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
