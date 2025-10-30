@@ -1,13 +1,13 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
 import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
-import { TimerStart } from 'iconsax-react';
+import { Location } from 'iconsax-react';
 import * as Yup from 'yup';
 
 export const initialValuesAction = {
   title: null,
   type: 'Person',
-  ChooseShift: null,
+  ChooseLocation: null,
   FromDate: null,
   organization: null,
   Department: null,
@@ -18,7 +18,7 @@ export const initialValuesAction = {
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
-  ChooseShift: Yup.string().required(),
+  ChooseLocation: Yup.string().required(),
   FromDate: Yup.string().required(),
   organization: Yup.string().required(),
   Department: Yup.string().required(),
@@ -37,7 +37,7 @@ export const handleSubmitAction = (values: any) => {
   return {
     title: values.title,
     type: values.type,
-    ChooseShift: values.ChooseShift,
+    ChooseLocation: values.ChooseLocation,
     FromDate: values.FromDate,
     organization: values.organization,
     Department: values.Department,
@@ -47,12 +47,12 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 
-const ShiftAllocationForm=()=>{
+const LocationAllocationEdit=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
 
   return(
     <>
-      <Form id="shift-allocation-form" onSubmit={handleSubmit}>
+      <Form id="location-allocation-edit" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
@@ -62,10 +62,10 @@ const ShiftAllocationForm=()=>{
           </RadioGroup>
           <div className='flex flex-row justify-between'>
             <AppAutoComplete props={{
-              label:'Choose Shift',
-              name:'ChooseShift',
-              value:values.ChooseShift,
-              error: touched.ChooseShift && errors.ChooseShift,
+              label:'Choose Location',
+              name:'ChooseLocation',
+              value:values.ChooseLocation,
+              error: touched.ChooseLocation && errors.ChooseLocation,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
@@ -134,9 +134,9 @@ const ShiftAllocationForm=()=>{
             }}/>
           </div>
         </div>
-        <TimerStart color='gray' size={90} className='absolute bottom-2 left-0'/>
+        <Location color='gray' size={90} className='absolute bottom-2 left-0'/>
       </Form>
     </>
   );
 }
-export default ShiftAllocationForm;
+export default LocationAllocationEdit;

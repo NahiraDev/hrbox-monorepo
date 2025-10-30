@@ -379,10 +379,10 @@ export const AppTable = <T extends Record<string, any>>({
         className={`${styles.tableClassName}`}
         isHeaderSticky={variant === 'attendance'}
         classNames={{
-          base: variant === 'attendance' ? "max-h-[750px] bg-transparent" : "!h-full bg-transparent shadow-none",
+          base: variant === 'attendance' ? "max-h-[750px] bg-transparent" : "!h-full bg-transparent !shadow-none",
           wrapper: variant === 'attendance'
             ? "max-h-full overflow-y-scroll custom-scroll bg-transparent "
-            : "bg-transparent h-full",
+            : "bg-transparent h-full !shadow-none",
           table: "min-w-full",
           thead: "[&>tr]:first:shadow-none",
           tr:'rounded-6',
@@ -479,6 +479,15 @@ export const AppTable = <T extends Record<string, any>>({
           })}
         </TableBody>
       </Table>
+      {shouldPaginate && (
+      <div className=' flex justify-end px-4'>
+        <AppPagination
+          total={Math.ceil(data.length / pageSize)}
+          page={currentPage}
+          onChange={setCurrentPage}
+        />
+      </div>
+    )}
       {expandable && expandedRowPosition && expandedRows.has(expandedRowPosition.rowIndex) && createPortal(
         <div
           style={{
@@ -495,15 +504,7 @@ export const AppTable = <T extends Record<string, any>>({
         </div>,
         document.body
       )}
-      {shouldPaginate && (
-        <div className='mt-4 flex justify-end px-4'>
-          <AppPagination
-            total={Math.ceil(data.length / pageSize)}
-            page={currentPage}
-            onChange={setCurrentPage}
-          />
-        </div>
-      )}
+
     </div>
   );
 };

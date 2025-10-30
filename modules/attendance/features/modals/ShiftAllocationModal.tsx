@@ -13,7 +13,7 @@ const ShiftAllocationModal=()=>{
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
-          closeModal('confirm', 'ShiftAllocationModal');
+          closeModal('confirm', 'ShiftAllocation');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
         <ShiftAllocationForm/>
         </FormProvider>
@@ -25,7 +25,7 @@ const ShiftAllocationModal=()=>{
               color: 'white',
               size: 'md',
               radius: 'lg',
-              onClick: () => closeModal('confirm', 'ShiftAllocationModal'),
+              onClick: () => closeModal('confirm', 'ShiftAllocation'),
               content: 'Cancel',
             }}
           />

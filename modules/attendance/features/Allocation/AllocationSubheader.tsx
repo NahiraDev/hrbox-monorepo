@@ -1,6 +1,7 @@
 import { AppButton, AppSearchInput } from '@core/components';
 import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
+import React from 'react';
 interface AllocationSubheaderProps {
   name: string;
   subheaderIcon: React.ComponentType<any>;

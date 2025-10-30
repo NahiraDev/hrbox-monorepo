@@ -1,21 +1,21 @@
 import { AppButton, AppModal } from '@core/components';
-import ShiftAllocationEdit from '@module/attendance/features/forms/ShiftAllocationEdit';
 import { FormProvider, useModalContext } from '@core/context';
-import {
+import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/ShiftAllocationEdit';
-const ShiftAllocationModalEdit=()=>{
+} from '@module/attendance/features/forms/LocationAllocationForm';
+import LocationAllocationForm from '@module/attendance/features/forms/LocationAllocationForm';
+const LocationAllocationModal=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
-          closeModal('edit', 'ShiftAllocationModalEdit');
+          closeModal('confirm', 'LocationAllocation');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
-          <ShiftAllocationEdit/>
+        <LocationAllocationForm/>
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -25,7 +25,7 @@ const ShiftAllocationModalEdit=()=>{
               color: 'white',
               size: 'md',
               radius: 'lg',
-              onClick: () => closeModal('edit', 'ShiftAllocationModalEdit'),
+              onClick: () => closeModal('confirm', 'LocationAllocation'),
               content: 'Cancel',
             }}
           />
@@ -35,9 +35,9 @@ const ShiftAllocationModalEdit=()=>{
               type: 'submit',
               size: 'md',
               radius: 'lg',
+              form:'location-allocation-form',
               className: 'text-white',
-              form:'shift-allocation-edit',
-              content: 'Submit Again',
+              content: 'Submit',
             }}
           />
         </div>
@@ -45,4 +45,4 @@ const ShiftAllocationModalEdit=()=>{
     </>
   )
 }
-export default ShiftAllocationModalEdit;
+export default LocationAllocationModal;

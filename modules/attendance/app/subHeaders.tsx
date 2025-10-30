@@ -2,11 +2,10 @@ import { lazyLoad } from '@core/routes';
 
 import { AttendancePath } from '@module/attendance/app/paths';
 import {
-  IpAllocationSubheader,
+  FaceRecognitionAssignment,
+  IpAllocationSubheader, LocationAllocationSubheader,
   ShiftAllocationSubheader,
 } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
-import { Refresh2 } from 'iconsax-react';
-import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
 
 const DashboardSubHeader = lazyLoad(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));
 const EntryExitSubHeader = lazyLoad(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
@@ -38,5 +37,11 @@ export const AttendanceSubHeaders: any = [
   },{
     path: AttendancePath.IpAllocation,
     component:IpAllocationSubheader,
+  },{
+    path: AttendancePath.LocationAllocation,
+    component:LocationAllocationSubheader,
+  },{
+    path: AttendancePath.FaceAllocation,
+    component:FaceRecognitionAssignment,
   },
 ];

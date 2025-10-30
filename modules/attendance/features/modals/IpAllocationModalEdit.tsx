@@ -1,21 +1,21 @@
 import { AppButton, AppModal } from '@core/components';
-import ShiftAllocationEdit from '@module/attendance/features/forms/ShiftAllocationEdit';
 import { FormProvider, useModalContext } from '@core/context';
-import {
+import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/ShiftAllocationEdit';
-const ShiftAllocationModalEdit=()=>{
+} from '@module/attendance/features/forms/IpAllocationEdit';
+import IpAllocationEdit from '@module/attendance/features/forms/IpAllocationEdit';
+const IpAllocationModalEdit=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
-          closeModal('edit', 'ShiftAllocationModalEdit');
+          closeModal('edit', 'IpAllocationModalEdit');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
-          <ShiftAllocationEdit/>
+        <IpAllocationEdit/>
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -25,7 +25,7 @@ const ShiftAllocationModalEdit=()=>{
               color: 'white',
               size: 'md',
               radius: 'lg',
-              onClick: () => closeModal('edit', 'ShiftAllocationModalEdit'),
+              onClick: () => closeModal('edit', 'IpAllocationModalEdit'),
               content: 'Cancel',
             }}
           />
@@ -35,9 +35,9 @@ const ShiftAllocationModalEdit=()=>{
               type: 'submit',
               size: 'md',
               radius: 'lg',
+              form:'ip-allocation-edit',
               className: 'text-white',
-              form:'shift-allocation-edit',
-              content: 'Submit Again',
+              content: 'Submit',
             }}
           />
         </div>
@@ -45,4 +45,4 @@ const ShiftAllocationModalEdit=()=>{
     </>
   )
 }
-export default ShiftAllocationModalEdit;
+export default IpAllocationModalEdit;

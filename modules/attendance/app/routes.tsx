@@ -13,7 +13,6 @@ export const page = {
   ShitAllocation: lazyLoad(() => import('@module/attendance/features/Allocation/ShiftAllocation')),
   FaceAllocation: lazyLoad(() => import('@module/attendance/features/Allocation/FaceAllocation')),
   IpAllocation: lazyLoad(() => import('@module/attendance/features/Allocation/IpAllocation')),
-  FaceAllocation: lazyLoad(() => import('@module/attendance/features/Allocation/FaceAllocation')),
   LocationAllocation: lazyLoad(() => import('@module/attendance/features/Allocation/LocationAllocation')),
 };
 export const AttendanceRoutes = createProjectRoutes('/attendance', {

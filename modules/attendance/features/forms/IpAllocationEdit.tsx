@@ -1,13 +1,13 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
 import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
-import { TimerStart } from 'iconsax-react';
+import { Global } from 'iconsax-react';
 import * as Yup from 'yup';
 
 export const initialValuesAction = {
   title: null,
   type: 'Person',
-  ChooseShift: null,
+  ChooseIp: null,
   FromDate: null,
   organization: null,
   Department: null,
@@ -18,7 +18,7 @@ export const initialValuesAction = {
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
-  ChooseShift: Yup.string().required(),
+  ChooseIp: Yup.string().required(),
   FromDate: Yup.string().required(),
   organization: Yup.string().required(),
   Department: Yup.string().required(),
@@ -27,17 +27,17 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-    console.log(values.title);
-    console.log(values.type);
-    console.log(values.ChooseShift);
-    console.log(values.FromDate);
-    console.log(values.organization);
-    console.log(values.Employee);
-    console.log(values.Description);
+  console.log(values.title);
+  console.log(values.type);
+  console.log(values.ChooseShift);
+  console.log(values.FromDate);
+  console.log(values.organization);
+  console.log(values.Employee);
+  console.log(values.Description);
   return {
     title: values.title,
     type: values.type,
-    ChooseShift: values.ChooseShift,
+    ChooseIp: values.ChooseIp,
     FromDate: values.FromDate,
     organization: values.organization,
     Department: values.Department,
@@ -47,12 +47,12 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 
-const ShiftAllocationForm=()=>{
+const IpAllocationEdit=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
 
   return(
     <>
-      <Form id="shift-allocation-form" onSubmit={handleSubmit}>
+      <Form id="ip-allocation-edit" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
@@ -62,10 +62,10 @@ const ShiftAllocationForm=()=>{
           </RadioGroup>
           <div className='flex flex-row justify-between'>
             <AppAutoComplete props={{
-              label:'Choose Shift',
-              name:'ChooseShift',
-              value:values.ChooseShift,
-              error: touched.ChooseShift && errors.ChooseShift,
+              label:'Choose Ip',
+              name:'ChooseIp',
+              value:values.ChooseIp,
+              error: touched.ChooseIp && errors.ChooseIp,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
@@ -120,7 +120,7 @@ const ShiftAllocationForm=()=>{
                 onBlur: handleBlur,
               }}/>
             </div>
-        )}
+          )}
 
           <div className="w-full">
             <AppTextArea props={{
@@ -134,9 +134,9 @@ const ShiftAllocationForm=()=>{
             }}/>
           </div>
         </div>
-        <TimerStart color='gray' size={90} className='absolute bottom-2 left-0'/>
+        <Global color='gray' size={90} className='absolute bottom-2 left-0'/>
       </Form>
     </>
   );
 }
-export default ShiftAllocationForm;
+export default IpAllocationEdit;
