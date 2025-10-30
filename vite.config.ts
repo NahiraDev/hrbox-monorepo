@@ -527,7 +527,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       cors: true,
 
       // HTTPS configuration
-      // https: fs.existsSync(path.resolve(__dirname, 'cert/key.pem')) ? {
+      // https:
+      // fs.existsSync(path.resolve(__dirname, 'cert/key.pem')) ? {
       //   key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
       //   cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
       // } : undefined,
@@ -536,8 +537,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       hmr: {
         overlay: true,
         port: 5173,
-        protocol: 'wss',
-        host: 'front.hrbox.me', // این فقط برای HMR استفاده می‌شود
       },
 
       // ✅ Proxy configuration اصلاح شده
