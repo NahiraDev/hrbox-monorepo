@@ -1,5 +1,3 @@
-import storybook from 'eslint-plugin-storybook';
-
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -43,12 +41,12 @@ export default [// Global ignores
 
     languageOptions: {
       parser: '@typescript-eslint/parser',
-      ecmaVersion: 'latest',
-      sourceType: 'module',
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
       },
@@ -83,6 +81,7 @@ export default [// Global ignores
             ['@core', './core'],
             ['@module', './modules'],
             ['@root', './'],
+            ['@proxy-server', './proxy-server'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },
@@ -304,4 +303,5 @@ export default [// Global ignores
         },
       ],
     },
-  }, ...storybook.configs['flat/recommended'], ...storybook.configs['flat/recommended']];
+  },
+];

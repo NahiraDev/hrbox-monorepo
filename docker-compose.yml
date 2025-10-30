@@ -10,16 +10,6 @@
       environment:
         - NODE_ENV=development
       command: pnpm dev
-
-    storybook:
-      build: configs
-      ports:
-        - "6006:6006"
-      volumes:
-        - .:/app
-        - /app/node_modules
-      command: pnpm storybook
-
     redis:
       image: redis:alpine
       ports:

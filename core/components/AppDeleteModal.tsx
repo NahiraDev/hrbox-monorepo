@@ -1,8 +1,8 @@
 import { useModalContext } from '@core/context';
-import { AppButton, AppModal } from '@core/components';
+import { AppButton } from '@core/components';
 
 export const AppDeleteModal = (props:any) => {
-  const {handleDelete , name , onConfirm, onCancel} = props;
+  const {name , onConfirm, onCancel} = props;
   const { getModalData, closeModal } = useModalContext();
   const modalData = getModalData('delete' , name);
 

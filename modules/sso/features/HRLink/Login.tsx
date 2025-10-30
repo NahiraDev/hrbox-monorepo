@@ -10,10 +10,7 @@ import {
 } from '@module/sso/features/HRLink/forms';
 import { useLoginMutation } from '@module/sso/features/HRLink/apis';
 import { setCredentials } from '@core/redux/reducers/authSlice';
-import { ClassicEditor, Context, Bold, Essentials, Italic, Paragraph, ContextWatchdog } from 'ckeditor5';
-import { CKEditor, CKEditorContext } from '@ckeditor/ckeditor5-react';
 
-import 'ckeditor5/ckeditor5.css';
 const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch();

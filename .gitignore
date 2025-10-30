@@ -46,6 +46,3 @@ bun.lockb
 
 # Optional: typescript cache
 *.tsbuildinfo
-
-*storybook.log
-storybook-static

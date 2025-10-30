@@ -104,6 +104,10 @@
     "verbatimModuleSyntax": false,
     "rootDir": "."
   },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "include": [
     "core/**/*",
     "modules/**/*",

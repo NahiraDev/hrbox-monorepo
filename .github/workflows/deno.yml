@@ -114,33 +114,6 @@ jobs:
       - name: Security audit
         run: pnpm audit --audit-level moderate
 
-  storybook:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.17.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Storybook
-        run: pnpm build-storybook
-
-      - name: Visual regression tests
-        run: pnpm test-storybook --ci
-
   deploy-preview:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
