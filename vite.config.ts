@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import imagemin from 'vite-plugin-imagemin';
 // Core plugins
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // Performance & Optimization
@@ -13,7 +13,6 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { visualizer } from 'rollup-plugin-visualizer';
 import analyzer from 'vite-bundle-analyzer';
-import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // Development Experience
 import { checker } from 'vite-plugin-checker';
@@ -137,11 +136,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     // }) as PluginOption,
 
     // React with SWC - fastest React refresh
-    react({
-    jsxImportSource: '@emotion/react',
-    reactRefreshHost: 'http://localhost:5173',
-      plugins: [['@swc/plugin-styled-components', {}]]
-    }) as PluginOption,
+    react() ,
 
     // Advanced TypeScript path resolution
     // tsconfigPaths({
@@ -351,14 +346,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           }) as PluginOption,
         ]
       : []),
-    basicSsl({
-      /** name of certification */
-      name: 'HRBox',
-      /** custom trust domains */
-      domains: ['*.hrbox.me'],
-      /** custom certification directory */
-      certDir: path.resolve(__dirname, 'certs'),
-    }),
   ];
 
   return {
@@ -472,16 +459,16 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       strictPort: false,
       open: true,
       cors: true,
-      https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
-      },
-      hmr: {
-        overlay: true,
-        port: 5173,
-        protocol: 'wss',
-        host: 'front.hrbox.me',
-      },
+      // https: {
+      //   key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
+      //   cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
+      // },
+        // hmr: {
+        //   overlay: false,
+        //   port: 5173,
+        //   protocol: 'wss',
+        //   host: 'front.hrbox.me',
+        // },
       watch: {
         usePolling: true,
         interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
