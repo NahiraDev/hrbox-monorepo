@@ -5,10 +5,5 @@
   "type": "module",
   "description": "Proxy server for HRBox frontend to bypass CORS restrictions",
   "main": "../dist/server.js",
-  "types": "../dist/server.js",
-  "scripts": {
-    "build": "echo 'No build needed - using tsx'",
-    "dev": "tsx server.ts",
-    "start": "tsx server.ts"
-  }
+  "types": "../dist/server.js"
 }

@@ -427,7 +427,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     server: {
       port: parseInt(envVars.VITE_PORT || '5173'),
-      host: 'front.hrbox.me',
+      host: '0.0.0.0',
       strictPort: false,
       open: false,
       cors: true,
@@ -435,34 +435,34 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       // ✅ HMR configuration
       hmr: {
         overlay: true,
-        host: 'front.hrbox.me',
+        host: '0.0.0.0',
       },
 
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3001',
-          changeOrigin: true,
-          secure: false,
-          ws: true, // WebSocket support
-
-          configure: (proxy, options) => {
-            proxy.on('error', (err, _req, _res) => {
-              console.error('❌ Proxy error:', err.message);
-            });
-
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log(`📤 [Vite → Proxy] ${req.method} ${req.url}`);
-
-              proxyReq.setHeader('Host', 'front.hrbox.me');
-              proxyReq.setHeader('Origin', 'https://front.hrbox.me');
-            });
-
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log(`📥 [Proxy → Vite] ${proxyRes.statusCode} ${req.url}`);
-            });
-          },
-        },
-      },
+      // proxy: {
+      //   '/api': {
+      //     target: 'http://localhost:3001',
+      //     changeOrigin: true,
+      //     secure: false,
+      //     ws: true, // WebSocket support
+      //
+      //     configure: (proxy, options) => {
+      //       proxy.on('error', (err, _req, _res) => {
+      //         console.error('❌ Proxy error:', err.message);
+      //       });
+      //
+      //       proxy.on('proxyReq', (proxyReq, req, _res) => {
+      //         console.log(`📤 [Vite → Proxy] ${req.method} ${req.url}`);
+      //
+      //         proxyReq.setHeader('Host', 'front.hrbox.me');
+      //         proxyReq.setHeader('Origin', 'https://front.hrbox.me');
+      //       });
+      //
+      //       proxy.on('proxyRes', (proxyRes, req, _res) => {
+      //         console.log(`📥 [Proxy → Vite] ${proxyRes.statusCode} ${req.url}`);
+      //       });
+      //     },
+      //   },
+      // },
 
       watch: {
         usePolling: true,
