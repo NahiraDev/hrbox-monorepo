@@ -17,7 +17,7 @@ export const BasicInfoMenu = (): { label: string; path: string; icon?: ReactNode
   const menuArray: { label: string; path: string; icon?: ReactNode }[] = [];
 
   const menuConfig: Record<string, string> = {
-    Dashboard: '/Dashboard',
+    Dashboard: '/dashboard',
     Departments: '/organization-departments',
     Locations: '/organizational-locations',
     Employees: '/all-employees',

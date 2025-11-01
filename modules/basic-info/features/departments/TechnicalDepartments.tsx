@@ -1,33 +1,30 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@core/components';
-import DocumentsModal from '@module/basic-info/features/employees/modals/DocumentsModal';
-import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
 import { useModalContext } from '@root/core';
-import { Category } from 'iconsax-react';
 import { TickIcon } from '@root/shared/icons/TickIcon';
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
 import { useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();
   const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-between p-4">
-      <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-4">
+      <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-3">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
-            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative"
+            className="cursor-pointer p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-3 relative hover:!bg-surface-50"
+            onPress = {() => navigate(BasicInfoPaths.PersonalInformation)}
             >
-           <Avatar className="w-30 h-30 sm:w-30 sm:h-30 bg-primary-400 text-white" radius="lg" src="" />
-            <div className="absolute top-2 right-3">
-              <TickIcon color="#CCCCCC"/>
+           <Avatar className="w-24 h-24 sm:w-30 sm:h-30 bg-primary-400 text-white rounded-xl" src="" />
+            <div className="absolute top-2 right-4">
+              <TickIcon color="#CCCCCC" />
             </div>
-            <div className="w-full text-center mt-2 group">
+            <div className=" text-center mt-2 group">
               <div className="relative w-full overflow-hidden h-6 flex items-center justify-center">
-                <span className="block lg:text-sm sm:text-xs text-xs font-semibold text-secondary-1000 truncate">
+                <span className="block !text-xs !font-semibold text-secondary-1000 truncate">
                 {user.name}
                 </span>
                 {user.name.length > 13 && (
@@ -43,11 +40,9 @@ const TechnicalDepartments = () => {
             </div>
             <AppButton
               props={{
-                className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary-400',
-                size: 'sm',
+                className: 'h-5 bg-surface-50  border-1 border-primary-50 text-primary-400',
                 radius: 'sm',
-                onPress: () => {navigate(BasicInfoPaths.PersonalInformation)},
-                content: <span>{user.job}</span>,
+                content: <span className="!text-xs">{user.job}</span>,
               }}
             />
           </Card>

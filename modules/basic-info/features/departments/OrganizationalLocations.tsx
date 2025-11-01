@@ -1,6 +1,6 @@
 import { OrganizationalLocation } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { Location, MoreSquare, Trash } from 'iconsax-react';
+import { Location, More, Trash } from 'iconsax-react';
 import { useState, useMemo } from 'react';
 import { useModalContext } from '@core/context';
 import { AppButton, AppDeleteModal, AppPagination } from '@core/components';
@@ -56,37 +56,41 @@ const OrganizationalLocations = () => {
           {filteredLocations.map((detail, index) => (
             <div key={`${detail.title}-${index}`} className="relative group">
               <Card
-                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border border-primary-400 transition-all duration-200 relative z-0"
+                className="cursor-pointer w-full bg-white shadow-sm rounded-xl p-4 flex flex-col items-center justify-center gap-3
+             border-1 border-transparent hover:border-primary-400
+             hover:!bg-[#D6F2FF]
+             transition-all duration-150"
               >
                 <Avatar
-                  className="w-full h-32 sm:h-40"
+                  className="w-full h-32 sm:h-40 text-white"
+                  color="primary"
                   radius="sm"
-                  src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+                  src=""
                 />
                 <div className="w-full">
-                  <span className="!font-bold text-left">{detail.title}</span>
+                  <span className="!font-bold text-left !text-[16px] text-secondary-1000">{detail.title}</span>
                 </div>
 
                 <div className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
                   <div className="flex items-center gap-1">
-                    <Location size="15" />
-                    <span className="!text-xs">Address</span>
+                    <Location size="12" />
+                    <span className="!text-[10px] text-secondary-1000">Address</span>
                   </div>
-                  <p className="!text-xs !font-bold truncate">{detail.Address}</p>
+                  <p className="!text-[10px] !font-bold truncate">{detail.Address}</p>
                 </div>
 
                 <div className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                   <div className="flex items-center gap-1">
-                    <Location size="15" />
-                    <span className="!text-xs">Email</span>
+                    <Location size="12" />
+                    <span className="!text-[10px] text-secondary-1000">Email</span>
                   </div>
                   <p className="!text-xs !font-bold truncate">{detail.email}</p>
                 </div>
 
                 <div className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                   <div className="flex items-center gap-1">
-                    <Location size="15" />
-                    <span className="!text-xs">Website</span>
+                    <Location size="12" />
+                    <span className="!text-[10px] text-secondary-1000">Website</span>
                   </div>
                   <a className="!text-xs !font-bold hover:underline truncate" href={detail.webLink} target="_blank" rel="noopener noreferrer">
                     {detail.webLink}
@@ -95,11 +99,11 @@ const OrganizationalLocations = () => {
 
                 <div className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                   <div className="flex items-center gap-1">
-                    <Location size="15" />
-                    <span className="!text-xs">Is it visible?</span>
+                    <Location size="12" />
+                    <span className="!text-[10px] text-secondary-1000">Is it visible?</span>
                   </div>
                   <p className="!text-xs !font-bold">
-                    <span className={`px-2 py-1 rounded-full !text-xs ${
+                    <span className={`px-2 py-1 rounded-full !text-xs !font-bold truncate ${
                       detail.visible === 'Yes' ? '' : ''
                     }`}>
                       {detail.visible}
@@ -115,25 +119,23 @@ const OrganizationalLocations = () => {
                     radius: 'sm',
                     variant: 'light',
                     onPress: () => handleMoreClick(index, detail),
-                    content: <MoreSquare />,
-                    className: `text-black p-2 bg-white text-lg rounded-lg border-2 border-primary-400 shadow-md transition-all duration-200 ${
-                      activeButton === index ? 'scale-105 ring-2 ring-primary-400' : 'hover:scale-105'
-                    }`
+                    content: <More size="20" />,
+                    className: "text-black p-1.5 bg-white text-lg  border border-primary-400 shadow-md hover:!bg-primary-400 hover:!text-white transition-all duration-200"
                   }}
                 />
               </div>
 
               {activeButton === index && (
-                <div className="absolute top-14 right-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200 py-1 w-30 animate-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-10.5 right-6 z-20 bg-white rounded-lg shadow-lg border border-gray-200 py-1 w-30 animate-in slide-in-from-top-2 duration-200">
                   <AppButton
                     props={{
                       size: 'sm',
                       variant: 'light',
                       onPress: () => handleDeleteClick(index),
                       content: (
-                        <div className="flex items-center gap-2">
-                          <Trash size={16} />
-                          <span>Delete</span>
+                        <div className="flex items-center gap-1 p-3">
+                          <Trash size='20' />
+                          <span className="text-secondary-1000 ">Delete</span>
                         </div>
                       ),
                       className: 'w-full justify-start text-left hover:bg-red-50 transition-colors duration-150'

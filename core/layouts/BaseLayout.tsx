@@ -29,17 +29,19 @@ export const BaseLayout = () => {
               <div className='flex w-full flex-col gap-4'>
                 <AppSubHeader />
                 <div className='border-primary-400 bg-surface-50 flex flex-col gap-3 overflow-hidden rounded-2xl border'>
-                  <ProtectedRoute
-                    children={
-                      <AppContent
-                        fallback={
-                          <div className='flex h-full items-center justify-center'>
-                            <div
-                              className={`${showDoc ? 'border-primary-400 bg-surface-50 shadow-theme-md border dark:bg-[rgba(4,66,92,0.60)]' : 'rounded-xl'} relative flex-1 overflow-hidden`}
-                            />
-                          </div>
-                        }
-                      />
+                  {/*<ProtectedRoute*/}
+                  {/*  children={*/}
+
+                  {/*  }*/}
+                  {/*/>*/}
+
+                  <AppContent
+                    fallback={
+                      <div className='flex h-full items-center justify-center'>
+                        <div
+                          className={`${showDoc ? 'border-primary-400 bg-surface-50 shadow-theme-md border dark:bg-[rgba(4,66,92,0.60)]' : 'rounded-xl'} relative flex-1 overflow-hidden`}
+                        />
+                      </div>
                     }
                   />
                 </div>

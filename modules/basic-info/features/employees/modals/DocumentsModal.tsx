@@ -1,6 +1,7 @@
 import { AppButton, AppModal } from '@core/components';
 import { Avatar } from '@heroui/react';
 import { useRef, useState } from 'react';
+import { DocumentUpload } from 'iconsax-react';
 
 const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
   const fileInputRef = useRef(null);
@@ -37,12 +38,12 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
 
   return (
     <AppModal.Body>
-      <div className="flex flex-col gap-2">
-        <div className="flex gap-1">
-          <Avatar radius="sm" size="lg" src={selectedImage || initialImage || undefined} />
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-3 items-center">
+          <Avatar className='text-white' radius="sm" size="lg" color="primary" src={selectedImage || initialImage || undefined} />
           <div className="flex flex-col gap-1">
-            <span>Ali Asadi</span>
-            <span>Identity Card</span>
+            <span className="!font-medium text-secondary-1000">Ali Asadi</span>
+            <span className="!font-medium text-secondary-1000">Identity Card</span>
           </div>
         </div>
         <div className="flex items-center justify-center rounded-lg">
@@ -59,7 +60,7 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
               className="max-w-full max-h-64 object-contain rounded-lg border-2 border-blue-500"
             />
           ) : (
-            <span className="p-28 bg-surface-50 rounded-xl">No Data</span>
+            <span className="p-28 bg-surface-50 rounded-xl w-[488px] text-center">No Data</span>
           )}
         </div>
         <AppModal.Footer>
@@ -92,7 +93,13 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
                 radius: 'sm',
                 color:'primary',
                 onPress: handleButtonClick,
-                content: <span>Upload File</span>,
+                content:
+                  <div className="flex gap-2">
+                    <DocumentUpload size="22"/>
+                  <span>
+                    Upload File
+                  </span>
+                </div>,
                 className: 'text-white py-1.5 px-3 text-xl rounded-lg ',
               }}
             />

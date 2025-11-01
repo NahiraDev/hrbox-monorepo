@@ -4,7 +4,6 @@ import { AppButton, AppDeleteModal } from '@core/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 import { useState } from 'react';
-// import { useState } from 'react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 
@@ -38,9 +37,9 @@ const Courses = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full p-4">
+        <div className="grid grid-cols-4 gap-4 w-full p-4 overflow-y-auto max-h-[600px] ">
           {courses.map((user: any, index) => (
-            <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
+            <Card key={index} className="cursor-pointer p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between border-b border-gray-200 p-1">
                   <div className="flex items-center gap-3 text-lg font-semibold">

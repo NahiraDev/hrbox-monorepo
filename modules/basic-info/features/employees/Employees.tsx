@@ -1,28 +1,35 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
-import { AppPagination } from '@root/core';
+import { AppButton, AppPagination } from '@root/core';
+import { TickIcon } from '@root/shared/icons/TickIcon';
+import { BasicInfoPaths } from '@module/basic-info/app/paths';
+import { useNavigate } from 'react-router-dom';
 
-// import { AppPagination } from '../../../../core';
-// import { TickIcon } from '../../../../public/icons';
-// import { TickIcon } from '../../../../public/icons';
 const Employees = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="h-full p-4">
-      <div className="grid grid-cols-9 gap-4">
+    <div className=" flex flex-col justify-between gap-10 p-4">
+      <div className="grid grid-cols-10 gap-3">
         {workersData.map((worker, index) => {
           return (
             <Card
               key={index}
-              className="flex flex-col items-center justify-center gap-2 p-5 relative shadow-[0_1px_3px_0_#080E1C4D] "
+                className="flex flex-col items-center justify-center gap-3 p-5 relative shadow-sm cursor-pointer hover:bg-surface-50"
             >
-              <Avatar radius="lg" color="primary" src="" className="w-30 h-30 text-white "/>
-              <div className="absolute top-3 right-3">
-                {/*<TickIcon color={worker.isAct  ive ? '#0B76B7' : '#CCC'} />*/}
+              <Avatar radius="lg" color="primary" src="" className="w-24 h-24 text-white "/>
+              <div className="absolute top-3 right-3  ">
+                <TickIcon color="#CCCCCC" />
               </div>
-              <span className="text-secondary-1000 font-medium">{worker.nameWorker}</span>
-              <Button className="h-6 text-primary-400 bg-[#DCF0F966]/40 border border-primary-100" variant="faded">
-                {worker.job}
-              </Button>
+              <span className="text-secondary-1000 !font-semibold !text-xs">{worker.nameWorker}</span>
+              <AppButton
+                props={{
+                  className: 'h-5  bg-surface-50  border-1 border-primary-50 text-primary-400',
+                  radius: 'sm',
+                  onPress: () => {navigate(BasicInfoPaths.PersonalInformation)},
+                  content: <span className="!text-xs">{worker.job}</span>,
+                }}
+              />
             </Card>
           );
         })}

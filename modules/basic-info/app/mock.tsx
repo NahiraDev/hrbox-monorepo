@@ -118,9 +118,9 @@ export const organizationDepartment = [
 export const technicalDepartment = [
   {
     img: '',
-    diactive: ' ',
-    name: ' mohammad hosseinzade sahafi',
-    job: ' CEO Nahira company',
+    diactive: '',
+    name: ' parisa',
+    job: ' CEO',
   },
   {
     img: '',
@@ -1170,8 +1170,19 @@ export const dataWorker = [
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
-  },
-  {
+  },  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },  {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
@@ -1185,32 +1196,22 @@ export const dataWorker = [
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
-  },
-  {
+  },  {
+    worker: 'Sahar Sharifi',
+    job: 'National Referee',
+    num: '2020',
+  },  {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
     num: '2020',
   },
-  {
-    worker: 'Sahar Sharifi',
-    job: 'National Referee',
-    num: '2020',
-  },
-  {
-    worker: 'Sahar Sharifi',
-    job: 'National Referee',
-    num: '2020',
-  },
-  {
-    worker: 'Sahar Sharifi',
-    job: 'National Referee',
-    num: '2020',
-  },
-  {
-    worker: 'Sahar Sharifi',
-    job: 'National Referee',
-    num: '2020',
-  },
+
+
+
+
+
+
+
   {
     worker: 'Sahar Sharifi',
     job: 'National Referee',
@@ -1240,6 +1241,15 @@ export const dataWorker2 =  [
   },
 ];
 export const Spouse = [
+  {
+    firstName: 'Negative',
+    lastName: 'Negative',
+    job: 'A+',
+    id: '2025/01/01',
+    education: '400.000.00',
+    mobile: '1234',
+    birth: '12345',
+  },
   {
     firstName: 'Negative',
     lastName: 'Negative',

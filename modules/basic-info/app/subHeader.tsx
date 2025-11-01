@@ -1,5 +1,5 @@
 import { lazyLoad } from '@core/routes';
-import { DocumentSketch, LikeShapes, Location } from 'iconsax-react';
+import { DocumentSketch, LikeShapes, Location, People } from 'iconsax-react';
 
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
 
@@ -46,16 +46,20 @@ export const BasicInfoSubHeaders: any = [
     path: BasicInfoPaths.AllEmployees,
     component: AllEmployees,
     props: {
-      name: 'AllEmployees',
+      name: 'Employees',
       icon: Location,
+      name1: "Satisfaction Status",
+      icon1: LikeShapes
     },
   },
   {
     path: BasicInfoPaths.EmployeeSatisfactionCalendar,
     component: EmployeeSatisfactionCalendarSubHeader,
     props: {
-      name: 'Satisfaction Status',
-      icon: LikeShapes,
+      name: 'Employees',
+      icon: People,
+      name1: "Satisfaction Status",
+      icon1: LikeShapes
     },
   },
 ];

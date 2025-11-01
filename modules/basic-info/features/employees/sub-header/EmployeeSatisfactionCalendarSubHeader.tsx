@@ -12,13 +12,15 @@ const EmployeeSatisfactionCalendarSubHeader = (props: any) => {
   return (
     <div className="flex items-center justify-between ">
       <div className="flex gap-2">
-        <div className="flex items-center gap-2 rounded-md bg-primary-400 shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.AllEmployees)}>
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal" >{props.name}</span>
-        </div>
-        <div className="flex items-center gap-2 rounded-md bg-primary-500 shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.EmployeeSatisfactionCalendar)}>
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal "  >{props.name}</span>
+        <div className="flex gap-2">
+          <div className="flex items-center gap-2 rounded-lg shadow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.AllEmployees)}>
+            {props.icon && <props.icon />}
+            <span className="!text-xl" >{props.name}</span>
+          </div>
+          <div className="flex items-center gap-2 rounded-lg bg-primary-400 shadow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.EmployeeSatisfactionCalendar)}>
+            {props.icon1 && <props.icon1 color="#fff" />}
+            <span className="text-white !text-xl">{props.name1}</span>
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-2">

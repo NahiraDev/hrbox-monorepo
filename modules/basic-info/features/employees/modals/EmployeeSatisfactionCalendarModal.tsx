@@ -32,13 +32,13 @@ const getBadgeGradient = (color) => {
 const MentorCard = ({ name, role, avatar, badgeColor }) => {
 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center px-5 py-6 relative">
-      <div className="absolute z-100 top-1 right-2">
+    <div className="flex flex-col gap-3 items-center justify-center px-5 py-6 relative">
+      <div className="absolute z-100 top-3 right-1">
         <div className={`w-5 h-5 ${getBadgeGradient(badgeColor)} rounded-full`}></div>
       </div>
       <div className="flex flex-col gap-2">
-        <Avatar className='w-24 h-24' radius="lg" src={avatar} />
-        <span className="!font-semibold text-xs text-secondary-1000">{name}</span>
+        <Avatar className='w-24 h-24 rounded-2xl'  src={avatar} />
+        <span className="!font-semibold !text-xs text-secondary-1000">{name}</span>
         <span className="flex items-center justify-center !text-xs rounded-full px-2 h-5 border border-primary-50 text-primary-400 bg-surface-50">
           {role}
         </span>

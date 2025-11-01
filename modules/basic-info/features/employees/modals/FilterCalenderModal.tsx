@@ -8,10 +8,11 @@ const FilterCalenderModal = () => {
 <>
 
     <AppModal.Body>
+      <div className="flex flex-col gap-6">
       <AppInput
         props={{
           className: ' border border-[#DCF0F9]',
-          label: 'Educational Institution',
+          label: 'Select Unit',
           size: 'lg',
           color: 'primary',
           radius: 'lg',
@@ -20,7 +21,7 @@ const FilterCalenderModal = () => {
       <AppInput
         props={{
           className: ' border border-[#DCF0F9]',
-          label: 'Educational Institution',
+          label: 'Search by Name or Position',
           size: 'lg',
           color: 'primary',
           radius: 'lg',
@@ -29,7 +30,7 @@ const FilterCalenderModal = () => {
       <AppInput
         props={{
           className: ' border border-[#DCF0F9]',
-          label: 'Educational Institution',
+          label: ' Personnel Code',
           size: 'lg',
           color: 'primary',
           radius: 'lg',
@@ -38,12 +39,13 @@ const FilterCalenderModal = () => {
       <AppInput
       props={{
         className: ' border border-[#DCF0F9]',
-        label: 'Educational Institution',
+        label: 'National Code',
         size: 'lg',
         color: 'primary',
         radius: 'lg',
       }}
     />
+      </div>
     </AppModal.Body>
   <AppModal.Footer>
     <AppButton

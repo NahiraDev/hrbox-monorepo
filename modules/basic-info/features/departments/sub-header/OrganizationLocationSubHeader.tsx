@@ -1,51 +1,60 @@
 import { AppButton, useModalContext } from '@root/core';
-import { Add, Location, SearchNormal, Trash } from 'iconsax-react';
+import { Add, Location, SearchNormal1 } from 'iconsax-react';
 import { OrganizationLocationModal } from '@module/basic-info/features/departments/modals/OrganizationLocationModal';
 
 const OrganizationLocationSubHeader = (props: any) =>{
   const { openModal } = useModalContext();
 
-  return(
-    <div className="flex items-center justify-between ">
+  return (
+    <div className='flex items-center justify-between'>
       <div>
-        <div className="flex items-center gap-2 rounded-md bg-primary-400 shdow-theme-sm px-3 py-1.5 w-fit">
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal">{props.name}</span>
+        <div className='bg-primary-400 shadow-theme-sm flex w-fit items-center gap-2 rounded-lg px-3 py-1.5'>
+          {props.icon && <props.icon color='#fff' />}
+          <span className='!text-xl text-white'>{props.name}</span>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className='flex items-center gap-2'>
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: "border border-primary-400 p-2",
             size: 'lg',
-            radius: 'sm',
+            radius: 'lg',
             isIconOnly: true,
-            onPress: () => "",
+            onPress: () => '',
             content: (
-              <span >
-                <SearchNormal size="28" />
+              <span>
+                <SearchNormal1 size='24' />
               </span>
             ),
           }}
         />
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 px-3 py-1.5',
             size: 'lg',
-            radius: 'sm',
+            radius: 'lg',
             variant: 'light',
-            onPress: () => openModal('edit',"", <OrganizationLocationModal />, undefined, '2xl',"Organizational Locations",<Location className='text-white'/>),
+            onPress: () =>
+              openModal(
+                'edit',
+                '',
+                <OrganizationLocationModal />,
+                undefined,
+                '2xl',
+                'Organizational Locations',
+                <Location className='text-white' />
+              ),
             content: (
-              <div className="flex items-center gap-4">
-                <Add size="28" />
-                <span className="!text-lg">Add New One</span>
+              <div className='flex items-center gap-2'>
+                <Add size='24' />
+                <span className='!text-[16px] text-secondary-1000'>Add New One</span>
               </div>
             ),
           }}
         />
       </div>
     </div>
-  )
+  );
 }
 
 export default OrganizationLocationSubHeader;

@@ -7,16 +7,15 @@ export const OrganizationLocationModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    // <AppModal icon={<Location color="white" />} size="3xl" title="Organizational Locations">
     <>
       <AppModal.Body>
         <div className="grid grid-cols-2 gap-6">
           <div className="flex gap-3">
             <div>
-              <Avatar size="lg" radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+              <Avatar className='p-3.5 text-white' size="lg" radius="sm" color='primary' src="" />
             </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-medium text-secondary-1000">Location Photo</span>
+            <div className="flex flex-col text-center gap-3">
+              <span className="!font-medium text-secondary-1000">Location Photo</span>
               <AppButton
                 props={{
                   size: 'xs',
@@ -38,7 +37,7 @@ export const OrganizationLocationModal = () => {
           <AppAutoComplete
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Depatments Title',
+              label: 'Location Title',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
@@ -47,7 +46,7 @@ export const OrganizationLocationModal = () => {
           <AppAutoComplete
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Depatments Title',
+              label: 'URL',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
@@ -56,7 +55,7 @@ export const OrganizationLocationModal = () => {
           <AppAutoComplete
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Depatments Title',
+              label: 'Province  ',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
@@ -65,7 +64,7 @@ export const OrganizationLocationModal = () => {
           <AppAutoComplete
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Depatments Title',
+              label: 'City',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
@@ -74,18 +73,18 @@ export const OrganizationLocationModal = () => {
           <AppAutoComplete
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Depatments Title',
+              label: 'HR Manager',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
             }}
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-6 mt-6">
           <AppTextArea
             props={{
               className: ' border border-[#DCF0F9]',
-              label: 'Descriptions*',
+              label: 'Address*',
               size: 'lg',
               color: 'primary',
               radius: 'lg',
@@ -111,7 +110,7 @@ export const OrganizationLocationModal = () => {
             onPress: () => openModal('delete', undefined),
             content: <span>Cancel</span>,
             className:
-              'text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200',
+              'text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg ',
           }}
         />
         <AppButton
@@ -121,11 +120,10 @@ export const OrganizationLocationModal = () => {
             variant: 'light',
             onPress: () => console.log('a'),
             content: <span>Save Changes</span>,
-            className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
+            className: 'bg-primary text-white py-1.5 px-3 !text-xl rounded-lg ',
           }}
         />
       </AppModal.Footer>
     </>
-    // {/*</AppModal>*/}
   );
 };

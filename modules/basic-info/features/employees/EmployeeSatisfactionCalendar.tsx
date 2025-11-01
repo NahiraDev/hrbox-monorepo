@@ -319,8 +319,8 @@ const EmployeeSatisfactionCalendar = () => {
                               />,
                               undefined,
                               '3xl',
-                              'Organizational Locations',
-                              <Category className="text-white" />
+                              'Satisfaction Status',
+                              <Category className="text-white w-4.5 h-4.5" />
                             );
                           }
                         }}

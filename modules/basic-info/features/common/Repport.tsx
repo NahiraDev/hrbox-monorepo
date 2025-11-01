@@ -1,6 +1,6 @@
 import { Listbox, ListboxItem, Avatar } from '@heroui/react';
 import { AppButton, AppDeleteModal, AppInput } from '@core/components';
-import { MessageEdit, Trash } from 'iconsax-react';
+import { Edit, Trash } from 'iconsax-react';
 import { useModalContext } from '@root/core';
 
 const users = [
@@ -41,7 +41,7 @@ const OrganizationalChart = () => {
                 color: 'white',
                 variant: 'solid',
                 className: 'p-2 hover:!bg-primary transition-all duration-200',
-                content: <MessageEdit className="text-secondary-1000 group-hover:text-white" />,
+                content: <Edit className="text-secondary-1000 group-hover:text-white" />,
               }}
             />
             <AppButton
@@ -60,9 +60,10 @@ const OrganizationalChart = () => {
         <div>
           <AppInput
             props={{
-              className:"border border-surface ",
+              className:"border border-surface-50 h-[70px]",
               label: '',
               size: 'lg',
+              placeholder:'',
               color: 'primary',
               radius: 'lg',
             }}

@@ -56,9 +56,12 @@ const Documents = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full p-4">
+        <div className="grid grid-cols-4 gap-4 w-full p-4 overflow-y-auto max-h-[550px] ">
           {documentsList.map((user, index) => (
-            <Card key={index} className="p-3 w-full h-full">
+            <Card
+              key={index}
+              className="cursor-pointer p-3 w-full h-full shadow-sm border border-transparent hover:border-primary-400 transition-all duration-200 ease-in-out"
+            >
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
@@ -84,12 +87,14 @@ const Documents = () => {
                           <Avatar
                             radius="sm"
                             size="lg"
+                            color="primary"
+                            className="text-white"
                             src={user.avatarSrc || undefined}
                           />
                         ),
                       }}
                     />
-                    <span>Identity Card</span>
+                    <span className="!font-semibold text-secondary-1000">Identity Card</span>
                   </div>
                   <div className="flex gap-1">
                     <div>
@@ -112,18 +117,7 @@ const Documents = () => {
                           radius: 'sm',
                           variant: 'light',
                           isIconOnly: true,
-                          onPress: () =>
-                            openModal(
-                              'edit',
-                              '',
-                              <DocumentsModal
-                                onClose={() => {}}
-                                onCloseAll={closeAllModals}
-                                onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
-                              />,
-                              undefined,
-                              'lg'
-                            ),
+                          onPress: () =>{""},
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
                           className: 'p-2 hover:!bg-primary-400 transition-all duration-200',
                         }}
@@ -131,19 +125,19 @@ const Documents = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-0.5 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-0.5 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5 rounded-lg">
                   <User className="w-4 h-4" />
                   <span className="text-sm">{user.name}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5 rounded-lg">
                   <Calendar className="w-4 h-4" />
                   <span className="text-sm">{user.Publication}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5 rounded-lg">
                   <Calendar className="w-4 h-4" />
                   <span className="text-sm">{user.Edit}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5 rounded-lg">
                   <Status className="w-4 h-4" />
                   <span className="text-sm">{user.UploadStatus}</span>
                 </div>

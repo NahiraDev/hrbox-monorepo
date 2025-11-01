@@ -14,9 +14,9 @@ const Achievements = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full p-4">
+        <div className="grid grid-cols-4 gap-4 w-full p-4 overflow-y-auto max-h-[600px] ">
           {achivements.map((user: any, index) => (
-            <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
+            <Card key={index} className="cursor-pointer p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between border-b border-gray-200 p-1">
                   <div className="flex items-center gap-3 text-lg font-semibold">
@@ -39,8 +39,8 @@ const Achievements = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex text-xs gap-0.5 items-center justify-between w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
-                  <div className="flex gap-2 items-center">
+                <div className="flex text-xs gap-0.5 items-center justify-between w-full border border-[#DCF0F9]/40 rounded-lg p-1.5 ">
+                  <div className="flex gap-2 items-center ">
                     <Settings size="20" />
                     <span>Title</span>
                   </div>
@@ -48,7 +48,7 @@ const Achievements = () => {
                     <span>{user.title}</span>
                   </div>
                 </div>
-                <div className="flex text-xs gap-0.5 items-center justify-between  w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex text-xs gap-0.5 items-center justify-between  w-full border border-[#DCF0F9]/40 rounded-lg p-1.5">
                   <div className="flex gap-2 items-center">
                     <Calendar size="20" />
                     <span>Date</span>
@@ -57,7 +57,7 @@ const Achievements = () => {
                     <span>{user.date}</span>
                   </div>
                 </div>
-                <div className="flex  text-xs flex-col gap-2 items-start w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex  text-xs flex-col gap-2 items-start w-full border border-[#DCF0F9]/40 rounded-lg p-1.5">
                   <div className="flex gap-2 items-center">
                     <TextalignJustifyleft size="20" />
                     <span>Description</span>

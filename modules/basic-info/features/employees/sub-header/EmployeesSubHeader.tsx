@@ -21,55 +21,55 @@ const EmployeesSubHeader = (props: any) => {
   return (
     <div className="flex items-center justify-between ">
       <div className="flex gap-2">
-        <div className="flex items-center gap-2 rounded-md bg-primary-400 shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.AllEmployees)}>
+        <div className="flex items-center gap-2 rounded-lg bg-primary-400 shadow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.AllEmployees)}>
           {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal " >{props.name}</span>
+          <span className="text-white !text-xl" >{props.name}</span>
         </div>
-        <div className="flex items-center gap-2 rounded-md bg-primary-500 shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.EmployeeSatisfactionCalendar)}>
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal "  >{props.name}</span>
+        <div className="flex items-center gap-2 rounded-lg shadow-theme-sm px-3 py-1.5 w-fit cursor-pointer" onClick={() => navigate(BasicInfoPaths.EmployeeSatisfactionCalendar)}>
+          {props.icon1 && <props.icon1 />}
+          <span className=" !text-xl">{props.name1}</span>
       </div>
       </div>
       <div className="flex items-center gap-2">
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 p-2',
             size: 'lg',
-            radius: 'sm',
+            radius: 'lg',
             isIconOnly: true,
             onPress: () => "",
             content: (
               <span >
-                <SearchNormal size="28" />
+                <SearchNormal size="24" />
               </span>
             ),
           }}
         />
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 p-2',
             size: 'lg',
-            radius: 'sm',
+            radius: 'lg',
             isIconOnly: true,
             onPress: () => openModal('edit',"", <FilterCalenderModal/>,undefined,"sm","Filter", <Filter className='text-white'/> ),
             content: (
               <span >
-                <Setting4 size="28" />
+                <Setting4 size="24" />
               </span>
             ),
           }}
         />
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 px-3 py-1.5',
             size: 'lg',
-            radius: 'sm',
+            radius: 'lg',
             variant: 'light',
             onPress: () => openModal('edit',"", <OrganizationLocationModal />, undefined, '2xl',"Do you want to remove it?",<Trash className='text-white'/>),
             content: (
-              <div className="flex items-center gap-4">
-                <Add size="28" />
-                <span className="!text-lg">Add New One</span>
+              <div className="flex items-center gap-2">
+                <Add size="24" />
+                <span className="!text-[16px]">Add New One</span>
               </div>
             ),
           }}

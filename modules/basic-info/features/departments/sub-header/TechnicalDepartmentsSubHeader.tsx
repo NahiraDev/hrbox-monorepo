@@ -13,48 +13,49 @@ const TechnicalDepartmentsSubHeader = (props: any) => {
 
   return (
     <div className="flex items-center justify-between ">
-    <div className="flex">
+    <div className="flex items-center justify-between">
       <AppButton
         props={{
+          className:'w-[24px] h-[24px]',
           size: 'lg',
           radius: 'sm',
           variant: 'light',
           isIconOnly: true,
           onPress:() => navigate(BasicInfoPaths.OrganizationDepartments),
-          content: <ArrowLeft2 size={24}/>,
+          content: <ArrowLeft2 size='24'/>,
         }}
       />
-      <div className="flex items-center gap-2 rounded-md bg-primary-400 shdow-theme-sm px-3 py-1.5 w-fit">
+      <div className="flex items-center gap-2 rounded-lg bg-primary-400 shadow-theme-sm px-3 py-1.5 w-fit">
         {props.icon && <props.icon color="#fff" />}
-        <span className="text-white text-xl font-normal">{props.name}</span>
+        <span className="text-white !text-xl">{props.name}</span>
       </div>
     </div>
       <div className="flex items-center gap-2">
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 p-2',
             size: 'lg',
             radius: 'sm',
             isIconOnly: true,
             onPress: () => openModal('custom', "",<OrganizationDepartmentModal/> , undefined, '3xl',"Organization Departments", <Category className='text-white'/> ),
             content: (
               <span >
-                <Edit size="28" />
+                <Edit size="24  " />
               </span>
             ),
           }}
         />
         <AppButton
           props={{
-            className: 'border border-primary-400',
+            className: 'border border-primary-400 px-3 py-1.5',
             size: 'lg',
             radius: 'sm',
             variant: 'light',
             onPress: () => "",
             content: (
-              <div className="flex items-center gap-3">
-                <Hierarchy3 size="28" />
-                <span className="!text-lg">Chart Maker</span>
+              <div className="flex items-center gap-1.5">
+                <Hierarchy3 size="24" />
+                <span className="!text-[16px]">Chart Maker</span>
               </div>
             ),
           }}

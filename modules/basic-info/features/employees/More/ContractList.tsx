@@ -128,9 +128,9 @@ const ContractList = () => {
             removeWrapper
             aria-label="Contracts Table with 8 columns"
             classNames={{
-              th: 'bg-primary text-white py-3 px-2 text-sm font-semibold',
-              tr: 'text-secondary-400 text-xs font-bold',
-              td: 'py-5',
+              th: 'bg-primary text-white py-3 px-3 !text-sm !font-semibold text-center',
+              tr: 'text-secondary-400 !text-xs !font-bold text-center',
+              td: 'py-5 text-center',
             }}
           >
             <TableHeader columns={columns}>

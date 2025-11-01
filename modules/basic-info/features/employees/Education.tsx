@@ -39,13 +39,14 @@ const Education = () => {
     <>
       <BasicInfoLayout
         content={
-          <div className="grid grid-cols-4 gap-3 w-full p-4">
+          <div className="grid grid-cols-4 gap-3 w-full p-4 overflow-y-auto max-h-[550px] ">
             {educationList.map((user, index) => ( // ✅ تغییر education به educationList
-              <Card key={index} className="py-2 px-3">
+              <Card  key={index}
+                     className="cursor-pointer px-3 py-2 shadow-sm border border-transparent hover:border-primary-400 hover:bg-[#D6F2FF] transition-all duration-200 ease-in-out ">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
                   <div className="flex items-center gap-2">
                     <Designtools />
-                    <span className="font-bold">{user.job}</span>
+                    <span className="!font-bold">{user.job}</span>
                   </div>
                   <div>
                     <AppButton
@@ -64,29 +65,29 @@ const Education = () => {
                 <div className="flex flex-col gap-2 p-2">
                   <div className="flex items-center justify-between p-1.5">
                     <div className="flex gap-2">
-                      <Buildings />
-                      <span>Uni</span>
+                      <Buildings  size={16}/>
+                      <span className="!text-xs text-secondary-1000">Uni</span>
                     </div>
                     <div>
-                      <span>{user.company}</span>
+                       <span className="!font-semibold text-secondary-1000 !text-xs">{user.company}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-1.5">
                     <div className="flex gap-2">
-                      <Calendar />
-                      <span>Date</span>
+                      <Calendar size={16}/>
+                      <span className="!text-xs text-secondary-1000">Date</span>
                     </div>
                     <div>
-                      <span>{user.date}</span>
+                       <span className="!font-semibold text-secondary-1000 !text-xs">{user.date}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-1.5">
                     <div className="flex gap-2">
-                      <Location />
-                      <span>Location</span>
+                      <Location size={16}/>
+                      <span className="!text-xs text-secondary-1000">Location</span>
                     </div>
                     <div>
-                      <span>{user.location}</span>
+                       <span className="!font-semibold text-secondary-1000 !text-xs">{user.location}</span>
                     </div>
                   </div>
                 </div>

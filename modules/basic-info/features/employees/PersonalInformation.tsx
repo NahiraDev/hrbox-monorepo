@@ -23,10 +23,10 @@ const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto ma
               <div key={`user-${index}`} className={cardClass}>
                 <div className="flex items-center gap-1">
                   {user.icon}
-                  <span className="text-sm font-medium">{user.title}</span>
+                  <span className="text-sm !font-light">{user.title}</span>
                 </div>
                 <div>
-                  <span className="text-sm text-gray-700">{user.text}</span>
+                  <span className="text-sm text-gray-700 !font-semibold">{user.text}</span>
                 </div>
               </div>
             ))}
