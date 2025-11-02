@@ -1,9 +1,9 @@
 import type { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
-import React from 'react';
+import { useState } from 'react';
 
 const ChartDashboard = () => {
-  const [series] = React.useState([
+  const [series] = useState([
     {
       name: 'PRODUCT A',
       data: [44, 55, 41, 67, 22, 43, 21, 49, 35, 25, 14],
@@ -18,7 +18,7 @@ const ChartDashboard = () => {
     },
   ]);
 
-  const [options] = React.useState<ApexOptions>({
+  const [options] = useState<ApexOptions>({
     chart: {
       type: 'bar',
       height: '100%',

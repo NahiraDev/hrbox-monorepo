@@ -1,6 +1,6 @@
 
 import { Add, Calendar, Trash } from 'iconsax-react';
-import { AppButton, AppTable } from '@root/core';
+import { AppButton, AppTable } from '@core/components';
 import { PersonalList } from '@module/attendance/app/mock';
 import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
 import { useState } from 'react';
