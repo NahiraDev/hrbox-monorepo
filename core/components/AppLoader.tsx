@@ -19,7 +19,7 @@ export const AppLoader = () => {
         className="w-8 h-8 absolute left-1/2 top-1/2"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
-        {/*<LottieComponent animationData={} loop={true} />*/}
+        loading...
       </div>
     </div>
   );

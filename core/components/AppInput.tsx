@@ -68,9 +68,10 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
   } = props;
 
   const inputWrapperClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
+    'bg-white ',
     error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
+    variant !== 'light' && 'shadow-theme-sm',
     radiusClasses[radius],
     className,
   );

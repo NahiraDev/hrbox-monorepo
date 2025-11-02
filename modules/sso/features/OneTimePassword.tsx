@@ -1,11 +1,11 @@
 import { FormProvider, useAuth } from '@core/context';
 
-import { OneTimePasswordForm } from '@module/sso/features/HRLink/forms';
+import { OneTimePasswordForm } from '@module/sso/features/forms';
 import {
   useLoginByOtpMutation,
   useRegisterOtpConfirmMutation,
   useResetPasswordCheckOtpMutation,
-} from '@module/sso/features/HRLink/apis';
+} from '@module/sso/features/apis';
 
 const OneTimePassword = () => {
   const [resetPassword] = useResetPasswordCheckOtpMutation();

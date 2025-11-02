@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { FormProvider, useAuth } from '@core/context';
-import { ResetPasswordForm } from '@module/sso/features/HRLink/forms';
+import { ResetPasswordForm } from '@module/sso/features/forms';
 import * as Yup from 'yup';
 
 import { useResetPasswordCheckOtpMutation } from './apis';

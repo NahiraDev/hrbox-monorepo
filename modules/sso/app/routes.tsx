@@ -4,12 +4,12 @@ import { SSOHRLinkPaths } from './paths';
 
 export const page = {
   hrlink: {
-    login: lazyLoad(() => import('../features/HRLink/Login')),
-    LoginByOtp: lazyLoad(() => import('../features/HRLink/LoginByOtp')),
-    register: lazyLoad(() => import('../features/HRLink/Register')),
-    oneTimePassword: lazyLoad(() => import('../features/HRLink/OneTimePassword')),
-    forgetPassword: lazyLoad(() => import('../features/HRLink/ForgetPassword')),
-    resetPassword: lazyLoad(() => import('../features/HRLink/ResetPassword')),
+    login: lazyLoad(() => import('../features/Login')),
+    LoginByOtp: lazyLoad(() => import('../features/LoginByOtp')),
+    register: lazyLoad(() => import('../features/Register')),
+    oneTimePassword: lazyLoad(() => import('../features/OneTimePassword')),
+    forgetPassword: lazyLoad(() => import('../features/ForgetPassword')),
+    resetPassword: lazyLoad(() => import('../features/ResetPassword')),
   },
 };
 

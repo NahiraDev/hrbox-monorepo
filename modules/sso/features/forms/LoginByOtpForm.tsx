@@ -34,7 +34,7 @@ export const LoginByOtpForm = () => {
   };
 
   return (
-    <Form className="w-full max-w-xs flex flex-col gap-6" onSubmit={handleSubmit}>
+    <Form className="w-full flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-col gap-1">
           <div className="flex w-full !px-0">

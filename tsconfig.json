@@ -20,7 +20,7 @@
       "@module/*": ["./modules/*"],
       "@root/*": ["./*"],
       "@hrbox/core/*": ["./core/*"],
-//      "~/*": ["./*"]
+      "~/*": ["./*"]
     },
     "rootDirs": [".", "core", "modules" , "shared"],
     "typeRoots": ["node_modules/@types"],

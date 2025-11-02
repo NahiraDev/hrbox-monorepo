@@ -18,7 +18,7 @@ export const ForgetPasswordForm = () => {
 
   return (
     <Form
-      className='w-full max-w-xs flex flex-col gap-6'
+      className='w-full flex flex-col gap-6'
       onSubmit={handleSubmit}
     >
       <div className='flex flex-col gap-4 w-full'>

@@ -7,14 +7,32 @@ import {
   initialValuesFormLogin,
   LoginForm,
   handleSubmitLogin
-} from '@module/sso/features/HRLink/forms';
-import { useLoginMutation } from '@module/sso/features/HRLink/apis';
+} from '@module/sso/features/forms';
+import { useLoginMutation } from '@module/sso/features/apis';
 import { setCredentials } from '@core/redux/reducers/authSlice';
 
 const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLogin = async (values: any) => {
+    try {
+      const result = await login(handleSubmitLogin(values)).unwrap();
+
+      dispatch(
+        setCredentials({
+          token: result.data.Token,
+          refreshToken: result.data.renewalToken,
+          user: result.data.userId,
+        })
+      );
+
+      navigate('/hrlink/dashboard');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
   return (
     <FormProvider
@@ -23,23 +41,7 @@ const Login = () => {
       validationSchema={formValidationErrorLogin}
       enableCache={true}
       clearCacheOnSubmit={true}
-      onSubmitAsync={async (values: any) => {
-        try {
-          const result = await login(handleSubmitLogin(values)).unwrap();
-
-          dispatch(
-            setCredentials({
-              token: result.data.Token,
-              refreshToken: result.data.renewalToken,
-              user: result.data.userId,
-            })
-          );
-
-          navigate('/hrlink/dashboard');
-        } catch (error) {
-          console.error('Login failed:', error);
-        }
-      }}
+      onSubmitAsync={handleLogin}
     >
       <LoginForm />
     </FormProvider>

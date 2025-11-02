@@ -2,8 +2,8 @@ import { FormProvider, useAuth } from '@core/context';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { useSendOtpMutation } from '@module/sso/features/HRLink/apis';
-import { ForgetPasswordForm } from '@module/sso/features/HRLink/forms/ForgetPasswordForm';
+import { useSendOtpMutation } from '@module/sso/features/apis';
+import { ForgetPasswordForm } from '@module/sso/features/forms/ForgetPasswordForm';
 
 const ForgetPassword = () => {
   const { t } = useTranslation();

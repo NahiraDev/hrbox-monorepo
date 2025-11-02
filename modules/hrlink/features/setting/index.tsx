@@ -85,6 +85,7 @@ const Setting = () => {
               <input ref={fileInputRef} accept="image/*" className="hidden" type="file" onChange={handleFileChange} />
             </div>
             <FormProvider
+              formId="profile-form"
               initialValues={initialValuesEditProfile}
               validationSchema={validationErrorEditProfile}
               onSubmitAsync={async (values: any) => {
