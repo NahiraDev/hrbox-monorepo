@@ -4,17 +4,28 @@ import { FormProvider, useModalContext } from '@core/context';
 import {
   formValidationAction,
   handleSubmitAction,
-  initialValuesAction,
 } from '@module/attendance/features/forms/ShiftAllocationEdit';
 const ShiftAllocationModalEdit=()=>{
-  const {closeModal}=useModalContext();
+  const {closeModal, getModalData}=useModalContext();
+  const rowData=getModalData('edit','ShiftAllocationModalEdit');
+  const initialValues = {
+    type: rowData.type || 'Person'||null,
+    ChooseShift: rowData.ChooseShift || null,
+    FromDate: rowData.FromDate || null,
+    organization: rowData.organization || null,
+    Department: rowData.Department || null,
+    Employee: rowData.Employee || null,
+    Description: rowData.Description || null,
+    JobTitle: rowData.JobTitle || null}
+
+  console.log(initialValues);
   return(
     <>
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('edit', 'ShiftAllocationModalEdit');
-        }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
+        }} initialValues={initialValues} validationSchema={formValidationAction}>
           <ShiftAllocationEdit/>
         </FormProvider>
       </AppModal.Body>

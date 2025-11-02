@@ -10,12 +10,12 @@ import BasicInfoPlugin from '@module/basic-info/app/register';
 import AttendancePlugin from '@module/attendance/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  'hrlink',
+  // 'hrlink',
   // 'process-maker',
   // 'chart-maker',
   // 'basic-info',
-  'sso'
-  // 'attendance'
+  // 'sso'
+  'attendance'
 ];
 
 async function bootstrap() {

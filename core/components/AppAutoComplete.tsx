@@ -11,9 +11,9 @@ export const AppAutoComplete = ({ props }: { props: any }) => {
     name,
     label,
     required = false,
-    data = [],
     displayKey = 'Name',
-    valueKey = 'Id',
+    valueKey = 'Id',    data = [],
+
     formik,
     error,
   } = props;

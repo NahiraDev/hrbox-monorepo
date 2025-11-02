@@ -3,7 +3,7 @@ import '../../app/index.css'
 const ApprovalsFilter=()=>{
   return(
     <>
-      <div className="flex flex-col w-[25%] h-full rounded-xl pr-2 pl-3 py-3 gap-4 ">
+      <div className="flex flex-col w-[22%] h-full rounded-xl pr-2 pl-3 py-3 gap-4 ">
         <div className='flex flex-col gap-4 pr-1 overflow-y-scroll max-h-[600px] custom-scroll-approvals'>
           <AppAutoComplete props={{
             label:'Request Type',

@@ -1,24 +1,21 @@
 import { type ConfigEnv, defineConfig, PluginOption, type UserConfig } from 'vite';
-import { resolve, dirname } from 'path';
 import path from 'path'
+import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import imagemin from 'vite-plugin-imagemin';
+
 // Core plugins
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // Performance & Optimization
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { visualizer } from 'rollup-plugin-visualizer';
 import analyzer from 'vite-bundle-analyzer';
-import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // Development Experience
-import { checker } from 'vite-plugin-checker';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
-import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server';
 
 // Build Optimization
 import { comlink } from 'vite-plugin-comlink';
@@ -137,11 +134,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     // }) as PluginOption,
 
     // React with SWC - fastest React refresh
-    react({
-    jsxImportSource: '@emotion/react',
-    reactRefreshHost: 'http://localhost:5173',
-      plugins: [['@swc/plugin-styled-components', {}]]
-    }) as PluginOption,
+    react() as PluginOption,
 
     // Advanced TypeScript path resolution
     // tsconfigPaths({
@@ -158,207 +151,176 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     // createAdvancedSpaMiddleware() as PluginOption,
 
-    // Development mocking
-    ...(isDevelopment
-      ? [
-          mockDevServerPlugin({
-            prefix: '/api',
-            wsPrefix: '/socket.io',
-          }) as PluginOption,
-        ]
-      : []),
-
     // Web Workers support
-    ...(isProduction ? [comlink() as PluginOption] : []),
+    // ...(isProduction ? [comlink() as PluginOption] : []),
 
     tailwindcss() as PluginOption,
 
-    ...(isProduction ? [analyzer() as PluginOption] : []),
-    createHtmlPlugin({
-      minify: true,
-      inject: {
-        data: {
-          title: envVars.VITE_APP_TITLE || 'HRBox Enterprise',
-          description: envVars.VITE_APP_DESCRIPTION || 'Next-generation HR management system',
-          keywords: 'HR, Enterprise, Management, Monorepo',
-          author: 'HRBox Team',
-        },
-      },
-      template: 'index.html',
-    }) as PluginOption,
-    imagemin({
-      gifsicle: { optimizationLevel: 7 },
-      mozjpeg: { quality: 85 },
-      pngquant: { quality: [0.65, 0.8], speed: 4 },
-      webp: { quality: 85 },
-    }) as PluginOption,
+    // ...(isProduction ? [analyzer() as PluginOption] : []),
+    // createHtmlPlugin({
+    //   minify: false,
+    //   inject: {
+    //     data: {
+    //       title: envVars.VITE_APP_TITLE || 'HRBox Enterprise',
+    //       description: envVars.VITE_APP_DESCRIPTION || 'Next-generation HR management system',
+    //       keywords: 'HR, Enterprise, Management, Monorepo',
+    //       author: 'HRBox Team',
+    //     },
+    //   },
+    //   template: 'index.html',
+    // }) as PluginOption,
+    // imagemin({
+    //   gifsicle: { optimizationLevel: 7 },
+    //   mozjpeg: { quality: 85 },
+    //   pngquant: { quality: [0.65, 0.8], speed: 4 },
+    //   webp: { quality: 85 },
+    // }) as PluginOption,
     // Micro-frontend support with Module Federation
-    ...(isProduction
-      ? [
-          federation({
-            name: 'hrbox',
-            filename: 'remoteEntry.js',
-            manifest: true,
-            exposes: {
-              './main': './main.tsx',
-            },
-            remotes: {
-              remote: {
-                type: 'module',
-                name: 'remote',
-                entry: 'https://localhost:5000/remoteEntry.js',
-                entryGlobalName: 'remote',
-                shareScope: 'default',
-              },
-              var_remote: 'var_remote@https://localhost:5000/remoteEntry.js',
-            },
-            shared: {
-              react: {
-                singleton: true,
-              },
-              'react/': {
-                singleton: true,
-              },
-            },
-          }),
-        ]
-      : []),
+    // ...(isProduction
+    //   ? [
+    //       federation({
+    //         name: 'hrbox',
+    //         filename: 'remoteEntry.js',
+    //         manifest: true,
+    //         exposes: {
+    //           './main': './main.tsx',
+    //         },
+    //         remotes: {
+    //           remote: {
+    //             type: 'module',
+    //             name: 'remote',
+    //             entry: 'https://localhost:5000/remoteEntry.js',
+    //             entryGlobalName: 'remote',
+    //             shareScope: 'default',
+    //           },
+    //           var_remote: 'var_remote@https://localhost:5000/remoteEntry.js',
+    //         },
+    //         shared: {
+    //           react: {
+    //             singleton: true,
+    //           },
+    //           'react/': {
+    //             singleton: true,
+    //           },
+    //         },
+    //       }),
+    //     ]
+    //   : []),
 
     // Static asset copying with optimization
-    ...(isProduction
-      ? [
-          viteStaticCopy({
-            targets: [
-              {
-                src: 'public/robots.txt',
-                dest: '.',
-              },
-              {
-                src: 'public/sitemap.xml',
-                dest: '.',
-              },
-              {
-                src: 'public/images/**/*',
-                dest: 'core-assets',
-              },
-            ],
-          }) as PluginOption,
-        ]
-      : []),
+    // ...(isProduction
+    //   ? [
+    //       viteStaticCopy({
+    //         targets: [
+    //           {
+    //             src: 'public/robots.txt',
+    //             dest: '.',
+    //           },
+    //           {
+    //             src: 'public/sitemap.xml',
+    //             dest: '.',
+    //           },
+    //           {
+    //             src: 'public/images/**/*',
+    //             dest: 'core-assets',
+    //           },
+    //         ],
+    //       }) as PluginOption,
+    //     ]
+    //   : []),
 
     // Advanced PWA with workbox strategies
     // ...(isProduction ? [
-    VitePWA({
-      registerType: 'autoUpdate',
-      filename: 'sw.js',
-      strategies: 'generateSW',
-      includeAssets: [
-        '**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf}',
-        '**/*.html',
-        '**/*.css',
-        '**/*.js',
-      ],
-      workbox: {
-        globDirectory: 'dist',
-        globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,gif,webp,svg,woff,woff2,ttf}'],
-        globIgnores: ['**/node_modules/**/*'],
-        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 8MB
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-cache',
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/api\..*/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api-cache',
-              networkTimeoutSeconds: 3,
-              expiration: { maxEntries: 1000, maxAgeSeconds: 60 * 5 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-          {
-            urlPattern: /\/DesktopModules\/.*/i,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'desktop-modules-cache',
-              expiration: { maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 },
-            },
-          },
-        ],
-        skipWaiting: true,
-        clientsClaim: true,
-        cleanupOutdatedCaches: true,
-      },
-      manifest: {
-        name: 'HRBox Enterprise Suite',
-        short_name: 'HRBox',
-        description: 'Advanced HR management platform with micro-frontend architecture',
-        theme_color: '#1f2937',
-        background_color: '#ffffff',
-        display: 'standalone',
-        orientation: 'any',
-        scope: '/',
-        start_url: '/',
-        categories: ['business', 'productivity'],
-        icons: [
-          { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },
-          {
-            src: '/pwa-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-        screenshots: [
-          {
-            src: '/screenshots/wide.png',
-            sizes: '1280x720',
-            type: 'image/png',
-            form_factor: 'wide',
-          },
-        ],
-      },
-    }) as PluginOption,
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   filename: 'sw.js',
+    //   strategies: 'generateSW',
+    //   includeAssets: [
+    //     '**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf}',
+    //     '**/*.html',
+    //     '**/*.css',
+    //     '**/*.js',
+    //   ],
+    //   workbox: {
+    //     globDirectory: 'dist',
+    //     globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,gif,webp,svg,woff,woff2,ttf}'],
+    //     globIgnores: ['**/node_modules/**/*'],
+    //     maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 8MB
+    //     runtimeCaching: [
+    //       {
+    //         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+    //         handler: 'CacheFirst',
+    //         options: {
+    //           cacheName: 'google-fonts-cache',
+    //           expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+    //           cacheableResponse: { statuses: [0, 200] },
+    //         },
+    //       },
+    //       {
+    //         urlPattern: /^https:\/\/api\..*/i,
+    //         handler: 'NetworkFirst',
+    //         options: {
+    //           cacheName: 'api-cache',
+    //           networkTimeoutSeconds: 3,
+    //           expiration: { maxEntries: 1000, maxAgeSeconds: 60 * 5 },
+    //           cacheableResponse: { statuses: [0, 200] },
+    //         },
+    //       },
+    //       {
+    //         urlPattern: /\/DesktopModules\/.*/i,
+    //         handler: 'StaleWhileRevalidate',
+    //         options: {
+    //           cacheName: 'desktop-modules-cache',
+    //           expiration: { maxEntries: 500, maxAgeSeconds: 60 * 60 * 24 },
+    //         },
+    //       },
+    //     ],
+    //     skipWaiting: true,
+    //     clientsClaim: true,
+    //     cleanupOutdatedCaches: true,
+    //   },
+    //   manifest: {
+    //     name: 'HRBox Enterprise Suite',
+    //     short_name: 'HRBox',
+    //     description: 'Advanced HR management platform with micro-frontend architecture',
+    //     theme_color: '#1f2937',
+    //     background_color: '#ffffff',
+    //     display: 'standalone',
+    //     orientation: 'any',
+    //     scope: '/',
+    //     start_url: '/',
+    //     categories: ['business', 'productivity'],
+    //     icons: [
+    //       { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
+    //       { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },
+    //       {
+    //         src: '/pwa-512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         purpose: 'any maskable',
+    //       },
+    //     ],
+    //     screenshots: [
+    //       {
+    //         src: '/screenshots/wide.png',
+    //         sizes: '1280x720',
+    //         type: 'image/png',
+    //         form_factor: 'wide',
+    //       },
+    //     ],
+    //   },
+    // }) as PluginOption,
     // ] : []),
 
     // HTML minification
-    ViteMinifyPlugin({
-      collapseWhitespace: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      minifyCSS: true,
-      minifyJS: true,
-    }) as PluginOption,
-
-    // Bundle analysis
-    ...(envVars.ANALYZE === 'true'
-      ? [
-          visualizer({
-            filename: 'dist/bundle-analysis.html',
-            open: true,
-            gzipSize: true,
-            brotliSize: true,
-            template: 'treemap',
-          }) as PluginOption,
-        ]
-      : []),
-    basicSsl({
-      /** name of certification */
-      name: 'HRBox',
-      /** custom trust domains */
-      domains: ['*.hrbox.me'],
-      /** custom certification directory */
-      certDir: path.resolve(__dirname, 'certs'),
-    }),
+    // ViteMinifyPlugin({
+    //   collapseWhitespace: true,
+    //   removeComments: true,
+    //   removeRedundantAttributes: true,
+    //   removeEmptyAttributes: true,
+    //   minifyCSS: false,
+    //   minifyJS: false,
+    // }) as PluginOption,
   ];
 
   return {
@@ -388,9 +350,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       outDir: resolve(__dirname, 'dist'),
       assetsDir: '',
       rollupOptions: {
-        external: (id: string) =>
-          /\.(png|jpg|jpeg|gif|webp|svg|ico|css|eot|woff|woff2|ttf|css\.map)$/i.test(id) ||
-          /node_modules/.test(id),
         input: {
           main: resolve(__dirname, 'index.html'),
           core: resolve(__dirname, 'core/index.ts'),
@@ -400,12 +359,12 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           hrlink: resolve(__dirname, 'modules/hrlink/app/register.ts'),
           basicInfo: resolve(__dirname, 'modules/basic-info/app/register.ts'),
         },
-        treeshake: {
-          moduleSideEffects: false,
-          propertyReadSideEffects: false,
-          tryCatchDeoptimization: false,
-          unknownGlobalSideEffects: false,
-        },
+        // treeshake: {
+        //   moduleSideEffects: false,
+        //   propertyReadSideEffects: false,
+        //   tryCatchDeoptimization: false,
+        //   unknownGlobalSideEffects: false,
+        // },
         output: {
           entryFileNames: chunkInfo => {
             if (chunkInfo.name === 'main') return 'index.js';
@@ -421,21 +380,21 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           assetFileNames: 'assets/[name]-[ext]',
         },
       },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ['console.info', 'console.debug', 'console.warn', 'console.log'],
-          unsafe: true,
-          passes: 4,
-        },
-        mangle: {
-          properties: { regex: /^_/ },
-          toplevel: true,
-        },
-        format: { comments: false },
-      },
-      chunkSizeWarningLimit: 1000,
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: true,
+      //     drop_debugger: true,
+      //     pure_funcs: ['console.info', 'console.debug', 'console.warn', 'console.log'],
+      //     unsafe: true,
+      //     passes: 4,
+      //   },
+      //   mangle: {
+      //     properties: { regex: /^_/ },
+      //     toplevel: true,
+      //   },
+      //   format: { comments: false },
+      // },
+      // chunkSizeWarningLimit: 1000,
     },
     // ESBuild configuration
     esbuild: {
@@ -455,6 +414,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         '@root': resolve(__dirname, '.'),
         '@core': resolve(__dirname, 'core'),
         '@module': resolve(__dirname, 'modules'),
+        '@proxy-server': resolve(__dirname, 'proxy-server'),
       },
 
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
@@ -465,86 +425,51 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     },
     assetsInclude: ['**/*.html'],
 
-    // Development server
     server: {
       port: parseInt(envVars.VITE_PORT || '5173'),
-      host: '0.0.0.0',
+      host: 'localhost',
       strictPort: false,
-      open: true,
+      open: false,
       cors: true,
-      https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
+
+      // ✅ HMR configuration
+      // hmr: {
+      //   overlay: true,
+      //   host: 'front.hrbox.me',
+      // },
+
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+          secure: false,
+          ws: true, // WebSocket support
+
+          configure: (proxy, options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.error('❌ Proxy error:', err.message);
+            });
+
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log(`📤 [Vite → Proxy] ${req.method} ${req.url}`);
+
+              proxyReq.setHeader('Host', 'front.hrbox.me');
+              proxyReq.setHeader('Origin', 'https://front.hrbox.me');
+            });
+
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log(`📥 [Proxy → Vite] ${proxyRes.statusCode} ${req.url}`);
+            });
+          },
+        },
       },
-      hmr: {
-        overlay: true,
-        port: 5173,
-        protocol: 'wss',
-        host: 'front.hrbox.me',
-      },
+
       watch: {
         usePolling: true,
         interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
       },
     },
 
-    // // Development server configuration with proxy for hrlink.hrbox.me
-    // server: {
-    //   port: parseInt(envVars.VITE_PORT || '5173'),
-    //   host: '0.0.0.0',
-    //   strictPort: false,
-    //   open: true,
-    //   cors: true,
-    //   https: {
-    //     key: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2-key.pem')),
-    //     cert: fs.readFileSync(path.resolve(__dirname, 'certs/front.hrbox.me+2.pem')),
-    //   },
-    //   hmr: {
-    //     overlay: true,
-    //     port: 5173,
-    //     protocol: 'wss',
-    //     host: 'front.hrbox.me',
-    //   },
-    //   // Add proxy configuration for hrlink API
-    //   proxy: {
-    //     '/DesktopModules': {
-    //       target: 'https://hrlink.hrbox.me',
-    //       changeOrigin: true,
-    //       secure: true, // Set to false if hrlink has self-signed certificates
-    //       ws: true, // Enable WebSocket proxying if needed
-    //       configure: (proxy, _options) => {
-    //         proxy.on('error', (err, _req, _res) => {
-    //           console.log('❌ Proxy error:', err);
-    //         });
-    //         proxy.on('proxyReq', (proxyReq, req, _res) => {
-    //           console.log('📤 Proxying:', req.method, req.url, '→', 'https://hrlink.hrbox.me' + req.url);
-    //         });
-    //         proxy.on('proxyRes', (proxyRes, req, _res) => {
-    //           console.log('📥 Response:', proxyRes.statusCode, req.url);
-    //         });
-    //       },
-    //     },
-    //     // Alternative: Create a dedicated /api proxy if you prefer
-    //     '/api/hrlink': {
-    //       target: 'https://hrlink.hrbox.me',
-    //       changeOrigin: true,
-    //       secure: true,
-    //       rewrite: (path) => path.replace(/^\/api\/hrlink/, ''),
-    //       configure: (proxy, _options) => {
-    //         proxy.on('error', (err, _req, _res) => {
-    //           console.log('❌ API Proxy error:', err);
-    //         });
-    //         proxy.on('proxyReq', (proxyReq, req, _res) => {
-    //           console.log('📤 API Proxying:', req.method, req.url);
-    //         });
-    //       },
-    //     },
-    //   },
-    //   watch: {
-    //     usePolling: true,
-    //     interval: parseInt(envVars.VITE_WATCH_INTERVAL || '100'),
-    //   },
-    // },
     // Preview server
     preview: {
       port: parseInt(envVars.VITE_PREVIEW_PORT || '4173'),

@@ -1,7 +1,6 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
-import { useFormContext } from '@core/context';
-import { AppAutoComplete, AppTextArea } from '@core/components';
+import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
 import { TimerStart } from 'iconsax-react';
 import * as Yup from 'yup';
 
@@ -28,33 +27,33 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-    console.log(values.title,'title');
+    console.log(values.title);
     console.log(values.type);
     console.log(values.ChooseShift);
     console.log(values.FromDate);
     console.log(values.organization);
     console.log(values.Employee);
     console.log(values.Description);
-  // return {
-  //   title: values.title,
-  //   type: values.type,
-  //   ChooseShift: values.ChooseShift,
-  //   FromDate: values.FromDate,
-  //   organization: values.organization,
-  //   Department: values.Department,
-  //   JobTitle: values.JobTitle,
-  //   Employee: values.Employee,
-  //   Description: values.Description,
-  // };
+  return {
+    title: values.title,
+    type: values.type,
+    ChooseShift: values.ChooseShift,
+    FromDate: values.FromDate,
+    organization: values.organization,
+    Department: values.Department,
+    JobTitle: values.JobTitle,
+    Employee: values.Employee,
+    Description: values.Description,
+  };
 };
 
-const ShiftAllocationForm=()=>{
+const ShiftAllocationShowForm=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
   return(
     <>
       <Form id="shift-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
-          <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
+          <RadioGroup name='type' isDisabled={true} classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
             <Radio value="Person" classNames={{wrapper:'border-2 border-primary'}} >Person</Radio>
             <Radio value="Group" classNames={{wrapper:'border-2 border-primary'}}>Group</Radio>
@@ -125,7 +124,7 @@ const ShiftAllocationForm=()=>{
           <div className="w-full">
             <AppTextArea props={{
               label:'Description',
-              className:'border border-[#DEE1E8]',
+              className:'border border-[#DEE1E8] ',
               name:'Description',
               value:values.Description,
               error: touched.Description && errors.Description,
@@ -139,4 +138,4 @@ const ShiftAllocationForm=()=>{
     </>
   );
 }
-export default ShiftAllocationForm;
+export default ShiftAllocationShowForm;

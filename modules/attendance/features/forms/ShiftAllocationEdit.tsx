@@ -1,20 +1,21 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
-import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
+import { useFormContext, useModalContext } from '@core/context';
+import { AppAutoComplete, AppTextArea }from '@core/components';
 import { TimerStart } from 'iconsax-react';
 import * as Yup from 'yup';
 
-export const initialValuesAction = {
-  title: null,
-  type: 'Person',
-  ChooseShift: null,
-  FromDate: null,
-  organization: null,
-  Department: null,
-  Employee: null,
-  Description: null,
-  JobTitle: null,
-}
+// export const initialValuesAction = {
+//   title: null,
+//   type: 'Person',
+//   ChooseShift: null,
+//   FromDate: null,
+//   organization: null,
+//   Department: null,
+//   Employee: null,
+//   Description: null,
+//   JobTitle: null,
+// }
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
@@ -49,7 +50,7 @@ export const handleSubmitAction = (values: any) => {
 
 const ShiftAllocationEdit=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
-
+  console.log(values,'vvvvv');
   return(
     <>
       <Form id="shift-allocation-edit" onSubmit={handleSubmit}>
@@ -127,7 +128,7 @@ const ShiftAllocationEdit=()=>{
               label:'Description',
               className:'border border-[#DEE1E8]',
               name:'Description',
-              value:values.Description,
+              values:values.Description,
               error: touched.Description && errors.Description,
               onChange: handleChange,
               onBlur: handleBlur,

@@ -472,6 +472,7 @@ export const AppTable = <T extends Record<string, any>>({
                 key={key}
                 data-row-index={index}
                 className={getRowClassName(row, index)}
+                onClick={() => onRowClick?.(row, index)}
               >
                 {cells}
               </TableRow>
