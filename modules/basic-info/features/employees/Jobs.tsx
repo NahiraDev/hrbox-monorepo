@@ -6,6 +6,7 @@ import { useModalContext } from '@core/context';
 import { useState } from 'react';
 // import { useState } from 'react';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
+import { TickIcon } from '@root/shared/icons/TickIcon';
 
 const Jobs = () => {
   const { openModal } = useModalContext();
@@ -42,12 +43,14 @@ const Jobs = () => {
             {jobs.map((user, index) => (
               <Card  key={index}
                      className="cursor-pointer px-3 py-2 shadow-sm border border-transparent hover:border-primary-400 transition-all duration-200 ease-in-out">
-                <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
-                  <div className="flex items-center gap-2">
-                    <Designtools size={18}/>
-                    <span className="!font-bold ">{user.job}</span>
-                  </div>
-                  <div>
+                <div className="flex items-center justify-between border-b-2 border-gray-200 ">
+                    <div className="pl-1 pb-[7px] pt-[5px] flex gap-2 items-center ">
+                      <span className="w-2 h-2 rounded-full bg-[#22AD5C]"></span>
+                      <Designtools size={18}/>
+                      <span className="!font-bold ">{user.job}</span>
+                    </div>
+                  <div className="flex items-center gap-2 pt-2 pb-1.5">
+                    <TickIcon color="#0A9AD7"/>
                     <AppButton
                       props={{
                         size: 'xs',
@@ -55,8 +58,8 @@ const Jobs = () => {
                         variant: 'light',
                         isIconOnly: true,
                         onPress: () => handleDeleteClick(index),
-                        content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
+                        content: <Trash className="text-secondary-1000 group-hover:text-white" size={16} />,
+                        className: 'p-1 hover:!bg-red-500 transition-all duration-200',
                       }}
                     />
                   </div>

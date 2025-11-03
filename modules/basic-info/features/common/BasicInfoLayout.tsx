@@ -25,7 +25,6 @@ interface MoreItem {
 }
 
 // ==================== CONSTANTS ====================
-// تمام تب‌های اصلی (بدون تب More)
 const ALL_MAIN_TABS: TabItem[] = [
   { key: 'personal-information', title: 'Personal Information', href: BasicInfoPaths.PersonalInformation },
   { key: 'documents', title: 'Documents', href: BasicInfoPaths.Documents },
@@ -35,29 +34,24 @@ const ALL_MAIN_TABS: TabItem[] = [
   { key: 'courses', title: 'Courses', href: BasicInfoPaths.Courses },
   { key: 'achievements', title: 'Achievements', href: BasicInfoPaths.Achievements },
   { key: 'dependents', title: 'Dependents', href: BasicInfoPaths.Dependents },
-];
-
-// آیتم‌های ثابت در لیست More
-const STATIC_MORE_ITEMS: MoreItem[] = [
-  { key: '1', label: 'Organization-Specific Information', href: '/basic-info/organization-specific-information' },
-  { key: '2', label: 'Onboarding', href: '/basic-info/onboarding' },
-  { key: '3', label: 'Offboarding', href: '/basic-info/offboarding' },
-  { key: '4', label: 'Guidelines', href: '/basic-info/guidelines' },
-  { key: '5', label: 'Test Report', href: '/basic-info/test-report' },
-  { key: '6', label: 'Contract List', href: '/basic-info/contract-list' },
-  { key: '7', label: 'Request List', href: '/basic-info/request-list' },
-  { key: '8', label: 'Health Records', href: '/basic-info/health-records' },
+  { key: 'organization-specific-information', title: 'Organization-Specific Information', href: '/basic-info/organization-specific-information' },
+  { key: 'onboarding', title: 'Onboarding', href: '/basic-info/onboarding' },
+  { key: 'offboarding', title: 'Offboarding', href: '/basic-info/offboarding' },
+  { key: 'guidelines', title: 'Guidelines', href: '/basic-info/guidelines' },
+  { key: 'test-report', title: 'Test Report', href: '/basic-info/test-report' },
+  { key: 'contract-list', title: 'Contract List', href: '/basic-info/contract-list' },
+  { key: 'request-list', title: 'Request List', href: '/basic-info/request-list' },
+  { key: 'health-records', title: 'Health Records', href: '/basic-info/health-records' },
 ];
 
 const TABS_WITH_ADD_BUTTON = ['education', 'skills', 'courses', 'achievements', 'jobs'];
 const TABS_WITHOUT_BUTTONS = ['documents', 'dependents'];
 
-// تنظیمات برای محاسبه هوشمند
 const TAB_CONFIG = {
-  minVisibleTabs: 2, // حداقل تعداد تب‌های قابل نمایش
-  moreTabWidth: 100, // عرض تقریبی تب More
-  tabPadding: 24, // padding هر تب (12px * 2)
-  extraSpace: 20, // فضای اضافی برای margin و ...
+  minVisibleTabs: 2,
+  moreTabWidth: 100,
+  tabPadding: 24,
+  extraSpace: 20,
 };
 
 // ==================== COMPONENTS ====================
@@ -165,10 +159,6 @@ const EndWorkButton = () => (
 );
 
 // ==================== CUSTOM HOOK ====================
-/**
- * هوک هوشمند برای مدیریت تب‌های Responsive
- * این هوک به صورت دینامیک محاسبه می‌کند که چند تب باید نمایش داده شود
- */
 const useSmartResponsiveTabs = () => {
   const [visibleTabs, setVisibleTabs] = useState<TabItem[]>(ALL_MAIN_TABS);
   const [hiddenTabs, setHiddenTabs] = useState<TabItem[]>([]);
@@ -176,14 +166,11 @@ const useSmartResponsiveTabs = () => {
   const tabWidthsRef = useRef<Map<string, number>>(new Map());
   const measurementDivRef = useRef<HTMLDivElement | null>(null);
 
-  // تابع برای اندازه‌گیری عرض واقعی متن هر تب
   const measureTabWidth = useCallback((title: string): number => {
-    // اگر قبلاً اندازه‌گیری شده، از cache استفاده کن
     if (tabWidthsRef.current.has(title)) {
       return tabWidthsRef.current.get(title)!;
     }
 
-    // ایجاد یک div موقت برای اندازه‌گیری
     if (!measurementDivRef.current) {
       measurementDivRef.current = document.createElement('div');
       measurementDivRef.current.style.cssText = `
@@ -200,69 +187,67 @@ const useSmartResponsiveTabs = () => {
     measurementDivRef.current.textContent = title;
     const width = measurementDivRef.current.offsetWidth + TAB_CONFIG.extraSpace;
 
-    // ذخیره در cache
     tabWidthsRef.current.set(title, width);
 
     return width;
   }, []);
 
-  // تابع اصلی برای محاسبه تب‌های قابل نمایش
   const calculateVisibleTabs = useCallback(() => {
     if (!containerRef.current) return;
 
     const containerWidth = containerRef.current.offsetWidth;
 
-    // محاسبه عرض کل تمام تب‌ها
     const tabWidths = ALL_MAIN_TABS.map(tab => ({
       tab,
       width: measureTabWidth(tab.title),
     }));
 
-    // محاسبه کل عرض تمام تب‌ها
     const totalTabsWidth = tabWidths.reduce((sum, item) => sum + item.width, 0);
 
-    // اگر همه تب‌ها جا می‌شوند، همه را نمایش بده
     if (totalTabsWidth <= containerWidth) {
       setVisibleTabs(ALL_MAIN_TABS);
       setHiddenTabs([]);
       return;
     }
 
-    // محاسبه تعداد تب‌هایی که می‌توانند نمایش داده شوند
-    let totalWidth = 0;
+    const availableWidth = containerWidth - TAB_CONFIG.moreTabWidth;
+
+    let accumulatedWidth = 0;
     let visibleCount = 0;
-    const availableWidthWithMore = containerWidth - TAB_CONFIG.moreTabWidth;
 
     for (let i = 0; i < tabWidths.length; i++) {
-      const potentialWidth = totalWidth + tabWidths[i].width;
+      const nextWidth = accumulatedWidth + tabWidths[i].width;
 
-      if (potentialWidth <= availableWidthWithMore) {
-        totalWidth = potentialWidth;
+      if (nextWidth <= availableWidth) {
+        accumulatedWidth = nextWidth;
         visibleCount++;
       } else {
         break;
       }
     }
 
-    // حداقل تعداد تب را رعایت کن
     visibleCount = Math.max(TAB_CONFIG.minVisibleTabs, visibleCount);
 
-    // اگر تنها یک تب باقی مانده، آن را هم نمایش بده
     if (visibleCount === ALL_MAIN_TABS.length - 1) {
       visibleCount = ALL_MAIN_TABS.length;
     }
 
-    // به‌روزرسانی state
-    if (visibleCount >= ALL_MAIN_TABS.length) {
-      setVisibleTabs(ALL_MAIN_TABS);
-      setHiddenTabs([]);
-    } else {
-      setVisibleTabs(ALL_MAIN_TABS.slice(0, visibleCount));
-      setHiddenTabs(ALL_MAIN_TABS.slice(visibleCount));
-    }
+    const newVisibleTabs = ALL_MAIN_TABS.slice(0, visibleCount);
+    const newHiddenTabs = ALL_MAIN_TABS.slice(visibleCount);
+
+    setVisibleTabs(prev => {
+      const prevKeys = prev.map(t => t.key).join(',');
+      const newKeys = newVisibleTabs.map(t => t.key).join(',');
+      return prevKeys !== newKeys ? newVisibleTabs : prev;
+    });
+
+    setHiddenTabs(prev => {
+      const prevKeys = prev.map(t => t.key).join(',');
+      const newKeys = newHiddenTabs.map(t => t.key).join(',');
+      return prevKeys !== newKeys ? newHiddenTabs : prev;
+    });
   }, [measureTabWidth]);
 
-  // Debounce برای بهینه‌سازی performance
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -271,22 +256,18 @@ const useSmartResponsiveTabs = () => {
       timeoutId = setTimeout(calculateVisibleTabs, 100);
     };
 
-    // محاسبه اولیه
     calculateVisibleTabs();
 
-    // استفاده از ResizeObserver برای تشخیص تغییرات اندازه
     const resizeObserver = new ResizeObserver(debouncedCalculate);
 
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
     }
 
-    // پاک‌سازی
     return () => {
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
 
-      // پاک کردن div اندازه‌گیری
       if (measurementDivRef.current && document.body.contains(measurementDivRef.current)) {
         document.body.removeChild(measurementDivRef.current);
         measurementDivRef.current = null;
@@ -313,31 +294,29 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   const moreTabRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // به‌روزرسانی تب انتخابی بر اساس مسیر
   useEffect(() => {
     const currentTab = ALL_MAIN_TABS.find(tab => tab.href && pathname.includes(tab.href));
     if (currentTab) setSelectedTab(currentTab.key);
   }, [pathname]);
 
-  // منطق نمایش دکمه‌ها
   const showRedButton = selectedTab === 'personal-information';
   const showWhiteButton = TABS_WITH_ADD_BUTTON.includes(selectedTab);
   const hideButtons = TABS_WITHOUT_BUTTONS.includes(selectedTab);
 
-  const allMoreItems: MoreItem[] = [
-    ...hiddenTabs.map(tab => ({
-      key: tab.key,
-      label: tab.title,
-      href: tab.href,
-    })),
-    ...STATIC_MORE_ITEMS,
-  ];
+  // آیتم‌های لیست More (فقط تب‌های مخفی شده)
+  const allMoreItems: MoreItem[] = hiddenTabs.map(tab => ({
+    key: tab.key,
+    label: tab.title,
+    href: tab.href,
+  }));
 
-  const shouldShowMoreTab = hiddenTabs.length > 0 || STATIC_MORE_ITEMS.length > 0;
+  // تب More را فقط زمانی نمایش بده که تب‌های مخفی وجود داشته باشند
+  const shouldShowMoreTab = hiddenTabs.length > 0;
 
   const displayTabs: TabItem[] = shouldShowMoreTab
     ? [...visibleTabs, { key: 'more', title: 'More' }]
     : visibleTabs;
+
   const listMoreStyle: React.CSSProperties = {};
   if (moreTabRef.current && showMore) {
     const rect = moreTabRef.current.getBoundingClientRect();
@@ -348,6 +327,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
       zIndex: 50,
     });
   }
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -368,7 +348,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
 
   return (
     <div>
-      <div className="bg-primary-400 w-full rounded-t-xl px-[26px] pt-4">
+      <div className="bg-primary-400 w-full rounded-t-xl pl-[26px] pt-4">
         <div className="flex items-center justify-between gap-7">
           <div
             className="w-[148px] h-[148px] rounded-lg relative mb-4"
@@ -411,10 +391,10 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                 fullWidth
                 classNames={{
                   base: '!p-0 w-full',
-                  tabList: 'bg-transparent !p-0 rounded-none w-full flex justify-between',
+                  tabList: 'bg-transparent !p-0 rounded-none w-full flex items-center justify-between',
                   cursor: '!rounded-b-none bg-[#F1F9FD]',
                   panel: 'p-0',
-                  tab: '!p-3 h-[46px] !rounded-0 flex-1',
+                  tab: 'p-3 h-[46px] !rounded-0 flex-1 ',
                   tabContent:
                     'group-data-[selected=true]:!text-primary text-white text-base !font-bold',
                 }}

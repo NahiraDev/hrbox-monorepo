@@ -1,10 +1,13 @@
-export const TickIcon = ({ color = '#04070E' }: { color: string }) => {
+export const TickIcon = ({ color = '#04070E', size = 20 }: {
+  color?: string;
+  size?: number
+}) => {
   return (
     <svg
       fill="none"
-      height="20"
+      height={size}
       viewBox="0 0 20 20"
-      width="20"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

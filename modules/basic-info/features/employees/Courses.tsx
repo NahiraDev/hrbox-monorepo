@@ -41,25 +41,24 @@ const Courses = () => {
           {courses.map((user: any, index) => (
             <Card key={index} className="cursor-pointer p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
-                <div className="flex justify-between border-b border-gray-200 p-1">
-                  <div className="flex items-center gap-3 text-lg font-semibold">
-                    <Teacher />
-                    <span>{user.job}</span>
+                <div className="flex items-center justify-between border-b-2 border-gray-200 ">
+                  <div className="pl-1 pb-[7px] pt-[5px] flex gap-2 items-center ">
+                    <span className="w-2 h-2 rounded-full bg-[#22AD5C]"></span>
+                    <Teacher size={18}/>
+                    <span className="!font-bold ">{user.job}</span>
                   </div>
-                  <div className="flex gap-1">
-                    <div>
-                      <AppButton
-                        props={{
-                          size: 'xs',
-                          radius: 'sm',
-                          variant: 'light',
-                          isIconOnly: true,
-                          onPress: () => handleDeleteClick(index),
-                          content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'p-2 hover:!bg-red-500 transition-all duration-200',
-                        }}
-                      />
-                    </div>
+                  <div className="flex items-center gap-2 pt-2 pb-1.5">
+                    <AppButton
+                      props={{
+                        size: 'xs',
+                        radius: 'sm',
+                        variant: 'light',
+                        isIconOnly: true,
+                        onPress: () => handleDeleteClick(index),
+                        content: <Trash className="text-secondary-1000 group-hover:text-white" size={16} />,
+                        className: 'p-1 hover:!bg-red-500 transition-all duration-200',
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="flex text-xs gap-0.5 items-center justify-between w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
