@@ -33,7 +33,7 @@ const CalenderSubHeader = () => {
             props={{
               color:isTrafficCalender?"white":"primary",
               size: 'md',
-              radius: 'lg',
+              radius: 'sm',
               startContent: (
                 <span>
                   <Profile />
@@ -48,6 +48,7 @@ const CalenderSubHeader = () => {
             props={{
               color: isTrafficCalender?"primary":"white",
               size: 'md',
+              radius: 'sm',
               className: isTrafficCalender?'shadow-none text-white':"shadow-none text-black",
               startContent: (
                 <span>

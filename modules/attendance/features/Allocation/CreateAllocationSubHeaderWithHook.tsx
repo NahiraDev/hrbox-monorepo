@@ -4,19 +4,24 @@ import { GlobalEdit, LocationAdd, Refresh2, Scan } from 'iconsax-react';
 import LocationAllocationModal from '@module/attendance/features/modals/LocationAllocationModal';
 import IpAllocationModal from '@module/attendance/features/modals/IpAllocationModal';
 import FaceAllocationModal from '@module/attendance/features/modals/FaceAllocationModal';
+import React from 'react';
 
-function CreateAllocationSubHeaderWithHook(name:string , ModalComponent:React.ComponentType,SubheaderIcon:React.ComponentType<any>){
+function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.ComponentType,icon:React.ReactNode) {
   const Wrapper = (props:any) => {
-    // const [trigger]=useHook();
-    return <AllocationSubheader {...props} name={name} subheaderIcon={SubheaderIcon} modalComponent={ModalComponent} />;
-  }
-  Wrapper.displayName=name;
+    return <AllocationSubheader
+      {...props}
+      modalComponent={modalComponent}
+      title={title}
+      icon={icon}
+    />;
+  };
+  Wrapper.displayName=title;
   return Wrapper;
 }
 
-export const ShiftAllocationSubheader=CreateAllocationSubHeaderWithHook('ShiftAllocation',ShiftAllocationModal,Refresh2);
-export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('LocationAllocation',LocationAllocationModal,LocationAdd);
-export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('IpAllocation',IpAllocationModal,GlobalEdit);
-export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('FaceAllocation',FaceAllocationModal,Scan);
+export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('ShiftAllocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/>);
+export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('LocationAllocation',LocationAllocationModal,<LocationAdd color='white' size={18}/>);
+export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('IpAllocation',IpAllocationModal,<GlobalEdit color='white' size={18} />);
+export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('FaceAllocation',FaceAllocationModal,<Scan color='white' size={18}/>);
 
 

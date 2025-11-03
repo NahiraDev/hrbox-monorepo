@@ -13,9 +13,11 @@ export const AppAutoComplete = ({ props }: { props: any }) => {
     required = false,
     displayKey = 'Name',
     valueKey = 'Id',    data = [],
-
     formik,
     error,
+    className,
+    classNames,
+    color
   } = props;
 
   const labelId = `${name}-label`;
@@ -38,10 +40,12 @@ export const AppAutoComplete = ({ props }: { props: any }) => {
 
       <Autocomplete
         aria-labelledby={label ? labelId : undefined}
-        className="custom-autocomplete"
+        className={className}
         selectedKey={selectedKey}
         variant="flat"
         onSelectionChange={handleSelectionChange}
+        classNames={classNames}
+        color={color}
       >
         {data.map((option: any) => {
           const key = option[valueKey];

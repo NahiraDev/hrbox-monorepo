@@ -6,6 +6,7 @@ import {
   IpAllocationSubheader, LocationAllocationSubheader,
   ShiftAllocationSubheader,
 } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
+import { Key, PasswordCheck, Refresh } from 'iconsax-react';
 
 const DashboardSubHeader = lazyLoad(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));
 const EntryExitSubHeader = lazyLoad(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
@@ -20,6 +21,10 @@ export const AttendanceSubHeaders: any = [
   {
     path: AttendancePath.EntryExitRegistration,
     component: EntryExitSubHeader,
+    props:{
+      title:'My Time',
+      icon:<PasswordCheck size={18} color='white' />,
+    }
   },
   {
     path: AttendancePath.AttendanceCalenders,
@@ -31,9 +36,17 @@ export const AttendanceSubHeaders: any = [
   {
     path: AttendancePath.ListOfApprovals,
     component:ApprovalsSubHeader ,
+    props:{
+      title:'List of  Approvals',
+      icon:<Key color='white' size={18} />
+    }
   },{
     path: AttendancePath.ShiftAllocation,
     component:ShiftAllocationSubheader,
+    props:{
+      title:'Shift Allocation',
+      icon: <Refresh color='white' size={18}/>
+    }
   },{
     path: AttendancePath.IpAllocation,
     component:IpAllocationSubheader,

@@ -78,9 +78,10 @@ const config: Config = {
         gold: '#DDBA69',
 
         success: {
-          DEFAULT: 'var(--color-success-default)',
+          DEFAULT: 'var(--color-success)',
           50: 'var(--color-success-50)',
           100: 'var(--color-success-100)',
+          150:'var(--color-success-150)',
           900: 'var(--color-success-900)',
         },
         warning: {
