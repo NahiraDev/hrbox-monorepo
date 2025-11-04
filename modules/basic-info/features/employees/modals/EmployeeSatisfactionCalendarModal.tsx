@@ -4,6 +4,7 @@ import { useState } from 'react';
 import FilterCalenderModal from '@module/basic-info/features/employees/modals/FilterCalenderModal'
 import { Filter } from 'iconsax-react';
 import { useModalContext } from '@root/core';
+import { Sad } from '@root/shared/icons/Sad';
 
 const sampleData = [
   { id: 1, name: 'Jahan', role: 'Mentor', avatar: 'https://i.pravatar.cc/150?u=a04258114e29026302d', badgeColor: 'red' },
@@ -16,25 +17,14 @@ const sampleData = [
   { id: 8, name: 'Hossein', role: 'Engineer', avatar: 'https://i.pravatar.cc/150?u=h04204258114e29026302d', badgeColor: 'red' },
 ];
 
-const getBadgeGradient = (color) => {
-  switch (color) {
-    case 'green':
-      return 'bg-gradient-to-br from-green-400 to-green-700';
-    case 'orange':
-      return 'bg-gradient-to-br from-orange-400 to-orange-700';
-    case 'red':
-      return 'bg-gradient-to-br from-red-400 to-red-700';
-    default:
-      return 'bg-gradient-to-br from-red-400 to-red-700';
-  }
-};
+
 
 const MentorCard = ({ name, role, avatar, badgeColor }) => {
 
   return (
     <div className="flex flex-col gap-3 items-center justify-center px-5 py-6 relative">
       <div className="absolute z-100 top-3 right-1">
-        <div className={`w-5 h-5 ${getBadgeGradient(badgeColor)} rounded-full`}></div>
+        <div className={`w-5 h-5 rounded-full`}><Sad/></div>
       </div>
       <div className="flex flex-col gap-2">
         <Avatar className='w-24 h-24 rounded-2xl'  src={avatar} />

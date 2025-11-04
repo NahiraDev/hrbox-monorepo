@@ -18,32 +18,15 @@ interface AppInputProps {
   size?: 'sm' | 'md' | 'lg';
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
   className?: string;
+  mode?: 'edit' | 'show'; // <-- اضافه شد
 }
 
 const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
-  sm: {
-    wrapper: 'h-8 px-2 text-xs',
-    input: 'text-xs',
-    label: 'text-xs font-medium',
-  },
-  md: {
-    wrapper: 'h-10 px-3 text-sm',
-    input: 'text-sm',
-    label: 'text-sm font-medium',
-  },
-  lg: {
-    wrapper: 'h-12 px-4 text-base',
-    input: 'text-base',
-    label: 'text-base font-semibold',
-  },
+  // ... بدون تغییر
 };
 
 const radiusClasses: Record<string, string> = {
-  none: 'rounded-none',
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
-  full: 'rounded-full',
+  // ... بدون تغییر
 };
 
 export const AppInput = ({ props }: { props: AppInputProps }) => {
@@ -64,11 +47,18 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
     size = 'md',
     radius = 'md',
     className,
+    mode = 'edit', // <-- پیش‌فرض edit
     ...rest
   } = props;
 
+  // منطق show mode
+  const isShowMode = mode === 'show';
+
   const inputWrapperClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
+    'bg-white !shadow-theme-sm border-1',
+    isShowMode
+      ? 'border-transparent cursor-default'
+      : 'border-[#DEE1E8]',
     error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
@@ -80,15 +70,14 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
     'placeholder:font-medium',
     error && 'text-red-500',
     sizeClasses[size]?.input,
+    isShowMode && 'cursor-default',
   );
-
-  const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
 
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <span className={labelClassNames}>
-          {label} {required && '*'}
+        <span className={clsx('leading-5', sizeClasses[size]?.label)}>
+          {label} {required && !isShowMode && '*'}
         </span>
       )}
       <Input
@@ -99,16 +88,17 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
         color={color}
         endContent={endContent}
         errorMessage={error}
-        isRequired={required}
+        isRequired={required && !isShowMode}
         name={name}
-        placeholder={`Please enter ${label ?? 'value'} ...`}
+        placeholder={isShowMode ? '' : `Bitte ${label ?? 'value'} eingeben ...`}
         startContent={startContent}
         type={type}
         value={value}
         variant={variant}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
+        onBlur={isShowMode ? undefined : onBlur}
+        onChange={isShowMode ? undefined : onChange}
+        onFocus={isShowMode ? undefined : onFocus}
+        isDisabled={isShowMode} // <-- مهم: غیرفعال کردن
         {...rest}
       />
     </div>

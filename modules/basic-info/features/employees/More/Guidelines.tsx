@@ -1,16 +1,32 @@
 import { guidlines } from '@module/basic-info/app/mock';
 import { Card, Avatar } from '@heroui/react';
-import { UserSearch } from 'iconsax-react';
+import { Add, UserSearch } from 'iconsax-react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
+import { AppButton } from '@root/core';
 const Guidelines = () => {
   return (
     <BasicInfoLayout
       content={
         <div className="p-2">
-          <div className="flex items-center gap-1 text-xl font-semibold text-secondary-900 p-3">
-            <UserSearch size="26" />
-            <span>Guidlines</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1 text-xl font-semibold text-secondary-900 p-3">
+              <UserSearch size="26" />
+              <span>Guidlines</span>
+            </div>
+            <div className="pr-5">
+              <AppButton
+                props={{
+                  size: 'xs',
+                  radius: 'sm',
+                  color: 'white',
+                  variant: 'solid',
+                  isIconOnly: true,
+                  className: 'bg-white border-1 border-primary-400 p-2',
+                  content: <Add className="text-secondary-900" size="20" />,
+                }}
+              />
+            </div>
           </div>
           {/*todo height*/}
           <div className="grid grid-cols-8 gap-3 overflow-y-scroll p-2 ">

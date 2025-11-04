@@ -1,4 +1,4 @@
-import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@core/components';
+import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
 import { Add, Location } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 import { Avatar } from '@heroui/react';
@@ -34,13 +34,12 @@ export const OrganizationLocationModal = () => {
               />
             </div>
           </div>
-          <AppAutoComplete
+          <AppInput
+            className="bg-gradient-to-r from-white via-sky-100 to-white"
             props={{
-              className: ' border border-[#DCF0F9]',
-              label: 'Location Title',
-              size: 'lg',
-              color: 'primary',
-              radius: 'lg',
+              label: "نام",
+              value: "علی احمدی",
+              mode: "show" // فقط نمایش
             }}
           />
           <AppAutoComplete

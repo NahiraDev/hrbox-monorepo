@@ -1,9 +1,11 @@
 import { OrganizationalLocation } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { Location, More, Trash } from 'iconsax-react';
+import { Location, More, Profile2User, Trash } from 'iconsax-react';
 import { useState, useMemo } from 'react';
 import { useModalContext } from '@core/context';
 import { AppButton, AppDeleteModal, AppPagination } from '@core/components';
+import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';
+import { OrganizationLocationModal } from '@module/basic-info/features/departments/modals/OrganizationLocationModal';
 
 const OrganizationalLocations = () => {
   const { openModal } = useModalContext();
@@ -47,6 +49,7 @@ const OrganizationalLocations = () => {
     setSelectedLocationIndex(null);
   };
 
+
   const filteredLocations = useMemo(() => locations, [locations]);
 
   return (
@@ -56,11 +59,23 @@ const OrganizationalLocations = () => {
           {filteredLocations.map((detail, index) => (
             <div key={`${detail.title}-${index}`} className="relative group">
               <Card
+                isPressable
+                onPress={() => {
+                      openModal(
+                    'edit',
+                    '',
+                    <OrganizationLocationModal />,
+                    undefined,
+                    'xl',
+                    'Spouse',
+                    <Profile2User className="text-white" />
+                  );
+                }}
                 className="cursor-pointer w-full bg-white shadow-sm rounded-xl p-4 flex flex-col items-center justify-center gap-3
-             border-1 border-transparent hover:border-primary-400
-             hover:!bg-[#D6F2FF]
-             transition-all duration-150"
-              >
+                Headquarters  border-1 border-transparent hover:border-primary-400
+               hover:!bg-[#D6F2FF]
+                transition-all duration-150"
+               >
                 <Avatar
                   className="w-full h-32 sm:h-40 text-white"
                   color="primary"
