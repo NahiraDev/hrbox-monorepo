@@ -13,6 +13,7 @@ interface AppDropDownProps {
   className?: string;
   EndIcon?: React.ReactNode;
   startIcon?: React.ReactNode;
+  classNames?:string;
 }
 const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
   const { title, item, className,EndIcon,startIcon } = props;
@@ -28,12 +29,12 @@ const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button className={`flex flex-row items-center ${className}`} variant="bordered">
+        <Button className={`flex flex-row items-center ${className}`} variant='bordered'>
           <span>{startIcon}</span>
           {title
             ? title
             : selected && (
-                <span className="flex flex-row items-center gap-1">
+                <span className='flex flex-row items-center gap-1'>
                   {selected.icon}
                   {selected.label}
                 </span>
@@ -42,14 +43,18 @@ const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="Dynamic Actions"
-        className="flex flex-row justify-between"
+        aria-label='Dynamic Actions'
+        className='flex flex-row justify-between'
         items={item}
-        onAction={(key) => handleSelect(key as string)}
+        onAction={key => handleSelect(key as string)}
       >
-        {(item) => (
-          <DropdownItem key={item.key} className="w-full flex flex-row justify-center">
-            <span className="flex flex-row items-center gap-1">
+        {item => (
+          <DropdownItem
+            key={item.key}
+            className='flex w-full flex-row justify-center'
+            classNames={{base:'hover:bg-[#DCF0F940]'}}
+          >
+            <span className='flex flex-row items-center gap-1'>
               {item.icon}
               {item.label}
             </span>

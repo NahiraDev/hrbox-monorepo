@@ -30,9 +30,9 @@ const TrafficCalender=()=>{
   const attendanceConfig = {
     columns,
     columnGroups: [
-      { startKey: 'date', endKey: 'shift', headerClassName: 'bg-[#999] text-white' },
-      { startKey: 'checkIn', endKey: 'haste', headerClassName: 'bg-primary text-white' },
-      { startKey: 'request', endKey: 'request', headerClassName: 'bg-green-500 text-white' },
+      { startKey: 'date', endKey: 'shift', headerClassName: ' text-white' },
+      { startKey: 'checkIn', endKey: 'haste', headerClassName: ' text-white' },
+      { startKey: 'request', endKey: 'request', headerClassName: ' text-white' },
     ],
     expandable: {
       render: (row: any, index: number) => {
