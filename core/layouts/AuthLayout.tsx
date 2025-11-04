@@ -67,13 +67,6 @@ export const AuthLayout = ({ content }: any) => {
 
                   {content}
 
-                  <div className="flex items-center justify-center gap-3 w-full">
-                    <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
-                    <span className="text-neutral-400 dark:neutral-250 text-sm font-bold">
-                      {t('or')}
-                    </span>
-                    <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
-                  </div>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { t } from 'i18next';
 
+
 import { useFormContext } from '@core/context';
 import { AppButton, AppSwitch, AppInput } from '@core/components';
 import { SSOHRLinkPaths } from '@module/sso/app/paths';
@@ -136,8 +137,44 @@ export const LoginForm = () => {
             variant: 'solid',
             color: 'info',
             isLoading: isSubmitting,
+            className: 'bg-[#1E3363] hover:bg-[#1E3363] text-white',
           }}
         />
+
+        <div className="flex items-center justify-center gap-3 w-full">
+          <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
+          <span className="text-neutral-400 dark:neutral-250 text-sm font-bold">
+            {t('or')}
+          </span>
+          <hr className="lg:w-[128px] w-full h-[1px] text-neutral-400" />
+        </div>
+
+        <AppButton
+          props={{
+          content: (t('sign_in_with_phone_number')),
+          size: 'lg',
+          fullWidth: true,
+          variant: 'light',
+          endContent: <img src="/images/message.svg" alt="phone icon" />,
+          className:
+            ' px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
+          onPress: () => console.log('Sign in with phone number clicked!'),
+            }}
+          />
+
+          <AppButton
+          props={{
+          content: (t('sign_in_with_google')),
+          size: 'lg',
+          fullWidth: true,
+          variant: 'light',
+          endContent: <img src="/images/Google Logo.svg" alt="phone icon" />,
+          className:
+            'gap-3 px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
+          onPress: () => console.log('Sign in with phone number clicked!'),
+            }}
+          />
+
       </Form>
     </div>
   );
