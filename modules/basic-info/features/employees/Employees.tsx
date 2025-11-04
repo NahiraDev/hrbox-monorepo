@@ -14,8 +14,10 @@ const Employees = () => {
         {workersData.map((worker, index) => {
           return (
             <Card
+              isPressable
               key={index}
                 className="flex flex-col items-center justify-center gap-3 p-5 relative shadow-sm cursor-pointer hover:bg-surface-50"
+              onPress = {() => navigate(BasicInfoPaths.PersonalInformation)}
             >
               <Avatar radius="lg" color="primary" src="" className="w-24 h-24 text-white "/>
               <div className="absolute top-3 right-3  ">
@@ -26,7 +28,6 @@ const Employees = () => {
                 props={{
                   className: 'h-5  bg-surface-50  border-1 border-primary-50 text-primary-400',
                   radius: 'sm',
-                  onPress: () => {navigate(BasicInfoPaths.PersonalInformation)},
                   content: <span className="!text-xs">{worker.job}</span>,
                 }}
               />

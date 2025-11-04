@@ -1,6 +1,28 @@
 import { Textarea } from '@heroui/react';
 import clsx from 'clsx';
 
+
+
+interface AppTextAreaProps {
+  label?: string;
+  required?: boolean;
+  error?: any;
+  name: string;
+  type?: string;
+  variant?: any;
+  color?: any;
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: any;
+  size?: 'sm' | 'md' | 'lg';
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  className?: string;
+  mode?: 'edit' | 'show'; // <-- اضافه شد
+}
+
 const sizeClasses: Record<
   string,
   { wrapper: string; input: string; label: string }
@@ -30,7 +52,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-export const AppTextArea = ({ props }: { props: any }) => {
+export const AppTextArea = ({ props }: { props: AppTextAreaProps }) => {
   const {
     label,
     required,
@@ -45,14 +67,22 @@ export const AppTextArea = ({ props }: { props: any }) => {
     onChange,
     size = 'md',
     radius = 'md',
+    mode = 'edit',
     className,
     ...rest
   } = props;
 
+
+  const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
+
+
+  const isShowMode = mode === 'show';
+
   const inputWrapperClassNames = clsx(
-    'bg-white',
-    '!backdrop_blur[35px]',
-    'dark:!shadow-secondary',
+    '!shadow-theme-sm border-1 text-secondary-1000 !font-medium',
+    isShowMode
+      ? 'border-transparent cursor-default bg-gradient-to-r from-white via-sky-100 to-white text-secondary-400'
+      : 'border-[#DEE1E8] bg-white',
     error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
@@ -60,13 +90,12 @@ export const AppTextArea = ({ props }: { props: any }) => {
   );
 
   const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 lg:placeholder:leading-5 placeholder:leading-normal',
+    'placeholder:text-secondary-1000',
     'placeholder:font-medium',
     error && 'text-red-500',
     sizeClasses[size]?.input,
+    isShowMode && 'cursor-default',
   );
-
-  const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
 
 
   return (
@@ -90,6 +119,7 @@ export const AppTextArea = ({ props }: { props: any }) => {
         type={type}
         value={value}
         onBlur={onBlur}
+        {...(isShowMode ? { readOnly: true } : {})}
         onChange={onChange}
         onFocus={onFocus}
         {...rest}

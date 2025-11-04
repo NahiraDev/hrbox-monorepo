@@ -41,7 +41,7 @@ export default function AddNewAchievement({ onClose }: AddNewJobProps) {
   return (
     <div className="w-[645px]">
       <AppModal.Body>
-        <div className="flex flex-col gap-y-6 overflow-y-scroll max-h-[70vh]">
+        <div className="flex flex-col gap-y-6 ">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
             <AppInput
               props={{

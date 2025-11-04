@@ -15,12 +15,16 @@ import {
   Add,
   UserSquare,
   People,
+  Category,
 } from 'iconsax-react';
 import { useModalContext } from '@core/context';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';
 import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';
 import { DependentsModal } from '@module/basic-info/features/employees/modals/DependentsModal';
+import { SpouseShowModeModal } from '@module/basic-info/features/employees/modals/SpouseShowModeModal';
+import {DependentsShowModeModal} from '@module/basic-info/features/employees/modals/DependentsShowModeModal';
+import { RelativeShowModeModal } from '@module/basic-info/features/employees/modals/RelativeShowModeModal';
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -55,7 +59,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit',"", <SpouseModal />,undefined,"xl","Spouse", <Profile2User className='text-white'/> ),
+                      onPress: () => openModal('edit',"", <SpouseModal />,undefined,"3xl","Spouse", <Profile2User className='text-white'/> ),
                       className: 'bg-white border-1 border-primary-400 p-2',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
@@ -65,7 +69,19 @@ const Dependents = () => {
                 <div className="overflow-y-auto max-h-[470px]">
                   <div className="flex flex-col gap-4 w-full ">
                  {Spouse.map((user: any, index) => (
-                  <Card key={index} className="p-3 w-full cursor-pointer   shadow-sm bg-white ">
+                  <Card key={index} className="p-3 w-full cursor-pointer   shadow-sm bg-white "
+                        isPressable
+                        onPress={() =>
+                          openModal(
+                            'edit',
+                            '',
+                            <SpouseShowModeModal />,
+                            undefined,
+                            '3xl',
+                            'Spouse',
+                            <Profile2User className="text-white" size={18}/>
+                          )
+                        }>
                     <div className="flex flex-col gap-2">
                       <div className="flex gap-0.5 items-center justify-between  w-full border border-[#DCF0F9]/40 rounded-5 p-3 bg-gradient-to-r from-white via-sky-100 to-white">
                         <div className="flex text-sm gap-2 items-center">
@@ -150,7 +166,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      onPress: () => openModal('edit',  "",<DependentsModal/>,undefined,'xl',"Dependents", <UserSquare className='text-white'/>),
+                      onPress: () => openModal('edit',  "",<DependentsModal/>,undefined,'3xl',"Dependents", <UserSquare className='text-white'/>),
                       className: 'bg-white border-1 border-primary-400 p-2',
                       content: <Add className="text-secondary-900" size="20"  />,
                     }}
@@ -160,7 +176,20 @@ const Dependents = () => {
               <div className="overflow-y-auto max-h-[470px]">
                 <div className="flex flex-col gap-4 w-full ">
                 {dataWorker.map((user: any, index) => (
-                  <Card key={index} className="p-3 w-full  shadow-light-tight-1 bg-white ">
+                  <Card key={index} className="p-3 w-full  shadow-light-tight-1 bg-white "
+                        isPressable
+                        onPress={() =>
+                          openModal(
+                            'edit',
+                            '',
+                            <DependentsShowModeModal />,
+                            undefined,
+                            '3xl',
+                            'Dependents',
+                            <UserSquare className="text-white" size={18}/>
+                          )
+                        }
+                  >
                     <div className="flex flex-col gap-2 ">
                       <div className="flex justify-between border-b border-gray-200 p-1.5">
                         <div className="flex items-center text-lg font-semibold">
@@ -259,7 +288,7 @@ const Dependents = () => {
                     color: 'white',
                     variant: 'solid',
                     isIconOnly: true,
-                    onPress: () => openModal('edit',"",<RelativesModal/> , undefined, 'xl',"Relatives",<People className='text-white'/>),
+                    onPress: () => openModal('edit',"",<RelativesModal/> , undefined, '3xl',"Relatives",<People className='text-white'/>),
                     className: 'bg-white border-1 border-primary-400 p-2',
                     content: <Add className="text-secondary-900" size="20" />,
                   }}
@@ -269,7 +298,20 @@ const Dependents = () => {
             <div className="overflow-y-auto max-h-[470px]">
             <div className="grid grid-cols-2 gap-4 w-full ">
               {dataWorker2.map((user: any, index) => (
-                <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
+                <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white "
+                      isPressable
+                      onPress={() =>
+                        openModal(
+                          'edit',
+                          '',
+                          <RelativeShowModeModal />,
+                          undefined,
+                          '3xl',
+                          'Relatives',
+                          <People className="text-white" size={18}/>
+                        )
+                      }
+                >
                   <div className="flex flex-col gap-2 ">
                     <div className="flex justify-between border-b border-gray-200 p-1">
                       <div className="flex items-center gap-3 text-lg font-semibold ">

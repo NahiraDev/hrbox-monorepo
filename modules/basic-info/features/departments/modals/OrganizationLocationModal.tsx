@@ -34,12 +34,13 @@ export const OrganizationLocationModal = () => {
               />
             </div>
           </div>
-          <AppInput
+          <AppAutoComplete
             className="bg-gradient-to-r from-white via-sky-100 to-white"
             props={{
-              label: "نام",
-              value: "علی احمدی",
-              mode: "show" // فقط نمایش
+              label: 'URL',
+              size: 'lg',
+              color: 'primary',
+              radius: 'lg',
             }}
           />
           <AppAutoComplete
@@ -85,6 +86,7 @@ export const OrganizationLocationModal = () => {
               className: ' border border-[#DCF0F9]',
               label: 'Address*',
               size: 'lg',
+              value:"Description",
               color: 'primary',
               radius: 'lg',
             }}
@@ -94,6 +96,7 @@ export const OrganizationLocationModal = () => {
               className: ' border border-[#DCF0F9]',
               label: 'Descriptions*',
               size: 'lg',
+              value:"Description",
               color: 'primary',
               radius: 'lg',
             }}
@@ -118,7 +121,7 @@ export const OrganizationLocationModal = () => {
             radius: 'sm',
             variant: 'light',
             onPress: () => console.log('a'),
-            content: <span>Save Changes</span>,
+            content: <span>Submit</span>,
             className: 'bg-primary text-white py-1.5 px-3 !text-xl rounded-lg ',
           }}
         />

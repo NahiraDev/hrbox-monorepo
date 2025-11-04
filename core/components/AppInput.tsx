@@ -55,10 +55,10 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
   const isShowMode = mode === 'show';
 
   const inputWrapperClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1',
+    '!shadow-theme-sm !font-medium border border-surface-50',
     isShowMode
-      ? 'border-transparent cursor-default'
-      : 'border-[#DEE1E8]',
+      ? 'border-transparent cursor-default  bg-gradient-to-r from-white via-sky-100 to-white text-secondary-400'
+      : 'border-[#DEE1E8] bg-white ',
     error && 'border-red-500 bg-red-100 dark:bg-red-800',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
@@ -67,7 +67,7 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
 
   const inputClassNames = clsx(
     'placeholder:text-secondary-1000',
-    'placeholder:font-medium',
+    'placeholder:!font-medium',
     error && 'text-red-500',
     sizeClasses[size]?.input,
     isShowMode && 'cursor-default',
@@ -98,7 +98,7 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
         onBlur={isShowMode ? undefined : onBlur}
         onChange={isShowMode ? undefined : onChange}
         onFocus={isShowMode ? undefined : onFocus}
-        isDisabled={isShowMode} // <-- مهم: غیرفعال کردن
+        isDisabled={isShowMode}
         {...rest}
       />
     </div>

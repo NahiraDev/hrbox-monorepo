@@ -60,7 +60,8 @@ export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseMod
                 value: initialData.title,
                 placeholder: 'Describe Title',
                 readOnly: true,
-                className: 'bg-gray-50 cursor-not-allowed',
+                className: 'bg-gray-50 cursor-not-allowed ',
+
               }}
             />
             <div className="flex items-center gap-3">

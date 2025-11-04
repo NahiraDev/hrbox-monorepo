@@ -2,7 +2,7 @@ import { workerInfo } from '@module/basic-info/app/mock';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import PropTypes from 'prop-types';
 
-const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto max-h-[calc(100vh-100px)]
+const cardContainerClass = `grid h-full grid-cols-2 gap-x-4 gap-y-4.5 m-4 overflow-y-auto max-h-[calc(100vh-100px)]
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200
@@ -10,7 +10,7 @@ const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto ma
   [&::-webkit-scrollbar-thumb]:text-blue-700
   [&::-webkit-scrollbar-thumb]:hover:bg-blue-900`;
 
-  const cardClass = `bg-gradient-to-r from-white via-sky-100 to-white w-full border-1 border-surface flex items-center justify-between p-4 rounded-2xl`;
+  const cardClass = `bg-gradient-to-r from-white via-sky-100 to-white w-full border-1 border-surface flex items-center justify-between px-4 py-3 rounded-2xl`;
 
   const PersonalInformation = () => {
 
@@ -21,12 +21,12 @@ const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto ma
           <div className={cardContainerClass}>
             {workerInfo.map((user, index) => (
               <div key={`user-${index}`} className={cardClass}>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   {user.icon}
-                  <span className="text-sm !font-light">{user.title}</span>
+                  <span className="text-secondary-900 !text-sm !font-light">{user.title}</span>
                 </div>
                 <div>
-                  <span className="text-sm text-gray-700 !font-semibold">{user.text}</span>
+                  <span className="!text-sm text-secondary-900 !font-semibold">{user.text}</span>
                 </div>
               </div>
             ))}

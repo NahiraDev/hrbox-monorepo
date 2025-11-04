@@ -65,7 +65,6 @@ const EmployeesSubHeader = (props: any) => {
             size: 'lg',
             radius: 'lg',
             variant: 'light',
-            onPress: () => openModal('edit',"", <OrganizationLocationModal />, undefined, '2xl',"Do you want to remove it?",<Trash className='text-white'/>),
             content: (
               <div className="flex items-center gap-2">
                 <Add size="24" />

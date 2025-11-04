@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@core/components';
 import { useModalContext } from '@root/core';
 
-// ✅ INTERFACE را **قبل** از function قرار دادیم
 interface AddNewJobProps {
   onClose: () => void;
 }
@@ -32,11 +31,9 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
 
   const handleSubmit = () => {
     if (!isSubmitted) {
-      // اولین بار کلیک شد - فقط فرم را قفل کن
       console.log('New Job:', formData);
       setIsSubmitted(true);
     } else {
-      // دومین بار کلیک شد - دکمه‌ها را حذف کن
       setIsSaved(true);
     }
   };
@@ -44,7 +41,7 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
   return (
     <div className="w-[645px]">
       <AppModal.Body>
-        <div className="flex flex-col gap-y-6 overflow-y-scroll max-h-[70vh]">
+        <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
             <AppInput
               props={{

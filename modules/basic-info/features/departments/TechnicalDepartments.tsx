@@ -14,6 +14,7 @@ const TechnicalDepartments = () => {
       <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-3">
         {technicalDepartment.map((user, index) => (
           <Card
+            isPressable
             key={index}
             className="cursor-pointer p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-3 relative hover:!bg-surface-50"
             onPress = {() => navigate(BasicInfoPaths.PersonalInformation)}

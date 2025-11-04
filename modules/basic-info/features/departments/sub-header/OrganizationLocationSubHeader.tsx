@@ -40,7 +40,7 @@ const OrganizationLocationSubHeader = (props: any) =>{
                 '',
                 <OrganizationLocationModal />,
                 undefined,
-                '2xl',
+                '3xl',
                 'Organizational Locations',
                 <Location className='text-white' />
               ),

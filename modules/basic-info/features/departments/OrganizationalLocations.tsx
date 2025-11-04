@@ -1,11 +1,12 @@
 import { OrganizationalLocation } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { Location, More, Profile2User, Trash } from 'iconsax-react';
+import { Location, More, Trash } from 'iconsax-react';
 import { useState, useMemo } from 'react';
 import { useModalContext } from '@core/context';
 import { AppButton, AppDeleteModal, AppPagination } from '@core/components';
-import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';
-import { OrganizationLocationModal } from '@module/basic-info/features/departments/modals/OrganizationLocationModal';
+import {
+  OrganizationLocationShowModeModal
+} from '@module/basic-info/features/departments/modals/OrganizationLocationShowModeModal';
 
 const OrganizationalLocations = () => {
   const { openModal } = useModalContext();
@@ -64,11 +65,11 @@ const OrganizationalLocations = () => {
                       openModal(
                     'edit',
                     '',
-                    <OrganizationLocationModal />,
+                    <OrganizationLocationShowModeModal />,
                     undefined,
-                    'xl',
-                    'Spouse',
-                    <Profile2User className="text-white" />
+                    '3xl',
+                    'Organizational Locations',
+                    <Location className="text-white" />
                   );
                 }}
                 className="cursor-pointer w-full bg-white shadow-sm rounded-xl p-4 flex flex-col items-center justify-center gap-3
@@ -82,8 +83,8 @@ const OrganizationalLocations = () => {
                   radius="sm"
                   src=""
                 />
-                <div className="w-full">
-                  <span className="!font-bold text-left !text-[16px] text-secondary-1000">{detail.title}</span>
+                <div className="w-full text-left">
+                  <span className="!font-bold !text-[16px] text-secondary-1000">{detail.title}</span>
                 </div>
 
                 <div className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
@@ -127,7 +128,7 @@ const OrganizationalLocations = () => {
                 </div>
               </Card>
 
-              <div className="absolute top-2 right-2 z-10">
+              <div className="absolute top-2 right-2 pt-1 pr-1 z-10">
                 <AppButton
                   props={{
                     size: 'xl',

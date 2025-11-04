@@ -1,4 +1,4 @@
-export const TickIcon = ({ color = '#04070E', size = 20 }: {
+export const TickIcon = ({ color = '#04070E', size = 16 }: {
   color?: string;
   size?: number
 }) => {

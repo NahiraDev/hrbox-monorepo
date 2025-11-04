@@ -21,13 +21,13 @@ const OrganizationDepartments = () => {
     >
       <CardHeader className="flex items-center gap-2 border-b border-neutral-100 dark:border-neutral-700 !p-0 !pb-1">
         <Avatar radius="sm" size="sm" src="https://i.pravatar.cc/150?u=e04258114e29026302d"/>
-        <span className="!font-semibold text-[16px]">{user.name}</span>
+        <span className="!font-semibold !text-[16px]">{user.name}</span>
       </CardHeader>
       <CardBody className="!p-0 flex flex-col gap-2">
         <div className="flex">
-          <span className="!font-bold text-xs text-secondary-800 dark:text-white">{user.job}</span>
+          <span className="!font-bold !text-xs text-secondary-800 dark:text-white">{user.job}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-sm">
+        <div className="flex items-center gap-4 text-sm">
           <User className="text-primary-400 dark:text-gold" size="18"/>
           <span className="text-primary-400 dark:text-gold">
             {user.people} {t('people')}

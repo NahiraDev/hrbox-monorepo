@@ -93,6 +93,7 @@ export const OrganizationDepartmentModal = () => {
             <AppInput
               props={{
                 ...commonInputProps,
+                className:"w-[320px]",
                 label: 'Department Title',
                 placeholder: 'Enter department title',
                 required: true,
