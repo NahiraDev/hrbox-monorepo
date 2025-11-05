@@ -1,6 +1,6 @@
 import { Minus, Add } from "iconsax-react";
 import { useState } from "react";
-import { AppButton } from "@core/components";
+import { AppButton } from "shared/components/index";
 
 export const Counter = () => {
   const [count, setCount] = useState(156);

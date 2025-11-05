@@ -14,7 +14,7 @@
     "useDefineForClassFields": true,
 
     /* Module Resolution */
-    "baseUrl": ".",
+    "baseUrl": "../../..",
     "paths": {
       "@core/*": ["./core/*"],
       "@module/*": ["./modules/*"],
@@ -22,7 +22,8 @@
       "@hrbox/core/*": ["./core/*"],
       "~/*": ["./*"]
     },
-    "rootDirs": [".", "core", "modules" , "shared"],
+    "rootDirs": [
+      "../../..", "core", "modules" , "shared"],
     "typeRoots": ["node_modules/@types"],
     "types": ["node"],
     "resolveJsonModule": true,
@@ -111,16 +112,16 @@
   "include": [
     "core/**/*",
     "modules/**/*",
-    "vite.config.ts",
+    "../../../vite.config.ts",
     "vitest.config.ts",
     "playwright.config.ts",
-    "tailwind.config.ts",
-    "postcss.config.js",
+    "core/config/tailwind/tailwind.config.ts",
+    "core/config/tailwind/postcss.config.js",
     "main.tsx",
     "**/*.d.ts"
   ],
   "exclude": [
-    "node_modules",
+    "../../../node_modules",
     "dist",
     "build",
     "coverage",
@@ -132,5 +133,5 @@
     "**/.temp/**",
     "**/tmp/**",
     "**/.tmp/**"
-  ],
+  ]
 }

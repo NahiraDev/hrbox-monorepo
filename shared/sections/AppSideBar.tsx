@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { serviceRegistry } from '@core/helpers';
+import { serviceRegistry } from 'core/helpers';
 
-import { AppButton } from '@core/components';
-import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '@core/redux';
+import { AppButton } from 'shared/components';
+import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from 'core/redux';
 
 export const AppSideBar = () => {
   const { t } = useTranslation();

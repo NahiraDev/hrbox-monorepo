@@ -1,6 +1,6 @@
 import { ComponentType, FC, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { serviceRegistry } from '@core/helpers';
+import { serviceRegistry } from 'core/helpers';
 
 export const AppSubHeader: FC = () => {
   const location = useLocation();

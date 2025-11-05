@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { LogoHRLink } from '@root/shared/icons/LogoHRLink';
 import { LogoMobile } from '@root/shared/icons/LogoMobile';
 import { setLanguage, useAppDispatch } from '@core/redux';
-import { AppButton } from '@core/components';
+import { AppButton } from 'shared/components';
 import { SliderSSO } from '@module/sso/features/common';
 import { t } from 'i18next';
 

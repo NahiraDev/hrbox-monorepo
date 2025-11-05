@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Warning2 } from 'iconsax-react';
-import { AppButton } from '@core/components';
+import { AppButton } from 'shared/components/index';
 
 // import { CloseIcon } from '../../public/icons';
-import { clearError, useAppDispatch, useAppSelector } from '@core/redux';
+import { clearError, useAppDispatch, useAppSelector } from 'core/redux';
 import { useEffect } from 'react';
 
 export const AppErrorToast = () => {

@@ -6,5 +6,5 @@ export * from '@core/translate';
 export * from '@core/routes';
 export * from '@core/app';
 export * from '@core/apis';
-export * from '@core/components';
+export * from 'shared/components';
 export * from '@core/hooks';

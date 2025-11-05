@@ -1,6 +1,6 @@
-import { AppButton } from '@core/components';
+import { AppButton } from 'shared/components/index';
 
-import { useAppSelector } from '@core/redux';
+import { useAppSelector } from 'core/redux';
 // import { SupportIcon } from '../../public/icons';
 
 export const AppSupportButton = () => {

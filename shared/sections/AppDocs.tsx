@@ -22,7 +22,7 @@ import {
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { AppDocItem } from '@core/sections';
+import { AppDocItem } from 'shared/sections/index';
 
 const MenuItems = [
   { module: 'Home', icon: ElementEqual, outline: false },

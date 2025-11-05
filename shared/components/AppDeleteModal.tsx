@@ -1,5 +1,5 @@
-import { useModalContext } from '@core/context';
-import { AppButton } from '@core/components';
+import { useModalContext } from 'core/context';
+import { AppButton } from 'shared/components/index';
 
 export const AppDeleteModal = (props:any) => {
   const {name , onConfirm, onCancel} = props;

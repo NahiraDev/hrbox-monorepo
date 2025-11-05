@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, type RouteObject } from 'react-router-dom';
 
 import { RoutesProvider } from '@core/context';
-import { AppLoader } from '@core/components';
+import { AppLoader } from 'shared/components';
 import { App } from '@core/app';
 import { ProjectRoutesMap } from '@root/modules/modulesRoutes';
 

@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "outDir": "../../dist/modules/process-maker",

@@ -8,7 +8,7 @@ import {
   TableCell,
   Tooltip,
 } from '@heroui/react';
-import { AppButton, AppPagination } from '@core/components';
+import { AppButton, AppPagination } from 'shared/components/index';
 import { createPortal } from 'react-dom';
 export interface ColumnConfig<T = any> {
   key: string;

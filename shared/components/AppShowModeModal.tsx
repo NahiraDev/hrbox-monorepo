@@ -1,4 +1,4 @@
-import { AppModal } from '@core/components';
+import { AppModal } from 'shared/components/index';
 
 interface ColumnPair {
   key: string;
