@@ -10,6 +10,7 @@ import { t } from 'i18next';
 import { useFormContext } from '@core/context';
 import { AppButton, AppSwitch, AppInput } from '@core/components';
 import { SSOHRLinkPaths } from '@module/sso/app/paths';
+import { sign } from 'crypto';
 
 // ============================================
 // Form Configuration
@@ -155,9 +156,9 @@ export const LoginForm = () => {
           size: 'lg',
           fullWidth: true,
           variant: 'light',
-          endContent: <img src="/images/message.svg" alt="phone icon" />,
+          startContent: <img src="/images/message.svg" alt="phone icon" />,
           className:
-            ' px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
+            ' px-4 py-3 justify-start bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
           onPress: () => console.log('Sign in with phone number clicked!'),
             }}
           />
@@ -168,12 +169,24 @@ export const LoginForm = () => {
           size: 'lg',
           fullWidth: true,
           variant: 'light',
-          endContent: <img src="/images/Google Logo.svg" alt="phone icon" />,
+          startContent: <img src="/images/Google Logo.svg" alt="phone icon" />,
           className:
-            'gap-3 px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
+            'gap-3 justify-start px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
           onPress: () => console.log('Sign in with phone number clicked!'),
             }}
           />
+
+          <div className="flex justify-center mt-6">
+            <p className="text-sm text-gray-600 text-center">
+              Do you have an account?{' '}
+              <span
+                className="text-[#1E3363] font-semibold cursor-pointer hover:underline"
+                onClick={() => navigate('/signup')}
+              >
+                Sign up now
+              </span>
+            </p>
+          </div>
 
       </Form>
     </div>

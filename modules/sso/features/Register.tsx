@@ -49,6 +49,7 @@ const Register = () => {
 
   return (
     <FormProvider
+      formId='register-form'
       initialValues={initialValuesForm}
       validationSchema={formValidationError}
       onSubmitAsync={async (values) => {

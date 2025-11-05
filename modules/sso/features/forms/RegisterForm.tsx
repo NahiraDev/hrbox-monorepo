@@ -99,6 +99,7 @@ export const RegisterForm = () => {
           <div className="flex flex-col gap-1">
             <AppInput
               props={{
+                name: 'registe-form',
                 label: t('password'),
                 error: touched.Password ? errors.Password : undefined,
                 type: isVisiblePassword ? 'text' : 'password',
