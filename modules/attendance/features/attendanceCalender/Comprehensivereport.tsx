@@ -36,6 +36,7 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
     'Unapproved night overtime (closed)',
     'Approved night overtime (Friday)',
     'Unconfirmed night overtime (Friday)',
+    'Unconfirmed night overtime (Friday)',
   ];
   return (
     <>
@@ -43,7 +44,7 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
         className={`bg-surface-50 flex h-full flex-col items-center rounded-xl p-3 font-sans ${isExpanded ? 'w-full' : 'border-primary w-[20%] border-1'} `}
       >
         <div className='flex w-full justify-start border-b border-neutral-100'>
-          <h1 className='mb-1 text-base font-semibold'>Comprehensive report</h1>
+          <p className='mb-1 !text-lg !font-bold !font-open-sans'>Comprehensive report</p>
           <AppButton
             props={{
               content: isExpanded ? <ArrowLeft2 size={14} /> : <ArrowRight2 size={14} />,
@@ -56,11 +57,11 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
             }}
           />
         </div>
-        <div className='custom-scroll overflow-y-scroll pr-1'>
+        <div className='custom-scroll overflow-y-scroll pr-1 w-full'>
           <div
             className={
               isExpanded
-                ? 'flex flex-row flex-wrap justify-between gap-x-14 gap-y-5 pt-4.5'
+                ? 'flex flex-wrap justify-between gap-x-14 gap-y-5 pt-4.5'
                 : 'mt-[14px] mr-2.5 flex flex-col justify-center gap-4'
             }
           >
@@ -70,8 +71,11 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
                   props={{
                     label: label,
                     size: 'lg',
+                    radius:'lg',
+                    placeHolderClass:'!text-xs !font-open-sans !text-secondary-400',
                     className:
-                      'bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)] placeholder:text-red-400 placeholder:text-sm',
+                      'bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)] ',
+                    labelClassName:'!text-xs !font-bold',
                     endContent: (
                       <Tooltip
                         classNames={{base:"z-999 flex w-[200px] flex-col gap-2 rounded-lg",content:"border border-orange-400"}}
@@ -79,19 +83,19 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
                           <div className='gap-2 p-2 rounded-lg'>
                             <div className='flex w-full flex-row gap-1'>
                               <span>
-                                <InfoCircle color='#FD8F02' />
+                                <InfoCircle color='#FD8F02' size={16} />
                               </span>
-                              <p className='text-xs font-semibold'>
+                              <p className='text-xs font-bold'>
                                 Total Number of All Attendance Days This Month
                               </p>
                             </div>
                             <div>
-                              <p className='text-secondary-1000 !text-sm !font-medium'>
-                                <span className='!text-sm !font-normal text-orange-400'>
+                              <p className='text-secondary-1000 !text-sm'>
+                                <span className='!text-xs !font-bold text-orange-400'>
                                   Note1:{' '}
                                 </span>
                                 Days without shifts are not included in this list.
-                                <span className='!text-sm !font-normal text-orange-400'>
+                                <span className='!text-xs !font-bold text-orange-400'>
                                   Note2:{' '}
                                 </span>
                                 Monthly working hours refer to the total of attendance days +
@@ -103,8 +107,8 @@ const Comprehensivereport = ({ isExpanded  ,onToggle }) => {
                         placement={'bottom-end'}
                         offset={10}
                       >
-                        <span>
-                          <InfoCircle color='#FD8F02' />
+                        <span className='cursor-pointer'>
+                          <InfoCircle color='#FD8F02' size={18} />
                         </span>
                       </Tooltip>
                     ),

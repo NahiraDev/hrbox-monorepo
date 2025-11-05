@@ -1,11 +1,12 @@
 import { AppButton, AppPageTitle } from '@core/components';
-import { PasswordCheck, TickCircle, TimerPause, TimerStart } from 'iconsax-react';
+import { Additem, PasswordCheck, TickCircle, TimerPause, TimerStart } from 'iconsax-react';
 
 import { useModalContext } from '@core/context';
 import FaceIdModal from '@module/attendance/features/modals/FaceIdModal';
 import UserLocationModal from '@module/attendance/features/modals/UserLocationModal';
 import { useEffect, useRef, useState } from 'react';
 import { addToast, ToastProvider } from '@heroui/react';
+import ActionsModal from '@module/attendance/features/modals/ActionsModal';
 
 const EntryExitSubHeader = ( props : any) => {
   const { openModal } = useModalContext();
@@ -94,7 +95,7 @@ const EntryExitSubHeader = ( props : any) => {
                 color: clock?'danger':'success',
                 startContent:clock?<TimerPause color='white' variant='Bold' />: <TimerStart color='white' variant='Bold' />,
                 radius: 'lg',
-                onPress: () => {
+                onPress: () =>{
                   setClock(!clock);
                   addToast({
                     description: 'Traffic registration was done successfully!',
@@ -108,7 +109,7 @@ const EntryExitSubHeader = ( props : any) => {
                       base: clock ? '!w-[500px] bg-red-50 ' : '!w-[500px] bg-green-50',
                     },
                   });
-                },
+                },// openModal('confirm','location',<ActionsModal/>,null,'2xl','userlocation',<Additem/>),
                 content: <span className='text-white'>{clock ? 'Clock out' : 'Clock in'}</span>,
               }}
             />

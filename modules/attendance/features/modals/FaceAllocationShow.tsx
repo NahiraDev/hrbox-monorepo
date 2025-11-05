@@ -1,24 +1,24 @@
 import { AppButton, AppModal } from '@core/components';
 import { FormProvider, useModalContext } from '@core/context';
-import {
+import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/ShiftAllocationShowForm';
-import ShiftAllocationShowForm from '@module/attendance/features/forms/ShiftAllocationShowForm';
-const ShiftAllocationShow=()=>{
+} from '@module/attendance/features/forms/FaceAllocationEdit';
+import FaceAllocationShowForm from '@module/attendance/features/forms/FaceAllocationShowForm';
+const FaceAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
-          closeModal('view', 'ShiftShowModal');
+          closeModal('view', 'FaceAllocationShow');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
-        <ShiftAllocationShowForm/>
+        <FaceAllocationShowForm/>
         </FormProvider>
       </AppModal.Body>
     </>
   )
 }
-export default ShiftAllocationShow;
+export default FaceAllocationShow;

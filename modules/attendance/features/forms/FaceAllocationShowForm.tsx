@@ -1,14 +1,14 @@
+
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
-import { useFormContext } from '@core/context';
-import { AppAutoComplete, AppTextArea } from '@core/components';
-import { TimerStart } from 'iconsax-react';
+import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
+import { Scan } from 'iconsax-react';
 import * as Yup from 'yup';
 
 export const initialValuesAction = {
   title: null,
   type: 'Person',
-  ChooseShift: null,
+  ChooseFaceRecognitionAssignment: null,
   FromDate: null,
   organization: null,
   Department: null,
@@ -19,7 +19,7 @@ export const initialValuesAction = {
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
-  ChooseShift: Yup.string().required(),
+  ChooseFaceRecognitionAssignment: Yup.string().required(),
   FromDate: Yup.string().required(),
   organization: Yup.string().required(),
   Department: Yup.string().required(),
@@ -28,31 +28,32 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-    console.log(values.title,'title');
-    console.log(values.type);
-    console.log(values.ChooseShift);
-    console.log(values.FromDate);
-    console.log(values.organization);
-    console.log(values.Employee);
-    console.log(values.Description);
-  // return {
-  //   title: values.title,
-  //   type: values.type,
-  //   ChooseShift: values.ChooseShift,
-  //   FromDate: values.FromDate,
-  //   organization: values.organization,
-  //   Department: values.Department,
-  //   JobTitle: values.JobTitle,
-  //   Employee: values.Employee,
-  //   Description: values.Description,
-  // };
+  console.log(values.title);
+  console.log(values.type);
+  console.log(values.ChooseShift);
+  console.log(values.FromDate);
+  console.log(values.organization);
+  console.log(values.Employee);
+  console.log(values.Description);
+  return {
+    title: values.title,
+    type: values.type,
+    ChooseFaceRecognitionAssignment: values.ChooseFaceRecognitionAssignment,
+    FromDate: values.FromDate,
+    organization: values.organization,
+    Department: values.Department,
+    JobTitle: values.JobTitle,
+    Employee: values.Employee,
+    Description: values.Description,
+  };
 };
 
-const ShiftAllocationForm=()=>{
+const FaceAllocationShowForm=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
+
   return(
     <>
-      <Form id="shift-allocation-form" onSubmit={handleSubmit}>
+        <Form id="face-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
@@ -63,37 +64,30 @@ const ShiftAllocationForm=()=>{
           <div className='flex flex-row justify-between gap-10'>
             <div className='w-full'>
             <AppAutoComplete props={{
-              label:'Choose Shift',
-              name:'ChooseShift',
-              variant:'bordered',
-              value:values.ChooseShift,
-              error: touched.ChooseShift && errors.ChooseShift,
+              label:'Choose Face Recognition Assignment',
+              name:'ChooseFaceRecognitionAssignment',
+              value:values.ChooseFaceRecognitionAssignment,
+              error: touched.ChooseFaceRecognitionAssignment && errors.ChooseFaceRecognitionAssignment,
               onChange: handleChange,
               onBlur: handleBlur,
-              classNames:{
-                inputWrapper:'!border-5 !shadow-none'
-              }
             }}/>
             </div>
             <div className='w-full'>
             <AppAutoComplete props={{
               label:'From Date',
               name:'FromDate',
-              variant:'bordered',
               value:values.FromDate,
               error: touched.FromDate && errors.FromDate,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
             </div>
-
           </div>
           <div className='flex flex-row justify-between gap-10'>
             <div className='w-full'>
             <AppAutoComplete props={{
               label:'Organization',
               name:'organization',
-              variant:'bordered',
               value:values.organization,
               error: touched.organization && errors.organization,
               onChange: handleChange,
@@ -105,7 +99,6 @@ const ShiftAllocationForm=()=>{
               <AppAutoComplete props={{
                 label:'Department',
                 name:'Department',
-                variant:'bordered',
                 value:values.Department,
                 error: touched.Department && errors.Department,
                 onChange: handleChange,
@@ -117,7 +110,6 @@ const ShiftAllocationForm=()=>{
               <AppAutoComplete props={{
                 label:'Job Title',
                 name:'JobTitle',
-                variant:'bordered',
                 value:values.JobTitle,
                 error: touched.JobTitle && errors.JobTitle,
                 onChange: handleChange,
@@ -133,24 +125,21 @@ const ShiftAllocationForm=()=>{
               <AppAutoComplete props={{
                 label:'Employee',
                 name:'Employee',
-                variant:'bordered',
                 value:values.Employee,
                 error: touched.Employee && errors.Employee,
                 onChange: handleChange,
                 onBlur: handleBlur,
-                classNames:{
-                inputWrapper:'!border-0 shadow-none'
-                }
               }}/>
               </div>
-              <div className='w-full'></div>
+              <div className='w-full'>
+              </div>
             </div>
-        )}
+          )}
 
           <div className="w-full">
             <AppTextArea props={{
               label:'Description',
-              className:'border border-[#DEE1E8] rounded-xl',
+              className:'border border-[#DEE1E8] rounded-xl z-999 bg-gradient-to-r from-white via-[#EEF9FF] to-white',
               name:'Description',
               variant:'bordered',
               value:values.Description,
@@ -161,9 +150,9 @@ const ShiftAllocationForm=()=>{
             }}/>
           </div>
         </div>
-        <TimerStart color='gray' size={90} className='absolute bottom-2 left-0'/>
+        <Scan color='gray' size={90} className='absolute bottom-2 left-3'/>
       </Form>
     </>
   );
 }
-export default ShiftAllocationForm;
+export default FaceAllocationShowForm;

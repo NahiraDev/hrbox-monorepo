@@ -99,7 +99,7 @@ const CalenderSubHeader = () => {
                   <ExportSquare size={20} />
                 </span>
               ),
-              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"2xl","Add Permision Time",<Hierarchy3 color="white"/>),
+              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"3xl","Add Permision Time",<Hierarchy3 color="white"/>),
               content: 'Export ',
             }}
           />

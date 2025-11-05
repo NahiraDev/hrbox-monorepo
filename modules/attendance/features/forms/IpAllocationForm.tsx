@@ -60,77 +60,97 @@ const IpAllocationForm=()=>{
             <Radio value="Group" classNames={{wrapper:'border-2 border-primary'}}>Group</Radio>
             <Radio value="JobTitle" classNames={{wrapper:'border-2 border-primary'}}>Job Title</Radio>
           </RadioGroup>
-          <div className='flex flex-row justify-between'>
+          <div className='flex flex-row justify-between gap-10'>
+            <div className='w-full'>
             <AppAutoComplete props={{
               label:'Choose Ip',
               name:'ChooseIp',
+              variant:'bordered',
               value:values.ChooseIp,
               error: touched.ChooseIp && errors.ChooseIp,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
+            </div>
+            <div className='w-full'>
             <AppAutoComplete props={{
               label:'From Date',
               name:'FromDate',
+              variant:'bordered',
               value:values.FromDate,
               error: touched.FromDate && errors.FromDate,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
-
+            </div>
           </div>
-          <div className='flex flex-row justify-between'>
+          <div className='flex flex-row justify-between gap-10'>
+            <div className='w-full'>
             <AppAutoComplete props={{
               label:'Organization',
               name:'organization',
+              variant:'bordered',
               value:values.organization,
               error: touched.organization && errors.organization,
               onChange: handleChange,
               onBlur: handleBlur,
             }}/>
+            </div>
             {values.type==='Person' || values.type==='Group' ? (
+                <div className='w-full'>
               <AppAutoComplete props={{
                 label:'Department',
                 name:'Department',
+                variant:'bordered',
                 value:values.Department,
                 error: touched.Department && errors.Department,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}/>
+                </div>
             ):(
+              <div className='w-full'>
               <AppAutoComplete props={{
                 label:'Job Title',
                 name:'JobTitle',
+                variant:'bordered',
                 value:values.JobTitle,
                 error: touched.JobTitle && errors.JobTitle,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}/>
+              </div>
             )}
 
           </div>
           {values.type==='Person'&& (
-            <div className='flex flex-row justify-between'>
+            <div className='flex flex-row justify-between gap-10'>
+              <div className='w-full'>
               <AppAutoComplete props={{
                 label:'Employee',
                 name:'Employee',
+                variant:'bordered',
                 value:values.Employee,
                 error: touched.Employee && errors.Employee,
                 onChange: handleChange,
                 onBlur: handleBlur,
               }}/>
+              </div>
+              <div className='w-full'></div>
             </div>
           )}
 
           <div className="w-full">
             <AppTextArea props={{
               label:'Description',
-              className:'border border-[#DEE1E8]',
+              className:'border border-[#DEE1E8] rounded-xl',
               name:'Description',
+              variant:'bordered',
               value:values.Description,
               error: touched.Description && errors.Description,
               onChange: handleChange,
               onBlur: handleBlur,
+              placeHolderClass:'placeholder:text-sm placeholder:text-secondary-400',
             }}/>
           </div>
         </div>

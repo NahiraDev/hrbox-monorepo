@@ -1,14 +1,13 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/radio';
-import { useFormContext } from '@core/context';
-import { AppAutoComplete, AppTextArea } from '@core/components';
-import { TimerStart } from 'iconsax-react';
+import { AppAutoComplete, AppTextArea, useFormContext } from '@root/core';
+import { Global } from 'iconsax-react';
 import * as Yup from 'yup';
 
 export const initialValuesAction = {
   title: null,
   type: 'Person',
-  ChooseShift: null,
+  ChooseIp: null,
   FromDate: null,
   organization: null,
   Department: null,
@@ -19,7 +18,7 @@ export const initialValuesAction = {
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
-  ChooseShift: Yup.string().required(),
+  ChooseIp: Yup.string().required(),
   FromDate: Yup.string().required(),
   organization: Yup.string().required(),
   Department: Yup.string().required(),
@@ -28,31 +27,32 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-    console.log(values.title,'title');
-    console.log(values.type);
-    console.log(values.ChooseShift);
-    console.log(values.FromDate);
-    console.log(values.organization);
-    console.log(values.Employee);
-    console.log(values.Description);
-  // return {
-  //   title: values.title,
-  //   type: values.type,
-  //   ChooseShift: values.ChooseShift,
-  //   FromDate: values.FromDate,
-  //   organization: values.organization,
-  //   Department: values.Department,
-  //   JobTitle: values.JobTitle,
-  //   Employee: values.Employee,
-  //   Description: values.Description,
-  // };
+  console.log(values.title);
+  console.log(values.type);
+  console.log(values.ChooseShift);
+  console.log(values.FromDate);
+  console.log(values.organization);
+  console.log(values.Employee);
+  console.log(values.Description);
+  return {
+    title: values.title,
+    type: values.type,
+    ChooseIp: values.ChooseIp,
+    FromDate: values.FromDate,
+    organization: values.organization,
+    Department: values.Department,
+    JobTitle: values.JobTitle,
+    Employee: values.Employee,
+    Description: values.Description,
+  };
 };
 
-const ShiftAllocationForm=()=>{
+const IpAllocationShowForm=()=>{
   const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
+
   return(
     <>
-      <Form id="shift-allocation-form" onSubmit={handleSubmit}>
+      <Form id="ip-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
@@ -63,16 +63,13 @@ const ShiftAllocationForm=()=>{
           <div className='flex flex-row justify-between gap-10'>
             <div className='w-full'>
             <AppAutoComplete props={{
-              label:'Choose Shift',
-              name:'ChooseShift',
+              label:'Choose Ip',
+              name:'ChooseIp',
               variant:'bordered',
-              value:values.ChooseShift,
-              error: touched.ChooseShift && errors.ChooseShift,
+              value:values.ChooseIp,
+              error: touched.ChooseIp && errors.ChooseIp,
               onChange: handleChange,
               onBlur: handleBlur,
-              classNames:{
-                inputWrapper:'!border-5 !shadow-none'
-              }
             }}/>
             </div>
             <div className='w-full'>
@@ -86,7 +83,6 @@ const ShiftAllocationForm=()=>{
               onBlur: handleBlur,
             }}/>
             </div>
-
           </div>
           <div className='flex flex-row justify-between gap-10'>
             <div className='w-full'>
@@ -138,19 +134,16 @@ const ShiftAllocationForm=()=>{
                 error: touched.Employee && errors.Employee,
                 onChange: handleChange,
                 onBlur: handleBlur,
-                classNames:{
-                inputWrapper:'!border-0 shadow-none'
-                }
               }}/>
               </div>
               <div className='w-full'></div>
             </div>
-        )}
+          )}
 
           <div className="w-full">
             <AppTextArea props={{
               label:'Description',
-              className:'border border-[#DEE1E8] rounded-xl',
+              className:'border border-[#DEE1E8] rounded-xl z-999 bg-gradient-to-r from-white via-[#EEF9FF] to-white',
               name:'Description',
               variant:'bordered',
               value:values.Description,
@@ -161,9 +154,9 @@ const ShiftAllocationForm=()=>{
             }}/>
           </div>
         </div>
-        <TimerStart color='gray' size={90} className='absolute bottom-2 left-0'/>
+        <Global color='gray' size={90} className='absolute bottom-2 left-0'/>
       </Form>
     </>
   );
 }
-export default ShiftAllocationForm;
+export default IpAllocationShowForm;

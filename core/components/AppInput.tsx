@@ -18,6 +18,8 @@ interface AppInputProps {
   size?: 'sm' | 'md' | 'lg';
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
   className?: string;
+  labelClassName?: string;
+  placeHolderClass?: string;
 }
 
 const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
@@ -40,9 +42,10 @@ const sizeClasses: Record<string, { wrapper: string; input: string; label: strin
 
 const radiusClasses: Record<string, string> = {
   none: 'rounded-none',
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
   full: 'rounded-full',
 };
 
@@ -64,31 +67,40 @@ export const AppInput = ({ props }: { props: AppInputProps }) => {
     size = 'md',
     radius = 'md',
     className,
+    labelClassName,
+    placeHolderClass,
     ...rest
   } = props;
 
   const inputWrapperClassNames = clsx(
     'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
-    error && 'border-red-500 bg-red-100 dark:bg-red-800',
+    'transition-all duration-200',
+    'hover:border-[#B8BCC8]',
+    'focus-within:border-primary focus-within:shadow-lg',
+    error && 'border-red-500 bg-red-50 focus-within:border-red-500',
     sizeClasses[size]?.wrapper,
     radiusClasses[radius],
     className,
   );
 
   const inputClassNames = clsx(
-    'placeholder:text-secondary-1000',
-    'placeholder:font-medium',
+    'placeholder:text-secondary-1000 placeholder:font-medium',
+    placeHolderClass,
     error && 'text-red-500',
     sizeClasses[size]?.input,
   );
 
-  const labelClassNames = clsx('leading-5', sizeClasses[size]?.label);
+  const labelClassNames = clsx(
+    'leading-5 text-secondary-1000',
+    sizeClasses[size]?.label,
+    labelClassName
+  );
 
   return (
     <div className="flex flex-col gap-1">
       {label && (
         <span className={labelClassNames}>
-          {label} {required && '*'}
+          {label} {required && <span className="text-red-500">*</span>}
         </span>
       )}
       <Input

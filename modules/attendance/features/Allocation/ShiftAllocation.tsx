@@ -4,7 +4,7 @@ import ShiftAllocationModalEdit from '@module/attendance/features/modals/ShiftAl
 import { Hierarchy3 } from 'iconsax-react';
 import { useState } from 'react';
 import { useModalContext } from 'core/context';
-import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
+import ShiftAllocationShow from '@module/attendance/features/modals/ShiftAllocationShow';
 
 const ShiftAllocation=()=>{
   const [data,setData]=useState(Allocatio);
@@ -13,9 +13,8 @@ const ShiftAllocation=()=>{
     setData(prevData => prevData.filter((_, i) => i !== index))
   }
   const handleRowClick=(row,index)=>{
-    openModal('view','ShiftShowModal',<ShiftAllocationModal/>,row,'2xl','Shift Allocation',<Hierarchy3 color="white"/>);
-    console.log(row);
-    console.log(index);
+    openModal('view','ShiftShowModal',<ShiftAllocationShow/>,row,'3xl','Shift Allocation',<Hierarchy3 color="white"/>);
+    console.log(row,"row");
   }
   return(
     <>
@@ -25,8 +24,8 @@ const ShiftAllocation=()=>{
       showStatus={true}
       hasPagination={true}
       onRowClick={(row,index)=>handleRowClick(row,index)}
-    onDelete={(index)=>handleDeleteRow(index)}
-      onEdit={(row,index)=> openModal('edit','ShiftAllocationModalEdit',<ShiftAllocationModalEdit/>,row,'2xl','Edit Shift Allocation',<Hierarchy3 color="white"/>)}
+     onDelete={(index)=>handleDeleteRow(index)}
+      onEdit={(row,index)=> openModal('edit','ShiftAllocationModalEdit',<ShiftAllocationModalEdit/>,row,'3xl','Edit Shift Allocation',<Hierarchy3 color="white"/>)}
     />
       </div>
     </>

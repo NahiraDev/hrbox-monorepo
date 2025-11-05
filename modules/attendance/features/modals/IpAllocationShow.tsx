@@ -1,24 +1,25 @@
 import { AppButton, AppModal } from '@core/components';
 import { FormProvider, useModalContext } from '@core/context';
-import {
+import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/ShiftAllocationShowForm';
-import ShiftAllocationShowForm from '@module/attendance/features/forms/ShiftAllocationShowForm';
-const ShiftAllocationShow=()=>{
+} from '@module/attendance/features/forms/IpAllocationEdit';
+import IpAllocationEdit from '@module/attendance/features/forms/IpAllocationEdit';
+import IpAllocationShowForm from '@module/attendance/features/forms/IpAllocationShowForm';
+const IpAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
       <AppModal.Body>
         <FormProvider onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
-          closeModal('view', 'ShiftShowModal');
+          closeModal('view', 'IpAllocationShow');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
-        <ShiftAllocationShowForm/>
+        <IpAllocationShowForm/>
         </FormProvider>
       </AppModal.Body>
     </>
   )
 }
-export default ShiftAllocationShow;
+export default IpAllocationShow;

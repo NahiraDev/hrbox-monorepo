@@ -14,7 +14,7 @@ const AllocationSubheader = ({
                              }: AllocationSubheaderProps) => {
   const {openModal} = useModalContext();
   const handlerOpenModal=()=>{
-    openModal('confirm',title,<ModalComponent/>, null,'2xl','Add New One',<Hierarchy3 color="white"/>)
+    openModal('confirm',title,<ModalComponent/>, null,'3xl','Add New One',<Hierarchy3 color="white"/>)
   }
   return(
     <>

@@ -17,7 +17,7 @@ const UserLocationModal = () => {
       <AppModal.Body>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-row gap-3 items-center">
-            <Avatar className="w-[64px] h-[64px]" radius="md" src="/images/favicon.png" />
+            <Avatar className="w-[64px] h-[64px]" radius="md" src="/images/profile.png" />
             <div className="flex flex-col gap-3">
               <p className="text-sm font-medium">Sahar Najafi</p>
               <p className="text-sm font-medium">192.168.1.1</p>
