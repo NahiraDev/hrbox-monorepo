@@ -19,13 +19,9 @@ const createBaseQuery = (
 ): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
-    credentials: 'include', // برای دریافت و ارسال کوکی‌ها
-    mode: 'cors',
     prepareHeaders: (headers, { getState }) => {
-      // فقط Content-Type - مثل Postman
-      headers.set('Content-Type', 'application/json');
+      // headers.set('Content-Type', 'application/json');
 
-      // Authorization فقط برای درخواست‌های بعد از Login
       if (requiresAuth) {
         const token = (getState() as any).auth?.token;
         if (token) {
