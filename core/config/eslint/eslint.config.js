@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -15,28 +18,28 @@ const __dirname = path.dirname(__filename);
 
 export default [// Global ignores
 // Base configuration
-  {
-    ignores: [
-      '.now/**',
-      '**/*.css',
-      '**/.changeset/**',
-      '**/dist/**',
-      '**/build/**',
-      '**/.next/**',
-      '**/coverage/**',
-      '**/node_modules/**',
-      '**/.turbo/**',
-      '**/.vite/**',
-      '**/.DS_Store',
-      '**/*.config.js',
-      '**/*.config.ts',
-      '!**/.commitlintrc.cjs',
-      '!**/.lintstagedrc.cjs',
-      '!**/vite.config.ts',
-      '!**/eslint.config.js',
-    ],
-  }, // Main configuration for TypeScript and React files
-  js.configs.recommended, {
+// Main configuration for TypeScript and React files
+{
+  ignores: [
+    '.now/**',
+    '**/*.css',
+    '**/.changeset/**',
+    '**/dist/**',
+    '**/build/**',
+    '**/.next/**',
+    '**/coverage/**',
+    '**/node_modules/**',
+    '**/.turbo/**',
+    '**/.vite/**',
+    '**/.DS_Store',
+    '**/*.config.js',
+    '**/*.config.ts',
+    '!**/.commitlintrc.cjs',
+    '!**/.lintstagedrc.cjs',
+    '!**/vite.config.ts',
+    '!**/eslint.config.js',
+  ],
+}, js.configs.recommended, {
     files: ['**/*.{ts,tsx,js,jsx}'],
 
     languageOptions: {
@@ -303,5 +306,4 @@ export default [// Global ignores
         },
       ],
     },
-  },
-];
+  }, ...storybook.configs["flat/recommended"]];

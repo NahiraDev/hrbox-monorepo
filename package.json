@@ -28,10 +28,6 @@
     "lint:staged": "lint-staged",
     "docker:build": "docker build -t hrbox-monorepo .",
     "docker:dev": "docker-compose up -d",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish",
-    "analyze": "pnpm build && npx webpack-bundle-analyzer dist/stats.json",
     "security:audit": "pnpm audit",
     "dependency:check": "pnpm outdated",
     "clean:all": "rm -rf dist node_modules/.vite-cache .turbo node_modules",
@@ -41,9 +37,8 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch",
-    "build:analyze": "pnpm build && npx vite-bundle-analyzer dist/stats.json",
-    "prepare": "husky install",
-    "postinstall": "patch-package"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@eslint/compat": "^1.4.1",
@@ -54,7 +49,6 @@
     "@heroui/theme": "^2.4.23",
     "@heroui/use-theme": "^2.1.10",
     "@internationalized/date": "^3.10.0",
-    "@module-federation/utilities": "^3.1.73",
     "@react-aria/visually-hidden": "3.8.28",
     "@react-types/shared": "3.32.1",
     "@reduxjs/toolkit": "^2.9.2",
@@ -78,7 +72,6 @@
     "date-object": "^2.1.6",
     "dotenv": "^17.2.3",
     "elkjs": "^0.11.0",
-    "embla-carousel-react": "^8.6.0",
     "express": "^5.1.0",
     "formik": "^2.4.6",
     "framer-motion": "12.23.24",
@@ -112,6 +105,7 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@eslint/eslintrc": "^3.3.1",
@@ -129,9 +123,10 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@swc/core": "^1.14.0",
-    "@swc/plugin-emotion": "^12.0.0",
-    "@swc/plugin-styled-components": "^10.0.0",
+    "@storybook/addon-a11y": "^10.0.5",
+    "@storybook/addon-docs": "^10.0.5",
+    "@storybook/addon-vitest": "^10.0.5",
+    "@storybook/react-vite": "^10.0.5",
     "@tailwindcss/postcss": "4.1.16",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
@@ -143,7 +138,6 @@
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "@vitejs/plugin-react": "^5.1.0",
-    "@vitejs/plugin-react-swc": "^4.2.0",
     "autoprefixer": "^10.4.21",
     "commitizen": "^4.3.1",
     "cross-env": "^10.1.0",
@@ -155,6 +149,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-storybook": "10.0.5",
     "eslint-plugin-unused-imports": "^4.3.0",
     "globals": "^16.4.0",
     "husky": "^9.1.7",
@@ -176,6 +171,7 @@
     "redux-persist": "^6.0.0",
     "rollup": "^4.52.5",
     "sort-package-json": "^3.4.0",
+    "storybook": "^10.0.5",
     "swiper": "^12.0.3",
     "tailwindcss": "^4.1.16",
     "ts-node": "^10.9.2",
@@ -184,33 +180,16 @@
     "turbo": "^2.5.8",
     "typescript": "5.9.3",
     "vite": "^7.1.12",
-    "vite-bundle-analyzer": "^1.2.3",
-    "vite-plugin-bundle-analyzer": "^0.0.1",
-    "vite-plugin-checker": "^0.11.0",
-    "vite-plugin-comlink": "^5.3.0",
-    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-ejs": "^1.7.0",
-    "vite-plugin-html": "^3.2.2",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-inspect": "^11.3.3",
     "vite-plugin-minify": "^2.1.0",
-    "vite-plugin-pwa": "^1.1.0",
-    "vite-plugin-static-copy": "^3.1.4",
-    "vite-plugin-webfont-dl": "^3.11.1",
-    "vite-tsconfig-paths": "^5.1.4"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "eslint --fix --max-warnings 0",
-      "prettier --write"
-    ],
-    "*.{json,md,yml,yaml}": [
-      "prettier --write"
-    ],
-    "*.{css,scss,less}": [
-      "prettier --write"
-    ]
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.7",
+    "playwright": "^1.56.1",
+    "@vitest/browser-playwright": "^4.0.7",
+    "@vitest/coverage-v8": "^4.0.7"
   },
   "workspaces": [
     "modules/*",

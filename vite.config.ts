@@ -1,35 +1,19 @@
 import { type ConfigEnv, defineConfig, PluginOption, type UserConfig } from 'vite';
-import path from 'path'
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
-import imagemin from 'vite-plugin-imagemin';
 
 // Core plugins
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-// Performance & Optimization
-import { VitePWA } from 'vite-plugin-pwa';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import analyzer from 'vite-bundle-analyzer';
-
 // Development Experience
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 
-// Build Optimization
-import { comlink } from 'vite-plugin-comlink';
-import { ViteMinifyPlugin } from 'vite-plugin-minify';
 
-// Styling
-import autoprefixer from 'autoprefixer';
-import postcssNesting from 'postcss-nesting';
 // Utilities
 import { loadEnv } from 'vite';
-import { OutputOptions } from 'rollup';
 import tailwindcss from '@tailwindcss/vite';
-import { federation } from '@module-federation/vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import * as fs from 'node:fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -44,7 +28,6 @@ const createAdvancedSpaMiddleware = () => ({
       const url = req.url;
 
       const staticPatterns = [
-        /\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|wasm)$/,
         /^\/public\//,
         /^\/static\//,
         /^\/@/,
@@ -76,17 +59,7 @@ const createAdvancedSpaMiddleware = () => ({
         /^\/hrlink(?:\/.*)?$/,
         /^\/basic-info(?:\/.*)?$/,
       ];
-
-      if (url !== '/') {
-        const isModuleRoute = moduleRoutes.some(route => route.test(url));
-
-        if (isModuleRoute) {
-          return next();
-        } else {
-          req.url = 'index.html';
-        }
-      }
-
+      
       next();
     });
   },
@@ -94,9 +67,7 @@ const createAdvancedSpaMiddleware = () => ({
 
 export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   const mode = process.env.VITE_APP_ENV;
-  const isDevelopment = mode;
   const isProduction = mode;
-  const isTest = mode === 'test';
 
   // Load environment variables
   const envVars = loadEnv(mode, process.cwd(), '');
@@ -127,7 +98,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   }
 
   const plugins = [
-    react() as PluginOption,
+    react({jsxRuntime: 'automatic',}) as PluginOption,
     tsconfigPaths() as PluginOption,
     ViteEjsPlugin({
       domain: envVars.VITE_APP_URL || 'localhost',
@@ -135,6 +106,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       version: packageJson.version || '1.0.0',
     }) as PluginOption,
     tailwindcss() as PluginOption,
+    createAdvancedSpaMiddleware() as PluginOption,
   ];
 
   return {
@@ -142,15 +114,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     // Define global constants
     define: {
-      __DEV__: isDevelopment,
-      __PROD__: isProduction,
-      __TEST__: isTest,
-      __VERSION__: JSON.stringify(packageJson.version || '1.0.0'),
-      __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
-      __FEATURE_SSO__: true,
-      __FEATURE_CHARTS__: true,
-      __FEATURE_REPORTS__: true,
-      'process.env.VITE_APP_ENV': JSON.stringify(mode),
+      'process.env.NODE_ENV': JSON.stringify('development'),
     },
 
     // Build configuration
@@ -255,7 +219,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           },
         },
 
-        // Proxy برای DesktopModules
         '/DesktopModules': {
           target: 'https://hrlink.hrbox.me:50443',
           changeOrigin: true,

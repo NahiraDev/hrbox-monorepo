@@ -1,7 +1,7 @@
 import { renderApp } from '@hrbox/core/app';
 import { createStoreWithReducers } from '@hrbox/core/redux/store';
 import { serviceRegistry } from '@hrbox/core/helpers';
-import './index.css'
+import '~/index.css'
 import HRLinkPlugin from '@module/hrlink/app/register';
 import ProcessMakerPlugin from '@module/process-maker/app/register';
 import ChartMakerPlugin from '@module/chart-maker/app/register';
