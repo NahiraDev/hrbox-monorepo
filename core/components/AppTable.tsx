@@ -157,7 +157,7 @@
     };
 
     const getRowClassName = (row: T, index: number): string => {
-      const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer  ';
+      const baseClass = 'hover:bg-[#DCF0F9] dark:hover:bg-[#04425c66] transition-colors cursor-pointer  ';
       let statusClass='';
       if(variant==='attendance'){
         const dateValue=row['Date']?.toString()||'';

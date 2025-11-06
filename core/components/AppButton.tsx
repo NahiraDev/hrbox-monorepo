@@ -48,7 +48,6 @@ export const AppButton = ({ props }: any) => {
   const { ref: forwardedRef, ...rest } = props;
   if (forwardedRef && typeof forwardedRef === 'object' && forwardedRef.hasOwnProperty('current')) {
     useImperativeHandle(forwardedRef, () => ({
-      // Exposed methods
     }));
   }
   return (
@@ -56,7 +55,7 @@ export const AppButton = ({ props }: any) => {
       ref={forwardedRef}
       className={clsx(
         'leading-5 font-normal transition-colors duration-200 ease-in-out flex min-w-fit h-fit',
-        variant !== 'light' && 'shadow-theme-sm',
+        variant == 'light',
         sizeClasses[size],
         radiusClasses[radius],
         className

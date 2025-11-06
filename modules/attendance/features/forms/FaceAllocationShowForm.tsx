@@ -55,7 +55,7 @@ const FaceAllocationShowForm=()=>{
     <>
         <Form id="face-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
-          <RadioGroup name='type' classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
+          <RadioGroup name='type' isDisabled={true} classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
                       defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
             <Radio value="Person" classNames={{wrapper:'border-2 border-primary'}} >Person</Radio>
             <Radio value="Group" classNames={{wrapper:'border-2 border-primary'}}>Group</Radio>
@@ -70,6 +70,7 @@ const FaceAllocationShowForm=()=>{
               error: touched.ChooseFaceRecognitionAssignment && errors.ChooseFaceRecognitionAssignment,
               onChange: handleChange,
               onBlur: handleBlur,
+              isDisabled:true,
             }}/>
             </div>
             <div className='w-full'>
@@ -80,6 +81,7 @@ const FaceAllocationShowForm=()=>{
               error: touched.FromDate && errors.FromDate,
               onChange: handleChange,
               onBlur: handleBlur,
+              isDisabled:true,
             }}/>
             </div>
           </div>
@@ -92,6 +94,7 @@ const FaceAllocationShowForm=()=>{
               error: touched.organization && errors.organization,
               onChange: handleChange,
               onBlur: handleBlur,
+              isDisabled:true,
             }}/>
             </div>
             {values.type==='Person' || values.type==='Group' ? (
@@ -103,6 +106,7 @@ const FaceAllocationShowForm=()=>{
                 error: touched.Department && errors.Department,
                 onChange: handleChange,
                 onBlur: handleBlur,
+                isDisabled:true,
               }}/>
                 </div>
             ):(
@@ -114,6 +118,7 @@ const FaceAllocationShowForm=()=>{
                 error: touched.JobTitle && errors.JobTitle,
                 onChange: handleChange,
                 onBlur: handleBlur,
+                isDisabled:true,
               }}/>
               </div>
             )}
@@ -129,6 +134,7 @@ const FaceAllocationShowForm=()=>{
                 error: touched.Employee && errors.Employee,
                 onChange: handleChange,
                 onBlur: handleBlur,
+                isDisabled:true,
               }}/>
               </div>
               <div className='w-full'>

@@ -59,29 +59,29 @@ const EntryExitSubHeader = ( props : any) => {
         </div>
         <div className='mt-[32px] flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center'>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px] '>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px] dark:bg-[rgba(4,66,92,0.6)] dark:shadow-none '>
               <p className='!text-[40px] text-secondary-400 font-inter'>
                 {formatTime(hours)}
               </p>
             </div>
             <div className='mx-6'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="14" viewBox="0 0 4 14" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="14" viewBox="0 0 4 14" fill="none" className='dark:[&>circle]:fill-white'>
                 <circle cx="1.92605" cy="1.92593" r="1.92593" fill="#1E3363"/>
                 <circle cx="1.92593" cy="11.4074" r="1.92593" fill="#1E3363"/>
               </svg>
             </div>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px]'>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px] dark:bg-[rgba(4,66,92,0.6)] dark:shadow-none'>
               <p className='!text-[40px] text-secondary-400 font-inter'>
                 {formatTime(minutes)}
               </p>
             </div>
             <div className='mx-6'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="14" viewBox="0 0 4 14" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="14" viewBox="0 0 4 14" fill="none" className='dark:[&>circle]:fill-white'>
                 <circle cx="1.92605" cy="1.92593" r="1.92593" fill="#1E3363"/>
                 <circle cx="1.92593" cy="11.4074" r="1.92593" fill="#1E3363"/>
               </svg>
             </div>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px] '>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-[80px] h-[80px] dark:bg-[rgba(4,66,92,0.6)] dark:shadow-none'>
               <p className='!text-[40px] text-secondary-400 font-inter'>
                 {formatTime(seconds)}
               </p>
@@ -95,21 +95,27 @@ const EntryExitSubHeader = ( props : any) => {
                 color: clock?'danger':'success',
                 startContent:clock?<TimerPause color='white' variant='Bold' />: <TimerStart color='white' variant='Bold' />,
                 radius: 'lg',
-                onPress: () =>{
-                  setClock(!clock);
+                // onPress:()=> openModal('confirm','location',<FaceIdModal/>,null,'xl'),
+                // onPress:()=> openModal('confirm','location',<UserLocationModal/>,null,'xl'),
+                // onPress:()=> openModal('confirm','location',<ActionsModal/>,null,'xl'),
+                onPress:  () =>{
+                  const newClockValue = !clock;
+                  setClock(newClockValue);
                   addToast({
+                    timeout:1000,
                     description: 'Traffic registration was done successfully!',
                     variant: 'solid',
-                      icon: <TickCircle color='white' size={24} />,
+                      icon: <TickCircle color='white'  size={24} />,
                     classNames: {
-                      icon: clock
+                      icon: newClockValue
                         ? 'w-[40px] h-[40px] text-red-500 rounded-full  p-1 border-1 border-red-100'
                         : 'w-[40px] h-[40px] text-green-600 rounded-full p-1 border-1 border-success-150',
-                      description: clock ? 'text-red-500 !text-sm ' : 'text-green-600 !text-sm',
-                      base: clock ? '!w-[500px] bg-red-50 ' : '!w-[500px] bg-green-50',
+                      description: newClockValue ? 'text-red-500 !dark:text-primary !text-sm ' : 'text-green-600 dark:text-success !text-sm',
+                      base: newClockValue ? '!w-[500px] bg-red-50 dark:bg-[#67141499] ' : '!w-[500px] bg-green-50 dark:bg-[#0E4A2799] ',
                     },
                   });
-                },// openModal('confirm','location',<ActionsModal/>,null,'2xl','userlocation',<Additem/>),
+                },
+
                 content: <span className='text-white'>{clock ? 'Clock out' : 'Clock in'}</span>,
               }}
             />

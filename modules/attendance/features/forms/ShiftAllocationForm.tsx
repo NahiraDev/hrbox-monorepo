@@ -70,9 +70,6 @@ const ShiftAllocationForm=()=>{
               error: touched.ChooseShift && errors.ChooseShift,
               onChange: handleChange,
               onBlur: handleBlur,
-              classNames:{
-                inputWrapper:'!border-5 !shadow-none'
-              }
             }}/>
             </div>
             <div className='w-full'>

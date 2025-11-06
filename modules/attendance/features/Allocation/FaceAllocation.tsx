@@ -21,6 +21,7 @@ const FaceAllocation=()=>{
       data={data}
       showStatus={true}
       hasPagination={true}
+      pageSize={8}
       onDelete={(row,index)=>handleDeleteRow(row,index)}
       onRowClick={(row,index)=>handleRowClick(row,index)}
       onEdit={()=> openModal('edit','FaceAllocationModalEdit',<FaceAllocationModalEdit/>,null,'3xl','Edit Face Recognition Assignment',<Hierarchy3 color="white"/>)}

@@ -7,7 +7,7 @@ const ApprovalsTable=()=>{
       <div className="h-full w-full">
       <AppTable
         data={ListApprovals}
-        pageSize={10}
+        pageSize={8}
       />
       </div>
     </>

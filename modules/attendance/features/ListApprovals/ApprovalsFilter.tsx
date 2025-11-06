@@ -18,6 +18,7 @@ const ApprovalsFilter=()=>{
               <AppAutoComplete props={{
                 variant:'bordered',
                 label:item,
+                labelClassName:'!text-sm !font-semibold',
               }}/>
             )
           })}
@@ -25,8 +26,9 @@ const ApprovalsFilter=()=>{
         <div className="flex justify-end">
           <AppButton props={{
             color:"primary",
-            size:"md",
-            className:'text-white mr-3',
+            size:"sm",
+            radius:'sm',
+            className:'text-white mr-[30px]',
             content:'Search',
           }} />
         </div>

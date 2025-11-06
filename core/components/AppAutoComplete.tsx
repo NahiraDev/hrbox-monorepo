@@ -40,6 +40,7 @@ export const AppAutoComplete = ({ props }: { props: any }) => {
     required = false,
     displayKey = 'Name',
     valueKey = 'Id',
+    isDisabled = false,
     data = [],
     formik,
     error,
@@ -111,6 +112,7 @@ export const AppAutoComplete = ({ props }: { props: any }) => {
         variant={variant}
         onSelectionChange={handleSelectionChange}
         placeholder={`Please select ${label ?? 'option'} ...`}
+        isDisabled={isDisabled}
         {...rest}
       >
         {data.map((option: any) => {
