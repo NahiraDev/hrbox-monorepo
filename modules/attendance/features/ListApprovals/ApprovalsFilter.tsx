@@ -1,4 +1,4 @@
-import { AppAutoComplete, AppButton } from '@root/core';
+import { AppAutoComplete, AppButton } from '@core/components';
 import '../../app/index.css'
 const ApprovalsFilter=()=>{
   const filterList=[

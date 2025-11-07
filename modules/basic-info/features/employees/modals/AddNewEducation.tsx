@@ -1,9 +1,7 @@
-// @module/basic-info/features/employees/modals/AddNewJob.tsx
 import React, { useState } from 'react';
-import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@core/components';
-import { useModalContext } from '@root/core';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
+import { useModalContext } from '@core/context';
 
-// ✅ INTERFACE را **قبل** از function قرار دادیم
 interface AddNewJobProps {
   onClose: () => void;
 }

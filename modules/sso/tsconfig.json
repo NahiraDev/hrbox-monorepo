@@ -1,9 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@hrbox/core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "outDir": "../../dist/modules/sso",
     "declarationDir": "../../dist/types"
   },
-  "include": ["."],
+  "include": ["."]
 }

@@ -1,9 +1,9 @@
-import { AppButton } from '@root/core/';
+import { AppButton } from '@core/components';
 import { BeHappy } from '@root/shared/icons/BeHappy';
 import { Frown } from '@root/shared/icons/Frown';
 import { Happy } from '@root/shared/icons/Happy';
 import { Sad } from '@root/shared/icons/Sad';
-import { useModalContext } from '@root/core';
+import { useModalContext } from '@core/context';
 
 interface HowAreYouTodayModalProps {
   onMoodSelect: (mood: string) => void;

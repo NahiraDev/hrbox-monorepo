@@ -1,0 +1,14 @@
+{
+  "extends": "@core/config/typescript/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": false,
+    "rootDir": "../",
+    "outDir": "../dist/proxy-server",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
+  },
+  "include": [
+    "." , "../*"
+  ]
+}

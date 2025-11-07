@@ -5,6 +5,8 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
+// TODO: check user domain and change front end 
+
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const isAuthenticated = useAppSelector((state: any) => state.auth.isAuthenticated);
   const location = useLocation();

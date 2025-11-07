@@ -1,6 +1,5 @@
 import { AppButton, AppInput, AppModal } from '@core/components';
-import { Avatar } from '@heroui/react';
-import { useModalContext } from '@root/core';
+import { useModalContext } from '@core/context';
 
 const FilterCalenderModal = () => {
   const { openModal } = useModalContext();

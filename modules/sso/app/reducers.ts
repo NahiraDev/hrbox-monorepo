@@ -1,5 +1,5 @@
 import { createRootReducer } from '@core/redux';
-import { SSOHRLinkApi } from '@module/sso/features/HRLink/apis';
+import { SSOHRLinkApi } from 'modules/sso/features/apis';
 import authReducer from "@core/redux/reducers/authSlice"
 
 export const HRLinkReducers = createRootReducer({

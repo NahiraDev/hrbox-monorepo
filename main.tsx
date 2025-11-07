@@ -1,8 +1,7 @@
 import { renderApp } from '@hrbox/core/app';
 import { createStoreWithReducers } from '@hrbox/core/redux/store';
 import { serviceRegistry } from '@hrbox/core/helpers';
-import './index.css'
-// Import all modules statically
+import '@hrbox/core/config/tailwind/index.css'
 import HRLinkPlugin from '@module/hrlink/app/register';
 import ProcessMakerPlugin from '@module/process-maker/app/register';
 import ChartMakerPlugin from '@module/chart-maker/app/register';
@@ -10,11 +9,11 @@ import BasicInfoPlugin from '@module/basic-info/app/register';
 import AttendancePlugin from '@module/attendance/app/register';
 
 const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  // 'hrlink',
-  // 'process-maker',
-  // 'chart-maker',
-  // 'basic-info',
-  // 'sso'
+  'hrlink',
+  'process-maker',
+  'chart-maker',
+  'basic-info',
+  'sso',
   'attendance'
 ];
 
@@ -69,7 +68,7 @@ async function bootstrap() {
 
     console.log('🏪 Creating Redux store...');
     // Create store with all reducers
-    const { store, persistor } = createStoreWithReducers(serviceRegistry.getAllReducers());
+    const { store, persistor } = createStoreWithReducers();
 
     console.log('🎨 Rendering application...');
     // Render the main application
