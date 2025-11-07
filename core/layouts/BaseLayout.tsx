@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { serviceRegistry } from '@core/helpers';
 import { useLocation } from 'react-router-dom';
 
-import { AppSupportButton } from 'shared/components';
-import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from 'shared/sections';
-import { ProtectedRoute } from '@core/routes/protectedRoute';
+import { AppSupportButton } from '@hrbox/uikit/components';
+import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '@hrbox/uikit/sections';
+import { ProtectedRoute } from '@hrbox/core/routes/protectedRoute';
 
 export const BaseLayout = () => {
   const location = useLocation();
