@@ -1,9 +1,9 @@
-import { skills as mockSkills } from '@module/basic-info/app/mock'; // Rename imported mock data
+import { skills as mockSkills } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { LampCharge, Trash } from 'iconsax-react';
-import { useModalContext } from '@core/context';
-import { AppDoubleLineProgress } from '@core/sections';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { AppDoubleLineProgress } from '@hrbox/uikit/sections';
 import { useState } from 'react'; // Import useState
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';

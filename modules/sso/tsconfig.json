@@ -2,8 +2,9 @@
   "extends": "@hrbox/core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
+    "rootDir": "../../",
     "outDir": "../../dist/modules/sso",
     "declarationDir": "../../dist/types"
   },
-  "include": ["."]
+  "include": ["." , "./*"]
 }

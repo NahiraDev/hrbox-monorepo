@@ -1,8 +1,8 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { AppButton } from '@core/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Category, TickCircle } from 'iconsax-react';
 
 const TechnicalDepartments = () => {

@@ -1,22 +1,16 @@
-import { AppButton } from '@core/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Edit } from 'iconsax-react';
 import { Avatar, Card } from '@heroui/react';
-
-import { InstagramIcon, LinkedinIcon, TelegramIcon } from '@module/hrlink/icons';
 import { useAppSelector } from '@core/redux';
+import {TelegramIcon} from "~/UIKit/icons/TelegramIcon";
+import {LinkedinIcon} from "~/UIKit/icons/LinkedinIcon";
+import {InstagramIcon} from "~/UIKit/icons/InstagramIcon";
 
 export const GeneralInformation = () => {
   const profileData: any = useAppSelector((state) => state.profile);
 
   return (
     <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
-      {/*<img*/}
-      {/*  alt=""*/}
-      {/*  className="w-full h-full absolute left-0 top-0 opacity-[0.2] blur rounded-[14px] object-cover"*/}
-      {/*  src={AvatarUser}*/}
-      {/*/>*/}
-      {/*<div className="w-full h-full absolute top-0 left-0 bg-secondary-400 dark:bg-surface-200 opacity-[0.2] rounded-[14px]" />*/}
-      {/*<div className="absolute top-0 right-0 w-full h-full rounded-md bg-[position:-59px_0px] blur-sm opacity-50" />*/}
       <div className="flex justify-between items-center border-b border-neutral-100 pb-2 mb-4">
         <AppButton
           props={{

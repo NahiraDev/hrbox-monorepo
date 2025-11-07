@@ -1,5 +1,4 @@
-import { AppButton, AppModal } from '@core/components';
-import { Location } from 'iconsax-react';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
 import {
@@ -8,7 +7,7 @@ import {
   useEditLocationMutation,
 } from '@module/hrlink/features/common';
 import { useEffect, useState } from 'react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 export const MapModal = ({
   position,

@@ -5,8 +5,8 @@ import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { serviceRegistry } from 'core/helpers';
 
-import { AppButton } from 'shared/components';
-import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from 'core/redux';
+import { AppButton } from '@hrbox/uikit/components';
+import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '@hrbox/core/redux';
 
 export const AppSideBar = () => {
   const { t } = useTranslation();

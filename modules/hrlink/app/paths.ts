@@ -1,4 +1,4 @@
-import { createPaths } from '@core/routes';
+import { createPaths } from '@hrbox/core/routes';
 
 export const HRLinkPaths = createPaths('/hrlink', {
   Impersonate: '/impersonate',

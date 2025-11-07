@@ -1,9 +1,9 @@
 import { Card } from '@heroui/react';
-import { dataWorker } from '@module/basic-info/app/mock'; // Assuming this is the mock data for courses
-import { AppButton, AppDeleteModal } from '@core/components';
+import { dataWorker } from '@module/basic-info/app/mock';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
-import { useModalContext } from '@core/context';
-import { useState } from 'react'; // 1. Import useState
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { useState } from 'react';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 

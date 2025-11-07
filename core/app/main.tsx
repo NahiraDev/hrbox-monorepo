@@ -8,12 +8,12 @@ import { I18nextProvider } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { StrictMode } from 'react';
 
-import { i18n } from '@core/translate';
-import { AuthProvider , ModalProvider} from '@core/context';
-import { RootRouterLoader } from '@core/routes';
+import { i18n } from '@hrbox/core/translate';
+import { AuthProvider , ModalProvider} from '@hrbox/core/context';
+import { RootRouterLoader } from '@hrbox/core/routes';
 
-import { HeroProviderWrapper } from '@core/providers/HeroUIProvider';
-import { AppModal } from 'shared/components';
+import { HeroProviderWrapper } from '@hrbox/core/providers/HeroUIProvider';
+import { AppModal } from '@hrbox/uikit/components';
 
 export const renderApp = (id: string, { store, persistor }: { store: EnhancedStore; persistor: Persistor }) => {
   const rootEl = document.getElementById(id);

@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Map as LeafletMap } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Add, Edit } from 'iconsax-react';
-import { AppButton } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 
 import { MarkerIcon } from '@module/hrlink/features/common/MarkerMap';

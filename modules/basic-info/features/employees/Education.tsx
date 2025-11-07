@@ -1,15 +1,15 @@
 import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { useState } from 'react';
 
 const Education = () => {
   const { openModal } = useModalContext();
 
-  const [educationList, setEducationList] = useState(education); // ✅ نام متغیر تغییر کرد
+  const [educationList, setEducationList] = useState(education);
 
   const handleDeleteClick = (index: number) => {
     openModal(

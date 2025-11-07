@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
 import { UserLocation, GeneralInformation } from '@module/hrlink/features/common';
-import { AppTable, AppLoader } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppTable, AppLoader } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 import { useDeleteEducationMutation, useLazyFetchEducationQuery } from '@module/hrlink/features/resume/apis';
 

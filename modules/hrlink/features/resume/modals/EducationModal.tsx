@@ -1,6 +1,5 @@
-import { AppButton, AppModal } from '@core/components';
-import { Personalcard } from 'iconsax-react';
-import { FormProvider } from '@core/context';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 
 import { EducationForm, formValidationEducation, handleSubmitEducation, initialValuesEducation } from '@module/hrlink/features/resume/forms';
 import { useCreateEducationMutation } from '@module/hrlink/features/resume/apis';

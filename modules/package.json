@@ -1,0 +1,15 @@
+{
+  "name": "@hrbox/modules",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "../dist/modules/index.js",
+  "types": "../dist/modules/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist .turbo",
+    "type-check": "tsc --noEmit",
+    "lint": "echo 'No lint configured'",
+    "lint:fix": "echo 'No lint configured'"
+  }
+}

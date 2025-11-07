@@ -1,4 +1,4 @@
-import { createEndpoint } from '@core/apis';
+import { createEndpoint } from '@hrbox/core/apis';
 import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
 import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
 

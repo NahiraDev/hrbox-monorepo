@@ -1,4 +1,4 @@
-import { createRootReducer } from '@core/redux';
+import { createRootReducer } from '@hrbox/core/redux';
 import { JobsApi } from '@module/hrlink/features/jobs/apis';
 import { DashboardApi } from '@module/hrlink/features/dashboard/apis';
 import { AwardApi, EducationApi, SkillsApi, CourseApi, ExperienceApi } from '@module/hrlink/features/resume/apis';

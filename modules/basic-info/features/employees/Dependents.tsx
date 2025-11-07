@@ -1,6 +1,6 @@
 import { Card } from '@heroui/react';
 import { dataWorker2, dataWorker, Spouse } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import {
   Settings,
   Trash,
@@ -16,8 +16,7 @@ import {
   UserSquare,
   People,
 } from 'iconsax-react';
-import { useModalContext } from '@core/context';
-// import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';
 import { SpouseModal } from '@module/basic-info/features/employees/modals/SpouseModal';

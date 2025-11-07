@@ -1,4 +1,4 @@
-import type { PluginModule } from '@core/helpers';
+import type { PluginModule } from '@hrbox/core/helpers';
 
 import { CommonApi } from '@module/hrlink/features/common/apis';
 import { JobsApi } from '@module/hrlink/features/jobs/apis';
