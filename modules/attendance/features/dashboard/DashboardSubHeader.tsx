@@ -10,7 +10,7 @@ const DashboardSubHeader = () => {
             props={{
               color: 'white',
               size: 'md',
-              radius: 'lg',
+              radius: 'sm',
               content: 'Add new One',
               className: 'border-1 border-primary',
               startContent: <Add />,
@@ -20,7 +20,7 @@ const DashboardSubHeader = () => {
             props={{
               color: 'white',
               size: 'md',
-              radius: 'lg',
+              radius: 'sm',
               className: 'border-1 border-primary',
               content: <Setting4 />,
             }}
@@ -29,7 +29,7 @@ const DashboardSubHeader = () => {
             props={{
               color: 'white',
               size: 'md',
-              radius: 'lg',
+              radius: 'sm',
               className: 'border-1 border-primary',
               content: <SearchNormal />,
             }}
@@ -38,11 +38,11 @@ const DashboardSubHeader = () => {
         <div className="flex">
           <AppButton
             props={{
-              color: 'primary-400',
+              color: '',
               size: 'md',
-              radius: 'lg',
+              radius: 'sm',
               content: 'Dashboard',
-              className: 'text-white',
+              className: 'text-white bg-primary-400 ',
               startContent: <Chart />,
             }}
           />

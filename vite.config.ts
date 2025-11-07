@@ -59,7 +59,7 @@ const createAdvancedSpaMiddleware = () => ({
         /^\/hrlink(?:\/.*)?$/,
         /^\/basic-info(?:\/.*)?$/,
       ];
-      
+
       next();
     });
   },

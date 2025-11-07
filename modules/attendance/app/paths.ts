@@ -7,4 +7,7 @@ export const AttendancePath = createPaths('/attendance', {
   ListOfApprovals: '/list-of-approvals',
   Export: '/export',
   ShiftAllocation: '/shift-allocation',
+  FaceAllocation: '/face-allocation',
+  IpAllocation: '/ip-allocation',
+  LocationAllocation: '/location-allocation',
 });

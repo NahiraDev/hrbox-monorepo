@@ -29,7 +29,7 @@ const AddPermisionTime=()=>{
               size: 'md',
               radius: 'lg',
               className: 'text-white',
-              content: 'Submit Again',
+              content: 'Submit',
             }}
           />
         </div>

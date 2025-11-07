@@ -1,21 +1,11 @@
-import { AppButton } from '@root/core';
-import { Key  } from 'iconsax-react';
+import { AppPageTitle } from '@root/core';
 
-const ApprovalsSubHeader=()=>{
+const ApprovalsSubHeader=(props:any)=>{
   return(
     <>
       <div className="flex flex-row-reverse justify-end ">
         <div className="flex">
-          <AppButton
-            props={{
-              color: 'primary',
-              size: 'md',
-              radius: 'lg',
-              content: 'List of  Approvals',
-              className: 'text-white',
-              startContent: <Key />,
-            }}
-          />
+          <AppPageTitle title={props.title} icon={props.icon} />
         </div>
       </div>
     </>

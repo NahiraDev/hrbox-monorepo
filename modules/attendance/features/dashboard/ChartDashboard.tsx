@@ -1,8 +1,9 @@
 import type { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
+import { useState } from 'react';
 
 const ChartDashboard = () => {
-  const [series] = React.useState([
+  const [series] = useState([
     {
       name: 'PRODUCT A',
       data: [44, 55, 41, 67, 22, 43, 21, 49, 35, 25, 14],
@@ -17,7 +18,7 @@ const ChartDashboard = () => {
     },
   ]);
 
-  const [options] = React.useState<ApexOptions>({
+  const [options] = useState<ApexOptions>({
     chart: {
       type: 'bar',
       height: '100%',
@@ -82,7 +83,7 @@ const ChartDashboard = () => {
   });
 
   return (
-    <div className="h-full rounded-2xl" id="chart">
+    <div className="!h-full rounded-2xl" id="chart">
       <ReactApexChart height="100%" options={options} series={series} type="bar" />
     </div>
   );

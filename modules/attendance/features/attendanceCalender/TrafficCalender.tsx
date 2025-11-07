@@ -1,11 +1,11 @@
-import AppDropDown from '@core/components/AppDropDown';
-import { Add, ArrowDown, ArrowDown2, Buildings2, Calendar, Profile, Trash } from 'iconsax-react';
-import { Avatar } from '@heroui/react';
-import { AppButton, AppTable } from '@core/components';
+import { Add, Calendar, Trash } from 'iconsax-react';
+import { AppButton, AppTable } from '@hrbox/core/components';
 import { PersonalList } from '@module/attendance/app/mock';
 import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
+import { useState } from 'react';
 
 const TrafficCalender=()=>{
+  const [IsReportHidden,setIsReportHidden]=useState<boolean>(false);
   const month = [
     { key: 'Januray', label: 'Januray', icon: <Calendar size={33} /> },
     { key: 'February', label: 'February', icon: <Calendar size={33} /> },
@@ -29,9 +29,9 @@ const TrafficCalender=()=>{
   const attendanceConfig = {
     columns,
     columnGroups: [
-      { startKey: 'date', endKey: 'shift', headerClassName: 'bg-[#999] text-white' },
-      { startKey: 'checkIn', endKey: 'haste', headerClassName: 'bg-primary text-white' },
-      { startKey: 'request', endKey: 'request', headerClassName: 'bg-green-500 text-white' },
+      { startKey: 'date', endKey: 'shift', headerClassName: ' text-white' },
+      { startKey: 'checkIn', endKey: 'haste', headerClassName: ' text-white' },
+      { startKey: 'request', endKey: 'request', headerClassName: ' text-white' },
     ],
     expandable: {
       render: (row: any, index: number) => {
@@ -50,43 +50,15 @@ const TrafficCalender=()=>{
   };
   return(
     <>
-      <div className="flx flex-col h-full font-bold">
-        <div className="flex flex-row items-center justify-between mb-3">
-          <div className="flex flex-row items-center gap-5">
-            <Avatar className="w-[50px] h-[50px]" radius="md" src="/images/profile.png"/>
-            <div className="flex flex-col gap-1">
-              <h1>Zahra Pakniyat</h1>
-              <div className="bg-primary-50 px-[4px] py-[1.5px] text-primary-400 rounded-md text-center flex items-center">
-                <p className="font-sans font-normal text-xs">UiUx Designer</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2">
-            <AppDropDown props={{
-              title:"Person",
-              item:month,
-              className: 'border-1 border-primary px-xl ',
-              startIcon:<Profile/>,
-              EndIcon:<ArrowDown2/>,
-            }}/>
-            <AppDropDown props={{
-              title:"Department/Unit",
-              item:month,
-              className: 'border-1 border-primary px-xl ',
-              startIcon:<Buildings2/>,
-              EndIcon:<ArrowDown2/>,
-            }}/>
-          </div>
-        </div>
-        <div className="flex flex-row gap-3 h-full ">
-          <AppTable
+        <div className={`${IsReportHidden?"h-full w-full":"flex flex-row gap-3 h-full w-full "}`}>
+          {!IsReportHidden && <AppTable
             data={PersonalList}
             variant="attendance"
             hasPagination={false}
-            {...attendanceConfig}/>
-          <Comprehensivereport/>
+            {...attendanceConfig}/>}
+
+          <Comprehensivereport isExpanded={IsReportHidden} onToggle={()=>setIsReportHidden(!IsReportHidden)} />
         </div>
-      </div>
     </>
   )
 }
