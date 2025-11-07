@@ -1,7 +1,7 @@
 // @module/basic-info/features/employees/modals/AddNewJob.tsx
 import React, { useState } from 'react';
 import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@core/components';
-import { useModalContext } from '@root/core';
+import { useModalContext } from '@core/context';
 
 interface AddNewJobProps {
   onClose: () => void;

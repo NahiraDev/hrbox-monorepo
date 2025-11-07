@@ -1,9 +1,7 @@
-// @module/basic-info/features/employees/modals/AddNewJob.tsx
 import React, { useState } from 'react';
-import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@core/components';
-import { useModalContext } from '@root/core';
+import { AppButton, AppInput, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@core/components';
+import { useModalContext } from '@core/context';
 
-// ✅ INTERFACE را **قبل** از function قرار دادیم
 interface AddNewJobProps {
   onClose: () => void;
 }
@@ -32,11 +30,9 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
 
   const handleSubmit = () => {
     if (!isSubmitted) {
-      // اولین بار کلیک شد - فقط فرم را قفل کن
       console.log('New Job:', formData);
       setIsSubmitted(true);
     } else {
-      // دومین بار کلیک شد - دکمه‌ها را حذف کن
       setIsSaved(true);
     }
   };
@@ -50,7 +46,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Title',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -61,7 +56,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Title',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -72,7 +66,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Title',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -83,7 +76,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Title',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -114,7 +106,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Upload Work Sample',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -125,7 +116,6 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Province',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
@@ -136,11 +126,9 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
               props={{
                 className: 'border border-[#DCF0F9] w-full',
                 label: 'Job Group',
-                placeholder: 'Describe title',
                 size: 'lg',
                 color: 'primary',
                 radius: 'lg',
-                isDisabled: isSubmitted
               }}
             />
             <AppSwitch

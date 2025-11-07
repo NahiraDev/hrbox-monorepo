@@ -1,0 +1,15 @@
+{
+  "name": "@hrbox/uikit",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "../dist/UIKit/index.js",
+  "types": "../dist/UIKit/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist .turbo",
+    "type-check": "tsc --noEmit",
+    "lint": "echo 'No lint configured'",
+    "lint:fix": "echo 'No lint configured'"
+  }
+}

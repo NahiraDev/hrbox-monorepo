@@ -1,0 +1,9 @@
+{
+  "name": "@hrbox/proxy-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Proxy server for HRBox frontend to bypass CORS restrictions",
+  "main": "../dist/server.js",
+  "types": "../dist/server.js"
+}

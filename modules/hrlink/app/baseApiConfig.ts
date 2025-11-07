@@ -14,7 +14,7 @@ const HRLinkTags = [
 ] as const;
 
 export const HRLinkBaseApi = createBaseApi(
-  import.meta.env.VITE_HRLINK_API_URL,
+  'https://hrlink.hrbox.me:50443',
   'HRLinkReducers',
   HRLinkTags,
 );

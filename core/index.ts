@@ -1,4 +1,4 @@
-export * from '@core/context';
+export * from '@core/providers';
 export * from '@core/redux';
 export * from '@core/layouts';
 export * from '@core/translate';
@@ -6,5 +6,4 @@ export * from '@core/translate';
 export * from '@core/routes';
 export * from '@core/app';
 export * from '@core/apis';
-export * from '@core/components';
 export * from '@core/hooks';

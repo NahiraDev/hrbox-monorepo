@@ -19,16 +19,16 @@ const createBaseQuery = (
 ): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,
-    credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
+      // headers.set('Content-Type', 'application/json');
+
       if (requiresAuth) {
         const token = (getState() as any).auth?.token;
         if (token) {
-          headers.set('Authorization', `${token}`);
+          headers.set('Authorization', `Bearer ${token}`);
         }
       }
-      headers.set('Content-Type', 'application/json');
-      headers.set('Accept', 'application/json');
+
       return headers;
     },
   });
@@ -42,7 +42,6 @@ const createBaseQuery = (
 
     // Handle 401 Unauthorized
     if (result.error && result.error.status === 401) {
-      // If already refreshing, wait for it
       if (isRefreshing && refreshPromise) {
         await refreshPromise;
         result = await rawBaseQuery(args, api, extraOptions);

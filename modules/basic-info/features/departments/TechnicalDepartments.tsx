@@ -1,9 +1,8 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@core/components';
-import DocumentsModal from '@module/basic-info/features/employees/modals/DocumentsModal';
 import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
-import { useModalContext } from '@root/core';
+import { useModalContext } from '@core/context';
 import { Category, TickCircle } from 'iconsax-react';
 
 const TechnicalDepartments = () => {

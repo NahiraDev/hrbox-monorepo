@@ -1,9 +1,7 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
-import { AppPagination } from '@root/core';
+import { AppPagination } from '@core/components';
 
-// import { AppPagination } from '../../../../core';
-// import { TickIcon } from '../../../../public/icons';
 
 const Employees = () => {
   return (

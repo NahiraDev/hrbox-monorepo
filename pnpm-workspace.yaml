@@ -1,7 +1,15 @@
 packages:
   - core
+  - core/*
+  - modules
   - modules/*
+  - UIKit
+  - UIKit/*
   - launcher
+  - proxy-server
+
+ignoredBuiltDependencies:
+  - '@swc/core'
 
 onlyBuiltDependencies:
   - '@heroui/shared-utils'
