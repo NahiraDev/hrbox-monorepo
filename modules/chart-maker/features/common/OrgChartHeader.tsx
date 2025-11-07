@@ -1,10 +1,10 @@
-import { AppButton, AppInput } from '@core/components';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { ArrowDown2, Edit, Eye, LayoutMaximize, SearchNormal1, Setting4, User } from 'iconsax-react';
 import { useState } from 'react';
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 
 import { departmentUnit } from '@module/chart-maker/app/mock';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 export const users = [
   { id: 1, name: 'Haircut', position: 'Front End Developer' },

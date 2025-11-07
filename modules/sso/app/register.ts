@@ -1,4 +1,4 @@
-import type { PluginModule } from '@core/helpers';
+import type { PluginModule } from '@hrbox/core/helpers';
 
 import { SSOHRLinkApi } from 'modules/sso/features/apis';
 import { SSOHRLinkRoutes } from '@module/sso/app/routes';

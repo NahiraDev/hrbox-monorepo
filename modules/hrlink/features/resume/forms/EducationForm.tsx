@@ -4,8 +4,8 @@ import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '@module/h
 import { useLazyFetchUniversityQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
 
-import { AppAutoComplete, AppDatePicker, AppInput } from '@core/components';
-import { useFormContext } from '@core/context'
+import { AppAutoComplete, AppDatePicker, AppInput } from '@hrbox/uikit/components';
+import { useFormContext } from '@hrbox/core/providers/FormProvider'
 import { Degree, FieldOfStudyType } from '@module/hrlink/app/mock';
 
 export const initialValuesEducation = {

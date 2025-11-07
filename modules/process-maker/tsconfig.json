@@ -1,9 +1,10 @@
 {
-  "extends": "@core/config/typescript/tsconfig.json",
+  "extends": "@hrbox/core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
+    "rootDir": "../../",
     "outDir": "../../dist/modules/process-maker",
     "declarationDir": "../../dist/types"
   },
-  "include": ["."]
+  "include": ["." , "./*"]
 }

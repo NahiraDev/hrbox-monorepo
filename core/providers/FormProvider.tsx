@@ -7,8 +7,8 @@ import {
   type FormikValues,
   type FormikContextType,
 } from 'formik';
-import { updateFormValues, clearFormCache } from '@core/redux/reducers/formCache';
-import type { RootState } from '@core/redux';
+import { updateFormValues, clearFormCache } from '@hrbox/core/redux/reducers/formCache';
+import type { RootState } from '@hrbox/core/redux';
 
 interface FormProviderProps<Values>
   extends Omit<FormikConfig<Values>, 'onSubmit'> {

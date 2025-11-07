@@ -1,14 +1,9 @@
-import { MedalStar, UserRemove } from 'iconsax-react';
+import { MedalStar } from 'iconsax-react';
 
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 
 export const DeactiveAccountModal = () => {
   return (
-    // <AppModal
-    //   icon={<UserRemove className="text-white" size="18" />}
-    //   size="2xl"
-    //   title="Would it be acceptable for you to Deactivate Account ?"
-    // >
       <div className="flex flex-col gap-10">
         <AppModal.Body>
           <div className="flex flex-col gap-4">
@@ -47,6 +42,5 @@ export const DeactiveAccountModal = () => {
           />
         </AppModal.Footer>
       </div>
-    // </AppModal>
   );
 };

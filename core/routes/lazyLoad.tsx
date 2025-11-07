@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 
-import { AppLoader } from 'shared/components';
+import { AppLoader } from '@hrbox/uikit/components';
 
 export function lazyLoad(
   importFunc: () => Promise<{ default: React.ComponentType<any> }>,

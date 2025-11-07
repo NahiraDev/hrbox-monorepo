@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable" , "WebWorker"],
     "module": "ESNext",
@@ -12,18 +11,15 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": true,
-
-    /* Module Resolution */
-    "baseUrl": "../../..",
+    "rootDir": "../../../",
+    "baseUrl": ".",
     "paths": {
-      "@core/*": ["./core/*"],
-      "@module/*": ["./modules/*"],
-      "@root/*": ["./*"],
-      "@hrbox/core/*": ["./core/*"],
-      "~/*": ["./*"]
+      "@core/*": ["../../../core/*"],
+      "@module/*": ["../../../modules/*"],
+      "@hrbox/core/*": ["../../../core/*"],
+      "@hrbox/uikit/*": ["../../../UIKit/*"],
+      "~/*": ["../../../*"]
     },
-    "rootDirs": [
-      "../../..", "core", "modules" , "shared"],
     "typeRoots": ["node_modules/@types"],
     "types": ["node"],
     "resolveJsonModule": true,
@@ -103,7 +99,6 @@
     "preserveConstEnums": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": false,
-    "rootDir": "."
   },
   "ts-node": {
     "esm": true,

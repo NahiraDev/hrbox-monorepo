@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
-import { useFormContext } from '@core/context';
-import { AppInput } from '@core/components';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
+import { AppInput } from '@hrbox/uikit/components';
 import { Form } from '@heroui/react';
 
 export const initialValuesForm = {

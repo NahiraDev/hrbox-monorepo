@@ -1,7 +1,7 @@
 import { Form } from '@heroui/react';
 import { Link21 } from 'iconsax-react';
-import { AppDatePicker, AppInput, AppTextArea } from '@core/components';
-import { useFormContext } from '@core/context';
+import { AppDatePicker, AppInput, AppTextArea } from '@hrbox/uikit/components';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import * as Yup from 'yup';
 
 export const initialValuesAward = {

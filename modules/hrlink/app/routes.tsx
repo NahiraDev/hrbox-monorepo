@@ -1,4 +1,4 @@
-import { lazyLoad , createProjectRoutes } from '@core/routes';
+import { lazyLoad , createProjectRoutes } from '@hrbox/core/routes';
 import { HRLinkPaths } from '@module/hrlink/app/paths';
 
 export const page = {

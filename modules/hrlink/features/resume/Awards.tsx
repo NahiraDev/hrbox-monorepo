@@ -1,12 +1,12 @@
 import { Edit, Trash } from 'iconsax-react';
 import { Card, CardBody, CardHeader } from '@heroui/react';
-import { AppButton, AppDeleteModal, AppPagination } from '@core/components';
+import { AppButton, AppDeleteModal, AppPagination } from '@hrbox/uikit/components';
 import { useDeleteAwardMutation, useLazyFetchAwardsQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
 
 import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
-import { CupStarIcon } from '@module/hrlink/icons';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import {CupStarIcon} from "@hrbox/uikit/icons/CupStarIcon";
 
 const Awards = () => {
   const { openModal } = useModalContext();

@@ -2,8 +2,8 @@ import { MedalStar } from 'iconsax-react';
 
 import { useChangePasswordMutation } from '@module/hrlink/features/setting/apis';
 import { ChangePasswordForm, formValidationError, handleChangePasswordSubmit, initialValuesForm } from '@module/hrlink/features/setting/forms';
-import { AppModal, AppButton } from '@core/components';
-import { FormProvider } from '@core/context';
+import { AppModal, AppButton } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 
 export const ChangePasswordModal = () => {
   const [changePassword] = useChangePasswordMutation();

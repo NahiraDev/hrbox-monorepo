@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { AuthLayout, BaseLayout } from '@core/layouts';
 import { useAppSelector } from '@core/redux';
-import { AppErrorToast } from 'shared/components';
+import { AppErrorToast } from '@hrbox/uikit/components';
 
 interface AppProps {
   children: React.ReactNode;

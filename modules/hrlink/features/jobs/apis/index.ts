@@ -1,4 +1,4 @@
-import { createEndpoint, createPaginatedEndpoint } from '@core/apis';
+import { createEndpoint, createPaginatedEndpoint } from '@hrbox/core/apis';
 import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
 import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
 

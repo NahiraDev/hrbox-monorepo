@@ -174,6 +174,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         '@core': resolve(__dirname, 'core'),
         '@module': resolve(__dirname, 'modules'),
         '@proxy-server': resolve(__dirname, 'proxy-server'),
+        '@hrbox/core': resolve(__dirname, 'core'),
+        '@hrbox/uikit': resolve(__dirname, 'UIKit'),
       },
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
       conditions: isProduction ? ['production'] : ['development'],

@@ -2,8 +2,8 @@ import { Edit, Lock } from 'iconsax-react';
 import { Avatar } from '@heroui/react';
 import { useRef, useState } from 'react';
 
-import { AppButton } from '@core/components';
-import { FormProvider } from '@core/context';
+import { AppButton } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 
 import { ChangePasswordModal, DeactiveAccountModal } from './modals';
 import {
@@ -100,6 +100,7 @@ const Setting = () => {
       <div className="col-span-1 flex flex-col gap-3">
         <div className="bg-white shadow-light-tight/1 rounded-5 px-3 !py-3">
           <FormProvider
+            formId="general-setting"
             initialValues={initialValuesEditGeralSetting}
             validationSchema={validationErrorEditGeneralSetting}
             onSubmitAsync={async (values: any) => {
