@@ -8,6 +8,7 @@ const LoginByOtp = () => {
 
   return (
     <FormProvider
+      formId='login-by-otp'
       initialValues={initialValuesLoginByOtp}
       validationSchema={validationErrorLoginByOtp}
       onSubmitAsync={async (values: any) => {

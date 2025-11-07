@@ -176,7 +176,7 @@ export const LoginForm = () => {
             }}
           />
 
-          <div className="flex justify-center mt-6">
+          <div className="flex items-center justify-center mt-6">
             <p className="text-sm text-gray-600 text-center">
               Do you have an account?{' '}
               <span

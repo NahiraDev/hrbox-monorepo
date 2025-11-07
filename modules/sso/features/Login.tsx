@@ -10,6 +10,9 @@ import {
 } from '@module/sso/features/forms';
 import { useLoginMutation } from '@module/sso/features/apis';
 import { setCredentials } from '@core/redux/reducers/authSlice';
+import { AppButton } from '@core/components';
+import { setLanguage, setLocalLanguage } from '@core/redux';
+import { i18n } from '@core/translate';
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -34,6 +37,12 @@ const Login = () => {
     }
   };
 
+  const toggleLanguage = (language: string, local: string) => {
+    dispatch(setLanguage(language));
+    dispatch(setLocalLanguage(local));
+    i18n.changeLanguage(language);
+  };
+
   return (
     <FormProvider
       formId="login-form"
@@ -45,7 +54,6 @@ const Login = () => {
     >
       <LoginForm />
     </FormProvider>
-    
   );
 };
 

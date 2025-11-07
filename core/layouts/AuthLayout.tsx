@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 import { LogoHRLink } from '@root/shared/icons/LogoHRLink';
 import { LogoMobile } from '@root/shared/icons/LogoMobile';
 import { setLanguage, useAppDispatch } from '@core/redux';
-import { AppButton } from 'shared/components';
+import { AppButton } from '@core/components';
 import { SliderSSO } from '@module/sso/features/common';
 import { t } from 'i18next';
+import { i18n } from '@core/translate';
 
 export const AuthLayout = ({ content }: any) => {
   const [mounted, setMounted] = useState(false);
@@ -20,6 +21,9 @@ export const AuthLayout = ({ content }: any) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const [currentLang, setCurrentLang] = useState<'en' | 'fa'>('en');
+
 
   if (!mounted) return null;
 
@@ -35,42 +39,90 @@ export const AuthLayout = ({ content }: any) => {
             </div>
           </div>
 
-          {/* Left Section - Form */}
-          <div className="flex flex-col justify-center lg:flex-1 w-full">
-            <div className="flex lg:flex-row flex-col items-start lg:items-end gap-8 lg:gap-[38px]">
-              {/* Form Container */}
-              <div className="flex flex-col items-center gap-10 w-full pt-[72px] lg:pt-0">
-                <div className="lg:block hidden">
-                  <LogoHRLink />
-                </div>
 
-                <div className="dark:bg-[#01101a66] bg-white/30 shadow-md rounded-xl md:w-[460px] w-full lg:px-8 lg:py-10 p-4 flex flex-col items-center gap-6 backdrop-blur-sm">
-                  <div className="flex items-center gap-7 w-full">
-                    <AppButton
-                      props={{
-                        className: `!rounded-none justify-left hover:!bg-transparent !p-0`,
-                        variant: 'light',
-                        onPress: () => history.back(),
-                        startContent: (
-                          <ArrowLeft
-                            size="24"
-                          />
-                        ),
-                        isIconOnly: true,
-                      }}
-                    />
 
-                    <span className="text-secondary-1000 lg:text-xl text-base lg:font-bold font-semibold dark:text-white">
-                      Please Enter Your Infomaition!
-                    </span>
+
+          {/* --- Form + Toggles Row --- */}
+          <div className='relative flex items-end justify-center gap-6'>
+
+            {/* testing purpose */}
+            <div>
+              {/* --- Controls Section (Language + Dark Mode) --- */}
+              <div className="hidden lg:flex flex-col gap-3 self-center">
+                <AppButton
+                  props={{
+                    size: 'lg',
+                    fullWidth: true,
+                    isIconOnly: true,
+                    variant: 'light',
+                    startContent: <img src="/images/moon.svg" alt="phone icon " />,
+                    className:
+                      'w-8 h-8 text-secondary-1000 dark:text-white ',
+                    onPress: () => console.log('Change theme has been clicked!'),
+
+                  }}
+                />
+
+                <AppButton
+                  props={{
+                    size: 'lg',
+                    fullWidth: true,
+                    isIconOnly: true,
+                    variant: 'light',
+                    startContent: <img src="/images/global.svg" alt="phone icon" />,
+                    className:
+                      'w-8 h-8 text-secondary-1000 dark:text-white ',
+                    onPress: () => console.log(currentLang),
+
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-center lg:flex-1 w-full">
+
+              <div className="flex lg:flex-row flex-col items-start lg:items-end gap-8 lg:gap-[38px]">
+                {/* Form Container */}
+                <div className="flex flex-col items-center gap-10 w-full pt-[72px] lg:pt-0">
+                  <div className="lg:block hidden">
+                    <LogoHRLink />
                   </div>
 
-                  {content}
+                  <div className="dark:bg-[#01101a66] bg-white/30 shadow-md rounded-xl md:w-[460px] w-full lg:px-8 lg:py-10 p-4 flex flex-col items-center gap-6 backdrop-blur-sm">
+                    <div className="flex items-center gap-7 w-full">
+                      <AppButton
+                        props={{
+                          className: `!rounded-none justify-left hover:!bg-transparent !p-0`,
+                          variant: 'light',
+                          onPress: () => history.back(),
+                          startContent: (
+                            <ArrowLeft
+                              size="24"
+                            />
+                          ),
+                          isIconOnly: true,
+                        }}
+                      />
 
+                      <span className="text-secondary-1000 lg:text-xl text-base lg:font-bold font-semibold dark:text-white">
+                        Please Enter Your Infomaition!
+                      </span>
+                    </div>
+
+                    {content}
+
+                      
+
+                  </div>
                 </div>
               </div>
             </div>
+
+
+
           </div>
+
+
 
           {/* Right Section - Slider */}
           <div className="hidden lg:flex lex lg:flex-1 lg:items-center lg:justify-center">
@@ -108,6 +160,7 @@ export const AuthLayout = ({ content }: any) => {
                 />
               </div>
             </div>
+
             <svg
               className="w-full"
               fill="none"
