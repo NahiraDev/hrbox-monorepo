@@ -1,6 +1,10 @@
 packages:
   - core
+  - core/*
+  - modules
   - modules/*
+  - UIKit
+  - UIKit/*
   - launcher
   - proxy-server
 

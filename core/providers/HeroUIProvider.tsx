@@ -1,4 +1,5 @@
 import { HeroUIProvider } from '@heroui/system';
+import React from "react";
 
 export function HeroProviderWrapper({
   children,

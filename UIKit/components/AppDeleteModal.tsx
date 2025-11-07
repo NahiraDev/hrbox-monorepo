@@ -1,5 +1,5 @@
-import { useModalContext } from 'core/context';
-import { AppButton } from 'shared/components/index';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { AppButton } from '@hrbox/uikit/components/AppButton';
 
 export const AppDeleteModal = (props:any) => {
   const {name , onConfirm, onCancel} = props;

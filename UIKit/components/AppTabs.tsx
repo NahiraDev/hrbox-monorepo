@@ -1,6 +1,7 @@
 import { Tabs, Tab } from '@heroui/react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import React from "react";
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type TabRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';

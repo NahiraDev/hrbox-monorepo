@@ -3,11 +3,13 @@ import { heroui } from '@heroui/react';
 
 const config: Config = {
   content: [
-    'modules/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    'core/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    'node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
-    'index.html',
-    'main.tsx',
+    '../../modules/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../core/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../UIKit/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../stories/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
+    '../../index.html',
+    '../../main.tsx',
   ],
   darkMode: 'class',
   theme: {

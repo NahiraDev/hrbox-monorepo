@@ -1,4 +1,4 @@
-import { AppModal } from 'shared/components/index';
+import { AppModal } from '@hrbox/uikit/components';
 
 interface ColumnPair {
   key: string;

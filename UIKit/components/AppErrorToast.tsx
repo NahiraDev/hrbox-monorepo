@@ -1,13 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Warning2 } from 'iconsax-react';
-import { AppButton } from 'shared/components/index';
+import { AppButton } from '@hrbox/uikit/components';
 
-// import { CloseIcon } from '../../public/icons';
-import { clearError, useAppDispatch, useAppSelector } from 'core/redux';
+import { clearError, useAppDispatch, useAppSelector } from '@hrbox/core/redux';
 import { useEffect } from 'react';
 
 export const AppErrorToast = () => {
-  const errorMessage = useAppSelector((state) => state.error.message);
+  const errorMessage = useAppSelector((state:any) => state.error.message);
   const dispatch = useAppDispatch();
 
   const onCloseToast = () => {

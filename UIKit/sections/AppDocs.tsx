@@ -22,7 +22,7 @@ import {
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { AppDocItem } from 'shared/sections/index';
+import { AppDocItem } from '@hrbox/uikit/sections/index';
 
 const MenuItems = [
   { module: 'Home', icon: ElementEqual, outline: false },

@@ -12,7 +12,7 @@ import { i18n } from '@core/translate';
 import { AuthProvider , ModalProvider} from '@core/context';
 import { RootRouterLoader } from '@core/routes';
 
-import { HeroProviderWrapper } from '@core/app/provider';
+import { HeroProviderWrapper } from '@core/providers/HeroUIProvider';
 import { AppModal } from 'shared/components';
 
 export const renderApp = (id: string, { store, persistor }: { store: EnhancedStore; persistor: Persistor }) => {

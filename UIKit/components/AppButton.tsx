@@ -1,7 +1,6 @@
 import { Button } from '@heroui/react';
-import { ReactRef } from '@heroui/react-utils';
 import clsx from 'clsx';
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 
 const sizeClasses: Record<string, string> = {
   xs: 'p-1.5 text-xs',

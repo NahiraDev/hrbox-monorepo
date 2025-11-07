@@ -2,7 +2,7 @@
   "name": "hrbox-monorepo",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd",
   "description": "Next-generation HR management platform with micro-frontend architecture",
   "keywords": [
     "hr",
@@ -110,7 +110,7 @@
     "@eslint/js": "^9.38.0",
     "@hrbox/core": "workspace:*",
     "@hrbox/proxy-server": "workspace:*",
-    "@module-federation/vite": "^1.9.0",
+    "@hrbox/uikit": "workspace:*",
     "@module/basic-info": "workspace:*",
     "@module/chart-maker": "workspace:*",
     "@module/hrlink": "workspace:*",
@@ -154,7 +154,6 @@
     "i18next": "^25.6.0",
     "imagemin-webp": "^8.0.0",
     "lightningcss": "^1.30.2",
-    "lint-staged": "^16.2.6",
     "minimatch": "^10.1.1",
     "moment-jalaali": "^0.10.4",
     "patch-package": "^8.0.1",
@@ -185,48 +184,14 @@
     "vite-plugin-minify": "^2.1.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.7",
-    "playwright": "^1.56.1",
-    "@vitest/browser-playwright": "^4.0.7",
-    "@vitest/coverage-v8": "^4.0.7"
+    "playwright": "^1.56.1"
   },
   "workspaces": [
     "modules/*",
     "core",
+    "UIKit",
     "launcher",
     "proxy-server"
-  ],
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "chrome >= 87",
-      "firefox >= 78",
-      "safari >= 14",
-      "edge >= 88"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "bundlesize": [
-    {
-      "path": "./dist/core/index.js",
-      "maxSize": "500kb",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/modules/*/index.js",
-      "maxSize": "500kb",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/index.js",
-      "maxSize": "1000kb",
-      "compression": "gzip"
-    }
   ],
   "volta": {
     "node": "20.19.1",

@@ -1,8 +1,8 @@
 {
-  "extends": "./config/typescript/tsconfig.json",
+  "extends": "../core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "../dist/core",
+    "outDir": "../dist/UIKit",
     "rootDir": "../",
     "declarationDir": "../dist/types"
   },

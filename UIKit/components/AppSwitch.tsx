@@ -1,6 +1,6 @@
 import { cn, Switch } from '@heroui/react';
 
-import { useAppSelector } from 'core/redux';
+import { useAppSelector } from '@hrbox/core/redux';
 
 const sizeWrapper: Record<string, string> = {
   sm: '!w-[30px] !h-[18px]',

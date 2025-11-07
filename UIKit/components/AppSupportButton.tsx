@@ -1,7 +1,7 @@
-import { AppButton } from 'shared/components/index';
+import { AppButton } from '@hrbox/uikit/components';
 
-import { useAppSelector } from 'core/redux';
-// import { SupportIcon } from '../../public/icons';
+import { useAppSelector } from '@hrbox/core/redux';
+import {SupportIcon} from "~/UIKit/icons/SupportIcon";
 
 export const AppSupportButton = () => {
   // @ts-ignore
@@ -16,7 +16,7 @@ export const AppSupportButton = () => {
         onPress: () => {},
         content: (
           <div>
-            {/*<SupportIcon />*/}
+            <SupportIcon />
           </div>
         ),
       }}

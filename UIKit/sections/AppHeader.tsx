@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@heroui/use-theme';
-import { AppButton, AppTabs } from 'shared/components';
+import { AppButton, AppTabs } from '@hrbox/uikit/components';
 import { serviceRegistry } from 'core/helpers';
-// import { HourGlass, Logo, LogoHRLink } from '../../public/icons';
-import { AppBreadcrumb } from 'shared/sections/index';
+import { AppBreadcrumb } from '@hrbox/uikit/sections/index';
 
 export const AppHeader = () => {
   const { t } = useTranslation();
