@@ -56,7 +56,7 @@ const Education = () => {
               }
               onClick={(e) => {
                 e.stopPropagation();
-                handleCardClick(index);
+                handleCardClick(index);cc
               }}
               className={`cursor-pointer px-3 py-2 shadow-sm border transition-all duration-200 ease-in-out
                 ${
