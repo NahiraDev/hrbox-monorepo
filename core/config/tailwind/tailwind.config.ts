@@ -3,21 +3,15 @@ import { heroui } from '@heroui/react';
 
 const config: Config = {
   content: [
-    '../../modules/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    '../../core/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    '../../UIKit/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    '../../stories/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
-    '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
-    '../../index.html',
-    '../../main.tsx',
+    '../../../modules/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../../core/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../../UIKit/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../../stories/**/*.{js,ts,jsx,tsx,d.ts,d.ts.map}',
+    '../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx,mjs,mts}',
   ],
   darkMode: 'class',
   theme: {
     extend: {
-      backgroundImage: {
-        'light-mode': `url('/images/lightmode.webp')`,
-        'dark-mode': `url('/images/darkmode.webp')`,
-      },
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary-default)',
@@ -35,7 +29,6 @@ const config: Config = {
           900: 'var(--color-primary-900)',
           1000: 'var(--color-primary-1000)',
         },
-
         secondary: {
           DEFAULT: 'var(--color-secondary-default)',
           50: 'var(--color-secondary-50)',
@@ -124,38 +117,30 @@ const config: Config = {
       themes: {
         light: {
           colors: {
-            default: '#ffffff',
-            foreground: '#04070E',
-            background: '#F5FBFE',
-            info: {
-              DEFAULT: '#01101A',
+            primary: {
+              DEFAULT: '#0A9AD7',
+              foreground: '#FFFFFF',
             },
             secondary: {
               DEFAULT: '#1E3363',
-              foreground: '#04070E',
+              foreground: '#FFFFFF',
             },
-            primary: {
-              DEFAULT: '#0A9AD7',
-              foreground: '#0A9AD7',
-            },
+            background: '#F5FBFE',
+            foreground: '#04070E',
           },
         },
         dark: {
           colors: {
-            default: '#01101A',
-            foreground: '#FFF',
-            background: '#01101A',
-            info: {
-              DEFAULT: '#FFF',
-            },
-            secondary: {
-              DEFAULT: '#FFF',
-              foreground: '#FFF',
-            },
             primary: {
               DEFAULT: '#044566',
-              foreground: '#044566',
+              foreground: '#FFFFFF',
             },
+            secondary: {
+              DEFAULT: '#FFFFFF',
+              foreground: '#04070E',
+            },
+            background: '#01101A',
+            foreground: '#FFFFFF',
           },
         },
       },

@@ -1,3 +1,5 @@
 export * from '@core/layouts/BaseLayout';
 export * from '@core/layouts/AuthLayout';
-export * from '@core/layouts/LayoutLoader';
+export { BaseLayout } from './BaseLayout';
+export { AuthLayout } from './AuthLayout';
+export { EmptyLayout } from './EmptyLayout';

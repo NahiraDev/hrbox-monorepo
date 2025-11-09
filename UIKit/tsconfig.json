@@ -1,13 +1,10 @@
 {
-  "extends": "../core/config/typescript/tsconfig.json",
+  "extends": "@hrbox/core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "outDir": "../dist/UIKit",
     "rootDir": "../",
     "declarationDir": "../dist/types"
   },
-  "include": [
-  ".",
-  "../*"
-  ]
+  "include": ["."]
 }

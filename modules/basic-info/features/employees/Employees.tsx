@@ -1,6 +1,6 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
-import { AppPagination } from '@core/components';
+import { AppPagination } from '@hrbox/uikit/components';
 
 
 const Employees = () => {

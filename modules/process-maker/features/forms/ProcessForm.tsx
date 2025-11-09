@@ -1,8 +1,8 @@
 import { CheckboxGroup, Form } from '@heroui/react';
 import * as Yup from 'yup';
 
-import { AppAutoComplete, AppInput, AppTextArea , AppCheckBox } from '@core/components';
-import { useFormContext } from '@core/context';
+import { AppAutoComplete, AppInput, AppTextArea , AppCheckBox } from '@hrbox/uikit/components';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 
 export const initialValuesProcess = {
   title: null,

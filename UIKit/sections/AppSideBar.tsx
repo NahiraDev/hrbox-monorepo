@@ -1,199 +1,195 @@
 import { ArrowRight2, ArrowLeft2, Setting2, Global, LogoutCurve } from 'iconsax-react';
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import i18n from 'i18next';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { serviceRegistry } from 'core/helpers';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 
 import { AppButton } from '@hrbox/uikit/components';
-import { useAppSelector, useAppDispatch, setLanguage, setLocalLanguage } from '@hrbox/core/redux';
+import { useAppDispatch, useAppSelector } from '@hrbox/core/redux/hooks';
+import { useLanguage } from '@hrbox/core/hooks/useLanguage';
+import { useAuth } from '@hrbox/core/hooks/useAuth';
+import { moduleRegistry } from '@hrbox/modules/registry';
+import { useLogout } from "@core/hooks/useLogout";
 
 export const AppSideBar = () => {
   const { t } = useTranslation();
-  const [fullWidth, setFullWidth] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string | undefined>('Home');
-  const [menuItems, setMenuItems] = useState<any[]>([]);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const currentLang = useAppSelector((state:any) => state.language.lang);
+  const {push} = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  // Hooks جدید
+  const { lang } = useLanguage();
+  const { logout, currentPanel } = useAuth();
+
+  const [fullWidth, setFullWidth] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string | undefined>('');
+  const [menuItems, setMenuItems] = useState<any[]>([]);
+
+  // Bottom menu items
   const bottomMenu = [
     {
       icon: <Setting2 size="24" />,
       name: t('generalSetting'),
-      route: '/setting',
+      action: 'settings',
     },
     {
       icon: <Global size="24" />,
-      name: currentLang === 'fa' ? t('persian') : t('english'),
-      route: '/',
+      name: lang === 'fa' ? t('persian') : t('english'),
+      action: 'language',
     },
-    { icon: <LogoutCurve size="24" />, name: 'Log out', route: 'logout' },
+    {
+      icon: <LogoutCurve size="24" />,
+      name: t('logout'),
+      action: 'logout',
+    },
   ];
 
-  const handleLogout = () => {
-    alert('User logged out');
+
+  const handleNavigate = (item: any) => {
+    setActiveTab(item.label);
+    push({ to: item.path });
   };
 
-  const handleNavigatePage = (item: any) => {
-    setActiveTab(item.label);
-    if (item.route) {
-      navigate(item.route);
+  const handleBottomMenuAction = (action: string) => {
+    switch (action) {
+      case 'settings':
+        push({ to: '/settings' });
+        break;
+      case 'language':
+        useLanguage();
+        break;
+      case 'logout':
+        useLogout();
+        break;
+      default:
+        break;
     }
   };
 
-  const toggleLanguage = (language: string, local: string) => {
-    dispatch(setLanguage(language));
-    dispatch(setLocalLanguage(local));
-    i18n.changeLanguage(language);
-  };
-
-  const handleLanguageChange = () => {
-    const newLang = currentLang === 'en' ? 'fa' : 'en';
-    const newLocalLang = currentLang === 'en' ? 'fa-IR-u-ca-persian' : 'en-US';
-
-    localStorage.setItem('lang', newLang);
-    document.documentElement.lang = newLang;
-    toggleLanguage(newLang, newLocalLang);
-  };
+  // بارگذاری منوی ماژول
+  useEffect(() => {
+    if (currentPanel) {
+      const module = moduleRegistry.getModule(currentPanel);
+      if (module?.menu) {
+        setMenuItems(module.menu);
+      }
+    }
+  }, [currentPanel]);
 
   useEffect(() => {
-    const getModuleName: string | undefined = serviceRegistry.getModuleName();
-    const activeMenu = serviceRegistry.getActiveMenu(getModuleName ?? '');
-
-    setMenuItems(activeMenu);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const activeItem = menuItems.find(item => item.path === location.pathname);
+    const activeItem = menuItems.find((item) => item.path === location.pathname);
     if (activeItem) {
       setActiveTab(activeItem.label);
     }
   }, [location.pathname, menuItems]);
 
-  useEffect(() => {
-    const lang = localStorage.getItem('lang') ?? 'en';
-
-    dispatch(setLanguage(lang));
-    i18n.changeLanguage(lang);
-    document.documentElement.lang = lang;
-  }, []);
-
   return (
     <div
-      className={`flex relative rounded-lg py-4 px-4 bg-white shadow-theme-md dark:shadow-dark-tight-2 transition-all ${!fullWidth ? 'w-[100px]' : 'w-[180px]'}`}
+      className={`
+        relative flex flex-col rounded-lg py-4 px-4 bg-panel-surface shadow-theme-md
+        dark:shadow-theme-lg transition-all duration-300
+        ${!fullWidth ? 'w-[100px]' : 'w-[220px]'}
+      `}
     >
+      {/* Toggle Button */}
       <AppButton
         props={{
-          className: 'absolute top-[50px] right-[-10px] shadow-theme-sm bg-white',
-          color: 'default',
+          className: 'absolute top-[50px] -right-3 shadow-theme-sm bg-panel-surface z-10',
+          color: 'primary',
           variant: 'solid',
           size: 'xs',
           radius: 'full',
+          isIconOnly: true,
           onPress: () => setFullWidth(!fullWidth),
           content: (
-            <div>
-              {fullWidth ? (
-                <ArrowLeft2 className="cursor-pointer text-info-1000" size="12" />
-              ) : (
-                <ArrowRight2 className="cursor-pointer text-info-1000" size="12" />
-              )}
-            </div>
+            fullWidth ? (
+              <ArrowLeft2 size="12" />
+            ) : (
+              <ArrowRight2 size="12" />
+            )
           ),
         }}
       />
 
-      <div className="flex flex-col items-center justify-between w-full">
-        <div className={`flex flex-col w-full pb-3 gap-3 ${fullWidth ? 'items-start pl-1' : 'items-center'}`}>
+      {/* Menu Items */}
+      <div className="flex flex-col items-center justify-between w-full h-full">
+        {/* Top Menu */}
+        <div
+          className={`
+            flex flex-col w-full pb-3 gap-2
+            ${fullWidth ? 'items-start pl-2' : 'items-center'}
+          `}
+        >
           {menuItems.map((item: any) => (
-            <div key={item.label} className="border-transparent">
-              <AppButton
-                props={{
-                  className: 'flex justify-center items-center !gap-1 p-3 transition-all border-b-1 group-hover border-transparent duration-200 hover:text-primary-400 hover:border-primary-400`',
-                  isIconOnly: true,
-                  color: 'default',
-                  size: 'xs',
-                  variant:'light',
-                  radius: 'none',
-                  disableRipple: true,
-                  onPress: () => handleNavigatePage({ name: item.label, route: item.path }),
-                  content: (
-                    <>
-                      <div
-                        className={`cursor-pointer${
-                          activeTab === item.label ? '!text-primary-400' : 'text-secondary-1000 '
-                        }`}
+            <AppButton
+              key={item.label}
+              props={{
+                className: `
+                  flex items-center gap-2 px-3 py-2 rounded-lg transition-all
+                  ${
+                  activeTab === item.label
+                    ? 'bg-primary-100 dark:bg-primary-700'
+                    : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                }
+                `,
+                isIconOnly: !fullWidth,
+                color: activeTab === item.label ? 'primary' : 'default',
+                variant: 'light',
+                size: 'md',
+                onPress: () => handleNavigate(item),
+                content: (
+                  <div className="flex items-center gap-2 w-full">
+                    <span
+                      className={`
+                        text-lg
+                        ${activeTab === item.label ? 'text-primary' : 'text-secondary-500'}
+                      `}
+                    >
+                      {item.icon}
+                    </span>
+                    {fullWidth && (
+                      <span
+                        className={`
+                          text-xs font-medium whitespace-nowrap
+                          ${activeTab === item.label ? 'text-primary' : 'text-secondary-600'}
+                        `}
                       >
-                        {item?.icon}
-                      </div>
-                      {fullWidth && (
-                        <span
-                          className={`cursor-pointer text-[12px] ${
-                            activeTab === item.label ? '!text-primary-400' : 'text-secondary-1000'
-                          }`}
-                        >
-                          {item?.label}
-                        </span>
-                      )}
-                    </>
-                  ),
-                }}
-              />
-            </div>
+                        {item.label}
+                      </span>
+                    )}
+                  </div>
+                ),
+              }}
+            />
           ))}
         </div>
 
-        <div
-          className={`flex flex-col ${fullWidth ? 'items-start pl-1' : ''} gap-[10px] pt-3 border-t-1 border-secondary-1000 w-full`}
-        >
+        {/* Bottom Menu */}
+        <div className={`flex flex-col w-full gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-700`}>
           {bottomMenu.map((item) => (
-            <div
-              key={item.name}
-              className={`${
-                activeTab === item.name ? 'border-b border-tertiar-400' : 'border-transparent'
-              }`}
-            >
-              <AppButton
-                props={{
-                  className:
-                    'flex justify-center items-center !gap-2 p-3 !h-fit !w-full bg-transparent transition-all duration-200',
-                  isIconOnly: true,
-                  color: 'default',
-                  size: 'md',
-                  variant: 'light',
-                  radius: 'none',
-                  onPress: () => {
-                    if (item.name === t('english') || item.name === t('persian')) {
-                      handleLanguageChange();
-                    } else if (item.name === 'Log out') {
-                      handleLogout();
-                    } else {
-                      handleNavigatePage(item);
-                    }
-                  },
-                  content: (
-                    <>
-                      <div
-                        className={`cursor-pointer ${
-                          activeTab === item.name ? 'text-tertiar-400' : 'text-secondary-1000'
-                        }`}
-                      >
-                        {item?.icon}
-                      </div>
-                      {fullWidth && (
-                        <span
-                          className={`cursor-pointer text-[12px] ${
-                            activeTab === item.name ? 'text-primary dark:text-gold' : 'text-secondary-1000'
-                          }`}
-                        >
-                          {item?.name}
-                        </span>
-                      )}
-                    </>
-                  ),
-                }}
-              />
-            </div>
+            <AppButton
+              key={item.action}
+              props={{
+                className: `
+                  flex items-center gap-2 px-3 py-2 rounded-lg transition-all
+                  hover:bg-neutral-100 dark:hover:bg-neutral-800
+                `,
+                isIconOnly: !fullWidth,
+                color: 'default',
+                variant: 'light',
+                size: 'md',
+                onPress: () => handleBottomMenuAction(item.action),
+                content: (
+                  <div className="flex items-center gap-2 w-full">
+                    <span className="text-lg text-secondary-500">{item.icon}</span>
+                    {fullWidth && (
+                      <span className="text-xs font-medium text-secondary-600 whitespace-nowrap">
+                        {item.name}
+                      </span>
+                    )}
+                  </div>
+                ),
+              }}
+            />
           ))}
         </div>
       </div>

@@ -3,9 +3,9 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 import { MarkerIcon } from '@module/hrlink/features/common';
 import { Map as LeafletMap } from 'leaflet';
 import { useRef, useState } from 'react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import ActionsModal from '@module/attendance/features/modals/ActionsModal';
 
 const LocationMarker = ({ position, setPosition }) => {

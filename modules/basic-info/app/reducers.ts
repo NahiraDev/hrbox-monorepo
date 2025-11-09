@@ -1,3 +1,3 @@
-import { createRootReducer } from '@core/redux';
+import { createRootReducer } from '@hrbox/core/redux';
 
 export const reducers = createRootReducer({});

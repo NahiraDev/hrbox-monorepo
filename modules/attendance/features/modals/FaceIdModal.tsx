@@ -1,8 +1,8 @@
 import { Avatar } from '@heroui/react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Repeat } from 'iconsax-react';
 
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import CameraView from '@module/attendance/features/registration/CameraView';
 
 const FaceIdModal = () => {

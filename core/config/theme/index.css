@@ -1,0 +1,803 @@
+/* ============================================
+   COMPLETE DESIGN SYSTEM - HRBox
+   Single Source of Truth
+   ============================================ */
+
+@import 'tailwindcss';
+@config "../tailwind/tailwind.config.ts";
+
+@layer theme, base, components, utilities;
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   1. CSS VARIABLES - DESIGN TOKENS
+   ============================================ */
+
+@layer theme {
+  :root {
+    /* === Primary Colors (HRLink Default) === */
+    --color-primary-default: #0A9AD7;
+    --color-primary-50: #B8E2F3;
+    --color-primary-100: #B8E2F3;
+    --color-primary-150: #96D3ED;
+    --color-primary-200: #73C5E8;
+    --color-primary-250: #50B6E2;
+    --color-primary-300: #2DA8DC;
+    --color-primary-400: #2DA8DC;
+    --color-primary-500: #0884B8;
+    --color-primary-600: #076E99;
+    --color-primary-700: #05587A;
+    --color-primary-800: #04425C;
+    --color-primary-900: #022C3D;
+    --color-primary-1000: #01161E;
+
+    /* === Secondary Colors === */
+    --color-secondary-default: #1E3363;
+    --color-secondary-50: #BEC4D2;
+    --color-secondary-100: #BEC4D2;
+    --color-secondary-150: #9EA7BC;
+    --color-secondary-200: #7E8AA5;
+    --color-secondary-250: #5E6D8F;
+    --color-secondary-300: #3E5079;
+    --color-secondary-400: #1E3363;
+    --color-secondary-500: #192B54;
+    --color-secondary-600: #152446;
+    --color-secondary-700: #111D38;
+    --color-secondary-800: #0C152A;
+    --color-secondary-900: #080E1C;
+    --color-secondary-1000: #04070E;
+
+    /* === Neutral Colors === */
+    --color-neutral-50: #F6F6F6;
+    --color-neutral-100: #E5E5E5;
+    --color-neutral-150: #CCCCCC;
+    --color-neutral-200: #B2B2B2;
+    --color-neutral-250: #999999;
+    --color-neutral-300: #7F7F7F;
+    --color-neutral-400: #666666;
+    --color-neutral-500: #555555;
+    --color-neutral-600: #444444;
+    --color-neutral-700: #333333;
+    --color-neutral-800: #222222;
+    --color-neutral-900: #111111;
+    --color-neutral-1000: #090909;
+
+    /* === Surface Colors === */
+    --color-surface-default: #F5FBFE;
+    --color-surface-50: rgba(220, 240, 249, 0.4);
+    --color-surface-100: rgba(4, 66, 92, 0.4);
+    --color-surface-200: #044566;
+
+    /* === Semantic Colors === */
+    --color-success: #22AD5C;
+    --color-success-50: #BFE7D0;
+    --color-success-100: #BFE7D0;
+    --color-success-150: #A0DBB9;
+    --color-success-900: #09311A;
+
+    --color-warning-default: #FEEFDA;
+    --color-warning-50: #FEDFB6;
+    --color-warning-100: #FEDFB6;
+    --color-warning-900: #482800;
+
+    --color-danger-default: #F23030;
+    --color-danger-50: #FBC3C3;
+    --color-danger-100: #FBC3C3;
+    --color-danger-900: #450D0D;
+
+    --color-info-default: #DCEBF4;
+    --color-info-50: #B9D7EA;
+    --color-info-100: #B9D7EA;
+    --color-info-900: #032134;
+    --color-info-1000: #01101A;
+
+    --color-tertiary-default: #FEDEE6;
+    --color-tertiary-100: #FEBDCD;
+    --color-tertiary-400: #FD1B51;
+    --color-tertiary-900: #480717;
+
+    /* === Special Colors === */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-gold: #DDBA69;
+
+    /* === Panel-Specific Colors (HRLink Default) === */
+    --color-panel-primary: var(--color-primary-default);
+    --color-panel-secondary: var(--color-secondary-default);
+    --color-panel-background: var(--color-surface-default);
+    --color-panel-surface: var(--color-white);
+
+    /* === Shadows === */
+    --shadow-sm: 0px 1px 3px 0px rgba(8, 14, 28, 0.3);
+    --shadow-md: 0px 2px 6px 0px rgba(8, 14, 28, 0.22);
+    --shadow-lg: 0px 3px 12px 0px rgba(8, 14, 28, 0.2);
+    --shadow-xl: 0px 7px 18px 0px rgba(8, 14, 28, 0.17);
+    --shadow-2xl: 0px 12px 28px 0px rgba(8, 14, 28, 0.2);
+
+    /* === Border Radius === */
+    --radius-none: 0;
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-2xl: 16px;
+    --radius-3xl: 24px;
+    --radius-full: 9999px;
+
+    /* === Spacing === */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+
+    /* === Typography === */
+    --font-display: 'Yekan Bakh', 'sans-serif';
+    --font-body: 'Inter', 'sans-serif';
+    --font-mono: 'Fira Code', 'monospace';
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+  }
+
+  /* === DARK MODE === */
+  .dark {
+    --color-primary-default: #044566;
+    --color-primary-50: #01161E;
+    --color-primary-100: #022C3D;
+    --color-primary-900: #B8E2F3;
+    --color-primary-1000: #B8E2F3;
+
+    --color-secondary-default: #FFFFFF;
+    --color-secondary-50: #04070E;
+    --color-secondary-100: #080E1C;
+    --color-secondary-900: #BEC4D2;
+    --color-secondary-1000: #BEC4D2;
+
+    --color-neutral-50: #090909;
+    --color-neutral-100: #111111;
+    --color-neutral-900: #E5E5E5;
+    --color-neutral-1000: #F6F6F6;
+
+    --color-surface-default: #01101A;
+    --color-surface-50: rgba(4, 66, 92, 0.4);
+    --color-surface-100: rgba(220, 240, 249, 0.4);
+
+    --color-panel-background: #04070E;
+    --color-panel-surface: #01101A;
+
+    --shadow-sm: 0px 1px 3px 0px #152446;
+    --shadow-md: 0px 2px 6px 0px #152446;
+    --shadow-lg: 0px 3px 12px 0px #152446;
+    --shadow-xl: 0px 7px 18px 0px #152446;
+    --shadow-2xl: 0px 12px 28px 0px #152446;
+  }
+
+  /* === HRLINK PANEL === */
+  :root.hrlink {
+    --color-panel-primary: #0A9AD7;
+    --color-panel-secondary: #1E3363;
+    --color-panel-background: #F5FBFE;
+    --color-panel-surface: #FFFFFF;
+  }
+
+  :root.hrlink.dark {
+    --color-panel-primary: #044566;
+    --color-panel-secondary: #FFFFFF;
+    --color-panel-background: #04070E;
+    --color-panel-surface: #01101A;
+  }
+
+  /* === HRBOX PANEL === */
+  :root.hrbox {
+    --color-panel-primary: #6366F1;
+    --color-panel-secondary: #1E293B;
+    --color-panel-background: #F8FAFC;
+    --color-panel-surface: #FFFFFF;
+  }
+
+  :root.hrbox.dark {
+    --color-panel-primary: #818CF8;
+    --color-panel-secondary: #FFFFFF;
+    --color-panel-background: #0F172A;
+    --color-panel-surface: #1E293B;
+  }
+
+  /* === SUPER ADMIN PANEL === */
+  :root.super-admin {
+    --color-panel-primary: #EF4444;
+    --color-panel-secondary: #991B1B;
+    --color-panel-background: #FEF2F2;
+    --color-panel-surface: #FFFFFF;
+  }
+
+  :root.super-admin.dark {
+    --color-panel-primary: #F87171;
+    --color-panel-secondary: #FFFFFF;
+    --color-panel-background: #1F1917;
+    --color-panel-surface: #292524;
+  }
+}
+
+/* ============================================
+   2. BASE STYLES
+   ============================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html[lang='en'] {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  html[lang='fa'] {
+    font-family: 'Yekan Bakh', 'Vazir', 'Tahoma', sans-serif;
+  }
+
+  html,
+  body {
+    min-height: 100vh;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: var(--color-panel-background);
+    color: var(--color-secondary-1000);
+    transition: background-color 300ms ease, color 300ms ease;
+  }
+
+  .dark body {
+    color: var(--color-white);
+  }
+
+  #root {
+    min-height: 100vh;
+    height: 100%;
+  }
+
+  /* === Text Selection === */
+  ::selection {
+    background-color: rgba(10, 154, 215, 0.2);
+    color: inherit;
+  }
+
+  ::-moz-selection {
+    background-color: rgba(10, 154, 215, 0.2);
+    color: inherit;
+  }
+
+  /* === Focus Visible === */
+  *:focus-visible {
+    outline: 2px solid var(--color-panel-primary);
+    outline-offset: 2px;
+  }
+
+  /* === RTL Support === */
+  .rtl {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .ltr {
+    direction: ltr;
+    text-align: left;
+  }
+}
+
+/* ============================================
+   3. COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+  /* === Buttons === */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    font-weight: 500;
+    transition: all 200ms ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-panel-primary);
+    outline-offset: 2px;
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .btn-primary {
+    background-color: var(--color-panel-primary);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-panel-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-panel-primary);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-surface-50);
+  }
+
+  /* === Cards === */
+  .card {
+    background-color: var(--color-panel-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 200ms ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* === Inputs === */
+  .input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-neutral-200);
+    background-color: var(--color-white);
+    color: var(--color-secondary-1000);
+    font-size: var(--text-base);
+    transition: all 200ms ease;
+  }
+
+  .dark .input {
+    background-color: var(--color-neutral-900);
+    border-color: var(--color-neutral-700);
+    color: var(--color-white);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-panel-primary);
+    box-shadow: 0 0 0 3px rgba(10, 154, 215, 0.1);
+  }
+
+  .input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* === Glass Effect === */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass-effect {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* === Scrollbar === */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-neutral-100);
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: var(--color-neutral-800);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-400);
+    border-radius: var(--radius-full);
+    transition: background 200ms ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neutral-500);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* === Skeleton Loader === */
+  .skeleton {
+    background: linear-gradient(
+            90deg,
+            var(--color-neutral-200) 25%,
+            var(--color-neutral-100) 50%,
+            var(--color-neutral-200) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+    border-radius: var(--radius-md);
+  }
+
+  .dark .skeleton {
+    background: linear-gradient(
+            90deg,
+            var(--color-neutral-800) 25%,
+            var(--color-neutral-700) 50%,
+            var(--color-neutral-800) 75%
+    );
+  }
+
+  /* === Spinner === */
+  .spinner {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border: 4px solid var(--color-neutral-200);
+    border-top-color: var(--color-panel-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* ============================================
+   4. UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+  /* === Panel Colors === */
+  .bg-panel-primary {
+    background-color: var(--color-panel-primary);
+  }
+
+  .text-panel-primary {
+    color: var(--color-panel-primary);
+  }
+
+  .border-panel-primary {
+    border-color: var(--color-panel-primary);
+  }
+
+  .bg-panel-surface {
+    background-color: var(--color-panel-surface);
+  }
+
+  .bg-panel-background {
+    background-color: var(--color-panel-background);
+  }
+
+  /* === Shadows === */
+  .shadow-theme-sm {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .shadow-theme-md {
+    box-shadow: var(--shadow-md);
+  }
+
+  .shadow-theme-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-theme-xl {
+    box-shadow: var(--shadow-xl);
+  }
+
+  .shadow-theme-2xl {
+    box-shadow: var(--shadow-2xl);
+  }
+
+  /* === Hover Effects === */
+  .hover-lift {
+    transition: transform 200ms ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-scale {
+    transition: transform 200ms ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  /* === Text Utilities === */
+  .text-gradient {
+    background: linear-gradient(
+            90deg,
+            var(--color-panel-primary),
+            var(--color-primary-300)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* === RTL Utilities === */
+  [dir='rtl'] .rtl\:rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  /* === Container === */
+  .container-fluid {
+    width: 100%;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .container-fluid {
+      padding-left: var(--spacing-lg);
+      padding-right: var(--spacing-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-fluid {
+      padding-left: var(--spacing-2xl);
+      padding-right: var(--spacing-2xl);
+    }
+  }
+}
+
+/* ============================================
+   5. ANIMATIONS
+   ============================================ */
+
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-4px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(4px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px var(--color-panel-primary);
+    }
+    50% {
+      box-shadow: 0 0 20px var(--color-panel-primary);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 300ms ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 300ms ease-out;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 300ms ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 200ms ease-out;
+  }
+
+  .animate-shake {
+    animation: shake 500ms ease-in-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  .animate-pulse-smooth {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+}
+
+/* ============================================
+   6. ACCESSIBILITY
+   ============================================ */
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @media (prefers-contrast: high) {
+    * {
+      border-width: 2px;
+    }
+  }
+}
+
+/* ============================================
+   7. PRINT STYLES
+   ============================================ */
+
+@media print {
+  @page {
+    margin: 1cm;
+  }
+
+  * {
+    color: #000000 !important;
+    background: #FFFFFF !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   8. SPECIAL LIBRARY OVERRIDES
+   ============================================ */
+
+/* React Flow */
+.react-flow {
+  overflow: unset !important;
+}
+
+/* Leaflet */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-control-container {
+  z-index: 1000;
+}
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.leaflet-tile {
+  filter: inherit;
+  visibility: hidden;
+}
+
+.leaflet-tile-loaded {
+  visibility: inherit;
+}

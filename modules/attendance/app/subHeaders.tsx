@@ -1,5 +1,3 @@
-import { lazyLoad } from '@core/routes';
-
 import { AttendancePath } from '@module/attendance/app/paths';
 import {
   FaceRecognitionAssignment,
@@ -7,11 +5,12 @@ import {
   ShiftAllocationSubheader,
 } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
 import { Key, PasswordCheck, Refresh } from 'iconsax-react';
+import { lazy } from "react";
 
-const DashboardSubHeader = lazyLoad(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));
-const EntryExitSubHeader = lazyLoad(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
-const CalenderSubHeader = lazyLoad(() => import('@module/attendance/features/attendanceCalender/CalenderSubHeader'));
-const ApprovalsSubHeader = lazyLoad(() => import('@module/attendance/features/ListApprovals/ApprovalsSubHeader'));
+const DashboardSubHeader = lazy(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));
+const EntryExitSubHeader = lazy(() => import('@module/attendance/features/registration/EntryExitSubHeader'));
+const CalenderSubHeader = lazy(() => import('@module/attendance/features/attendanceCalender/CalenderSubHeader'));
+const ApprovalsSubHeader = lazy(() => import('@module/attendance/features/ListApprovals/ApprovalsSubHeader'));
 
 export const AttendanceSubHeaders: any = [
   {

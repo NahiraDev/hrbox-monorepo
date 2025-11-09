@@ -1,31 +1,18 @@
-import { Button } from '@heroui/react';
 import { ArrowLeft, Global, Moon } from 'iconsax-react';
-import { useEffect, useState } from 'react';
+import { AppButton } from '@hrbox/uikit/components/AppButton';
+import { SliderSSO } from '@hrbox/modules/sso/components/SliderSSO';
+// @ts-ignore
+import {LogoMobile} from "@hrbox/uikit/icons/LogoMobile";
+// @ts-ignore
+import {LogoHRLink} from "~/UIKit/icons/LogoHRLink";
+import { ThemeToggle } from "@core/components/ThemeToggle";
+import { LanguageToggle } from "@core/components/LanguageToggle";
+import { Outlet } from "@tanstack/react-router";
+import { Suspense } from "react";
+import { Spinner } from "@heroui/react";
+import { motion } from 'framer-motion';
 
-import { LogoHRLink } from '@root/shared/icons/LogoHRLink';
-import { LogoMobile } from '@root/shared/icons/LogoMobile';
-import { setLanguage, useAppDispatch } from '@core/redux';
-import { AppButton } from '@core/components';
-import { SliderSSO } from '@module/sso/features/common';
-import { t } from 'i18next';
-import { i18n } from '@core/translate';
-
-export const AuthLayout = ({ content }: any) => {
-  const [mounted, setMounted] = useState(false);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setLanguage(localStorage.getItem('lang') as string));
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const [currentLang, setCurrentLang] = useState<'en' | 'fa'>('en');
-
-
-  if (!mounted) return null;
+export const AuthLayout = () => {
 
   return (
     <div className="min-h-screen bg-cover bg-center bg-[url('/images/lightmode-auth-hrlink.webp')]">
@@ -40,8 +27,6 @@ export const AuthLayout = ({ content }: any) => {
           </div>
 
 
-
-
           {/* --- Form + Toggles Row --- */}
           <div className='relative flex items-end justify-center gap-6'>
 
@@ -49,33 +34,8 @@ export const AuthLayout = ({ content }: any) => {
             <div>
               {/* --- Controls Section (Language + Dark Mode) --- */}
               <div className="hidden lg:flex flex-col gap-3 self-center">
-                <AppButton
-                  props={{
-                    size: 'lg',
-                    fullWidth: true,
-                    isIconOnly: true,
-                    variant: 'light',
-                    startContent: <img src="/images/moon.svg" alt="phone icon " />,
-                    className:
-                      'w-8 h-8 text-secondary-1000 dark:text-white ',
-                    onPress: () => console.log('Change theme has been clicked!'),
-
-                  }}
-                />
-
-                <AppButton
-                  props={{
-                    size: 'lg',
-                    fullWidth: true,
-                    isIconOnly: true,
-                    variant: 'light',
-                    startContent: <img src="/images/global.svg" alt="phone icon" />,
-                    className:
-                      'w-8 h-8 text-secondary-1000 dark:text-white ',
-                    onPress: () => console.log(currentLang),
-
-                  }}
-                />
+                <ThemeToggle />
+                <LanguageToggle />
               </div>
             </div>
 
@@ -108,11 +68,26 @@ export const AuthLayout = ({ content }: any) => {
                         Please Enter Your Infomaition!
                       </span>
                     </div>
-
-                    {content}
-
-                      
-
+                    <Suspense
+                      fallback={
+                        <div className="flex flex-col items-center gap-4">
+                          <Spinner size="lg" color="primary" />
+                          <p className="text-neutral-500 dark:text-neutral-400">
+                            بارگذاری...
+                          </p>
+                        </div>
+                      }
+                    >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full flex items-center justify-center"
+                    >
+                      <Outlet />
+                    </motion.div>
+                    </Suspense>
                   </div>
                 </div>
               </div>

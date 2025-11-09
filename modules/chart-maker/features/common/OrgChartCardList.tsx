@@ -1,11 +1,11 @@
 import { Avatar } from '@heroui/react';
 import { User } from 'iconsax-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 export const OrgChartCardListNode = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigation();
   return (
-    <div onClick={()=> navigate('/chart-maker/OrgChart')} className="flex border-l-[2px] border-primary-400 items-start flex-col gap-2 bg-white rounded-xl shdow-theme-sm dark:shadow-dark-tight-1 py-2 px-3">
+    <div onClick={()=> navigate.push('/chart-maker/OrgChart')} className="flex border-l-[2px] border-primary-400 items-start flex-col gap-2 bg-white rounded-xl shdow-theme-sm dark:shadow-dark-tight-1 py-2 px-3">
       <div className="flex items-center gap-[10px] pb-1 border-b-0.5 border-neutral-100 dark:border-neutral-700">
         <Avatar radius="sm" size="sm" src="" />
         <h3 className="text-base font-semibold text-secondary-1000 wrap-break-word ">HRBox</h3>

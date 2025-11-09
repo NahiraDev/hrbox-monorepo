@@ -1,4 +1,4 @@
-import { AppTable } from '@core/components';
+import { AppTable } from '@hrbox/uikit/components';
 import { Allocatio } from '@module/attendance/app/mock';
 import ShiftAllocationModalEdit from '@module/attendance/features/modals/ShiftAllocationModalEdit';
 import { Hierarchy3 } from 'iconsax-react';

@@ -1,56 +1,84 @@
-import { useEffect, useState } from 'react';
-import { serviceRegistry } from '@core/helpers';
-import { useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Outlet, useRouteContext } from '@tanstack/react-router';
+import { motion } from 'framer-motion';
+import { Spinner } from '@heroui/react';
 
+import { AppHeader } from '@hrbox/uikit/sections/AppHeader';
+import { AppSideBar } from '@hrbox/uikit/sections/AppSideBar';
 import { AppSupportButton } from '@hrbox/uikit/components';
-import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '@hrbox/uikit/sections';
-import { ProtectedRoute } from '@hrbox/core/routes/protectedRoute';
+import { AppDocs } from '@hrbox/uikit/sections/AppDocs';
 
-export const BaseLayout = () => {
-  const location = useLocation();
-  const [showDoc, setShowDoc] = useState<boolean>(false);
-
-  useEffect(() => {
-    const getModuleName: string | undefined = serviceRegistry.getModuleName();
-
-    if (getModuleName !== 'hrlink') {
-      setShowDoc(true);
-    }
-  }, [location.pathname]);
+/**
+ * ✅ Layout اصلی برای تمام صفحات محافظ شده
+ * شامل: Sidebar, Header, SubHeader, Main Content, Support Button, Dock Menu
+ */
+export function BaseLayout() {
+  // دریافت context از root route
+  const context = useRouteContext({ from: '__root__' });
+  const SubHeader = context?.component;
+  const subHeaderProps = context?.props;
 
   return (
-    <div className='shadow-tight text-foreground bg-light-mode dark:bg-dark-mode flex h-screen flex-col bg-white bg-cover bg-center bg-no-repeat pr-16 pb-10 pl-8 bg-blend-screen'>
-      <AppHeader />
-      <div className='flex min-h-0 flex-1 gap-4'>
-        <div className='flex min-h-0 flex-1 items-stretch gap-4'>
-          <div className='flex min-h-0 flex-1 flex-col gap-4'>
-            <div className='flex min-h-0 w-full flex-1 gap-8'>
-              <AppSideBar />
-              <div className='flex w-full flex-col gap-4'>
-                <AppSubHeader />
-                <div className='border-primary-400 bg-surface-50 h-full flex flex-col gap-3 overflow-hidden rounded-2xl border'>
-                  <AppContent
-                    fallback={
-                      <div className='flex h-full items-center justify-center'>
-                        <div
-                          className={`${showDoc ? 'border-primary-400 bg-surface-50 shadow-theme-md border dark:bg-[rgba(4,66,92,0.60)]' : 'rounded-xl'} relative flex-1 overflow-hidden`}
-                        />
-                      </div>
-                    }
-                  />
+    <div className="flex h-screen w-full bg-panel-background overflow-hidden">
+      {/* 1️⃣ Sidebar */}
+      <aside className="flex-shrink-0 border-r border-neutral-200 dark:border-neutral-700">
+        <AppSideBar />
+      </aside>
+
+      {/* 2️⃣ Main Content Area */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Header */}
+        <header className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+          <AppHeader />
+        </header>
+
+        {/* Optional Sub-Header */}
+        {SubHeader && (
+          <Suspense
+            fallback={
+              <div className="h-16 flex-shrink-0 bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
+            }
+          >
+            <div className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+              <SubHeader {...subHeaderProps} />
+            </div>
+          </Suspense>
+        )}
+
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto">
+          <Suspense
+            fallback={
+              <div className="flex h-full items-center justify-center bg-panel-background">
+                <div className="flex flex-col items-center gap-4">
+                  <Spinner size="lg" color="primary" />
+                  <p className="text-neutral-500 dark:text-neutral-400">
+                    بارگذاری محتوا...
+                  </p>
                 </div>
               </div>
-            </div>
-            {showDoc && (
-              <div className='mb-4 shrink-0'>
-                <AppDocs />
+            }
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <div className="p-6 h-full">
+                <Outlet />
               </div>
-            )}
-          </div>
-        </div>
+            </motion.div>
+          </Suspense>
+
+          {/* Support Button */}
+          <AppSupportButton />
+        </main>
       </div>
 
-      <AppSupportButton />
+      {/* 3️⃣ Dock Menu (HRBox only) */}
+      <AppDocs />
     </div>
   );
-};
+}

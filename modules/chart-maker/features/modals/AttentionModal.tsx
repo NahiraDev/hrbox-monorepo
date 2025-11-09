@@ -1,19 +1,7 @@
-import { InfoCircle } from 'iconsax-react';
-
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 
 export const AttentionModal = () => {
-  // const { getOpenModals } = useModalContext();
-  // const openModals = getOpenModals();
-  // const { closeModal } = useModalContext();
-
-  // const handleCancel = () => {
-  //   console.log(openModals);
-  //   // closeModal('confirm','Test');
-  // };
-
   return (
-    // <AppModal icon={<InfoCircle color="white" size={18} />} size="xl" title="Attention">
     <>
       <AppModal.Body>
         <div className="bg-surface-50 px-6 py-3 w-full rounded-lg">
@@ -42,6 +30,5 @@ export const AttentionModal = () => {
         </div>
       </AppModal.Footer>
     </>
-    // </AppModal>
   );
 };

@@ -1,4 +1,4 @@
-export const ApiEndpointsHRLink = {
+export const AuthApiEndpoints = {
   loginApi: `/DesktopModules/SSO/api/Login/Login`,
   logOutApi: `/DesktopModules/SSO/api/Login/LogOff`,
   sendOtpApi: `/DesktopModules/SSO/api/Login/SendOTP`,
@@ -7,4 +7,5 @@ export const ApiEndpointsHRLink = {
   registerOtpConfirmApi: `/DesktopModules/Login/api/FreelancerRegistration/RejisterOTPConfirm`,
   resetPasswordCheckOtpApi: `/DesktopModules/SSO/api/Login/ResetPasswordCheckOTP`,
   resetPasswordByGuidCodeApi: `/DesktopModules/SSO/api/Login/ResetPasswordByGuidCode`,
+  getRoleList: `/DesktopModules/Freelancer/api/MasterService/rolesList`,
 };

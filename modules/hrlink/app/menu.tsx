@@ -9,12 +9,7 @@ import {
   Personalcard,
   UserOctagon,
 } from 'iconsax-react';
-import {
-  AcademyIcon,
-  CupStarIcon,
-  JobOffersIcon,
-  JobOpportunitiesIcon,
-} from '@module/hrlink/icons';
+import {AcademyIcon} from "@hrbox/uikit/icons/AcademyIcon";
 
 const DashboardIcons = {
   dashboard: Chart2,

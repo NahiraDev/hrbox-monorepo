@@ -1,17 +1,16 @@
-import { lazyLoad } from '@core/routes';
-
 import { AttendancePath } from '@module/attendance/app/paths';
+import { lazyRouteComponent } from "@tanstack/react-router";
 
-const Dashboard = lazyLoad(() => import('@module/attendance/features/dashboard/Dashboard'));
-const EntryExit = lazyLoad(() => import('@module/attendance/features/registration/EntryExit'));
-const AttendanceCalender = lazyLoad(() => import('@module/attendance/features/attendanceCalender/AttendanceCalenders'));
-const TrafficCalender = lazyLoad(() => import('@module/attendance/features/attendanceCalender/TrafficCalender'));
-const ExportPage = lazyLoad(() => import('@module/attendance/features/Export/ExportPage'));
-const ListOfApprovals = lazyLoad(() => import('@module/attendance/features/ListApprovals/ListApprovals'));
-const ShiftAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/ShiftAllocation'));
-const FaceAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/FaceAllocation'));
-const IpAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/IpAllocation'));
-const LocationAllocation = lazyLoad(() => import('@module/attendance/features/Allocation/LocationAllocation'));
+const Dashboard = lazyRouteComponent(() => import('@module/attendance/features/dashboard/Dashboard'));
+const EntryExit = lazyRouteComponent(() => import('@module/attendance/features/registration/EntryExit'));
+const AttendanceCalender = lazyRouteComponent(() => import('@module/attendance/features/attendanceCalender/AttendanceCalenders'));
+const TrafficCalender = lazyRouteComponent(() => import('@module/attendance/features/attendanceCalender/TrafficCalender'));
+const ExportPage = lazyRouteComponent(() => import('@module/attendance/features/Export/ExportPage'));
+const ListOfApprovals = lazyRouteComponent(() => import('@module/attendance/features/ListApprovals/ListApprovals'));
+const ShiftAllocation = lazyRouteComponent(() => import('@module/attendance/features/Allocation/ShiftAllocation'));
+const FaceAllocation = lazyRouteComponent(() => import('@module/attendance/features/Allocation/FaceAllocation'));
+const IpAllocation = lazyRouteComponent(() => import('@module/attendance/features/Allocation/IpAllocation'));
+const LocationAllocation = lazyRouteComponent(() => import('@module/attendance/features/Allocation/LocationAllocation'));
 
 export const AttendanceContents: any = [
   {

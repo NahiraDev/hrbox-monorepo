@@ -1,36 +1,36 @@
-import { lazyLoad } from '@core/routes';
-import { SSOHRLinkPaths } from '@module/sso/app/paths';
+import { lazy } from "react";
+import { Paths } from "@hrbox/modules/paths";
 
-const Login = lazyLoad(() => import('@module/sso/features/Login'));
-const LoginByOtp = lazyLoad(() => import('@module/sso/features/LoginByOtp'));
-const Register = lazyLoad(() => import('@module/sso/features/Register'));
-const ForgetPassword = lazyLoad(() => import('@module/sso/features/ForgetPassword'));
-const ResetPassword = lazyLoad(() => import('@module/sso/features/ResetPassword'));
-const OneTimePassword = lazyLoad(() => import('@module/sso/features/OneTimePassword'));
+const Login = lazy(() => import('../pages/Login'));
+const LoginByOtp = lazy(() => import('../pages/LoginByOtp'));
+const Register = lazy(() => import('../pages/Register'));
+const ForgetPassword = lazy(() => import('../pages/ForgetPassword'));
+const ResetPassword = lazy(() => import('../pages/ResetPassword'));
+const OneTimePassword = lazy(() => import('../pages/OneTimePassword'));
 
 export const SSOContents: any = [
   {
-    path: SSOHRLinkPaths.login,
+    path: Paths.SSO.login,
     component: Login,
   },
   {
-    path: SSOHRLinkPaths.loginByOtp,
+    path: Paths.SSO.loginByOtp,
     component: LoginByOtp,
   },
   {
-    path: SSOHRLinkPaths.register,
+    path: Paths.SSO.register,
     component: Register,
   },
   {
-    path: SSOHRLinkPaths.forgetPassword,
+    path: Paths.SSO.forgetPassword,
     component: ForgetPassword,
   },
   {
-    path: SSOHRLinkPaths.resetPassword,
+    path: Paths.SSO.resetPassword,
     component: ResetPassword,
   },
   {
-    path: SSOHRLinkPaths.oneTimePassword,
+    path: Paths.SSO.oneTimePassword,
     component: OneTimePassword,
   },
 ];

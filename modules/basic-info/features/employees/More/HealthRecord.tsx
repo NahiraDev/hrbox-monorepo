@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { healthy } from '@module/basic-info/app/mock';
 import { Card } from '@heroui/react';
-import { AppButton } from '@core/components';
+import { AppButton } from '@hrbox/uikit/components';
 import {
   Calendar,
   Drop,
@@ -14,7 +14,7 @@ import {
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import PreEmploymentHealthRecordsModals from '@module/basic-info/features/employees/modals/PreEmploymentHealthRecordsModals';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import AddNewOnDutyHealthRecords from '@module/basic-info/features/employees/modals/AddNewOnDutyHealthRecords';
 import OnDutyHealthRecords from '@module/basic-info/features/employees/modals/OnDutyHealthRecords';
 

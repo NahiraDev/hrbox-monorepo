@@ -4,8 +4,8 @@ import Modeler from 'bpmn-js/lib/Modeler';
 
 import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from '@module/process-maker/features/modals';
 
-import { AppButton, AppInput } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 import { DocumentDownload, DocumentUpload } from 'iconsax-react';
 import CustomPalette from '@module/process-maker/features/CustomPalette';
@@ -255,10 +255,10 @@ const ProcessMaker = () => {
   }, [i18n.language, applyPaletteTranslations]);
 
   const handleCloseModal = () => {
-    closeModal('confirm', 'bpmn:Task');
+    closeModal("confirm", "bpmn:Task");
   };
   const handleCloseEditModal = () => {
-    closeModal('edit', 'bpmn:Task');
+    closeModal("edit", "bpmn:Task");
   };
 
   const handleSave = (values: FormsValueBpmn, name: string) => {

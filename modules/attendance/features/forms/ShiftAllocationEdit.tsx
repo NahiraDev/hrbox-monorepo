@@ -1,21 +1,10 @@
 import { Form } from '@heroui/react';
-import { Radio, RadioGroup } from '@heroui/radio';
-import { useFormContext, useModalContext } from '@core/context';
-import { AppAutoComplete, AppTextArea }from '@core/components';
+import { Radio, RadioGroup } from '@heroui/react';
+import { useFormContext } from '@hrbox/core';
+import { AppAutoComplete, AppTextArea }from '@hrbox/uikit/components';
 import { TimerStart } from 'iconsax-react';
 import * as Yup from 'yup';
 
-// export const initialValuesAction = {
-//   title: null,
-//   type: 'Person',
-//   ChooseShift: null,
-//   FromDate: null,
-//   organization: null,
-//   Department: null,
-//   Employee: null,
-//   Description: null,
-//   JobTitle: null,
-// }
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),

@@ -1,4 +1,4 @@
-import { AppTable } from '@core/components';
+import { AppTable } from '@hrbox/uikit/components';
 import { Allocatio } from '@module/attendance/app/mock';
 import { Hierarchy3 } from 'iconsax-react';
 import { useState } from 'react';

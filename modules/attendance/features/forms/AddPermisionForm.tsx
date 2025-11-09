@@ -1,5 +1,5 @@
 import { Form } from '@heroui/react';
-import { AppAutoComplete, AppInput } from '@core/components';
+import { AppAutoComplete, AppInput } from '@hrbox/uikit/components';
 
 const AddPermisionForm = () => {
   return (

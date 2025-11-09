@@ -1,9 +1,9 @@
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import { Avatar } from '@heroui/react';
 import { useState } from 'react';
 import FilterCalenderModal from '@module/basic-info/features/employees/modals/FilterCalenderModal'
 import { Filter } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const sampleData = [
   { id: 1, name: 'Jahan', role: 'Mentor', avatar: 'https://i.pravatar.cc/150?u=a04258114e29026302d', badgeColor: 'red' },

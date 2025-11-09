@@ -1,4 +1,4 @@
-import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
+import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
 import { NotificationFavorite } from 'iconsax-react';
 import { useState } from 'react';
 

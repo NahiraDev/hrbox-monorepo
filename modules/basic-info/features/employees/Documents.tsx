@@ -1,8 +1,8 @@
 import { Avatar, Card } from '@heroui/react';
 import { identityCard } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useState } from 'react';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import DocumentsModal from '../employees/modals/DocumentsModal';

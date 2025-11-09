@@ -1,6 +1,6 @@
-// @module/basic-info/features/employees/modals/AddNewSkill.tsx
+// @module/basic-info/pages/employees/modals/AddNewSkill.tsx
 import React, { useState } from 'react';
-import { AppButton, AppInput } from '@core/components';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
 
 interface AddNewSkillProps {
   onClose: () => void;

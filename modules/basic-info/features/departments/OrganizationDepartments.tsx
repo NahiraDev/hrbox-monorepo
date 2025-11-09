@@ -2,21 +2,21 @@ import { User } from 'iconsax-react';
 import { organizationDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { AppPagination } from '@core/components';
-import { useNavigate } from 'react-router-dom';
+import { AppPagination } from '@hrbox/uikit/components/AppPagination';
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
+import { useNavigation } from "@core/hooks/useNavigation";
 const borderColors = ['#000000', '#A61111', '#F4D082', '#05856F', '#DB5918', '#2F80ED', '#0ED2F7'];
 
 const OrganizationDepartments = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useNavigation();
 
   const renderOrganizationDepartments = (user: any, index: number) => (
     <Card
       key={index}
       className="rounded-xl border-l-2 py-2 px-3 shadow-light-tight-1 flex flex-col gap-2 hover:bg-[#D6F2FF] hover:cursor-pointer"
       style={{ borderLeftColor: borderColors[index % borderColors.length] }}
-      onPress={() => navigate(BasicInfoPaths.TechnicalDepartment)}
+      onPress={() => navigate.push(BasicInfoPaths.TechnicalDepartment)}
     >
       <CardHeader className="flex items-center gap-2 border-b border-neutral-100 dark:border-neutral-700 !p-0 !pb-1">
         <Avatar radius="sm" size="sm" src="https://i.pravatar.cc/150?u=e04258114e29026302d"/>

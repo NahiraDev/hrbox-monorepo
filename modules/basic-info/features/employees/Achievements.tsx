@@ -1,9 +1,8 @@
 import { Card } from '@heroui/react';
 import { achivements } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@core/components';
+import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
-import { useModalContext } from '@core/context';
-// import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import AddNewCourses from '@module/basic-info/features/employees/modals/AddNewCourses';

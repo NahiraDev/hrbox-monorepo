@@ -3,22 +3,18 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 
-// Core plugins
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-
-// Development Experience
-import { ViteEjsPlugin } from 'vite-plugin-ejs';
 
 
 // Utilities
 import { loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import * as fs from 'node:fs';
+import {tanstackRouter } from '@tanstack/router-vite-plugin'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Advanced middleware for SPA routing
 const createAdvancedSpaMiddleware = () => ({
   name: 'advanced-spa-middleware',
   configureServer(server: any) {
@@ -45,8 +41,8 @@ const createAdvancedSpaMiddleware = () => ({
 
       // Don't intercept static files or API calls
       if (
-        staticPatterns.some(pattern => pattern.test(url)) ||
-        apiPatterns.some(pattern => pattern.test(url))
+          staticPatterns.some(pattern => pattern.test(url)) ||
+          apiPatterns.some(pattern => pattern.test(url))
       ) {
         return next();
       }
@@ -66,8 +62,10 @@ const createAdvancedSpaMiddleware = () => ({
 });
 
 export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
-  const mode = process.env.VITE_APP_ENV;
+  const mode:any = process.env.VITE_APP_ENV;
+  const isDevelopment = mode;
   const isProduction = mode;
+  const isTest = mode === 'test';
 
   // Load environment variables
   const envVars = loadEnv(mode, process.cwd(), '');
@@ -98,15 +96,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   }
 
   const plugins = [
-    react({jsxRuntime: 'automatic',}) as PluginOption,
+    react() as PluginOption,
     tsconfigPaths() as PluginOption,
-    ViteEjsPlugin({
-      domain: envVars.VITE_APP_URL || 'localhost',
-      buildTime: new Date().toISOString(),
-      version: packageJson.version || '1.0.0',
-    }) as PluginOption,
+    // tanstackRouter({routesDirectory:'../routes'}),
     tailwindcss() as PluginOption,
-    createAdvancedSpaMiddleware() as PluginOption,
+    // createAdvancedSpaMiddleware() as PluginOption,
   ];
 
   return {
@@ -114,9 +108,19 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     // Define global constants
     define: {
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: isDevelopment,
+      __PROD__: isProduction,
+      __TEST__: isTest,
+      __VERSION__: JSON.stringify(packageJson.version || '1.0.0'),
+      __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+      __FEATURE_SSO__: true,
+      __FEATURE_CHARTS__: true,
+      __FEATURE_REPORTS__: true,
+      'process.env.VITE_APP_ENV': JSON.stringify(mode),
     },
-
+    css: {
+      postcss: './core/config/tailwind/postcss.config.js',
+    },
     // Build configuration
     build: {
       target: 'es2023',
@@ -125,16 +129,15 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       emptyOutDir: true,
       cssCodeSplit: true,
       outDir: resolve(__dirname, 'dist'),
-      assetsDir: '',
+      assetsDir: 'public',
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
-          core: resolve(__dirname, 'core/index.ts'),
-          sso: resolve(__dirname, 'modules/sso/app/register.ts'),
-          processMaker: resolve(__dirname, 'modules/process-maker/app/register.ts'),
-          chartMaker: resolve(__dirname, 'modules/chart-maker/app/register.ts'),
-          hrlink: resolve(__dirname, 'modules/hrlink/app/register.ts'),
-          basicInfo: resolve(__dirname, 'modules/basic-info/app/register.ts'),
+          // sso: resolve(__dirname, 'modules/sso/plugin.tsx'),
+          // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
+          // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
+          hrlink: resolve(__dirname, 'modules/hrlink/plugin.tsx'),
+          // basicInfo: resolve(__dirname, 'modules/basic-info/plugin.tsx'),
         },
         output: {
           entryFileNames: chunkInfo => {
@@ -170,12 +173,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     resolve: {
       alias: {
-        '@root': resolve(__dirname, '.'),
-        '@core': resolve(__dirname, 'core'),
-        '@module': resolve(__dirname, 'modules'),
-        '@proxy-server': resolve(__dirname, 'proxy-server'),
         '@hrbox/core': resolve(__dirname, 'core'),
-        '@hrbox/uikit': resolve(__dirname, 'UIKit'),
+        '@hrbox/modules': resolve(__dirname, 'modules'),
+        '@hrbox/routes': resolve(__dirname, 'routes'),
+        '@hrbox/UIKit': resolve(__dirname, 'UIKit'),
+        '@proxy-server': resolve(__dirname, 'proxy-server'),
       },
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
       conditions: isProduction ? ['production'] : ['development'],
@@ -188,13 +190,12 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       port: 443,
       host: true,
       allowedHosts: ['localhost' , 'front.hrbox.me' , 'react.hrbox.me'],
-      strictPort: true,
-      open: false,
+      strictPort: false,
+      open: true,
       cors: true,
       https: httpsConfig,
       hmr: {
         overlay: true,
-        host: 'front.hrbox.me',
         protocol: 'wss',
         port: 443,
       },
@@ -221,6 +222,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           },
         },
 
+        // Proxy برای DesktopModules
         '/DesktopModules': {
           target: 'https://hrlink.hrbox.me:50443',
           changeOrigin: true,
@@ -248,7 +250,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     appType: 'spa',
 
     optimizeDeps: {
-      include: ['react', 'react-dom', 'react-router-dom', '@emotion/react', '@emotion/styled'],
+      include: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
       exclude: ['@vite/client', '@vite/env'],
     },
 

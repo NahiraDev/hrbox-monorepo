@@ -1,6 +1,6 @@
-import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@core/components';
-import { Add, Location } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { Add } from 'iconsax-react';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 
 export const OrgLocation = () => {

@@ -1,7 +1,7 @@
 import { Tabs, Tab } from '@heroui/react';
 import clsx from 'clsx';
-import { useNavigate } from 'react-router-dom';
 import React from "react";
+import { useNavigation } from "@core/hooks/useNavigation";
 
 type TabSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type TabRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
@@ -77,12 +77,11 @@ export const AppTabs: React.FC<AppTabsProps> = ({
   ariaLabel = 'Dynamic Tabs',
   fullWidth = false,
   isVertical = false,
-  motionProps,
   classNames,
   onTabChange,
   ...rest
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigation();
 
   const handleSelectionChange = (key: string | number) => {
     if (onTabChange) {
@@ -91,7 +90,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({
 
     const selectedTab = tabs.find((tab) => tab.key === key || tab.href === key);
     if (selectedTab?.href) {
-      navigate(selectedTab.href);
+      navigate.push({ to:selectedTab.href });
     }
   };
 
@@ -105,7 +104,6 @@ export const AppTabs: React.FC<AppTabsProps> = ({
       destroyInactiveTabPanel={destroyInactiveTabPanel}
       isDisabled={isDisabled}
       isVertical={isVertical}
-      motionProps={motionProps}
       placement={placement}
       selectedKey={selectedKey}
       variant={variant}

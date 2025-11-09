@@ -1,5 +1,0 @@
-export * from '@module/hrlink/features/resume/apis/award'
-export * from '@module/hrlink/features/resume/apis/education'
-export * from '@module/hrlink/features/resume/apis/course'
-export * from '@module/hrlink/features/resume/apis/skills'
-export * from '@module/hrlink/features/resume/apis/experience'

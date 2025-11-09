@@ -1,4 +1,3 @@
-import { lazyLoad } from '@core/routes';
 import {
   Briefcase,
   Buildings,
@@ -11,24 +10,26 @@ import {
   Star,
   UserOctagon,
 } from 'iconsax-react';
-import { CupStarIcon, JobOffersIcon } from '@module/hrlink/icons';
 
-import {
-  useLazyFetchExperienceQuery,
-  useLazyFetchEducationQuery,
-  useLazyFetchCoursesQuery,
-  useLazyFetchAwardsQuery,
-  useLazyFetchHardSkillsQuery,
-  useLazyFetchSoftSkillsQuery,
-} from '@module/hrlink/features/resume/apis';
+// import {
+//   useLazyFetchExperienceQuery,
+//   useLazyFetchEducationQuery,
+//   useLazyFetchCoursesQuery,
+//   useLazyFetchAwardsQuery,
+//   useLazyFetchHardSkillsQuery,
+//   useLazyFetchSoftSkillsQuery,
+// } from '@hrbox/modules/hrlink/apis';
 
-import { HRLinkPaths } from '@module/hrlink/app/paths';
+import {JobOffersIcon} from "~/UIKit/icons/JobOffersIcon";
+import {CupStarIcon} from "~/UIKit/icons/CupStarIcon";
+import { lazyRouteComponent } from "@tanstack/react-router";
+import { Paths } from '@module/paths';
 
-const ResumeSubHeader = lazyLoad(() => import('@module/hrlink/features/resume/ResumeSubHeader'));
-const JobSubHeader = lazyLoad(() => import('@module/hrlink/features/jobs/JobSubHeader'));
-const JobDetailSubHeader = lazyLoad(() => import('@module/hrlink/features/jobs/JobDetailSubHeader'));
-const CompanySubHeader = lazyLoad(() => import('@module/hrlink/features/companies/CompanySubHeader'));
-const CompanyInformationSubHeader = lazyLoad(() => import('@module/hrlink/features/companies/CompanyInformationSubHeader'));
+const ResumeSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/ResumeSubHeader'));
+const JobSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/JobSubHeader'));
+const JobDetailSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/JobDetailSubHeader'));
+const CompanySubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/CompanySubHeader'));
+const CompanyInformationSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/CompanyInformationSubHeader'));
 
 function createResumeSubHeaderWithHook(useHook: () => any, name: string) {
   const Wrapper = (props: any) => {
@@ -42,33 +43,29 @@ function createResumeSubHeaderWithHook(useHook: () => any, name: string) {
   return Wrapper;
 }
 
-const ResumeExperienceSubHeader = createResumeSubHeaderWithHook(
-  useLazyFetchExperienceQuery,
-  'ResumeExperienceSubHeader',
-);
-const ResumeEducationSubHeader = createResumeSubHeaderWithHook(useLazyFetchEducationQuery, 'ResumeEducationSubHeader');
-const ResumeCourseSubHeader = createResumeSubHeaderWithHook(useLazyFetchCoursesQuery, 'ResumeCourseSubHeader');
-const ResumeAwardsSubHeader = createResumeSubHeaderWithHook(useLazyFetchAwardsQuery, 'ResumeAwardsSubHeader');
-const ResumeHardSkillsSubHeader = createResumeSubHeaderWithHook(
-  useLazyFetchHardSkillsQuery,
-  'ResumeHardSkillsSubHeader',
-);
-const ResumeSoftSkillsSubHeader = createResumeSubHeaderWithHook(
-  useLazyFetchSoftSkillsQuery,
-  'ResumeSoftSkillsSubHeader',
-);
+// const ResumeExperienceSubHeader = createResumeSubHeaderWithHook(
+//   useLazyFetchExperienceQuery,
+//   'ResumeExperienceSubHeader',
+// );
+// const ResumeEducationSubHeader = createResumeSubHeaderWithHook(useLazyFetchEducationQuery, 'ResumeEducationSubHeader');
+// const ResumeCourseSubHeader = createResumeSubHeaderWithHook(useLazyFetchCoursesQuery, 'ResumeCourseSubHeader');
+// const ResumeAwardsSubHeader = createResumeSubHeaderWithHook(useLazyFetchAwardsQuery, 'ResumeAwardsSubHeader');
+// const ResumeHardSkillsSubHeader = createResumeSubHeaderWithHook(
+//   useLazyFetchHardSkillsQuery,
+//   'ResumeHardSkillsSubHeader',
+// );
+// const ResumeSoftSkillsSubHeader = createResumeSubHeaderWithHook(
+//   useLazyFetchSoftSkillsQuery,
+//   'ResumeSoftSkillsSubHeader',
+// );
 
 export const HRLinkSubHeaders: any = [
   {
-    path: HRLinkPaths.Impersonate,
+    path: Paths.HRLink.Dashboard,
     component: null,
   },
   {
-    path: HRLinkPaths.Dashboard,
-    component: null,
-  },
-  {
-    path: HRLinkPaths.ResumeInformation,
+    path: Paths.HRLink.ResumeInformation,
     component: ResumeSubHeader,
     props: {
       icon: Personalcard,
@@ -76,55 +73,55 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.ResumeExperience,
-    component: ResumeExperienceSubHeader,
+    path: Paths.HRLink.ResumeExperience,
+    component: null,
     props: {
       icon: Briefcase,
       name: 'Experience',
     },
   },
   {
-    path: HRLinkPaths.ResumeEducation,
-    component: ResumeEducationSubHeader,
+    path: Paths.HRLink.ResumeEducation,
+    component: null,
     props: {
       icon: UserOctagon,
       name: 'Education',
     },
   },
   {
-    path: HRLinkPaths.ResumeCourse,
-    component: ResumeCourseSubHeader,
+    path: Paths.HRLink.ResumeCourse,
+    component: null,
     props: {
       icon: UserOctagon,
       name: 'Courses',
     },
   },
   {
-    path: HRLinkPaths.ResumeAwards,
-    component: ResumeAwardsSubHeader,
+    path: Paths.HRLink.ResumeAwards,
+    component: null,
     props: {
       icon: CupStarIcon,
       name: 'Awards',
     },
   },
   {
-    path: HRLinkPaths.ResumeHardSkills,
-    component: ResumeHardSkillsSubHeader,
+    path: Paths.HRLink.ResumeHardSkills,
+    component: null,
     props: {
       icon: LampCharge,
       name: 'Hard Skills',
     },
   },
   {
-    path: HRLinkPaths.ResumeSoftSkills,
-    component: ResumeSoftSkillsSubHeader,
+    path: Paths.HRLink.ResumeSoftSkills,
+    component: null,
     props: {
       icon: Star,
       name: 'Soft Skills',
     },
   },
   {
-    path: HRLinkPaths.JobOffers,
+    path: Paths.HRLink.JobOffers,
     component: JobSubHeader,
     props: {
       icon: JobOffersIcon,
@@ -132,7 +129,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.JobDetail,
+    path: Paths.HRLink.JobDetail,
     component: JobDetailSubHeader,
     props: {
       icon: JobOffersIcon,
@@ -140,7 +137,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.JobOpportunities,
+    path: Paths.HRLink.JobOpportunities,
     component: JobSubHeader,
     props: {
       icon: JobOffersIcon,
@@ -148,11 +145,11 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.Setting,
+    path: Paths.HRLink.Setting,
     component: null,
   },
   {
-    path: HRLinkPaths.AllCompanies,
+    path: Paths.HRLink.AllCompanies,
     component: CompanySubHeader,
     props: {
       icon: Buildings,
@@ -160,7 +157,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.CompanyJobOffers,
+    path: Paths.HRLink.CompanyJobOffers,
     component: CompanySubHeader,
     props: {
       icon: JobOffersIcon,
@@ -168,7 +165,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.CompanyEvents,
+    path: Paths.HRLink.CompanyEvents,
     component: CompanyInformationSubHeader,
     props: {
       icon: Medal,
@@ -176,7 +173,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.CompanyFavorites,
+    path: Paths.HRLink.CompanyFavorites,
     component: CompanySubHeader,
     props: {
       icon: Heart,
@@ -184,7 +181,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.CompanyRequested,
+    path: Paths.HRLink.CompanyRequested,
     component: CompanySubHeader,
     props: {
       icon: DeviceMessage,
@@ -192,7 +189,7 @@ export const HRLinkSubHeaders: any = [
     },
   },
   {
-    path: HRLinkPaths.CompanyInformation,
+    path: Paths.HRLink.CompanyInformation,
     component: CompanySubHeader,
     props: {
       icon: HomeHashtag,

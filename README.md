@@ -696,11 +696,11 @@ pnpm storybook             # Starts on http://localhost:6006
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from '@core/providers';
-import { Layout } from '@core/components';
+import { Layout } from '@hrbox/uikit/components';
 
 // Import your module components
 import HomePage from '../src/pages/HomePage';
-import FeaturePage from '../src/features/your-feature/pages/FeaturePage';
+import FeaturePage from '../src/pages/your-feature/pages/FeaturePage';
 
 export default function App() {
   return (

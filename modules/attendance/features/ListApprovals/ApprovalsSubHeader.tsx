@@ -1,4 +1,4 @@
-import { AppPageTitle } from '@root/core';
+import { AppPageTitle } from '@hrbox/uikit/components';
 
 const ApprovalsSubHeader=(props:any)=>{
   return(

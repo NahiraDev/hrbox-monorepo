@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { serviceRegistry } from '@hrbox/core/helpers';
 import React from "react";
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full';
@@ -18,7 +17,6 @@ const sizeClasses: Record<ModalSize, any> = {
 };
 
 export const AppModal = () => {
-  const getModuleName: string | undefined = serviceRegistry.getModuleName();
   const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
   const handleBackdropClick = () => {

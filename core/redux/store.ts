@@ -1,67 +1,63 @@
-import type { Persistor } from 'redux-persist/es/types';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { moduleRegistry } from '@hrbox/modules/registry';
 
-import { configureStore, type EnhancedStore } from '@reduxjs/toolkit';
-import { type PersistConfig, persistReducer, persistStore } from 'redux-persist';
-import { serviceRegistry } from '@core/helpers';
+// Core slices
+import authReducer from '@core/redux/slices/authSlice';
+import themeReducer from '@core/redux/slices/themeSlice';
+import languageReducer from '@core/redux/slices/languageSlice';
+import formCacheReducer from '@core/redux/slices/formCacheSlice';
 
-import { createRootReducer } from '@core/redux';
-
-const storageInstance = {
-  getItem: (key: string) => {
-    return Promise.resolve(window.localStorage.getItem(key));
-  },
-  setItem: (key: string, value: string) => {
-    return Promise.resolve(window.localStorage.setItem(key, value));
-  },
-  removeItem: (key: string) => {
-    return Promise.resolve(window.localStorage.removeItem(key));
-  },
+const persistConfig = {
+  key: 'hrbox-v3',
+  storage,
+  whitelist: ['auth', 'theme', 'language'],
 };
 
-export const createStoreWithReducers = (): { store: EnhancedStore; persistor: Persistor } => {
-  const rootReducer = createRootReducer({});
-  const pluginApis: any[] = serviceRegistry.getAllApis();
-  const uniqueMiddlewares = Array.from(new Set(pluginApis.map((api) => api.middleware)));
+export function createStoreWithModules(enabledModules: string[]) {
+  const moduleReducers = moduleRegistry.getAllReducers();
+  const moduleApis = moduleRegistry.getAllApis();
 
-  if (!storageInstance) {
-    const store = configureStore({
-      reducer: rootReducer,
-      devTools: { name: 'HRBOX' },
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(uniqueMiddlewares),
-    });
-
-    return { store, persistor: null as unknown as Persistor };
-  }
-
-  const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
-    key: 'root',
-    storage: storageInstance,
-    whitelist: ['language' , 'auth' , 'formCache'],
-  };
+  // Combine all slices
+  const rootReducer = combineReducers({
+    auth: authReducer,
+    theme: themeReducer,
+    language: languageReducer,
+    formCache: formCacheReducer,
+    ...moduleReducers,
+  });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+  // Create store
   const store = configureStore({
     reducer: persistedReducer,
-    devTools: { name: 'HRBOX' },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) => {
+      const middleware = getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: [
-            'persist/PERSIST',
-            'persist/REHYDRATE',
-            'persist/FLUSH',
-            'persist/PAUSE',
-            'persist/PURGE',
-            'persist/REGISTER',
-          ],
+          ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
         },
-      }).concat(uniqueMiddlewares),
+      });
+
+      moduleApis.forEach((api) => {
+        if (api.middleware) {
+          middleware.push(api.middleware);
+        }
+      });
+
+      return middleware;
+    },
+    devTools: import.meta.env.DEV,
   });
+
+  setupListeners(store.dispatch);
 
   const persistor = persistStore(store);
 
   return { store, persistor };
-};
-export type RootState = ReturnType<ReturnType<typeof createRootReducer>>;
-export type AppDispatch = ReturnType<typeof createStoreWithReducers>['store']['dispatch'];
+}
+
+export type RootState = ReturnType<ReturnType<typeof createStoreWithModules>['store']['getState']>;
+export type AppDispatch = ReturnType<typeof createStoreWithModules>['store']['dispatch'];

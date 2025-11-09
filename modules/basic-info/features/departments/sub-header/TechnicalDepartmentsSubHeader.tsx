@@ -1,4 +1,4 @@
-import { AppButton } from '@core/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { ArrowLeft } from 'iconsax-react';
 
 const TechnicalDepartmentsSubHeader = (props: any) => {

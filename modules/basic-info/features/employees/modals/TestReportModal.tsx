@@ -1,4 +1,4 @@
-import {  AppInput, AppModal } from '@core/components';
+import {  AppInput, AppModal } from '@hrbox/uikit/components';
 import {  TickSquare } from 'iconsax-react';
 
 export const TestReportModal = () => {

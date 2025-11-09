@@ -1,25 +1,8 @@
 packages:
   - core
-  - core/*
   - modules
   - modules/*
+  - routes
   - UIKit
-  - UIKit/*
   - launcher
   - proxy-server
-
-ignoredBuiltDependencies:
-  - '@swc/core'
-
-onlyBuiltDependencies:
-  - '@heroui/shared-utils'
-  - '@tailwindcss/oxide'
-  - cwebp-bin
-  - esbuild
-  - gifsicle
-  - jpegtran-bin
-  - mozjpeg
-  - optipng-bin
-  - pngquant-bin
-  - sharp
-  - unrs-resolver
