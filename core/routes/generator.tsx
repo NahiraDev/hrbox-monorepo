@@ -1,69 +1,125 @@
-import { createRoute } from '@tanstack/react-router';
+import { createRoute, redirect } from '@tanstack/react-router';
 import { rootRoute } from '@hrbox/routes/__root';
-import { BaseLayout } from '@hrbox/core/layouts/BaseLayout';
-import { AuthLayout } from '@hrbox/core/layouts/AuthLayout';
-import { Panel } from '@core/config/design';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
+import type { ModulePlugin, ModuleRoute } from '@hrbox/modules/types';
+import { Panel, RoleSlug } from '@core/config/theme';
 import { Spinner } from '@heroui/react';
-import { ProtectedRoute } from "@core/routes/protectedRoute";
-import { ModulePlugin } from "@module/types";
+import { extractPanelFromPath } from "@core/helpers/extractPanelFromPath";
 
-interface ModuleContent {
-  path: string;
-  component: React.ComponentType;
+// ============================================
+// Types
+// ============================================
+
+interface RouteContext {
+  auth?: {
+    isAuthenticated: boolean;
+    needsRoleSelection: boolean;
+    currentPanel: Panel | null;
+    selectedRole: any;
+    user: any;
+  };
 }
 
-interface ModuleSubHeader {
-  path: string;
-  component: React.ComponentType;
-  props?: Record<string, any>;
-}
+// ============================================
+// Generate TanStack Routes from Module
+// ============================================
 
-/**
- * ✅ تولید مسیرهای ماژول‌ها به صورت خودکار
- */
 export function generateModuleRoutes(module: ModulePlugin) {
+  if (!module.routes || module.routes.length === 0) {
+    return [];
+  }
+
   const isAuthModule = module.name === 'sso';
-  const Layout = isAuthModule ? AuthLayout : BaseLayout;
 
-  return (module.contents ?? []).map((content: ModuleContent) => {
-    // پیدا کردن زیر هدر
-    const subHeader = (module.subHeaders ?? []).find(
-      (s: ModuleSubHeader) => s.path === content.path
-    );
+  return module.routes.map((route: ModuleRoute) => {
+    const meta = route.meta || {};
+    const requireAuth = meta.requireAuth !== false;
+    const requiredPanel = extractPanelFromPath(route.path);
+    const requiredRoles = meta.requiredRoles || [];
+    const requiredPermissions = meta.requiredPermissions || [];
 
-    // استخراج پنل از مسیر (مثلا /hrbox/... → hrbox)
-    const pathSegments = content.path.split('/').filter(Boolean);
-    const panelFromPath = pathSegments[0] as Panel | undefined;
+    // Component
+    const Component = route.component;
 
-    const Component = content.component;
-
+    // ============================================
+    // Create TanStack Route
+    // ============================================
     return createRoute({
       getParentRoute: () => rootRoute,
-      path: content.path,
+      path: route.path,
+
+      // ============================================
+      // Before Load Hook (Guards)
+      // ============================================
+      beforeLoad: async ({ context, location }: { context: RouteContext; location: any }) => {
+        // 1️⃣ اگر route نیاز به احراز هویت ندارد
+        if (!requireAuth) {
+          return {};
+        }
+
+        // 2️⃣ بررسی لاگین
+        if (!context.auth?.isAuthenticated) {
+          throw redirect({
+            to: '/sso/login',
+            search: { redirect: location.pathname },
+          });
+        }
+
+        // 3️⃣ بررسی نیاز به انتخاب نقش
+        if (context.auth?.needsRoleSelection) {
+          throw redirect({
+            to: '/sso/select-role',
+            search: { redirect: location.pathname },
+          });
+        }
+
+        // 4️⃣ بررسی پنل
+        if (requiredPanel && context.auth?.currentPanel !== requiredPanel) {
+          throw redirect({ to: '/403' });
+        }
+
+        // 5️⃣ بررسی نقش
+        if (requiredRoles.length > 0) {
+          const userRole = context.auth?.selectedRole?.slug;
+          const hasRole = requiredRoles.includes(userRole as RoleSlug);
+
+          if (!hasRole) {
+            throw redirect({ to: '/403' });
+          }
+        }
+
+        // 6️⃣ بررسی مجوز
+        if (requiredPermissions.length > 0) {
+          const userPermissions = context.auth?.selectedRole?.permissions || [];
+          const hasPermission = requiredPermissions.some((perm) =>
+            userPermissions.includes(perm)
+          );
+
+          if (!hasPermission) {
+            throw redirect({ to: '/403' });
+          }
+        }
+
+        // ✅ Access granted
+        return {
+          pageTitle: meta.title,
+          breadcrumb: meta.title,
+        };
+      },
+
+      // ============================================
+      // Component with Suspense
+      // ============================================
       component: () => (
-        <Layout
-          subHeader={subHeader?.component}
-          subHeaderProps={subHeader?.props}
+        <Suspense
+          fallback={
+            <div className="flex h-screen items-center justify-center bg-panel-background">
+              <Spinner size="lg" color="primary" />
+            </div>
+          }
         >
-          <Suspense
-            fallback={
-              <div className="flex h-full items-center justify-center">
-                <Spinner size="lg" color="primary" />
-              </div>
-            }
-          >
-            {isAuthModule ? (
-              // ماژول احراز هویت بدون محافظت
-              <Component />
-            ) : (
-              // سایر ماژول‌ها نیاز به محافظت دارند
-              <ProtectedRoute requiredPanel={panelFromPath}>
-                <Component />
-              </ProtectedRoute>
-            )}
-          </Suspense>
-        </Layout>
+          <Component />
+        </Suspense>
       ),
     });
   });

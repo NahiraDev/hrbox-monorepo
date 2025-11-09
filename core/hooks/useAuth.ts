@@ -12,7 +12,7 @@ import {
   type User,
   type UserRole,
 } from '@hrbox/core/redux/slices/authSlice';
-import type { Domain } from '@core/config/design';
+import { Domain } from "@hrbox/core/config/theme";
 
 export function useAuth() {
   const dispatch = useAppDispatch();
@@ -27,7 +27,6 @@ export function useAuth() {
   const error = useAppSelector((state:any) => state.auth.error);
 
   return {
-    // حالت
     isAuthenticated,
     user,
     roles,
@@ -38,7 +37,6 @@ export function useAuth() {
     loading,
     error,
 
-    // تابع‌ها
     setCurrentDomain: (domain: Domain) => dispatch(setCurrentDomain(domain)),
 
     loginSuccess: (user: User, token: string, refreshToken: string) =>

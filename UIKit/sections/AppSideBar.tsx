@@ -1,22 +1,25 @@
 import { ArrowRight2, ArrowLeft2, Setting2, Global, LogoutCurve } from 'iconsax-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 
 import { AppButton } from '@hrbox/uikit/components';
-import { useAppDispatch, useAppSelector } from '@hrbox/core/redux/hooks';
+import { useAppDispatch } from '@hrbox/core/redux/hooks';
 import { useLanguage } from '@hrbox/core/hooks/useLanguage';
 import { useAuth } from '@hrbox/core/hooks/useAuth';
 import { moduleRegistry } from '@hrbox/modules/registry';
-import { useLogout } from "@core/hooks/useLogout";
+import { useLogout } from "@hrbox/core/hooks/useLogout";
+import { useModuleAccess } from "@hrbox/core/hooks/useModuleAccess";
+import { getCurrentDomain } from "@hrbox/core/config/theme";
 
 export const AppSideBar = () => {
+  const { getModuleMenu } = useModuleAccess();
+  const currentModule = getCurrentDomain();
+  const menu = getModuleMenu(currentModule);
   const { t } = useTranslation();
-  const {push} = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  // Hooks جدید
   const { lang } = useLanguage();
   const { logout, currentPanel } = useAuth();
 
@@ -65,7 +68,6 @@ export const AppSideBar = () => {
     }
   };
 
-  // بارگذاری منوی ماژول
   useEffect(() => {
     if (currentPanel) {
       const module = moduleRegistry.getModule(currentPanel);

@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '@hrbox/core/redux/hooks';
 import { roleSelected } from '@hrbox/core/redux/slices/authSlice';
 import { useSelectRoleMutation } from '@module/sso/apis/Auth';
 import { useNavigation } from '@hrbox/core/hooks/useNavigation';
-import { getRoleConfig, type RoleSlug } from '@core/config/theme/roles';
+import { getRoleConfig, type RoleSlug } from '@hrbox/core/config/theme/roles';
 import { Button, Card, CardBody } from "@heroui/react";
 
 export function SelectRolePage() {

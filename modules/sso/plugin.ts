@@ -1,10 +1,9 @@
 import { lazy } from 'react';
 import type { ModulePlugin } from '@hrbox/modules/types';
-import { RoleSlug } from '@core/config/design';
 
-const LoginPage = lazy(() => import('./pages/Login'));
-const SelectRolePage = lazy(() => import('./pages/SelectRole'));
-const WelcomePage = lazy(() => import('./pages/Welcome'));
+const LoginPage = lazy(() => import('@hrbox/modules/sso/pages/Login'));
+const SelectRolePage = lazy(() => import('@hrbox/modules/sso/pages/SelectRole'));
+const WelcomePage = lazy(() => import('@hrbox/modules/sso/pages/Welcome'));
 
 export const SSOPlugin: ModulePlugin = {
   name: 'sso',

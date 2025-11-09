@@ -22,7 +22,6 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
 
-  // بررسی active بر اساس مسیر
   useEffect(() => {
     if (path) {
       const currentPath = window.location.pathname;

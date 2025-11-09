@@ -1,5 +1,4 @@
-import type { ComponentType, LazyExoticComponent } from 'react';
-import type { Panel, RoleSlug } from '@hrbox/core/config/theme';
+import React, { ComponentType, LazyExoticComponent } from 'react';
 
 export interface ModuleMenuItem {
   id: string;
@@ -34,33 +33,25 @@ export interface ModuleConfig {
   basePath: string;
   layout?: 'base' | 'auth' | 'empty';
 
-  // محتوا
   routes?: ModuleRoute[];
   menu?: ModuleMenuItem[];
   subHeaders?: ModuleSubHeader[];
 
-  // Redux
   reducers?: Record<string, any>;
 
-  // API
   api?: {
     baseUrl?: string;
     endpoints?: Record<string, string>;
   };
 
-  // دسترسی
   requiredRoles?: RoleSlug[];
   requiredPermissions?: string[];
 
-  // هوک‌ها
   prefetch?: () => Promise<void>;
   onModuleLoad?: () => void;
   onModuleUnload?: () => void;
 }
 
-/**
- * Plugin Interface - برای تمام ماژول‌ها
- */
 export interface ModulePlugin extends ModuleConfig {
   version: string;
   author?: string;

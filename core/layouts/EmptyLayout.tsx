@@ -2,9 +2,6 @@ import { Suspense } from 'react';
 import { Outlet } from '@tanstack/react-router';
 import { Spinner } from '@heroui/react';
 
-/**
- * ✅ Layout خالی برای صفحات خصوصی
- */
 export function EmptyLayout() {
   return (
     <Suspense

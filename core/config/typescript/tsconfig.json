@@ -11,14 +11,11 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": true,
-    "rootDir": "../../../",
-    "baseUrl": ".",
     "paths": {
-      "@core/*": ["../../../core/*"],
-      "@module/*": ["../../../modules/*"],
+      "@hrbox/modules/*": ["../../../modules/*"],
       "@hrbox/core/*": ["../../../core/*"],
       "@hrbox/uikit/*": ["../../../UIKit/*"],
-      "~/*": ["../../../*"]
+      "@*": ["../../../*"],
     },
     "typeRoots": ["node_modules/@types"],
     "types": ["node"],

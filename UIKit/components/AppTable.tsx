@@ -1,336 +1,487 @@
-  import React, { useEffect, useMemo, useRef, useState } from 'react';
-  import {
-    Table,
-    TableHeader,
-    TableBody,
-    TableColumn,
-    TableRow,
-    TableCell,
-    Tooltip,
-  } from '@heroui/react';
-  import { AppButton, AppPagination } from '@hrbox/uikit/components';
-  import { createPortal } from 'react-dom';
-  import { Edit, Trash } from 'iconsax-react';
-  export interface ColumnConfig<T = any> {
-    key: string;
-    label?: string;
-    width?: string | number;
-    align?: 'left' | 'center' | 'right' | 'start' | 'end';
-    render?: (value: any, row: T, index: number) => React.ReactNode;
-    headerRender?: () => React.ReactNode;
-    headerClassName?: string | ((col: ColumnConfig<T>) => string);
-    cellClassName?: string | ((value: any, row: T, index: number) => string);
-    visible?: boolean | ((row: T) => boolean);
-    sortable?: boolean;
-  }
+// ============================================
+// components/tables/AppTable.tsx (ADVANCED)
+// ============================================
 
-  export interface ColumnGroup {
-    label: string;
-    startKey: string;
-    endKey: string;
-    headerClassName?: string;
-  }
+import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+  Tooltip,
+  Spinner,
+} from '@heroui/react';
+import { AppButton } from '@hrbox/uikit/components';
+import { createPortal } from 'react-dom';
+import { Edit, Trash, Eye, MoreVertical } from 'iconsax-react';
+import clsx from 'clsx';
 
-  export interface RowAction<T = any> {
-    label: string;
-    icon?: React.ReactNode;
-    onClick: (row: T, index: number) => void;
-    visible?: (row: T) => boolean;
-    color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-  }
+/**
+ * ============================================
+ * TYPES & INTERFACES
+ * ============================================
+ */
 
-  export interface ExpandableConfig<T = any> {
-    render: (row: T, index: number, cellType?: 'first' | 'second') => React.ReactNode;
-    secondCellRender?: (row: T, index: number) => React.ReactNode;
-    expandedRowClassName?: string;
-    onExpand?: (row: T, index: number, isExpanded: boolean, cellType?: 'first' | 'second') => void;
-    defaultExpanded?: boolean | ((row: T) => boolean);
-  }
+export enum SortDirection {
+  ASC = 'asc',
+  DESC = 'desc',
+}
 
-  export interface TableStyleConfig {
-    containerClassName?: string;
-    tableClassName?: string;
-    headerClassName?: string;
-    bodyClassName?: string;
-    rowClassName?: string | ((row: any, index: number) => string);
-    cellClassName?: string;
-    emptyClassName?: string;
-    loadingClassName?: string;
-  }
+export interface ColumnConfig<T = any> {
+  key: string;
+  label?: string;
+  width?: string | number;
+  minWidth?: string | number;
+  maxWidth?: string | number;
+  align?: 'left' | 'center' | 'right';
+  sortable?: boolean;
+  filterable?: boolean;
 
-  export interface AppTableProps<T = any> {
-    data: T[];
-    columns?: ColumnConfig<T>[];
-    columnGroups?: ColumnGroup[];
-    rowActions?: RowAction<T>[];
-    expandable?: ExpandableConfig<T>;
-    selectable?: boolean;
-    onRowClick?: (row: T, index: number) => void;
-    onSelectionChange?: (selectedRows: T[], selectedIndices: number[]) => void;
-    rowKey?: string | ((row: T, index: number) => string | number);
-    hasPagination?: boolean;
-    pageSize?: number;
-    variant?: 'default' | 'attendance' | 'bordered' | 'striped' | 'minimal';
-    styles?: TableStyleConfig;
-    loading?: boolean;
-    error?: string;
-    emptyMessage?: string | React.ReactNode;
-    showStatus?: boolean;
-    onEdit?: (row: T, index: number) => void;
-    onDelete?: (row: T, index: number) => void;
-  }
+  // Rendering
+  render?: (value: any, row: T, index: number) => React.ReactNode;
+  headerRender?: () => React.ReactNode;
 
-  export const AppTable = <T extends Record<string, any>>({
-    data = [],
-    columns,
-    columnGroups,
-    rowActions,
-    expandable,
-    selectable = false,
-    onRowClick,
-    onSelectionChange,
-    rowKey = 'id',
-    hasPagination = true,
-    pageSize = 10,
-    variant = 'default',
-    styles = {},
-    loading = false,
-    error,
-    showStatus = false,
-    onEdit,
-    onDelete,
-    emptyMessage = 'No data available',
-  }: AppTableProps<T>) => {
-    const shouldPaginate = variant === 'attendance' ? false : hasPagination;
+  // Styling
+  headerClassName?: string | ((col: ColumnConfig<T>) => string);
+  cellClassName?: string | ((value: any, row: T, index: number) => string);
+
+  // Visibility
+  visible?: boolean | ((row: T) => boolean);
+
+  // Formatting
+  format?: (value: any) => string;
+  type?: 'text' | 'number' | 'date' | 'boolean' | 'email' | 'phone' | 'custom';
+}
+
+export interface RowAction<T = any> {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  onClick: (row: T, index: number) => void | Promise<void>;
+  visible?: (row: T, index: number) => boolean;
+  color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  confirmMessage?: string; // نمایش تایید
+  disabled?: (row: T) => boolean;
+}
+
+export interface ExpandableConfig<T = any> {
+  render: (row: T, index: number) => React.ReactNode;
+  expandedRowClassName?: string;
+  onExpand?: (row: T, index: number, isExpanded: boolean) => void | Promise<void>;
+  defaultExpanded?: boolean | ((row: T) => boolean);
+  expandButtonPosition?: 'start' | 'end';
+}
+
+export interface SortConfig {
+  key: string;
+  direction: SortDirection;
+}
+
+export interface FilterConfig {
+  [key: string]: any;
+}
+
+export interface TableStyleConfig {
+  containerClassName?: string;
+  tableClassName?: string;
+  headerClassName?: string;
+  bodyClassName?: string;
+  rowClassName?: string | ((row: any, index: number, isSelected: boolean) => string);
+  cellClassName?: string;
+  emptyClassName?: string;
+  loadingClassName?: string;
+}
+
+export interface AppTableProps<T = any> {
+  // Data
+  data: T[];
+  columns?: ColumnConfig<T>[];
+  rowKey?: string | ((row: T, index: number) => string | number);
+
+  // Behavior
+  selectable?: boolean;
+  onSelectionChange?: (selectedRows: T[], selectedIndices: number[]) => void;
+  onRowClick?: (row: T, index: number) => void;
+  rowActions?: RowAction<T>[];
+  expandable?: ExpandableConfig<T>;
+
+  // Sorting & Filtering
+  sortable?: boolean;
+  onSort?: (sort: SortConfig) => void;
+  defaultSort?: SortConfig;
+
+  filterable?: boolean;
+  onFilter?: (filters: FilterConfig) => void;
+
+  // Pagination
+  hasPagination?: boolean;
+  pageSize?: number;
+  totalItems?: number; // برای server-side pagination
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
+
+  // Display
+  variant?: 'default' | 'striped' | 'bordered' | 'minimal' | 'attendance';
+  styles?: TableStyleConfig;
+  density?: 'sm' | 'md' | 'lg'; // compact, normal, spacious
+
+  // States
+  loading?: boolean;
+  error?: string;
+  emptyMessage?: string | React.ReactNode;
+
+  // Features
+  showCheckbox?: boolean;
+  showRowNumber?: boolean;
+  showStatus?: boolean;
+  sticky?: boolean; // Sticky header
+
+  // Callbacks
+  onEdit?: (row: T, index: number) => void;
+  onDelete?: (row: T, index: number) => void;
+  onView?: (row: T, index: number) => void;
+}
+
+/**
+ * ============================================
+ * MAIN COMPONENT
+ * ============================================
+ */
+
+export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
+  (
+    {
+      data = [],
+      columns,
+      rowKey = 'id',
+
+      selectable = false,
+      onSelectionChange,
+      onRowClick,
+      rowActions,
+      expandable,
+
+      sortable = false,
+      onSort,
+      defaultSort,
+
+      filterable = false,
+      onFilter,
+
+      hasPagination = true,
+      pageSize = 10,
+      totalItems,
+      currentPage: controlledPage,
+      onPageChange,
+
+      variant = 'default',
+      styles = {},
+      density = 'md',
+
+      loading = false,
+      error,
+      emptyMessage = 'اطلاعات موجود نیست',
+
+      showCheckbox = selectable,
+      showRowNumber = false,
+      showStatus = false,
+      sticky = true,
+
+      onEdit,
+      onDelete,
+      onView,
+    },
+    ref
+  ) => {
+    // States
     const [currentPage, setCurrentPage] = useState(1);
+    const [sort, setSort] = useState<SortConfig | null>(defaultSort || null);
+    const [filters, setFilters] = useState<FilterConfig>({});
+    const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
     const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
     const [expandedRowPosition, setExpandedRowPosition] = useState<{
       top: number;
       left: number;
       width: number;
       rowIndex: number;
-      cellType: 'first' | 'second';
-    }|null>(null);
+    } | null>(null);
+    const [actionLoading, setActionLoading] = useState<string | null>(null);
     const tableContainerRef = useRef<HTMLDivElement>(null);
-    const autoColumns = useMemo<ColumnConfig<T>[]>(() => {
+
+    // Use controlled or uncontrolled page
+    const page = controlledPage || currentPage;
+
+    /**
+     * ============================================
+     * AUTO COLUMNS
+     * ============================================
+     */
+
+    const autoColumns = useMemo<ColumnConfig<any>[]>(() => {
       if (columns) return columns;
       if (data.length === 0) return [];
 
       return Object.keys(data[0])
-        .filter(key => key !== 'id')
-        .map(key => ({
+        .filter((key) => !['id', '_id'].includes(key))
+        .map((key) => ({
           key,
-          label: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
+          label: key.replace(/([A-Z])/g, ' $1').trim(),
           align: 'center' as const,
+          type: 'text' as const,
         }));
     }, [columns, data]);
 
+    /**
+     * ============================================
+     * PAGINATION
+     * ============================================
+     */
+
     const paginatedData = useMemo(() => {
-      if (!shouldPaginate) return data;
-      const startIndex = (currentPage - 1) * pageSize;
+      if (!hasPagination) return data;
+      const startIndex = (page - 1) * pageSize;
       return data.slice(startIndex, startIndex + pageSize);
-    }, [data, currentPage, pageSize, shouldPaginate]);
+    }, [data, page, pageSize, hasPagination]);
 
-    const getColumnGroupInfo = (colKey: string) => {
-      if (!columnGroups) return null;
+    const totalPages = useMemo(() => {
+      return Math.ceil((totalItems || data.length) / pageSize);
+    }, [totalItems, data.length, pageSize]);
 
-      for (const group of columnGroups) {
-        const startIdx = autoColumns.findIndex(c => c.key === group.startKey);
-        const endIdx = autoColumns.findIndex(c => c.key === group.endKey);
-        const currentIdx = autoColumns.findIndex(c => c.key === colKey);
-
-        if (currentIdx >= startIdx && currentIdx <= endIdx) {
-          return {
-            group,
-            isFirst: currentIdx === startIdx,
-            isLast: currentIdx === endIdx,
-            isOnly: startIdx === endIdx,
-          };
+    const handlePageChange = useCallback(
+      (newPage: number) => {
+        if (onPageChange) {
+          onPageChange(newPage);
+        } else {
+          setCurrentPage(newPage);
         }
-      }
-      return null;
-    };
+      },
+      [onPageChange]
+    );
 
-    const getRowKey = (row: T, index: number): string | number => {
-      if (typeof rowKey === 'function') return rowKey(row, index);
-      return row[rowKey] ?? index;
-    };
+    /**
+     * ============================================
+     * SORTING
+     * ============================================
+     */
 
-    const getRowClassName = (row: T, index: number): string => {
-      const baseClass = 'hover:bg-[#DCF0F9] dark:hover:bg-[#04425c66] transition-colors cursor-pointer  ';
-      let statusClass='';
-      if(variant==='attendance'){
-        const dateValue=row['Date']?.toString()||'';
-      if(dateValue.includes('Absence')){
-        statusClass='bg-red-100 !rounded-2xl'
+    const handleSort = useCallback(
+      (key: string) => {
+        if (!sortable) return;
+
+        let newDirection = SortDirection.ASC;
+        if (sort?.key === key && sort.direction === SortDirection.ASC) {
+          newDirection = SortDirection.DESC;
+        }
+
+        const newSort: SortConfig = { key, direction: newDirection };
+        setSort(newSort);
+        onSort?.(newSort);
+      },
+      [sort, sortable, onSort]
+    );
+
+    /**
+     * ============================================
+     * SELECTION
+     * ============================================
+     */
+
+    const handleRowSelect = useCallback(
+      (index: number) => {
+        const newSelected = new Set(selectedRows);
+        if (newSelected.has(index)) {
+          newSelected.delete(index);
+        } else {
+          newSelected.add(index);
+        }
+        setSelectedRows(newSelected);
+
+        const selectedItems = Array.from(newSelected)
+          .map((idx) => paginatedData[idx])
+          .filter(Boolean);
+        onSelectionChange?.(selectedItems, Array.from(newSelected));
+      },
+      [selectedRows, paginatedData, onSelectionChange]
+    );
+
+    const handleSelectAll = useCallback(() => {
+      if (selectedRows.size === paginatedData.length) {
+        setSelectedRows(new Set());
+        onSelectionChange?.([], []);
+      } else {
+        const newSelected = new Set(paginatedData.map((_, idx) => idx));
+        setSelectedRows(newSelected);
+        onSelectionChange?.(paginatedData, Array.from(newSelected));
       }
-      }
+    }, [selectedRows, paginatedData, onSelectionChange]);
+
+    /**
+     * ============================================
+     * ROW ACTIONS
+     * ============================================
+     */
+
+    const handleRowAction = useCallback(
+      async (action: RowAction, row: any, index: number) => {
+        if (action.confirmMessage) {
+          if (!confirm(action.confirmMessage)) return;
+        }
+
+        setActionLoading(action.id);
+        try {
+          await action.onClick(row, index);
+        } finally {
+          setActionLoading(null);
+        }
+      },
+      []
+    );
+
+    /**
+     * ============================================
+     * EXPAND
+     * ============================================
+     */
+
+    const handleRowExpand = useCallback(
+      async (index: number) => {
+        const newExpanded = new Set(expandedRows);
+        const wasExpanded = newExpanded.has(index);
+
+        if (wasExpanded) {
+          newExpanded.delete(index);
+          setExpandedRowPosition(null);
+        } else {
+          newExpanded.add(index);
+          // Calculate position
+          setTimeout(() => {
+            const rowElement = document.querySelector(
+              `[data-row-index="${index}"]`
+            ) as HTMLTableRowElement;
+            if (rowElement) {
+              const rect = rowElement.getBoundingClientRect();
+              setExpandedRowPosition({
+                top: rect.bottom + window.scrollY + 8,
+                left: rect.left + window.scrollX,
+                width: rect.width,
+                rowIndex: index,
+              });
+            }
+          }, 0);
+        }
+
+        setExpandedRows(newExpanded);
+        if (expandable?.onExpand) {
+          await expandable.onExpand(
+            paginatedData[index],
+            index,
+            !wasExpanded
+          );
+        }
+      },
+      [expandedRows, paginatedData, expandable]
+    );
+
+    /**
+     * ============================================
+     * RENDERING
+     * ============================================
+     */
+
+    const getRowClassName = (row: any, index: number): string => {
+      const isSelected = selectedRows.has(index);
+      const baseClass =
+        'hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors';
+
       const customClass =
         typeof styles.rowClassName === 'function'
-          ? styles.rowClassName(row, index)
+          ? styles.rowClassName(row, index, isSelected)
           : styles.rowClassName || '';
-      return `${baseClass} ${statusClass} ${customClass}`;
+
+      const variantClass = {
+        striped: index % 2 === 0 ? 'bg-neutral-50 dark:bg-neutral-800' : '',
+        bordered: 'border-b border-neutral-200 dark:border-neutral-700',
+        minimal: '',
+        attendance: '',
+        default: '',
+      }[variant];
+
+      return clsx(baseClass, variantClass, customClass, isSelected && 'bg-primary-100 dark:bg-primary-900/40');
     };
 
-    const getCellClassName = (col: ColumnConfig<T>, value: any, row: T, index: number): string => {
-      if (typeof col.cellClassName === 'function') {
-        return col.cellClassName(value, row, index);
-      }
-      return col.cellClassName || '';
+    const getDensityClass = () => {
+      return {
+        sm: 'py-2 px-2',
+        md: 'py-3 px-3',
+        lg: 'py-4 px-4',
+      }[density];
     };
 
-    const getHeaderClassName = (col: ColumnConfig<T>): string => {
-      const groupInfo = getColumnGroupInfo(col.key);
-
-      let baseClass =
-        variant === 'default'
-          ? 'text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12'
-          : '';
-
-      if (groupInfo && variant === 'attendance') {
-        const { group, isFirst, isLast, isOnly } = groupInfo;
-        const roundedClass = isOnly
-          ? 'rounded-xl'
-          : isFirst
-            ? 'rounded-l-xl'
-            : isLast
-              ? 'rounded-r-xl'
-              : '';
-        const spacingClass = !isLast ? 'border-r-4 border-transparent' : '';
-        baseClass = `${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
-      }
-
-      if (typeof col.headerClassName === 'function') {
-        return `${baseClass} ${col.headerClassName(col)}`;
-      }
-      return `${baseClass} ${col.headerClassName || ''}`;
-    };
-
-    const renderCellValue = (col: ColumnConfig<T>, row: T, index: number) => {
+    const renderCellValue = (col: ColumnConfig, row: any, index: number) => {
       const value = row[col.key];
 
       if (col.render) {
         return col.render(value, row, index);
       }
 
-      if (typeof value === 'boolean') {
-        return value ? 'Yes' : 'No';
+      if (col.format) {
+        return col.format(value);
       }
 
-      if (value === null || value === undefined) {
-        return '-';
+      switch (col.type) {
+        case 'boolean':
+          return value ? '✓' : '✗';
+        case 'date':
+          return value
+            ? new Date(value).toLocaleDateString()
+            : '-';
+        case 'number':
+          return typeof value === 'number'
+            ? value.toLocaleString()
+            : value;
+        case 'email':
+          return (
+            <a href={`mailto:${value}`} className="text-primary hover:underline">
+              {value}
+            </a>
+          );
+        default:
+          return value ?? '-';
       }
-
-      if (col.key.toLowerCase().includes('date') && value) {
-        return new Date(value).toLocaleDateString();
-      }
-
-      return String(value);
     };
-    useEffect(() => {
-      if (!expandedRowPosition) return;
 
-      const updatePosition = () => {
-        const rowElement = document.querySelector(
-          `[data-row-index="${expandedRowPosition.rowIndex}"]`
-        ) as HTMLTableRowElement;
-
-        if (!rowElement) return;
-        const cellIndex = expandedRowPosition.cellType === 'first' ? 0 : 1;
-        const cellElement = rowElement.children[cellIndex] as HTMLTableCellElement;
-        if (!cellElement) return;
-        const cellRect = cellElement.getBoundingClientRect();
-        setExpandedRowPosition(prev =>
-          prev ? {
-            ...prev,
-            top: cellRect.bottom + window.scrollY + 8,
-            left: cellRect.left + window.scrollX,
-            width: cellRect.width,
-          } : null
-        );
-      };
-
-      window.addEventListener('scroll', updatePosition, true);
-      window.addEventListener('resize', updatePosition);
-
-      return () => {
-        window.removeEventListener('scroll', updatePosition,true);
-        window.removeEventListener('resize', updatePosition);
-      };
-    }, [expandedRowPosition]);
-
-    const renderRowActions = (row: T, index: number) => {
-      if (!rowActions || rowActions.length === 0) return null;
-
-      return (
-        <div className='flex items-center justify-center gap-2'>
-          {rowActions.map((action, idx) => {
-            const visible = action.visible ? action.visible(row) : true;
-            if (!visible) return null;
-
-            return (
-              <Tooltip key={idx} content={action.label}>
-                <AppButton
-                  props={{
-                    size: 'sm',
-                    radius: 'full',
-                    variant: 'light',
-                    color: action.color,
-                    onPress: () => action.onClick(row, index),
-                    content: (
-                      <span className='cursor-pointer text-lg'>{action.icon || action.label}.</span>
-                    ),
-                  }}
-                />
-              </Tooltip>
-            );
-          })}
-        </div>
-      );
-    }
-    const renderStatusActions = (row: T, index: number) => {
-      return (
-        <div className='flex items-center justify-center gap-2'>
-              <AppButton
-                props={{
-                  size: 'sm',
-                  radius: 'full',
-                  variant: 'light',
-                  color: 'black',
-                  onPress: () => onEdit(row, index),
-                  content: <Edit />,
-                }}
-              />
-              <AppButton
-                props={{
-                  size: 'sm',
-                  radius: 'full',
-                  variant: 'light',
-                  color: 'black',
-                  onPress: () => onDelete(row, index),
-                  content: <Trash />,
-                }}
-              />
-        </div>
-      );
-    };
+    /**
+     * ============================================
+     * LOADING & ERROR STATES
+     * ============================================
+     */
 
     if (loading) {
       return (
         <div
-          className={`bg-primary-50 rounded-2xl p-8 dark:bg-[rgba(4,66,92,0.60)] ${styles.loadingClassName || ''}`}
+          ref={ref}
+          className={clsx(
+            'flex items-center justify-center rounded-2xl p-8',
+            'bg-neutral-50 dark:bg-neutral-800',
+            styles.loadingClassName
+          )}
         >
-          <div className='flex items-center justify-center'>
-            <div className='text-center text-gray-500'>Loading...</div>
-          </div>
+          <Spinner label="بارگذاری..." color="primary" />
         </div>
       );
     }
 
     if (error) {
       return (
-        <div className='rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20'>
-          <div className='text-center text-red-600 dark:text-red-400'>Error: {error}</div>
+        <div
+          ref={ref}
+          className="rounded-2xl border border-danger-200 bg-danger-50 p-4 dark:border-danger-800 dark:bg-danger-900/20"
+        >
+          <div className="text-center text-danger dark:text-danger-400">
+            ❌ خطا: {error}
+          </div>
         </div>
       );
     }
@@ -338,146 +489,278 @@
     if (!data || data.length === 0) {
       return (
         <div
-          className={`bg-primary-50 rounded-2xl p-4 dark:bg-[rgba(4,66,92,0.60)] ${styles.emptyClassName || ''}`}
+          ref={ref}
+          className={clsx(
+            'rounded-2xl p-8 text-center',
+            'bg-neutral-50 dark:bg-neutral-800',
+            styles.emptyClassName
+          )}
         >
-          <div className='text-center text-gray-500'>{emptyMessage}</div>
+          <div className="text-neutral-500 dark:text-neutral-400">
+            {emptyMessage}
+          </div>
         </div>
       );
     }
 
-    const headerColumns = autoColumns.map(col => (
-      <TableColumn key={col.key} className={getHeaderClassName(col)} style={{ width: col.width }}>
-        {col.headerRender ? col.headerRender() : col.label || col.key}
-      </TableColumn>
-    ));
+    /**
+     * ============================================
+     * HEADER COLUMNS
+     * ============================================
+     */
 
-    if (rowActions && rowActions.length > 0) {
+    const headerColumns: React.ReactNode[] = [];
+
+    // Checkbox
+    if (showCheckbox) {
+      headerColumns.push(
+        <TableColumn key="checkbox" width={40} className="text-center">
+          <input
+            type="checkbox"
+            checked={selectedRows.size === paginatedData.length && paginatedData.length > 0}
+            onChange={handleSelectAll}
+            className="cursor-pointer"
+          />
+        </TableColumn>
+      );
+    }
+
+    // Row Number
+    if (showRowNumber) {
+      headerColumns.push(
+        <TableColumn key="rowNumber" width={40} className="text-center">
+          #
+        </TableColumn>
+      );
+    }
+
+    // Expand Button
+    if (expandable) {
+      headerColumns.push(
+        <TableColumn key="expand" width={40} className="text-center">
+          ⬇️
+        </TableColumn>
+      );
+    }
+
+    // Data Columns
+    autoColumns.forEach((col) => {
       headerColumns.push(
         <TableColumn
-          key='actions'
-          className='bg-primary !h-12 text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
+          key={col.key}
+          width={col.width}
+          className={clsx(
+            'font-semibold text-white text-center',
+            'bg-primary dark:bg-primary-900',
+            getDensityClass(),
+            typeof col.headerClassName === 'function'
+              ? col.headerClassName(col)
+              : col.headerClassName
+          )}
+          onClick={() => sortable && handleSort(col.key)}
+          style={{
+            cursor: sortable ? 'pointer' : 'default',
+            minWidth: col.minWidth,
+            maxWidth: col.maxWidth,
+          }}
         >
-          Actions
+          <div className="flex items-center justify-center gap-1">
+            {col.headerRender ? col.headerRender() : col.label || col.key}
+            {sortable && sort?.key === col.key && (
+              <span>{sort.direction === SortDirection.ASC ? '↑' : '↓'}</span>
+            )}
+          </div>
+        </TableColumn>
+      );
+    });
+
+    // Actions
+    if (rowActions && rowActions.length > 0) {
+      headerColumns.push(
+        <TableColumn key="actions" width={100} className="text-center font-semibold">
+          عملیات
         </TableColumn>
       );
     }
 
     if (showStatus) {
       headerColumns.push(
-        <TableColumn
-          key='status'
-          className='bg-primary !h-12 text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
-        >
-          Status
+        <TableColumn key="status" width={100} className="text-center font-semibold">
+          وضعیت
         </TableColumn>
       );
     }
+
+    /**
+     * ============================================
+     * RENDER
+     * ============================================
+     */
+
     return (
       <div
-        ref={tableContainerRef}
-        className={`w-full shadow-light-tight/1 rounded-2xl  ${styles.containerClassName || ''}`}
+        ref={ref}
+        className={clsx('w-full rounded-2xl overflow-hidden', styles.containerClassName)}
       >
         <Table
           aria-label="Data table"
-          className={`${styles.tableClassName}`}
-          isHeaderSticky={variant === 'attendance'}
+          className={styles.tableClassName}
+          isHeaderSticky={sticky}
           classNames={{
-            base: variant === 'attendance' ? "max-h-[750px] bg-transparent " : "!h-full bg-transparent !shadow-none",
-            wrapper: variant === 'attendance'
-              ? "max-h-full bg-transparent overflow-hidden"
-              : "bg-transparent h-full !shadow-none",
-            table: "min-w-full ",
-            thead: "[&>tr]:first:shadow-none ",
-            tr:'!rounded-lg',
-            th: variant==='attendance'?'first:border-r-8 first:border-r-transparent first:rounded-lg first:bg-neutral-250 [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-lg [&:nth-of-type(2)]:bg-neutral-250 [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-lg [&:nth-of-type(8)]:rounded-r-lg [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-lg [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500 py-3 px-2'
-              :"bg-primary-400",
-            td:'py-3 px-2 first:rounded-l-lg last:rounded-r-lg'
+            wrapper: 'shadow-none bg-white dark:bg-neutral-800',
+            table: 'min-w-full',
+            th: clsx(getDensityClass(), 'bg-primary dark:bg-primary-900 text-white'),
+            td: clsx(getDensityClass(), 'border-b border-neutral-200 dark:border-neutral-700'),
+            tr: 'hover:bg-primary-50 dark:hover:bg-primary-900/20',
           }}
         >
-          <TableHeader className={styles.headerClassName}>{headerColumns}</TableHeader>
+          <TableHeader>{headerColumns}</TableHeader>
 
-          <TableBody className={styles.bodyClassName}>
+          <TableBody>
             {paginatedData.map((row, index) => {
-              const key = getRowKey(row, index);
+              const key = typeof rowKey === 'function'
+                ? rowKey(row, index)
+                : row[rowKey] || index;
 
-              const cells = autoColumns.map((col, colIndex) => {
+              const isSelected = selectedRows.has(index);
+              const isExpanded = expandedRows.has(index);
+
+              const cells: React.ReactNode[] = [];
+
+              // Checkbox
+              if (showCheckbox) {
+                cells.push(
+                  <TableCell key="checkbox" className="text-center">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleRowSelect(index)}
+                      className="cursor-pointer"
+                    />
+                  </TableCell>
+                );
+              }
+
+              // Row Number
+              if (showRowNumber) {
+                cells.push(
+                  <TableCell key="rowNumber" className="text-center text-sm">
+                    {(page - 1) * pageSize + index + 1}
+                  </TableCell>
+                );
+              }
+
+              // Expand Button
+              if (expandable) {
+                cells.push(
+                  <TableCell
+                    key="expand"
+                    className="text-center cursor-pointer hover:text-primary"
+                    onClick={() => handleRowExpand(index)}
+                  >
+                    {isExpanded ? '⬆️' : '⬇️'}
+                  </TableCell>
+                );
+              }
+
+              // Data Cells
+              autoColumns.forEach((col) => {
                 const value = row[col.key];
-                const cellClass = getCellClassName(col, value, row, index);
-                const isFirstCell = colIndex === 0;
-                const isSecondCell = colIndex === 1;
-
-                const handleCellClick = (cellType: 'first' | 'second') => (e: React.MouseEvent) => {
-                  e.stopPropagation();
-                  const cellElement = e.currentTarget as HTMLTableCellElement;
-                  const rowElement = cellElement.closest('tr') as HTMLTableRowElement;
-
-                  if (!rowElement || !cellElement) return;
-
-                  setExpandedRows(prev => {
-                    const newSet = new Set(prev);
-                    const wasExpanded = newSet.has(index) && expandedRowPosition?.cellType === cellType;
-
-                    if (wasExpanded) {
-                      newSet.delete(index);
-                      setExpandedRowPosition(null);
-                    } else {
-                      newSet.add(index);
-
-                      const tableContainer = tableContainerRef.current;
-                      const scrollWrapper = tableContainer?.querySelector('[data-slot="wrapper"]') as HTMLDivElement;
-
-                      const cellRect = cellElement.getBoundingClientRect();
-                      const tableRect = scrollWrapper?.getBoundingClientRect() || tableContainer?.getBoundingClientRect();
-
-                      if (!tableRect) return newSet;
-
-                      const tooltipHeight = 170;
-                      const spaceBelow = tableRect.bottom - cellRect.bottom;
-                      const shouldShowAbove = spaceBelow < tooltipHeight;
-
-                      setExpandedRowPosition({
-                        top: shouldShowAbove
-                          ? cellRect.top + window.scrollY - tooltipHeight - 8
-                          : cellRect.bottom + window.scrollY + 8,
-                        left: cellRect.left + window.scrollX,
-                        width: cellRect.width,
-                        rowIndex: index,
-                        cellType,
-                      });
-                    }
-
-                    expandable?.onExpand?.(row, index, !wasExpanded, cellType);
-                    return newSet;
-                  });
-                };
-                return (
+                cells.push(
                   <TableCell
                     key={col.key}
-                    className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ''}`}
-                    onClick={
-                      expandable && isFirstCell
-                        ? handleCellClick('first')
-                        : expandable && isSecondCell && expandable.secondCellRender
-                          ? handleCellClick('second')
-                          : undefined
-                    }
+                    className={clsx(
+                      'text-center text-sm',
+                      typeof col.cellClassName === 'function'
+                        ? col.cellClassName(value, row, index)
+                        : col.cellClassName
+                    )}
+                    onClick={() => onRowClick?.(row, index)}
                   >
                     {renderCellValue(col, row, index)}
                   </TableCell>
                 );
               });
+
+              // Actions
               if (rowActions && rowActions.length > 0) {
                 cells.push(
-                  <TableCell key='actions' className='text-secondary-400 text-xs'>
-                    {renderRowActions(row, index)}
+                  <TableCell key="actions" className="text-center">
+                    <div className="flex items-center justify-center gap-1">
+                      {rowActions.map((action) => {
+                        const visible = action.visible
+                          ? action.visible(row, index)
+                          : true;
+                        const disabled = action.disabled
+                          ? action.disabled(row)
+                          : false;
+
+                        if (!visible) return null;
+
+                        return (
+                          <Tooltip key={action.id} content={action.label}>
+                            <AppButton
+                              props={{
+                                size: 'sm',
+                                isIconOnly: true,
+                                variant: 'light',
+                                color: action.color,
+                                isDisabled: disabled || actionLoading === action.id,
+                                isLoading: actionLoading === action.id,
+                                onPress: () =>
+                                  handleRowAction(action, row, index),
+                                content: action.icon || '⋯',
+                              }}
+                            />
+                          </Tooltip>
+                        );
+                      })}
+                    </div>
                   </TableCell>
                 );
               }
 
+              // Status
               if (showStatus) {
                 cells.push(
-                  <TableCell key='status' className='text-secondary-400 text-xs'>
-                    {renderStatusActions(row, index)}
+                  <TableCell key="status" className="text-center">
+                    <div className="flex gap-1 justify-center">
+                      {onView && (
+                        <AppButton
+                          props={{
+                            size: 'sm',
+                            isIconOnly: true,
+                            variant: 'light',
+                            onPress: () => onView(row, index),
+                            content: <Eye size={16} />,
+                          }}
+                        />
+                      )}
+                      {onEdit && (
+                        <AppButton
+                          props={{
+                            size: 'sm',
+                            isIconOnly: true,
+                            variant: 'light',
+                            color: 'primary',
+                            onPress: () => onEdit(row, index),
+                            content: <Edit size={16} />,
+                          }}
+                        />
+                      )}
+                      {onDelete && (
+                        <AppButton
+                          props={{
+                            size: 'sm',
+                            isIconOnly: true,
+                            variant: 'light',
+                            color: 'danger',
+                            onPress: () => onDelete(row, index),
+                            content: <Trash size={16} />,
+                          }}
+                        />
+                      )}
+                    </div>
                   </TableCell>
                 );
               }
@@ -487,7 +770,7 @@
                   key={key}
                   data-row-index={index}
                   className={getRowClassName(row, index)}
-                  onClick={() => onRowClick?.(row, index)}
+                  onClick={() => !showCheckbox && onRowClick?.(row, index)}
                 >
                   {cells}
                 </TableRow>
@@ -495,39 +778,57 @@
             })}
           </TableBody>
         </Table>
-        {shouldPaginate && (
-        <div className=' flex justify-end px-4'>
-          <AppPagination
-            total={Math.ceil(data.length / pageSize)}
-            page={currentPage}
-            onChange={setCurrentPage}
-          />
-        </div>
-      )}
-        {expandable && expandedRowPosition && expandedRows.has(expandedRowPosition.rowIndex) && createPortal(
-          <div
-            style={{
-              position: 'absolute',
-              top: `${expandedRowPosition.top}px`,
-              left: `${expandedRowPosition.left}px`,
-              zIndex: 1000,
-            }}
-          >
-            {expandedRowPosition.cellType === 'first'
-              ? expandable.render(
-                paginatedData[expandedRowPosition.rowIndex],
-                expandedRowPosition.rowIndex,
-                'first'
-              )
-              : expandable.secondCellRender?.(
-                paginatedData[expandedRowPosition.rowIndex],
-                expandedRowPosition.rowIndex
-              )
-            }
-          </div>,
-          document.body
+
+        {/* Pagination */}
+        {hasPagination && (
+          <div className="flex justify-end items-center gap-2 p-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
+            <span className="text-sm text-neutral-600 dark:text-neutral-400">
+              صفحه {page} از {totalPages}
+            </span>
+            <div className="flex gap-1">
+              <button
+                disabled={page === 1}
+                onClick={() => handlePageChange(page - 1)}
+                className="px-3 py-1 rounded border disabled:opacity-50"
+              >
+                ←
+              </button>
+              <button
+                disabled={page === totalPages}
+                onClick={() => handlePageChange(page + 1)}
+                className="px-3 py-1 rounded border disabled:opacity-50"
+              >
+                →
+              </button>
+            </div>
+          </div>
         )}
 
+        {/* Expandable Row */}
+        {expandable &&
+          expandedRowPosition &&
+          expandedRows.has(expandedRowPosition.rowIndex) &&
+          createPortal(
+            <div
+              style={{
+                position: 'absolute',
+                top: `${expandedRowPosition.top}px`,
+                left: `${expandedRowPosition.left}px`,
+                width: `${expandedRowPosition.width}px`,
+                zIndex: 1000,
+              }}
+              className="bg-white dark:bg-neutral-800 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700"
+            >
+              {expandable.render(
+                paginatedData[expandedRowPosition.rowIndex],
+                expandedRowPosition.rowIndex
+              )}
+            </div>,
+            document.body
+          )}
       </div>
     );
-  };
+  }
+);
+
+AppTable.displayName = 'AppTable';

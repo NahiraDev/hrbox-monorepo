@@ -1,54 +1,85 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+export interface FormCacheEntry {
+  values: Record<string, any>;
+  timestamp: number;
+  mode?: 'create' | 'edit' | 'view';
+}
+
 export interface FormCacheState {
-  [formId: string]: {
-    values: Record<string, any>;
-    timestamp: number;
-  };
+  [formId: string]: FormCacheEntry;
 }
 
 const initialState: FormCacheState = {};
+
 
 export const formCacheSlice = createSlice({
   name: 'formCache',
   initialState,
   reducers: {
     updateFormField(
-      state,
-      action: PayloadAction<{ formId: string; fieldName: string; value: any }>
+        state,
+        action: PayloadAction<{
+          formId: string;
+          fieldName: string;
+          value: any;
+        }>
     ) {
       const { formId, fieldName, value } = action.payload;
 
       if (!state[formId]) {
-        state[formId] = { values: {}, timestamp: Date.now() };
+        state[formId] = {
+          values: {},
+          timestamp: Date.now(),
+        };
       }
 
       state[formId].values[fieldName] = value;
       state[formId].timestamp = Date.now();
     },
 
+    /**
+     * بروزرسانی تمام values
+     */
     updateFormValues(
-      state,
-      action: PayloadAction<{ formId: string; values: Record<string, any> }>
+        state,
+        action: PayloadAction<{
+          formId: string;
+          values: Record<string, any>;
+          mode?: 'create' | 'edit' | 'view';
+        }>
     ) {
-      const { formId, values } = action.payload;
+      const { formId, values, mode } = action.payload;
 
       state[formId] = {
         values: { ...values },
         timestamp: Date.now(),
+        mode,
       };
     },
 
+    /**
+     * پاک کردن cache یک فرم
+     */
     clearFormCache(state, action: PayloadAction<string>) {
       delete state[action.payload];
     },
 
+    /**
+     * پاک کردن تمام cache‌ها
+     */
     clearAllFormCaches(state) {
       return {};
     },
 
-    clearExpiredCaches(state, action: PayloadAction<number>) {
-      const expiryTime = action.payload; // in milliseconds
+    /**
+     * پاک کردن cache های منقضی شده
+     */
+    clearExpiredCaches(
+        state,
+        action: PayloadAction<number> // expiry time in ms
+    ) {
+      const expiryTime = action.payload;
       const now = Date.now();
 
       Object.keys(state).forEach((formId) => {
@@ -56,6 +87,10 @@ export const formCacheSlice = createSlice({
           delete state[formId];
         }
       });
+    },
+
+    getFormCache: (state, action: PayloadAction<string>) => {
+      return state[action.payload] || null;
     },
   },
 });
@@ -66,6 +101,7 @@ export const {
   clearFormCache,
   clearAllFormCaches,
   clearExpiredCaches,
+  getFormCache,
 } = formCacheSlice.actions;
 
 export default formCacheSlice.reducer;

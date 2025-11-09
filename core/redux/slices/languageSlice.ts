@@ -19,19 +19,15 @@ export const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
-    // تنظیم زبان
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.lang = action.payload;
       state.dir = action.payload === 'fa' ? 'rtl' : 'ltr';
 
-      // بروزرسانی i18n
       i18n.changeLanguage(action.payload);
 
-      // بروزرسانی DOM
       document.documentElement.lang = action.payload;
       document.documentElement.dir = state.dir;
 
-      // ذخیره در localStorage
       localStorage.setItem('lang', action.payload);
     },
 

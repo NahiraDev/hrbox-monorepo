@@ -1,6 +1,14 @@
-import { cn, Switch } from '@heroui/react';
+import { Switch, SwitchProps } from '@heroui/react';
+import { useAppSelector } from '@hrbox/core/redux/hooks';
+import clsx from 'clsx';
+import { forwardRef } from "react";
 
-import { useAppSelector } from '@hrbox/core/redux';
+interface AppSwitchProps extends SwitchProps {
+  label?: string;
+  formMode?: FormMode;
+  size?: 'sm' | 'md' | 'lg';
+  radius?: 'sm' | 'md' | 'lg' | 'full';
+}
 
 const sizeWrapper: Record<string, string> = {
   sm: '!w-[30px] !h-[18px]',
@@ -14,67 +22,68 @@ const sizeThumb: Record<string, string> = {
   lg: '!w-5 !h-5',
 };
 
-const sizeLabel: Record<string, string> = {
-  sm: 'text-xs',
-  md: 'text-sm',
-  lg: 'text-base',
-};
+/**
+ * ✅ AppSwitch - updated with FormMode
+ */
+export const AppSwitch = forwardRef<HTMLInputElement, AppSwitchProps>(
+  (
+    {
+      label,
+      formMode = FormMode.CREATE,
+      isSelected,
+      onChange,
+      onBlur,
+      value,
+      size = 'md',
+      radius = 'full',
+      className,
+      isDisabled,
+      ...rest
+    },
+    ref
+  ) => {
+    const lang = useAppSelector((state) => state.language.lang);
+    const isViewMode = formMode === FormMode.VIEW;
 
-const radiusClasses: Record<string, string> = {
-  none: 'rounded-none',
-  sm: 'rounded-md',
-  md: 'rounded-lg',
-  lg: 'rounded-xl',
-  full: 'rounded-full',
-};
+    return (
+      <div className={clsx(
+        'flex items-center gap-2',
+        isViewMode && 'pointer-events-none opacity-75'
+      )}>
+        <Switch
+          ref={ref}
+          classNames={{
+            thumb: clsx(
+              'shadow-lg transition-all duration-300',
+              'dark:bg-info-1000 dark:shadow-lg',
+              'group-data-[selected=true]:ms-2.5',
+              sizeThumb[size],
+              isSelected && (lang === 'en' ? '!mr-auto' : '!ml-auto'),
+            ),
+            wrapper: clsx(
+              'flex items-center justify-start transition-all duration-500',
+              'bg-neutral-200 dark:bg-neutral-700',
+              'group-data-[selected=true]:bg-primary-400',
+              sizeWrapper[size],
+              `rounded-${radius}`,
+              className,
+            ),
+          }}
+          isSelected={isSelected}
+          isDisabled={isViewMode || isDisabled}
+          onValueChange={onChange}
+          onBlur={onBlur}
+          {...rest}
+        >
+          {label && (
+            <span className="text-sm font-semibold text-secondary-900 dark:text-white">
+              {label}
+            </span>
+          )}
+        </Switch>
+      </div>
+    );
+  }
+);
 
-export const AppSwitch = ({ props }: { props: any }) => {
-  const {
-    isSelected,
-    onChange,
-    onBlur,
-    value,
-    label,
-    size = 'sm',
-    radius = 'full',
-    className,
-    ...rest
-  } = props;
-
-  const lang = useAppSelector((state) => state.language.lang);
-
-  return (
-    <Switch
-      classNames={{
-        thumb: cn(
-          'shadow-lg transition-all duration-300 ease-in-out transform',
-          'dark:bg-info-1000 dark:shadow-lg',
-          'group-data-[selected=true]:ms-2.5',
-          'scale-100',
-          isSelected && (lang === 'en' ? '!mr-auto' : '!ml-auto'),
-          sizeThumb[size],
-        ),
-        wrapper: cn(
-          'flex items-center justify-start transition-all duration-500 ease-in-out',
-          'bg-neutral-200 text-info-1000 dark:bg-neutral-100',
-          'group-data-[selected=true]:bg-primary-400',
-          sizeWrapper[size],
-          radiusClasses[radius],
-          className,
-        ),
-      }}
-      isSelected={isSelected}
-      size={size}
-      onValueChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      {...rest}
-    >
-      <span
-        className={cn('text-secondary-1000 font-semibold', sizeLabel[size])}
-      >
-        {label}
-      </span>
-    </Switch>
-  );
-};
+AppSwitch.displayName = 'AppSwitch';

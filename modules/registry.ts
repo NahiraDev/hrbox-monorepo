@@ -2,10 +2,6 @@ import type { ModulePlugin } from './types';
 
 class ModuleRegistry {
   private modules: Map<string, ModulePlugin> = new Map();
-
-  /**
-   * ثبت یک ماژول
-   */
   register(plugin: ModulePlugin) {
     if (this.modules.has(plugin.name)) {
       console.warn(`⚠️ Module "${plugin.name}" already registered, overwriting...`);
@@ -19,23 +15,16 @@ class ModuleRegistry {
     }
   }
 
-  /**
-   * دریافت ماژول
-   */
+
   getModule(name: string): ModulePlugin | undefined {
     return this.modules.get(name);
   }
 
-  /**
-   * دریافت تمام ماژول‌ها
-   */
+
   getAllModules(): ModulePlugin[] {
     return Array.from(this.modules.values());
   }
 
-  /**
-   * دریافت ماژول بر اساس مسیر
-   */
   getModuleByPath(pathname: string): ModulePlugin | undefined {
     const basePath = pathname.split('/')[1];
     return Array.from(this.modules.values()).find(
@@ -43,9 +32,7 @@ class ModuleRegistry {
     );
   }
 
-  /**
-   * دریافت تمام routes
-   */
+
   getAllRoutes() {
     const routes: any[] = [];
     this.getAllModules().forEach((module) => {
@@ -56,17 +43,11 @@ class ModuleRegistry {
     return routes;
   }
 
-  /**
-   * دریافت منوی یک ماژول
-   */
   getModuleMenu(moduleName: string): any[] {
     const module = this.getModule(moduleName);
     return module?.menu ?? [];
   }
 
-  /**
-   * دریافت تمام reducers
-   */
   getAllReducers() {
     const reducers: Record<string, any> = {};
     this.getAllModules().forEach((module) => {
@@ -77,9 +58,7 @@ class ModuleRegistry {
     return reducers;
   }
 
-  /**
-   * دریافت تمام API endpoints
-   */
+
   getAllApis() {
     const apis: any[] = [];
     this.getAllModules().forEach((module) => {
@@ -93,9 +72,6 @@ class ModuleRegistry {
     return apis;
   }
 
-  /**
-   * دریافت دسترسی ماژول
-   */
   getModuleAccess(moduleName: string) {
     const module = this.getModule(moduleName);
     return {
@@ -104,13 +80,9 @@ class ModuleRegistry {
     };
   }
 
-  /**
-   * بررسی دسترسی کاربر به ماژول
-   */
   hasModuleAccess(moduleName: string, userRoles: string[], userPermissions: string[]): boolean {
     const access = this.getModuleAccess(moduleName);
 
-    // بررسی نقش‌ها
     if (access.requiredRoles.length > 0) {
       const hasRole = access.requiredRoles.some((role) =>
         userRoles.includes(role)
@@ -118,7 +90,6 @@ class ModuleRegistry {
       if (!hasRole) return false;
     }
 
-    // بررسی مجوزها
     if (access.requiredPermissions.length > 0) {
       const hasPermission = access.requiredPermissions.some((perm) =>
         userPermissions.includes(perm)
@@ -129,9 +100,6 @@ class ModuleRegistry {
     return true;
   }
 
-  /**
-   * اجرای prefetch برای تمام ماژول‌ها
-   */
   async runPrefetch() {
     const promises = this.getAllModules()
       .filter((module) => module.prefetch)

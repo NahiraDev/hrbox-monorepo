@@ -1,21 +1,28 @@
-import { Autocomplete, AutocompleteItem, AutocompleteProps } from '@heroui/react';
-import clsx from 'clsx';
+import { Select, SelectItem, SelectProps } from '@heroui/react';
 import React, { forwardRef, useMemo } from 'react';
+import clsx from 'clsx';
+import { FormMode } from '@hrbox/uikit/components/forms';
 
-interface AppAutoCompleteProps extends Omit<AutocompleteProps, 'onChange' | 'onBlur' | 'onFocus'> {
+export interface SelectOption {
+  key: string | number;
+  label: string;
+  icon?: React.ReactNode;
+  description?: string;
+}
+
+interface AppSelectProps extends Omit<SelectProps, 'onChange' | 'onBlur' | 'onFocus'> {
   name: string;
   label?: string;
   required?: boolean;
-  displayKey?: string;
-  valueKey?: string;
-  data?: any[];
   formMode?: FormMode;
+  options: SelectOption[];
   error?: string | boolean;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onChange?: (value: string | number) => void;
   helperText?: string;
+  onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+  onChange?: (value: string | number) => void;
   containerClassName?: string;
+  selectedKey?: string | number;
 }
 
 const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
@@ -37,25 +44,24 @@ const sizeClasses: Record<string, { wrapper: string; input: string; label: strin
 };
 
 /**
- * ✅ AppAutoComplete - updated with FormMode
+ * ✅ AppSelect - HeroUI Select with FormMode support
  */
-export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps>(
+export const AppSelect = forwardRef<HTMLSelectElement, AppSelectProps>(
   (
     {
       name,
       label,
       required = false,
-      displayKey = 'name',
-      valueKey = 'id',
-      data = [],
       formMode = FormMode.CREATE,
+      options = [],
       error,
+      helperText,
       onBlur,
       onFocus,
       onChange,
-      helperText,
       containerClassName,
       size = 'md',
+      selectedKey,
       isDisabled,
       ...rest
     },
@@ -105,60 +111,69 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
       }
     }, [formMode, size]);
 
-    // دریافت نام آیتم انتخاب شده
-    const getDisplayText = (selectedKey: string | null) => {
-      if (!selectedKey) return '';
-      const item = data.find((d) => String(d[valueKey]) === String(selectedKey));
-      return item ? String(item[displayKey]) : '';
-    };
+    const wrapperClasses = clsx(
+      modeStyles.wrapper,
+      hasError && !isViewMode && 'border-danger bg-danger-50 dark:bg-danger-900/20',
+      'rounded-lg'
+    );
+
+    const inputClasses = clsx(
+      modeStyles.input,
+      hasError && !isViewMode && 'text-danger dark:text-danger-400'
+    );
 
     return (
       <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
+        {/* Label */}
         {label && (
-          <label className={clsx(sizeClasses[size]?.label, 'text-secondary-900 dark:text-white')}>
+          <label className="text-sm font-semibold text-secondary-900 dark:text-white">
             {label}
             {required && !isViewMode && <span className="text-danger ml-1">*</span>}
           </label>
         )}
 
-        <Autocomplete
+        {/* Select */}
+        <Select
           ref={ref}
-          classNames={{
-            inputWrapper: clsx(
-              modeStyles.wrapper,
-              'rounded-lg',
-              hasError && !isViewMode && 'border-danger bg-danger-50 dark:bg-danger-900/20'
-            ),
-            input: clsx(modeStyles.input, hasError && !isViewMode && 'text-danger'),
-            listboxWrapper: 'rounded-lg',
+          name={name}
+          selectedKeys={selectedKey ? [String(selectedKey)] : []}
+          onSelectionChange={(keys) => {
+            const key = Array.from(keys)[0];
+            if (onChange && key) {
+              onChange(key as string);
+            }
           }}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
           onFocus={onFocus}
           onBlur={onBlur}
-          onSelectionChange={(key) => {
-            if (onChange && key) {
-              onChange(key as string);
-            }
+          classNames={{
+            trigger: wrapperClasses,
+            value: inputClasses,
+            popoverContent: 'dark:bg-neutral-800',
           }}
           placeholder={`انتخاب ${label || 'گزینه'}...`}
           {...rest}
         >
-          {data.map((item) => (
-            <AutocompleteItem
-              key={item[valueKey]}
-              value={item[valueKey]}
+          {options.map((option) => (
+            <SelectItem
+              key={option.key}
+              value={option.key}
               className="text-secondary-900 dark:text-white"
+              startContent={option.icon}
+              description={option.description}
             >
-              {item[displayKey]}
-            </AutocompleteItem>
+              {option.label}
+            </SelectItem>
           ))}
-        </Autocomplete>
+        </Select>
 
+        {/* Error */}
         {hasError && (
           <span className="text-xs text-danger">{error}</span>
         )}
 
+        {/* Helper Text */}
         {helperText && !hasError && (
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {helperText}
@@ -169,4 +184,4 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
   }
 );
 
-AppAutoComplete.displayName = 'AppAutoComplete';
+AppSelect.displayName = 'AppSelect';

@@ -10,14 +10,6 @@ interface ProtectedRouteProps {
   requiredRoles?: RoleSlug[];
 }
 
-/**
- * ✅ حفاظت از مسیرها در برابر دسترسی غیرمجاز
- * بررسی می‌کند:
- * 1. آیا کاربر لاگین کرده است
- * 2. آیا نقش انتخاب کرده است
- * 3. آیا پنل مطابقت دارد
- * 4. آیا نقش‌های لازم دارد
- */
 export function ProtectedRoute({
                                  children,
                                  requiredPanel,

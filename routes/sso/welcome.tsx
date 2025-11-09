@@ -6,7 +6,6 @@ export const welcomeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/sso/welcome',
   beforeLoad: async ({ context }: any) => {
-    // درخواست کاربر لاگین شده و نقش انتخاب کرده باشد
     if (!context?.auth?.isAuthenticated) {
       throw redirect({ to: '/sso/login' });
     }

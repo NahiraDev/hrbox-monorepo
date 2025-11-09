@@ -1,130 +1,168 @@
+import React, { useMemo } from 'react';
 import { Input } from '@heroui/react';
-import clsx from 'clsx';
-import React from 'react';
+import { clsx } from 'clsx';
+import type { InputProps } from '@heroui/react';
 
-interface AppInputProps {
+interface AppInputProps extends Omit<InputProps, 'onChange' | 'onBlur' | 'onFocus'> {
   label?: string;
   required?: boolean;
-  error?: any;
+  error?: string | boolean;
   name: string;
-  type?: string;
-  variant?: any;
-  color?: any;
-  startContent?: React.ReactNode;
-  endContent?: React.ReactNode;
+  formMode?: FormMode;
+  isDisabled?: boolean;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: any;
-  size?: 'sm' | 'md' | 'lg';
-  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
-  className?: string;
-  labelClassName?: string;
-  placeHolderClass?: string;
+  helperText?: string;
+  containerClassName?: string;
+  errorClassName?: string;
 }
 
-const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
-  sm: {
-    wrapper: 'h-8 px-2 text-xs',
-    input: 'text-xs',
-    label: 'text-xs font-medium',
-  },
-  md: {
-    wrapper: 'h-10 px-3 text-sm',
-    input: 'text-sm',
-    label: 'text-sm font-medium',
-  },
-  lg: {
-    wrapper: 'h-12 px-4 text-base',
-    input: 'text-base',
-    label: 'text-base font-semibold',
-  },
-};
+/**
+ * ✅ AppInput - Input متطابق با دیزاین سیستم
+ */
+const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
+  (
+    {
+      label,
+      required = false,
+      error,
+      name,
+      formMode = FormMode.CREATE,
+      isDisabled = false,
+      onFocus,
+      onBlur,
+      onChange,
+      helperText,
+      containerClassName,
+      errorClassName,
+      className,
+      startContent,
+      endContent,
+      ...rest
+    },
+    ref
+  ) => {
+    // حالت و استایل بر اساس mode
+    const modeStyles = useMemo(() => {
+      const baseInput = 'text-sm font-medium transition-all duration-200';
+      const baseWrapper = 'h-10 px-3';
 
-const radiusClasses: Record<string, string> = {
-  none: 'rounded-none',
-  sm: 'rounded-sm',
-  md: 'rounded-md',
-  lg: 'rounded-lg',
-  xl: 'rounded-xl',
-  full: 'rounded-full',
-};
+      switch (formMode) {
+        case FormMode.VIEW:
+          return {
+            wrapper: clsx(
+              baseWrapper,
+              'bg-neutral-50 dark:bg-neutral-900',
+              'border-1 border-neutral-200 dark:border-neutral-700',
+              'hover:bg-neutral-100 dark:hover:bg-neutral-800'
+            ),
+            input: clsx(baseInput, 'text-neutral-600 dark:text-neutral-300 cursor-default'),
+            isDisabled: true,
+          };
 
-export const AppInput = ({ props }: { props: AppInputProps }) => {
-  const {
-    label,
-    required = true,
-    error,
-    name,
-    type = 'text',
-    variant = 'solid',
-    color,
-    startContent,
-    endContent,
-    onFocus,
-    onBlur,
-    onChange,
-    value,
-    size = 'md',
-    radius = 'md',
-    className,
-    labelClassName,
-    placeHolderClass,
-    ...rest
-  } = props;
+        case FormMode.EDIT:
+          return {
+            wrapper: clsx(
+              baseWrapper,
+              'bg-panel-surface dark:bg-neutral-800',
+              'border-1.5 border-primary-200 dark:border-primary-700',
+              'hover:border-primary-300 dark:hover:border-primary-600',
+              'focus-within:border-panel-primary focus-within:shadow-md'
+            ),
+            input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
+            isDisabled: false,
+          };
 
-  const inputWrapperClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
-    'transition-all duration-200',
-    'hover:border-[#B8BCC8]',
-    'focus-within:border-primary focus-within:shadow-lg',
-    error && 'border-red-500 bg-red-50 focus-within:border-red-500',
-    sizeClasses[size]?.wrapper,
-    variant !== 'light' && 'shadow-theme-sm',
-    radiusClasses[radius],
-    className,
-  );
+        case FormMode.CREATE:
+        default:
+          return {
+            wrapper: clsx(
+              baseWrapper,
+              'bg-white dark:bg-neutral-800',
+              'border-1 border-neutral-300 dark:border-neutral-600',
+              'hover:border-primary-300 dark:hover:border-primary-600',
+              'focus-within:border-panel-primary focus-within:shadow-lg'
+            ),
+            input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
+            isDisabled: false,
+          };
+      }
+    }, [formMode]);
 
-  const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 placeholder:font-medium',
-    placeHolderClass,
-    error && 'text-red-500',
-    sizeClasses[size]?.input,
-  );
+    // Error state
+    const hasError = Boolean(error);
+    const isViewMode = formMode === FormMode.VIEW;
 
-  const labelClassNames = clsx(
-    'leading-5 text-secondary-1000',
-    sizeClasses[size]?.label,
-    labelClassName
-  );
+    const wrapperClasses = clsx(
+      modeStyles.wrapper,
+      hasError &&
+      !isViewMode &&
+      'border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20',
+      className
+    );
 
-  return (
-    <div className="flex flex-col gap-1">
-      {label && (
-        <span className={labelClassNames}>
-          {label} {required && <span className="text-red-500">*</span>}
-        </span>
-      )}
-      <Input
-        classNames={{
-          inputWrapper: inputWrapperClassNames,
-          input: inputClassNames,
-        }}
-        color={color}
-        endContent={endContent}
-        errorMessage={error}
-        isRequired={required}
-        name={name}
-        placeholder={`Please enter ${label ?? 'value'} ...`}
-        startContent={startContent}
-        type={type}
-        value={value}
-        variant={variant}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
-        {...rest}
-      />
-    </div>
-  );
-};
+    const inputClasses = clsx(
+      modeStyles.input,
+      hasError && !isViewMode && 'text-danger dark:text-danger-400',
+      'placeholder:text-neutral-400 dark:placeholder:text-neutral-500'
+    );
+
+    return (
+      <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
+        {/* Label */}
+        {label && (
+          <label
+            htmlFor={name}
+            className={clsx(
+              'text-sm font-semibold leading-none',
+              'text-secondary-900 dark:text-white',
+              'transition-colors duration-200'
+            )}
+          >
+            {label}
+            {required && !isViewMode && (
+              <span className="text-danger ml-1">*</span>
+            )}
+          </label>
+        )}
+
+        {/* Input */}
+        <Input
+          ref={ref}
+          id={name}
+          name={name}
+          isDisabled={isViewMode || isDisabled}
+          isInvalid={hasError}
+          classNames={{
+            inputWrapper: wrapperClasses,
+            input: inputClasses,
+            errorMessage: clsx(
+              'text-xs font-medium',
+              'text-danger dark:text-danger-400',
+              errorClassName
+            ),
+          }}
+          startContent={startContent}
+          endContent={endContent}
+          errorMessage={hasError ? error : ''}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={onChange}
+          {...rest}
+        />
+
+        {/* Helper Text */}
+        {helperText && !hasError && (
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            {helperText}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+AppInputComponent.displayName = 'AppInput';
+
+export const AppInput = AppInputComponent;

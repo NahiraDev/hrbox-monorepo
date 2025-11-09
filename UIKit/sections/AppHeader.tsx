@@ -10,13 +10,13 @@ import { Logo, LogoHRLink } from '@hrbox/uikit/icons';
 import { useTheme } from '@hrbox/core/hooks/useTheme';
 import { useAuth } from '@hrbox/core/hooks/useAuth';
 import { useRoleAccess } from '@hrbox/core/hooks/useRoleAccess';
-import { Panel, RoleSlug } from '@core/config/design';
+import { Panel, RoleSlug } from '@hrbox/core/config/theme/roles';
 import { RoleSwitcher } from '@hrbox/core/components/RoleSwitcher';
 
 export const AppHeader = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const { isDark, toggle } = useTheme();
+  const { isDark } = useTheme();
   const { currentPanel, user } = useAuth();
   const { isSuperAdmin, isOrganization } = useRoleAccess();
 

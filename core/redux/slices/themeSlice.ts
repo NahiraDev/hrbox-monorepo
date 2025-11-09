@@ -17,7 +17,6 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    // تبدیل تم
     toggleTheme: (state) => {
       state.mode = state.mode === 'light' ? 'dark' : 'light';
       if (state.currentPanel) {
@@ -26,7 +25,6 @@ export const themeSlice = createSlice({
       localStorage.setItem('theme-mode', state.mode);
     },
 
-    // تنظیم مود تم
     setThemeMode: (state, action: PayloadAction<ThemeMode>) => {
       state.mode = action.payload;
       if (state.currentPanel) {
@@ -35,7 +33,6 @@ export const themeSlice = createSlice({
       localStorage.setItem('theme-mode', action.payload);
     },
 
-    // تنظیم پنل جاری
     setCurrentPanel: (state, action: PayloadAction<Panel | null>) => {
       state.currentPanel = action.payload;
       if (action.payload) {
@@ -43,7 +40,6 @@ export const themeSlice = createSlice({
       }
     },
 
-    // بارگذاری تم
     initTheme: (state) => {
       const savedMode = (localStorage.getItem('theme-mode') as ThemeMode) || 'light';
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

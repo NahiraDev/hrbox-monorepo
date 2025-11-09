@@ -8,31 +8,23 @@ import { AppSideBar } from '@hrbox/uikit/sections/AppSideBar';
 import { AppSupportButton } from '@hrbox/uikit/components';
 import { AppDocs } from '@hrbox/uikit/sections/AppDocs';
 
-/**
- * ✅ Layout اصلی برای تمام صفحات محافظ شده
- * شامل: Sidebar, Header, SubHeader, Main Content, Support Button, Dock Menu
- */
+
 export function BaseLayout() {
-  // دریافت context از root route
   const context = useRouteContext({ from: '__root__' });
   const SubHeader = context?.component;
   const subHeaderProps = context?.props;
 
   return (
     <div className="flex h-screen w-full bg-panel-background overflow-hidden">
-      {/* 1️⃣ Sidebar */}
       <aside className="flex-shrink-0 border-r border-neutral-200 dark:border-neutral-700">
         <AppSideBar />
       </aside>
 
-      {/* 2️⃣ Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Header */}
         <header className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
           <AppHeader />
         </header>
 
-        {/* Optional Sub-Header */}
         {SubHeader && (
           <Suspense
             fallback={
