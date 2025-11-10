@@ -1,5 +1,4 @@
-export const JobOffersIcon = ({ props }: { props: any }) => {
-  const { color } = props;
+export const JobOffersIcon = ({ color }: { color: any }) => {
 
   return (
     <svg
