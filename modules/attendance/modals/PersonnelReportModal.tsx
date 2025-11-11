@@ -1,8 +1,8 @@
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 
-import { AppButton, AppModal, AppTable } from '@UIKit/components';
-import { ReportPersonnal } from '@module/attendance/app/mock';
+import { AppButton, AppModal, AppTable } from '@hrbox/uikit/components';
+import { ReportPersonnal } from '@hrbox/modules/attendance/app/mock';
 const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
   return (

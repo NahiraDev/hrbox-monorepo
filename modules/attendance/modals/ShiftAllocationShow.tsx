@@ -1,13 +1,13 @@
-import { AppModal } from '@UIKit/components';
-import { FormProvider } from '@core/providers/FormProvider';
-import { useModalContext } from '@core/providers/ModalProvider'
+import { AppModal } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider'
 
 import {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/ShiftAllocationShowForm';
-import ShiftAllocationShowForm from '@module/attendance/features/forms/ShiftAllocationShowForm';
+} from '@hrbox/modules/attendance/forms/ShiftAllocationShowForm';
+import ShiftAllocationShowForm from '@hrbox/modules/attendance/forms/ShiftAllocationShowForm';
 const ShiftAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(

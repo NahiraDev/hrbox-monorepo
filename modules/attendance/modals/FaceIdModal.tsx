@@ -1,9 +1,9 @@
 import { Avatar } from '@heroui/react';
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Repeat } from 'iconsax-reactjs';
 
-import { AppButton, AppModal } from '@UIKit/components';
-import CameraView from '@module/attendance/features/registration/CameraView';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import CameraView from '@hrbox/modules/attendance/pages/registration/CameraView';
 
 const FaceIdModal = () => {
   const { closeModal } = useModalContext();

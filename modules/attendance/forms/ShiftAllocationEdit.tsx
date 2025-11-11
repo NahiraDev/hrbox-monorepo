@@ -1,7 +1,7 @@
 import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/react';
-import { useFormContext } from '@hrbox/core';
-import { AppAutoComplete, AppTextArea }from '@UIKit/components';
+import { useFormContext } from '@hrbox/core/providers';
+import { AppAutoComplete, AppTextArea }from '@hrbox/uikit/components';
 import { TimerStart } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 

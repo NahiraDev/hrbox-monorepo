@@ -1,12 +1,12 @@
-import { AppButton, AppModal } from '@UIKit/components';
-import { FormProvider } from '@core/providers/FormProvider';
-import { useModalContext } from '@core/providers/ModalProvider';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
-} from '@module/attendance/features/forms/LocationAllocationEdit';
-import LocationAllocationEdit from '@module/attendance/features/forms/LocationAllocationEdit';
+} from '@hrbox/modules/attendance/forms/LocationAllocationEdit';
+import LocationAllocationEdit from '@hrbox/modules/attendance/forms/LocationAllocationEdit';
 const LocationAllocationModalEdit=()=>{
   const {closeModal}=useModalContext();
   return(

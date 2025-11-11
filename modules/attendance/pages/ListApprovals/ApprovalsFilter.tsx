@@ -1,4 +1,4 @@
-import { AppAutoComplete, AppButton } from '@UIKit/components';
+import { AppAutoComplete, AppButton } from '@hrbox/uikit/components';
 import '../../app/index.css'
 const ApprovalsFilter=()=>{
   const filterList=[

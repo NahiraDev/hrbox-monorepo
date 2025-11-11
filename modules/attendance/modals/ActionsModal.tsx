@@ -1,4 +1,4 @@
-import { AppModal } from '@UIKit/components';
+import { AppModal } from '@hrbox/uikit/components';
 
 const ActionsModal = () => {
   return (

@@ -1,7 +1,7 @@
-import { AppButton, AppPageTitle } from '@UIKit/components';
+import { AppButton, AppPageTitle } from '@hrbox/uikit/components';
 import { TickCircle, TimerPause, TimerStart } from 'iconsax-reactjs';
 
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useEffect, useRef, useState } from 'react';
 import { addToast, ToastProvider } from '@heroui/react';
 

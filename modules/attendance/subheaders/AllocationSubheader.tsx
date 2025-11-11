@@ -1,6 +1,6 @@
-import { AppButton, AppPageTitle, AppSearchInput } from '@UIKit/components';
+import { AppButton, AppPageTitle, AppSearchInput } from '@hrbox/uikit/components';
 import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-reactjs';
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import React from 'react';
 interface AllocationSubheaderProps {
   modalComponent: React.ComponentType;

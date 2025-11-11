@@ -1,5 +1,5 @@
-import ApprovalsTable from '@module/attendance/features/ListApprovals/ApprovalsTable';
-import ApprovalsFilter from '@module/attendance/features/ListApprovals/ApprovalsFilter';
+import ApprovalsTable from '@hrbox/modules/attendance/pages/ListApprovals/ApprovalsTable';
+import ApprovalsFilter from '@hrbox/modules/attendance/pages/ListApprovals/ApprovalsFilter';
 
 const ListApprovals=()=>{
   return(

@@ -1,7 +1,7 @@
 import {Form, Radio, RadioGroup} from '@heroui/react';
-import { AppAutoComplete, AppTextArea } from '@UIKit/components';
+import { AppAutoComplete, AppTextArea } from '@hrbox/uikit/components';
 import * as Yup from 'yup';
-import {useFormContext} from "@core/providers/FormProvider";
+import {useFormContext} from "@hrbox/core/providers/FormProvider";
 
 export const initialValuesAction = {
   title: null,

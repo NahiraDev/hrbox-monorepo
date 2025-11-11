@@ -1,12 +1,12 @@
 import { Avatar } from '@heroui/react';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
-import { MarkerIcon } from '@module/hrlink/features/common';
+// import { MarkerIcon } from '@hrbox/hrlink/features/common';
 import { Map as LeafletMap } from 'leaflet';
 import { useRef, useState } from 'react';
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
-import { AppButton, AppModal } from '@UIKit/components';
-import ActionsModal from '@module/attendance/features/modals/ActionsModal';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import ActionsModal from '@hrbox/modules/attendance/modals/ActionsModal';
 
 const LocationMarker = ({ position, setPosition }) => {
   useMapEvents({

@@ -1,5 +1,5 @@
-import { AppInput } from '@UIKit/components';
-import { useFormContext } from '@hrbox/core';
+import { AppInput } from '@hrbox/uikit/components';
+import { useFormContext } from '@hrbox/core/providers';
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
 
