@@ -1,5 +1,19 @@
-import { Textarea } from '@heroui/react';
+import { Textarea, TextAreaProps } from '@heroui/react';
 import clsx from 'clsx';
+import React, { forwardRef, useMemo } from 'react';
+
+interface AppTextAreaProps extends Omit<TextAreaProps, 'onChange' | 'onBlur' | 'onFocus'> {
+  label?: string;
+  required?: boolean;
+  error?: string | boolean;
+  name: string;
+  formMode?: FormMode;
+  onFocus?: (e: React.FocusEvent) => void;
+  onBlur?: (e: React.FocusEvent) => void;
+  onChange?: (e: React.ChangeEvent) => void;
+  helperText?: string;
+  containerClassName?: string;
+}
 
 const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
   sm: {
@@ -19,85 +33,106 @@ const sizeClasses: Record<string, { wrapper: string; input: string; label: strin
   },
 };
 
-const radiusClasses: Record<string, string> = {
-  none: 'rounded-none',
-  sm: 'rounded-sm',
-  md: 'rounded-md',
-  lg: 'rounded-lg',
-  xl: 'rounded-xl',
-  full: 'rounded-full',
-};
+/**
+ * ✅ AppTextArea - updated with FormMode
+ */
+export const AppTextArea = forwardRef<HTMLTextAreaElement, AppTextAreaProps>(
+    (
+        {
+          label,
+          required = false,
+          error,
+          name,
+          formMode = FormMode.CREATE,
+          onFocus,
+          onBlur,
+          onChange,
+          helperText,
+          containerClassName,
+          size = 'md',
+          isDisabled,
+          ...rest
+        },
+        ref
+    ) => {
+      const modeStyles = useMemo(() => {
+        const baseWrapper = sizeClasses[size]?.wrapper || sizeClasses.md.wrapper;
 
-export const AppTextArea = ({ props }: { props: any }) => {
-  const {
-    label,
-    required = false,
-    error,
-    name,
-    type = 'text',
-    value,
-    startContent,
-    endContent,
-    onFocus,
-    onBlur,
-    onChange,
-    size = 'md',
-    radius = 'md',
-    className,
-    labelClassName,
-    placeHolderClass,
-    ...rest
-  } = props;
+        switch (formMode) {
+          case FormMode.VIEW:
+            return {
+              wrapper: clsx(
+                  baseWrapper,
+                  'bg-neutral-50 dark:bg-neutral-900',
+                  'border border-neutral-200 dark:border-neutral-700',
+                  'cursor-default'
+              ),
+              input: clsx(sizeClasses[size]?.input, 'text-neutral-600 dark:text-neutral-400'),
+            };
 
-  const inputWrapperClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
-    'transition-all duration-200',
-    'hover:border-[#B8BCC8]',
-    'focus-within:border-primary focus-within:shadow-lg',
-    error && 'border-red-500 bg-red-50 focus-within:border-red-500',
-    sizeClasses[size]?.wrapper,
-    radiusClasses[radius],
-    className,
-  );
+          case FormMode.EDIT:
+            return {
+              wrapper: clsx(
+                  baseWrapper,
+                  'bg-panel-surface dark:bg-neutral-800',
+                  'border-1.5 border-primary-200 dark:border-primary-700',
+                  'focus-within:border-panel-primary'
+              ),
+              input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
+            };
 
-  const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 placeholder:font-medium',
-    placeHolderClass,
-    error && 'text-red-500',
-    sizeClasses[size]?.input,
-  );
+          case FormMode.CREATE:
+          default:
+            return {
+              wrapper: clsx(
+                  baseWrapper,
+                  'bg-white dark:bg-neutral-800',
+                  'border border-neutral-300 dark:border-neutral-600',
+                  'focus-within:border-panel-primary'
+              ),
+              input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
+            };
+        }
+      }, [formMode, size]);
 
-  const labelClassNames = clsx(
-    'leading-5 text-secondary-1000',
-    sizeClasses[size]?.label,
-    labelClassName
-  );
+      const hasError = Boolean(error);
+      const isViewMode = formMode === FormMode.VIEW;
 
-  return (
-    <div className="flex flex-col gap-1">
-      {label && (
-        <span className={labelClassNames}>
-          {label} {required && <span className="text-red-500">*</span>}
-        </span>
-      )}
-      <Textarea
-        classNames={{
-          inputWrapper: inputWrapperClassNames,
-          input: inputClassNames,
-        }}
-        endContent={endContent}
-        errorMessage={error}
-        isRequired={required}
-        name={name}
-        placeholder={`Please enter ${label ?? 'value'} ...`}
-        startContent={startContent}
-        type={type}
-        value={value}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
-        {...rest}
-      />
-    </div>
-  );
-};
+      return (
+          <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
+            {label && (
+                <label className={clsx(sizeClasses[size]?.label, 'text-secondary-900 dark:text-white')}>
+                  {label}
+                  {required && !isViewMode && <span className="text-danger ml-1">*</span>}
+                </label>
+            )}
+
+            <Textarea
+                ref={ref}
+                classNames={{
+                  inputWrapper: clsx(
+                      modeStyles.wrapper,
+                      hasError && !isViewMode && 'border-danger bg-danger-50 dark:bg-danger-900/20'
+                  ),
+                  input: clsx(modeStyles.input, hasError && !isViewMode && 'text-danger'),
+                }}
+                isDisabled={isViewMode || isDisabled}
+                isInvalid={hasError}
+                errorMessage={hasError ? error : ''}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onChange={onChange}
+                {...rest}
+            />
+
+            {helperText && !hasError && (
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  {helperText}
+                </p>
+            )}
+          </div>
+      );
+    }
+);
+
+AppTextArea.displayName = 'AppTextArea';

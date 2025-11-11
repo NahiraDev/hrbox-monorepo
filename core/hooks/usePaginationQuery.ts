@@ -1,26 +1,56 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearch } from '@tanstack/react-router';
+import { useCallback, useMemo } from 'react';
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
-interface UsePaginationQueryProps {
-  pageKey?: string;
-  sizeKey?: string;
-  defaultSize?: number;
-}
+export function usePagination(defaultPageSize = 10) {
+  const navigate = useNavigation();
+  const search = useSearch({ from: '__root__' }) as any;
 
-export const usePaginationQuery = ({
-  pageKey = 'Page',
-  sizeKey = 'PageSize',
-  defaultSize = 10,
-}: UsePaginationQueryProps = {}) => {
-  const [searchParams] = useSearchParams();
+  const page = useMemo(() => search?.page || 1, [search]);
+  const pageSize = useMemo(() => search?.pageSize || defaultPageSize, [search, defaultPageSize]);
+  const searchQuery = useMemo(() => search?.search || '', [search]);
 
-  const page = parseInt(searchParams.get(pageKey) || '1', 10);
-  const pageSize = parseInt(
-    searchParams.get(sizeKey) || defaultSize.toString(),
-    10,
+  const setPage = useCallback(
+    (newPage: number) => {
+      navigate.push({
+        // @ts-expect-error temporarily ignore type
+        search: (prev) => ({ ...prev, page: newPage }),
+      });
+    },
+    [navigate]
+  );
+
+  const setPageSize = useCallback(
+    (newSize: number) => {
+      navigate.push({
+        // @ts-expect-error temporarily ignore type
+        search: (prev: any) => ({ ...prev, page: 1, pageSize: newSize }),
+      });
+    },
+    [navigate]
+  );
+
+  const setSearch = useCallback(
+    (newSearch: string) => {
+      navigate.push({
+        // @ts-expect-error temporarily ignore type
+        search: (prev: any) => ({
+          ...prev,
+          page: 1,
+          search: newSearch || undefined,
+        }),
+      });
+    },
+    [navigate]
   );
 
   return {
-    [pageKey]: page,
-    [sizeKey]: pageSize,
+    page,
+    pageSize,
+    search: searchQuery,
+    setPage,
+    setPageSize,
+    setSearch,
+    params: { page, pageSize, search: searchQuery || undefined },
   };
-};
+}

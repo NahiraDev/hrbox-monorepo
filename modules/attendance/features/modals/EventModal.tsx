@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, AppModal } from '@core/components';
-import { FormProvider } from '@core/context';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core';
 import { EventForm, formValidationEvent, handleSubmitEvent, initialValuesEvent } from '@module/attendance/features/forms/EventForm';
 
 export const EventModal = () => {

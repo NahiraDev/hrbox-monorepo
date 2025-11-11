@@ -1,85 +1,146 @@
-import React, { createContext, type ReactNode, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 
-type ModalType = 'delete' | 'edit' | 'view' | 'confirm' | 'custom';
+export enum ModalType {
+  CREATE = 'create',
+  EDIT = 'edit',
+  VIEW = 'view',
+  DELETE = 'delete',
+  CONFIRM = 'confirm',
+  CUSTOM = 'custom',
+}
+
+export enum ModalSize {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+  FULL = 'full',
+}
+
+interface Modal {
+  type: ModalType | string;
+  name: string;
+  component: React.ReactNode;
+  data?: any;
+  size?: ModalSize | string;
+  title?: string | null;
+  icon?: React.ReactNode | null;
+  onClose?: () => void;
+}
 
 interface ModalContextType {
-  openModal: (type: ModalType, name: string, component: React.ReactNode, data?: any | undefined, size?: string, title?: string | null, icon?: React.ReactNode) => void;
-  closeModal: (type: ModalType, name: string) => void;
-  getModalData: (type: ModalType, name: string) => any;
-  isModalOpen: (type: ModalType, name: string) => boolean;
-  getOpenModal: () => { title?: string | null ; icon?: React.ReactNode | null; size?: string | null; type: ModalType | string; name: string; component: React.ReactNode } | null;
+  openModal: (
+    type: ModalType | string,
+    name: string,
+    component: React.ReactNode,
+    data?: any,
+    size?: ModalSize | string,
+    title?: string | null,
+    icon?: React.ReactNode | null
+  ) => void;
+  closeModal: (type: ModalType | string | undefined, name: string | undefined) => void;
+  getModalData: (type: ModalType | string, name: string) => any;
+  isModalOpen: (type: ModalType | string | undefined, name: string | undefined) => boolean;
+  getOpenModal: () => Modal | null;
+  closeAllModals: () => void;
+  getModalCount: () => number;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider: React.FC<{
-  children: ReactNode;
-  store?: any;
-}> = ({ children, store }) => {
-  const [modals, setModals] = useState<any[]>([]);
+/**
+ * ✅ ModalProvider - مدیریت مودال‌های متعدد
+ */
+export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [modals, setModals] = useState<Modal[]>([]);
 
-  const openModal = (
-    type: ModalType | string,
-    name: string,
-    component: React.ReactNode,
-    data?: any | undefined,
-    size?: string | null,
-    title?: string | null,
-    icon?: React.ReactNode | null
-  ) => {
-    setModals(prev => {
-      const filtered = prev.filter(
-        modal => !(modal.type === type && modal.name === name),
+  // باز کردن مودال
+  const openModal = useCallback(
+    (
+      type: ModalType | string,
+      name: string,
+      component: React.ReactNode,
+      data?: any,
+      size?: ModalSize | string,
+      title?: string | null,
+      icon?: React.ReactNode | null
+    ) => {
+      setModals((prev) => {
+        const filtered = prev.filter(
+          (modal) => !(modal.type === type && modal.name === name)
+        );
+        return [
+          ...filtered,
+          { type, name, component, data, size, title, icon },
+        ];
+      });
+    },
+    []
+  );
+
+  // بستن مودال
+  const closeModal = useCallback(
+    (type: ModalType | string, name: string) => {
+      setModals((prev) =>
+        prev.filter((modal) => !(modal.type === type && modal.name === name))
       );
-      return [...filtered, { type, name, data, component, size, title, icon }];
-    });
-  };
+    },
+    []
+  );
 
-  const closeModal = (type: ModalType | string, name: string) => {
-    setModals(prev =>
-      prev.filter(modal => !(modal.type === type && modal.name === name)),
-    );
-  };
+  // دریافت data مودال
+  const getModalData = useCallback(
+    (type: ModalType | string, name: string) => {
+      return modals.find(
+        (modal) => modal.type === type && modal.name === name
+      )?.data;
+    },
+    [modals]
+  );
 
-  const getModalData = (type: ModalType | string, name: string) => {
-    return modals.find(modal => modal.type === type && modal.name === name)
-      ?.data;
-  };
+  // بررسی باز بودن مودال
+  const isModalOpen = useCallback(
+    (type: ModalType | string, name: string) => {
+      return modals.some(
+        (modal) => modal.type === type && modal.name === name
+      );
+    },
+    [modals]
+  );
 
-  const isModalOpen = (type: ModalType | string, name: string) => {
-    return modals.some(modal => modal.type === type && modal.name === name);
-  };
+  const getOpenModal = useCallback((): Modal | null => {
+    return modals.length > 0 ? modals[modals.length - 1] : null;
+  }, [modals]);
 
-  const getOpenModal = (): {
-    title?: string | null;
-    icon?: React.ReactNode | null;
-    size?: string | null;
-    type: ModalType | string;
-    name: string;
-    component: React.ReactNode;
-  } | null => {
-    if (modals.length === 0) return null;
-    const latest = modals[modals.length - 1];
-    return {
-      type: latest.type,
-      name: latest.name,
-      component: latest.component,
-      size: latest.size,
-      title: latest.title,
-      icon: latest.icon,
-    };
-  };
+  const closeAllModals = useCallback(() => {
+    setModals([]);
+  }, []);
+
+  const getModalCount = useCallback(() => modals.length, [modals]);
+
+  const value: ModalContextType = useMemo(
+    () => ({
+      openModal,
+      closeModal,
+      getModalData,
+      isModalOpen,
+      getOpenModal,
+      closeAllModals,
+      getModalCount,
+    }),
+    [
+      openModal,
+      closeModal,
+      getModalData,
+      isModalOpen,
+      getOpenModal,
+      closeAllModals,
+      getModalCount,
+    ]
+  );
 
   return (
-    <ModalContext.Provider
-      value={{
-        openModal,
-        closeModal,
-        getModalData,
-        isModalOpen,
-        getOpenModal,
-      }}
-    >
+    <ModalContext.Provider value={value}>
       {children}
     </ModalContext.Provider>
   );

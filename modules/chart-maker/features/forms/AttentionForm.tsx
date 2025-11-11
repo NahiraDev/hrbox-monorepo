@@ -1,7 +1,7 @@
 import { Form } from '@heroui/react';
 import { departmentUnit } from '@module/chart-maker/app/mock';
 
-import { AppAutoComplete } from '@core/components';
+import { AppAutoComplete } from '@hrbox/uikit/components';
 import * as Yup from 'yup';
 
 export const initialValuesForm = {

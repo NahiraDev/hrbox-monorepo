@@ -1,4 +1,4 @@
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import { Avatar } from '@heroui/react';
 import { useRef, useState } from 'react';
 

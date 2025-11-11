@@ -1,59 +1,28 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import type { PaginatedResponse } from '@hrbox/core/api/types';
 import { Pagination as HeroPagination } from '@heroui/react';
-import { useSearchParams } from 'react-router-dom';
-import { serviceRegistry } from '@hrbox/core/helpers';
 
-export const AppPagination = ({ total }: { total: number }) => {
-  const getModuleName: string | undefined = serviceRegistry.getModuleName();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState<number>(() => {
-    const pageParam = searchParams.get('page');
-    return pageParam ? parseInt(pageParam, 10) : 1;
-  });
+interface PaginationProps {
+  meta: PaginatedResponse<any>['meta'];
+  onPageChange: (page: number) => void;
+}
 
-  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
-
-  const handlePageChange = useCallback(
-    (page: number) => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('page', page.toString());
-
-      setCurrentPage(page);
-      setSearchParams(newParams, { replace: true }); // ✅ replace = بدون history push
-    },
-    [searchParams, setSearchParams],
-  );
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
+export function AppPagination({ meta, onPageChange }: PaginationProps) {
+  if (meta.totalPages <= 1) return null;
 
   return (
-    <div className="transition-all duration-150">
+    <div className="flex items-center justify-center py-4">
       <HeroPagination
+        total={meta.totalPages}
+        page={meta.page}
+        onChange={onPageChange}
+        showControls
+        color="primary"
+        size="lg"
         classNames={{
-          item: 'bg-white rounded-md shadow-tight-light-1 focus:outline-none cursor-pointer mt-5 transition-all duration-200 ease-in-out hover:scale-105',
-          cursor: 'bg-primary text-white rounded-md mt-5 font-semibold transition-colors duration-200 ease-in-out',
-          next: 'bg-white rounded-md cursor-pointer mt-5 transition-all duration-150 hover:scale-105 hover:bg-gray-50',
-          prev: 'bg-white rounded-md cursor-pointer mt-5 transition-all duration-150 hover:scale-105 hover:bg-gray-50',
+          cursor: 'bg-primary text-white font-semibold',
+          item: 'bg-white hover:bg-gray-100 transition-colors',
         }}
-        color={getModuleName === 'hrlink' ? 'secondary' : 'primary'}
-        dotsJump={1}
-        initialPage={1}
-        page={currentPage}
-        showControls={true}
-        size="md"
-        total={total}
-        onChange={handlePageChange}
       />
     </div>
   );
-};
+}

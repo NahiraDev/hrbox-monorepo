@@ -1,5 +1,5 @@
-import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { NotificationFavorite } from 'iconsax-react';
+import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { NotificationFavorite } from 'iconsax-reactjs';
 import { useState } from 'react';
 
 // ✅ INTERFACE

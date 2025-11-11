@@ -1,12 +1,9 @@
-import { AppButton, AppPageTitle } from '@core/components';
-import { Additem, PasswordCheck, TickCircle, TimerPause, TimerStart } from 'iconsax-react';
+import { AppButton, AppPageTitle } from '@hrbox/uikit/components';
+import { TickCircle, TimerPause, TimerStart } from 'iconsax-reactjs';
 
-import { useModalContext } from '@core/context';
-import FaceIdModal from '@module/attendance/features/modals/FaceIdModal';
-import UserLocationModal from '@module/attendance/features/modals/UserLocationModal';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useEffect, useRef, useState } from 'react';
 import { addToast, ToastProvider } from '@heroui/react';
-import ActionsModal from '@module/attendance/features/modals/ActionsModal';
 
 const EntryExitSubHeader = ( props : any) => {
   const { openModal } = useModalContext();

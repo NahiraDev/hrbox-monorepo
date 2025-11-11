@@ -1,7 +1,7 @@
-import { useModalContext } from '@core/context';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 
-import { AppButton, AppModal, AppTable } from '@core/components';
+import { AppButton, AppModal, AppTable } from '@hrbox/uikit/components';
 import { ReportPersonnal } from '@module/attendance/app/mock';
 const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
@@ -54,7 +54,7 @@ const PersonnelReportModal = () => {
               color: 'white',
               size: 'md',
               radius: 'lg',
-              onPress:()=> closeModal('confirm','PersonnelReport'),
+              onPress:()=> closeModal('confirm', 'PersonnelReport'),
               content: 'Cancel',
             }}
           />

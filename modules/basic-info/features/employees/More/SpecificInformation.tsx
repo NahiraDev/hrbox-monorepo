@@ -1,4 +1,4 @@
-import { Building, TickSquare } from 'iconsax-react';
+import { Building, TickSquare } from 'iconsax-reactjs';
 import { specificInformation } from '@module/basic-info/app/mock';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';

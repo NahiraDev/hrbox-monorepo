@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import { ArrowDown2, Briefcase, Trash, User } from 'iconsax-react';
+import { ArrowDown2, Briefcase, Trash, User } from 'iconsax-reactjs';
 import { Handle, Position } from '@xyflow/react';
 
 const OrgChartNode = () => {

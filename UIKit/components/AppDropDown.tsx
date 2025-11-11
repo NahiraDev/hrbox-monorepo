@@ -1,18 +1,22 @@
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@heroui/react';
-import { useState } from 'react';
+import React, { useState, useMemo, forwardRef } from "react";
 import clsx from 'clsx';
 
-interface AppDropDownItem {
-  key: string;
+export interface AppDropDownItem {
+  key: string | number;
   label: string;
   icon?: React.ReactNode;
+  description?: string;
+  color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 }
 
 interface AppDropDownProps {
+  name?: string;
   title?: string;
-  item: AppDropDownItem[];
+  items: AppDropDownItem[];
+  selectedKey?: string | number;
   className?: string;
-  EndIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
   startIcon?: React.ReactNode;
   size?: 'sm' | 'md' | 'lg';
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
@@ -20,6 +24,12 @@ interface AppDropDownProps {
   label?: string;
   required?: boolean;
   labelClassName?: string;
+  onChange?: (key: string | number) => void;
+  onOpenChange?: (isOpen: boolean) => void;
+  variant?: 'solid' | 'bordered' | 'flat' | 'faded' | 'shadow' | 'light';
+  color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  isDisabled?: boolean;
+  isLoading?: boolean;
 }
 
 const sizeClasses: Record<string, { button: string; label: string }> = {
@@ -45,97 +55,142 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-const AppDropDown = ({ props }: { props: AppDropDownProps }) => {
-  const {
-    title,
-    item,
-    className,
-    EndIcon,
-    startIcon,
-    size = 'md',
-    radius = 'md',
-    error,
-    label,
-    required = false,
-    labelClassName,
-  } = props;
+/**
+ * ✅ AppDropDown - بهبور یافته
+ */
+export const AppDropDown = forwardRef<HTMLButtonElement, AppDropDownProps>(
+  (
+    {
+      name,
+      title,
+      items = [],
+      selectedKey,
+      className,
+      endIcon,
+      startIcon,
+      size = 'md',
+      radius = 'md',
+      error,
+      label,
+      required = false,
+      labelClassName,
+      onChange,
+      onOpenChange,
+      variant = 'bordered',
+      color = 'default',
+      isDisabled = false,
+      isLoading = false,
+    },
+    ref
+  ) => {
+    const [selected, setSelected] = useState<AppDropDownItem | null>(
+      items.find((item) => item.key === selectedKey) || (items.length > 0 ? items[0] : null)
+    );
 
-  const [selected, setSelected] = useState<AppDropDownItem | null>(
-    item.length > 0 ? item[0] : null
-  );
+    // دریافت متن نمایشی
+    const displayText = useMemo(() => {
+      if (title) return title;
+      if (selected) {
+        return (
+          <span className="flex items-center gap-2">
+            {selected.icon && <span>{selected.icon}</span>}
+            <span>{selected.label}</span>
+          </span>
+        );
+      }
+      return 'انتخاب گزینه...';
+    }, [title, selected]);
 
-  const handleSelect = (key: string) => {
-    const found = item.find((item) => item.key === key);
-    if (found) {
-      setSelected(found);
-    }
-  };
+    const handleSelect = (key: string | number) => {
+      const found = items.find((item) => item.key === key);
+      if (found) {
+        setSelected(found);
+        onChange?.(key);
+      }
+    };
 
-  const buttonClassNames = clsx(
-    'bg-white !shadow-theme-sm border-1 border-[#DEE1E8]',
-    'transition-all duration-200',
-    'hover:border-[#B8BCC8]',
-    'focus:border-primary focus:shadow-lg',
-    'data-[hover=true]:bg-white',
-    error && 'border-red-500 bg-red-50',
-    sizeClasses[size]?.button,
-    radiusClasses[radius],
-    className,
-  );
+    const hasError = Boolean(error);
 
-  const labelClassNames = clsx(
-    'leading-5 text-secondary-1000',
-    sizeClasses[size]?.label,
-    labelClassName
-  );
+    const buttonClassNames = clsx(
+      'transition-all duration-200 font-medium',
+      sizeClasses[size]?.button,
+      radiusClasses[radius],
+      variant === 'bordered' && clsx(
+        'border border-neutral-300 dark:border-neutral-600',
+        'hover:border-primary-300 dark:hover:border-primary-600',
+        'focus:border-panel-primary'
+      ),
+      hasError && variant === 'bordered' && 'border-danger bg-danger-50 dark:bg-danger-900/20',
+      className
+    );
 
-  return (
-    <div className="flex flex-col gap-1">
-      {label && (
-        <span className={labelClassNames}>
-          {label} {required && <span className="text-red-500">*</span>}
-        </span>
-      )}
-      <Dropdown>
-        <DropdownTrigger>
-          <Button className={buttonClassNames} variant="bordered">
-            {startIcon && <span>{startIcon}</span>}
-            {title ? (
-              title
-            ) : selected ? (
-              <span className="flex flex-row items-center gap-1">
-                {selected.icon}
-                {selected.label}
-              </span>
-            ) : null}
-            {EndIcon && <span>{EndIcon}</span>}
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          aria-label="Dynamic Actions"
-          className="flex flex-row justify-between"
-          items={item}
-          onAction={(key) => handleSelect(key as string)}
+    const labelClassNames = clsx(
+      'text-sm font-semibold text-secondary-900 dark:text-white',
+      sizeClasses[size]?.label,
+      labelClassName
+    );
+
+    return (
+      <div className="flex flex-col gap-1.5">
+        {/* Label */}
+        {label && (
+          <label className={labelClassNames}>
+            {label}
+            {required && <span className="text-danger ml-1">*</span>}
+          </label>
+        )}
+
+        {/* Dropdown */}
+        <Dropdown
+          onOpenChange={onOpenChange}
+          isDisabled={isDisabled || isLoading}
         >
-          {(item) => (
-            <DropdownItem
-              key={item.key}
-              className="flex w-full flex-row justify-center"
-              classNames={{
-                base: 'hover:bg-[#DCF0F940] transition-colors duration-200',
-              }}
+          <DropdownTrigger>
+            <Button
+              ref={ref}
+              className={buttonClassNames}
+              variant={variant as any}
+              color={color as any}
+              isLoading={isLoading}
+              endContent={endIcon || undefined}
+              startContent={startIcon || undefined}
             >
-              <span className="flex flex-row items-center gap-1">
-                {item.icon}
-                {item.label}
-              </span>
-            </DropdownItem>
-          )}
-        </DropdownMenu>
-      </Dropdown>
-      {error && <span className="text-xs text-red-500 mt-1">{error}</span>}
-    </div>
-  );
-};
+              {displayText}
+            </Button>
+          </DropdownTrigger>
 
-export default AppDropDown;
+          {/* Menu */}
+          <DropdownMenu
+            aria-label="Select item"
+            items={items}
+            onAction={(key) => handleSelect(key as string | number)}
+            classNames={{
+              base: 'dark:bg-neutral-800 dark:border-neutral-700',
+            }}
+          >
+            {(item) => (
+              <DropdownItem
+                key={item.key}
+                color={item.color || 'default'}
+                className="transition-colors duration-200"
+                startContent={item.icon}
+                description={item.description}
+              >
+                {item.label}
+              </DropdownItem>
+            )}
+          </DropdownMenu>
+        </Dropdown>
+
+        {/* Error */}
+        {hasError && (
+          <span className="text-xs text-danger font-medium">
+            {error}
+          </span>
+        )}
+      </div>
+    );
+  }
+);
+
+AppDropDown.displayName = 'AppDropDown';

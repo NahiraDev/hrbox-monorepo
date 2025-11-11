@@ -1,6 +1,6 @@
 import AllocationSubheader from '@module/attendance/features/Allocation/AllocationSubheader';
 import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
-import { GlobalEdit, LocationAdd, Refresh2, Scan } from 'iconsax-react';
+import { GlobalEdit, LocationAdd, Refresh2, Scan } from 'iconsax-reactjs';
 import LocationAllocationModal from '@module/attendance/features/modals/LocationAllocationModal';
 import IpAllocationModal from '@module/attendance/features/modals/IpAllocationModal';
 import FaceAllocationModal from '@module/attendance/features/modals/FaceAllocationModal';

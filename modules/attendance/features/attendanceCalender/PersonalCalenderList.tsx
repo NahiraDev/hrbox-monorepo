@@ -1,7 +1,7 @@
 import { PersonalList } from '@module/attendance/app/mock';
 
-import { AppButton, AppTable } from '@core/components';
-import { Add, Calendar, Edit, Trash } from 'iconsax-react';
+import { AppButton, AppTable } from '@hrbox/uikit/components';
+import { Add, Calendar, Edit, Trash } from 'iconsax-reactjs';
 const PersonalCalenderList = () => {
   const columns = [
     {

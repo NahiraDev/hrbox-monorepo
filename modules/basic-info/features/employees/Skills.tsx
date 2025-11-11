@@ -1,7 +1,7 @@
 import { skills as mockSkills } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { LampCharge, Trash } from 'iconsax-react';
+import { LampCharge, Trash } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { AppDoubleLineProgress } from '@hrbox/uikit/sections';
 import { useState } from 'react'; // Import useState

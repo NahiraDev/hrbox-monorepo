@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="480" width="640" id="flag-icon-css-jp">
   <defs>
     <clipPath id="a">
-      <path fill-opacity=".67" d="M-88.001 32h640v480h-640z"/>
+      <path fillOpacity=".67" d="M-88.001 32h640v480h-640z"/>
     </clipPath>
   </defs>
   <g fill-rule="evenodd" clip-path="url(#a)" transform="translate(88.001 -32)" stroke-width="1pt">

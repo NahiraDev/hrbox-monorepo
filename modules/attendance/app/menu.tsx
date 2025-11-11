@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Calendar2, Chart2, Key, PasswordCheck, ReceiveSquare2, Setting3 } from 'iconsax-react';
+import { Calendar2, Chart2, Key, PasswordCheck, ReceiveSquare2, Setting3 } from 'iconsax-reactjs';
 
 const MenuIcons = {
   dashboard: Chart2,

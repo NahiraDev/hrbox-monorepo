@@ -1,16 +1,16 @@
-import { lazyLoad } from '@core/routes';
-import { DocumentSketch,Location } from 'iconsax-react';
+import { DocumentSketch,Location } from 'iconsax-reactjs';
 
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
+import { lazyRouteComponent } from "@tanstack/react-router";
 
-const OrganizationDepartments = lazyLoad(
+const OrganizationDepartments = lazyRouteComponent(
   () => import('@module/basic-info/features/departments/sub-header/OrganizationDepartmentsSubHeader'),
 );
-const TechnicalDepartments = lazyLoad(() => import('@module/basic-info/features/departments/sub-header/TechnicalDepartmentsSubHeader'));
-const OrganizationalLocations = lazyLoad(
+const TechnicalDepartments = lazyRouteComponent(() => import('@module/basic-info/features/departments/sub-header/TechnicalDepartmentsSubHeader'));
+const OrganizationalLocations = lazyRouteComponent(
   () => import('@module/basic-info/features/departments/sub-header/OrganizationLocationSubHeader'),
 );
-const AllEmployees = lazyLoad(
+const AllEmployees = lazyRouteComponent(
   () => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'),
 );
 

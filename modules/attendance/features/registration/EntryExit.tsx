@@ -1,5 +1,5 @@
 import { EntryExitData } from '@module/attendance/app/mock';
-import { AppTable } from '@core/components';
+import { AppTable } from '@hrbox/uikit/components';
 
 const EntryExit = () => {;
 

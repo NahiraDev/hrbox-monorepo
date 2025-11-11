@@ -1,11 +1,11 @@
-import { AppButton, AppModal } from '@core/components';
-import { FormProvider, useModalContext } from '@core/context';
+import { AppModal } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 import  {
   formValidationAction,
   handleSubmitAction,
   initialValuesAction,
 } from '@module/attendance/features/forms/IpAllocationEdit';
-import IpAllocationEdit from '@module/attendance/features/forms/IpAllocationEdit';
 import IpAllocationShowForm from '@module/attendance/features/forms/IpAllocationShowForm';
 const IpAllocationShow=()=>{
   const {closeModal}=useModalContext();

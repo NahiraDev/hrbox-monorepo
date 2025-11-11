@@ -1,5 +1,4 @@
 export const AcademyIcon = ({ color }: { color: string }) => {
-
   return (
     <svg
       fill="none"

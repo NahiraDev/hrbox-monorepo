@@ -1,5 +1,5 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue } from '@heroui/react';
-import { Setting } from 'iconsax-react';
+import { Setting } from 'iconsax-reactjs';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 

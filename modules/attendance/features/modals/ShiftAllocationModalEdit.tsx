@@ -1,6 +1,7 @@
-import { AppButton, AppModal } from '@core/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import ShiftAllocationEdit from '@module/attendance/features/forms/ShiftAllocationEdit';
-import { FormProvider, useModalContext } from '@core/context';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
+import {useModalContext} from '@hrbox/core/providers/ModalProvider'
 import {
   formValidationAction,
   handleSubmitAction,

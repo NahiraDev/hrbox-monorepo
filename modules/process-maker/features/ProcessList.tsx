@@ -1,4 +1,4 @@
-import { AppTable } from '@core/components';
+import { AppTable } from '@hrbox/uikit/components';
 import { sampleData } from '@module/process-maker/app/mock';
 const ProcessList = () => {
   return (

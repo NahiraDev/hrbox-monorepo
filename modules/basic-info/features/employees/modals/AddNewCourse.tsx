@@ -1,6 +1,6 @@
-// @module/basic-info/features/employees/modals/AddNewCourse.tsx
+// @module/basic-info/pages/employees/modals/AddNewCourse.tsx
 import React, { useState } from 'react';
-import { AppButton, AppInput, AppDatePicker } from '@core/components';
+import { AppButton, AppInput, AppDatePicker } from '@hrbox/uikit/components';
 
 interface AddNewCourseProps {
   onClose: () => void;

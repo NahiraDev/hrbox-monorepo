@@ -3,7 +3,7 @@ import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@module/basic-info/features/departments/modals/OrganizationDepartmentModal';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { Category, TickCircle } from 'iconsax-react';
+import { Category, TickCircle } from 'iconsax-reactjs';
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();

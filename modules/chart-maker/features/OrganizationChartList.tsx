@@ -1,4 +1,4 @@
-import { AppPagination } from '@core/components';
+import { AppPagination } from '@hrbox/uikit/components';
 import { organizationCharts } from '@module/chart-maker/app/mock';
 
 import { OrgChartCardListNode } from '@module/chart-maker/features/common';

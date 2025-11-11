@@ -6,12 +6,12 @@ import {
   Hierarchy3,
   People,
   Profile,
-} from 'iconsax-react';
-import AppDropDown from '@core/components/AppDropDown';
-import { useModalContext } from '@core/context';
+} from 'iconsax-reactjs';
+import AppDropDown from '@hrbox/uikit/components/AppDropDown';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';
 
-import { AppButton } from '@core/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Avatar } from '@heroui/react';

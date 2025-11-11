@@ -1,13 +1,12 @@
-import { lazyLoad } from '@core/routes';
-
 import { ProcessMakerPath } from '@module/process-maker/app/paths';
 import 'bpmn-js/dist/assets/diagram-js.css';
 import 'bpmn-js/dist/assets/bpmn-js.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
+import { lazy } from "react";
 
-const Dashboard = lazyLoad(() => import('@module/process-maker/features/Dashboard'));
-const ProcessMaker = lazyLoad(() => import('@module/process-maker/features/ProcessMaker'));
-const ProcessList = lazyLoad(() => import('@module/process-maker/features/ProcessList'));
+const Dashboard = lazy(() => import('@module/process-maker/features/Dashboard'));
+const ProcessMaker = lazy(() => import('@module/process-maker/features/ProcessMaker'));
+const ProcessList = lazy(() => import('@module/process-maker/features/ProcessList'));
 
 export const ProcessMakerContents: any = [
   {

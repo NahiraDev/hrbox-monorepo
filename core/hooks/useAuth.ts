@@ -1,20 +1,60 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { RootState, useAppSelector } from '@core/redux';
-import { logout as logoutAction } from '@core/redux/reducers/authSlice';
+import { useAppSelector, useAppDispatch } from '@hrbox/core/redux/hooks';
+import {
+  setCurrentDomain,
+  loginSuccess,
+  roleSelected,
+  switchRole,
+  logout,
+  updateToken,
+  initAuth,
+  setLoading,
+  setError,
+  type User,
+  type UserRole,
+} from '@hrbox/core/redux/slices/authSlice';
+import { Domain } from "@hrbox/core/config/theme/domains";
 
-export const useAuth = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const auth = useAppSelector((state:any) => state.auth);
-
-  const logout = () => {
-    dispatch(logoutAction());
-    navigate('/hrlink/login');
-  };
+export function useAuth() {
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector((state:any) => state.auth.isAuthenticated);
+  const user = useAppSelector((state:any) => state.auth.user);
+  const roles = useAppSelector((state:any) => state.auth.roles);
+  const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
+  const needsRoleSelection = useAppSelector((state:any) => state.auth.needsRoleSelection);
+  const currentPanel = useAppSelector((state:any) => state.auth.currentPanel);
+  const currentDomain = useAppSelector((state:any) => state.auth.currentDomain);
+  const loading = useAppSelector((state:any) => state.auth.loading);
+  const error = useAppSelector((state:any) => state.auth.error);
 
   return {
-    ...auth,
-    logout,
+    isAuthenticated,
+    user,
+    roles,
+    selectedRole,
+    needsRoleSelection,
+    currentPanel,
+    currentDomain,
+    loading,
+    error,
+
+    setCurrentDomain: (domain: Domain) => dispatch(setCurrentDomain(domain)),
+
+    loginSuccess: (user: User, token: string, refreshToken: string) =>
+      dispatch(loginSuccess({ user, token, refreshToken })),
+
+    roleSelected: (role: UserRole, accessToken: string) =>
+      dispatch(roleSelected({ role, accessToken })),
+
+    switchRole: (role: UserRole) => dispatch(switchRole(role)),
+
+    logout: () => dispatch(logout()),
+
+    updateToken: (token: string) => dispatch(updateToken(token)),
+
+    init: () => dispatch(initAuth()),
+
+    setLoading: (loading: boolean) => dispatch(setLoading(loading)),
+
+    setError: (error: string | null) => dispatch(setError(error)),
   };
-};
+}

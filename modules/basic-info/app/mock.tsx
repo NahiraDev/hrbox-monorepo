@@ -1,4 +1,4 @@
-import { GpsSlash, Profile, Heart, ProfileTick, Call, Calendar } from 'iconsax-react';
+import { GpsSlash, Profile, Heart, ProfileTick, Call, Calendar } from 'iconsax-reactjs';
 
 export const organizationDepartment = [
   {

@@ -1,56 +1,67 @@
-import { useEffect, useState } from 'react';
-import { serviceRegistry } from '@core/helpers';
-import { useLocation } from 'react-router-dom';
+import { Suspense, ReactNode } from 'react';
+import { useMatches } from '@tanstack/react-router';
+import { motion } from 'framer-motion';
 
-import { AppSupportButton } from '@hrbox/uikit/components';
-import { AppDocs, AppHeader, AppSideBar, AppSubHeader, AppContent } from '@hrbox/uikit/sections';
-import { ProtectedRoute } from '@hrbox/core/routes/protectedRoute';
+import { AppHeader } from '@hrbox/uikit/sections/AppHeader';
+import { AppSidebar } from '@hrbox/uikit/sections/AppSideBar';
+import { AppSupportButton } from '@hrbox/uikit/components/AppSupportButton';
+import { AppDocs } from '@hrbox/uikit/sections/AppDocs';
 
-export const BaseLayout = () => {
-  const location = useLocation();
-  const [showDoc, setShowDoc] = useState<boolean>(false);
+interface BaseLayoutProps {
+  children: ReactNode;
+}
 
-  useEffect(() => {
-    const getModuleName: string | undefined = serviceRegistry.getModuleName();
+export function BaseLayout({ children }: BaseLayoutProps) {
+  const matches = useMatches();
+  const currentRoute = matches[matches.length - 1];
+  const routeContext = currentRoute?.context as any;
 
-    if (getModuleName !== 'hrlink') {
-      setShowDoc(true);
-    }
-  }, [location.pathname]);
+  const SubHeader = routeContext?.subHeader;
+  const subHeaderProps = routeContext?.subHeaderProps || {};
 
   return (
-    <div className='shadow-tight text-foreground bg-light-mode dark:bg-dark-mode flex h-screen flex-col bg-white bg-cover bg-center bg-no-repeat pr-16 pb-10 pl-8 bg-blend-screen'>
-      <AppHeader />
-      <div className='flex min-h-0 flex-1 gap-4'>
-        <div className='flex min-h-0 flex-1 items-stretch gap-4'>
-          <div className='flex min-h-0 flex-1 flex-col gap-4'>
-            <div className='flex min-h-0 w-full flex-1 gap-8'>
-              <AppSideBar />
-              <div className='flex w-full flex-col gap-4'>
-                <AppSubHeader />
-                <div className='border-primary-400 bg-surface-50 h-full flex flex-col gap-3 overflow-hidden rounded-2xl border'>
-                  <AppContent
-                    fallback={
-                      <div className='flex h-full items-center justify-center'>
-                        <div
-                          className={`${showDoc ? 'border-primary-400 bg-surface-50 shadow-theme-md border dark:bg-[rgba(4,66,92,0.60)]' : 'rounded-xl'} relative flex-1 overflow-hidden`}
-                        />
-                      </div>
-                    }
-                  />
-                </div>
-              </div>
+    <div className="flex h-screen w-full bg-panel-background overflow-hidden">
+      <aside className="flex-shrink-0 m-5">
+        <AppSidebar />
+      </aside>
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Header */}
+        <header className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+          <AppHeader />
+        </header>
+
+        {SubHeader && (
+          <Suspense
+            fallback={
+              <div className="h-16 flex-shrink-0 bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
+            }
+          >
+            <div className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+              <SubHeader {...subHeaderProps} />
             </div>
-            {showDoc && (
-              <div className='mb-4 shrink-0'>
-                <AppDocs />
-              </div>
-            )}
-          </div>
-        </div>
+          </Suspense>
+        )}
+
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="h-full w-full"
+          >
+            <div className="p-6 h-full">
+              {children}
+            </div>
+          </motion.div>
+          <AppDocs />
+
+          <AppSupportButton />
+        </main>
       </div>
 
-      <AppSupportButton />
     </div>
   );
-};
+}
