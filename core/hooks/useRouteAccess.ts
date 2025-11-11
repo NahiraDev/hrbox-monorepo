@@ -47,7 +47,6 @@ export function useRouteAccess(): UseRouteAccessReturn {
   const selectedRole = useAppSelector((state: any) => state.auth.selectedRole);
   const currentPanel = useAppSelector((state: any) => state.auth.currentPanel);
 
-  // استخراج نقش‌ها و مجوزها
   const userRoles = useMemo(() => {
     if (!selectedRole) return [];
     return [selectedRole.slug as RoleSlug];
@@ -58,14 +57,9 @@ export function useRouteAccess(): UseRouteAccessReturn {
     return selectedRole.permissions;
   }, [selectedRole]);
 
-  // دریافت تمام routes
   const allRoutes = useMemo(() => {
     return moduleRegistry.getAllRoutes();
   }, []);
-
-  // ============================================
-  // 1️⃣ بررسی دسترسی به یک route خاص
-  // ============================================
 
   const checkRouteAccess = (path: string): RouteAccessCheck => {
     const route = allRoutes.find((r) => r.path === path);
@@ -74,22 +68,18 @@ export function useRouteAccess(): UseRouteAccessReturn {
       return { canAccess: false, reason: 'no_auth' };
     }
 
-    // اگر route نیاز به احراز هویت ندارد
     if (route.meta?.requireAuth === false) {
       return { canAccess: true };
     }
 
-    // بررسی احراز هویت
     if (!isAuthenticated) {
       return { canAccess: false, reason: 'no_auth' };
     }
 
-    // بررسی پنل
     if (route.meta?.requiredPanel && route.meta.requiredPanel !== currentPanel) {
       return { canAccess: false, reason: 'wrong_panel' };
     }
 
-    // بررسی نقش
     if (route.meta?.requiredRoles && route.meta.requiredRoles.length > 0) {
       const hasRole = route.meta.requiredRoles.some((role: RoleSlug) =>
         userRoles.includes(role as RoleSlug)
@@ -107,7 +97,6 @@ export function useRouteAccess(): UseRouteAccessReturn {
       }
     }
 
-    // بررسی مجوز
     if (route.meta?.requiredPermissions && route.meta.requiredPermissions.length > 0) {
       const hasPermission = route.meta.requiredPermissions.some((perm: any) =>
         userPermissions.includes(perm)
@@ -132,10 +121,6 @@ export function useRouteAccess(): UseRouteAccessReturn {
     return checkRouteAccess(path).canAccess;
   };
 
-  // ============================================
-  // 2️⃣ فیلتر routes بر اساس دسترسی
-  // ============================================
-
   const accessibleRoutes = useMemo(() => {
     return allRoutes.filter((route) => canAccessRoute(route.path));
   }, [allRoutes, isAuthenticated, userRoles, userPermissions, currentPanel]);
@@ -148,19 +133,11 @@ export function useRouteAccess(): UseRouteAccessReturn {
     return allRoutes.filter((route) => route.meta?.requireAuth === false);
   }, [allRoutes]);
 
-  // ============================================
-  // 3️⃣ فیلتر routes بر اساس panel
-  // ============================================
-
   const filterRoutesByPanel = (panel: Panel): ModuleRoute[] => {
     return allRoutes.filter(
       (route) => route.meta?.requiredPanel === panel || !route.meta?.requiredPanel
     );
   };
-
-  // ============================================
-  // 4️⃣ فیلتر routes بر اساس نقش
-  // ============================================
 
   const filterRoutesByRole = (roles: RoleSlug[]): ModuleRoute[] => {
     return allRoutes.filter((route) => {
@@ -172,10 +149,6 @@ export function useRouteAccess(): UseRouteAccessReturn {
       );
     });
   };
-
-  // ============================================
-  // 5️⃣ فیلتر routes بر اساس مجوز
-  // ============================================
 
   const filterRoutesByPermission = (permissions: string[]): ModuleRoute[] => {
     return allRoutes.filter((route) => {

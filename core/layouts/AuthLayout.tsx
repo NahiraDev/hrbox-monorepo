@@ -27,7 +27,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         backgroundColor: !loginBackground ? 'var(--color-panel-background)' : undefined,
       }}
     >
-      <div className="min-h-screen lg:px-10 px-4 flex items-center justify-center backdrop-blur-sm">
+      <div className="min-h-screen lg:px-10 px-4 flex items-center justify-center">
         <div className="w-full max-w-[1400px] flex lg:flex-row flex-col justify-between lg:gap-[156px] items-center lg:items-stretch py-20 lg:py-0">
 
           {/* Mobile Header */}
@@ -45,7 +45,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
           {/* Form Section */}
           <div className='relative flex items-end justify-center gap-6 flex-1'>
             {/* Controls (Desktop) */}
-            <div className="hidden lg:flex flex-col gap-3 self-center">
+            <div className="hidden lg:flex flex-col gap-4">
               <ThemeToggle />
               <LanguageToggle />
             </div>
@@ -69,9 +69,10 @@ export function AuthLayout({ children }: AuthLayoutProps) {
                   <div className="bg-white/80 dark:bg-[#01101a]/80 shadow-2xl rounded-2xl md:w-[460px] w-full lg:px-8 lg:py-10 p-6 flex flex-col items-center gap-6 backdrop-blur-xl border border-white/20 dark:border-neutral-700/20">
                     <div className="flex items-center gap-7 w-full">
                       <AppButton
-                        content={<ArrowLeft size="24" />}
+                        content={<ArrowLeft size="24" className="text-secondary-1000"/>}
                         size="md"
                         isIconOnly={true}
+                        variant="light"
                         onPress={() => window.history.back()}
                       />
 
@@ -80,7 +81,6 @@ export function AuthLayout({ children }: AuthLayoutProps) {
                       </span>
                     </div>
 
-                    {/* Children (Page Content) */}
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}

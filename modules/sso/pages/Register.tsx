@@ -3,11 +3,10 @@ import { FormProvider } from '@hrbox/core/providers/FormProvider';
 import { useTranslation } from 'react-i18next';
 
 import { RegisterForm } from '../forms';
-import { useRegisterUserMutation } from '../apis/Auth';
+import { useRegisterMutation } from "@hrbox-monorepo/modules/sso/apis/Auth";
 
 const Register = () => {
-  const { t } = useTranslation();
-  const [register] = useRegisterUserMutation();
+  const [register] = useRegisterMutation();
 
   const initialValuesForm = {
     FirstName: '',
