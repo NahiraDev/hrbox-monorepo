@@ -80,10 +80,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'main.tsx'),
-          sso: resolve(__dirname, './modules/sso/plugin.ts'),
+          sso: resolve(__dirname, './modules/sso/plugin.tsx'),
           // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
-          hrlink: resolve(__dirname, './modules/hrlink/plugin.ts'),
+          hrlink: resolve(__dirname, './modules/hrlink/plugin.tsx'),
+          attendance: resolve(__dirname, './modules/attendance/plugin.tsx'),
           // basicInfo: resolve(__dirname, 'modules/basic-info/plugin.tsx'),
         },
         output: {
@@ -95,6 +96,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             if (chunkInfo.name === 'chartMaker') return 'modules/chart-maker/index.js';
             if (chunkInfo.name === 'hrlink') return 'modules/hrlink/index.js';
             if (chunkInfo.name === 'basicInfo') return 'modules/basic-info/index.js';
+            if (chunkInfo.name === 'attendance') return 'modules/basic-info/index.js';
             return '[name].js';
           },
           chunkFileNames: '[name]-[hash].js',

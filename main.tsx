@@ -68,10 +68,9 @@ async function bootstrap() {
       // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
       // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
       // 'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
-      // attendance: () => import('@hrbox/modules/attendance/plugin'),
+      attendance: () => import('@hrbox/modules/attendance/plugin'),
     };
 
-    // بارگذاری موازی ماژول‌ها
     await Promise.all(
       ENABLED_MODULES.map(async (moduleName: any) => {
         if (moduleLoaders[moduleName]) {

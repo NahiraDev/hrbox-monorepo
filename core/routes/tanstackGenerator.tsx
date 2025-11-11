@@ -104,13 +104,13 @@ const generateModuleRoutes = (module: ModulePlugin) => {
             layout: layoutType,
           };
         }
-        //
-        // if (!context.auth?.isAuthenticated) {
-        //   throw redirect({
-        //     to:'/sso/login',
-        //     search: { redirect: location.pathname },
-        //   });
-        // }
+
+        if (!context.auth?.isAuthenticated) {
+          throw redirect({
+            to:'/sso/login',
+            search: { redirect: location.pathname },
+          });
+        }
 
         if (context.auth?.needsRoleSelection) {
           throw redirect({
@@ -209,12 +209,12 @@ export function createRouteTree() {
     getParentRoute: () => rootRoute,
     path: '/',
     beforeLoad: async ({ context }: { context: RouteContext }) => {
-      // if (!context.auth?.isAuthenticated) {
-      //   throw redirect({ to: '/sso/login' });
-      // }
-      // if (context.auth?.needsRoleSelection) {
-      //   throw redirect({ to: '/sso/select-role' });
-      // }
+      if (!context.auth?.isAuthenticated) {
+        throw redirect({ to: '/sso/login' });
+      }
+      if (context.auth?.needsRoleSelection) {
+        throw redirect({ to: '/sso/select-role' });
+      }
       const defaultRoutes: Record<Panel, string> = {
         hrlink: '/hrlink/dashboard',
         hrbox: '/hrbox/dashboard',

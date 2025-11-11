@@ -9,8 +9,6 @@ interface DynamicLogoProps {
 
 export function DynamicLogo({ variant = 'default', className = '' }: DynamicLogoProps) {
   const currentPanel = useAppSelector((state: any) => state.auth.currentPanel);
-  console.log(currentPanel);
-
   const { logoSrc, alt } = useMemo(() => {
     if (!currentPanel) {
       return { logoSrc: '', alt: '' };

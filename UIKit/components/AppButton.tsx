@@ -45,7 +45,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
       size = 'md',
       radius = 'md',
       variant = 'solid',
-      color = 'primary',
+      color,
       className,
       isLoading = false,
       isDisabled = false,

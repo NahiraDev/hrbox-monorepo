@@ -70,28 +70,24 @@ export const LoginForm = () => {
         </div>
 
         <AppButton
-          props={{
-          content: (t('sign_in_with_phone_number')),
-          size: 'lg',
-          fullWidth: true,
-          variant: 'light',
-          startContent: <img src="/images/message.svg" alt="phone icon" />,
-          className:
-            ' px-4 py-3 justify-start bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
-            }}
+          content={(t('sign_in_with_phone_number'))}
+          size='lg'
+          fullWidth={true}
+           variant=""
+          color="primary"
+            startContent={<img src="/images/message.svg" alt="phone icon" />}
+             className="!bg-[radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.10) 100%)]) backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] flex justify-start border-1 border-[rgba(216, 216, 216, 0.00)]"
           />
 
           <AppButton
             content={(t('sign_in_with_google'))}
-          props={{
-          size: 'lg',
-          fullWidth: true,
-          variant: 'light',
-          startContent: <img src="/images/Google%20Logo.svg" alt="phone icon" />,
-          className:
-            'gap-3 justify-start px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]',
-          onPress: () => console.log('Sign in with phone number clicked!'),
-            }}
+            size='lg'
+             fullWidth={true}
+           variant='light'
+        startContent={<img src="/images/Google%20Logo.svg" alt="phone icon" />}
+        className=
+        'gap-3 justify-start px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]'
+        onPress={() => console.log('Sign in with phone number clicked!')}
           />
 
           <div className="flex items-center justify-center mt-6">
@@ -99,7 +95,7 @@ export const LoginForm = () => {
               Do you have an account?{' '}
               <span
                 className="text-[#1E3363] font-semibold cursor-pointer hover:underline"
-                onClick={() => navigate('/signup')}
+                onClick={() => push({to:'/sso/register'})}
               >
                 Sign up now
               </span>

@@ -5,36 +5,45 @@
 import { lazy } from 'react';
 import type { ModulePlugin } from '@hrbox/modules/types';
 import { RoleSlug } from '@hrbox/core/config/theme';
-import { Profile, Briefcase, Building } from 'iconsax-reactjs';
+import { Profile, Briefcase, Building, PasswordCheck } from "iconsax-reactjs";
 import { lazyRouteComponent } from '@tanstack/react-router';
+import { Paths } from "@hrbox/modules/paths";
+import { AttendancePath } from "@module/*";
 
 // ============================================
 // Pages
 // ============================================
 
-const DashboardPage = lazyRouteComponent(() => import('./pages/dashboard'));
-const ResumePage = lazyRouteComponent(() => import('./pages/resume/Information'));
-const JobsPage = lazyRouteComponent(() => import('./pages/jobs/JobOffers'));
-const CompanyPage = lazyRouteComponent(() => import('./pages/companies/Companies'));
+const Dashboard = lazyRouteComponent(() => import('./pages/dashboard/Dashboard'));
+const EntryExit = lazyRouteComponent(() => import('./pages/registration/EntryExit'));
+const AttendanceCalender = lazyRouteComponent(() => import('./pages/attendanceCalender/AttendanceCalenders'));
+const TrafficCalender = lazyRouteComponent(() => import('./pages/attendanceCalender/TrafficCalender'));
+const ExportPage = lazyRouteComponent(() => import('./pages/Export/ExportPage'));
+const ListOfApprovals = lazyRouteComponent(() => import('./pages/ListApprovals/ListApprovals'));
+const ShiftAllocation = lazyRouteComponent(() => import('./pages/Allocation/ShiftAllocation'));
+const FaceAllocation = lazyRouteComponent(() => import('./pages/Allocation/FaceAllocation'));
+const IpAllocation = lazyRouteComponent(() => import('./pages/Allocation/IpAllocation'));
+const LocationAllocation = lazyRouteComponent(() => import('./pages/Allocation/LocationAllocation'));
 
 // ============================================
 // SubHeaders (Lazy Load)
 // ============================================
 
 const DashboardSubHeader = lazy(() => import('./subheaders/DashboardSubHeader'));
-const JobsSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
-const ResumeSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
+const EntryExitSubHeader = lazy(() => import('./subheaders/EntryExitSubHeader'));
+const CalenderSubHeader = lazy(() => import('./subheaders/CalenderSubHeader'));
+const ApprovalsSubHeader = lazy(() => import('./subheaders/ApprovalsSubHeader'));
 
 // ============================================
 // Plugin Definition
 // ============================================
 
-export const HRLinkPlugin: ModulePlugin = {
-  name: 'hrlink',
+export const AttendancePlugin: ModulePlugin = {
+  name: 'attendance',
   version: '1.0.0',
-  basePath: '/hrlink',
+  basePath: '/attendance',
   layout: 'base',
-  description: 'Job Seeker Portal',
+  description: '',
   author: 'HRBox Team',
 
   // ============================================
@@ -42,55 +51,26 @@ export const HRLinkPlugin: ModulePlugin = {
   // ============================================
   routes: [
     {
-      path: '/hrlink/dashboard',
-      component: DashboardPage,
+      path: Paths.Attendance.Dashboard,
+      component: Dashboard,
       layout: 'base',
       meta: {
         title: 'Dashboard',
-        requireAuth: true,
-        requiredRoles: [RoleSlug.JOB_SEEKER],
-      },
-    },
-
-    {
-      path: '/hrlink/resume',
-      component: ResumePage,
-      layout: 'base',
-      meta: {
-        title: 'Resume',
         requireAuth: false,
-        requiredRoles: [RoleSlug.JOB_SEEKER],
-      },
-      subHeader: ResumeSubHeader,
-    },
-
-    // Jobs
-    {
-      path: '/hrlink/jobs',
-      component: JobsPage,
-      layout: 'base',
-      meta: {
-        title: 'Jobs',
-        requireAuth: true,
-        requiredRoles: [RoleSlug.JOB_SEEKER],
-      },
-      subHeader: JobsSubHeader,
-      subHeaderProps: {
-        showFilters: true,
-        showSearch: true,
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
     },
 
     {
-      path: '/hrlink/company/:id',
-      component: CompanyPage,
+      path: Paths.Attendance.EntryExitRegistration,
+      component: EntryExit,
       layout: 'base',
       meta: {
-        title: 'Company',
+        title: 'Entry Exit',
         requireAuth: true,
-        requiredRoles: [RoleSlug.JOB_SEEKER],
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      // ✅ این صفحه SubHeader نداره
+      subHeader: EntryExitSubHeader,
     },
   ],
 
@@ -124,11 +104,11 @@ export const HRLinkPlugin: ModulePlugin = {
     },
   ],
 
-  requiredRoles: [RoleSlug.JOB_SEEKER],
+  requiredRoles: [RoleSlug.ORGANIZATION],
   requiredPermissions: [],
 
   prefetch: async () => {
-    console.log('Prefetching HRLink module...');
+    console.log('Prefetching Attendance module...');
   },
 
   onModuleLoad: () => {
@@ -140,4 +120,4 @@ export const HRLinkPlugin: ModulePlugin = {
   },
 };
 
-export default HRLinkPlugin;
+export default AttendancePlugin;

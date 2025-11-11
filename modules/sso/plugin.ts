@@ -3,6 +3,7 @@ import { lazyRouteComponent } from "@tanstack/react-router";
 import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
 
 const LoginPage = lazyRouteComponent(() => import('./pages/Login'));
+const RegisterPage = lazyRouteComponent(() => import('./pages/Register'));
 const SelectRolePage = lazyRouteComponent(() => import('./pages/SelectRole'));
 const WelcomePage = lazyRouteComponent(() => import('./pages/Welcome'));
 
@@ -28,12 +29,21 @@ export const SSOPlugin: ModulePlugin = {
       },
     },
     {
+      path: '/sso/register',
+      component: RegisterPage,
+      layout: 'auth',
+      meta: {
+        title: 'Register',
+        requireAuth: false,
+      },
+    },
+    {
       path: '/sso/select-role',
       component: SelectRolePage,
       layout: 'base',
       meta: {
         title: 'Select Role',
-        requireAuth: false,
+        requireAuth: true,
       },
     },
     {

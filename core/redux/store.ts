@@ -15,7 +15,7 @@ const persistConfig = {
   whitelist: ['auth', 'theme', 'language'],
 };
 
-export function createStoreWithModules() {
+export function createStoreWithModules(ENABLED_MODULES: string[]) {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
 

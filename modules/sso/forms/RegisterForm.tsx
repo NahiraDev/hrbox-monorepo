@@ -1,9 +1,10 @@
-import { AppButton, AppInput } from '@hrbox/uikit/components';
-import { Form } from '@heroui/react';
-import { Eye, EyeSlash } from 'iconsax-reactjs';
-import { useFormContext } from '@hrbox/core/providers/FormProvider';
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { AppButton, AppInput } from "@hrbox/uikit/components";
+import { Form } from "@heroui/react";
+import { Eye, EyeSlash } from "iconsax-reactjs";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { FormField } from "@hrbox-monorepo/UIKit/components/FormField";
 
 export const RegisterForm = () => {
   const {
@@ -12,7 +13,7 @@ export const RegisterForm = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isSubmitting,
+    isSubmitting
   } = useFormContext<{
     FirstName: string;
     LastName: string;
@@ -31,78 +32,32 @@ export const RegisterForm = () => {
     <Form className="w-full flex flex-col gap-12" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-4 w-full">
         <div className="grid xl:grid-cols-2 xl:gap-10 gap-2">
+          <FormField  label={t("first_name")} name="FirstName" helperText={touched.FirstName && errors.FirstName}/>
+          <FormField  label={t("last_name")} name="LastName" helperText={touched.LastName && errors.LastName}/>
+          <FormField  label={t("email")} name="Email" helperText={touched.Email && errors.Email}/>
+          <FormField  label={t("phone")} name="Mobile" helperText={touched.NationalCode && errors.NationalCode} />
+        </div>
+        <div className="grid xl:grid-cols-2 xl:gap-10 gap-2">
           <div className="flex flex-col gap-1">
-            <AppInput
-              props={{
-                required: true,
-                label: t('first_name'),
-                name: 'FirstName',
-                error: touched.FirstName ? errors.FirstName : undefined,
-                onChange: handleChange,
-                onBlur: handleBlur,
-              }}
-            />
+            {/*<AppInput*/}
+            {/*  props={{*/}
+            {/*    label: t("national_code"),*/}
+            {/*    name: "NationalCode",*/}
+            {/*    error:  : undefined,*/}
+            {/*    onChange: handleChange,*/}
+            {/*    onBlur: handleBlur*/}
+            {/*  }}*/}
+            {/*/>*/}
           </div>
         </div>
         <div className="grid xl:grid-cols-2 xl:gap-10 gap-2">
           <div className="flex flex-col gap-1">
             <AppInput
               props={{
-                required: true,
-                label: t('last_name'),
-                name: 'LastName',
-                error: touched.LastName ? errors.LastName : undefined,
-                onChange: handleChange,
-                onBlur: handleBlur,
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <AppInput
-              props={{
-                required: true,
-                label: t('email'),
-                name: 'Email',
-                error: touched.Email ? errors.Email : undefined,
-                onChange: handleChange,
-                onBlur: handleBlur,
-              }}
-            />
-          </div>
-        </div>
-        <div className="grid xl:grid-cols-2 xl:gap-10 gap-2">
-          <div className="flex flex-col gap-1">
-            <AppInput
-              props={{
-                required: true,
-                label: t('phone'),
-                name: 'Mobile',
-                error: touched.Mobile ? errors.Mobile : undefined,
-                onChange: handleChange,
-                onBlur: handleBlur,
-              }}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <AppInput
-              props={{
-                label: t('national_code'),
-                name: 'NationalCode',
-                error: touched.NationalCode ? errors.NationalCode : undefined,
-                onChange: handleChange,
-                onBlur: handleBlur,
-              }}
-            />
-          </div>
-        </div>
-        <div className="grid xl:grid-cols-2 xl:gap-10 gap-2">
-          <div className="flex flex-col gap-1">
-            <AppInput
-              props={{
-                name: 'registe-form',
-                label: t('password'),
+                name: "registe-form",
+                label: t("password"),
                 error: touched.Password ? errors.Password : undefined,
-                type: isVisiblePassword ? 'text' : 'password',
+                type: isVisiblePassword ? "text" : "password",
                 onChange: handleChange,
                 onBlur: handleBlur,
                 endContent: (
@@ -124,22 +79,19 @@ export const RegisterForm = () => {
                       />
                     )}
                   </button>
-                ),
+                )
               }}
             />
           </div>
         </div>
       </div>
       <AppButton
-        props={{
-          className: `font-semibold h-14 !py-4 lg:!w-[320px]`,
-          size: 'lg',
-          type: 'submit',
-          fullWidth: true,
-          variant: 'primary',
-          text: t('sign_up'),
-          isSubmitting: isSubmitting,
-        }}
+        className="font-semibold h-14 !py-4 lg:!w-[320px]"
+        size="lg"
+        fullWidth={true}
+        variant="primary"
+        text={t("sign_up")}
+        isSubmitting={isSubmitting}
       />
     </Form>
   );
