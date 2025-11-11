@@ -1,6 +1,6 @@
 import { Avatar } from '@heroui/react';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { Repeat } from 'iconsax-react';
+import { Repeat } from 'iconsax-reactjs';
 
 import { AppButton, AppModal } from '@hrbox/uikit/components';
 import CameraView from '@module/attendance/features/registration/CameraView';

@@ -1,4 +1,4 @@
-import { DocumentSketch,Location } from 'iconsax-react';
+import { DocumentSketch,Location } from 'iconsax-reactjs';
 
 import { BasicInfoPaths } from '@module/basic-info/app/paths';
 import { lazyRouteComponent } from "@tanstack/react-router";

@@ -1,14 +1,13 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { moduleRegistry } from '@hrbox/modules/registry';
 
-// Core slices
-import authReducer from '@core/redux/slices/authSlice';
-import themeReducer from '@core/redux/slices/themeSlice';
-import languageReducer from '@core/redux/slices/languageSlice';
-import formCacheReducer from '@core/redux/slices/formCacheSlice';
+import authReducer from '@hrbox/core/redux/slices/authSlice';
+import themeReducer from '@hrbox/core/redux/slices/themeSlice';
+import languageReducer from '@hrbox/core/redux/slices/languageSlice';
+import formCacheReducer from '@hrbox/core/redux/slices/formCacheSlice';
 
 const persistConfig = {
   key: 'hrbox-v3',
@@ -16,39 +15,37 @@ const persistConfig = {
   whitelist: ['auth', 'theme', 'language'],
 };
 
-export function createStoreWithModules(enabledModules: string[]) {
+export function createStoreWithModules() {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
 
-  // Combine all slices
-  const rootReducer = combineReducers({
-    auth: authReducer,
-    theme: themeReducer,
-    language: languageReducer,
-    formCache: formCacheReducer,
-    ...moduleReducers,
+  const rootReducer = (state: any = {}, action: any) => ({
+    auth: authReducer(state.auth, action),
+    theme: themeReducer(state.theme, action),
+    language: languageReducer(state.language, action),
+    formCache: formCacheReducer(state.formCache, action),
+    ...Object.fromEntries(
+      Object.entries(moduleReducers).map(([key, reducer]) => [
+        key,
+        reducer(state[key], action),
+      ])
+    ),
   });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-  // Create store
   const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => {
-      const middleware = getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
         },
-      });
-
-      moduleApis.forEach((api) => {
-        if (api.middleware) {
-          middleware.push(api.middleware);
-        }
-      });
-
-      return middleware;
-    },
+      }).concat(
+        moduleApis
+          .filter((api) => api.middleware)
+          .map((api) => api.middleware)
+      ),
     devTools: import.meta.env.DEV,
   });
 
@@ -59,5 +56,9 @@ export function createStoreWithModules(enabledModules: string[]) {
   return { store, persistor };
 }
 
-export type RootState = ReturnType<ReturnType<typeof createStoreWithModules>['store']['getState']>;
-export type AppDispatch = ReturnType<typeof createStoreWithModules>['store']['dispatch'];
+export type RootState = ReturnType<
+  ReturnType<typeof createStoreWithModules>['store']['getState']
+>;
+export type AppDispatch = ReturnType<
+  typeof createStoreWithModules
+>['store']['dispatch'];

@@ -1,8 +1,14 @@
-import { Autocomplete, AutocompleteItem, AutocompleteProps } from '@heroui/react';
-import clsx from 'clsx';
-import React, { forwardRef, useMemo } from 'react';
+import {
+  Autocomplete,
+  AutocompleteItem,
+  AutocompleteProps,
+} from "@heroui/react";
+import clsx from "clsx";
+import React, { forwardRef, useMemo } from "react";
+import { FormMode } from "@hrbox/uikit/components/types";
 
-interface AppAutoCompleteProps extends Omit<AutocompleteProps, 'onChange' | 'onBlur' | 'onFocus'> {
+interface AppAutoCompleteProps
+  extends Omit<AutocompleteProps<any>, "onChange" | "onBlur" | "onFocus"> {
   name: string;
   label?: string;
   required?: boolean;
@@ -18,35 +24,35 @@ interface AppAutoCompleteProps extends Omit<AutocompleteProps, 'onChange' | 'onB
   containerClassName?: string;
 }
 
-const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
+const sizeClasses: Record<
+  string,
+  { wrapper: string; label: string; inputWrapper: string }
+> = {
   sm: {
-    wrapper: 'h-8 px-2 text-xs',
-    input: 'text-xs',
-    label: 'text-xs font-medium',
+    wrapper: "h-8 px-2 text-xs",
+    label: "text-xs font-medium",
+    inputWrapper: "text-xs",
   },
   md: {
-    wrapper: 'h-10 px-3 text-sm',
-    input: 'text-sm',
-    label: 'text-sm font-medium',
+    wrapper: "h-10 px-3 text-sm",
+    label: "text-sm font-medium",
+    inputWrapper: "text-sm",
   },
   lg: {
-    wrapper: 'h-12 px-4 text-base',
-    input: 'text-base',
-    label: 'text-base font-semibold',
+    wrapper: "h-12 px-4 text-base",
+    label: "text-base font-semibold",
+    inputWrapper: "text-base",
   },
 };
 
-/**
- * ✅ AppAutoComplete - updated with FormMode
- */
 export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps>(
   (
     {
       name,
       label,
       required = false,
-      displayKey = 'name',
-      valueKey = 'id',
+      displayKey = "name",
+      valueKey = "id",
       data = [],
       formMode = FormMode.CREATE,
       error,
@@ -55,7 +61,7 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
       onChange,
       helperText,
       containerClassName,
-      size = 'md',
+      size = "md",
       isDisabled,
       ...rest
     },
@@ -64,58 +70,50 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
     const isViewMode = formMode === FormMode.VIEW;
     const hasError = Boolean(error);
 
-    // استایل بر اساس mode
     const modeStyles = useMemo(() => {
       const baseWrapper = sizeClasses[size]?.wrapper || sizeClasses.md.wrapper;
 
       switch (formMode) {
         case FormMode.VIEW:
           return {
-            wrapper: clsx(
+            inputWrapper: clsx(
               baseWrapper,
-              'bg-neutral-50 dark:bg-neutral-900',
-              'border border-neutral-200 dark:border-neutral-700',
-              'cursor-default'
+              "bg-neutral-50 dark:bg-neutral-900",
+              "border border-neutral-200 dark:border-neutral-700",
+              "cursor-default"
             ),
-            input: clsx(sizeClasses[size]?.input, 'text-neutral-600 dark:text-neutral-400'),
           };
-
         case FormMode.EDIT:
           return {
-            wrapper: clsx(
+            inputWrapper: clsx(
               baseWrapper,
-              'bg-panel-surface dark:bg-neutral-800',
-              'border-1.5 border-primary-200 dark:border-primary-700',
-              'focus-within:border-panel-primary'
+              "bg-panel-surface dark:bg-neutral-800",
+              "border-1.5 border-primary-200 dark:border-primary-700",
+              "focus-within:border-panel-primary"
             ),
-            input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
           };
-
         case FormMode.CREATE:
         default:
           return {
-            wrapper: clsx(
+            inputWrapper: clsx(
               baseWrapper,
-              'bg-white dark:bg-neutral-800',
-              'border border-neutral-300 dark:border-neutral-600',
-              'focus-within:border-panel-primary'
+              "bg-white dark:bg-neutral-800",
+              "border border-neutral-300 dark:border-neutral-600",
+              "focus-within:border-panel-primary"
             ),
-            input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
           };
       }
     }, [formMode, size]);
 
-    // دریافت نام آیتم انتخاب شده
-    const getDisplayText = (selectedKey: string | null) => {
-      if (!selectedKey) return '';
-      const item = data.find((d) => String(d[valueKey]) === String(selectedKey));
-      return item ? String(item[displayKey]) : '';
-    };
-
     return (
-      <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
+      <div className={clsx("flex flex-col gap-1.5", containerClassName)}>
         {label && (
-          <label className={clsx(sizeClasses[size]?.label, 'text-secondary-900 dark:text-white')}>
+          <label
+            className={clsx(
+              sizeClasses[size]?.label,
+              "text-secondary-900 dark:text-white"
+            )}
+          >
             {label}
             {required && !isViewMode && <span className="text-danger ml-1">*</span>}
           </label>
@@ -125,23 +123,19 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
           ref={ref}
           classNames={{
             inputWrapper: clsx(
-              modeStyles.wrapper,
-              'rounded-lg',
-              hasError && !isViewMode && 'border-danger bg-danger-50 dark:bg-danger-900/20'
+              modeStyles.inputWrapper,
+              hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
             ),
-            input: clsx(modeStyles.input, hasError && !isViewMode && 'text-danger'),
-            listboxWrapper: 'rounded-lg',
+            listboxWrapper: "z-50 max-h-64",
           }}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
           onFocus={onFocus}
           onBlur={onBlur}
           onSelectionChange={(key) => {
-            if (onChange && key) {
-              onChange(key as string);
-            }
+            if (onChange && key) onChange(key as string);
           }}
-          placeholder={`انتخاب ${label || 'گزینه'}...`}
+          placeholder={`انتخاب ${label || "گزینه"}...`}
           {...rest}
         >
           {data.map((item) => (
@@ -155,10 +149,7 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
           ))}
         </Autocomplete>
 
-        {hasError && (
-          <span className="text-xs text-danger">{error}</span>
-        )}
-
+        {hasError && <span className="text-xs text-danger">{error}</span>}
         {helperText && !hasError && (
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {helperText}
@@ -169,4 +160,4 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
   }
 );
 
-AppAutoComplete.displayName = 'AppAutoComplete';
+AppAutoComplete.displayName = "AppAutoComplete";

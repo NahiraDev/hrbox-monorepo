@@ -10,7 +10,7 @@ import {
   Hospital,
   Add,
   HeartEdit,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import PreEmploymentHealthRecordsModals from '@module/basic-info/features/employees/modals/PreEmploymentHealthRecordsModals';

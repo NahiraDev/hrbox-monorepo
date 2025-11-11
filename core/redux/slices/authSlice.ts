@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Domain, Panel, RoleSlug, getRoleConfig, getCurrentDomain } from '@core/config/theme';
+import { Domain, Panel, RoleSlug, getRoleConfig, getCurrentDomain } from '@hrbox/core/config/theme';
 
 export interface UserRole {
   id: string;
@@ -19,8 +19,9 @@ export interface User {
 interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
-  token: string | null;
-  refreshToken: string | null;
+  userId: string | null;
+  Token: string | null;
+  renewalToken: string | null;
   selectedRole: UserRole | null;
   needsRoleSelection: boolean;
   currentDomain: Domain;
@@ -31,9 +32,10 @@ interface AuthState {
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  user: null,
-  token: null,
-  refreshToken: null,
+  user:null,
+  userId: null,
+  Token: null,
+  renewalToken: null,
   selectedRole: null,
   needsRoleSelection: false,
   currentDomain: getCurrentDomain(),
@@ -46,35 +48,34 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // تنظیم دامنه جاری
     setCurrentDomain: (state, action: PayloadAction<Domain>) => {
       state.currentDomain = action.payload;
     },
 
-    // موفقیت لاگین
     loginSuccess: (state, action: PayloadAction<{
       user: User;
-      token: string;
-      refreshToken: string;
+      userId: string;
+      Token: string;
+      renewalToken: string;
     }>) => {
-      const { user, token, refreshToken } = action.payload;
-      state.user = user;
-      state.token = token;
-      state.refreshToken = refreshToken;
+      const { userId, Token, renewalToken } = action.payload;
+      state.user = null;
+      state.userId = userId;
+      state.Token = Token;
+      state.renewalToken = renewalToken;
       state.loading = false;
       state.error = null;
 
-      // ذخیره در localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('Token', Token);
+      localStorage.setItem('renewalToken', renewalToken);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('user', JSON.stringify(userId));
 
-      // اگر بیش از یک نقش داشت
       if (user.roles.length > 1) {
         state.needsRoleSelection = true;
         state.isAuthenticated = false;
       }
-      // اگر فقط یک نقش داشت
+
       else if (user.roles.length === 1) {
         const role = user.roles[0];
         state.selectedRole = role;
@@ -113,8 +114,8 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
-      state.token = null;
-      state.refreshToken = null;
+      state.Token = null;
+      state.renewalToken = null;
       state.selectedRole = null;
       state.needsRoleSelection = false;
       state.currentPanel = null;
@@ -128,19 +129,18 @@ export const authSlice = createSlice({
 
     // بروزرسانی توکن
     updateToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
+      state.Token = action.payload;
       localStorage.setItem('token', action.payload);
     },
 
-    // بارگذاری اطلاعات ذخیره شده
     initAuth: (state) => {
-      const token = localStorage.getItem('token');
-      const user = localStorage.getItem('user');
+      const token = localStorage.getItem('Token');
+      const user = localStorage.getItem('userId');
       const selectedRole = localStorage.getItem('selectedRole');
 
       if (token && user && selectedRole) {
         try {
-          state.token = token;
+          state.Token = token;
           state.user = JSON.parse(user);
           state.selectedRole = JSON.parse(selectedRole);
           state.currentPanel = getRoleConfig(JSON.parse(selectedRole).slug).panel;

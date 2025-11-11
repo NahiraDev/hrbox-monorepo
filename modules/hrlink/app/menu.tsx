@@ -8,7 +8,7 @@ import {
   LampCharge,
   Personalcard,
   UserOctagon,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import {AcademyIcon} from "@hrbox/uikit/icons/AcademyIcon";
 
 const DashboardIcons = {

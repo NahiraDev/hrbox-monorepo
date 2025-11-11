@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import i18n from '@core/translate';
+import i18n from '@hrbox/core/translate';
 
 export type Language = 'en' | 'fa';
 

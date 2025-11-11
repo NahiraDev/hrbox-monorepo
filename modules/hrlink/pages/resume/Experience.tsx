@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
-import { AppLoader, AppTable } from '@hrbox/uikit/components';
+import { AppTable } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-
-import { useLazyFetchExperienceQuery } from '@module/hrlink/features/resume/apis';
+import { GeneralInformation } from "@hrbox-monorepo/modules/hrlink/components/GeneralInformation";
+import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
+import { useLazyFetchExperienceQuery } from "@hrbox/modules/hrlink/apis";
 
 const Experience = () => {
   const { openModal } = useModalContext();
@@ -17,20 +17,14 @@ const Experience = () => {
   return (
     <div className="grid grid-cols-4 gap-6 h-full">
       <div className="col-span-3">
-        {isLoading ? (
-          <div>
-            <AppLoader />
-          </div>
-        ) : (
-          <AppTable
-            data={data}
-            error={isError ? 'Failed to load data' : undefined}
-            hasPagination={true}
-            loading={isLoading}
-            onDelete={(row) => openModal('delete', 'experience', row)}
-            onEdit={(row) => openModal('edit', 'experience' , row)}
-          />
-        )}
+        <AppTable
+          data={data}
+          error={isError ? 'Failed to load data' : undefined}
+          hasPagination={true}
+          loading={isLoading}
+          onDelete={(row) => openModal('delete', 'experience', row)}
+          onEdit={(row) => openModal('edit', 'experience' , row)}
+        />
       </div>
       <div className="col-span-1 flex flex-col gap-3">
         <GeneralInformation />

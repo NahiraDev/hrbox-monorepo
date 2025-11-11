@@ -1,12 +1,12 @@
 import {
+  Panel,
   PanelTheme,
   RadiusConfig,
   ShadowConfig,
   SpacingConfig,
   ThemeColors,
   TypographyConfig
-} from "@core/config/theme/types";
-import { Panel } from "@core/config/theme/roles";
+} from "@hrbox/core/config/theme/types";
 
 export const PANEL_PRESETS: Record<Panel, PanelTheme> = {
   hrlink: {

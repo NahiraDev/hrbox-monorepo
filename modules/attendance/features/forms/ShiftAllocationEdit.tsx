@@ -2,7 +2,7 @@ import { Form } from '@heroui/react';
 import { Radio, RadioGroup } from '@heroui/react';
 import { useFormContext } from '@hrbox/core';
 import { AppAutoComplete, AppTextArea }from '@hrbox/uikit/components';
-import { TimerStart } from 'iconsax-react';
+import { TimerStart } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 
 export const formValidationAction = Yup.object().shape({

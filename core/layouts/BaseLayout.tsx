@@ -1,26 +1,32 @@
-import { Suspense } from 'react';
-import { Outlet, useRouteContext } from '@tanstack/react-router';
+import { Suspense, ReactNode } from 'react';
+import { useMatches } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { Spinner } from '@heroui/react';
 
 import { AppHeader } from '@hrbox/uikit/sections/AppHeader';
-import { AppSideBar } from '@hrbox/uikit/sections/AppSideBar';
-import { AppSupportButton } from '@hrbox/uikit/components';
+import { AppSidebar } from '@hrbox/uikit/sections/AppSideBar';
+import { AppSupportButton } from '@hrbox/uikit/components/AppSupportButton';
 import { AppDocs } from '@hrbox/uikit/sections/AppDocs';
 
+interface BaseLayoutProps {
+  children: ReactNode;
+}
 
-export function BaseLayout() {
-  const context = useRouteContext({ from: '__root__' });
-  const SubHeader = context?.component;
-  const subHeaderProps = context?.props;
+export function BaseLayout({ children }: BaseLayoutProps) {
+  const matches = useMatches();
+  const currentRoute = matches[matches.length - 1];
+  const routeContext = currentRoute?.context as any;
+
+  const SubHeader = routeContext?.subHeader;
+  const subHeaderProps = routeContext?.subHeaderProps || {};
 
   return (
     <div className="flex h-screen w-full bg-panel-background overflow-hidden">
-      <aside className="flex-shrink-0 border-r border-neutral-200 dark:border-neutral-700">
-        <AppSideBar />
+      <aside className="flex-shrink-0 m-5">
+        <AppSidebar />
       </aside>
 
       <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Header */}
         <header className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
           <AppHeader />
         </header>
@@ -39,38 +45,23 @@ export function BaseLayout() {
 
         {/* Main Content */}
         <main className="flex-1 overflow-auto">
-          <Suspense
-            fallback={
-              <div className="flex h-full items-center justify-center bg-panel-background">
-                <div className="flex flex-col items-center gap-4">
-                  <Spinner size="lg" color="primary" />
-                  <p className="text-neutral-500 dark:text-neutral-400">
-                    بارگذاری محتوا...
-                  </p>
-                </div>
-              </div>
-            }
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="h-full w-full"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="h-full w-full"
-            >
-              <div className="p-6 h-full">
-                <Outlet />
-              </div>
-            </motion.div>
-          </Suspense>
+            <div className="p-6 h-full">
+              {children}
+            </div>
+          </motion.div>
+          <AppDocs />
 
-          {/* Support Button */}
           <AppSupportButton />
         </main>
       </div>
 
-      {/* 3️⃣ Dock Menu (HRBox only) */}
-      <AppDocs />
     </div>
   );
 }

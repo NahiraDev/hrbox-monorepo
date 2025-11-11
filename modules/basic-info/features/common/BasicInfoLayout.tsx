@@ -1,7 +1,7 @@
 import type { Key, ReactNode } from 'react';
 import { DynamicAddModal } from '@module/basic-info/features/employees/modals/DynamicAddModal';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Add, Category, FolderCross, MessageEdit, Trash } from 'iconsax-react';
+import { Add, Category, FolderCross, MessageEdit, Trash } from 'iconsax-reactjs';
 import { Listbox, ListboxItem } from '@heroui/react';
 import { useEffect, useState, useRef } from 'react';
 import { AppTabs } from '@hrbox/uikit/components';

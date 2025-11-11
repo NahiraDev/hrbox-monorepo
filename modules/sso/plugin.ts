@@ -1,9 +1,10 @@
-import { lazy } from 'react';
 import type { ModulePlugin } from '@hrbox/modules/types';
+import { lazyRouteComponent } from "@tanstack/react-router";
+import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
 
-const LoginPage = lazy(() => import('@hrbox/modules/sso/pages/Login'));
-const SelectRolePage = lazy(() => import('@hrbox/modules/sso/pages/SelectRole'));
-const WelcomePage = lazy(() => import('@hrbox/modules/sso/pages/Welcome'));
+const LoginPage = lazyRouteComponent(() => import('./pages/Login'));
+const SelectRolePage = lazyRouteComponent(() => import('./pages/SelectRole'));
+const WelcomePage = lazyRouteComponent(() => import('./pages/Welcome'));
 
 export const SSOPlugin: ModulePlugin = {
   name: 'sso',
@@ -12,8 +13,10 @@ export const SSOPlugin: ModulePlugin = {
   layout: 'auth',
   description: 'Authentication & Authorization Module',
   author: 'HRBox Team',
-
-  // مسیرها
+  api:{
+    baseUrl: 'https://hrlink.hrbox.me:50443',
+    endpoints:AuthApiEndpoints,
+  },
   routes: [
     {
       path: '/sso/login',
@@ -27,16 +30,16 @@ export const SSOPlugin: ModulePlugin = {
     {
       path: '/sso/select-role',
       component: SelectRolePage,
-      layout: 'auth',
+      layout: 'base',
       meta: {
         title: 'Select Role',
-        requireAuth: true,
+        requireAuth: false,
       },
     },
     {
       path: '/sso/welcome',
       component: WelcomePage,
-      layout: 'auth',
+      layout: 'empty',
       meta: {
         title: 'Welcome',
         requireAuth: true,
@@ -44,13 +47,10 @@ export const SSOPlugin: ModulePlugin = {
     },
   ],
 
-  // ماژول قابل دسترس برای تمام نقش‌ها
   requiredRoles: [],
   requiredPermissions: [],
 
-  // Prefetch
   prefetch: async () => {
-    // بارگذاری اطلاعات اولیه
     console.log('Prefetching SSO module...');
   },
 

@@ -1,5 +1,5 @@
 import { AppButton, AppSearchInput } from '~/UIKit/components';
-import { Setting4 } from 'iconsax-react';
+import { Setting4 } from 'iconsax-reactjs';
 import { JobOffersIcon, JobOpportunitiesIcon } from "~/UIKit/icons";
 
 export const JobSubHeader = (props: any) => {

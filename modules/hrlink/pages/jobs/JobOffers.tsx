@@ -1,11 +1,11 @@
-import { Buildings2, Clock, Dislike, DollarCircle, Like1, Location, Status } from 'iconsax-react';
+import { Buildings2, Clock, Dislike, DollarCircle, Like1, Location, Status } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
 
 import { AppButton , AppPagination } from '@hrbox/uikit/components';
 
-import { useLazyJobOffersQuery } from '@module/hrlink/features/jobs/apis';
-import { JobFilterModal } from '@module/hrlink/features/jobs/modals';
-import { useNavigation } from "@core/hooks/useNavigation";
+import { useLazyJobOffersQuery } from '@hrbox/modules/hrlink/apis/Jobs';
+import { JobFilterModal } from '@hrbox-monorepo/modules/hrlink/modals/JobFilterModal';
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 const JobOffers = () => {
   const [fetchJobOffers, { data }] = useLazyJobOffersQuery();

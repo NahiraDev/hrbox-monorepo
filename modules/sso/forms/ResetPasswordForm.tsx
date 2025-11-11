@@ -1,6 +1,6 @@
-import { AppButton, AppInput } from '~/UIKit/components';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { Form } from '@heroui/react';
-import { useFormContext } from '@core/providers/FormProvider';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { useTranslation } from 'react-i18next';
 
 export const ResetPasswordForm = () => {

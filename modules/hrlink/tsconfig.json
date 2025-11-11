@@ -1,5 +1,5 @@
 {
-  "extends": "@hrbox/core/config/typescript/tsconfig.json",
+  "extends": "../../core/config/typescript/tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",

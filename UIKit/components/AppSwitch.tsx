@@ -2,6 +2,7 @@ import { Switch, SwitchProps } from '@heroui/react';
 import { useAppSelector } from '@hrbox/core/redux/hooks';
 import clsx from 'clsx';
 import { forwardRef } from "react";
+import { FormMode } from "@hrbox/uikit/components/types";
 
 interface AppSwitchProps extends SwitchProps {
   label?: string;

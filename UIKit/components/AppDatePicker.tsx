@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Calendar } from 'iconsax-react';
+import { Calendar } from 'iconsax-reactjs';
 import * as DatePickerModule from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -7,7 +7,7 @@ import gregorian_en from 'react-date-object/locales/gregorian_en';
 import gregorian from 'react-date-object/calendars/gregorian';
 import clsx from 'clsx';
 import { forwardRef, MouseEventHandler } from 'react';
-import type { FormMode } from '@hrbox/uikit/components/forms';
+import { FormMode } from "@hrbox/uikit/components/types";
 
 interface AppDatePickerProps {
   name: string;
@@ -48,12 +48,11 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
     const calendar = lang === 'fa' ? persian : gregorian;
     const locale = lang === 'fa' ? persian_fa : gregorian_en;
     const holidays = lang === 'fa' ? persianHolidays : gregorianHolidays;
-    const DatePicker = (DatePickerModule as any).default || DatePickerModule.DatePicker || DatePickerModule;
+    const DatePicker = (DatePickerModule as any).default || DatePickerModule?.DatePicker || DatePickerModule;
 
     const isViewMode = formMode === FormMode.CREATE;
     const hasError = Boolean(error);
 
-    // استایل بر اساس mode
     const getModeClass = () => {
       switch (formMode) {
         case 'view':

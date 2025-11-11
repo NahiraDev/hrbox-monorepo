@@ -5,18 +5,14 @@ import {
   initialValuesFormLogin,
   LoginForm,
 } from '@module/sso/forms';
-import { useLoginMutation } from '@module/sso/apis/Auth';
-import { useNavigation } from "@hrbox/core/hooks/useNavigation";
+import { useLoginMutation } from '@module/sso/apis/Auth'
 
 const Login = () => {
-  const { push } = useNavigation();
   const [login] = useLoginMutation();
 
   const handleLogin = async (values: any) => {
     try {
-      const result = await login(values).unwrap();
-
-      push({to:'/hrlink/dashboard'});
+     await login(values).unwrap();
     } catch (error) {
       console.error('Login failed:', error);
     }

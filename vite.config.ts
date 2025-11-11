@@ -2,64 +2,13 @@ import { type ConfigEnv, defineConfig, PluginOption, type UserConfig } from 'vit
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
-
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-
-
-// Utilities
 import { loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import * as fs from 'node:fs';
-import {tanstackRouter } from '@tanstack/router-vite-plugin'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const createAdvancedSpaMiddleware = () => ({
-  name: 'advanced-spa-middleware',
-  configureServer(server: any) {
-    server.middlewares.use((req: any, _res: any, next: any) => {
-      if (req.method !== 'GET') return next();
-
-      const url = req.url;
-
-      const staticPatterns = [
-        /^\/public\//,
-        /^\/static\//,
-        /^\/@/,
-        /^\/node_modules/,
-        /^\/\$vite/,
-        /^\/__/,
-        /^\/favicon/,
-        /^\/manifest/,
-        /^\/sw\.js/,
-        /^\/workbox/,
-      ];
-
-      // API patterns
-      const apiPatterns = [/^\/api\//, /^\/DesktopModules\//, /^\/graphql/, /^\/trpc/];
-
-      // Don't intercept static files or API calls
-      if (
-          staticPatterns.some(pattern => pattern.test(url)) ||
-          apiPatterns.some(pattern => pattern.test(url))
-      ) {
-        return next();
-      }
-
-      // Module routing - let specific modules handle their own routing
-      const moduleRoutes = [
-        /^\/sso(?:\/.*)?$/,
-        /^\/process-maker(?:\/.*)?$/,
-        /^\/chart-maker(?:\/.*)?$/,
-        /^\/hrlink(?:\/.*)?$/,
-        /^\/basic-info(?:\/.*)?$/,
-      ];
-
-      next();
-    });
-  },
-});
 
 export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   const mode:any = process.env.VITE_APP_ENV;
@@ -98,9 +47,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   const plugins = [
     react() as PluginOption,
     tsconfigPaths() as PluginOption,
-    // tanstackRouter({routesDirectory:'../routes'}),
     tailwindcss() as PluginOption,
-    // createAdvancedSpaMiddleware() as PluginOption,
   ];
 
   return {
@@ -132,11 +79,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       assetsDir: 'public',
       rollupOptions: {
         input: {
-          main: resolve(__dirname, 'index.html'),
-          // sso: resolve(__dirname, 'modules/sso/plugin.tsx'),
+          main: resolve(__dirname, 'main.tsx'),
+          sso: resolve(__dirname, './modules/sso/plugin.ts'),
           // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
-          hrlink: resolve(__dirname, 'modules/hrlink/plugin.tsx'),
+          hrlink: resolve(__dirname, './modules/hrlink/plugin.ts'),
           // basicInfo: resolve(__dirname, 'modules/basic-info/plugin.tsx'),
         },
         output: {
@@ -158,7 +105,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     // ESBuild configuration
     esbuild: {
-      jsxInject: `import React from 'react'`,
       drop: isProduction ? ['console', 'debugger'] : [],
       legalComments: 'none',
       charset: 'utf8',
@@ -176,7 +122,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         '@hrbox/core': resolve(__dirname, 'core'),
         '@hrbox/modules': resolve(__dirname, 'modules'),
         '@hrbox/routes': resolve(__dirname, 'routes'),
-        '@hrbox/UIKit': resolve(__dirname, 'UIKit'),
+        '@hrbox/uikit': resolve(__dirname, 'UIKit'),
         '@proxy-server': resolve(__dirname, 'proxy-server'),
       },
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
@@ -191,11 +137,12 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       host: true,
       allowedHosts: ['localhost' , 'front.hrbox.me' , 'react.hrbox.me'],
       strictPort: false,
-      open: true,
+      open: false,
       cors: true,
       https: httpsConfig,
       hmr: {
         overlay: true,
+        host: 'front.hrbox.me',
         protocol: 'wss',
         port: 443,
       },
@@ -241,6 +188,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     preview: {
       port: 443,
       host: '0.0.0.0',
+      allowedHosts: ['localhost' , 'front.hrbox.me' , 'react.hrbox.me'],
       strictPort: true,
       open: envVars.VITE_OPEN !== 'false',
       cors: true,

@@ -1,4 +1,4 @@
-import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-react';
+import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
 import { AppButton, AppPagination } from '@hrbox/uikit/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
@@ -6,7 +6,7 @@ import { Card, CardBody, CardHeader } from '@heroui/react';
 import { HRLinkPaths, Paths } from "@module/paths";
 
 import { useLazyFetchCompanyQuery, useSendRequestMutation } from '@module/hrlink/features/companies/apis';
-import { useNavigation } from "@core/hooks/useNavigation";
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 const Companies = () => {
   const [fetchCompanies, { data }] = useLazyFetchCompanyQuery();

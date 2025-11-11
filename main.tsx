@@ -1,10 +1,5 @@
-// ============================================
-// main.tsx (UPDATED VERSION)
-// ============================================
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -12,16 +7,17 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { I18nextProvider } from 'react-i18next';
 import { Toaster } from 'sonner';
 import { HeroUIProvider } from '@heroui/react';
-
+import {RouterContextProvider} from '@hrbox/core/routes/router';
+import { RouterProvider } from '@tanstack/react-router'
 import { moduleRegistry } from '@hrbox/modules/registry';
 import { createStoreWithModules } from '@hrbox/core/redux/store';
-import { router, RouterContextProvider } from '@hrbox/routes/router';
 import i18n from '@hrbox/core/translate';
 import { LoadingProvider } from '@hrbox/core/providers/LoadingContext';
 import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 
 import '@hrbox/core/config/theme/index.css';
-import { AppModal } from '~/UIKit/components';
+import { AppModal } from '@hrbox/uikit/components/AppModal';
+import {initRouter} from "@nima/Projects/hrbox-monorepo/core/routes/router";
 
 // ============================================
 // QueryClient Setup
@@ -68,17 +64,16 @@ async function bootstrap() {
 
     const moduleLoaders: Record<string, () => Promise<any>> = {
       sso: () => import('@hrbox/modules/sso/plugin'),
-      hrlink: () => import('@module/hrlink/plugin'),
-      hrbox: () => import('@hrbox/modules/hrbox/plugin'),
-      'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
-      'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
-      'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
-      attendance: () => import('@hrbox/modules/attendance/plugin'),
+      hrlink: () => import('@hrbox/modules/hrlink/plugin'),
+      // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
+      // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
+      // 'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
+      // attendance: () => import('@hrbox/modules/attendance/plugin'),
     };
 
     // بارگذاری موازی ماژول‌ها
     await Promise.all(
-      ENABLED_MODULES.map(async (moduleName: string | number) => {
+      ENABLED_MODULES.map(async (moduleName: any) => {
         if (moduleLoaders[moduleName]) {
           try {
             const { default: ModulePlugin } = await moduleLoaders[moduleName]();
@@ -118,6 +113,8 @@ async function bootstrap() {
 
     const root = createRoot(rootElement);
 
+    const router = initRouter()
+
     root.render(
       <StrictMode>
         <ReduxProvider store={store}>
@@ -133,7 +130,7 @@ async function bootstrap() {
                       </RouterContextProvider>
 
                       {/* Global Modal */}
-                      <AppModal />
+                      {/*<AppModal />*/}
 
                       {/* Toast Notifications */}
                       <Toaster

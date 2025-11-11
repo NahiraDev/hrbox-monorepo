@@ -1,5 +1,5 @@
 import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@hrbox/uikit/components';
-import { Add } from 'iconsax-react';
+import { Add } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 

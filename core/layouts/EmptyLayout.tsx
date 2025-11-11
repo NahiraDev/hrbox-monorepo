@@ -1,17 +1,13 @@
-import { Suspense } from 'react';
-import { Outlet } from '@tanstack/react-router';
-import { Spinner } from '@heroui/react';
+import { ReactNode } from 'react';
 
-export function EmptyLayout() {
+interface EmptyLayoutProps {
+  children: ReactNode;
+}
+
+export function EmptyLayout({ children }: EmptyLayoutProps) {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-screen items-center justify-center bg-panel-background">
-          <Spinner size="lg" color="primary" />
-        </div>
-      }
-    >
-      <Outlet />
-    </Suspense>
+    <div className="min-h-screen bg-panel-background">
+      {children}
+    </div>
   );
 }

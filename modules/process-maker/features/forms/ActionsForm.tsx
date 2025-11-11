@@ -1,5 +1,5 @@
 import { CheckboxGroup, Form } from '@heroui/react';
-import { Add, Message, Notification, Sms } from 'iconsax-react';
+import { Add, Message, Notification, Sms } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { AppCheckBox } from '@hrbox/uikit/components';

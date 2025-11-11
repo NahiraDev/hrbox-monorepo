@@ -1,5 +1,5 @@
 import { Form, InputOtp } from '@heroui/react';
-import { useFormContext } from '@core/providers/FormProvider';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';

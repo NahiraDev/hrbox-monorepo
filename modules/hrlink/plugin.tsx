@@ -1,13 +1,33 @@
+// ============================================
+// modules/hrlink/plugin.tsx
+// ============================================
+
 import { lazy } from 'react';
 import type { ModulePlugin } from '@hrbox/modules/types';
-import { RoleSlug } from '@core/config/design';
-import { Profile, Briefcase, Building } from 'iconsax-react';
-import { lazyRouteComponent } from "@tanstack/react-router";
+import { RoleSlug } from '@hrbox/core/config/theme';
+import { Profile, Briefcase, Building } from 'iconsax-reactjs';
+import { lazyRouteComponent } from '@tanstack/react-router';
 
-const DashboardPage = lazyRouteComponent(() => import('./pages/Dashboard'));
-const ResumePage = lazyRouteComponent(() => import('./pages/Resume'));
-const JobsPage = lazyRouteComponent(() => import('./pages/Jobs'));
-const CompanyPage = lazyRouteComponent(() => import('./pages/Company'));
+// ============================================
+// Pages
+// ============================================
+
+const DashboardPage = lazyRouteComponent(() => import('./pages/dashboard'));
+const ResumePage = lazyRouteComponent(() => import('./pages/resume/Information'));
+const JobsPage = lazyRouteComponent(() => import('./pages/jobs/JobOffers'));
+const CompanyPage = lazyRouteComponent(() => import('./pages/companies/Companies'));
+
+// ============================================
+// SubHeaders (Lazy Load)
+// ============================================
+
+const DashboardSubHeader = lazy(() => import('./subheaders/DashboardSubHeader'));
+const JobsSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
+const ResumeSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
+
+// ============================================
+// Plugin Definition
+// ============================================
 
 export const HRLinkPlugin: ModulePlugin = {
   name: 'hrlink',
@@ -17,7 +37,9 @@ export const HRLinkPlugin: ModulePlugin = {
   description: 'Job Seeker Portal',
   author: 'HRBox Team',
 
-  // مسیرها
+  // ============================================
+  // Routes
+  // ============================================
   routes: [
     {
       path: '/hrlink/dashboard',
@@ -25,20 +47,24 @@ export const HRLinkPlugin: ModulePlugin = {
       layout: 'base',
       meta: {
         title: 'Dashboard',
-        requireAuth: true,
+        requireAuth: false,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
     },
+
     {
       path: '/hrlink/resume',
       component: ResumePage,
       layout: 'base',
       meta: {
         title: 'Resume',
-        requireAuth: true,
+        requireAuth: false,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
+      subHeader: ResumeSubHeader,
     },
+
+    // Jobs
     {
       path: '/hrlink/jobs',
       component: JobsPage,
@@ -48,7 +74,13 @@ export const HRLinkPlugin: ModulePlugin = {
         requireAuth: true,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
+      subHeader: JobsSubHeader,
+      subHeaderProps: {
+        showFilters: true,
+        showSearch: true,
+      },
     },
+
     {
       path: '/hrlink/company/:id',
       component: CompanyPage,
@@ -58,10 +90,13 @@ export const HRLinkPlugin: ModulePlugin = {
         requireAuth: true,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
+      // ✅ این صفحه SubHeader نداره
     },
   ],
 
-  // منو
+  // ============================================
+  // Menu
+  // ============================================
   menu: [
     {
       id: 'dashboard',
@@ -89,7 +124,6 @@ export const HRLinkPlugin: ModulePlugin = {
     },
   ],
 
-  // محدود به کارجو
   requiredRoles: [RoleSlug.JOB_SEEKER],
   requiredPermissions: [],
 

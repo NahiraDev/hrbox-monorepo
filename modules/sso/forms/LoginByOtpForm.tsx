@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { t } from 'i18next';
 
-import { AppButton } from '~/UIKit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Flag } from '@module/sso/components';
-import { useFormContext } from '@core/providers/FormProvider';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 
 export const initialValuesLoginByOtp = {
   UsernameOrMobile: '',

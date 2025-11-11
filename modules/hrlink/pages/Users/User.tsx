@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
-import { Edit, Trash, Eye } from 'iconsax-react';
+import { Edit, Trash, Eye } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 
 import { useModalContext, ModalType, ModalSize } from '@hrbox/core/providers/ModalContext';

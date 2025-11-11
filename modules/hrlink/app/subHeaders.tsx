@@ -9,7 +9,7 @@ import {
   Personalcard,
   Star,
   UserOctagon,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 
 // import {
 //   useLazyFetchExperienceQuery,

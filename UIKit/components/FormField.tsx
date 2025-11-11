@@ -7,7 +7,7 @@ interface FormFieldProps {
   label?: string;
   required?: boolean;
   type?: string;
-  helperText?: string;
+  helperText?: any;
   component?: React.ComponentType<any>;
   [key: string]: any;
 }

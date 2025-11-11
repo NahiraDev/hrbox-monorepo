@@ -1,5 +1,5 @@
 import { Form } from '@heroui/react';
-import { Add, Message, Notification, Sms } from 'iconsax-react';
+import { Add, Message, Notification, Sms } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 
 import { AppAutoComplete, AppInput, AppTextArea } from '@hrbox/uikit/components';

@@ -1,5 +1,5 @@
 import { AppButton } from '~/UIKit/components';
-import { Buildings, Heart, Medal } from 'iconsax-react';
+import { Buildings, Heart, Medal } from 'iconsax-reactjs';
 import {JobOffersIcon} from "~/UIKit/icons/JobOffersIcon";
 
 const CompanyInformationSubHeader = () =>{

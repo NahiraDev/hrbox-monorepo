@@ -1,10 +1,7 @@
-import { Edit, Trash } from 'iconsax-react';
+import { Edit, Trash } from 'iconsax-reactjs';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 import { AppButton, AppDeleteModal, AppPagination } from '@hrbox/uikit/components';
-import { useDeleteAwardMutation, useLazyFetchAwardsQuery } from '@module/hrlink/features/resume/apis';
 import { useEffect } from 'react';
-
-import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import {CupStarIcon} from "@hrbox/uikit/icons/CupStarIcon";
 

@@ -1,7 +1,7 @@
-import { AppButton, AppInput } from '~/UIKit/components';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { Form } from '@heroui/react';
-import { Eye, EyeSlash } from 'iconsax-react';
-import { useFormContext } from '@core/providers/FormProvider';
+import { Eye, EyeSlash } from 'iconsax-reactjs';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 

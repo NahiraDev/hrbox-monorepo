@@ -1,4 +1,4 @@
-import { Edit, Lock } from 'iconsax-react';
+import { Edit, Lock } from 'iconsax-reactjs';
 import { Avatar } from '@heroui/react';
 import { useRef, useState } from 'react';
 

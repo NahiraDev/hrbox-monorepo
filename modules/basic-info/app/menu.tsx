@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Briefcase, Building, Chart2, LocationAdd, Profile2User, ReceiveSquare, Setting3 } from 'iconsax-react';
+import { Briefcase, Building, Chart2, LocationAdd, Profile2User, ReceiveSquare, Setting3 } from 'iconsax-reactjs';
 
 const MenuIcons = {
   dashboard: Chart2,

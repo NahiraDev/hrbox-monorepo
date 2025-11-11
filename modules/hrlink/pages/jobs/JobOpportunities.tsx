@@ -1,4 +1,4 @@
-import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-react';
+import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-reactjs';
 import { Button } from '@heroui/button';
 import { useNavigate } from 'react-router-dom';
 import { AppPagination } from '@hrbox/uikit/components';

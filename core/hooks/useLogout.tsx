@@ -1,24 +1,34 @@
-import { useAppDispatch } from "@hrbox/core/redux/hooks";
-import { logout } from "@hrbox/core/redux/slices/authSlice";
-import { useNavigation } from "./useNavigation";
-import { Paths } from "@hrbox/module/paths";
+import { useCallback } from 'react';
+import { useNavigate } from '@tanstack/react-router';
+import { useAppDispatch } from '@hrbox/core/redux/hooks';
+import { logout } from '@hrbox/core/redux/slices/authSlice';
+import { toast } from 'sonner';
 
 export function useLogout() {
   const dispatch = useAppDispatch();
-  const { push } = useNavigation();
+  const navigate = useNavigate();
 
-  return () => {
-    dispatch(logout());
-    push({to:Paths.SSO.logout});
-  };
-}
+  const handleLogout = useCallback(async () => {
+    try {
+      const loadingToast = toast.loading('در حال خروج...');
 
-function Header() {
-  const logout = useLogout();
+      localStorage.removeItem('Token');
+      localStorage.removeItem('renewalToken');
+      localStorage.removeItem('userId');
 
-  return (
-    <button onClick={logout}>
-      خروج
-      </button>
-  );
+      dispatch(logout());
+
+      toast.dismiss(loadingToast);
+
+      toast.success('با موفقیت خارج شدید');
+
+      // Redirect به صفحه لاگین
+      navigate({ to: '/sso/login' });
+    } catch (error) {
+      console.error('Logout failed:', error);
+      toast.error('خطا در خروج از حساب کاربری');
+    }
+  }, [dispatch, navigate]);
+
+  return { handleLogout };
 }

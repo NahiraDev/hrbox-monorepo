@@ -1,4 +1,4 @@
-import type { ModulePlugin } from './types';
+import type { ModulePlugin, SubHeaderConfig } from "./types";
 
 class ModuleRegistry {
   private modules: Map<string, ModulePlugin> = new Map();
@@ -30,6 +30,42 @@ class ModuleRegistry {
     return Array.from(this.modules.values()).find(
       (module) => module.name === basePath || module.basePath === basePath
     );
+  }
+
+  getModuleSubHeaders(moduleName: string): SubHeaderConfig[] {
+    const module = this.getModule(moduleName);
+    return module?.subHeaders ?? [];
+  }
+
+// ✅ پیدا کردن SubHeader بر اساس path
+  getSubHeaderForPath(pathname: string): { component: any; props: any } | null {
+    const allModules = this.getAllModules();
+
+    for (const module of allModules) {
+      // چک کردن در routes
+      if (module.routes) {
+        const route = module.routes.find(r => r.path === pathname);
+        if (route?.subHeader) {
+          return {
+            component: route.subHeader,
+            props: route.subHeaderProps || {},
+          };
+        }
+      }
+
+      // چک کردن در subHeaders
+      if (module.subHeaders) {
+        const subHeader = module.subHeaders.find(sh => sh.path === pathname);
+        if (subHeader) {
+          return {
+            component: subHeader.component,
+            props: subHeader.props || {},
+          };
+        }
+      }
+    }
+
+    return null;
   }
 
 

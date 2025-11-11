@@ -1,5 +1,5 @@
 import { AppButton, AppPageTitle, AppSearchInput } from '@hrbox/uikit/components';
-import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-react';
+import { Add, ArrowLeft2, Hierarchy3 } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import React from 'react';
 interface AllocationSubheaderProps {

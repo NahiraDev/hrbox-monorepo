@@ -1,6 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
-import { AuthApiEndpoints } from "@module/sso/app/endpoints";
+import { AuthApiEndpoints } from "@hrbox-monorepo/modules/sso/apis/endpoints";
 
 // Types
 interface LoginRequest {
@@ -52,7 +52,7 @@ interface RoleSelectResponse {
 
 const ssoApi = createModuleApi({
   reducerPath: 'ssoApi',
-  baseUrl: '/api/auth',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/SSO/api',
   tagTypes: ['Auth'],
   requiresAuth: false,
   autoToast: true,

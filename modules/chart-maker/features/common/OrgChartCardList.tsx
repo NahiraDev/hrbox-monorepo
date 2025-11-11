@@ -1,5 +1,5 @@
 import { Avatar } from '@heroui/react';
-import { User } from 'iconsax-react';
+import { User } from 'iconsax-reactjs';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 export const OrgChartCardListNode = () => {

@@ -1,6 +1,6 @@
 import { AppButton, AppInput } from '@hrbox/uikit/components';
 import "../../app/index.css";
-import { ArrowLeft2, ArrowRight2, InfoCircle } from 'iconsax-react';
+import { ArrowLeft2, ArrowRight2, InfoCircle } from 'iconsax-reactjs';
 import { Tooltip } from '@heroui/react';
 import { isExpanded } from 'bpmn-js/lib/util/DiUtil';
 const Comprehensivereport = ({ isExpanded  ,onToggle }) => {

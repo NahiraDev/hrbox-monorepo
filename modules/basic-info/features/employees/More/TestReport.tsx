@@ -1,5 +1,5 @@
 import { testReport } from '@module/basic-info/app/mock';
-import { TickSquare, User, ArrowDown, DollarCircle, Status } from 'iconsax-react';
+import { TickSquare, User, ArrowDown, DollarCircle, Status } from 'iconsax-reactjs';
 import { Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';

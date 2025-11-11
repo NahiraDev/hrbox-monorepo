@@ -1,16 +1,57 @@
-import { createEndpoint } from '@core/apis';
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
-export const CourseApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    fetchCourses: createEndpoint(build, HRLinkApiEndpoints.resume.course.getList, 'GET', ['Course']),
-    fetchCourseDetail: createEndpoint(build, HRLinkApiEndpoints.resume.course.getDetail, 'GET', ['Course']),
-    createCourse: createEndpoint(build, HRLinkApiEndpoints.resume.course.create, 'POST', ['Course']),
-    editCourse: createEndpoint(build, HRLinkApiEndpoints.resume.course.edit, 'POST', ['Course']),
-    deleteCourse: createEndpoint(build, HRLinkApiEndpoints.resume.award.delete, 'DELETE', ['Course']),
-  }),
-  overrideExisting: false,
+const courseApi = createModuleApi({
+  reducerPath: 'courseApi',
+  baseUrl: 'https://hrlink.hrbox.me:50443',
+  tagTypes: ['Course'],
+  requiresAuth: true,
+  autoToast: true,
 });
 
-export const {useLazyFetchCoursesQuery , useLazyFetchCourseDetailQuery , useCreateCourseMutation , useDeleteCourseMutation , useEditCourseMutation} = CourseApi;
+export const courseApiWithEndpoints = courseApi.injectEndpoints({
+  endpoints: (build) => ({
+    // GET: لیست دوره‌ها
+    fetchCourses: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.course.getList,
+      method: 'GET',
+      tags: ['Course'],
+    }),
+
+    // GET: جزئیات یک دوره
+    fetchCourseDetail: createQuery<any, { id: string }>(build, {
+      url: HRLinkApiEndpoints.resume.course.getDetail,
+      method: 'GET',
+      tags: ['Course'],
+    }),
+
+    // POST: ایجاد دوره جدید
+    createCourse: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.course.create,
+      method: 'POST',
+      tags: ['Course'],
+    }),
+
+    // POST: ویرایش دوره
+    editCourse: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.course.edit,
+      method: 'POST',
+      tags: ['Course'],
+    }),
+
+    deleteCourse: createMutation<any, { id: string }>(build, {
+      url: HRLinkApiEndpoints.resume.course.delete,
+      method: 'DELETE',
+      tags: ['Course'],
+    }),
+  }),
+});
+
+export const {
+  useLazyFetchCoursesQuery,
+  useLazyFetchCourseDetailQuery,
+  useCreateCourseMutation,
+  useEditCourseMutation,
+  useDeleteCourseMutation,
+} = courseApiWithEndpoints;

@@ -1,4 +1,4 @@
-import { Edit, Trash } from 'iconsax-react';
+import { Edit, Trash } from 'iconsax-reactjs';
 import { AppButton, AppPagination } from '@hrbox/uikit/components';
 import { useEffect } from 'react';
 

@@ -11,16 +11,16 @@ import {
   Profile,
   ProfileTick,
   Shield,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import moment from 'moment-jalaali';
 import { Card } from '@heroui/react';
+import { GeneralInformation } from "@hrbox-monorepo/modules/hrlink/components/GeneralInformation";
+import { UserLocation } from "@hrbox-monorepo/modules/hrlink/components/UserLocation";
+import { GeneralInformationModal } from "@hrbox-monorepo/modules/hrlink/modals/GeneralInformationModal";
 
-import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
-
-import { GeneralInformationModal } from '@module/hrlink/features/resume/modals';
 
 const ResumeInfo = () => {
-  const profileData = null;
+  const profileData = {};
 
   return (
     <div className="grid grid-cols-4 gap-6 h-full">

@@ -1,4 +1,11 @@
 import React, { ComponentType, LazyExoticComponent } from 'react';
+import { RoleSlug } from '@hrbox/core/config/theme';
+
+export interface SubHeaderConfig {
+  path: string;
+  component: ComponentType<any>;
+  props?: Record<string, any>;
+}
 
 export interface ModuleMenuItem {
   id: string;
@@ -7,6 +14,8 @@ export interface ModuleMenuItem {
   icon?: React.ReactNode;
   badge?: string | number;
   children?: ModuleMenuItem[];
+  requiredRoles?: RoleSlug[];
+  requiredPermissions?: string[];
 }
 
 export interface ModuleRoute {
@@ -20,12 +29,8 @@ export interface ModuleRoute {
     requiredRoles?: RoleSlug[];
     requiredPermissions?: string[];
   };
-}
-
-export interface ModuleSubHeader {
-  path: string;
-  component: ComponentType<any>;
-  props?: Record<string, any>;
+  subHeader?: ComponentType<any>;
+  subHeaderProps?: Record<string, any>;
 }
 
 export interface ModuleConfig {
@@ -34,8 +39,10 @@ export interface ModuleConfig {
   layout?: 'base' | 'auth' | 'empty';
 
   routes?: ModuleRoute[];
+
   menu?: ModuleMenuItem[];
-  subHeaders?: ModuleSubHeader[];
+
+  subHeaders?: SubHeaderConfig[];
 
   reducers?: Record<string, any>;
 
@@ -51,6 +58,10 @@ export interface ModuleConfig {
   onModuleLoad?: () => void;
   onModuleUnload?: () => void;
 }
+
+// ============================================
+// Module Plugin
+// ============================================
 
 export interface ModulePlugin extends ModuleConfig {
   version: string;

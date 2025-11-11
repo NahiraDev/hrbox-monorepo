@@ -12,7 +12,7 @@ import {
   Profile,
   ReceiptItem,
   TickCircle,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import { useState } from 'react';
 import { AppButton } from '@hrbox/uikit/components';
 

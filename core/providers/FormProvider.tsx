@@ -12,7 +12,7 @@ import {
   clearFormCache,
 } from '@hrbox/core/redux/slices/formCacheSlice';
 import type { RootState } from '@hrbox/core/redux';
-import { FormMode } from "~/UIKit/components/types";
+import { FormMode } from "@hrbox/uikit/components/types";
 
 interface FormProviderProps<Values>
   extends Omit<FormikConfig<Values>, 'onSubmit'> {

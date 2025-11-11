@@ -2,7 +2,6 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModalContext, ModalType, ModalSize } from "@hrbox/core/providers/ModalProvider";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
-import { Close } from "iconsax-react";
 import { Button } from "@heroui/react";
 import React, { createContext, useContext } from "react";
 import clsx from "clsx";
@@ -14,10 +13,6 @@ const sizeClasses: Record<ModalSize | string, string> = {
   xl: "max-w-xl",
   full: "w-full h-full"
 };
-
-// ============================================
-// Context برای Compound Components
-// ============================================
 
 interface AppModalContextType {
   modalTitle?: string;
@@ -48,10 +43,6 @@ const useModalInternal = () => {
   }
   return ctx;
 };
-
-// ============================================
-// AppModal.Header
-// ============================================
 
 interface AppModalHeaderProps {
   children?: React.ReactNode;

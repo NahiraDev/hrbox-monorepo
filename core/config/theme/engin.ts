@@ -1,14 +1,18 @@
-import { RadiusConfig, ShadowConfig, SpacingConfig, ThemeConfig, TypographyConfig } from "@core/config/theme/types";
-import { Panel } from "@core/config/theme/roles";
+import {
+  Panel,
+  RadiusConfig,
+  ShadowConfig,
+  SpacingConfig, ThemeColors,
+  ThemeConfig, ThemeMode,
+  TypographyConfig
+} from "@hrbox/core/config/theme/types";
 import {
   DEFAULT_COLORS,
   DEFAULT_RADIUS,
   DEFAULT_SHADOWS,
   DEFAULT_SPACING,
   DEFAULT_TYPOGRAPHY, PANEL_PRESETS
-} from "@core/config/theme/presets";
-import { ThemeMode } from "@core/config/theme/theme";
-import { ThemeColors } from "@core/config/theme/types";
+} from "@hrbox/core/config/theme/presets";
 
 export class ThemeEngine {
   private root: HTMLElement;
@@ -47,13 +51,9 @@ export class ThemeEngine {
       this.applyCustomCSS(fullTheme.customCSS);
     }
 
-    // ذخیره در localStorage
     this.saveTheme(fullTheme);
   }
 
-  /**
-   * اعمال رنگ‌ها
-   */
   private applyColors(theme: ThemeConfig): void {
     const panelColors = PANEL_PRESETS[theme.panel][theme.mode];
 
@@ -151,9 +151,6 @@ export class ThemeEngine {
     this.root.style.setProperty(name, value);
   }
 
-  /**
-   * ادغام با مقادیر پیش‌فرض
-   */
   private mergeWithDefaults(theme: Partial<ThemeConfig>): ThemeConfig {
     return {
       mode: theme.mode || 'light',
@@ -175,9 +172,6 @@ export class ThemeEngine {
     };
   }
 
-  /**
-   * ذخیره تم
-   */
   private saveTheme(theme: ThemeConfig): void {
     try {
       localStorage.setItem('app-theme', JSON.stringify(theme));
@@ -186,9 +180,7 @@ export class ThemeEngine {
     }
   }
 
-  /**
-   * بارگذاری تم
-   */
+
   loadTheme(): ThemeConfig | null {
     try {
       const saved = localStorage.getItem('app-theme');
@@ -203,16 +195,10 @@ export class ThemeEngine {
     return null;
   }
 
-  /**
-   * دریافت تم فعلی
-   */
   getCurrentTheme(): ThemeConfig | null {
     return this.currentTheme;
   }
 
-  /**
-   * ریست به تم پیش‌فرض
-   */
   resetToDefault(panel: Panel, mode: ThemeMode): void {
     const defaultTheme: ThemeConfig = {
       mode,
@@ -227,9 +213,6 @@ export class ThemeEngine {
     this.applyTheme(defaultTheme);
   }
 
-  /**
-   * تغییر مد (light/dark)
-   */
   toggleMode(): void {
     if (!this.currentTheme) return;
 
@@ -237,18 +220,12 @@ export class ThemeEngine {
     this.applyTheme({ ...this.currentTheme, mode: newMode });
   }
 
-  /**
-   * تغییر پنل
-   */
   changePanel(panel: Panel): void {
     if (!this.currentTheme) return;
 
     this.applyTheme({ ...this.currentTheme, panel });
   }
 
-  /**
-   * به‌روزرسانی رنگ خاص
-   */
   updateColor(path: string, value: string): void {
     if (!this.currentTheme) return;
 
@@ -262,36 +239,11 @@ export class ThemeEngine {
     }
   }
 
-  /**
-   * به‌روزرسانی فونت
-   */
   updateFont(type: keyof TypographyConfig['fontFamily'], value: string): void {
     if (!this.currentTheme) return;
 
     this.currentTheme.typography.fontFamily[type] = value;
     this.applyTheme(this.currentTheme);
-  }
-
-  /**
-   * اکسپورت تم به JSON
-   */
-  exportTheme(): string {
-    if (!this.currentTheme) return '{}';
-    return JSON.stringify(this.currentTheme, null, 2);
-  }
-
-  /**
-   * ایمپورت تم از JSON
-   */
-  importTheme(json: string): boolean {
-    try {
-      const theme = JSON.parse(json);
-      this.applyTheme(theme);
-      return true;
-    } catch (error) {
-      console.error('Failed to import theme:', error);
-      return false;
-    }
   }
 }
 export const themeEngine = new ThemeEngine();

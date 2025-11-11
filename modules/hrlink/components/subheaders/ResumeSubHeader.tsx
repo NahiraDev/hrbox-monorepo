@@ -1,5 +1,5 @@
 import { AppButton, AppSearchInput } from '@hrbox/uikit/components';
-import { Add, ArrowLeft2, ArrowRight2, ReceiveSquare } from 'iconsax-react';
+import { Add, ArrowLeft2, ArrowRight2, ReceiveSquare } from 'iconsax-reactjs';
 
 export const ResumeSubHeader = (props:any) => {
 

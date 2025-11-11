@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Chart2, Setting3, Hierarchy3 } from 'iconsax-react';
+import { Chart2, Setting3, Hierarchy3 } from 'iconsax-reactjs';
 
 const MenuIcons = {
   dashboard: Chart2,

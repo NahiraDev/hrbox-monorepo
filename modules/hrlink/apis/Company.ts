@@ -1,34 +1,43 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
-import { awardApiEndpoints } from "~/hrbox-monorepo/modules/hrlink/apis/Awards";
 
+const companyApi = createModuleApi({
+  reducerPath: 'companyApi',
+  baseUrl: 'https://hrlink.hrbox.me:50443',
+  tagTypes: ['Company'],
+  requiresAuth: true,
+  autoToast: true,
+});
 
-
-export const companyApiEndpoints = awardApiEndpoints.injectEndpoints({
-  endpoints: (build:any) => ({
+export const companyApiWithEndpoints = companyApi.injectEndpoints({
+  endpoints: (build) => ({
+    // GET: Company List (Paginated)
     fetchCompany: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getList,
       tags: ['Company'],
     }),
 
-    fetchEvents: createPaginatedQuery<Event>(build, {
+    // GET: Company Events (Paginated)
+    fetchEvents: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getEvents,
       tags: ['Company'],
     }),
 
-    fetchCompanyDetail: createQuery<Company, { id: string }>(build, {
+    // GET: Company Detail
+    fetchCompanyDetail: createQuery<any, { id: string }>(build, {
       url: HRLinkApiEndpoints.company.getDetail,
       tags: ['Company'],
     }),
 
-    sendRequest: createMutation<any, SendRequestRequest>(build, {
+    // POST: Send Request to Company
+    sendRequest: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.company.sendRequest,
       method: 'POST',
       tags: ['Company'],
     }),
 
-    followAndUnfollow: createMutation<any, FollowUnfollowRequest>(build, {
+    followAndUnfollow: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.company.followOrUnfollow,
       method: 'POST',
       tags: ['Company'],
@@ -42,4 +51,4 @@ export const {
   useLazyFetchCompanyDetailQuery,
   useSendRequestMutation,
   useFollowAndUnfollowMutation,
-} = hrlinkApiWithEndpoints;
+} = companyApiWithEndpoints;

@@ -1,5 +1,5 @@
 import { AppButton } from '~/UIKit/components';
-import { ArrowLeft2, Heart } from 'iconsax-react';
+import { ArrowLeft2, Heart } from 'iconsax-reactjs';
 import { JobOffersIcon } from '@module/hrlink/icons';
 import { Shared } from '@module/hrlink/features/common';
 

@@ -1,9 +1,8 @@
 import type { ChartOptions } from 'chart.js';
 
-import { Buildings2, DocumentForward } from 'iconsax-react';
+import { Buildings2, DocumentForward } from 'iconsax-reactjs';
 import { Button, Card, CardBody, CardHeader, cn, Slider } from '@heroui/react';
 import { Line } from 'react-chartjs-2';
-import { useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,9 +14,10 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
-import { GeneralInformation, UserLocation } from '../common';
+import { data } from "autoprefixer";
+import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
+import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 
-import { useLazyDashboardQuery } from './apis';
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +31,6 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const [dashboardData, { data }] = useLazyDashboardQuery();
   const sampleData = [12, 19, 3, 5, 2];
 
   const DashboardChartData = {
@@ -134,11 +133,6 @@ const Dashboard = () => {
     { id: 3, company: 'Orkid', sent: true },
     { id: 4, company: 'ZAT', sent: true },
   ];
-
-  useEffect(() => {
-    dashboardData({});
-  }, []);
-
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3 flex flex-col gap-3 h-full">

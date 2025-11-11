@@ -1,7 +1,7 @@
 import { AppTable } from '@hrbox/uikit/components';
 import { Allocatio } from '@module/attendance/app/mock';
 import ShiftAllocationModalEdit from '@module/attendance/features/modals/ShiftAllocationModalEdit';
-import { Hierarchy3 } from 'iconsax-react';
+import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
 import { useModalContext } from 'core/context';
 import ShiftAllocationShow from '@module/attendance/features/modals/ShiftAllocationShow';

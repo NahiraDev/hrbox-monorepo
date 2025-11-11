@@ -1,200 +1,208 @@
-import { ArrowRight2, ArrowLeft2, Setting2, Global, LogoutCurve } from 'iconsax-react';
-import { useState, useEffect } from 'react';
+import { ArrowRight2, ArrowLeft2, Setting2, Global, LogoutCurve } from 'iconsax-reactjs';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from '@tanstack/react-router';
+import { useNavigate, useMatchRoute } from '@tanstack/react-router';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { AppButton } from '@hrbox/uikit/components';
-import { useAppDispatch } from '@hrbox/core/redux/hooks';
 import { useLanguage } from '@hrbox/core/hooks/useLanguage';
 import { useAuth } from '@hrbox/core/hooks/useAuth';
-import { moduleRegistry } from '@hrbox/modules/registry';
-import { useLogout } from "@hrbox/core/hooks/useLogout";
-import { useModuleAccess } from "@hrbox/core/hooks/useModuleAccess";
-import { getCurrentDomain } from "@hrbox/core/config/theme";
+import { useLogout } from '@hrbox/core/hooks/useLogout';
+import { useModuleAccess } from '@hrbox/core/hooks/useModuleAccess';
 
-export const AppSideBar = () => {
-  const { getModuleMenu } = useModuleAccess();
-  const currentModule = getCurrentDomain();
-  const menu = getModuleMenu(currentModule);
+interface MenuItem {
+  id: string;
+  label: string;
+  path: string;
+  icon?: React.ReactNode;
+  badge?: string | number;
+  children?: MenuItem[];
+}
+
+export const AppSidebar = () => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const matchRoute = useMatchRoute();
+  const { lang, toggleLanguage } = useLanguage();
+  const { currentPanel } = useAuth();
+  const { handleLogout } = useLogout();
+  const { getModuleMenu } = useModuleAccess();
 
-  const { lang } = useLanguage();
-  const { logout, currentPanel } = useAuth();
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const [fullWidth, setFullWidth] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string | undefined>('');
-  const [menuItems, setMenuItems] = useState<any[]>([]);
+  const menuItems = useMemo(() => {
+    if (!currentPanel) return [];
+    return getModuleMenu(currentPanel);
+  }, [currentPanel, getModuleMenu]);
 
-  // Bottom menu items
-  const bottomMenu = [
-    {
-      icon: <Setting2 size="24" />,
-      name: t('generalSetting'),
-      action: 'settings',
-    },
-    {
-      icon: <Global size="24" />,
-      name: lang === 'fa' ? t('persian') : t('english'),
-      action: 'language',
-    },
-    {
-      icon: <LogoutCurve size="24" />,
-      name: t('logout'),
-      action: 'logout',
-    },
-  ];
-
-
-  const handleNavigate = (item: any) => {
-    setActiveTab(item.label);
-    push({ to: item.path });
+  // ✅ تشخیص Active Item
+  const isActiveRoute = (path: string) => {
+    return !!matchRoute({ to: path });
   };
 
-  const handleBottomMenuAction = (action: string) => {
-    switch (action) {
-      case 'settings':
-        push({ to: '/settings' });
-        break;
-      case 'language':
-        useLanguage();
-        break;
-      case 'logout':
-        useLogout();
-        break;
-      default:
-        break;
+  // ✅ Bottom Menu
+  const bottomMenu = useMemo(() => [
+    {
+      id: 'settings',
+      icon: <Setting2 size="20" />,
+      label: t('generalSetting', 'Settings'),
+      action: () => navigate({ to: '/settings' }),
+    },
+    {
+      id: 'language',
+      icon: <Global size="20" />,
+      label: lang === 'fa' ? t('persian', 'فارسی') : t('english', 'English'),
+      action: toggleLanguage,
+    },
+    {
+      id: 'logout',
+      icon: <LogoutCurve size="20" />,
+      label: t('logout', 'Logout'),
+      action: handleLogout,
+    },
+  ], [lang, t, navigate, toggleLanguage, handleLogout]);
+
+  const handleNavigate = (item: MenuItem) => {
+    if (item.path) {
+      navigate({ to: item.path });
     }
   };
-
-  useEffect(() => {
-    if (currentPanel) {
-      const module = moduleRegistry.getModule(currentPanel);
-      if (module?.menu) {
-        setMenuItems(module.menu);
-      }
-    }
-  }, [currentPanel]);
-
-  useEffect(() => {
-    const activeItem = menuItems.find((item) => item.path === location.pathname);
-    if (activeItem) {
-      setActiveTab(activeItem.label);
-    }
-  }, [location.pathname, menuItems]);
 
   return (
-    <div
-      className={`
-        relative flex flex-col rounded-lg py-4 px-4 bg-panel-surface shadow-theme-md
-        dark:shadow-theme-lg transition-all duration-300
-        ${!fullWidth ? 'w-[100px]' : 'w-[220px]'}
-      `}
+    <motion.div
+      initial={false}
+      animate={{ width: isExpanded ? 220 : 100 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="relative flex flex-col h-full rounded-lg py-4 px-4 bg-panel-surface shadow-theme-md dark:shadow-theme-lg"
     >
       {/* Toggle Button */}
-      <AppButton
-        props={{
-          className: 'absolute top-[50px] -right-3 shadow-theme-sm bg-panel-surface z-10',
-          color: 'primary',
-          variant: 'solid',
-          size: 'xs',
-          radius: 'full',
-          isIconOnly: true,
-          onPress: () => setFullWidth(!fullWidth),
-          content: (
-            fullWidth ? (
-              <ArrowLeft2 size="12" />
-            ) : (
-              <ArrowRight2 size="12" />
-            )
-          ),
-        }}
-      />
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-panel-primary text-white shadow-theme-sm hover:scale-110 transition-transform"
+        aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
+      >
+        {isExpanded ? <ArrowLeft2 size="12" /> : <ArrowRight2 size="12" />}
+      </button>
 
-      {/* Menu Items */}
+      {/* Menu Items Container */}
       <div className="flex flex-col items-center justify-between w-full h-full">
         {/* Top Menu */}
-        <div
-          className={`
-            flex flex-col w-full pb-3 gap-2
-            ${fullWidth ? 'items-start pl-2' : 'items-center'}
-          `}
+        <nav
+          className={`flex flex-col w-full pb-3 gap-2 ${
+            isExpanded ? 'items-start' : 'items-center'
+          }`}
+          aria-label="Main navigation"
         >
-          {menuItems.map((item: any) => (
-            <AppButton
-              key={item.label}
-              props={{
-                className: `
-                  flex items-center gap-2 px-3 py-2 rounded-lg transition-all
-                  ${
-                  activeTab === item.label
-                    ? 'bg-primary-100 dark:bg-primary-700'
-                    : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
-                }
-                `,
-                isIconOnly: !fullWidth,
-                color: activeTab === item.label ? 'primary' : 'default',
-                variant: 'light',
-                size: 'md',
-                onPress: () => handleNavigate(item),
-                content: (
-                  <div className="flex items-center gap-2 w-full">
-                    <span
-                      className={`
-                        text-lg
-                        ${activeTab === item.label ? 'text-primary' : 'text-secondary-500'}
-                      `}
-                    >
+          <AnimatePresence mode="wait">
+            {menuItems.map((item: MenuItem) => {
+              const isActive = isActiveRoute(item.path);
+
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full"
+                >
+                  <button
+                    onClick={() => handleNavigate(item)}
+                    className={`
+                      relative flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all
+                      ${isActive
+                      ? 'bg-primary-50 dark:bg-primary-900/20 text-primary'
+                      : 'hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-600 dark:text-neutral-400'
+                    }
+                      ${!isExpanded && 'justify-center'}
+                    `}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {/* Icon */}
+                    <span className={`flex-shrink-0 ${isActive ? 'text-primary' : ''}`}>
                       {item.icon}
                     </span>
-                    {fullWidth && (
-                      <span
-                        className={`
-                          text-xs font-medium whitespace-nowrap
-                          ${activeTab === item.label ? 'text-primary' : 'text-secondary-600'}
-                        `}
+
+                    {/* Label (visible when expanded) */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.span
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: 'auto' }}
+                          exit={{ opacity: 0, width: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className={`text-sm font-medium whitespace-nowrap overflow-hidden ${
+                            isActive ? 'text-primary' : 'text-secondary-600 dark:text-neutral-400'
+                          }`}
+                        >
+                          {item.label}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Badge */}
+                    {item.badge && isExpanded && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="ml-auto flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-danger text-white text-xs font-semibold"
                       >
-                        {item.label}
-                      </span>
+                        {item.badge}
+                      </motion.span>
                     )}
-                  </div>
-                ),
-              }}
-            />
-          ))}
-        </div>
+
+                    {/* Active Indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </nav>
 
         {/* Bottom Menu */}
-        <div className={`flex flex-col w-full gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-700`}>
+        <div
+          className={`flex flex-col w-full gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-700 ${
+            isExpanded ? 'items-start' : 'items-center'
+          }`}
+        >
           {bottomMenu.map((item) => (
-            <AppButton
-              key={item.action}
-              props={{
-                className: `
-                  flex items-center gap-2 px-3 py-2 rounded-lg transition-all
-                  hover:bg-neutral-100 dark:hover:bg-neutral-800
-                `,
-                isIconOnly: !fullWidth,
-                color: 'default',
-                variant: 'light',
-                size: 'md',
-                onPress: () => handleBottomMenuAction(item.action),
-                content: (
-                  <div className="flex items-center gap-2 w-full">
-                    <span className="text-lg text-secondary-500">{item.icon}</span>
-                    {fullWidth && (
-                      <span className="text-xs font-medium text-secondary-600 whitespace-nowrap">
-                        {item.name}
-                      </span>
-                    )}
-                  </div>
-                ),
-              }}
-            />
+            <button
+              key={item.id}
+              onClick={item.action}
+              className={`
+                flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all
+                hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-600 dark:text-neutral-400
+                ${!isExpanded && 'justify-center'}
+              `}
+              aria-label={item.label}
+            >
+              {/* Icon */}
+              <span className="flex-shrink-0">{item.icon}</span>
+
+              {/* Label (visible when expanded) */}
+              <AnimatePresence>
+                {isExpanded && (
+                  <motion.span
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                  >
+                    {item.label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

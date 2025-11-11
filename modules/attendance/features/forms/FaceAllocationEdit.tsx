@@ -1,6 +1,6 @@
 import { Form , Radio, RadioGroup } from '@heroui/react';
 import { AppAutoComplete, AppTextArea } from '@hrbox/uikit/components';
-import { Scan } from 'iconsax-react';
+import { Scan } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 import {useFormContext} from "@hrbox/core/providers/FormProvider";
 

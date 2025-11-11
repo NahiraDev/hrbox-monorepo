@@ -1,7 +1,7 @@
 import { Card } from '@heroui/react';
 import { Jobss } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-react';
+import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useState } from 'react';
 

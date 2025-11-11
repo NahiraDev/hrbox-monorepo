@@ -1,6 +1,6 @@
 import { OrganizationalLocation } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
-import { Location, MoreSquare, Trash } from 'iconsax-react';
+import { Location, MoreSquare, Trash } from 'iconsax-reactjs';
 import { useState, useMemo } from 'react';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { AppButton, AppDeleteModal, AppPagination } from '@hrbox/uikit/components';

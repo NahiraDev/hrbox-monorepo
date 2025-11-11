@@ -1,4 +1,4 @@
-import { Personalcard } from 'iconsax-react';
+import { Personalcard } from 'iconsax-reactjs';
 
 import { ProcessMakerPath } from '@module/process-maker/app/paths';
 import { lazy } from "react";

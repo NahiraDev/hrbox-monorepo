@@ -4,6 +4,7 @@
     "composite": true,
     "outDir": "../dist/core",
     "rootDir": "../",
+    "baseUrl": ".",
     "declarationDir": "../dist/types"
   },
   "include": ["." , "./*"]

@@ -2,7 +2,7 @@ import { AppButton, AppModal } from '@hrbox/uikit/components';
 import { Avatar } from '@heroui/react';
 import { useState } from 'react';
 import FilterCalenderModal from '@module/basic-info/features/employees/modals/FilterCalenderModal'
-import { Filter } from 'iconsax-react';
+import { Filter } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const sampleData = [

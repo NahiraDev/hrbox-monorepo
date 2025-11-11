@@ -1,6 +1,6 @@
 import { AppPagination } from '@hrbox/uikit/components';
 import { useLazyFetchEventsQuery } from '@module/hrlink/features/companies/apis';
-import { Buildings2, Calendar, People } from 'iconsax-react';
+import { Buildings2, Calendar, People } from 'iconsax-reactjs';
 import { useEffect } from 'react';
 
 const CompanyEvents = () => {

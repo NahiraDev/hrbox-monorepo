@@ -1,7 +1,7 @@
-import { AppButton, AppSearchInput } from '~/UIKit/components';
-import { Buildings, DeviceMessage, Heart, Setting4 } from 'iconsax-react';
-import { useNavigation } from "@core/hooks/useNavigation";
-import { Paths } from "@module/paths";
+import { AppButton, AppSearchInput } from '@hrbox/uikit/components';
+import { Buildings, DeviceMessage, Heart, Setting4 } from 'iconsax-reactjs';
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
+import { Paths } from "@hrbox/modules/paths";
 
 export const CompanySubHeader = (props: any) => {
   const navigate = useNavigation();

@@ -1,5 +1,5 @@
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-react';
+import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
 import EmployeeSatisfactionCalendarModal from './modals/EmployeeSatisfactionCalendarModal';
 import HowAreYouTodayModal from '@module/basic-info/features/employees/modals/HowAreYouTodayModal';

@@ -1,4 +1,4 @@
-import { Buildings2, Clock, DollarCircle, Heart, HomeHashtag, Location, Medal, Status } from 'iconsax-react';
+import { Buildings2, Clock, DollarCircle, Heart, HomeHashtag, Location, Medal, Status } from 'iconsax-reactjs';
 import { Button } from '@heroui/react';
 import { AppButton, AppPagination } from '@hrbox/uikit/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';

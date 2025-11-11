@@ -1,8 +1,8 @@
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@heroui/react';
 import { useAuth } from '@hrbox/core/hooks/useAuth';
-import { getRoleConfig } from '@core/config/design';
+import { getRoleConfig } from '@hrbox/core/config/theme';
 import { AppButton } from '@hrbox/uikit/components';
-import { ArrowDown } from "iconsax-react";
+import { ArrowDown } from "iconsax-reactjs";
 
 export const RoleSwitcher = () => {
   const { user, selectedRole, switchRole } = useAuth();
@@ -17,20 +17,17 @@ export const RoleSwitcher = () => {
     <Dropdown>
       <DropdownTrigger>
         <AppButton
-          props={{
-            variant: 'bordered',
-            color: 'primary',
-            size: 'sm',
-            radius: 'md',
-            className: 'gap-2',
-            content: (
-              <div className="flex items-center gap-2">
-                <span className="text-lg">{currentRoleConfig.icon}</span>
-                <span className="text-xs font-medium">{currentRoleConfig.nameFA}</span>
-                <ArrowDown size="16" />
-              </div>
-            ),
-          }}
+          variant='bordered'
+        color='primary'
+        size='sm'
+        radius='md'
+        content={
+          <div className="flex items-center gap-2">
+            <span className="text-lg">{currentRoleConfig.icon}</span>
+            <span className="text-xs font-medium">{currentRoleConfig.nameFA}</span>
+            <ArrowDown size="16" />
+          </div>
+        }
         />
       </DropdownTrigger>
 

@@ -7,17 +7,16 @@ import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { Paths } from "@hrbox/modules/paths";
 
-export function WelcomePage() {
+export const Welcome = () => {
   const { push } = useNavigation();
   const user = useAppSelector((state:any) => state.auth.user);
   const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-    // Auto redirect after 3 seconds
     const timer = setTimeout(() => {
       push({to:Paths.HRLink.Dashboard});
-    }, 3000);
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, [push]);
@@ -73,3 +72,5 @@ export function WelcomePage() {
     </div>
   );
 }
+
+export default Welcome;

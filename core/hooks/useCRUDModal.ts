@@ -1,5 +1,5 @@
-import { ModalSize, ModalType } from "@core/providers";
-import { useModal } from "@core/hooks/useModal";
+import { ModalSize, ModalType } from "@hrbox/core/providers";
+import { useModal } from "@hrbox/core/hooks/useModal";
 import React from "react";
 
 export const useCRUDModal = (config: {

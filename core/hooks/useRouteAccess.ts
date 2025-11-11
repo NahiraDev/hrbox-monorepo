@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { useAppSelector } from '@core/redux/hooks';
+import { useAppSelector } from '@hrbox/core/redux/hooks';
 import { moduleRegistry } from '@hrbox/modules/registry';
-import { Panel, RoleSlug } from '@core/config/theme';
+import { Panel, RoleSlug } from '@hrbox/core/config/theme';
 import type { ModuleRoute } from '@module/types';
 
 // ============================================

@@ -1,4 +1,4 @@
-import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-react';
+import { ArrowRight, DocumentForward, Heart, Location, Star1 } from 'iconsax-reactjs';
 import { useState } from 'react';
 
 import { AppButton, AppPagination } from '@hrbox/uikit/components';

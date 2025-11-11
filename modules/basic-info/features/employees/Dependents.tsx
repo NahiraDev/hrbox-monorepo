@@ -15,7 +15,7 @@ import {
   Add,
   UserSquare,
   People,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { RelativesModal } from '@module/basic-info/features/employees/modals/RelativesModal';

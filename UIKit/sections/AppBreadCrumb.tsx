@@ -1,14 +1,11 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
-\import { useAppSelector } from '@hrbox/core/redux/hooks';
-import { ArrowRight2 } from "iconsax-react";
+import { useAppSelector } from '@hrbox/core/redux/hooks';
+import { ArrowRight2 } from "iconsax-reactjs";
 
 interface AppBreadcrumbProps {
   pages: string[];
 }
 
-/**
- * ✅ Breadcrumb component برای نمایش مسیر فعلی
- */
 export const AppBreadcrumb = ({ pages }: AppBreadcrumbProps) => {
   const lang = useAppSelector((state) => state.language.lang);
   const isRTL = lang === 'fa';

@@ -6,7 +6,7 @@ import {
   Hierarchy3,
   People,
   Profile,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import AppDropDown from '@hrbox/uikit/components/AppDropDown';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';

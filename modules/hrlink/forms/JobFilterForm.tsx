@@ -1,9 +1,9 @@
-import { AppAutoComplete, AppInput } from '~/UIKit/components';
-import { SearchNormal1 } from 'iconsax-react';
-import { useFormContext } from '@core/providers/FormProvider';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { useState } from 'react';
 import { Form, Slider } from "@heroui/react";
-import { useAppSelector } from "@core/redux/hooks";
+import { useAppSelector } from "@hrbox/core/redux/hooks";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete } from "@hrbox-monorepo/UIKit/components";
 
 export const JobFilterForm = () => {
   const [salaryValue, setSalaryValue] = useState<any>([100, 300]);
@@ -12,52 +12,10 @@ export const JobFilterForm = () => {
   const lang = useAppSelector((state:any) => state.language);
   return (
     <Form className='w-full flex flex-col gap-6' onSubmit={handleSubmit}>
-      <div className='w-full'>
-        <AppInput
-          props={{
-            label: 'Describe text',
-            required: true,
-            startContent: <SearchNormal1 />,
-            error: errors.search_sth,
-            name: 'Search Sth',
-            type: 'text',
-          }}
-        />
-      </div>
-      <div className='flex flex-col gap-1 w-full'>
-        <AppAutoComplete
-          props={{
-            name: 'firstname',
-            label: 'Location',
-            displayKey: `label.${lang}`,
-            error: touched.search_sth && errors.search_sth,
-            data: [],
-          }}
-        />
-      </div>
-      <div className='flex flex-col gap-1 w-full'>
-        <AppAutoComplete
-          props={{
-            name: 'firstname',
-            label: 'Job Category',
-            displayKey: `label.${lang}`,
-            error: touched.search_sth && errors.search_sth,
-            data: [],
-          }}
-        />
-      </div>
-      <div className='flex flex-col gap-1 w-full'>
-        <AppAutoComplete
-          props={{
-            name: 'firstname',
-            label: 'Sort by',
-            required: true,
-            displayKey: `label.${lang}`,
-            error: touched.search_sth && errors.search_sth,
-            data: [],
-          }}
-        />
-      </div>
+      <FormField name="name"/>
+      <FormField name="location" component={AppAutoComplete}/>
+      <FormField name="category" component={AppAutoComplete}/>
+      <FormField name="sort" component={AppAutoComplete}/>
       <div className='flex flex-col gap-3 w-full'>
         <span className='text-secondary-1000 text-sm font-inter leading-5 font-medium'>
           Set the salary

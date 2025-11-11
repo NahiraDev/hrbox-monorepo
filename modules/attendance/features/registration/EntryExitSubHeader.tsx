@@ -1,5 +1,5 @@
 import { AppButton, AppPageTitle } from '@hrbox/uikit/components';
-import { TickCircle, TimerPause, TimerStart } from 'iconsax-react';
+import { TickCircle, TimerPause, TimerStart } from 'iconsax-reactjs';
 
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useEffect, useRef, useState } from 'react';

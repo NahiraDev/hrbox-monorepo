@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useAdvancedTheme } from '@core/hooks/useAdvancedTheme';
+import { useTheme } from '@Projects/hrbox-monorepo/core/hooks/useTheme';
 
 export default function ThemeCustomizer() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('colors');
 
   const {
-    mode,
     panel,
     isDark,
     isCustomized,
@@ -26,41 +25,8 @@ export default function ThemeCustomizer() {
     reset,
     undo,
     redo,
-    exportTheme,
-    importThemeFromJSON,
     config,
-  } = useAdvancedTheme();
-
-  // ============================================
-  // Handlers
-  // ============================================
-
-  const handleExport = () => {
-    const json = exportTheme();
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `theme-${panel}-${Date.now()}.json`;
-    a.click();
-  };
-
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const json = event.target?.result as string;
-          importThemeFromJSON(json);
-          alert('Theme imported successfully!');
-        } catch (error) {
-          alert('Failed to import theme. Invalid JSON.');
-        }
-      };
-      reader.readAsText(file);
-    }
-  };
+  } = useTheme();
 
   // ============================================
   // Tab Content
@@ -225,25 +191,6 @@ export default function ThemeCustomizer() {
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-6">
               {renderTabContent()}
-            </div>
-
-            {/* Footer */}
-            <div className="border-t border-neutral-200 dark:border-neutral-700 p-4 space-y-2">
-              <button
-                onClick={handleExport}
-                className="w-full rounded-lg bg-success-500 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-success-600"
-              >
-                📥 Export Theme
-              </button>
-              <label className="block w-full cursor-pointer rounded-lg bg-primary-500 px-4 py-2 text-center text-sm font-medium text-white transition-all hover:bg-primary-600">
-                📤 Import Theme
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={handleImport}
-                  className="hidden"
-                />
-              </label>
             </div>
           </div>
         </div>

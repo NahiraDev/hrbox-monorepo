@@ -1,4 +1,4 @@
-import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-react';
+import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-reactjs';
 
 import { AppButton } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';

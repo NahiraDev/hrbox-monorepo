@@ -10,7 +10,7 @@ import {
   People,
   Profile,
   TagUser,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 
 import { StarRating } from '@module/hrlink/features/common';
 

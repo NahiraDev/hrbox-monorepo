@@ -19,13 +19,13 @@ import {
   StatusUp,
   Notification,
   Message,
-} from 'iconsax-react';
+} from 'iconsax-reactjs';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { AppDocItem } from '@hrbox/uikit/sections/AppDocItem';
+import { AppDocItem } from '@hrbox/uikit/sections/AppDocItems';
 import { useAppSelector } from '@hrbox/core/redux/hooks';
-import { Panel } from '@core/config/design';
+import { Panel } from '@hrbox/core/config/theme';
 
 /**
  * منوی اصلی داک
@@ -181,14 +181,6 @@ export const AppDocs = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  // فقط برای HRBox نمایش بده
-  if (currentPanel !== Panel.HRBOX) {
-    return null;
-  }
-
-  /**
-   * تشخیص موس در پایین صفحه
-   */
   const handleMouseMove = useCallback((event: MouseEvent) => {
     const windowHeight = window.innerHeight;
     const mouseY = event.clientY;
@@ -256,9 +248,7 @@ export const AppDocs = () => {
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            {/* Menu Items Container */}
             <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide flex-1">
-              {/* Primary Menu */}
               {PRIMARY_MENU_ITEMS.map((item, index) => (
                 <AppDocItem
                   key={item.id}
@@ -293,7 +283,6 @@ export const AppDocs = () => {
           </motion.div>
         </motion.div>
       ) : (
-        // 📌 Dock بسته (فقط indicator)
         <motion.div
           key="dock-closed"
           className="fixed bottom-2 left-1/2 z-50 -translate-x-1/2"

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import React, { useRef, useEffect, useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import type { IconProps } from 'iconsax-react';
+import { motion } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import type { IconProps } from "iconsax-reactjs";
 
 interface AppDocItemProps {
   icon: React.ComponentType<IconProps>;
@@ -16,7 +16,7 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
                                                         module,
                                                         path,
                                                         outlined = false,
-                                                        index,
+                                                        index
                                                       }) => {
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
@@ -56,10 +56,10 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
             relative overflow-hidden w-16 h-16
             ${
             outlined
-              ? 'border border-dashed border-neutral-400 dark:border-white bg-transparent'
+              ? "border border-dashed border-neutral-400 dark:border-white bg-transparent"
               : isActive
-                ? 'bg-gradient-to-br from-panel-primary to-primary-300 text-white shadow-lg'
-                : 'bg-gradient-to-t from-neutral-200 to-white dark:from-neutral-700 dark:to-neutral-600 text-secondary-900 dark:text-white hover:shadow-md'
+                ? "bg-gradient-to-br from-panel-primary to-primary-300 text-white shadow-lg"
+                : "bg-gradient-to-t from-neutral-200 to-white dark:from-neutral-700 dark:to-neutral-600 text-secondary-900 dark:text-white hover:shadow-md"
           }
           `}
           whileHover={!outlined ? { scale: 1.05 } : undefined}
@@ -68,7 +68,7 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
           {isActive && (
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20"
-              animate={{ x: ['0%', '100%'] }}
+              animate={{ x: ["0%", "100%"] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           )}
@@ -76,10 +76,10 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
           <Icon
             className={`
               relative z-10 transition-all duration-200
-              ${isActive ? 'text-white' : 'text-secondary-700 dark:text-white'}
+              ${isActive ? "text-white" : "text-secondary-700 dark:text-white"}
             `}
             size={28}
-            variant={outlined ? 'Outline' : 'Bold'}
+            variant={outlined ? "Outline" : "Bold"}
           />
         </motion.div>
 
@@ -90,8 +90,8 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
             max-w-[70px] text-center truncate
             ${
             isActive
-              ? 'opacity-100 text-panel-primary dark:text-white'
-              : 'opacity-0 group-hover:opacity-100 text-secondary-600 dark:text-neutral-300'
+              ? "opacity-100 text-panel-primary dark:text-white"
+              : "opacity-0 group-hover:opacity-100 text-secondary-600 dark:text-neutral-300"
           }
           `}
         >

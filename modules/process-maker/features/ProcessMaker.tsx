@@ -7,7 +7,7 @@ import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from '@modu
 import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
-import { DocumentDownload, DocumentUpload } from 'iconsax-react';
+import { DocumentDownload, DocumentUpload } from 'iconsax-reactjs';
 import CustomPalette from '@module/process-maker/features/CustomPalette';
 
 

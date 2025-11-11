@@ -12,7 +12,7 @@ import {
   type User,
   type UserRole,
 } from '@hrbox/core/redux/slices/authSlice';
-import { Domain } from "@hrbox/core/config/theme";
+import { Domain } from "@hrbox/core/config/theme/domains";
 
 export function useAuth() {
   const dispatch = useAppDispatch();

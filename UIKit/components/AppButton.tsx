@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@heroui/react';
+import { Button } from '@heroui/react';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 
@@ -20,7 +20,7 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-interface AppButtonProps extends ButtonProps {
+interface AppButtonProps {
   content?: React.ReactNode;
   fullWidth?: boolean;
   startContent?: React.ReactNode;
@@ -28,11 +28,15 @@ interface AppButtonProps extends ButtonProps {
   isIconOnly?: boolean;
   radius?: keyof typeof radiusClasses;
   disableRipple?: boolean;
+  size?: keyof typeof sizeClasses;
+  variant?: string;
+  color?: string;
+  className?:string;
+  isLoading?:boolean;
+  isDisabled?:boolean;
+  onPress?: () => void;
 }
 
-/**
- * ✅ AppButton - unified button component
- */
 export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
   (
     {
@@ -63,6 +67,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
         )}
         color={color as any}
         variant={variant as any}
+        type="submit"
         radius={radius as any}
         size={size as any}
         isLoading={isLoading}

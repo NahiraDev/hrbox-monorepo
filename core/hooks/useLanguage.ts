@@ -1,29 +1,34 @@
-import { useAppSelector, useAppDispatch } from '@hrbox/core/redux/hooks';
-import {
-  setLanguage,
-  toggleLanguage,
-  initLanguage,
-  type Language,
-} from '@hrbox/core/redux/slices/languageSlice';
+import { useCallback } from 'react';
+import { useAppDispatch, useAppSelector } from '@hrbox/core/redux/hooks';
+import { setLanguage, toggleLanguage as toggleLang } from '@hrbox/core/redux/slices/languageSlice';
+import type { Language } from '@hrbox/core/redux/slices/languageSlice';
 
 export function useLanguage() {
   const dispatch = useAppDispatch();
-  const lang = useAppSelector((state:any) => state.language.lang);
-  const dir = useAppSelector((state:any) => state.language.dir);
-  const isInitialized = useAppSelector((state:any) => state.language.isInitialized);
+  const lang = useAppSelector((state: any) => state.language.lang);
+  const dir = useAppSelector((state: any) => state.language.dir);
+  const isInitialized = useAppSelector((state: any) => state.language.isInitialized);
+
+  const toggleLanguage = useCallback(() => {
+    dispatch(toggleLang());
+  }, [dispatch]);
+
+  const changeLanguage = useCallback(
+    (newLang: Language) => {
+      dispatch(setLanguage(newLang));
+    },
+    [dispatch]
+  );
 
   return {
     lang,
     dir,
     isInitialized,
-    isFA: lang === 'fa',
-    isEN: lang === 'en',
+    toggleLanguage,
+    changeLanguage,
     isRTL: dir === 'rtl',
     isLTR: dir === 'ltr',
-
-    // تابع‌ها
-    setLanguage: (language: Language) => dispatch(setLanguage(language)),
-    toggle: () => dispatch(toggleLanguage()),
-    init: () => dispatch(initLanguage()),
+    isFarsi: lang === 'fa',
+    isEnglish: lang === 'en',
   };
 }

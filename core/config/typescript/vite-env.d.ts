@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_VERSION: string;
   readonly VITE_HRLINK_URL: string;
   readonly VITE_HRBOX_URL: string;
+  readonly VITE_ENABLED_MODULES: string;
 }
 
 interface ImportMeta {

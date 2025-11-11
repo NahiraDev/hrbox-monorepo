@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, Location, Star1 } from 'iconsax-react';
+import { ArrowRight, Heart, Location, Star1 } from 'iconsax-reactjs';
 import { useState } from 'react';
 import { AppButton } from '@hrbox/uikit/components';
 

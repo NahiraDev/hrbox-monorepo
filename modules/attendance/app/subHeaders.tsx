@@ -4,7 +4,7 @@ import {
   IpAllocationSubheader, LocationAllocationSubheader,
   ShiftAllocationSubheader,
 } from '@module/attendance/features/Allocation/CreateAllocationSubHeaderWithHook';
-import { Key, PasswordCheck, Refresh } from 'iconsax-react';
+import { Key, PasswordCheck, Refresh } from 'iconsax-reactjs';
 import { lazy } from "react";
 
 const DashboardSubHeader = lazy(() => import('@module/attendance/features/dashboard/DashboardSubHeader'));

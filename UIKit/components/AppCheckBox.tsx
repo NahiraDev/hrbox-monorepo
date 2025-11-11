@@ -1,5 +1,7 @@
 import { Checkbox, CheckboxProps } from '@heroui/react';
 import { forwardRef } from "react";
+import { FormMode } from "@hrbox/uikit/components/types";
+import { clsx } from "clsx";
 
 interface AppCheckBoxProps extends CheckboxProps {
   formMode?: FormMode;
@@ -13,9 +15,6 @@ const sizeCheckbox: Record<string, string> = {
   lg: 'w-6 h-6',
 };
 
-/**
- * ✅ AppCheckBox - updated with FormMode
- */
 export const AppCheckBox = forwardRef<HTMLInputElement, AppCheckBoxProps>(
   (
     {

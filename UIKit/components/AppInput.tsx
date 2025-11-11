@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Input } from '@heroui/react';
 import { clsx } from 'clsx';
 import type { InputProps } from '@heroui/react';
+import { FormMode } from "@hrbox/uikit/components/types";
 
 interface AppInputProps extends Omit<InputProps, 'onChange' | 'onBlur' | 'onFocus'> {
   label?: string;
@@ -18,9 +19,6 @@ interface AppInputProps extends Omit<InputProps, 'onChange' | 'onBlur' | 'onFocu
   errorClassName?: string;
 }
 
-/**
- * ✅ AppInput - Input متطابق با دیزاین سیستم
- */
 const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
   (
     {
@@ -43,9 +41,8 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
     },
     ref
   ) => {
-    // حالت و استایل بر اساس mode
     const modeStyles = useMemo(() => {
-      const baseInput = 'text-sm font-medium transition-all duration-200';
+      const baseInput = 'text-sm font-medium transition-all duration-200 rounded-lg';
       const baseWrapper = 'h-10 px-3';
 
       switch (formMode) {
@@ -80,7 +77,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
             wrapper: clsx(
               baseWrapper,
               'bg-white dark:bg-neutral-800',
-              'border-1 border-neutral-300 dark:border-neutral-600',
+              'dark:border-neutral-600',
               'hover:border-primary-300 dark:hover:border-primary-600',
               'focus-within:border-panel-primary focus-within:shadow-lg'
             ),
@@ -98,7 +95,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
       modeStyles.wrapper,
       hasError &&
       !isViewMode &&
-      'border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20',
+      'border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg',
       className
     );
 

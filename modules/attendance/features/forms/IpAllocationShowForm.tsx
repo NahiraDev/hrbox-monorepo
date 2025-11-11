@@ -1,7 +1,7 @@
 import { Form , Radio, RadioGroup } from '@heroui/react';
 import { AppAutoComplete, AppTextArea } from '@hrbox/uikit/components';
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
-import { Global } from 'iconsax-react';
+import { Global } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 
 export const initialValuesAction = {

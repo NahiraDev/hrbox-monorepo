@@ -1,7 +1,7 @@
 import { Card } from '@heroui/react';
 import { achivements } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-react';
+import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
