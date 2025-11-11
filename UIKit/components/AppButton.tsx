@@ -1,13 +1,13 @@
 import { Button } from '@heroui/react';
 import clsx from 'clsx';
-import { useImperativeHandle } from 'react';
+import React, { forwardRef } from 'react';
 
 const sizeClasses: Record<string, string> = {
-  xs: 'p-1.5 text-xs',
-  sm: 'px-2 py-1 text-sm',
-  md: 'px-3 py-1.5 text-base',
-  lg: 'px-4 py-3 text-lg',
-  xl: 'px-6 py-4 text-xl',
+  xs: 'px-2 py-1 text-xs h-fit',
+  sm: 'px-3 py-1.5 text-sm h-fit',
+  md: 'px-4 py-2 text-base h-fit',
+  lg: 'px-5 py-2.5 text-lg h-fit',
+  xl: 'px-6 py-3 text-xl h-fit',
 };
 
 const radiusClasses: Record<string, string> = {
@@ -20,65 +20,64 @@ const radiusClasses: Record<string, string> = {
   full: 'rounded-full',
 };
 
-export const AppButton = ({ props }: any) => {
-  if (!props) return null;
-
-  const {
-    content,
-    fullWidth,
-    type = 'button',
-    variant = 'solid',
-    color,
-    size = 'md',
-    radius = 'md',
-    onPress,
-    onClick,
-    startContent,
-    endContent,
-    isIconOnly = false,
-    className,
-    disabled,
-    isSubmitting,
-    spinner,
-      spinnerPlacement,
-    disableRipple,
-  } = props;
-  const handlePress = onPress || onClick;
-  const { ref: forwardedRef, ...rest } = props;
-  if (forwardedRef && typeof forwardedRef === 'object' && forwardedRef.hasOwnProperty('current')) {
-    useImperativeHandle(forwardedRef, () => ({
-    }));
-  }
-  return (
-    <Button
-      ref={forwardedRef}
-      className={clsx(
-        'leading-5 font-normal transition-colors duration-200 ease-in-out flex min-w-fit h-fit',
-        variant == 'light',
-        sizeClasses[size],
-        radiusClasses[radius],
-        className
-      )}
-      color={color}
-      disableRipple={disableRipple}
-      endContent={endContent}
-      fullWidth={fullWidth}
-      isDisabled={disabled}
-      isIconOnly={isIconOnly}
-      isLoading={isSubmitting}
-      radius={radius}
-      size={size}
-      spinner={spinner}
-      spinnerPlacement={spinnerPlacement}
-      startContent={startContent}
-      type={type}
-      variant={variant}
-      onPress={handlePress}
-      {...rest}
-    >
-      {content}
-    </Button>
-  );
+interface AppButtonProps {
+  content?: React.ReactNode;
+  fullWidth?: boolean;
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
+  isIconOnly?: boolean;
+  radius?: keyof typeof radiusClasses;
+  disableRipple?: boolean;
+  size?: keyof typeof sizeClasses;
+  variant?: string;
+  color?: string;
+  className?:string;
+  isLoading?:boolean;
+  isDisabled?:boolean;
+  onPress?: () => void;
 }
+
+export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
+  (
+    {
+      content,
+      fullWidth = false,
+      size = 'md',
+      radius = 'md',
+      variant = 'solid',
+      color = 'primary',
+      className,
+      isLoading = false,
+      isDisabled = false,
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <Button
+        ref={ref}
+        className={clsx(
+          'font-medium transition-all duration-200',
+          'flex items-center justify-center min-w-fit gap-2',
+          sizeClasses[size as keyof typeof sizeClasses],
+          radiusClasses[radius],
+          fullWidth && 'w-full',
+          isLoading && 'opacity-70',
+          className
+        )}
+        color={color as any}
+        variant={variant as any}
+        type="submit"
+        radius={radius as any}
+        size={size as any}
+        isLoading={isLoading}
+        isDisabled={isDisabled}
+        {...rest}
+      >
+        {content}
+      </Button>
+    );
+  }
+);
 
 AppButton.displayName = 'AppButton';

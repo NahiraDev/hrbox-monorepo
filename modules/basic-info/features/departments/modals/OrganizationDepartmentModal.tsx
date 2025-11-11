@@ -1,9 +1,9 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import {
   OrganizationDepartmentChoseModal
 } from '@module/basic-info/features/departments/modals/OrganizationDepartmentChoseModal';
-import { Category } from 'iconsax-react';
+import { Category } from 'iconsax-reactjs';
 import { useState } from 'react';
 
 const colors = ['#000000', '#A61111', '#F4D082', '#05856F', '#0ED2F7', '#2F80ED', '#DB5918', '#9F9C90'] as const;

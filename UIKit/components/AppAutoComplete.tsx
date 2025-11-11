@@ -1,129 +1,163 @@
-import type { Key } from 'react';
-import { Autocomplete, AutocompleteItem } from '@heroui/react';
-import clsx from 'clsx';
+import {
+  Autocomplete,
+  AutocompleteItem,
+  AutocompleteProps,
+} from "@heroui/react";
+import clsx from "clsx";
+import React, { forwardRef, useMemo } from "react";
+import { FormMode } from "@hrbox/uikit/components/types";
 
-const sizeClasses: Record<string, { wrapper: string; input: string; label: string }> = {
+interface AppAutoCompleteProps
+  extends Omit<AutocompleteProps<any>, "onChange" | "onBlur" | "onFocus"> {
+  name: string;
+  label?: string;
+  required?: boolean;
+  displayKey?: string;
+  valueKey?: string;
+  data?: any[];
+  formMode?: FormMode;
+  error?: string | boolean;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (value: string | number) => void;
+  helperText?: string;
+  containerClassName?: string;
+}
+
+const sizeClasses: Record<
+  string,
+  { wrapper: string; label: string; inputWrapper: string }
+> = {
   sm: {
-    wrapper: 'h-8 px-2 text-xs',
-    input: 'text-xs',
-    label: 'text-xs font-medium',
+    wrapper: "h-8 px-2 text-xs",
+    label: "text-xs font-medium",
+    inputWrapper: "text-xs",
   },
   md: {
-    wrapper: 'h-10 px-3 text-sm',
-    input: 'text-sm',
-    label: 'text-sm font-medium',
+    wrapper: "h-10 px-3 text-sm",
+    label: "text-sm font-medium",
+    inputWrapper: "text-sm",
   },
   lg: {
-    wrapper: 'h-12 px-4 text-base',
-    input: 'text-base',
-    label: 'text-base font-semibold',
+    wrapper: "h-12 px-4 text-base",
+    label: "text-base font-semibold",
+    inputWrapper: "text-base",
   },
 };
 
-const radiusClasses: Record<string, string> = {
-  none: 'rounded-none',
-  sm: 'rounded-sm',
-  md: 'rounded-md',
-  lg: 'rounded-lg',
-  xl: 'rounded-xl',
-  full: 'rounded-full',
-};
+export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps>(
+  (
+    {
+      name,
+      label,
+      required = false,
+      displayKey = "name",
+      valueKey = "id",
+      data = [],
+      formMode = FormMode.CREATE,
+      error,
+      onBlur,
+      onFocus,
+      onChange,
+      helperText,
+      containerClassName,
+      size = "md",
+      isDisabled,
+      ...rest
+    },
+    ref
+  ) => {
+    const isViewMode = formMode === FormMode.VIEW;
+    const hasError = Boolean(error);
 
-const getValueByPath = (obj: any, path: string): any => {
-  return path.split('.').reduce((acc, part) => acc?.[part], obj);
-};
+    const modeStyles = useMemo(() => {
+      const baseWrapper = sizeClasses[size]?.wrapper || sizeClasses.md.wrapper;
 
-export const AppAutoComplete = ({ props }: { props: any }) => {
-  const {
-    name,
-    label,
-    required = false,
-    displayKey = 'Name',
-    valueKey = 'Id',
-    isDisabled = false,
-    data = [],
-    formik,
-    error,
-    variant = 'flat',
-    className,
-    classNames: customClassNames,
-    color,
-    size = 'md',
-    radius = 'md',
-    labelClassName,
-    ...rest
-  } = props;
+      switch (formMode) {
+        case FormMode.VIEW:
+          return {
+            inputWrapper: clsx(
+              baseWrapper,
+              "bg-neutral-50 dark:bg-neutral-900",
+              "border border-neutral-200 dark:border-neutral-700",
+              "cursor-default"
+            ),
+          };
+        case FormMode.EDIT:
+          return {
+            inputWrapper: clsx(
+              baseWrapper,
+              "bg-panel-surface dark:bg-neutral-800",
+              "border-1.5 border-primary-200 dark:border-primary-700",
+              "focus-within:border-panel-primary"
+            ),
+          };
+        case FormMode.CREATE:
+        default:
+          return {
+            inputWrapper: clsx(
+              baseWrapper,
+              "bg-white dark:bg-neutral-800",
+              "border border-neutral-300 dark:border-neutral-600",
+              "focus-within:border-panel-primary"
+            ),
+          };
+      }
+    }, [formMode, size]);
 
-  const labelId = `${name}-label`;
-  const selectedValue = formik?.values?.[name];
-  const selectedItem = data.find((item: any) => String(item[valueKey]) === String(selectedValue));
-  const selectedKey = selectedItem ? String(selectedItem[valueKey]) : null;
+    return (
+      <div className={clsx("flex flex-col gap-1.5", containerClassName)}>
+        {label && (
+          <label
+            className={clsx(
+              sizeClasses[size]?.label,
+              "text-secondary-900 dark:text-white"
+            )}
+          >
+            {label}
+            {required && !isViewMode && <span className="text-danger ml-1">*</span>}
+          </label>
+        )}
 
-  const handleSelectionChange = (key: Key | null) => {
-    if (!formik || typeof formik.setFieldValue !== 'function') return;
-    formik.setFieldValue(name, key ?? '');
-  };
+        <Autocomplete
+          ref={ref}
+          classNames={{
+            inputWrapper: clsx(
+              modeStyles.inputWrapper,
+              hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
+            ),
+            listboxWrapper: "z-50 max-h-64",
+          }}
+          isDisabled={isViewMode || isDisabled}
+          isInvalid={hasError}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onSelectionChange={(key) => {
+            if (onChange && key) onChange(key as string);
+          }}
+          placeholder={`انتخاب ${label || "گزینه"}...`}
+          {...rest}
+        >
+          {data.map((item) => (
+            <AutocompleteItem
+              key={item[valueKey]}
+              value={item[valueKey]}
+              className="text-secondary-900 dark:text-white"
+            >
+              {item[displayKey]}
+            </AutocompleteItem>
+          ))}
+        </Autocomplete>
 
-  // 👇 این classNames ها رو تغییر بدید
-  const baseClassNames = clsx(
-    '!shadow-none', // 👈 shadow پیش‌فرض رو حذف کنید
-    className,
-  );
+        {hasError && <span className="text-xs text-danger">{error}</span>}
+        {helperText && !hasError && (
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            {helperText}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
 
-  const inputWrapperClassNames = clsx(
-    error && '!border-red-500 !bg-red-50',
-    sizeClasses[size]?.wrapper,
-    radiusClasses[radius],
-  );
-
-  const inputClassNames = clsx(
-    'placeholder:text-secondary-1000 placeholder:font-medium',
-    error && 'text-red-500',
-    sizeClasses[size]?.input,
-  );
-
-  const labelClassNames = clsx(
-    'leading-5 text-secondary-1000',
-    sizeClasses[size]?.label,
-    labelClassName
-  );
-
-  return (
-    <div className="flex flex-col gap-1">
-      {label && (
-        <label className={labelClassNames} id={labelId}>
-          {label} {required && <span className="text-red-500">*</span>}
-        </label>
-      )}
-
-      <Autocomplete
-        aria-labelledby={label ? labelId : undefined}
-        className={baseClassNames} // 👈 از baseClassNames استفاده کنید
-        classNames={{
-          base: clsx('!shadow-none', customClassNames?.base), // 👈 shadow رو حذف کنید
-          listboxWrapper: customClassNames?.listboxWrapper,
-          popoverContent: customClassNames?.popoverContent,
-          selectorButton: customClassNames?.selectorButton,
-          inputWrapper: inputWrapperClassNames && customClassNames?.inputWrapper,
-          input: inputClassNames,
-        }}
-        color={color}
-        selectedKey={selectedKey}
-        variant={variant}
-        onSelectionChange={handleSelectionChange}
-        placeholder={`Please select ${label ?? 'option'} ...`}
-        isDisabled={isDisabled}
-        {...rest}
-      >
-        {data.map((option: any) => {
-          const key = option[valueKey];
-          const displayLabel = getValueByPath(option, displayKey) || '';
-
-          return <AutocompleteItem key={key}>{displayLabel}</AutocompleteItem>;
-        })}
-      </Autocomplete>
-
-      {error && <span className="text-xs text-red-500 mt-1">{error}</span>}
-    </div>
-  );
-};
+AppAutoComplete.displayName = "AppAutoComplete";

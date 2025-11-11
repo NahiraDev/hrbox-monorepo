@@ -1,16 +1,29 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { createEnhancedBaseQuery } from "./createBaseQuery";
 
-import createBaseQuery from '@core/apis/createBaseQuery';
+interface ApiConfig {
+  reducerPath: string;
+  baseUrl: string;
+  tagTypes?: readonly string[];
+  requiresAuth?: boolean;
+  autoToast?: boolean;
+}
 
-export const createBaseApi = (
-  baseUrl: string,
-  reducerPath: string,
-  tagTypes: readonly string[],
-) => {
+export function createModuleApi({
+                                  reducerPath,
+                                  baseUrl,
+                                  tagTypes = [],
+                                  requiresAuth = true,
+                                  autoToast = true
+                                }: ApiConfig) {
   return createApi({
     reducerPath,
-    baseQuery: createBaseQuery(baseUrl),
-    tagTypes,
-    endpoints: () => ({}),
+    baseQuery: createEnhancedBaseQuery({
+      baseUrl,
+      requiresAuth,
+      autoToast
+    }),
+    tagTypes: [...tagTypes],
+    endpoints: () => ({})
   });
-};
+}

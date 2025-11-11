@@ -1,12 +1,10 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { Category } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const EducationModals = () => {
   const { openModal } = useModalContext();
 
   return (
-    // <AppModal icon={<Category color="white" />} size="3xl" title="Software Management">
     <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
@@ -130,7 +128,6 @@ const EducationModals = () => {
         />
       </AppModal.Footer>
     </>
-    // </AppModal>
   );
 };
 

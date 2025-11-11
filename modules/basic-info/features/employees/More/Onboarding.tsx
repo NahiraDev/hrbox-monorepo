@@ -1,5 +1,5 @@
 import { onBoarding, DNNSupervisor } from '@module/basic-info/app/mock';
-import { Calendar, Clipboard, UserAdd } from 'iconsax-react';
+import { Calendar, Clipboard, UserAdd } from 'iconsax-reactjs';
 import { Card } from '@heroui/react';
 import { AppDoubleLineProgress } from '@core/sections';
 

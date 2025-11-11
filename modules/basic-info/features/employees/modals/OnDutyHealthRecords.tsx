@@ -1,5 +1,5 @@
-import { AppAutoComplete, AppInput, AppModal } from '@core/components';
-import { HeartEdit } from 'iconsax-react';
+import { AppAutoComplete, AppInput, AppModal } from '@hrbox/uikit/components';
+import { HeartEdit } from 'iconsax-reactjs';
 
 const OnDutyHealthRecords = () => {
   return (

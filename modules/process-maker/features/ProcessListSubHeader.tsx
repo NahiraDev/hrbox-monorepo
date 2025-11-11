@@ -1,7 +1,7 @@
-import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-react';
+import { Add, Hierarchy3, SearchNormal, Setting4 } from 'iconsax-reactjs';
 
-import { AppButton } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { NewOneModal } from '@module/process-maker/features/modals';
 
 const ProcessListSubHeader = () => {

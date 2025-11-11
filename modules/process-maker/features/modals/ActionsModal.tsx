@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { FormProvider } from '@core/context';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 
 import { ActionsForm, formValidationAction, handleSubmitAction, initialValuesAction } from '@module/process-maker/features/forms';
-import { AppModal, AppButton } from '@core/components';
+import { AppModal, AppButton } from '@hrbox/uikit/components';
 
 export const AddActionsModall = () => {
   const { t } = useTranslation();
@@ -12,6 +12,7 @@ export const AddActionsModall = () => {
     <>
       <AppModal.Body>
         <FormProvider
+            formId="action-form"
           initialValues={initialValuesAction}
           validationSchema={formValidationAction}
           onSubmitAsync={async (values: any) => {

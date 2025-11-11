@@ -1,5 +1,5 @@
-import { AppButton, AppModal } from '@core/components';
-import { FormProvider, useModalContext } from '@core/context';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { FormProvider, useModalContext } from '@hrbox/core';
 import  {
   formValidationAction,
   handleSubmitAction,

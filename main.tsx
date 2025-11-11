@@ -1,126 +1,267 @@
-import { renderApp } from '@hrbox/core/app';
-import { createStoreWithReducers } from '@hrbox/core/redux/store';
-import { serviceRegistry } from '@hrbox/core/helpers';
-import '@hrbox/core/config/tailwind/index.css'
-import HRLinkPlugin from '@module/hrlink/app/register';
-import ProcessMakerPlugin from '@module/process-maker/app/register';
-import ChartMakerPlugin from '@module/chart-maker/app/register';
-import BasicInfoPlugin from '@module/basic-info/app/register';
-import AttendancePlugin from '@module/attendance/app/register';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { I18nextProvider } from 'react-i18next';
+import { Toaster } from 'sonner';
+import { HeroUIProvider } from '@heroui/react';
+import {RouterContextProvider} from '@hrbox/core/routes/router';
+import { RouterProvider } from '@tanstack/react-router'
+import { moduleRegistry } from '@hrbox/modules/registry';
+import { createStoreWithModules } from '@hrbox/core/redux/store';
+import i18n from '@hrbox/core/translate';
+import { LoadingProvider } from '@hrbox/core/providers/LoadingContext';
+import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 
-const enabledModules = import.meta.env.VITE_ENABLED_MODULES?.split(',') || [
-  'hrlink',
-  'process-maker',
-  'chart-maker',
-  'basic-info',
-  'sso',
-  'attendance'
-];
+import '@hrbox/core/config/theme/index.css';
+import { AppModal } from '@hrbox/uikit/components/AppModal';
+import {initRouter} from "@nima/Projects/hrbox-monorepo/core/routes/router";
+
+// ============================================
+// QueryClient Setup
+// ============================================
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+// ============================================
+// Enabled Modules
+// ============================================
+
+const ENABLED_MODULES =
+  (import.meta.env.VITE_ENABLED_MODULES || '')
+    .split(',')
+    .filter(Boolean) || [
+    'sso',
+    'hrlink',
+    'hrbox',
+    'process-maker',
+    'chart-maker',
+    'basic-info',
+    'attendance',
+  ];
+
+// ============================================
+// Bootstrap Function
+// ============================================
 
 async function bootstrap() {
   try {
-    console.log('🚀 Starting HR Box Application...');
-    console.log('📦 Enabled modules:', enabledModules);
+    console.log('🚀 Starting application bootstrap...');
 
-    // Register modules conditionally but on the same port
-    const modulePromises: Promise<any>[] = [];
+    // ============================================
+    // 1️⃣ ثبت ماژول‌ها (Lazy Load)
+    // ============================================
 
-    if (enabledModules.includes('sso')) {
-      modulePromises.push(
-        import('@module/sso/app/register').then(module => {
-          serviceRegistry.registerPlugin(module.default);
-          console.log('✅ SSO module loaded');
-        }).catch(err => {
-          console.warn('⚠️ Failed to load SSO module:', err.message);
-        })
-      );
+    const moduleLoaders: Record<string, () => Promise<any>> = {
+      sso: () => import('@hrbox/modules/sso/plugin'),
+      hrlink: () => import('@hrbox/modules/hrlink/plugin'),
+      // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
+      // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
+      // 'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
+      // attendance: () => import('@hrbox/modules/attendance/plugin'),
+    };
+
+    // بارگذاری موازی ماژول‌ها
+    await Promise.all(
+      ENABLED_MODULES.map(async (moduleName: any) => {
+        if (moduleLoaders[moduleName]) {
+          try {
+            const { default: ModulePlugin } = await moduleLoaders[moduleName]();
+            moduleRegistry.register(ModulePlugin);
+            console.log(`✅ ${moduleName} module registered`);
+          } catch (error) {
+            console.error(`❌ Failed to load ${moduleName} module:`, error);
+          }
+        }
+      })
+    );
+
+    // ============================================
+    // 2️⃣ Prefetch ماژول‌ها
+    // ============================================
+
+    console.log('⏳ Prefetching modules...');
+    await moduleRegistry.runPrefetch();
+    console.log('✅ Modules prefetched');
+
+    // ============================================
+    // 3️⃣ ایجاد Redux Store
+    // ============================================
+
+    console.log('⏳ Creating Redux store...');
+    const { store, persistor } = createStoreWithModules(ENABLED_MODULES);
+    console.log('✅ Redux store created');
+
+    // ============================================
+    // 4️⃣ رندر اپلیکیشن
+    // ============================================
+
+    const rootElement = document.getElementById('root');
+    if (!rootElement) {
+      throw new Error('Root element not found');
     }
-    if (enabledModules.includes('hrlink') && location.pathname.includes("/hrlink")) {
-      serviceRegistry.registerPlugin(HRLinkPlugin);
-      console.log('✅ HRLink module registered');
-    }
 
-    if (enabledModules.includes('process-maker') && location.pathname.includes("/process-maker")) {
-      serviceRegistry.registerPlugin(ProcessMakerPlugin);
-      console.log('✅ ProcessMaker module registered');
-    }
+    const root = createRoot(rootElement);
 
-    if (enabledModules.includes('basic-info') && location.pathname.includes("/basic-info")) {
-      serviceRegistry.registerPlugin(BasicInfoPlugin);
-      console.log('✅ BasicInfo module registered');
-    }
+    const router = initRouter()
 
-    if (enabledModules.includes('chart-maker') &&location.pathname.includes("/chart-maker")) {
-      serviceRegistry.registerPlugin(ChartMakerPlugin);
-      console.log('✅ ChartMaker module registered');
-    }
-    if (enabledModules.includes('attendance') &&location.pathname.includes("/attendance")) {
-      serviceRegistry.registerPlugin(AttendancePlugin);
-      console.log('✅ Attendance module registered');
-    }
+    root.render(
+      <StrictMode>
+        <ReduxProvider store={store}>
+          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+            <QueryClientProvider client={queryClient}>
+              <I18nextProvider i18n={i18n}>
+                <HeroUIProvider>
+                  <LoadingProvider>
+                    <ModalProvider>
+                      {/* Router Context Provider */}
+                      <RouterContextProvider>
+                        <RouterProvider router={router} />
+                      </RouterContextProvider>
 
-    // Wait for all dynamic imports to complete
-    await Promise.all(modulePromises);
+                      {/* Global Modal */}
+                      {/*<AppModal />*/}
 
-    console.log('🔄 Running module prefetch...');
-    // Run prefetch for all registered modules
-    await serviceRegistry.runPrefetch();
+                      {/* Toast Notifications */}
+                      <Toaster
+                        position="top-right"
+                        richColors
+                        closeButton
+                        duration={3000}
+                        theme="system"
+                      />
+                    </ModalProvider>
+                  </LoadingProvider>
+                </HeroUIProvider>
+              </I18nextProvider>
 
-    console.log('🏪 Creating Redux store...');
-    // Create store with all reducers
-    const { store, persistor } = createStoreWithReducers();
+              {/* React Query DevTools */}
+              {import.meta.env.DEV && <ReactQueryDevtools />}
+            </QueryClientProvider>
+          </PersistGate>
+        </ReduxProvider>
+      </StrictMode>
+    );
 
-    console.log('🎨 Rendering application...');
-    // Render the main application
-    renderApp('root', { store, persistor });
-
-    console.log('✨ Application bootstrapped successfully!');
-    console.log(`🌐 Application running on: http://localhost:5173`);
-
+    console.log('✅ Application bootstrapped successfully!');
   } catch (error) {
     console.error('❌ Failed to bootstrap application:', error);
 
-    // Show error in UI
-    const root = document.getElementById('root');
-    if (root) {
-      root.innerHTML = `
+    // نمایش خطا به کاربر
+    document.body.innerHTML = `
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: system-ui, -apple-system, sans-serif;
+        color: white;
+      ">
         <div style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
-          font-family: system-ui, -apple-system, sans-serif;
-          color: #ef4444;
-          background: #fef2f2;
-          padding: 2rem;
           text-align: center;
+          max-width: 600px;
+          padding: 2rem;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         ">
-          <h1 style="font-size: 2rem; margin-bottom: 1rem;">❌ Application Failed to Start</h1>
-          <p style="font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px;">
-            There was an error loading the application. Please check the console for more details.
+          <h1 style="font-size: 3rem; margin: 0 0 1rem;">😢</h1>
+          <h2 style="margin: 0 0 1rem; font-weight: 600;">خطا در بارگذاری برنامه</h2>
+          <p style="opacity: 0.9; margin-bottom: 2rem;">
+            متأسفانه مشکلی در بارگذاری اپلیکیشن پیش آمده است
           </p>
-          <details style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #fecaca;">
-            <summary style="cursor: pointer; font-weight: bold;">Error Details</summary>
-            <pre style="margin-top: 1rem; text-align: left; font-size: 0.9rem;">${error instanceof Error ? error.stack : String(error)}</pre>
-          </details>
-          <button onclick="window.location.reload()" style="
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-          ">
-            🔄 Reload Page
+          <button
+            onclick="window.location.reload()"
+            style="
+              background: white;
+              color: #667eea;
+              border: none;
+              padding: 12px 32px;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+              font-size: 1rem;
+              transition: transform 0.2s;
+            "
+            onmouseover="this.style.transform='scale(1.05)'"
+            onmouseout="this.style.transform='scale(1)'"
+          >
+            🔄 تلاش مجدد
           </button>
-        </div>
-      `;
+          ${
+      import.meta.env.DEV
+        ? `
+            <details style="
+              margin-top: 2rem;
+              text-align: left;
+              background: rgba(0, 0, 0, 0.2);
+              padding: 1rem;
+              border-radius: 8px;
+              font-size: 0.875rem;
+            ">
+              <summary style="cursor: pointer; font-weight: 600; margin-bottom: 0.5rem;">
+                جزئیات خطا (فقط در Development)
+              </summary>
+              <pre style="
+                overflow: auto;
+                white-space: pre-wrap;
+                word-break: break-word;
+                font-family: monospace;
+                font-size: 0.75rem;
+              ">${error}</pre>
+            </details>
+          `
+        : ''
     }
+        </div>
+      </div>
+    `;
   }
 }
 
-// Start the application
+// ============================================
+// Loading Screen Component
+// ============================================
+
+function LoadingScreen() {
+  return (
+    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700">
+      <div className="text-center text-white">
+        <div className="inline-block animate-spin h-16 w-16 border-4 border-white border-t-transparent rounded-full mb-6" />
+        <h2 className="text-2xl font-bold mb-2">HRBox</h2>
+        <p className="text-sm opacity-90">در حال بارگذاری...</p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// شروع برنامه
+// ============================================
+
 bootstrap();
+
+// ============================================
+// Hot Module Replacement
+// ============================================
+
+if (import.meta.hot) {
+  import.meta.hot.accept();
+
+  import.meta.hot.dispose(() => {
+    console.log('🔄 HMR: Disposing modules...');
+    moduleRegistry.clear();
+  });
+}

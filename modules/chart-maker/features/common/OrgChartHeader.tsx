@@ -1,5 +1,5 @@
 import { AppButton, AppInput } from '@hrbox/uikit/components';
-import { ArrowDown2, Edit, Eye, LayoutMaximize, SearchNormal1, Setting4, User } from 'iconsax-react';
+import { ArrowDown2, Edit, Eye, LayoutMaximize, SearchNormal1, Setting4, User } from 'iconsax-reactjs';
 import { useState } from 'react';
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 

@@ -1,5 +1,5 @@
-import { AppButton, AppInput, AppModal } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const FilterCalenderModal = () => {
   const { openModal } = useModalContext();

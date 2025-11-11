@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
 import { EventAddForm } from '@module/process-maker/features/forms';
-import { AppModal, AppButton } from '@core/components';
-import { FormProvider } from '@core/context'
+import { AppModal, AppButton } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider'
 import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '@module/process-maker/features/forms';
 
 export const NewEventModal = () => {

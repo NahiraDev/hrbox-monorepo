@@ -1,5 +1,0 @@
-export * from '@module/hrlink/features/resume/forms/ExperienceForm'
-export * from '@module/hrlink/features/resume/forms/EducationForm'
-export * from '@module/hrlink/features/resume/forms/CoursesForm'
-export * from '@module/hrlink/features/resume/forms/AwardForm'
-export * from '@module/hrlink/features/resume/forms/GeneralInformationForm'

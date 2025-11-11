@@ -1,4 +1,4 @@
- import { CloseCircle, Global, Location, TickCircle } from 'iconsax-react';
+ import { CloseCircle, Global, Location, TickCircle } from 'iconsax-reactjs';
 
 export const EntryExitData = [
   {

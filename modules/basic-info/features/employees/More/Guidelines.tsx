@@ -1,6 +1,6 @@
 import { guidlines } from '@module/basic-info/app/mock';
 import { Card, Avatar } from '@heroui/react';
-import { UserSearch } from 'iconsax-react';
+import { UserSearch } from 'iconsax-reactjs';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 const Guidelines = () => {

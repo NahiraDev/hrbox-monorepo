@@ -13,7 +13,7 @@ const ProcessMakerPlugin: PluginModule = {
   routes: ProcessMakerRoutes.routes,
   contents: ProcessMakerContents,
   subHeaders: ProcessMakerSubHeaders,
-  menu: ProcessMakerMenu(),
+  menu: ProcessMakerMenu()
 };
 
 export default ProcessMakerPlugin;

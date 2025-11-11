@@ -1,6 +1,5 @@
-import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { NotificationFavorite } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { AppAutoComplete, AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const PreEmploymentHealthRecordsModals = () => {
   const { openModal } = useModalContext();

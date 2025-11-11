@@ -1,216 +1,127 @@
-import { ElementEqual, Moon, Notification, Play, SmsNotification } from 'iconsax-react';
-import { Avatar, Divider } from '@heroui/react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useTheme } from '@heroui/use-theme';
-import { AppButton, AppTabs } from '@hrbox/uikit/components';
-import { serviceRegistry } from 'core/helpers';
-import { AppBreadcrumb } from '@hrbox/uikit/sections/index';
+import { Moon, Sun1, Notification, SmsNotification } from "iconsax-reactjs";
+import { Avatar, Divider, Badge } from "@heroui/react";
+import { useMemo } from "react";
+import { useMatches, useNavigate } from "@tanstack/react-router";
+
+import { AppButton } from "@hrbox/uikit/components";
+import { AppBreadcrumb } from "@hrbox/uikit/sections";
+import { useTheme } from "@hrbox/core/hooks/useTheme";
+import { useAuth } from "@hrbox/core/hooks/useAuth";
+import { RoleSwitcher } from "@hrbox/core/components/RoleSwitcher";
+import { DynamicLogo } from "@hrbox/core/components/DynamicLogo";
 
 export const AppHeader = () => {
-  const { t } = useTranslation();
-  const { theme, setTheme } = useTheme();
-  const location = useLocation();
-  const [currentPages, setCurrentPages] = useState<string[]>([]);
-  const [HRBoxPanel, setHRBoxPanel] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
-  const handleTabChange = (key: string | number) => {
-    setActiveTab(key as string);
-  };
+  const navigate = useNavigate();
+  const matches = useMatches();
+  const { isDark, toggleMode } = useTheme();
+  const { currentPanel, user } = useAuth();
 
-  const getHRLinkPath = (path: string) => {
-    const basePath = '/hrlink';
+  const currentRoute = matches[matches.length - 1];
+  const routeContext = currentRoute?.context as any;
+  const pageTitle = routeContext?.pageTitle || "Dashboard";
 
-    if (location.pathname.includes(basePath)) {
-      return `${basePath}${path}`;
-    }
+  const breadcrumbPages = useMemo(() => {
+    const pathname = currentRoute?.pathname || "/";
+    const segments = pathname.split("/").filter(Boolean);
 
-    return path;
-  };
-  const pageTabs = [
-    {
-      key: 'dashboard',
-      title: 'Dashboard',
-      href: getHRLinkPath('/dashboard'),
-    },
-    {
-      key: 'resume',
-      title: 'Resume',
-      href: getHRLinkPath('/resume'),
-    },
-    {
-      key: 'jobs',
-      title: 'Jobs',
-      href: getHRLinkPath('/jobs'),
-    },
-    {
-      key: 'company',
-      title: 'Company',
-      href: getHRLinkPath('/company'),
-    },
-  ];
+    return ["Home", ...segments.map(seg =>
+      seg.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+    )];
+  }, [currentRoute?.pathname]);
 
-  useEffect(() => {
-    const getModuleName: string | undefined = serviceRegistry.getModuleName();
-
-    if (getModuleName !== 'hrlink') {
-      setHRBoxPanel(true);
-    }
-  }, [location.pathname]);
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-
-    setTheme(newTheme);
-  };
-
-  useEffect(() => {
-    const path = location.pathname;
-
-    if (path.includes('dashboard')) setActiveTab('dashboard');
-    else if (path.includes('resume')) setActiveTab('resume');
-    else if (path.includes('jobs')) setActiveTab('jobs');
-    else if (path.includes('company')) setActiveTab('company');
-    else setActiveTab('dashboard');
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const pathSegments = location.pathname.split('/').filter((segment) => segment);
-
-    setCurrentPages(['Home', ...pathSegments]);
-  }, [location]);
-
-  useEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    document.body.classList.remove('light', 'dark');
-    document.body.classList.add(theme);
-    document.documentElement.style.colorScheme = theme;
-    document.body.style.background = theme === 'dark' ? '#04070E' : '#FFFFFF';
-    document.body.style.color = theme === 'dark' ? '#FFFFFF' : '#04070E';
-    localStorage.setItem('heroui-theme', theme);
-  }, [theme]);
 
   return (
-    <div className="flex items-center justify-between pb-8 pt-4 gap-10">
-      {/*<button className="flex justify-center items-center w-[100px] cursor-pointer" onClick={() => navigate('/')}>*/}
-      {/*  {HRBoxPanel ? <Logo /> : <LogoHRLink />}*/}
-      {/*</button>*/}
-      <div className="flex flex-col w-full">
+    <div className="flex items-center justify-between px-6 py-4 gap-6">
+      {/* Logo */}
+      <div className="flex justify-center items-center min-w-fit">
+        <DynamicLogo className="h-8" />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col w-full gap-2">
+        {/* Title & Actions Row */}
         <div className="flex items-center justify-between w-full">
-          <div className="flex flex-col gap-2">
-            {HRBoxPanel ? (
-              <>
-                <div>
-                  <span className="text-secondary-1000 text-2xl font-semibold leading-normal">
-                    {location.pathname.split('/').filter(Boolean).pop()?.replace(/-/g, ' ')}
+          {/* Left: Title & Breadcrumb */}
+          <div className="flex flex-col gap-2 flex-1">
+            {/* Page Title */}
+            <h1 className="text-2xl font-bold text-secondary-900 dark:text-white">
+              {pageTitle}
+            </h1>
+            {/* Breadcrumb */}
+            <AppBreadcrumb pages={breadcrumbPages} />
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <AppButton
+              variant="light"
+              isIconOnly={true}
+              content={isDark ? (
+                <Sun1 size="20" className="text-secondary-900 dark:text-white" />
+              ) : (
+                <Moon size="20" className="text-secondary-900 dark:text-white" />
+              )}
+              onPress={toggleMode}
+            />
+
+            {/* Notifications */}
+            <Badge content="5" color="danger" size="sm" placement="top-right">
+              <AppButton
+                isIconOnly={true}
+                variant="light"
+                radius="md"
+                size="md"
+                onPress={() => navigate({ to: "/notifications" })}
+                content={<Notification size="20" className="text-secondary-900 dark:text-white" />}
+              />
+            </Badge>
+
+            {/* Messages */}
+            <Badge content="3" color="primary" size="sm" placement="top-right">
+              <AppButton
+                onPress={() => navigate({ to: "/messages" })}
+                content={<SmsNotification size="20" className="text-secondary-900 dark:text-white" />}
+                variant="light"
+                size="sm"
+                isIconOnly={true}
+              />
+            </Badge>
+
+            {/* Divider */}
+            <Divider orientation="vertical" className="h-6" />
+
+            {/* Role Switcher */}
+            <RoleSwitcher />
+
+            {/* User Avatar */}
+            <button
+              onClick={() => navigate({ to: "/profile" })}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              aria-label="User profile"
+            >
+              <Avatar
+                radius="sm"
+                size="sm"
+                src={user?.avatar || ""}
+                name={user?.name || "User"}
+                className="bg-primary-100 dark:bg-primary-900"
+                isBordered
+                color="primary"
+              />
+              {user?.name && (
+                <div className="hidden lg:flex flex-col items-start">
+                  <span className="text-sm font-medium text-secondary-900 dark:text-white">
+                    {user.name}
+                  </span>
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                    {user.email}
                   </span>
                 </div>
-                <div className="flex gap-2 mb-2">
-                  <ElementEqual className="text-neutral-400 dark:text-white" size="18" variant="Bold" />
-                  <AppBreadcrumb pages={currentPages} />
-                </div>
-              </>
-            ) : (
-              <AppTabs
-                fullWidth
-                classNames={{
-                  tabList: 'gap-4',
-                  tabContent:
-                    'group-data-[selected=true]:text-secondary-400 group-data-[selected=true]:font-bold text-sm',
-                  cursor: 'bg-secondary-400 h-[2px]',
-                }}
-                color="secondary"
-                radius="md"
-                selectedKey={activeTab}
-                size="md"
-                tabs={pageTabs}
-                variant="underlined"
-                onTabChange={handleTabChange}
-              />
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <AppButton
-                props={{
-                  color: HRBoxPanel ? 'primary' : 'default',
-                  variant: HRBoxPanel ? 'bordered' : 'solid',
-                  size: 'xs',
-                  radius: 'md',
-                  content: <Play size="24" />,
-                }}
-              />
-              <AppButton
-                props={{
-                  color: HRBoxPanel ? 'primary' : 'default',
-                  variant: HRBoxPanel ? 'bordered' : 'solid',
-                  size: 'md',
-                  radius: 'md',
-                  content: t('ed_tour'),
-                }}
-              />
-              <AppButton
-                props={{
-                  color: HRBoxPanel ? 'primary' : 'default',
-                  variant: HRBoxPanel ? 'bordered' : 'solid',
-                  radius: 'md',
-                  size: 'md',
-                  content: t('upgrade'),
-                }}
-              />
-            </div>
-            <div className="flex items-center gap-1">
-              <AppButton
-                props={{
-                  isIconOnly: true,
-                  variant: 'light',
-                  color: 'default',
-                  radius: 'sm',
-                  size: 'xs',
-                  onPress: () => toggleTheme(),
-                  content: <Moon size="20" />,
-                }}
-              />
-              <AppButton
-                props={{
-                  isIconOnly: true,
-                  variant: 'light',
-                  color: 'default',
-                  radius: 'md',
-                  size: 'xs',
-                  content: <Notification size="20" />,
-                }}
-              />
-              <AppButton
-                props={{
-                  isIconOnly: true,
-                  variant: 'light',
-                  color: 'default',
-                  radius: 'md',
-                  size: 'xs',
-                  content: <SmsNotification size="20" />,
-                }}
-              />
-              {HRBoxPanel && (
-                <AppButton
-                  props={{
-                    isIconOnly: true,
-                    variant: 'light',
-                    color: 'default',
-                    radius: 'md',
-                    size: 'xs',
-                    // content: <HourGlass size="20" />,
-                  }}
-                />
               )}
-            </div>
-            <div>
-              <Avatar radius="sm" src="" />
-            </div>
+            </button>
           </div>
         </div>
-        {HRBoxPanel && <Divider className="bg-primary-400" />}
       </div>
     </div>
   );

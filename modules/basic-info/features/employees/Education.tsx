@@ -1,7 +1,7 @@
 import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-react';
+import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { useState } from 'react';

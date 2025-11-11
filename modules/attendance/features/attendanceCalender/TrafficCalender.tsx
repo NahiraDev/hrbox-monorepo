@@ -1,4 +1,4 @@
-import { Add, Calendar, Trash } from 'iconsax-react';
+import { Add, Calendar, Trash } from 'iconsax-reactjs';
 import { AppButton, AppTable } from '@hrbox/core/components';
 import { PersonalList } from '@module/attendance/app/mock';
 import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';

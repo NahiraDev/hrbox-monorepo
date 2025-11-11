@@ -1,6 +1,6 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { People } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { People } from 'iconsax-reactjs';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 export const RelativesModal = () => {
   const { openModal } = useModalContext();

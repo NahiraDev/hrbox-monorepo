@@ -1,9 +1,6 @@
-import { AppButton } from '@core/components';
-import { BeHappy } from '@root/shared/icons/BeHappy';
-import { Frown } from '@root/shared/icons/Frown';
-import { Happy } from '@root/shared/icons/Happy';
-import { Sad } from '@root/shared/icons/Sad';
-import { useModalContext } from '@core/context';
+import { AppButton } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import {BeHappy, Frown, Happy, Sad} from "~/UIKit/icons";
 
 interface HowAreYouTodayModalProps {
   onMoodSelect: (mood: string) => void;

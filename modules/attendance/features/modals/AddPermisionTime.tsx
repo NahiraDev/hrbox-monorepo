@@ -1,5 +1,6 @@
-import { AppButton, AppModal } from '@core/components';
-import { FormProvider, useModalContext } from '@core/context';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import {FormProvider} from "@hrbox/core/providers/FormProvider"
 import AddPermisionForm from '@module/attendance/features/forms/AddPermisionForm';
 
 const AddPermisionTime=()=>{

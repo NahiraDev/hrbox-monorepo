@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 interface AddNewJobProps {
   onClose: () => void;

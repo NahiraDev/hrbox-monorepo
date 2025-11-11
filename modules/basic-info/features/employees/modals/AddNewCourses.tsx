@@ -1,6 +1,5 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from '@core/components';
-import { Category } from 'iconsax-react';
-import { useModalContext } from '@core/context';
+import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox/uikit/components';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const AddNewCourses = () => {
   const { openModal } = useModalContext();
