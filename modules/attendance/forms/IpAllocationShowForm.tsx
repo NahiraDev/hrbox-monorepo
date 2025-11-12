@@ -1,12 +1,13 @@
-import { Form , Radio, RadioGroup } from '@heroui/react';
-import { AppAutoComplete, AppTextArea } from '@hrbox/uikit/components';
+import { Form, Radio, RadioGroup } from "@heroui/react";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
-import { Global } from 'iconsax-reactjs';
-import * as Yup from 'yup';
+import { Global } from "iconsax-reactjs";
+import * as Yup from "yup";
+import { FormField } from "@hrbox/uikit/components/FormField";
 
 export const initialValuesAction = {
   title: null,
-  type: 'Person',
+  type: "Person",
   ChooseIp: null,
   FromDate: null,
   organization: null,
@@ -14,7 +15,7 @@ export const initialValuesAction = {
   Employee: null,
   Description: null,
   JobTitle: null,
-}
+};
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
   type: Yup.string().required(),
@@ -47,121 +48,118 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 
-const IpAllocationShowForm=()=>{
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit,setFieldValue } = useFormContext();
+const IpAllocationShowForm = () => {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+  } = useFormContext();
 
-  return(
+  return (
     <>
       <Form id="ip-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
-          <RadioGroup name='type' isDisabled={true} classNames={{base:'w-full flex justify-between',wrapper:'w-full flex justify-between'}}
-                      defaultValue='Person' orientation='horizontal' value={values.type} onValueChange={(value) => setFieldValue('type', value)}  >
-            <Radio value="Person" classNames={{wrapper:'border-2 border-primary'}} >Person</Radio>
-            <Radio value="Group" classNames={{wrapper:'border-2 border-primary'}}>Group</Radio>
-            <Radio value="JobTitle" classNames={{wrapper:'border-2 border-primary'}}>Job Title</Radio>
+          <RadioGroup
+            name="type"
+            isDisabled={true}
+            classNames={{
+              base: "w-full flex justify-between",
+              wrapper: "w-full flex justify-between",
+            }}
+            defaultValue="Person"
+            orientation="horizontal"
+            value={values.type}
+            onValueChange={(value) => setFieldValue("type", value)}
+          >
+            <Radio
+              value="Person"
+              classNames={{ wrapper: "border-2 border-primary" }}
+            >
+              Person
+            </Radio>
+            <Radio
+              value="Group"
+              classNames={{ wrapper: "border-2 border-primary" }}
+            >
+              Group
+            </Radio>
+            <Radio
+              value="JobTitle"
+              classNames={{ wrapper: "border-2 border-primary" }}
+            >
+              Job Title
+            </Radio>
           </RadioGroup>
-          <div className='flex flex-row justify-between gap-10'>
-            <div className='w-full'>
-            <AppAutoComplete props={{
-              label:'Choose Ip',
-              name:'ChooseIp',
-              variant:'bordered',
-              value:values.ChooseIp,
-              error: touched.ChooseIp && errors.ChooseIp,
-              onChange: handleChange,
-              onBlur: handleBlur,
-              isDisabled:true,
-            }}/>
+          <div className="flex flex-row justify-between gap-10">
+            <div className="w-full">
+              <FormField
+                name="ChooseIp"
+                label="Choose Ip"
+                component={AppAutoComplete}
+              />
             </div>
-            <div className='w-full'>
-            <AppAutoComplete props={{
-              label:'From Date',
-              name:'FromDate',
-              variant:'bordered',
-              value:values.FromDate,
-              error: touched.FromDate && errors.FromDate,
-              onChange: handleChange,
-              onBlur: handleBlur,
-              isDisabled:true,
-            }}/>
+            <div className="w-full">
+              <FormField
+                name="FromDate"
+                label="From Date"
+                component={AppAutoComplete}
+              />
             </div>
           </div>
-          <div className='flex flex-row justify-between gap-10'>
-            <div className='w-full'>
-            <AppAutoComplete props={{
-              label:'Organization',
-              name:'organization',
-              variant:'bordered',
-              value:values.organization,
-              error: touched.organization && errors.organization,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}/>
+          <div className="flex flex-row justify-between gap-10">
+            <div className="w-full">
+              <FormField
+                name="organization"
+                label="Organization"
+                component={AppAutoComplete}
+              />
             </div>
-            {values.type==='Person' || values.type==='Group' ? (
-                <div className='w-full'>
-              <AppAutoComplete props={{
-                label:'Department',
-                name:'Department',
-                variant:'bordered',
-                value:values.Department,
-                error: touched.Department && errors.Department,
-                onChange: handleChange,
-                onBlur: handleBlur,
-                isDisabled:true,
-              }}/>
-                </div>
-            ):(
-              <div className='w-full'>
-              <AppAutoComplete props={{
-                label:'Job Title',
-                name:'JobTitle',
-                variant:'bordered',
-                value:values.JobTitle,
-                error: touched.JobTitle && errors.JobTitle,
-                onChange: handleChange,
-                onBlur: handleBlur,
-                isDisabled:true,
-              }}/>
+            {values.type === "Person" || values.type === "Group" ? (
+              <div className="w-full">
+                <FormField
+                  name="Department"
+                  label="Department"
+                  component={AppAutoComplete}
+                />
+              </div>
+            ) : (
+              <div className="w-full">
+                <FormField
+                  name="JobTitle"
+                  label="Job Title"
+                  component={AppAutoComplete}
+                />
               </div>
             )}
-
           </div>
-          {values.type==='Person'&& (
-            <div className='flex flex-row justify-between gap-10'>
-              <div className='w-full'>
-              <AppAutoComplete props={{
-                label:'Employee',
-                name:'Employee',
-                variant:'bordered',
-                value:values.Employee,
-                error: touched.Employee && errors.Employee,
-                onChange: handleChange,
-                onBlur: handleBlur,
-                isDisabled:true,
-              }}/>
+          {values.type === "Person" && (
+            <div className="flex flex-row justify-between gap-10">
+              <div className="w-full">
+                <FormField
+                  name="Employee"
+                  label="Employee"
+                  component={AppAutoComplete}
+                />
               </div>
-              <div className='w-full'></div>
+              <div className="w-full"></div>
             </div>
           )}
 
           <div className="w-full">
-            <AppTextArea props={{
-              label:'Description',
-              className:'border border-[#DEE1E8] rounded-xl z-999 bg-gradient-to-r from-white via-[#EEF9FF] to-white',
-              name:'Description',
-              variant:'bordered',
-              value:values.Description,
-              error: touched.Description && errors.Description,
-              onChange: handleChange,
-              onBlur: handleBlur,
-              placeHolderClass:'placeholder:text-sm placeholder:text-secondary-400',
-            }}/>
+            <FormField
+              name="Description"
+              label="Description"
+              component={AppTextArea}
+            />
           </div>
         </div>
-        <Global color='gray' size={90} className='absolute bottom-2 left-0'/>
+        <Global color="gray" size={90} className="absolute bottom-2 left-0" />
       </Form>
     </>
   );
-}
+};
 export default IpAllocationShowForm;

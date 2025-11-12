@@ -6,13 +6,13 @@ import  {
   handleSubmitAction,
   initialValuesAction,
 } from '@hrbox/modules/attendance/forms/IpAllocationEdit';
-import IpAllocationShowForm from '@hrbox/modulesb/attendance/forms/IpAllocationShowForm';
+import IpAllocationShowForm from '../forms/IpAllocationShowForm';
 const IpAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider  formId='IpAllocationShow-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('view', 'IpAllocationShow');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>

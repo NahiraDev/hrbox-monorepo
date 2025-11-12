@@ -13,6 +13,7 @@ export const EventModal = () => {
         <FormProvider
           initialValues={initialValuesEvent}
           validationSchema={formValidationEvent}
+          formId='event-form' enableCache clearCacheOnSubmit
           onSubmitAsync={async (values: any) => {
             handleSubmitEvent(values);
           }}
@@ -23,21 +24,17 @@ export const EventModal = () => {
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              content: t('cancel'),
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'lg'
+              content= {t('cancel')}
           />
           <AppButton
-            props={{
-              color: 'primary',
-              type: 'submit',
-              size: 'md',
-              radius: 'lg',
-              content: t('submit'),
-            }}
+              color= 'primary'
+              size= 'md'
+              radius= 'lg'
+              content={ t('submit')}
+
           />
         </div>
       </AppModal.Footer>

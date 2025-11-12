@@ -1,6 +1,7 @@
 import { Textarea, TextAreaProps } from '@heroui/react';
 import clsx from 'clsx';
 import React, { forwardRef, useMemo } from 'react';
+import { FormMode } from './types';
 
 interface AppTextAreaProps extends Omit<TextAreaProps, 'onChange' | 'onBlur' | 'onFocus'> {
   label?: string;

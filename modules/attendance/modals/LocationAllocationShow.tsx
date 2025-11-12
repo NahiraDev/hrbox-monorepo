@@ -12,7 +12,7 @@ const LocationAllocationShow=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider  formId='LocationAllocationShow-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('view', 'LocationAllocationShow');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>

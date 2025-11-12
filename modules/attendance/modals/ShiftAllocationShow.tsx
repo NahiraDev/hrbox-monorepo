@@ -5,7 +5,7 @@ import { useModalContext } from '@hrbox/core/providers/ModalProvider'
 import {
   formValidationAction,
   handleSubmitAction,
-  initialValuesAction,
+  ,
 } from '@hrbox/modules/attendance/forms/ShiftAllocationShowForm';
 import ShiftAllocationShowForm from '@hrbox/modules/attendance/forms/ShiftAllocationShowForm';
 const ShiftAllocationShow=()=>{
@@ -13,10 +13,10 @@ const ShiftAllocationShow=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider  formId='ShiftAllocationShow-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('view', 'ShiftShowModal');
-        }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
+        }} initialValues={} validationSchema={formValidationAction}>
         <ShiftAllocationShowForm/>
         </FormProvider>
       </AppModal.Body>

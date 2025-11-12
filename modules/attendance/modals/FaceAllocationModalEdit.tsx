@@ -12,7 +12,9 @@ const FaceAllocationModalEdit=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider 
+          formId='FaceAllocationEdit-form' enableCache clearCacheOnSubmit
+        onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('edit', 'FaceAllocationModalEdit');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
@@ -22,24 +24,18 @@ const FaceAllocationModalEdit=()=>{
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              onClick: () => closeModal('edit', 'FaceAllocationModalEdit'),
-              content: 'Cancel',
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'lg'
+              onPress={ () => closeModal('edit', 'FaceAllocationModalEdit')}
+              content='Cancel'
           />
           <AppButton
-            props={{
-              color: 'primary',
-              type: 'submit',
-              size: 'md',
-              radius: 'lg',
-              form:'face-allocation-edit',
-              className: 'text-white',
-              content: 'Submit',
-            }}
+              color= 'primary'
+              size= 'md'
+              radius= 'lg'
+              className= 'text-white'
+              content= 'Submit'
           />
         </div>
       </AppModal.Footer>

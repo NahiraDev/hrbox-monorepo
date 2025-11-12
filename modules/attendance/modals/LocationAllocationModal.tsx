@@ -13,7 +13,7 @@ const LocationAllocationModal=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider  formId='LocationAllocation-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('confirm', 'LocationAllocation');
         }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
@@ -23,24 +23,18 @@ const LocationAllocationModal=()=>{
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              onClick: () => closeModal('confirm', 'LocationAllocation'),
-              content: 'Cancel',
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'lg'
+              onPress= {() => closeModal('confirm', 'LocationAllocation')}
+              content= 'Cancel'
           />
           <AppButton
-            props={{
-              color: 'primary',
-              type: 'submit',
-              size: 'md',
-              radius: 'lg',
-              form:'location-allocation-form',
-              className: 'text-white',
-              content: 'Submit',
-            }}
+              color= 'primary'
+              size= 'md'
+              radius= 'lg'
+              className= 'text-white'
+              content= 'Submit'
           />
         </div>
       </AppModal.Footer>
