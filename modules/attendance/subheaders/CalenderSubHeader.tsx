@@ -7,11 +7,11 @@ import {
   People,
   Profile,
 } from 'iconsax-reactjs';
-import AppDropDown from '@UIKit/components/AppDropDown';
-import { useModalContext } from '@core/providers/ModalProvider';
-import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';
+import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import AddPermisionTime from '@hrbox/modules/attendance/modals/AddPermisionTime';
 
-import { AppButton } from '@UIKit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Avatar } from '@heroui/react';

@@ -1,11 +1,11 @@
-import { AppButton, AppModal } from '@UIKit/components';
-import ShiftAllocationEdit from '@module/attendance/features/forms/ShiftAllocationEdit';
-import { FormProvider } from '@core/providers/FormProvider';
-import {useModalContext} from '@core/providers/ModalProvider'
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import ShiftAllocationEdit from '@hrbox/modules/attendance/forms/ShiftAllocationEdit';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
+import {useModalContext} from '@hrbox/core/providers/ModalProvider'
 import {
   formValidationAction,
   handleSubmitAction,
-} from '@module/attendance/features/forms/ShiftAllocationEdit';
+} from '@hrbox/modules/attendance/forms/ShiftAllocationEdit';
 const ShiftAllocationModalEdit=()=>{
   const {closeModal, getModalData}=useModalContext();
   const rowData=getModalData('edit','ShiftAllocationModalEdit');
@@ -23,7 +23,7 @@ const ShiftAllocationModalEdit=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider onSubmitAsync={async(values:any)=>{
+        <FormProvider  formId='ShiftAllocation-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('edit', 'ShiftAllocationModalEdit');
         }} initialValues={initialValues} validationSchema={formValidationAction}>
@@ -33,24 +33,18 @@ const ShiftAllocationModalEdit=()=>{
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              onClick: () => closeModal('edit', 'ShiftAllocationModalEdit'),
-              content: 'Cancel',
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'lg'
+              onPress= {() => closeModal('edit', 'ShiftAllocationModalEdit')}
+              content= 'Cancel'
           />
           <AppButton
-            props={{
-              color: 'primary',
-              type: 'submit',
-              size: 'md',
-              radius: 'lg',
-              className: 'text-white',
-              form:'shift-allocation-edit',
-              content: 'Submit Again',
-            }}
+              color= 'primary'
+              size= 'md'
+              radius= 'lg'
+              className= 'text-white'
+              content= 'Submit Again'
           />
         </div>
       </AppModal.Footer>

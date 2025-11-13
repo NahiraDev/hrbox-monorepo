@@ -1,4 +1,4 @@
-import { AppButton, AppInput } from '@UIKit/components';
+import { AppButton, AppInput } from '@hrbox/uikit/components';
 import "../../app/index.css";
 import { ArrowLeft2, ArrowRight2, InfoCircle } from 'iconsax-reactjs';
 import { Tooltip } from '@heroui/react';

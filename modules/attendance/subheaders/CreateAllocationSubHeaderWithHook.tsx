@@ -1,9 +1,9 @@
-import AllocationSubheader from '@module/attendance/features/Allocation/AllocationSubheader';
-import ShiftAllocationModal from '@module/attendance/features/modals/ShiftAllocationModal';
+import AllocationSubheader from '@hrbox/modules/attendance/subheaders/AllocationSubheader';
+import ShiftAllocationModal from '@hrbox/modules/attendance/modals/ShiftAllocationModal';
 import { GlobalEdit, LocationAdd, Refresh2, Scan } from 'iconsax-reactjs';
-import LocationAllocationModal from '@module/attendance/features/modals/LocationAllocationModal';
-import IpAllocationModal from '@module/attendance/features/modals/IpAllocationModal';
-import FaceAllocationModal from '@module/attendance/features/modals/FaceAllocationModal';
+import LocationAllocationModal from '@hrbox/modules/attendance/modals/LocationAllocationModal';
+import IpAllocationModal from '@hrbox/modules/attendance/modals/IpAllocationModal';
+import FaceAllocationModal from '@hrbox/modules/attendance/modals/FaceAllocationModal';
 import React from 'react';
 
 function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.ComponentType,icon:React.ReactNode) {

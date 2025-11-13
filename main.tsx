@@ -17,7 +17,7 @@ import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 
 import '@hrbox/core/config/theme/index.css';
 import { AppModal } from '@hrbox/uikit/components/AppModal';
-import {initRouter} from "@nima/Projects/hrbox-monorepo/core/routes/router";
+import {initRouter} from "@hrbox/core/routes/router";
 
 // ============================================
 // QueryClient Setup

@@ -8,7 +8,12 @@ import { RoleSlug } from '@hrbox/core/config/theme';
 import { Profile, Briefcase, Building, PasswordCheck } from "iconsax-reactjs";
 import { lazyRouteComponent } from '@tanstack/react-router';
 import { Paths } from "@hrbox/modules/paths";
-import { AttendancePath } from "@module/*";
+import {
+  FaceRecognitionAssignment,
+  IpAllocationSubheader,
+  LocationAllocationSubheader,
+  ShiftAllocationSubheader,
+} from "@hrbox/modules/attendance/subheaders/CreateAllocationSubHeaderWithHook";
 
 // ============================================
 // Pages
@@ -59,6 +64,7 @@ export const AttendancePlugin: ModulePlugin = {
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
+      subHeader:DashboardSubHeader,
     },
 
     {
@@ -67,10 +73,88 @@ export const AttendancePlugin: ModulePlugin = {
       layout: 'base',
       meta: {
         title: 'Entry Exit',
-        requireAuth: true,
+        requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: EntryExitSubHeader,
+    },{
+      path: Paths.Attendance.AttendanceCalenders,
+      component: AttendanceCalender,
+      layout: 'base',
+      meta: {
+        title: 'Attendance Calendar',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: CalenderSubHeader,
+    },{
+      path: Paths.Attendance.ListOfApprovals,
+      component: ListOfApprovals,
+      layout: 'base',
+      meta: {
+        title: 'Approvals',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: ApprovalsSubHeader,
+    },{
+      path: Paths.Attendance.ShiftAllocation,
+      component: ShiftAllocation,
+      layout: 'base',
+      meta: {
+        title: 'ُShift Allocation',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: ShiftAllocationSubheader,
+    },{
+      path: Paths.Attendance.LocationAllocation,
+      component: LocationAllocation,
+      layout: 'base',
+      meta: {
+        title: 'Location Allocation',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: LocationAllocationSubheader,
+    },{
+      path: Paths.Attendance.IpAllocation,
+      component: IpAllocation,
+      layout: 'base',
+      meta: {
+        title: 'Ip Allocation',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: IpAllocationSubheader,
+    },{
+      path: Paths.Attendance.FaceAllocation,
+      component: FaceAllocation,
+      layout: 'base',
+      meta: {
+        title: 'Face Allocation',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: FaceRecognitionAssignment,
+    },{
+      path: Paths.Attendance.Export,
+      component: ExportPage,
+      layout: 'base',
+      meta: {
+        title: 'Export',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      }
+    },{
+      path: Paths.Attendance.TrafficCalender,
+      component: TrafficCalender,
+      layout: 'base',
+      meta: {
+        title: 'Traffic Calendar',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      }
     },
   ],
 
@@ -81,25 +165,65 @@ export const AttendancePlugin: ModulePlugin = {
     {
       id: 'dashboard',
       label: 'Dashboard',
-      path: '/hrlink/dashboard',
+      path: '/attendance/dashboard',
       icon: <Profile size="24" />,
     },
     {
-      id: 'resume',
-      label: 'Resume',
-      path: '/hrlink/resume',
+      id: 'entry-exit',
+      label: 'Entry Exit',
+      path: '/attendance/entry-exit',
       icon: <Profile size="24" />,
     },
     {
-      id: 'jobs',
-      label: 'Jobs',
-      path: '/hrlink/jobs',
+      id: 'calender',
+      label: 'Attendance Calender',
+      path: '/attendance/attendance-calender',
       icon: <Briefcase size="24" />,
     },
     {
-      id: 'company',
-      label: 'Company',
-      path: '/hrlink/company',
+      id: 'export',
+      label: 'Export',
+      path: '/attendance/export',
+      icon: <Building size="24" />,
+    },{
+      id: 'traffic',
+      label: 'Traffic Calender',
+      path: '/attendance/traffic-calender',
+      icon: <Building size="24" />,
+    },{
+      id: 'shift',
+      label: 'Shift Allocation',
+      path: '/attendance/shift-allocation',
+      icon: <Building size="24" />,
+    },{
+      id: 'approvals',
+      label: 'List Of Approvals',
+      path: '/attendance/list-of-approvals',
+      icon: <Building size="24" />,
+    },{
+      id: 'export',
+      label: 'Export',
+      path: '/attendance/export',
+      icon: <Building size="24" />,
+    },{
+      id: 'face',
+      label: 'Face Allocation',
+      path: '/attendance/face-allocation',
+      icon: <Building size="24" />,
+    },{
+      id: 'shift',
+      label: 'Shift Allocation',
+      path: '/attendance/shift-allocation',
+      icon: <Building size="24" />,
+    },{
+      id: 'ip',
+      label: 'Ip Allocation',
+      path: '/attendance/ip-allocation',
+      icon: <Building size="24" />,
+    },{
+      id: 'location',
+      label: 'Location Allocation',
+      path: '/attendance/location-allocation',
       icon: <Building size="24" />,
     },
   ],

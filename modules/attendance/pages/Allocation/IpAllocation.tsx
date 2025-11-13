@@ -1,10 +1,10 @@
-import { AppTable } from '@UIKit/components';
-import { Allocatio } from '@module/attendance/app/mock';
+import { AppTable } from '@hrbox/uikit/components';
+import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
-import { useModalContext } from 'core/context';
-import IpAllocationModalEdit from '@module/attendance/features/modals/IpAllocationModalEdit';
-import IpAllocationShow from '@module/attendance/features/modals/IpAllocationShow';
+import { useModalContext } from '@hrbox/core/context';
+import IpAllocationModalEdit from '@hrbox/modules/attendance/modals/IpAllocationModalEdit';
+import IpAllocationShow from '@hrbox/modules/attendance/modals/IpAllocationShow';
 
 const IpAllocation=()=>{
   const [data,setData]=useState(Allocatio);

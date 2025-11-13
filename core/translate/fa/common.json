@@ -146,5 +146,10 @@
   "resend_code": "ارسال مجدد",
   "otp_is_correct_redirecting": "کد یکبار مصرف صحیح است. در حال هدایت به پنل کاربری...",
   "lorem": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
-  "Personal_attendance_calendar": "تقویم حضور و غیاب شخصی"
+  "Personal_attendance_calendar": "تقویم حضور و غیاب شخصی",
+  "setting": "Setting (fa)",
+  "insurance": "Insurance (fa)",
+  "computationalCoefficients": "Computational Coefficients (fa)",
+  "please_sign_in_to_our_hrbox_account": "Please Sign in to your “HRBOX“ account. (fa)",
+  "please_sign_in_to_our_hrlink_account": "Please Sign in to your “HRLink“ account. (fa)"
 }

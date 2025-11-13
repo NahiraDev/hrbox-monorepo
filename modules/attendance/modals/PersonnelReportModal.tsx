@@ -1,8 +1,8 @@
-import { useModalContext } from '@core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 
-import { AppButton, AppModal, AppTable } from '@UIKit/components';
-import { ReportPersonnal } from '@module/attendance/app/mock';
+import { AppButton, AppModal, AppTable } from '@hrbox/uikit/components';
+import { ReportPersonnal } from '@hrbox/modules/attendance/app/mock';
 const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
   return (
@@ -39,7 +39,7 @@ const PersonnelReportModal = () => {
                 <p className="text-sm font-medium">Sahar Najafi</p>
                 <p>مدیر منابع انسانی</p>
               </div>
-              <Avatar className="w-[64px] h-[64px]" radius="md" src="/images/favicon.ico" />
+              <Avatar className="w-16 h-16" radius="md" src="/images/favicon.ico" />
             </div>
           </div>
           <div className="w-full">
@@ -50,23 +50,18 @@ const PersonnelReportModal = () => {
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              onPress:()=> closeModal('confirm', 'PersonnelReport'),
-              content: 'Cancel',
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'lg'
+              onPress={()=> closeModal('confirm', 'PersonnelReport')}
+              content= 'Cancel'
           />
           <AppButton
-            props={{
-              color: 'primary',
-              type: '',
-              size: 'md',
-              radius: 'lg',
-              className: 'text-white',
-              content: 'Download File',
-            }}
+              color= 'primary'
+              size= 'md'
+              radius= 'lg'
+              className= 'text-white'
+              content= 'Download File'
           />
         </div>
       </AppModal.Footer>
