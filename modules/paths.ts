@@ -1,3 +1,5 @@
+import SelectRole from "sso/pages/SelectRole";
+
 export const Paths = {
   SSO:{
     login: '/login',
@@ -7,9 +9,9 @@ export const Paths = {
     forgetPassword: '/forget-password',
     resetPassword: '/reset-password',
     welcome: '/welcome',
+    SelectRole: '/sso/select-role',
   },
   HRLink:{
-    Impersonate: '/impersonate',
     Dashboard: '/dashboard',
     ResumeInformation: '/resume/information',
     ResumeExperience: '/resume/experience',

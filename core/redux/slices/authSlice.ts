@@ -42,6 +42,22 @@ const initialState: AuthState = {
   error: null,
 };
 
+const clearAuthStorage = (state: AuthState) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+  localStorage.removeItem('selectedRole');
+
+  state.isAuthenticated = false;
+  state.user = null;
+  state.token = null;
+  state.refreshToken = null;
+  state.selectedRole = null;
+  state.needsRoleSelection = false;
+  state.currentPanel = null;
+  state.error = 'جلسه منقضی شده است.';
+};
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -51,41 +67,46 @@ export const authSlice = createSlice({
       state.currentDomain = action.payload;
     },
 
-    // موفقیت لاگین
-    loginSuccess: (state, action: PayloadAction<{
-      user: User;
-      token: string;
-      refreshToken: string;
-    }>) => {
-      const { user, token, refreshToken } = action.payload;
-      state.user = user;
-      state.token = token;
-      state.refreshToken = refreshToken;
-      state.loading = false;
-      state.error = null;
+ loginSuccess: (
+  state,
+  action: PayloadAction<{
+    userId: number;
+    displayName: string;
+    Token: string;
+    renewalToken: string;
+    roles?: UserRole[];
+  }>
+) => {
+  const { userId, displayName, Token, renewalToken, roles = [] } = action.payload;
 
-      // ذخیره در localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(user));
+  const user: User = {
+    id: String(userId),
+    name: displayName,
+    email: '',
+    roles,
+  };
 
-      // اگر بیش از یک نقش داشت
-      if (user.roles.length > 1) {
-        state.needsRoleSelection = true;
-        state.isAuthenticated = false;
-      }
-      // اگر فقط یک نقش داشت
-      else if (user.roles.length === 1) {
-        const role = user.roles[0];
-        state.selectedRole = role;
-        state.currentPanel = getRoleConfig(role.slug).panel;
-        state.isAuthenticated = true;
-        state.needsRoleSelection = false;
-        localStorage.setItem('selectedRole', JSON.stringify(role));
-      }
-    },
+  state.user = user;
+  state.token = Token;
+  state.refreshToken = renewalToken;
+  state.isAuthenticated = true;
+  state.loading = false;
+  state.error = null;
+  state.needsRoleSelection = roles.length > 1;
 
-    // انتخاب نقش
+  localStorage.setItem('token', Token);
+  localStorage.setItem('refreshToken', renewalToken);
+  localStorage.setItem('user', JSON.stringify(user));
+
+  if (roles.length === 1) {
+    const role = roles[0];
+    state.selectedRole = role;
+    state.currentPanel = getRoleConfig(role.slug).panel;
+    state.needsRoleSelection = false;
+    localStorage.setItem('selectedRole', JSON.stringify(role));
+  }
+},
+
     roleSelected: (state, action: PayloadAction<{
       role: UserRole;
       accessToken: string;
@@ -109,19 +130,7 @@ export const authSlice = createSlice({
     },
 
     logout: (state) => {
-      state.isAuthenticated = false;
-      state.user = null;
-      state.token = null;
-      state.refreshToken = null;
-      state.selectedRole = null;
-      state.needsRoleSelection = false;
-      state.currentPanel = null;
-      state.error = null;
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
-      localStorage.removeItem('selectedRole');
+      clearAuthStorage(state);
     },
 
     updateToken: (state, action: PayloadAction<string>) => {
@@ -129,24 +138,41 @@ export const authSlice = createSlice({
       localStorage.setItem('token', action.payload);
     },
 
-    initAuth: (state:any) => {
-      const token = localStorage.getItem('token');
-      const user = localStorage.getItem('user');
-      const selectedRole = localStorage.getItem('selectedRole');
+   initAuth: (state) => {
+  const token = localStorage.getItem('token');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const userStr = localStorage.getItem('user');
+  const roleStr = localStorage.getItem('selectedRole');
 
-      if (token && user && selectedRole) {
-        try {
-          state.token = token;
-          state.user = JSON.parse(user);
-          state.selectedRole = JSON.parse(selectedRole);
-          state.currentPanel = getRoleConfig(JSON.parse(selectedRole).slug).panel;
-          state.isAuthenticated = true;
-        } catch (e) {
-          console.error('Failed to parse auth data', e);
-          state.logout(state);
-        }
+  if (token && refreshToken && userStr) {
+    try {
+      const user = JSON.parse(userStr) as User;
+      const selectedRole = roleStr ? JSON.parse(roleStr) as UserRole : null;
+
+      state.token = token;
+      state.refreshToken = refreshToken;
+      state.user = user;
+      state.isAuthenticated = true;
+
+      if (selectedRole && user.roles.some(r => r.id === selectedRole.id)) {
+        state.selectedRole = selectedRole;
+        state.currentPanel = getRoleConfig(selectedRole.slug).panel;
+        state.needsRoleSelection = false;
+      } else if (user.roles.length === 1) {
+        const role = user.roles[0];
+        state.selectedRole = role;
+        state.currentPanel = getRoleConfig(role.slug).panel;
+        state.needsRoleSelection = false;
+        localStorage.setItem('selectedRole', JSON.stringify(role));
+      } else {
+        state.needsRoleSelection = true;
       }
-    },
+    } catch (e) {
+      console.error('Failed to restore auth', e);
+      clearAuthStorage(state);
+    }
+  }
+},
 
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;

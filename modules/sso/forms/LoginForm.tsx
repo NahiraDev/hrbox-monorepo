@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { t } from 'i18next';
 
-
 import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { AppButton } from "@hrbox/uikit/components";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
@@ -20,13 +19,7 @@ export const formValidationErrorLogin = Yup.object().shape({
 });
 
 export const LoginForm = () => {
-  const {
-    errors,
-    touched,
-    handleSubmit,
-    isSubmitting,
-  } = useFormContext();
-
+  const { errors, touched, handleSubmit, isSubmitting, setSubmitting, setErrors } = useFormContext();
   const { t } = useTranslation();
   const { push } = useNavigation();
 
@@ -39,21 +32,22 @@ export const LoginForm = () => {
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-4">
             <FormField name="Username" label={t('user_name')} helperText={touched.Username && errors.Username}/>
-            <FormField name="Password" label={t('password')} helperText={touched.Password && errors.Password}/>
+            <FormField name="Password" label={t('password')} helperText={touched.Password && errors.Password} type="password"/>  {/* Added type="password" to hide chars */}
           </div>
 
-            <div className="flex items-center justify-between w-full mt-2">
-              <Link
-                className="text-secondary-400 dark:text-white font-semibold text-xs cursor-pointer hover:underline transition-all"
-                onPress={() => push({to:"/sso/forget-password"})}
-              >
-                {t('forgot_password')}
-              </Link>
-            </div>
+          <div className="flex items-center justify-between w-full mt-2">
+            <Link
+              className="text-secondary-400 dark:text-white font-semibold text-xs cursor-pointer hover:underline transition-all"
+              onPress={() => push({to:"/sso/forget-password"})}
+            >
+              {t('forgot_password')}
+            </Link>
           </div>
+        </div>
 
         {/* Submit Button */}
         <AppButton
+          type="submit"  // Important: This makes the button submit the form
           content={t('sign_in')}
           size="md"
           fullWidth={true}
@@ -73,34 +67,34 @@ export const LoginForm = () => {
           content={(t('sign_in_with_phone_number'))}
           size='lg'
           fullWidth={true}
-           variant=""
+          variant=""
           color="primary"
-            startContent={<img src="/images/message.svg" alt="phone icon" />}
-             className="!bg-[radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.10) 100%)]) backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] flex justify-start border-1 border-[rgba(216, 216, 216, 0.00)]"
-          />
+          startContent={<img src="/images/message.svg" alt="phone icon" />}
+          className="!bg-[radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.10) 100%)]) backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] flex justify-start border-1 border-[rgba(216, 216, 216, 0.00)]"
+        />
 
-          <AppButton
-            content={(t('sign_in_with_google'))}
-            size='lg'
-             fullWidth={true}
-           variant='light'
-        startContent={<img src="/images/Google%20Logo.svg" alt="phone icon" />}
-        className=
-        'gap-3 justify-start px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]'
-        onPress={() => console.log('Sign in with phone number clicked!')}
-          />
+        <AppButton
+          content={(t('sign_in_with_google'))}
+          size='lg'
+          fullWidth={true}
+          variant='light'
+          startContent={<img src="/images/Google%20Logo.svg" alt="phone icon" />}
+          className=
+          'gap-3 justify-start px-4 py-3 bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)] rounded-lg outline outline-1 outline-white/90 backdrop-blur-[20px] hover:bg-[radial-gradient(ellipse_135.8%_231%_at_0.9%_2.98%,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0.1)_100%)]'
+          onPress={() => console.log('Sign in with phone number clicked!')}
+        />
 
-          <div className="flex items-center justify-center mt-6">
-            <p className="text-sm text-gray-600 text-center">
-              Do you have an account?{' '}
-              <span
-                className="text-[#1E3363] font-semibold cursor-pointer hover:underline"
-                onClick={() => push({to:'/sso/register'})}
-              >
-                Sign up now
-              </span>
-            </p>
-          </div>
+        <div className="flex items-center justify-center mt-6">
+          <p className="text-sm text-gray-600 text-center">
+            Do you have an account?{' '}
+            <span
+              className="text-[#1E3363] font-semibold cursor-pointer hover:underline"
+              onClick={() => push({to:'/sso/register'})}
+            >
+              Sign up now
+            </span>
+          </p>
+        </div>
 
       </Form>
     </div>

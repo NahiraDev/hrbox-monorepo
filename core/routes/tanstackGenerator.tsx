@@ -108,16 +108,14 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         if (!context.auth?.isAuthenticated) {
           throw redirect({
             to:'/sso/login',
-            search: { redirect: location.pathname },
           });
         }
 
-        if (context.auth?.needsRoleSelection) {
-          throw redirect({
-            to: '/sso/select-role',
-            search: { redirect: location.pathname },
-          });
-        }
+        // if (context.auth?.needsRoleSelection) {
+        //   throw redirect({
+        //     to: '/sso/select-role',
+        //   });
+        // }
 
         if (requiredPanel && context.auth?.currentPanel !== requiredPanel) {
           throw redirect({ to: '/403' });

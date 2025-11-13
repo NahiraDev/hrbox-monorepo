@@ -39,13 +39,6 @@ export const ssoApiWithEndpoints = ssoApi.injectEndpoints({
       tags: ['Auth'],
     }),
 
-    // Register
-    register: createMutation<any, any>(build, {
-      url: AuthApiEndpoints.registerApi,
-      method: 'POST',
-      tags: ['Auth'],
-    }),
-
     // Register OTP Confirm
     registerOtpConfirm: createMutation<any, any>(build, {
       url: AuthApiEndpoints.registerOtpConfirmApi,

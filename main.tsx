@@ -16,9 +16,7 @@ import { LoadingProvider } from '@hrbox/core/providers/LoadingContext';
 import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 
 import '@hrbox/core/config/theme/index.css';
-import { AppModal } from '@hrbox/uikit/components/AppModal';
 import {initRouter} from "@hrbox/core/routes/router";
-
 // ============================================
 // QueryClient Setup
 // ============================================
@@ -63,7 +61,7 @@ async function bootstrap() {
     // ============================================
 
     const moduleLoaders: Record<string, () => Promise<any>> = {
-      sso: () => import('@nima/Projects/hrbox-monorepo/modules/sso/plugin'),
+      sso: () => import('@hrbox/modules/sso/plugin'),
       hrlink: () => import('@hrbox/modules/hrlink/plugin'),
       // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
       // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),

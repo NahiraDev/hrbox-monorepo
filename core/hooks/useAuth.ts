@@ -18,7 +18,8 @@ export function useAuth() {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state:any) => state.auth.isAuthenticated);
   const user = useAppSelector((state:any) => state.auth.user);
-  const roles = useAppSelector((state:any) => state.auth.roles);
+  // const roles = useAppSelector((state:any) => state.auth.roles);
+  const roles = useAppSelector((state: any) => state.auth.user?.roles || []);
   const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
   const needsRoleSelection = useAppSelector((state:any) => state.auth.needsRoleSelection);
   const currentPanel = useAppSelector((state:any) => state.auth.currentPanel);
@@ -39,8 +40,13 @@ export function useAuth() {
 
     setCurrentDomain: (domain: Domain) => dispatch(setCurrentDomain(domain)),
 
-    loginSuccess: (user: User, token: string, refreshToken: string) =>
-      dispatch(loginSuccess({ user, token, refreshToken })),
+    loginSuccess: (
+  userId: number,
+  displayName: string,
+  Token: string,
+  renewalToken: string,
+  roles?: UserRole[]
+) => dispatch(loginSuccess({ userId, displayName, Token, renewalToken, roles })),
 
     roleSelected: (role: UserRole, accessToken: string) =>
       dispatch(roleSelected({ role, accessToken })),
