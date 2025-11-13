@@ -97,7 +97,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             if (chunkInfo.name === 'chartMaker') return 'modules/chart-maker/index.js';
             if (chunkInfo.name === 'hrlink') return 'modules/hrlink/index.js';
             if (chunkInfo.name === 'basicInfo') return 'modules/basic-info/index.js';
-            if (chunkInfo.name === 'attendance') return 'modules/basic-info/index.js';
+            if (chunkInfo.name === 'attendance') return 'modules/attendance/index.js';
             return '[name].js';
           },
           chunkFileNames: '[name]-[hash].js',
