@@ -14,7 +14,7 @@ const ShiftAllocationModal=()=>{
         <FormProvider  formId='ShiftAllocation-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
           handleSubmitAction(values);
           closeModal('confirm', 'ShiftAllocation');
-        }} initialValues={} validationSchema={formValidationAction}>
+        }} validationSchema={formValidationAction}>
         <ShiftAllocationForm/>
         </FormProvider>
       </AppModal.Body>
