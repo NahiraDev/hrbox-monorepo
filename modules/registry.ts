@@ -37,12 +37,10 @@ class ModuleRegistry {
     return module?.subHeaders ?? [];
   }
 
-// ✅ پیدا کردن SubHeader بر اساس path
   getSubHeaderForPath(pathname: string): { component: any; props: any } | null {
     const allModules = this.getAllModules();
 
     for (const module of allModules) {
-      // چک کردن در routes
       if (module.routes) {
         const route = module.routes.find(r => r.path === pathname);
         if (route?.subHeader) {
@@ -53,7 +51,6 @@ class ModuleRegistry {
         }
       }
 
-      // چک کردن در subHeaders
       if (module.subHeaders) {
         const subHeader = module.subHeaders.find(sh => sh.path === pathname);
         if (subHeader) {
