@@ -12,32 +12,58 @@ import {
   FaceRecognitionAssignment,
   IpAllocationSubheader,
   LocationAllocationSubheader,
-  ShiftAllocationSubheader
+  ShiftAllocationSubheader,
 } from "@hrbox/modules/attendance/subheaders/CreateAllocationSubHeaderWithHook";
 
 // ============================================
 // Pages
 // ============================================
 
-const Dashboard = lazyRouteComponent(() => import("./pages/dashboard/Dashboard"));
-const EntryExit = lazyRouteComponent(() => import("./pages/registration/EntryExit"));
-const AttendanceCalender = lazyRouteComponent(() => import("./pages/attendanceCalender/AttendanceCalenders"));
-const TrafficCalender = lazyRouteComponent(() => import("./pages/attendanceCalender/TrafficCalender"));
-const ExportPage = lazyRouteComponent(() => import("./pages/Export/ExportPage"));
-const ListOfApprovals = lazyRouteComponent(() => import("./pages/ListApprovals/ListApprovals"));
-const ShiftAllocation = lazyRouteComponent(() => import("./pages/Allocation/ShiftAllocation"));
-const FaceAllocation = lazyRouteComponent(() => import("./pages/Allocation/FaceAllocation"));
-const IpAllocation = lazyRouteComponent(() => import("./pages/Allocation/IpAllocation"));
-const LocationAllocation = lazyRouteComponent(() => import("./pages/Allocation/LocationAllocation"));
+const Dashboard = lazyRouteComponent(
+  () => import("./pages/dashboard/Dashboard")
+);
+const EntryExit = lazyRouteComponent(
+  () => import("./pages/registration/EntryExit")
+);
+const AttendanceCalender = lazyRouteComponent(
+  () => import("./pages/attendanceCalender/AttendanceCalenders")
+);
+const TrafficCalender = lazyRouteComponent(
+  () => import("./pages/attendanceCalender/TrafficCalender")
+);
+const ExportPage = lazyRouteComponent(
+  () => import("./pages/Export/ExportPage")
+);
+const ListOfApprovals = lazyRouteComponent(
+  () => import("./pages/ListApprovals/ListApprovals")
+);
+const ShiftAllocation = lazyRouteComponent(
+  () => import("./pages/Allocation/ShiftAllocation")
+);
+const FaceAllocation = lazyRouteComponent(
+  () => import("./pages/Allocation/FaceAllocation")
+);
+const IpAllocation = lazyRouteComponent(
+  () => import("./pages/Allocation/IpAllocation")
+);
+const LocationAllocation = lazyRouteComponent(
+  () => import("./pages/Allocation/LocationAllocation")
+);
 
 // ============================================
 // SubHeaders (Lazy Load)
 // ============================================
 
-const DashboardSubHeader = lazy(() => import("./subheaders/DashboardSubHeader"));
-const EntryExitSubHeader = lazy(() => import("./subheaders/EntryExitSubHeader"));
+const DashboardSubHeader = lazy(
+  () => import("./subheaders/DashboardSubHeader")
+);
+const EntryExitSubHeader = lazy(
+  () => import("./subheaders/EntryExitSubHeader")
+);
 const CalenderSubHeader = lazy(() => import("./subheaders/CalenderSubHeader"));
-const ApprovalsSubHeader = lazy(() => import("./subheaders/ApprovalsSubHeader"));
+const ApprovalsSubHeader = lazy(
+  () => import("./subheaders/ApprovalsSubHeader")
+);
 
 // ============================================
 // Plugin Definition
@@ -62,9 +88,9 @@ export const AttendancePlugin: ModulePlugin = {
       meta: {
         title: "Dashboard",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: DashboardSubHeader
+      subHeader: DashboardSubHeader,
     },
 
     {
@@ -74,88 +100,97 @@ export const AttendancePlugin: ModulePlugin = {
       meta: {
         title: "Entry Exit",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: EntryExitSubHeader
-    }, {
+      subHeader: EntryExitSubHeader,
+    },
+    {
       path: Paths.Attendance.AttendanceCalenders,
       component: AttendanceCalender,
       layout: "base",
       meta: {
         title: "Attendance Calendar",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: CalenderSubHeader
-    }, {
+      subHeader: CalenderSubHeader,
+    },
+    {
       path: Paths.Attendance.ListOfApprovals,
       component: ListOfApprovals,
       layout: "base",
       meta: {
         title: "Approvals",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: ApprovalsSubHeader
-    }, {
+      subHeader: ApprovalsSubHeader,
+    },
+    {
       path: Paths.Attendance.ShiftAllocation,
       component: ShiftAllocation,
       layout: "base",
       meta: {
         title: "ُShift Allocation",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: ShiftAllocationSubheader
-    }, {
+      subHeader: ShiftAllocationSubheader,
+    },
+    {
       path: Paths.Attendance.LocationAllocation,
       component: LocationAllocation,
       layout: "base",
       meta: {
         title: "Location Allocation",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: LocationAllocationSubheader
-    }, {
+      subHeader: LocationAllocationSubheader,
+    },
+    {
       path: Paths.Attendance.IpAllocation,
       component: IpAllocation,
       layout: "base",
       meta: {
         title: "Ip Allocation",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: IpAllocationSubheader
-    }, {
+      subHeader: IpAllocationSubheader,
+    },
+    {
       path: Paths.Attendance.FaceAllocation,
       component: FaceAllocation,
       layout: "base",
       meta: {
         title: "Face Allocation",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
+        requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: FaceRecognitionAssignment
-    }, {
+      subHeader: FaceRecognitionAssignment,
+    },
+    {
       path: Paths.Attendance.Export,
       component: ExportPage,
       layout: "base",
       meta: {
         title: "Export",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
-      }
-    }, {
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+    },
+    {
       path: Paths.Attendance.TrafficCalender,
       component: TrafficCalender,
       layout: "base",
       meta: {
         title: "Traffic Calendar",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION]
-      }
-    }
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: CalenderSubHeader,
+    },
   ],
 
   // ============================================
@@ -166,66 +201,74 @@ export const AttendancePlugin: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/attendance/dashboard",
-      icon: <Profile size="24" />
+      icon: <Profile size="24" />,
     },
     {
       id: "entry-exit",
       label: "Entry Exit",
       path: "/attendance/entry-exit",
-      icon: <Profile size="24" />
+      icon: <Profile size="24" />,
     },
     {
       id: "calender",
       label: "Attendance Calender",
       path: "/attendance/attendance-calender",
-      icon: <Briefcase size="24" />
+      icon: <Briefcase size="24" />,
     },
     {
       id: "export",
       label: "Export",
       path: "/attendance/export",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "traffic",
       label: "Traffic Calender",
       path: "/attendance/traffic-calender",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "shift",
       label: "Shift Allocation",
       path: "/attendance/shift-allocation",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "approvals",
       label: "List Of Approvals",
       path: "/attendance/list-of-approvals",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "export",
       label: "Export",
       path: "/attendance/export",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "face",
       label: "Face Allocation",
       path: "/attendance/face-allocation",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "shift",
       label: "Shift Allocation",
       path: "/attendance/shift-allocation",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "ip",
       label: "Ip Allocation",
       path: "/attendance/ip-allocation",
-      icon: <Building size="24" />
-    }, {
+      icon: <Building size="24" />,
+    },
+    {
       id: "location",
       label: "Location Allocation",
       path: "/attendance/location-allocation",
-      icon: <Building size="24" />
-    }
+      icon: <Building size="24" />,
+    },
   ],
 
   requiredRoles: [RoleSlug.ORGANIZATION],
@@ -241,7 +284,7 @@ export const AttendancePlugin: ModulePlugin = {
 
   onModuleUnload: () => {
     console.log("HRLink module unloaded");
-  }
+  },
 };
 
 export default AttendancePlugin;

@@ -3,7 +3,7 @@ import ChartDashboard from '@hrbox/modules/attendance/pages/dashboard/ChartDashb
 const Dashboard = () => {
   return (
     <>
-      <div className="w-full !h-full">
+      <div className="w-full h-full!">
         <ChartDashboard />
       </div>
     </>

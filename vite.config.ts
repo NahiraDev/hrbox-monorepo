@@ -136,7 +136,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     assetsInclude: ['**/*.html'],
 
     server: {
-      port: import.meta.env.VITE_PORT,
+      port: 443,
       host: true,
       allowedHosts: ['localhost' , 'front.hrbox.me' , 'react.hrbox.me'],
       strictPort: false,
@@ -146,7 +146,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       hmr: {
         overlay: true,
         protocol: 'wss',
-        port: import.meta.env.VITE_PORT,
+        port:443,
       },
 
       proxy: {
@@ -188,7 +188,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
     // Preview server
     preview: {
-      port: import.meta.env.VITE_PORT,
+      port: 443,
       host: '0.0.0.0',
       allowedHosts: ['localhost' , 'front.hrbox.me' , 'react.hrbox.me'],
       strictPort: true,
