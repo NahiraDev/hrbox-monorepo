@@ -71,19 +71,17 @@ async function bootstrap() {
       attendance: () => import('@hrbox/modules/attendance/plugin'),
     };
 
+    // 1. Load and register all modules first
     await Promise.all(
       ENABLED_MODULES.map(async (moduleName: any) => {
         if (moduleLoaders[moduleName]) {
-          try {
-            const { default: ModulePlugin } = await moduleLoaders[moduleName]();
-            moduleRegistry.register(ModulePlugin);
-            console.log(`✅ ${moduleName} module registered`);
-          } catch (error) {
-            console.error(`❌ Failed to load ${moduleName} module:`, error);
-          }
+          const { default: ModulePlugin } = await moduleLoaders[moduleName]();
+          moduleRegistry.register(ModulePlugin);
+          console.log(`${moduleName} module registered`);
         }
       })
     );
+
 
     // ============================================
     // 2️⃣ Prefetch ماژول‌ها
@@ -110,9 +108,18 @@ async function bootstrap() {
       throw new Error('Root element not found');
     }
 
-    const root = createRoot(rootElement);
+    // const root = createRoot(rootElement);
 
-    const router = initRouter()
+    // const router = initRouter()
+
+    await moduleRegistry.runPrefetch();
+
+    // 3. NOW create the router (after routes are registered!)
+    const router = initRouter();   // ← MOVED HERE
+
+    // 4. Render
+    const root = createRoot(document.getElementById('root')!);
+
 
     root.render(
       <StrictMode>
@@ -147,6 +154,7 @@ async function bootstrap() {
               {/* React Query DevTools */}
               {import.meta.env.DEV && <ReactQueryDevtools />}
             </QueryClientProvider>
+
           </PersistGate>
         </ReduxProvider>
       </StrictMode>

@@ -28,6 +28,7 @@ export const SSOPlugin: ModulePlugin = {
         requireAuth: false,
       },
     },
+
     {
       path: '/sso/register',
       component: RegisterPage,
