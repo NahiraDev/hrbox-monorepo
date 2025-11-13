@@ -29,8 +29,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   // SSL Configuration
   let httpsConfig = undefined;
   try {
-    const keyPath = resolve(__dirname, 'certs/cert_hrbox.key');
-    const certPath = resolve(__dirname, 'certs/cert_hrbox.crt');
+    const keyPath = resolve(__dirname, './certs/cert_hrbox.key');
+    const certPath = resolve(__dirname, './certs/cert_hrbox.crt');
 
     if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
       httpsConfig = {

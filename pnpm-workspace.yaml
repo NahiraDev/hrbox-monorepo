@@ -6,3 +6,7 @@ packages:
   - UIKit
   - launcher
   - proxy-server
+
+ignoredBuiltDependencies:
+  - '@heroui/shared-utils'
+  - esbuild
