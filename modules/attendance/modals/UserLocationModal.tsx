@@ -1,17 +1,34 @@
 import { Avatar } from "@heroui/react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
-import { Map as LeafletMap } from "leaflet";
+import { Map as LeafletMap,LatLngExpression,icon   } from "leaflet";
 import { useRef, useState } from "react";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 import { AppButton, AppModal } from "@hrbox/uikit/components";
 import ActionsModal from "@hrbox/modules/attendance/modals/ActionsModal";
-const LocationMarker = ({ position, setPosition }) => {
+import { MaskRight } from "iconsax-reactjs";
+const LocationMarker = ({ 
+  position, 
+  setPosition 
+}: { 
+  position: LatLngExpression | null; 
+  setPosition: (pos: LatLngExpression) => void;
+}) => {
   useMapEvents({
     click(e) {
       setPosition([e.latlng.lat, e.latlng.lng]);
     },
   });
+
+  const MarkerIcon = icon({
+  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
 
   return position === null ? null : (
     <Marker icon={MarkerIcon} position={position} />
@@ -19,7 +36,7 @@ const LocationMarker = ({ position, setPosition }) => {
 };
 
 const UserLocationModal = () => {
-  const [position, setPosition] = useState([51.505, -0.09]);
+  const [position, setPosition] = useState<LatLngExpression>([51.505, -0.09]);
   const mapRef = useRef<LeafletMap | null>(null);
   const { closeModal, openModal } = useModalContext();
 

@@ -144,7 +144,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       https: httpsConfig,
       hmr: {
         overlay: true,
-        host: 'front.hrbox.me',
         protocol: 'wss',
         port: 443,
       },
