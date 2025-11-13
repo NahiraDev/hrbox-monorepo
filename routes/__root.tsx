@@ -4,9 +4,9 @@ import { Suspense, useEffect } from 'react';
 import { useAppDispatch } from '@hrbox/core/redux/hooks';
 import { initTheme } from '@hrbox/core/redux/slices/themeSlice';
 import { initLanguage } from '@hrbox/core/redux/slices/languageSlice';
-import { initAuth } from '@hrbox/core/redux/slices/authSlice';
 import { useDomainInit } from "@hrbox/core/hooks/useDomainInit";
 import { usePageTitle } from "@hrbox/core/hooks/usePageTitle";
+import {useAuth} from "@hrbox/core/hooks";
 
 export interface RootRouteContext {
   auth: {
@@ -20,9 +20,9 @@ export interface RootRouteContext {
 
 function RootComponent() {
   const dispatch = useAppDispatch();
+  const { init: initAuth } = useAuth();
 
   useEffect(() => {
-
     dispatch(initTheme());
 
     dispatch(initLanguage());

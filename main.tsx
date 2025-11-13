@@ -63,7 +63,7 @@ async function bootstrap() {
     // ============================================
 
     const moduleLoaders: Record<string, () => Promise<any>> = {
-      sso: () => import('@hrbox/modules/sso/plugin'),
+      sso: () => import('@nima/Projects/hrbox-monorepo/modules/sso/plugin'),
       hrlink: () => import('@hrbox/modules/hrlink/plugin'),
       // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
       // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
