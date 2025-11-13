@@ -8,7 +8,7 @@ const AddPermisionTime=()=>{
   return(
     <>
       <AppModal.Body>
-        <FormProvider formId='AddPermision-form' enableCache clearCacheOnSubmit onSubmitAsync={} initialValues={}>
+        <FormProvider formId='AddPermision-form' enableCache clearCacheOnSubmit initialValues={}>
           <AddPermisionForm/>
         </FormProvider>
       </AppModal.Body>

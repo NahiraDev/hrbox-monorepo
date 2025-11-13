@@ -7,6 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import * as fs from 'node:fs';
+import path from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -80,7 +81,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'main.tsx'),
-          sso: resolve(__dirname, './modules/sso/plugin.tsx'),
+          input: path.resolve(__dirname, './modules/sso/plugin.ts'),
           // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
           hrlink: resolve(__dirname, './modules/hrlink/plugin.tsx'),
