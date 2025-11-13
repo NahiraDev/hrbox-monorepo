@@ -1,10 +1,10 @@
-import { AppTable } from '@UIKit/components';
-import { Allocatio } from '@module/attendance/app/mock';
+import { AppTable } from '@hrbox/uikit/components';
+import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
-import { useModalContext } from 'core/context';
-import FaceAllocationModalEdit from '@module/attendance/features/modals/FaceAllocationModalEdit';
-import FaceAllocationShow from '@module/attendance/features/modals/FaceAllocationShow';
+import { useModalContext } from '@hrbox/core/providers';
+import FaceAllocationModalEdit from '@hrbox/modules/attendance/modals/FaceAllocationModalEdit';
+import FaceAllocationShow from '@hrbox/modules/attendance/modals/FaceAllocationShow';
 const FaceAllocation=()=>{
   const [data,setData]=useState(Allocatio);
   const {openModal} = useModalContext();
