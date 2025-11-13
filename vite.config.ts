@@ -7,6 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { loadEnv } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import * as fs from 'node:fs';
+import path from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -28,8 +29,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   // SSL Configuration
   let httpsConfig = undefined;
   try {
-    const keyPath = resolve(__dirname, 'certs/cert_hrbox.key');
-    const certPath = resolve(__dirname, 'certs/cert_hrbox.crt');
+    const keyPath = resolve(__dirname, './certs/cert_hrbox.key');
+    const certPath = resolve(__dirname, './certs/cert_hrbox.crt');
 
     if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
       httpsConfig = {
@@ -80,7 +81,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'main.tsx'),
-          sso: resolve(__dirname, './modules/sso/plugin.tsx'),
+          input: path.resolve(__dirname, './modules/sso/plugin.ts'),
           // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
           hrlink: resolve(__dirname, './modules/hrlink/plugin.tsx'),
@@ -96,7 +97,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             if (chunkInfo.name === 'chartMaker') return 'modules/chart-maker/index.js';
             if (chunkInfo.name === 'hrlink') return 'modules/hrlink/index.js';
             if (chunkInfo.name === 'basicInfo') return 'modules/basic-info/index.js';
-            if (chunkInfo.name === 'attendance') return 'modules/basic-info/index.js';
+            if (chunkInfo.name === 'attendance') return 'modules/attendance/index.js';
             return '[name].js';
           },
           chunkFileNames: '[name]-[hash].js',
@@ -144,9 +145,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       https: httpsConfig,
       hmr: {
         overlay: true,
-        host: 'front.hrbox.me',
         protocol: 'wss',
-        port: 443,
+        port:443,
       },
 
       proxy: {

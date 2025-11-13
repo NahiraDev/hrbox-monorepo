@@ -1,7 +1,7 @@
 import { Add, Calendar, Trash } from 'iconsax-reactjs';
-import { AppButton, AppTable } from '@hrbox/core/components';
-import { PersonalList } from '@module/attendance/app/mock';
-import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
+import { AppButton, AppTable } from '@hrbox/uikit/components';
+import { PersonalList } from '@hrbox/modules/attendance/app/mock';
+import Comprehensivereport from '@hrbox/modules/attendance/pages/attendanceCalender/Comprehensivereport';
 import { useState } from 'react';
 
 const TrafficCalender=()=>{

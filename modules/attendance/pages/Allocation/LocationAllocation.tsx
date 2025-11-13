@@ -1,11 +1,10 @@
-import { AppTable } from '@UIKit/components';
-import { Allocatio } from '@module/attendance/app/mock';
+import { AppTable } from '@hrbox/uikit/components';
+import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
 import { useModalContext } from 'core/context';
-import LocationAllocationModalEdit from '@module/attendance/features/modals/LocationAllocationModalEdit';
-import ShiftAllocationShow from '@module/attendance/features/modals/ShiftAllocationShow';
-import LocationAllocationShow from '@module/attendance/features/modals/LocationAllocationShow';
+import LocationAllocationModalEdit from '@hrbox/modules/attendance/modals/LocationAllocationModalEdit';
+import LocationAllocationShow from '@hrbox/modules/attendance/modals/LocationAllocationShow';
 
 const LocationAllocation=()=>{
   const [data,setData]=useState(Allocatio);

@@ -1,10 +1,10 @@
-import { AppTable } from '@UIKit/components';
-import { Allocatio } from '@module/attendance/app/mock';
-import ShiftAllocationModalEdit from '@module/attendance/features/modals/ShiftAllocationModalEdit';
+import { AppTable } from '@hrbox/uikit/components';
+import { Allocatio } from '@hrbox/modules/attendance/app/mock';
+import ShiftAllocationModalEdit from '@hrbox/modules/attendance/modals/ShiftAllocationModalEdit';
 import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
 import { useModalContext } from 'core/context';
-import ShiftAllocationShow from '@module/attendance/features/modals/ShiftAllocationShow';
+import ShiftAllocationShow from '@hrbox/modules/attendance/modals/ShiftAllocationShow';
 
 const ShiftAllocation=()=>{
   const [data,setData]=useState(Allocatio);

@@ -2,7 +2,7 @@ import { AppTable } from '@hrbox/uikit/components';
 import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { Hierarchy3 } from 'iconsax-reactjs';
 import { useState } from 'react';
-import { useModalContext } from '@hrbox/core/providers';
+import { useModalContext } from '@hrbox/core';
 import FaceAllocationModalEdit from '@hrbox/modules/attendance/modals/FaceAllocationModalEdit';
 import FaceAllocationShow from '@hrbox/modules/attendance/modals/FaceAllocationShow';
 const FaceAllocation=()=>{

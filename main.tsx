@@ -89,33 +89,21 @@ async function bootstrap() {
     await moduleRegistry.runPrefetch();
     console.log('✅ Modules prefetched');
 
-    // ============================================
-    // 3️⃣ ایجاد Redux Store
-    // ============================================
-
     console.log('⏳ Creating Redux store...');
     const { store, persistor } = createStoreWithModules(ENABLED_MODULES);
     console.log('✅ Redux store created');
-
-    // ============================================
-    // 4️⃣ رندر اپلیکیشن
-    // ============================================
 
     const rootElement = document.getElementById('root');
     if (!rootElement) {
       throw new Error('Root element not found');
     }
 
-    // const root = createRoot(rootElement);
 
-    // const router = initRouter()
 
     await moduleRegistry.runPrefetch();
 
-    // 3. NOW create the router (after routes are registered!)
     const router = initRouter();   // ← MOVED HERE
 
-    // 4. Render
     const root = createRoot(document.getElementById('root')!);
 
 
@@ -236,10 +224,6 @@ async function bootstrap() {
   }
 }
 
-// ============================================
-// Loading Screen Component
-// ============================================
-
 function LoadingScreen() {
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700">
@@ -252,15 +236,7 @@ function LoadingScreen() {
   );
 }
 
-// ============================================
-// شروع برنامه
-// ============================================
-
 bootstrap();
-
-// ============================================
-// Hot Module Replacement
-// ============================================
 
 if (import.meta.hot) {
   import.meta.hot.accept();

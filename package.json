@@ -22,7 +22,7 @@
     "clean": "rm -rf ./node_modules ./dist ./pnpm-lock.yaml ./.turbo ./.idea",
     "build": "turbo run build",
     "dev": "turbo run dev && npm run i18n:sync",
-    "dev:main": "vite --config vite.config.ts --port 443",
+    "dev:main": "vite --config vite.config.ts --port 4173",
     "dev:modules": "pnpm turbo run dev --parallel --filter=\"@module/*\"",
     "dev:all": "turbo run dev:main dev --parallel",
     "dev:hrlink": "pnpm --filter @module/hrlink dev",

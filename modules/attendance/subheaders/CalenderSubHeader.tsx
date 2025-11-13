@@ -7,14 +7,14 @@ import {
   People,
   Profile,
 } from 'iconsax-reactjs';
-import AppDropDown from '@UIKit/components/AppDropDown';
-import { useModalContext } from '@core/providers/ModalProvider';
-import AddPermisionTime from '@module/attendance/features/modals/AddPermisionTime';
+import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import AddPermisionTime from '@hrbox/modules/attendance/modals/AddPermisionTime';
 
-import { AppButton } from '@UIKit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Avatar } from '@heroui/react';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 
 const CalenderSubHeader = () => {
   const years = [
@@ -29,7 +29,7 @@ const CalenderSubHeader = () => {
   ];
   const { openModal } = useModalContext();
   const {t}=useTranslation();
-  const navigate=useNavigate();
+  const navigate=useNavigate<any>();
   const location = useLocation();
   const isTrafficCalender = location.pathname === '/attendance/traffic-calender';
   return (
@@ -37,35 +37,30 @@ const CalenderSubHeader = () => {
       <div className="w-full flex flex-row justify-between">
         <div className="flex flex-row justify-between">
           <AppButton
-            props={{
-              color:isTrafficCalender?"white":"primary",
-              size: 'md',
-              radius: 'sm',
-              startContent: (
+              color={isTrafficCalender?"white":"primary"}
+              size= 'md'
+              radius= 'sm'
+              startContent= {
                 <span>
                   <Profile size={18} />
                 </span>
-              ),
-              className:isTrafficCalender? "text-black":"text-white",
-              onClick:()=>navigate('/attendance/attendance-calender'),
-              content: t('Personal_attendance_calendar'),
-            }}
+              }
+              className={isTrafficCalender? "text-black":"text-white"}
+              onPress={()=>navigate({to:'/attendance/attendance-calender'})}
+              content= {t('Personal_attendance_calendar')}
           />
           <AppButton
-            props={{
-              color: isTrafficCalender?"primary":"white",
-              size: 'md',
-              radius: 'sm',
-              className: isTrafficCalender?'shadow-none text-white':"shadow-none text-black",
-              startContent: (
+              color= {isTrafficCalender?"primary":"white"}
+              size= 'md'
+              radius= 'sm'
+              className= {isTrafficCalender?'shadow-none text-white':"shadow-none text-black"}
+              startContent= {(
                 <span>
                   <People size={18} />
                 </span>
-              ),
-              // onPress: () => openModal('confirm','PersonnelReport',<PersonnelReportModal/>,undefined,"2xl","Add Permision Time", <Hierarchy3 color="white"/>),
-              onClick:()=>navigate('/attendance/traffic-calender'),
-              content: 'Group attendance calendar',
-            }}
+              )}
+              onPress={()=>navigate({to: "/attendance/traffic-calender"})}
+              content= 'Group attendance calendar'
           />
         </div>
         <div className="flex flex-row justify-between gap-2">
@@ -88,20 +83,18 @@ const CalenderSubHeader = () => {
             }}
           />
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              variant: 'solid',
-              radius: 'sm',
-              className: 'shadow-none border-1 border-solid border-primary',
-              startContent: (
+              color= 'white'
+              size= 'md'
+              variant= 'solid'
+              radius= 'sm'
+              className= 'shadow-none border-1 border-solid border-primary'
+              startContent= {(
                 <span>
                   <ExportSquare size={20} />
                 </span>
-              ),
-              onPress: () => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"3xl","Add Permision Time",<Hierarchy3 color="white"/>),
-              content: 'Export ',
-            }}
+              )}
+              /* onPress= {() => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"3xl","Add Permision Time",<Hierarchy3 color="white"/>)} */
+              content= 'Export '
           />
         </div>
       </div>
@@ -109,12 +102,12 @@ const CalenderSubHeader = () => {
         (
       <div className="flex flex-row items-center justify-between mt-3">
         <div className="flex flex-row items-center gap-5">
-          <Avatar className="w-[40px] h-[40px]" radius="md" src="/images/profile.png"/>
+          <Avatar className="w-10 h-10" radius="md" src="/images/profile.png"/>
           <div className="flex flex-col gap-1">
-            <p className='!text-sm font-open-sans'>Zahra Pakniyat</p>
+            <p className='text-sm! font-open-sans'>Zahra Pakniyat</p>
             <div className="flex justify-start items-center">
               <div className='bg-[#DCF0F940] rounded-lg border border-primary-50 px-1 '>
-              <p className="font-open-sans !text-[10px] !text-center !text-primary-400 ">UiUx Designer</p>
+              <p className="font-open-sans text-[10px]! text-center! text-primary-400! ">UiUx Designer</p>
               </div>
               </div>
           </div>

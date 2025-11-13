@@ -1,3 +1,6 @@
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import { AppModal } from "./AppModal";
+
 interface FormModalProps extends AppModalProps {
   formId?: string;
   submitLabel?: string;

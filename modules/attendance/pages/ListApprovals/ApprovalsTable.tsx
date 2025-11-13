@@ -1,5 +1,5 @@
-import { AppTable } from '@root/core/components';
-import { ListApprovals } from '@module/attendance/app/mock';
+import { AppTable } from '@hrbox/uikit/components';
+import { ListApprovals } from '@hrbox/modules/attendance/app/mock';
 
 const ApprovalsTable=()=>{
   return(

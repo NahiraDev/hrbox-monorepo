@@ -1,5 +1,5 @@
-import PersonalCalenderList from '@module/attendance/features/attendanceCalender/PersonalCalenderList';
-import Comprehensivereport from '@module/attendance/features/attendanceCalender/Comprehensivereport';
+import PersonalCalenderList from '@hrbox/modules/attendance/pages/attendanceCalender/PersonalCalenderList';
+import Comprehensivereport from '@hrbox/modules/attendance/pages/attendanceCalender/Comprehensivereport';
 import { useState } from 'react';
 
 const AttendanceCalenders = () => {

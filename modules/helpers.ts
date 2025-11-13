@@ -2,44 +2,27 @@ import { ModuleRoute } from "./types";
 import { moduleRegistry } from "./registry";
 import { useAuth } from "@hrbox/core/hooks/useAuth";
 
-/**
- * ============================================
- * 1️⃣ دریافت routes محافظ شده
- * ============================================
- */
 export function getProtectedRoutes(): ModuleRoute[] {
   return moduleRegistry
     .getAllRoutes()
     .filter((route) => route.meta?.requireAuth !== false);
 }
 
-/**
- * ============================================
- * 2️⃣ دریافت routes عمومی
- * ============================================
- */
 export function getPublicRoutes(): ModuleRoute[] {
   return moduleRegistry
     .getAllRoutes()
     .filter((route) => route.meta?.requireAuth === false);
 }
 
-/**
- * ============================================
- * 3️⃣ فیلتر routes بر اساس نقش
- * ============================================
- */
 export function filterRoutesByRole(
   routes: ModuleRoute[],
   userRoles: string[]
 ): ModuleRoute[] {
   return routes.filter((route) => {
-    // اگر route نیاز به نقش خاصی ندارد، در دسترس است
     if (!route.meta?.requiredRoles || route.meta.requiredRoles.length === 0) {
       return true;
     }
 
-    // اگر یکی از نقش‌های کاربر مطابقت داشت، دسترس دارد
     return route.meta.requiredRoles.some((role) =>
       userRoles.includes(role)
     );
@@ -56,12 +39,10 @@ export function filterRoutesByPermission(
   userPermissions: string[]
 ): ModuleRoute[] {
   return routes.filter((route) => {
-    // اگر route نیاز به مجوز خاصی ندارد
     if (!route.meta?.requiredPermissions || route.meta.requiredPermissions.length === 0) {
       return true;
     }
 
-    // اگر یکی از مجوزهای کاربر مطابقت داشت
     return route.meta.requiredPermissions.some((perm) =>
       userPermissions.includes(perm)
     );

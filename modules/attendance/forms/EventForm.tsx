@@ -1,7 +1,7 @@
-import { AppInput } from '@UIKit/components';
-import { useFormContext } from '@hrbox/core';
+import { useFormContext } from '@hrbox/core/providers';
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
+import { FormField } from '@hrbox/uikit/components/FormField';
 
 export const initialValuesEvent = {
   title: null,
@@ -22,17 +22,7 @@ export const EventForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <AppInput
-        props={{
-          type: 'text',
-          label: 'Please enter the time. ',
-          name: 'title',
-          value: values.title,
-          error: touched.title && errors.title,
-          onChange: handleChange,
-          onBlur: handleBlur,
-        }}
-      />
+      <FormField name='title' label='Please enter the time.' type='text'  />
     </Form>
   );
 };
