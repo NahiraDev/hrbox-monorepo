@@ -21,23 +21,23 @@ export function BaseLayout({ children }: BaseLayoutProps) {
 
   return (
     <div className="flex h-screen w-full bg-panel-background overflow-hidden">
-      <aside className="flex-shrink-0 m-5">
+      <aside className="shrink-0 m-5">
         <AppSidebar />
       </aside>
 
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Header */}
-        <header className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+        <header className="shrink-0 border-b border-neutral-200 dark:border-neutral-700">
           <AppHeader />
         </header>
 
         {SubHeader && (
           <Suspense
             fallback={
-              <div className="h-16 flex-shrink-0 bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
+              <div className="h-16 shrink-0 bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
             }
           >
-            <div className="flex-shrink-0 border-b border-neutral-200 dark:border-neutral-700">
+            <div className="shrink-0  dark:border-neutral-700">
               <SubHeader {...subHeaderProps} />
             </div>
           </Suspense>
