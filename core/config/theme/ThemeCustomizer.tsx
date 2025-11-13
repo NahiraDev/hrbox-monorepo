@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTheme } from '@Projects/hrbox-monorepo/core/hooks/useTheme';
+import { useTheme } from '@hrbox/core/hooks/useTheme';
 
 export default function ThemeCustomizer() {
   const [isOpen, setIsOpen] = useState(false);

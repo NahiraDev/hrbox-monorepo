@@ -5,7 +5,7 @@
     "baseUrl": ".",
     "rootDir": "../../",
     "outDir": "../../dist/modules/sso",
-    "declarationDir": "../../dist/types"
+    "declarationDir": "../../dist/types",
   },
   "include": ["." , "./*"]
 }

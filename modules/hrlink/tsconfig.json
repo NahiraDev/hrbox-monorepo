@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "rootDir": "../../",
     "outDir": "../../dist/modules/hrlink",
-    "declarationDir": "../../dist/types"
-  },
+    "declarationDir": "../../dist/types",
+    "types": ["node"]
+    },
   "include": ["." , "./*"]
 }
