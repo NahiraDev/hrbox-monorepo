@@ -45,7 +45,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
           {/* Form Section */}
           <div className='relative flex items-end justify-center gap-6 flex-1'>
             {/* Controls (Desktop) */}
-            <div className="hidden lg:flex flex-col gap-4">
+            <div className="lg:flex flex-col gap-4">
               <ThemeToggle />
               <LanguageToggle />
             </div>
