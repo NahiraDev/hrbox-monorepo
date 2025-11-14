@@ -1,5 +1,5 @@
-import type { PaginatedResponse } from '@hrbox/core/api/types';
 import { Pagination as HeroPagination } from '@heroui/react';
+import {PaginatedResponse} from "@hrbox/core/apis/types";
 
 interface PaginationProps {
   meta: PaginatedResponse<any>['meta'];

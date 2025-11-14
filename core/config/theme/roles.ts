@@ -39,7 +39,7 @@ export const ROLE_CONFIGS: Record<RoleSlug, RoleConfig> = {
     panel: Panel.HRBOX,
     icon: '🏢',
     defaultRoute: '/hrbox/dashboard',
-    color: '#6366F1',
+    color: '#0A9AD7',
     description: 'دسترسی به پنل مدیریت سازمانی',
   },
   [RoleSlug.SUPER_ADMIN]: {
@@ -55,14 +55,12 @@ export const ROLE_CONFIGS: Record<RoleSlug, RoleConfig> = {
 };
 
 export function getRoleConfig(slug: RoleSlug): RoleConfig {
-  return ROLE_CONFIGS[slug];
-}
+  const config = ROLE_CONFIGS[slug];
 
-export function getRoleByPanel(panel: Panel): RoleSlug | null {
-  for (const [slug, config] of Object.entries(ROLE_CONFIGS)) {
-    if (config.panel === panel) {
-      return slug as RoleSlug;
-    }
+  if (!config) {
+    console.warn(`⚠️ Role config not found for: ${slug}, using default`);
+    return ROLE_CONFIGS[RoleSlug.JOB_SEEKER];
   }
-  return null;
+
+  return config;
 }

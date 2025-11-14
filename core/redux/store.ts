@@ -3,11 +3,12 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { moduleRegistry } from '@hrbox/modules/registry';
-
+import { ssoApiWithEndpoints } from '@hrbox/modules/sso/apis/Auth';
 import authReducer from '@hrbox/core/redux/slices/authSlice';
 import themeReducer from '@hrbox/core/redux/slices/themeSlice';
 import languageReducer from '@hrbox/core/redux/slices/languageSlice';
 import formCacheReducer from '@hrbox/core/redux/slices/formCacheSlice';
+import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
 
 const persistConfig = {
   key: 'hrbox-v3',
@@ -24,6 +25,8 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
+    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
+    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
         key,
@@ -45,6 +48,8 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
         moduleApis
           .filter((api) => api.middleware)
           .map((api) => api.middleware)
+          .concat(ssoApiWithEndpoints.middleware)
+          .concat(settingApiWithEndpoints.middleware)
       ),
     devTools: import.meta.env.DEV,
   });

@@ -4,6 +4,7 @@
     "composite": true,
     "baseUrl": ".",
     "rootDir": "../",
+ // Add this
   },
-  "include": ["." , "./*"]
+  "include": ["." , "./*", "../../UIKit/components/**/*",]
 }

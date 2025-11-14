@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Profile, Briefcase, Building, PasswordCheck } from "iconsax-reactjs";
+import { Profile, Briefcase, Building } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 import {

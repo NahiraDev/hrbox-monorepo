@@ -29,6 +29,7 @@ interface AppButtonProps {
   radius?: keyof typeof radiusClasses;
   disableRipple?: boolean;
   size?: keyof typeof sizeClasses;
+  type?:any;
   variant?: string;
   color?: string;
   className?:string;
@@ -45,6 +46,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
       size = 'md',
       radius = 'md',
       variant = 'solid',
+      type = 'button',
       color,
       className,
       isLoading = false,
@@ -67,7 +69,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
         )}
         color={color as any}
         variant={variant as any}
-        type="submit"
+        type={type}
         radius={radius as any}
         size={size as any}
         isLoading={isLoading}
@@ -81,3 +83,5 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
 );
 
 AppButton.displayName = 'AppButton';
+
+

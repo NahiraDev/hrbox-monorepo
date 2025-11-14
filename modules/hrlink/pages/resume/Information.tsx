@@ -12,16 +12,15 @@ import {
   ProfileTick,
   Shield,
 } from 'iconsax-reactjs';
-import moment from 'moment-jalaali';
 import { Card } from '@heroui/react';
-import { GeneralInformation } from "@hrbox-monorepo/modules/hrlink/components/GeneralInformation";
-import { UserLocation } from "@hrbox-monorepo/modules/hrlink/components/UserLocation";
-import { GeneralInformationModal } from "@hrbox-monorepo/modules/hrlink/modals/GeneralInformationModal";
+import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
+import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
+import { GeneralInformationModal } from "@hrbox/modules/hrlink/modals/GeneralInformationModal";
+import {useFetchProfileQuery} from "@hrbox/modules/hrlink/apis/Setting";
 
 
 const ResumeInfo = () => {
-  const profileData = {};
-
+  const { data: profileData } = useFetchProfileQuery();
   return (
     <div className="grid grid-cols-4 gap-6 h-full">
       <div className="col-span-3">
@@ -65,7 +64,7 @@ const ResumeInfo = () => {
                   <span className="text-secondary-900 text-base font-light leading-normal">Date Of Birth</span>
                 </div>
                 <span className="text-secondary-900 text-base font-semibold leading-normal">
-                  {moment(profileData?.profile.birthDate).format('YYYY/MM/DD')}
+                  {/*{moment(profileData?.profile.birthDate).format('YYYY/MM/DD')}*/}
                 </span>
               </div>
               <div className="px-4 py-3 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
@@ -168,10 +167,10 @@ const ResumeInfo = () => {
         </div>
       </div>
       <div className="col-span-1 flex flex-col gap-3">
-        <GeneralInformation />
-        <UserLocation />
+        <GeneralInformation/>
+        <UserLocation/>
       </div>
-      <GeneralInformationModal />
+      {/*<GeneralInformationModal />*/}
     </div>
   );
 };

@@ -7,8 +7,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { I18nextProvider } from 'react-i18next';
 import { Toaster } from 'sonner';
 import { HeroUIProvider } from '@heroui/react';
-import {RouterContextProvider} from '@hrbox/core/routes/router';
-import { RouterProvider } from '@tanstack/react-router'
+import { RouterContextProvider } from '@hrbox/core/routes/router';
+import { RouterProvider } from '@tanstack/react-router';
 import { moduleRegistry } from '@hrbox/modules/registry';
 import { createStoreWithModules } from '@hrbox/core/redux/store';
 import i18n from '@hrbox/core/translate';
@@ -16,7 +16,9 @@ import { LoadingProvider } from '@hrbox/core/providers/LoadingContext';
 import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 
 import '@hrbox/core/config/theme/index.css';
-import {initRouter} from "@hrbox/core/routes/router";
+import { initRouter } from '@hrbox/core/routes/router';
+
+import { GlobalModalRenderer } from '@hrbox/uikit/components/GlobalModalRenderer';
 
 // ============================================
 // QueryClient Setup
@@ -37,17 +39,17 @@ const queryClient = new QueryClient({
 // ============================================
 
 const ENABLED_MODULES =
-  (import.meta.env.VITE_ENABLED_MODULES || '')
-    .split(',')
-    .filter(Boolean) || [
-    'sso',
-    'hrlink',
-    'hrbox',
-    'process-maker',
-    'chart-maker',
-    'basic-info',
-    'attendance',
-  ];
+    (import.meta.env.VITE_ENABLED_MODULES || '')
+        .split(',')
+        .filter(Boolean) || [
+      'sso',
+      'hrlink',
+      'hrbox',
+      'process-maker',
+      'chart-maker',
+      'basic-info',
+      'attendance',
+    ];
 
 // ============================================
 // Bootstrap Function
@@ -66,21 +68,20 @@ async function bootstrap() {
       hrlink: () => import('@hrbox/modules/hrlink/plugin'),
       // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
       // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
-      // 'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
+      'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
       attendance: () => import('@hrbox/modules/attendance/plugin'),
     };
 
     // 1. Load and register all modules first
     await Promise.all(
-      ENABLED_MODULES.map(async (moduleName: any) => {
-        if (moduleLoaders[moduleName]) {
-          const { default: ModulePlugin } = await moduleLoaders[moduleName]();
-          moduleRegistry.register(ModulePlugin);
-          console.log(`${moduleName} module registered`);
-        }
-      })
+        ENABLED_MODULES.map(async (moduleName: any) => {
+          if (moduleLoaders[moduleName]) {
+            const { default: ModulePlugin } = await moduleLoaders[moduleName]();
+            moduleRegistry.register(ModulePlugin);
+            console.log(`✅ ${moduleName} module registered`);
+          }
+        })
     );
-
 
     // ============================================
     // 2️⃣ Prefetch ماژول‌ها
@@ -99,52 +100,46 @@ async function bootstrap() {
       throw new Error('Root element not found');
     }
 
+    const router = initRouter();
 
-
-    await moduleRegistry.runPrefetch();
-
-    const router = initRouter();   // ← MOVED HERE
-
-    const root = createRoot(document.getElementById('root')!);
-
+    const root = createRoot(rootElement);
 
     root.render(
-      <StrictMode>
-        <ReduxProvider store={store}>
-          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-            <QueryClientProvider client={queryClient}>
-              <I18nextProvider i18n={i18n}>
-                <HeroUIProvider>
-                  <LoadingProvider>
-                    <ModalProvider>
-                      {/* Router Context Provider */}
-                      <RouterContextProvider>
-                        <RouterProvider router={router} />
-                      </RouterContextProvider>
+        <StrictMode>
+          <ReduxProvider store={store}>
+            <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+              <QueryClientProvider client={queryClient}>
+                <I18nextProvider i18n={i18n}>
+                  <HeroUIProvider>
+                    <LoadingProvider>
+                      <ModalProvider>
+                        {/* Router Context Provider */}
+                        <RouterContextProvider>
+                          <RouterProvider router={router} />
+                        </RouterContextProvider>
 
-                      {/* Global Modal */}
-                      {/*<AppModal />*/}
+                        {/* ✅ Global Modal Renderer - به جای <AppModal /> */}
+                        <GlobalModalRenderer />
 
-                      {/* Toast Notifications */}
-                      <Toaster
-                        position="top-right"
-                        richColors
-                        closeButton
-                        duration={3000}
-                        theme="system"
-                      />
-                    </ModalProvider>
-                  </LoadingProvider>
-                </HeroUIProvider>
-              </I18nextProvider>
+                        {/* Toast Notifications */}
+                        <Toaster
+                            position="top-right"
+                            richColors
+                            closeButton
+                            duration={3000}
+                            theme="system"
+                        />
+                      </ModalProvider>
+                    </LoadingProvider>
+                  </HeroUIProvider>
+                </I18nextProvider>
 
-              {/* React Query DevTools */}
-              {import.meta.env.DEV && <ReactQueryDevtools />}
-            </QueryClientProvider>
-
-          </PersistGate>
-        </ReduxProvider>
-      </StrictMode>
+                {/* React Query DevTools */}
+                {import.meta.env.DEV && <ReactQueryDevtools />}
+              </QueryClientProvider>
+            </PersistGate>
+          </ReduxProvider>
+        </StrictMode>
     );
 
     console.log('✅ Application bootstrapped successfully!');
@@ -195,8 +190,8 @@ async function bootstrap() {
             🔄 تلاش مجدد
           </button>
           ${
-      import.meta.env.DEV
-        ? `
+        import.meta.env.DEV
+            ? `
             <details style="
               margin-top: 2rem;
               text-align: left;
@@ -217,7 +212,7 @@ async function bootstrap() {
               ">${error}</pre>
             </details>
           `
-        : ''
+            : ''
     }
         </div>
       </div>
@@ -227,13 +222,13 @@ async function bootstrap() {
 
 function LoadingScreen() {
   return (
-    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700">
-      <div className="text-center text-white">
-        <div className="inline-block animate-spin h-16 w-16 border-4 border-white border-t-transparent rounded-full mb-6" />
-        <h2 className="text-2xl font-bold mb-2">HRBox</h2>
-        <p className="text-sm opacity-90">در حال بارگذاری...</p>
+      <div className="flex h-screen items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700">
+        <div className="text-center text-white">
+          <div className="inline-block animate-spin h-16 w-16 border-4 border-white border-t-transparent rounded-full mb-6" />
+          <h2 className="text-2xl font-bold mb-2">HRBox</h2>
+          <p className="text-sm opacity-90">در حال بارگذاری...</p>
+        </div>
       </div>
-    </div>
   );
 }
 

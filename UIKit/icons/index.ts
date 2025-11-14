@@ -16,7 +16,6 @@ export * from "@hrbox/uikit/icons/Google";
 export * from "@hrbox/uikit/icons/Happy";
 export * from "@hrbox/uikit/icons/HourGlass";
 export * from "@hrbox/uikit/icons/InstagramIcon";
-export * from "@hrbox/uikit/icons/JobOffersIcon";
 export * from "@hrbox/uikit/icons/JobOpportunitiesIcon";
 export * from "@hrbox/uikit/icons/LinearChart";
 export * from "@hrbox/uikit/icons/LinearGuard";

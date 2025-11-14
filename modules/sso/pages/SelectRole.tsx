@@ -1,41 +1,149 @@
-import { User } from "iconsax-reactjs";
+import { useAuth } from '@hrbox/core/hooks/useAuth';
+import { useNavigation } from '@hrbox/core/hooks/useNavigation';
+import { Paths } from '../../paths';
+import { Button } from '@heroui/react';
+import { RoleSlug } from '@hrbox/core/config/theme';
+import { useEffect } from 'react';
 
 const SelectRole = () => {
+    const { user, roles, roleSelected, selectedRole, needsRoleSelection, logout } = useAuth();
+    const { push } = useNavigation();
 
-  return (
-    <div className="flex flex-col gap-12">
-      <p className="text-secondary-1000 text-2xl font-normal text-justify">
-        Please select your desired user panel from the list below to access relevant information and dedicated
-        functionalities.
-      </p>
-      <div className="flex gap-3">
-        <div className="bg-white p-6 rounded-5 flex flex-col gap-3">
-          <div className="bg-tertiar-400 w-[140px] h-[140px] rounded-[18px] flex justify-center items-center">
-            <User />
-          </div>
-          <div className="flex flex-col gap-3">
-            <span className="text-secondary-1000 text-sm font-semibold">Jahan Hatami</span>
-            <span className="text-tertiar-700 text-sm font-semibold">Dev Chapter Leader</span>
-            <div className="px-[10px] py-0.5 border-1 border-tertiar-0 rounded-md w-fit bg-[#fedee666]">
-              <span className="text-tertiar-700 text-sm font-semibold">Hr-Link</span>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-5 flex flex-col gap-3">
-          <div className="w-[140px] h-[140px] rounded-[18px] flex justify-center items-center">
-            <img alt="inpersonate-avatar" className="rounded-3xl" src={''} />
-          </div>
-          <div className="flex flex-col gap-3">
-            <span className="text-secondary-1000 text-sm font-semibold">Jahan Hatami</span>
-            <span className="text-primary-700 text-sm font-semibold">Dev Chapter Leader</span>
-            <div className="px-[10px] py-0.5 border-1 border-[#DCF0F9] rounded-md w-fit bg-[#dcf0f966]">
-              <span className="text-primary-400 text-sm font-semibold">Hrbox Holding</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+    // ✅ اگر نیاز به انتخاب نقش نباشه → مستقیم ریدایرکت
+    useEffect(() => {
+        if (!needsRoleSelection && selectedRole) {
+            let dashboardPath = '/';
 
-export default SelectRole
+            switch (selectedRole.slug) {
+                case RoleSlug.JOB_SEEKER:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.ORGANIZATION:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.SUPER_ADMIN:
+                    dashboardPath = '/super-admin/dashboard';
+                    break;
+            }
+
+            push({ to: dashboardPath });
+        }
+    }, [needsRoleSelection, selectedRole, push]);
+
+    const handleRoleSelect = async (role: any) => {
+        try {
+            console.log('🎭 Selecting role:', role);
+
+            // ✅ در اینجا اگر API برای انتخاب نقش داری، فراخوانی کن
+            // const response = await selectRoleAPI({ roleId: role.id }).unwrap();
+            // const accessToken = response.accessToken;
+
+            // ✅ فعلاً از توکن فعلی استفاده می‌کنیم
+            const accessToken = user?.id || 'temp-access-token';
+
+            // ✅ ذخیره نقش و تنظیم پنل
+            roleSelected(role, accessToken);
+
+            // ✅ ریدایرکت به داشبورد مربوطه
+            let dashboardPath = '/';
+
+            switch (role.slug) {
+                case RoleSlug.JOB_SEEKER:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.ORGANIZATION:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.SUPER_ADMIN:
+                    dashboardPath = '/super-admin/dashboard';
+                    break;
+            }
+
+            console.log('✅ Redirecting to:', dashboardPath);
+            await push({ to: dashboardPath });
+
+        } catch (err) {
+            console.error('❌ انتخاب نقش ناموفق:', err);
+        }
+    };
+
+    // ✅ بررسی وجود کاربر و نقش‌ها
+    if (!user || roles.length === 0) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                    <p className="text-secondary-600">در حال بارگذاری...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex flex-col gap-12 p-6 max-w-4xl mx-auto">
+            <div className="text-center">
+                <h1 className="text-3xl font-bold text-secondary-1000">انتخاب نقش</h1>
+                <p className="text-secondary-600 mt-2">
+                    سلام <span className="font-semibold">{user.name}</span>! لطفاً نقش مورد نظر خود را انتخاب کنید.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {roles.map((role) => (
+                    <div
+                        key={role.id}
+                        className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+                        onClick={() => handleRoleSelect(role)}
+                    >
+                        <div className="flex flex-col items-center gap-4">
+                            {/* آواتار کاربر */}
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
+                                <img
+                                    src={user.avatar || '/default-avatar.png'}
+                                    alt={user.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            {/* اطلاعات کاربر */}
+                            <div className="text-center">
+                                <h3 className="text-lg font-semibold text-secondary-1000">{user.name}</h3>
+                                <p className="text-sm text-primary-700 font-medium">{role.name}</p>
+                                <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
+                                    {role.slug}
+                                </div>
+                            </div>
+
+                            {/* دکمه انتخاب */}
+                            <Button
+                                onPress={() => handleRoleSelect(role)}
+                                className="w-full mt-3"
+                                color="primary"
+                                variant="flat"
+                            >
+                                ورود به پنل {role.name}
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* دکمه خروج */}
+            <div className="text-center">
+                <Button
+                    onPress={() => {
+                        logout();
+                        push({ to: Paths.SSO.login });
+                    }}
+                    variant="light"
+                    color="danger"
+                    size="sm"
+                >
+                    خروج از حساب
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default SelectRole;

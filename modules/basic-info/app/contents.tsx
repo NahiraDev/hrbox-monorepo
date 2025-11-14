@@ -4,7 +4,7 @@ import { lazyRouteComponent } from "@tanstack/react-router";
 const OrganizationDepartments = lazyRouteComponent(() => import('@module/basic-info/features/departments/OrganizationDepartments'));
 const TechnicalDepartments = lazyRouteComponent(() => import('@module/basic-info/features/departments/TechnicalDepartments'));
 const OrganizationalLocations = lazyRouteComponent(() => import('@module/basic-info/features/departments/OrganizationalLocations'));
-const AllEmployees = lazyRouteComponent(() => import('@module/basic-info/features/employees/sub-header/EmployeesSubHeader'));
+const AllEmployees = lazyRouteComponent(() => import('@hrbox-monorepo/modules/basic-info/subheaders/EmployeesSubHeader'));
 const TestReport = lazyRouteComponent(() => import('@module/basic-info/features/employees/More/TestReport'));
 const HealthRecords = lazyRouteComponent(() => import('@module/basic-info/features/employees/More/HealthRecord'));
 const Documents = lazyRouteComponent(() => import('@module/basic-info/features/employees/Documents'));
