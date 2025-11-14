@@ -2,6 +2,7 @@ import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { Form } from '@heroui/react';
 import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import { useTranslation } from 'react-i18next';
+import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
 
 export const ResetPasswordForm = () => {
   const {
@@ -27,43 +28,32 @@ export const ResetPasswordForm = () => {
     >
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-col gap-1">
-          <AppInput
-            props={{
-              required: true,
-              label: t('password'),
-              name: 'Password',
-              error: touched.UsernameOrMobile ? errors.Password : undefined,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}
+          <FormField
+            required={true}
+            label={t('password')}
+            name='Password'
+            helperText={touched.UsernameOrMobile ? errors.Password : undefined}
           />
         </div>
         <div className="flex flex-col gap-1">
-          <AppInput
-            props={{
-              required: true,
-              label: t('password_confirmation'),
-              name: 'PasswordConfirm',
-              error: touched.PasswordConfirm
-                ? errors.PasswordConfirm
-                : undefined,
-              onChange: handleChange,
-              onBlur: handleBlur,
-            }}
+          <FormField
+            label={t('password_confirmation')}
+            name={'PasswordConfirm'}
+            helperText={touched.PasswordConfirm
+            ? errors.PasswordConfirm
+            : undefined}
           />
         </div>
       </div>
       <div className="w-full pb-36">
         <AppButton
-          props={{
-            text: t('Submit'),
-            className: '!font-semibold !py-4 h-14',
-            fullWidth: true,
-            size: 'lg',
-            type: 'submit',
-            variant: 'primary',
-            isLoading: isSubmitting,
-          }}
+          content={t('Submit')}
+          className='!font-semibold !py-4 h-14'
+          fullWidth={true}
+          size='lg'
+          type='submit'
+          color='primary'
+          isLoading={isSubmitting}
         />
       </div>
       {formError && <div className="text-red-500 text-sm">{formError}</div>}

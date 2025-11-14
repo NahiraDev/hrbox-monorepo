@@ -1,67 +1,77 @@
-import { Suspense, ReactNode } from 'react';
-import { useMatches } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
+import {Suspense, ReactNode} from 'react';
+import {useMatches} from '@tanstack/react-router';
+import {motion} from 'framer-motion';
 
-import { AppHeader } from '@hrbox/uikit/sections/AppHeader';
-import { AppSidebar } from '@hrbox/uikit/sections/AppSideBar';
-import { AppSupportButton } from '@hrbox/uikit/components/AppSupportButton';
-import { AppDocs } from '@hrbox/uikit/sections/AppDocs';
+import {AppHeader} from '@hrbox/uikit/sections/AppHeader';
+import {AppSidebar} from '@hrbox/uikit/sections/AppSideBar';
+import {AppSupportButton} from '@hrbox/uikit/components/AppSupportButton';
+import {AppDocs} from '@hrbox/uikit/sections/AppDocs';
+import {useDynamicBackground} from "@Projects/hrbox-monorepo/core/hooks/useDynamicBackground";
 
 interface BaseLayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
-export function BaseLayout({ children }: BaseLayoutProps) {
-  const matches = useMatches();
-  const currentRoute = matches[matches.length - 1];
-  const routeContext = currentRoute?.context as any;
+export function BaseLayout({children}: BaseLayoutProps) {
+    const matches = useMatches();
+    const {panelBackground} = useDynamicBackground();
 
-  const SubHeader = routeContext?.subHeader;
-  const subHeaderProps = routeContext?.subHeaderProps || {};
+    const currentRoute = matches[matches.length - 1];
+    const routeContext = currentRoute?.context as any;
 
-  return (
-    <div className="flex h-screen w-full bg-panel-background overflow-hidden">
-      <aside className="shrink-0 m-5">
-        <AppSidebar />
-      </aside>
+    const SubHeader = routeContext?.subHeader;
+    const subHeaderProps = routeContext?.subHeaderProps || {};
 
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Header */}
-        <header className="shrink-0 border-b border-neutral-200 dark:border-neutral-700">
-          <AppHeader />
-        </header>
+    return (
+        <div
+            className="h-full flex flex-col xl:pr-16 pr-4 xl:pl-8 pl-4 xl:pb-8 pb-4 xl:pt-6 pt-4"
+            style={{
+                backgroundImage: panelBackground && `url(${panelBackground})`,
+                backgroundColor: !panelBackground ? 'var(--color-panel-background)' : undefined,
+            }}
+        >
+            <header className="shrink-0 z-20">
+                <AppHeader/>
+            </header>
+            <div className="flex-1 w-full flex overflow-hidden gap-8">
+                <aside className="shrink-0 h-full">
+                    <AppSidebar/>
+                </aside>
+                <div className="flex-1 flex flex-col overflow-hidden">
+                    {SubHeader && (
+                        <Suspense
+                            fallback={
+                                <div className="h-16 shrink-0 animate-pulse"/>
+                            }
+                        >
+                            <div className="shrink-0  dark:border-neutral-700">
+                                <SubHeader {...subHeaderProps} />
+                            </div>
+                        </Suspense>
+                    )}
 
-        {SubHeader && (
-          <Suspense
-            fallback={
-              <div className="h-16 shrink-0 bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
-            }
-          >
-            <div className="shrink-0  dark:border-neutral-700">
-              <SubHeader {...subHeaderProps} />
+                    <main className="flex-1 flex flex-col overflow-hidden relative">
+                        <motion.div
+                            initial={{opacity: 0, y: 10}}
+                            animate={{opacity: 1, y: 0}}
+                            exit={{opacity: 0, y: -10}}
+                            transition={{duration: 0.3}}
+                            className="flex-1 overflow-y-auto overflow-x-hidden"
+                        >
+                            {children}
+                        </motion.div>
+
+                        {/*<div className="shrink-0">*/}
+                        {/*    <AppDocs/>*/}
+                        {/*</div>*/}
+
+                        <div className="shrink-0">
+                            <AppSupportButton/>
+                        </div>
+                    </main>
+                </div>
+
             </div>
-          </Suspense>
-        )}
-
-        {/* Main Content */}
-        <main className="flex-1 overflow-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="h-full w-full"
-          >
-            <div className="p-6 h-full">
-              {children}
-            </div>
-          </motion.div>
-          <AppDocs />
-
-          <AppSupportButton />
-        </main>
-      </div>
-
-    </div>
-  );
+        </div>
+    );
 }

@@ -81,12 +81,12 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'main.tsx'),
-          input: path.resolve(__dirname, './modules/sso/plugin.ts'),
+          sso: path.resolve(__dirname, './modules/sso/plugin.tsx'),
           // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
           hrlink: resolve(__dirname, './modules/hrlink/plugin.tsx'),
           attendance: resolve(__dirname, './modules/attendance/plugin.tsx'),
-          // basicInfo: resolve(__dirname, 'modules/basic-info/plugin.tsx'),
+          basicInfo: resolve(__dirname, './modules/basic-info/plugin.tsx'),
         },
         output: {
           entryFileNames: chunkInfo => {
@@ -161,8 +161,10 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             });
 
             proxy.on('proxyReq', (proxyReq, req, _res) => {
-              proxyReq.setHeader('Host', 'https://hrlink.hrbox.me:50443');
-              proxyReq.setHeader('Origin', 'https://react.hrbox.me');
+              // ✅ تصحیح Host header: بدون protocol (https://) و فقط hostname:port
+              proxyReq.setHeader('Host', 'hrlink.hrbox.me:50443');
+              // ✅ تغییر Origin به front.hrbox.me تا backend درخواست‌ها از react.hrbox.me رو به عنوان front.hrbox.me بشناسه
+              proxyReq.setHeader('Origin', 'https://front.hrbox.me');
             });
 
             proxy.on('proxyRes', (proxyRes, req, _res) => {
@@ -177,6 +179,22 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           changeOrigin: true,
           secure: false,
           ws: true,
+          configure: (proxy, options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.error('❌ Proxy error (DesktopModules):', err.message);
+            });
+
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              // ✅ تصحیح Host header: بدون protocol
+              proxyReq.setHeader('Host', 'hrlink.hrbox.me:50443');
+              // ✅ تغییر Origin به front.hrbox.me برای شناسایی به عنوان front.hrbox.me
+              proxyReq.setHeader('Origin', 'https://front.hrbox.me');
+            });
+
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log(`📥 [hrlink.hrbox.me → Vite (DesktopModules)] ${proxyRes.statusCode} ${req.url}`);
+            });
+          },
         },
       },
 

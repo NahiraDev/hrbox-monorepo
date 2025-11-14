@@ -4,11 +4,12 @@ import { AppButton, AppDeleteModal, AppPagination } from '@hrbox/uikit/component
 import { useEffect } from 'react';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import {CupStarIcon} from "@hrbox/uikit/icons/CupStarIcon";
+import {useDeleteAwardMutation, useLazyFetchAwardsQuery} from "@hrbox/modules/hrlink/apis";
+import {GeneralInformation} from "@hrbox/modules/hrlink/components/GeneralInformation";
+import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";
 
 const Awards = () => {
-  const { openModal } = useModalContext();
   const [fetchAwards, { data }] = useLazyFetchAwardsQuery();
-  const [deleteAward] = useDeleteAwardMutation()
   useEffect(() => {
     fetchAwards({});
   }, []);
@@ -38,16 +39,10 @@ const Awards = () => {
                           }}
                         />
                         <AppButton
-                          props={{
-                            isIconOnly: true,
-                            color: 'white',
-                            size: 'md',
-                            radius: 'sm',
-                            onPress:openModal('delete' , 'deleteAward' ,  <AppDeleteModal props={{
-                              handleDelete:deleteAward
-                            }}/>),
-                            content: <Trash className="text-secondary-1000" size="14" />,
-                          }}
+                            isIconOnly={true}
+                            color='white'
+                            size='md'
+                            radius='sm'
                         />
                       </div>
                     </div>

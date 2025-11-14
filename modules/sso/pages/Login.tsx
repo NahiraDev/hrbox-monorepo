@@ -13,7 +13,7 @@ import { Paths } from '@hrbox/modules/paths';
 const Login = () => {
   const [login] = useLoginMutation();
   const { loginSuccess } = useAuth();
-  const { push } = useNavigation()
+  const { push } = useNavigation();
 
   // دیکد کردن JWT بدون کتابخانه
   const decodeJWT = (token: string) => {
@@ -31,52 +31,101 @@ const Login = () => {
 
       const { userId, displayName, Token, renewalToken } = response.data;
 
-      // مرحله ۱: خواندن نقش‌ها از JWT
       const jwtPayload = decodeJWT(Token);
       const roleSlugsFromToken: string[] = jwtPayload.role || [];
 
-      // مرحله ۲: ساخت نقش‌های تستی (اگر JWT خالی بود)
+      console.log('🔑 JWT Roles:', roleSlugsFromToken);
+
       const fallbackRoles = [
-        { id: '1', name: 'کارفرما', slug: RoleSlug.SUPER_ADMIN, permissions: [] },
-        { id: '2', name: 'فریلنسر', slug: RoleSlug.JOB_SEEKER, permissions: [] },
-        { id: '3', name: 'کاربر عادی', slug: RoleSlug.ORGANIZATION, permissions: [] },
+        {
+          id: '1',
+          name: 'سوپر ادمین',
+          slug: RoleSlug.SUPER_ADMIN,
+          permissions: ['*']
+        },
+        {
+          id: '2',
+          name: 'کارجو',
+          slug: RoleSlug.JOB_SEEKER,
+          permissions: ['view_jobs', 'apply_jobs']
+        },
+        {
+          id: '3',
+          name: 'سازمان',
+          slug: RoleSlug.ORGANIZATION,
+          permissions: ['manage_company', 'post_jobs']
+        },
       ];
 
-      // مرحله ۳: ترکیب نقش‌های JWT + تستی
-      let roles = roleSlugsFromToken.map((slug: string, index: number) => ({
-        id: String(userId * 100 + index),
-        name: slug === 'Client' ? 'کارفرما' : slug === 'Freelancer' ? 'فریلنسر' : 'کاربر عادی',
-        slug: slug as RoleSlug,
-        permissions: [],
-      }));
+      // ✅ تبدیل نقش‌های JWT به RoleSlug
+      const mapTokenRoleToSlug = (tokenRole: string): RoleSlug => {
+        const roleMap: Record<string, RoleSlug> = {
+          'Client': RoleSlug.ORGANIZATION,
+          'Freelancer': RoleSlug.JOB_SEEKER,
+          'SuperAdmin': RoleSlug.SUPER_ADMIN,
+          'Admin': RoleSlug.SUPER_ADMIN,
+        };
+        return roleMap[tokenRole] || RoleSlug.JOB_SEEKER;
+      };
 
-      // اگر JWT نقش نداشت → نقش‌های تستی
+      let roles = roleSlugsFromToken.map((tokenRole: string, index: number) => {
+        const slug = mapTokenRoleToSlug(tokenRole);
+        return {
+          id: String(userId * 100 + index),
+          name: slug === RoleSlug.ORGANIZATION ? 'سازمان' :
+              slug === RoleSlug.JOB_SEEKER ? 'کارجو' : 'سوپر ادمین',
+          slug,
+          permissions: slug === RoleSlug.SUPER_ADMIN ? ['*'] : [],
+        };
+      });
+
       if (roles.length === 0) {
+        console.warn('⚠️ No roles in token, using fallback roles');
         roles = fallbackRoles;
       }
 
-      // مرحله ۴: dispatch loginSuccess
-      console.log('فراخوانی loginSuccess با:', { userId, displayName, Token, roles });
+      console.log('✅ Final roles:', roles);
+
       loginSuccess(userId, displayName, Token, renewalToken, roles);
-      push({to:Paths.SSO.SelectRole})
-      
+
+      if (roles.length > 1) {
+        await push({ to: Paths.SSO.SelectRole });
+      } else {
+        const role = roles[0];
+        let dashboardPath = '/';
+
+        switch (role.slug) {
+          case RoleSlug.JOB_SEEKER:
+            dashboardPath = Paths.HRLink.Dashboard;
+            break;
+          case RoleSlug.ORGANIZATION:
+            dashboardPath = Paths.HRLink.Dashboard;
+            break;
+          case RoleSlug.SUPER_ADMIN:
+            dashboardPath = '/super-admin/dashboard';
+            break;
+        }
+
+        await push({ to: dashboardPath });
+      }
+
     } catch (error: any) {
-      console.error('خطا در لاگین:', error);
+      console.error('❌ خطا در لاگین:', error);
       throw new Error(error?.data?.msg || 'خطا در ورود');
     }
   };
 
   return (
-    <FormProvider
-      formId="login-form"
-      initialValues={initialValuesFormLogin}
-      validationSchema={formValidationErrorLogin}
-      enableCache={true}
-      clearCacheOnSubmit={true}
-      onSubmitAsync={handleLogin}
-    >
-      <LoginForm />
-    </FormProvider>
+      <FormProvider
+          formId="login-form"
+          initialValues={initialValuesFormLogin}
+          validationSchema={formValidationErrorLogin}
+          enableCache={true}
+          clearCacheOnSubmit={true}
+          onSubmitAsync={handleLogin}
+      >
+        <LoginForm />
+      </FormProvider>
   );
 };
 

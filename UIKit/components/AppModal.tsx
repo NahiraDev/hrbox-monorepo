@@ -1,7 +1,6 @@
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModalContext, ModalType, ModalSize } from "@hrbox/core/providers/ModalProvider";
-import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { Button } from "@heroui/react";
 import React, { createContext, useContext } from "react";
 import clsx from "clsx";
@@ -320,8 +319,8 @@ const AppModalBase: React.FC<AppModalProps> & {
 
   const portalContent = (
     <AnimatePresence mode="wait">
-      {shouldShowModal && (
-        <motion.div
+      {isModalOpen(type, name) && (
+          <motion.div
           key={`modal-${modalType}-${modalName}`}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -527,3 +527,621 @@
 //     },
 //   ],
 // };
+// ===============================================
+// مثال پیشرفته: استفاده از FormMode و Cache
+// ===============================================
+//
+// import React, { useState, useEffect } from "react";
+// import { FormProvider, useFormContext } from "@hrbox/core/providers/FormProvider";
+// import { useCRUDModal } from "@hrbox/core/hooks/useCRUDModal";
+// import { FormModal } from "./FormModal";
+// import { ModalSize } from "@hrbox/core/providers/ModalProvider";
+// import { FormMode } from "@hrbox/uikit/components/types";
+// import * as Yup from "yup";
+//
+// // فرم محصول که با FormMode کار میکنه
+// const ProductFormContent = () => {
+//     const {
+//         values,
+//         errors,
+//         touched,
+//         handleChange,
+//         handleBlur,
+//         formMode,
+//         setFormMode
+//     } = useFormContext();
+//
+//     const isViewMode = formMode === FormMode.VIEW;
+//     const isEditMode = formMode === FormMode.EDIT;
+//
+//     return (
+//         <div className="space-y-4">
+//             {/* نمایش وضعیت فرم */}
+//             <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+//                 <p className="text-sm text-blue-700">
+//                     وضعیت فرم: <strong>{formMode}</strong>
+//                 </p>
+//                 {isEditMode && (
+//                     <button
+//                         type="button"
+//                         onClick={() => setFormMode(FormMode.VIEW)}
+//                         className="mt-2 text-xs text-blue-600 underline"
+//                     >
+//                         تبدیل به حالت مشاهده
+//                     </button>
+//                 )}
+//                 {isViewMode && (
+//                     <button
+//                         type="button"
+//                         onClick={() => setFormMode(FormMode.EDIT)}
+//                         className="mt-2 text-xs text-blue-600 underline"
+//                     >
+//                         تبدیل به حالت ویرایش
+//                     </button>
+//                 )}
+//             </div>
+//
+//             <div>
+//                 <label className="block mb-2 font-medium">نام محصول</label>
+//                 <input
+//                     name="name"
+//                     value={values.name || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                     disabled={isViewMode}
+//                     className="w-full p-2 border rounded disabled:bg-gray-100 disabled:cursor-not-allowed"
+//                     placeholder="نام محصول"
+//                 />
+//                 {errors.name && touched.name && (
+//                     <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+//                 )}
+//             </div>
+//
+//             <div>
+//                 <label className="block mb-2 font-medium">قیمت (تومان)</label>
+//                 <input
+//                     name="price"
+//                     type="number"
+//                     value={values.price || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                     disabled={isViewMode}
+//                     className="w-full p-2 border rounded disabled:bg-gray-100"
+//                     placeholder="قیمت"
+//                 />
+//                 {errors.price && touched.price && (
+//                     <p className="text-red-500 text-sm mt-1">{errors.price}</p>
+//                 )}
+//             </div>
+//
+//             <div>
+//                 <label className="block mb-2 font-medium">دسته‌بندی</label>
+//                 <select
+//                     name="category"
+//                     value={values.category || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                     disabled={isViewMode}
+//                     className="w-full p-2 border rounded disabled:bg-gray-100"
+//                 >
+//                     <option value="">انتخاب کنید</option>
+//                     <option value="electronics">الکترونیک</option>
+//                     <option value="clothing">پوشاک</option>
+//                     <option value="food">مواد غذایی</option>
+//                     <option value="books">کتاب</option>
+//                 </select>
+//                 {errors.category && touched.category && (
+//                     <p className="text-red-500 text-sm mt-1">{errors.category}</p>
+//                 )}
+//             </div>
+//
+//             <div>
+//                 <label className="block mb-2 font-medium">موجودی</label>
+//                 <input
+//                     name="stock"
+//                     type="number"
+//                     value={values.stock || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                     disabled={isViewMode}
+//                     className="w-full p-2 border rounded disabled:bg-gray-100"
+//                     placeholder="تعداد موجودی"
+//                 />
+//             </div>
+//
+//             <div>
+//                 <label className="block mb-2 font-medium">توضیحات</label>
+//                 <textarea
+//                     name="description"
+//                     value={values.description || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                     disabled={isViewMode}
+//                     className="w-full p-2 border rounded disabled:bg-gray-100"
+//                     rows={4}
+//                     placeholder="توضیحات محصول..."
+//                 />
+//             </div>
+//
+//             <div className="flex items-center gap-2">
+//                 <input
+//                     name="featured"
+//                     type="checkbox"
+//                     checked={values.featured || false}
+//                     onChange={handleChange}
+//                     disabled={isViewMode}
+//                     className="w-4 h-4 disabled:cursor-not-allowed"
+//                 />
+//                 <label>محصول ویژه</label>
+//             </div>
+//         </div>
+//     );
+// };
+//
+// // Validation Schema
+// const productValidationSchema = Yup.object({
+//     name: Yup.string()
+//         .required("نام محصول الزامی است")
+//         .min(3, "نام باید حداقل 3 کاراکتر باشد"),
+//     price: Yup.number()
+//         .required("قیمت الزامی است")
+//         .positive("قیمت باید مثبت باشد")
+//         .min(1000, "قیمت باید حداقل 1000 تومان باشد"),
+//     category: Yup.string().required("دسته‌بندی الزامی است"),
+//     stock: Yup.number()
+//         .required("موجودی الزامی است")
+//         .min(0, "موجودی نمی‌تواند منفی باشد"),
+// });
+//
+// // کامپوننت اصلی
+// export const AdvancedProductManagement = () => {
+//     const [products, setProducts] = useState([
+//         {
+//             id: 1,
+//             name: "لپ‌تاپ ایسوس",
+//             price: 25000000,
+//             category: "electronics",
+//             stock: 10,
+//             description: "لپ‌تاپ با کیفیت",
+//             featured: true,
+//         },
+//         {
+//             id: 2,
+//             name: "کتاب برنامه‌نویسی",
+//             price: 150000,
+//             category: "books",
+//             stock: 50,
+//             description: "آموزش React",
+//             featured: false,
+//         },
+//     ]);
+//
+//     const productModal = useCRUDModal({
+//         name: "product-modal",
+//         size: ModalSize.XL,
+//     });
+//
+//     // افزودن محصول
+//     const handleAddProduct = async (values: any) => {
+//         await new Promise(resolve => setTimeout(resolve, 1000));
+//
+//         const newProduct = {
+//             id: products.length + 1,
+//             ...values,
+//         };
+//         setProducts([...products, newProduct]);
+//         productModal.close("create");
+//     };
+//
+//     // ویرایش محصول
+//     const handleEditProduct = async (values: any) => {
+//         await new Promise(resolve => setTimeout(resolve, 1000));
+//
+//         setProducts(products.map(p =>
+//             p.id === values.id ? values : p
+//         ));
+//         productModal.close("edit");
+//     };
+//
+//     // حذف محصول
+//     const handleDeleteProduct = async (values: any) => {
+//         await new Promise(resolve => setTimeout(resolve, 500));
+//
+//         setProducts(products.filter(p => p.id !== values.id));
+//         productModal.close("delete");
+//     };
+//
+//     return (
+//         <div className="p-8 max-w-7xl mx-auto">
+//             <div className="flex justify-between items-center mb-6">
+//                 <div>
+//                     <h1 className="text-2xl font-bold text-gray-800">مدیریت محصولات</h1>
+//                     <p className="text-sm text-gray-600 mt-1">
+//                         با قابلیت Cache و FormMode
+//                     </p>
+//                 </div>
+//                 <button
+//                     onClick={() =>
+//                         productModal.openCreate(
+//                             <ProductFormContent />,
+//                             "افزودن محصول جدید",
+//                             <span>📦</span>
+//                         )
+//                     }
+//                     className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+//                 >
+//                     + افزودن محصول
+//                 </button>
+//             </div>
+//
+//             {/* Grid محصولات */}
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                 {products.map((product) => (
+//                     <div
+//                         key={product.id}
+//                         className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+//                     >
+//                         <div className="flex justify-between items-start mb-3">
+//                             <div>
+//                                 <h3 className="font-semibold text-lg text-gray-800">
+//                                     {product.name}
+//                                     {product.featured && (
+//                                         <span className="ml-2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+//                       ⭐ ویژه
+//                     </span>
+//                                     )}
+//                                 </h3>
+//                                 <p className="text-sm text-gray-600 mt-1">
+//                                     دسته: {product.category}
+//                                 </p>
+//                             </div>
+//                             <div className="text-right">
+//                                 <p className="font-bold text-blue-600">
+//                                     {product.price.toLocaleString()} تومان
+//                                 </p>
+//                                 <p className="text-xs text-gray-500 mt-1">
+//                                     موجودی: {product.stock}
+//                                 </p>
+//                             </div>
+//                         </div>
+//
+//                         <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+//                             {product.description}
+//                         </p>
+//
+//                         <div className="flex gap-2">
+//                             <button
+//                                 onClick={() =>
+//                                     productModal.openView(
+//                                         <ProductFormContent />,
+//                                         product,
+//                                         "مشاهده محصول",
+//                                         <span>👁️</span>
+//                                     )
+//                                 }
+//                                 className="flex-1 px-3 py-1.5 bg-gray-500 hover:bg-gray-600 text-white rounded text-sm transition-colors"
+//                             >
+//                                 مشاهده
+//                             </button>
+//
+//                             <button
+//                                 onClick={() =>
+//                                     productModal.openEdit(
+//                                         <ProductFormContent />,
+//                                         product,
+//                                         "ویرایش محصول",
+//                                         <span>✏️</span>
+//                                     )
+//                                 }
+//                                 className="flex-1 px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm transition-colors"
+//                             >
+//                                 ویرایش
+//                             </button>
+//
+//                             <button
+//                                 onClick={() =>
+//                                     productModal.openDelete(
+//                                         <div className="text-center">
+//                                             <p className="text-red-600 mb-4">
+//                                                 آیا از حذف "{product.name}" اطمینان دارید؟
+//                                             </p>
+//                                         </div>,
+//                                         product,
+//                                         "حذف محصول",
+//                                         <span>🗑️</span>
+//                                     )
+//                                 }
+//                                 className="flex-1 px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded text-sm transition-colors"
+//                             >
+//                                 حذف
+//                             </button>
+//                         </div>
+//                     </div>
+//                 ))}
+//             </div>
+//
+//             {/* مودال افزودن با Cache */}
+//             <FormProvider
+//                 formId="add-product-form"
+//                 initialValues={{
+//                     name: "",
+//                     price: 0,
+//                     category: "",
+//                     stock: 0,
+//                     description: "",
+//                     featured: false,
+//                 }}
+//                 validationSchema={productValidationSchema}
+//                 onSubmitAsync={handleAddProduct}
+//                 enableCache={true}
+//                 clearCacheOnSubmit={true}
+//                 cacheExpiryMs={60 * 60 * 1000} // 1 ساعت
+//             >
+//                 {(formContext) => (
+//                     <>
+//                         {/* نمایش اطلاعات Cache */}
+//                         {formContext.dirty && (
+//                             <div className="fixed bottom-4 left-4 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded-lg shadow-lg z-50">
+//                                 <p className="text-sm">
+//                                     ⚠️ تغییرات ذخیره نشده در Cache موجود است
+//                                 </p>
+//                                 <button
+//                                     onClick={() => formContext.clearCache()}
+//                                     className="text-xs underline mt-1"
+//                                 >
+//                                     پاک کردن Cache
+//                                 </button>
+//                             </div>
+//                         )}
+//
+//                         <FormModal
+//                             type="create"
+//                             name="product-modal"
+//                             submitLabel="ذخیره محصول"
+//                             cancelLabel="انصراف"
+//                         />
+//                     </>
+//                 )}
+//             </FormProvider>
+//
+//             {/* مودال ویرایش */}
+//             <FormProvider
+//                 formId="edit-product-form"
+//                 initialValues={{
+//                     id: 0,
+//                     name: "",
+//                     price: 0,
+//                     category: "",
+//                     stock: 0,
+//                     description: "",
+//                     featured: false,
+//                 }}
+//                 validationSchema={productValidationSchema}
+//                 onSubmitAsync={handleEditProduct}
+//             >
+//                 {(formContext) => {
+//                     // تنظیم FormMode به EDIT
+//                     useEffect(() => {
+//                         formContext.setFormMode(FormMode.EDIT);
+//                     }, []);
+//
+//                     return (
+//                         <FormModal
+//                             type="edit"
+//                             name="product-modal"
+//                             submitLabel="بروزرسانی"
+//                             cancelLabel="انصراف"
+//                         />
+//                     );
+//                 }}
+//             </FormProvider>
+//
+//             {/* مودال مشاهده */}
+//             <FormProvider
+//                 formId="view-product-form"
+//                 initialValues={{}}
+//             >
+//                 {(formContext) => {
+//                     // تنظیم FormMode به VIEW
+//                     useEffect(() => {
+//                         formContext.setFormMode(FormMode.VIEW);
+//                     }, []);
+//
+//                     return (
+//                         <FormModal
+//                             type="view"
+//                             name="product-modal"
+//                             hideFooter={true}
+//                         />
+//                     );
+//                 }}
+//             </FormProvider>
+//
+//             {/* مودال حذف */}
+//             <FormProvider
+//                 formId="delete-product-form"
+//                 initialValues={{ id: 0 }}
+//                 onSubmitAsync={handleDeleteProduct}
+//             >
+//                 <FormModal
+//                     type="delete"
+//                     name="product-modal"
+//                     submitLabel="تایید حذف"
+//                     cancelLabel="انصراف"
+//                 />
+//             </FormProvider>
+//         </div>
+//     );
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useState } from "react";
+// import { FormProvider } from "@hrbox/core/providers/FormProvider";
+// import { useCRUDModal } from "@hrbox/core/hooks/useCRUDModal";
+// import { FormModal } from "./FormModal";
+// import * as Yup from "yup";
+//
+// // Validation
+// const schema = Yup.object({
+//     name: Yup.string().required("نام الزامی است"),
+//     email: Yup.string().email().required("ایمیل الزامی است"),
+// });
+//
+// // Form Content
+// const UserForm = () => {
+//     const { values, errors, touched, handleChange, handleBlur } =
+//         useFormContext();
+//
+//     return (
+//         <div className="space-y-4">
+//             <div>
+//                 <input
+//                     name="name"
+//                     value={values.name || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                 />
+//                 {errors.name && touched.name && (
+//                     <p className="text-red-500">{errors.name}</p>
+//                 )}
+//             </div>
+//             <div>
+//                 <input
+//                     name="email"
+//                     type="email"
+//                     value={values.email || ""}
+//                     onChange={handleChange}
+//                     onBlur={handleBlur}
+//                 />
+//                 {errors.email && touched.email && (
+//                     <p className="text-red-500">{errors.email}</p>
+//                 )}
+//             </div>
+//         </div>
+//     );
+// };
+//
+// // Main Component
+// function UserManager() {
+//     const [users, setUsers] = useState([]);
+//     const modal = useCRUDModal({ name: "user" });
+//
+//     const handleAdd = async (values) => {
+//         await api.addUser(values);
+//         setUsers([...users, values]);
+//         modal.close("create");
+//     };
+//
+//     return (
+//         <div>
+//             <button onClick={() =>
+//                 modal.openCreate(<UserForm />, "افزودن کاربر")
+//             }>
+//                 افزودن
+//             </button>
+//
+//             <FormProvider
+//                 formId="add-user"
+//                 initialValues={{ name: "", email: "" }}
+//                 validationSchema={schema}
+//                 onSubmitAsync={handleAdd}
+//             >
+//                 <FormModal type="create" name="user" />
+//             </FormProvider>
+//         </div>
+//     );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useModal } from "@hrbox/core/hooks/useModal";
+// import { ModalType } from "@hrbox/core/providers/ModalProvider";
+//
+// function MyComponent() {
+//     const modal = useModal();
+//
+//     const handleOpen = () => {
+//         modal.open(
+//             ModalType.CREATE,      // نوع
+//             "my-modal",           // نام یکتا
+//             <MyContent />,        // محتوا
+//             { userId: 1 },        // دیتا (optional)
+//             "md",                 // سایز
+//             "عنوان",              // تایتل
+//             <Icon />              // آیکون
+//         );
+//     };
+//
+//     return (
+//         <>
+//             <button onClick={handleOpen}>باز کن</button>
+//             <AppModal type={ModalType.CREATE} name="my-modal" />
+//         </>
+//     );
+// }
+
+
+
+
+
+
+//
+// import { useCRUDModal } from "@hrbox/core/hooks/useCRUDModal";
+// import { ModalSize } from "@hrbox/core/providers/ModalProvider";
+//
+// function MyComponent() {
+//     const userModal = useCRUDModal({
+//         name: "user-modal",
+//         size: ModalSize.LG
+//     });
+//
+//     return (
+//         <>
+//             <button onClick={() =>
+//                 userModal.openCreate(
+//                     <AddUserForm />,
+//                     "افزودن کاربر",
+//                     <UserIcon />
+//                 )
+//             }>
+//                 افزودن
+//             </button>
+//
+//             <FormProvider
+//                 formId="add-user"
+//                 initialValues={{ name: "", email: "" }}
+//                 onSubmitAsync={handleSubmit}
+//             >
+//                 <FormModal type="create" name="user-modal" />
+//             </FormProvider>
+//         </>
+//     );
+// }
+//
+//

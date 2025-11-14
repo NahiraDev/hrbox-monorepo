@@ -27,9 +27,6 @@ import { AppDocItem } from '@hrbox/uikit/sections/AppDocItems';
 import { useAppSelector } from '@hrbox/core/redux/hooks';
 import { Panel } from '@hrbox/core/config/theme';
 
-/**
- * منوی اصلی داک
- */
 const PRIMARY_MENU_ITEMS = [
   {
     id: 'home',

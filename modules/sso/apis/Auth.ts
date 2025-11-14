@@ -2,7 +2,6 @@ import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { AuthApiEndpoints } from "@hrbox-monorepo/modules/sso/apis/endpoints";
 
-
 const ssoApi = createModuleApi({
   reducerPath: 'ssoApi',
   baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/SSO/api',

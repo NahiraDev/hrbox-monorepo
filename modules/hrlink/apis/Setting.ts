@@ -12,7 +12,6 @@ const settingApi = createModuleApi({
 
 export const settingApiWithEndpoints = settingApi.injectEndpoints({
   endpoints: (build) => ({
-    // GET: اطلاعات پروفایل کاربر
     fetchProfile: createQuery<any>(build, {
       url: HRLinkApiEndpoints.profile.getInfo,
       method: 'GET',
@@ -20,7 +19,7 @@ export const settingApiWithEndpoints = settingApi.injectEndpoints({
     }),
 
     fetchGeneralSetting: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.profile.getSettings,
+      url: HRLinkApiEndpoints.profile.fetchSettings,
       method: 'GET',
       tags: ['Setting'],
     }),
@@ -29,26 +28,22 @@ export const settingApiWithEndpoints = settingApi.injectEndpoints({
       url: HRLinkApiEndpoints.profile.changePassword,
       method: 'POST',
       tags: ['Setting'],
-      invalidatesTags: ['Setting'],
     }),
 
     editProfile: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.profile.edit,
       method: 'POST',
       tags: ['Setting'],
-      invalidatesTags: ['Setting'],
     }),
 
     editGeneralSetting: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.profile.editSettings,
       method: 'POST',
       tags: ['Setting'],
-      invalidatesTags: ['Setting'],
     }),
   }),
 });
 
-// هوک‌های صحیح و استاندارد
 export const {
   useFetchProfileQuery,
   useFetchGeneralSettingQuery,

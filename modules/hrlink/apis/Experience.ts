@@ -1,24 +1,51 @@
-import { createEndpoint, createPaginatedEndpoint } from '@core/apis';
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
-export const ExperienceApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    fetchExperience: createPaginatedEndpoint(build, HRLinkApiEndpoints.resume.experience.getList, 'GET', [
-      'Experience',
-    ]),
-    fetchExperienceDetail: createEndpoint(build, HRLinkApiEndpoints.resume.experience.getDetail, 'GET', ['Experience']),
-    editExperience: createEndpoint(build, HRLinkApiEndpoints.resume.experience.edit, 'PUT', ['Experience']),
-    createExperience: createEndpoint(build, HRLinkApiEndpoints.resume.experience.create, 'PUT', ['Experience']),
-    deleteExperience: createEndpoint(build, HRLinkApiEndpoints.resume.education.delete, 'DELETE', ['Experience']),
+const experienceApi = createModuleApi({
+  reducerPath: 'HRLinkApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Experience'],
+  requiresAuth: true,
+  autoToast: true,
+});
+
+export const experienceApiEndpoints = experienceApi.injectEndpoints({
+  endpoints: (build:any) => ({
+    fetchExperiences: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.getList,
+      tags: ['Experience'],
+    }),
+
+    fetchExperienceDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.getDetail,
+      tags: ['Experience'],
+    }),
+
+    createExperience: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.create,
+      method: 'PUT',
+      tags: ['Experience'],
+    }),
+
+    editExperience: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.edit,
+      method: 'PUT',
+      tags: ['Experience'],
+    }),
+
+    deleteExperience: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.delete,
+      method: 'DELETE',
+      tags: ['Experience'],
+    }),
   }),
-  overrideExisting: false,
 });
 
 export const {
-  useLazyFetchExperienceQuery,
+  useLazyFetchExperiencesQuery,
   useLazyFetchExperienceDetailQuery,
   useCreateExperienceMutation,
   useEditExperienceMutation,
   useDeleteExperienceMutation,
-} = ExperienceApi;
+} = experienceApiEndpoints;

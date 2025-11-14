@@ -1,14 +1,36 @@
-import { createEndpoint, createPaginatedEndpoint } from '@core/apis';
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
-export const JobsApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    jobOffers: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
-    jobOpportunities: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.opportunities, 'GET', ['Jobs']),
-    jobDetail: createEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
-  }),
-  overrideExisting: false,
+const jobsApi = createModuleApi({
+  reducerPath: 'HRLinkApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Jobs'],
+  requiresAuth: true,
+  autoToast: true,
 });
 
-export const { useLazyJobOffersQuery, useLazyJobDetailQuery, useLazyJobOpportunitiesQuery } = JobsApi;
+export const jobsApiEndpoints = jobsApi.injectEndpoints({
+  endpoints: (build:any) => ({
+    fetchJobOffers: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.offers,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOpportunities: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.opportunities,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.offers,
+      tags: ['Jobs'],
+    }),
+  }),
+});
+
+export const {
+  useLazyFetchJobOffersQuery,
+  useLazyFetchJobOpportunitiesQuery,
+  useLazyFetchJobDetailQuery,
+} = jobsApiEndpoints;

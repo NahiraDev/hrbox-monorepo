@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { themeEngine } from "@hrbox/core/config/theme/engin";
 import { Panel, PanelTheme, ThemeConfig, ThemeMode } from "@hrbox/core/config/theme/types";
 import { RootState } from "@reduxjs/toolkit/query";
+import {getCurrentDomain} from "@Projects/hrbox-monorepo/core/config/theme";
 
 // ============================================
 // State Interface
@@ -46,7 +47,7 @@ export const themeSlice = createSlice({
       } else {
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         state.mode = systemPrefersDark ? 'dark' : 'light';
-        state.panel = 'hrbox';
+        state.panel = getCurrentDomain();
 
         themeEngine.resetToDefault(state.panel, state.mode);
         state.config = themeEngine.getCurrentTheme();

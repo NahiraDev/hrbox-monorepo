@@ -1,6 +1,6 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
 import { useAppSelector } from '@hrbox/core/redux/hooks';
-import { ArrowRight2 } from "iconsax-reactjs";
+import {ArrowRight2, ElementEqual} from "iconsax-reactjs";
 
 interface AppBreadcrumbProps {
   pages: string[];
@@ -18,8 +18,9 @@ export const AppBreadcrumb = ({ pages }: AppBreadcrumbProps) => {
   };
 
   return (
-    <nav aria-label="breadcrumb">
-      <Breadcrumbs
+    <nav aria-label="breadcrumb" className="flex gap-2 items-center">
+        <ElementEqual size={20} className="text-neutral-400"/>
+        <Breadcrumbs
         separator={<ArrowRight2 size="16" className="text-neutral-400" />}
         maxItems={isRTL ? 3 : 5}
         classNames={{

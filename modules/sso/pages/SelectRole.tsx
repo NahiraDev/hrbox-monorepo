@@ -2,101 +2,148 @@ import { useAuth } from '@hrbox/core/hooks/useAuth';
 import { useNavigation } from '@hrbox/core/hooks/useNavigation';
 import { Paths } from '../../paths';
 import { Button } from '@heroui/react';
+import { RoleSlug } from '@hrbox/core/config/theme';
+import { useEffect } from 'react';
 
 const SelectRole = () => {
-  const { user, roles, roleSelected, selectedRole, needsRoleSelection } = useAuth();
-  const {push} = useNavigation();
+    const { user, roles, roleSelected, selectedRole, needsRoleSelection, logout } = useAuth();
+    const { push } = useNavigation();
 
-  // اگر نیاز به انتخاب نقش نباشه → مستقیم ریدایرکت
-  if (!needsRoleSelection && selectedRole) {
-    push({to:Paths.HRLink.Dashboard})
-    return null;
-  }
+    // ✅ اگر نیاز به انتخاب نقش نباشه → مستقیم ریدایرکت
+    useEffect(() => {
+        if (!needsRoleSelection && selectedRole) {
+            let dashboardPath = '/';
 
-  const handleRoleSelect = async (role: any) => {
-    try {
-      // فرض: بک‌اند یه endpoint داره برای انتخاب نقش
-      // اگر نداره، فقط local ذخیره کن
-      // await selectRole({ roleId: role.id }).unwrap();
+            switch (selectedRole.slug) {
+                case RoleSlug.JOB_SEEKER:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.ORGANIZATION:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.SUPER_ADMIN:
+                    dashboardPath = '/super-admin/dashboard';
+                    break;
+            }
 
-      // دسترسی موقت: فقط localStorage + Redux
-      const accessToken = 'temp-access-token'; // در حالت واقعی از بک‌اند بگیر
-      roleSelected(role, accessToken);
+            push({ to: dashboardPath });
+        }
+    }, [needsRoleSelection, selectedRole, push]);
 
-    } catch (err) {
-      console.error('انتخاب نقش ناموفق:', err);
-    }
-  };
+    const handleRoleSelect = async (role: any) => {
+        try {
+            console.log('🎭 Selecting role:', role);
 
-  if (!user || roles.length === 0) {
-    return <div>در حال بارگذاری...</div>;
-  }
+            // ✅ در اینجا اگر API برای انتخاب نقش داری، فراخوانی کن
+            // const response = await selectRoleAPI({ roleId: role.id }).unwrap();
+            // const accessToken = response.accessToken;
 
-  return (
-    <div className="flex flex-col gap-12 p-6 max-w-4xl mx-auto">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-secondary-1000">انتخاب نقش</h1>
-        <p className="text-secondary-600 mt-2">
-          سلام <span className="font-semibold">{user.name}</span>! لطفاً نقش مورد نظر خود را انتخاب کنید.
-        </p>
-      </div>
+            // ✅ فعلاً از توکن فعلی استفاده می‌کنیم
+            const accessToken = user?.id || 'temp-access-token';
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {roles.map((role) => (
-          <div
-            key={role.id}
-            className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
-            onClick={() => handleRoleSelect(role)}
-          >
-            <div className="flex flex-col items-center gap-4">
-              {/* آواتار کاربر */}
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
-                <img
-                  src={user.avatar || '/default-avatar.png'}
-                  alt={user.name}
-                  className="object-cover"
-                />
-              </div>
+            // ✅ ذخیره نقش و تنظیم پنل
+            roleSelected(role, accessToken);
 
-              {/* اطلاعات کاربر */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-secondary-1000">{user.name}</h3>
-                <p className="text-sm text-primary-700 font-medium">{role.name}</p>
-                <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
-                  {role.slug}
+            // ✅ ریدایرکت به داشبورد مربوطه
+            let dashboardPath = '/';
+
+            switch (role.slug) {
+                case RoleSlug.JOB_SEEKER:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.ORGANIZATION:
+                    dashboardPath = Paths.HRLink.Dashboard;
+                    break;
+                case RoleSlug.SUPER_ADMIN:
+                    dashboardPath = '/super-admin/dashboard';
+                    break;
+            }
+
+            console.log('✅ Redirecting to:', dashboardPath);
+            await push({ to: dashboardPath });
+
+        } catch (err) {
+            console.error('❌ انتخاب نقش ناموفق:', err);
+        }
+    };
+
+    // ✅ بررسی وجود کاربر و نقش‌ها
+    if (!user || roles.length === 0) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                    <p className="text-secondary-600">در حال بارگذاری...</p>
                 </div>
-              </div>
-
-              {/* دکمه انتخاب */}
-              <Button
-                onPress={(e) => {
-                  handleRoleSelect(role);
-                }}
-                className="w-full mt-3"
-                variant="flat"
-              >
-                ورود به پنل {role.name}
-              </Button>
             </div>
-          </div>
-        ))}
-      </div>
+        );
+    }
 
-      {/* دکمه خروج */}
-      <div className="text-center">
-        <Button
-          onPress={() => {
-            const { logout } = useAuth();
-            logout();
-          }}
-          variant="flat "
-          size="sm"
-        >
-          خروج از حساب
-        </Button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex flex-col gap-12 p-6 max-w-4xl mx-auto">
+            <div className="text-center">
+                <h1 className="text-3xl font-bold text-secondary-1000">انتخاب نقش</h1>
+                <p className="text-secondary-600 mt-2">
+                    سلام <span className="font-semibold">{user.name}</span>! لطفاً نقش مورد نظر خود را انتخاب کنید.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {roles.map((role) => (
+                    <div
+                        key={role.id}
+                        className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+                        onClick={() => handleRoleSelect(role)}
+                    >
+                        <div className="flex flex-col items-center gap-4">
+                            {/* آواتار کاربر */}
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
+                                <img
+                                    src={user.avatar || '/default-avatar.png'}
+                                    alt={user.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            {/* اطلاعات کاربر */}
+                            <div className="text-center">
+                                <h3 className="text-lg font-semibold text-secondary-1000">{user.name}</h3>
+                                <p className="text-sm text-primary-700 font-medium">{role.name}</p>
+                                <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
+                                    {role.slug}
+                                </div>
+                            </div>
+
+                            {/* دکمه انتخاب */}
+                            <Button
+                                onPress={() => handleRoleSelect(role)}
+                                className="w-full mt-3"
+                                color="primary"
+                                variant="flat"
+                            >
+                                ورود به پنل {role.name}
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* دکمه خروج */}
+            <div className="text-center">
+                <Button
+                    onPress={() => {
+                        logout();
+                        push({ to: Paths.SSO.login });
+                    }}
+                    variant="light"
+                    color="danger"
+                    size="sm"
+                >
+                    خروج از حساب
+                </Button>
+            </div>
+        </div>
+    );
 };
 
 export default SelectRole;

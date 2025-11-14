@@ -1,9 +1,12 @@
 import type { ModulePlugin } from '@hrbox/modules/types';
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
+import {Paths} from "@hrbox/modules/paths";
 
 const LoginPage = lazyRouteComponent(() => import('./pages/Login'));
+const LoginByOtpPage = lazyRouteComponent(() => import('./pages/LoginByOtp'));
 const RegisterPage = lazyRouteComponent(() => import('./pages/Register'));
+const ForgetPasswordPage = lazyRouteComponent(() => import('./pages/ForgetPassword'));
 const SelectRolePage = lazyRouteComponent(() => import('./pages/SelectRole'));
 const WelcomePage = lazyRouteComponent(() => import('./pages/Welcome'));
 
@@ -20,7 +23,7 @@ export const SSOPlugin: ModulePlugin = {
   },
   routes: [
     {
-      path: '/sso/login',
+      path: Paths.SSO.login,
       component: LoginPage,
       layout: 'auth',
       meta: {
@@ -30,16 +33,34 @@ export const SSOPlugin: ModulePlugin = {
     },
 
     {
-      path: '/sso/register',
+      path: Paths.SSO.register,
       component: RegisterPage,
-      layout: 'auth',
+      layout: 'empty',
       meta: {
         title: 'Register',
         requireAuth: false,
       },
     },
     {
-      path: '/sso/select-role',
+      path: Paths.SSO.loginByOtp,
+      component: LoginByOtpPage,
+      layout: 'auth',
+      meta: {
+        title: 'Login by Otp',
+        requireAuth: false,
+      },
+    },
+    {
+      path: Paths.SSO.forgetPassword,
+      component: ForgetPasswordPage,
+      layout: 'auth',
+      meta: {
+        title: 'ForgetPassword',
+        requireAuth: false,
+      },
+    },
+    {
+      path: Paths.SSO.SelectRole,
       component: SelectRolePage,
       layout: 'base',
       meta: {
@@ -48,7 +69,7 @@ export const SSOPlugin: ModulePlugin = {
       },
     },
     {
-      path: '/sso/welcome',
+      path: Paths.SSO.welcome,
       component: WelcomePage,
       layout: 'empty',
       meta: {

@@ -7,6 +7,7 @@ import type { ModulePlugin } from '@hrbox/modules/types';
 import { RoleSlug } from '@hrbox/core/config/theme';
 import { Profile, Briefcase, Building } from 'iconsax-reactjs';
 import { lazyRouteComponent } from '@tanstack/react-router';
+import {Paths} from "@hrbox/modules/paths";
 
 // ============================================
 // Pages
@@ -14,7 +15,10 @@ import { lazyRouteComponent } from '@tanstack/react-router';
 
 const DashboardPage = lazyRouteComponent(() => import('./pages/dashboard'));
 const ResumePage = lazyRouteComponent(() => import('./pages/resume/Information'));
-const JobsPage = lazyRouteComponent(() => import('./pages/jobs/JobOffers'));
+const AwardPage = lazyRouteComponent(() => import('./pages/resume/Awards'));
+const EducationPage = lazyRouteComponent(() => import('./pages/resume/Education'));
+const ExperiencePage = lazyRouteComponent(() => import('./pages/resume/Education'));
+const JobOfferPage = lazyRouteComponent(() => import('./pages/jobs/JobOffers'));
 const CompanyPage = lazyRouteComponent(() => import('./pages/companies/Companies'));
 
 // ============================================
@@ -42,18 +46,18 @@ export const HRLinkPlugin: ModulePlugin = {
   // ============================================
   routes: [
     {
-      path: '/hrlink/dashboard',
+      path:  Paths.HRLink.Dashboard,
       component: DashboardPage,
       layout: 'base',
       meta: {
         title: 'Dashboard',
-        requireAuth: true,
+        requireAuth: false,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
     },
 
     {
-      path: '/hrlink/resume',
+      path: Paths.HRLink.ResumeInformation,
       component: ResumePage,
       layout: 'base',
       meta: {
@@ -63,11 +67,22 @@ export const HRLinkPlugin: ModulePlugin = {
       },
       subHeader: ResumeSubHeader,
     },
-
-    // Jobs
     {
-      path: '/hrlink/jobs',
-      component: JobsPage,
+      path: Paths.HRLink.ResumeAwards,
+      component: AwardPage,
+      layout: 'base',
+      meta: {
+        title: 'Awards',
+        requireAuth: false,
+        requiredRoles: [RoleSlug.JOB_SEEKER],
+      },
+      subHeader: ResumeSubHeader,
+    },
+
+
+    {
+      path: Paths.HRLink.JobOffers,
+      component: JobOfferPage,
       layout: 'base',
       meta: {
         title: 'Jobs',
@@ -90,7 +105,6 @@ export const HRLinkPlugin: ModulePlugin = {
         requireAuth: true,
         requiredRoles: [RoleSlug.JOB_SEEKER],
       },
-      // ✅ این صفحه SubHeader نداره
     },
   ],
 

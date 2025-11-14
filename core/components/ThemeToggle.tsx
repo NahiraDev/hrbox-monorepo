@@ -16,7 +16,7 @@ export const ThemeToggle = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => dispatch(toggleThemeMode())}
-      className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-surface-50 text-secondary-1000 dark:text-white hover:bg-surface-100 transition-colors"
+      className="relative flex cursor-pointer items-center justify-center rounded-lg bg-surface-50 text-secondary-1000 dark:text-white hover:bg-surface-100 transition-colors"
       aria-label="Toggle theme"
     >
       {/* ---------- Moon (visible in LIGHT → fades out in DARK) ---------- */}
@@ -27,7 +27,7 @@ export const ThemeToggle = () => {
           opacity: isDark ? 0 : 1,
         }}
         transition={{ duration: 0.3 }}
-        className="absolute"
+        className="h-[52px] w-[52px] flex justify-center items-center"
       >
         <svg
           width="28"

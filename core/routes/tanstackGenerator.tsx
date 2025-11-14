@@ -105,13 +105,13 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           };
         }
 
-        if (!context.auth?.isAuthenticated) {
-          throw redirect({
-            to:'/sso/login',
-          });
-        }
-
-        // if (context.auth?.needsRoleSelection) {
+        // if (!context.auth?.isAuthenticated) {
+        //   throw redirect({
+        //     to:'/sso/login',
+        //   });
+        // }
+        //
+        // if (context.auth?.needsRoleSelection && location.pathname !== '/sso/select-role') {
         //   throw redirect({
         //     to: '/sso/select-role',
         //   });
@@ -150,7 +150,6 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         };
       },
 
-      // ✅ Component با Layout
       component: () => (
         <LayoutComponent>
           <Suspense

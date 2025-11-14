@@ -1,59 +1,35 @@
-import * as Yup from 'yup';
-import { FormProvider } from '@hrbox/core/providers/FormProvider';
-import { useTranslation } from 'react-i18next';
+import {FormProvider} from '@hrbox/core/providers/FormProvider';
 
-import { RegisterForm } from '../forms';
-import { useRegisterMutation } from "@hrbox-monorepo/modules/sso/apis/Auth";
+import {initialValuesRegister, RegisterForm, validationSchemaRegister} from '../forms';
+import {useRegisterMutation} from "@hrbox-monorepo/modules/sso/apis/Auth";
 
 const Register = () => {
   const [register] = useRegisterMutation();
 
-  const initialValuesForm = {
-    FirstName: '',
-    lastName: '',
-    Mobile: '',
-    Email: '',
-    NationalCode: '',
-    Password: '',
-  };
-
-  const formValidationError = () => {
-    Yup.object({
-      FirstName: Yup.string().required('First Name is required'),
-      LastName: Yup.string().required('Last Name is required'),
-      Email: Yup.string()
-        .email('Invalid email format')
-        .required('Email is required'),
-      NationalCode: Yup.string().required('National Code is required'),
-      Mobile: Yup.string().required('Mobile is required'),
-      Password: Yup.string()
-        .min(6, 'Password must be at least 6 characters')
-        .required('Password is required'),
-    });
-  };
-
   const handleFormSubmit = (values: any) => {
+    const { PasswordConfirm, ClientOtpCode, ...dataToSend } = values;
+
     return {
-      FirstName: values.FirstName,
-      LastName: values.LastName,
-      Email: values.Email,
-      Mobile: values.Mobile,
-      NationalCode: values.NationalCode,
-      Password: values.Password,
+      FirstName: dataToSend.FirstName,
+      LastName: dataToSend.LastName,
+      Email: dataToSend.Email,
+      Mobile: dataToSend.Mobile,
+      NationalCode: dataToSend.NationalCode,
+      Password: dataToSend.Password,
     };
   };
 
   return (
-    <FormProvider
-      formId='register-form'
-      initialValues={initialValuesForm}
-      validationSchema={formValidationError}
-      onSubmitAsync={async (values) => {
-        await register(handleFormSubmit(values)).unwrap();
-      }}
-    >
-      <RegisterForm />
-    </FormProvider>
+      <FormProvider
+          formId='register-form'
+          initialValues={initialValuesRegister}
+          validationSchema={validationSchemaRegister}
+          onSubmitAsync={async (values) => {
+            return await register(handleFormSubmit(values)).unwrap();
+          }}
+      >
+        <RegisterForm />
+      </FormProvider>
   );
 };
 

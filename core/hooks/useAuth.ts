@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from '@hrbox/core/redux/hooks';
 import {
-  setCurrentDomain,
   loginSuccess,
   roleSelected,
   switchRole,
@@ -9,8 +8,7 @@ import {
   initAuth,
   setLoading,
   setError,
-  type User,
-  type UserRole,
+  type UserRole, setDomainTheme,
 } from '@hrbox/core/redux/slices/authSlice';
 import { Domain } from "@hrbox/core/config/theme/domains";
 
@@ -38,7 +36,6 @@ export function useAuth() {
     loading,
     error,
 
-    setCurrentDomain: (domain: Domain) => dispatch(setCurrentDomain(domain)),
 
     loginSuccess: (
   userId: number,
