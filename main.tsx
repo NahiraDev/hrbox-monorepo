@@ -18,7 +18,6 @@ import { ModalProvider } from '@hrbox/core/providers/ModalProvider';
 import '@hrbox/core/config/theme/index.css';
 import { initRouter } from '@hrbox/core/routes/router';
 
-// ✅ تغییر مهم: استفاده از GlobalModalRenderer به جای AppModal
 import { GlobalModalRenderer } from '@hrbox/uikit/components/GlobalModalRenderer';
 
 // ============================================

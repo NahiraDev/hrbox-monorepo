@@ -1,12 +1,30 @@
 import React from "react";
-import { useModalContext } from "@Projects/hrbox-monorepo/core/providers/ModalProvider";
-import { AppModal } from "@Projects/hrbox-monorepo/UIKit/components/AppModal";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { AppModal } from "./AppModal";
 
 export const GlobalModalRenderer: React.FC = () => {
-    const { getOpenModal } = useModalContext();
+    const { getOpenModal, closeModal } = useModalContext();
     const openModal = getOpenModal();
 
-    // اگر مودالی باز نیست، چیزی render نمی‌کنیم
+    React.useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && openModal) {
+                closeModal(openModal.type, openModal.name);
+            }
+        };
+
+        if (openModal) {
+            document.addEventListener("keydown", handleEscape);
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = "hidden";
+        }
+
+        return () => {
+            document.removeEventListener("keydown", handleEscape);
+            document.body.style.overflow = "";
+        };
+    }, [openModal, closeModal]);
+
     if (!openModal) {
         return null;
     }
@@ -15,13 +33,12 @@ export const GlobalModalRenderer: React.FC = () => {
         <AppModal
             type={openModal.type}
             name={openModal.name}
-            title={openModal.title}
-            icon={openModal.icon}
+            title={openModal.title ?? undefined}
+            icon={openModal.icon ?? undefined}
             size={openModal.size}
             component={openModal.component}
         />
     );
 };
 
-// Export با نام دیگه برای سازگاری
 export default GlobalModalRenderer;
