@@ -4,7 +4,6 @@ import {  TickSquare } from 'iconsax-react';
 export const TestReportModal = () => {
 
   return (
-    // <AppModal icon={<TickSquare color="white" />} size="3xl" title="Test Result">
       <AppModal.Body>
         <div className='grid grid-cols-2 gap-10'>
           <AppInput
@@ -14,6 +13,8 @@ export const TestReportModal = () => {
               size: 'lg',
               color: 'primary',
               radius: 'lg',
+              mode:"show",
+              value:"contact"
             }}
           />
           <AppInput
@@ -23,6 +24,8 @@ export const TestReportModal = () => {
               size: 'lg',
               color: 'primary',
               radius: 'lg',
+              mode:"show",
+              value:"contact"
             }}
           />
           <AppInput
@@ -32,6 +35,8 @@ export const TestReportModal = () => {
               size: 'lg',
               color: 'primary',
               radius: 'lg',
+              mode:"show",
+              value:"contact"
             }}
           />
           <AppInput
@@ -41,11 +46,12 @@ export const TestReportModal = () => {
               size: 'lg',
               color: 'primary',
               radius: 'lg',
+              mode:"show",
+              value:"contact"
             }}
           />
         </div>
 
       </AppModal.Body>
-    // </AppModal>
   );
 };

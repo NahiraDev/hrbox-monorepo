@@ -38,7 +38,7 @@ const Education = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-3 w-full p-4 overflow-y-auto max-h-[550px] ">
+        <div className="grid grid-cols-4 gap-3 w-full p-4 overflow-y-auto max-h-[550px]">
           {educationList.map((user, index) => (
             <Card
               key={index}
@@ -56,7 +56,7 @@ const Education = () => {
               }
               onClick={(e) => {
                 e.stopPropagation();
-                handleCardClick(index);cc
+                handleCardClick(index);
               }}
               className={`cursor-pointer px-3 py-2 shadow-sm border transition-all duration-200 ease-in-out
                 ${

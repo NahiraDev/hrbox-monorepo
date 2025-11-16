@@ -1,11 +1,20 @@
 import { testReport } from '@module/basic-info/app/mock';
-import { TickSquare, User, ImportCurve, DollarCircle, Status, Courthouse } from 'iconsax-react';
+import {
+  TickSquare,
+  User,
+  ImportCurve,
+  DollarCircle,
+  Status,
+  Courthouse,
+  UserSquare,
+} from 'iconsax-react';
 import { Card } from '@heroui/react';
 import { AppButton } from '@core/components';
 import { useModalContext } from '@core/context';
 
 import { BasicInfoLayout } from '@module/basic-info/features/common';
 import { TestReportModal } from '@module/basic-info/features/employees/modals/TestReportModal';
+import { DependentsShowModeModal } from '@module/basic-info/features/employees/modals/DependentsShowModeModal';
 const TestReport = () => {
   const { openModal } = useModalContext();
 
@@ -20,7 +29,20 @@ const TestReport = () => {
           {/*todo height*/}
           <div className="grid grid-cols-4 gap-3 overflow-y-scroll max-h-[100vh] p-2">
             {testReport.map((worker, index) => (
-              <Card key={index} className="p-3 flex flex-col gap-2 shadow-sm  ">
+              <Card key={index} className="p-3 flex flex-col gap-2 shadow-sm"
+                    isPressable
+                    onPress={() =>
+                      openModal(
+                        'edit',
+                        '',
+                        <TestReportModal />,
+                        undefined,
+                        '2xl',
+                        'Test Result',
+                        <TickSquare className="text-white" size={18}/>
+                      )
+                    }
+              >
                 <div className="flex items-center justify-between gap-3">
                   <Courthouse className="bg-primary-400 rounded-lg text-white rounded-4 p-2.5" size="50" />
                   <div className="flex flex-col gap-1">
@@ -30,7 +52,7 @@ const TestReport = () => {
                         className: 'bg-surface  border border-[#DCF0F9] p-0.5',
                         size: 'xs',
                         radius: 'lg',
-                        onPress: () => openModal('edit',"", <TestReportModal/>,undefined,'lg',"Test Result",<TickSquare className='text-white'/> ),
+
                         content:
                         <div className="flex gap-1">
                           <Courthouse size="12" color="#05587A"/>
