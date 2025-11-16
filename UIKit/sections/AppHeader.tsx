@@ -1,6 +1,6 @@
 import {Moon, Sun1, Notification, SmsNotification, Play} from "iconsax-reactjs";
 import {Avatar, Divider, Badge} from "@heroui/react";
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useMatches, useNavigate} from "@tanstack/react-router";
 
 import {AppButton, AppTabs} from "@hrbox/uikit/components";
@@ -9,17 +9,19 @@ import {useTheme} from "@hrbox/core/hooks/useTheme";
 import {useAuth} from "@hrbox/core/hooks/useAuth";
 import {DynamicLogo} from "@hrbox/core/components/DynamicLogo";
 import {useTranslation} from "react-i18next";
+import {useAppSelector} from "@Projects/hrbox-monorepo/core/redux";
 
 export const AppHeader = () => {
     const navigate = useNavigate();
     const matches = useMatches();
     const {isDark, toggleMode} = useTheme();
-    const {currentPanel, user} = useAuth();
+    const {user} = useAuth();
     const {t} = useTranslation();
     const currentRoute = matches[matches.length - 1];
     const routeContext = currentRoute?.context as any;
     const pageTitle = routeContext?.pageTitle || "Dashboard";
     const [activeTab, setActiveTab] = useState<string>('dashboard');
+    const domainTheme = useAppSelector((state: any) => state.auth.domainTheme);
 
     const breadcrumbPages = useMemo(() => {
         const pathname = currentRoute?.pathname || "/";
@@ -71,7 +73,7 @@ export const AppHeader = () => {
             <div className="flex flex-col w-full gap-2">
                 <div className="flex items-center justify-between w-full">
                     <div className="flex flex-col gap-2 flex-1">
-                        {currentPanel === "hrbox" ? (
+                        {domainTheme === "hrbox" ? (
                             <>
                                 <h1 className="text-2xl font-bold text-black dark:text-white">
                                     {pageTitle}
@@ -99,22 +101,22 @@ export const AppHeader = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <AppButton
-                            color={currentPanel === "hrbox" ? 'primary' : 'default'}
-                            variant={currentPanel === "hrbox" ? 'bordered' : 'solid'}
-                            size='xs'
+                            color={domainTheme === "hrbox" ? 'primary' : 'default'}
+                            variant={domainTheme === "hrbox" ? 'bordered' : 'solid'}
+                            size='md'
                             radius='md'
                             content={<Play size="24"/>}
                         />
                         <AppButton
-                            color={currentPanel === "hrbox" ? 'primary' : 'default'}
-                            variant={currentPanel === "hrbox" ? 'bordered' : 'solid'}
+                            color={domainTheme === "hrbox" ? 'primary' : 'default'}
+                            variant={domainTheme === "hrbox" ? 'bordered' : 'solid'}
                             size='md'
                             radius='md'
                             content={t('ed_tour')}
                         />
                         <AppButton
-                            color={currentPanel === "hrbox" ? 'primary' : 'default'}
-                            variant={currentPanel === "hrbox" ? 'bordered' : 'solid'}
+                            color={domainTheme === "hrbox" ? 'primary' : 'default'}
+                            variant={domainTheme === "hrbox" ? 'bordered' : 'solid'}
                             radius='md'
                             size='md'
                             content={t('upgrade')}

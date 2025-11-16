@@ -9,7 +9,6 @@ import ShiftAllocationForm, {
 const ShiftAllocationModal=()=>{
   const {closeModal}=useModalContext();
   return(
-    <>
      <FormProvider
       formId="ShiftAllocation-form"
       enableCache
@@ -27,12 +26,9 @@ const ShiftAllocationModal=()=>{
         submitLabel="تایید"
         cancelLabel="انصراف"
       > */}
-        <AppModal.Body>
           <ShiftAllocationForm />
-        </AppModal.Body>
       {/* </AppModal> */}
     </FormProvider>
-    </>
   )
 }
 export default ShiftAllocationModal;

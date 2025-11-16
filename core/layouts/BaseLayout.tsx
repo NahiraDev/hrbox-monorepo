@@ -5,7 +5,6 @@ import {motion} from 'framer-motion';
 import {AppHeader} from '@hrbox/uikit/sections/AppHeader';
 import {AppSidebar} from '@hrbox/uikit/sections/AppSideBar';
 import {AppSupportButton} from '@hrbox/uikit/components/AppSupportButton';
-import {AppDocs} from '@hrbox/uikit/sections/AppDocs';
 import {useDynamicBackground} from "@Projects/hrbox-monorepo/core/hooks/useDynamicBackground";
 
 interface BaseLayoutProps {
@@ -24,7 +23,7 @@ export function BaseLayout({children}: BaseLayoutProps) {
 
     return (
         <div
-            className="h-full flex flex-col xl:pr-16 pr-4 xl:pl-8 pl-4 xl:pb-8 pb-4 xl:pt-6 pt-4"
+            className="h-full flex flex-col gap-6 xl:pr-16 pr-4 xl:pl-8 pl-4 xl:pb-8 pb-4 xl:pt-6 pt-4"
             style={{
                 backgroundImage: panelBackground && `url(${panelBackground})`,
                 backgroundColor: !panelBackground ? 'var(--color-panel-background)' : undefined,
