@@ -5,7 +5,6 @@ import {motion} from 'framer-motion';
 import {AppHeader} from '@hrbox/uikit/sections/AppHeader';
 import {AppSidebar} from '@hrbox/uikit/sections/AppSideBar';
 import {AppSupportButton} from '@hrbox/uikit/components/AppSupportButton';
-import {AppDocs} from '@hrbox/uikit/sections/AppDocs';
 import {useDynamicBackground} from "@Projects/hrbox-monorepo/core/hooks/useDynamicBackground";
 
 interface BaseLayoutProps {
