@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { themeEngine } from "@hrbox/core/config/theme/engin";
 import { Panel, PanelTheme, ThemeConfig, ThemeMode } from "@hrbox/core/config/theme/types";
 import { RootState } from "@reduxjs/toolkit/query";
-import {getCurrentDomain} from "@Projects/hrbox-monorepo/core/config/theme";
+import {getCurrentDomain} from "@hrbox/core/config/theme";
 
 // ============================================
 // State Interface

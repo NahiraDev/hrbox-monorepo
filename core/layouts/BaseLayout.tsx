@@ -5,7 +5,8 @@ import {motion} from 'framer-motion';
 import {AppHeader} from '@hrbox/uikit/sections/AppHeader';
 import {AppSidebar} from '@hrbox/uikit/sections/AppSideBar';
 import {AppSupportButton} from '@hrbox/uikit/components/AppSupportButton';
-import {useDynamicBackground} from "@Projects/hrbox-monorepo/core/hooks/useDynamicBackground";
+import {AppDocs} from '@hrbox/uikit/sections/AppDocs';
+import {useDynamicBackground} from "@hrbox/core/hooks/useDynamicBackground";
 
 interface BaseLayoutProps {
     children: ReactNode;
@@ -43,7 +44,7 @@ export function BaseLayout({children}: BaseLayoutProps) {
                                 <div className="h-16 shrink-0 animate-pulse"/>
                             }
                         >
-                            <div className="shrink-0 mb-3  dark:border-neutral-700">
+                            <div className="shrink-0  dark:border-neutral-700">
                                 <SubHeader {...subHeaderProps} />
                             </div>
                         </Suspense>

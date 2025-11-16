@@ -9,7 +9,7 @@ import {useTheme} from "@hrbox/core/hooks/useTheme";
 import {useAuth} from "@hrbox/core/hooks/useAuth";
 import {DynamicLogo} from "@hrbox/core/components/DynamicLogo";
 import {useTranslation} from "react-i18next";
-import {useAppSelector} from "@Projects/hrbox-monorepo/core/redux";
+import {useAppSelector} from "@hrbox/core/redux";
 
 export const AppHeader = () => {
     const navigate = useNavigate();

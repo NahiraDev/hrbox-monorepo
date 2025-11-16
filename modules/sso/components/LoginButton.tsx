@@ -7,7 +7,7 @@ export const LoginButton = () =>{
     const { push } = useNavigation()
     const { t } = useTranslation()
     return(
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
             <div className="flex items-center justify-center gap-3 w-full">
                 <hr className="lg:w-full w-full h-[1px] text-neutral-400" />
                 <span className="text-neutral-400 dark:neutral-250 text-sm font-bold">
