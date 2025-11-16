@@ -15,8 +15,7 @@ import {
 import { Card } from '@heroui/react';
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
-import { GeneralInformationModal } from "@hrbox/modules/hrlink/modals/GeneralInformationModal";
-import {useFetchProfileQuery} from "@hrbox/modules/hrlink/apis/Setting";
+import { useFetchProfileQuery } from "@hrbox/modules/hrlink/apis/Setting";
 
 
 const ResumeInfo = () => {

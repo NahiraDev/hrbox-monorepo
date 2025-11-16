@@ -30,54 +30,54 @@ const PersonalCalenderList = () => {
       render: (row: any, index: number) => {
         return (
           <div className="flex flex-col justify-start bg-white gap-1.5 shadow-[0_1.25px_4px_0_var(--Secondary-600,#152446)] px-4 py-2 rounded-lg font-normal text-sm font-sans">
-            <AppButton props={{
-              startContent: <Add size={18} />,
-              content: "Daily Leave",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs"
-            }} />
-            <AppButton props={{
-              startContent: <Add size={18} />,
-              content: "Daily Mission",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs"
-            }} />
-            <AppButton props={{
-              startContent: <Trash size={18} />,
-              content: "Delete Traffic Entry",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs"
-            }} />
+            <AppButton
+              startContent= {<Add size={18} />}
+              content="Daily Leave"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+              />
+            <AppButton
+              startContent= {<Add size={18} />}
+              content= "Daily Mission"
+              className='w-full flex flex-row justify-start !text-sm!'
+              size="xs"
+             />
+            <AppButton 
+              startContent= {<Trash size={18} />}
+              content= "Delete Traffic Entry"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+             />
           </div>
         );
       },
       secondCellRender: (row: any, index: number) => {
         return (
           <div className="flex flex-col justify-start bg-white gap-1.5 shadow-[0_1.25px_4px_0_var(--Secondary-600,#152446)] px-4 py-2 rounded-lg font-normal font-sans">
-            <AppButton props={{
-              startContent: <Add size={18} />,
-              content: "Hourly Leave",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs",
-            }} />
-            <AppButton props={{
-              startContent: <Add size={18} />,
-              content: "Hourly Mission",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs",
-            }} />
-            <AppButton props={{
-              startContent: <Edit size={18} />,
-              content: "Edit Traffic Entry",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs",
-            }} />
-            <AppButton props={{
-              startContent: <Trash size={18} />,
-              content: "Delete Traffic Entry",
-              className:'w-full flex flex-row justify-start !text-sm',
-              size:"xs",
-            }} />
+            <AppButton
+              startContent= {<Add size={18} />}
+              content= "Hourly Leave"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+            />
+            <AppButton
+              startContent={ <Add size={18} />}
+              content= "Hourly Mission"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+             />
+            <AppButton
+              startContent={ <Edit size={18} />}
+              content= "Edit Traffic Entry"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+             />
+            <AppButton 
+              startContent= {<Trash size={18} />}
+              content= "Delete Traffic Entry"
+              className='w-full flex flex-row justify-start text-sm!'
+              size="xs"
+             />
           </div>
         );
       },

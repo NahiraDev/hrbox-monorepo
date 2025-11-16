@@ -1,4 +1,3 @@
-// scripts/auto-translate.js
 const fs = require('fs-extra');
 const glob = require('glob');
 const fetch = require('node-fetch');

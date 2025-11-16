@@ -8,17 +8,17 @@ interface DynamicLogoProps {
 }
 
 export function DynamicLogo({ variant = 'default', className = '' }: DynamicLogoProps) {
-  const currentPanel = useAppSelector((state: any) => state.auth.currentPanel);
+  const domainTheme = useAppSelector((state: any) => state.auth.domainTheme);
   const { logoSrc, alt } = useMemo(() => {
-    if (!currentPanel) {
+    if (!domainTheme) {
       return { logoSrc: '', alt: '' };
     }
-    const config = getDomainConfig(currentPanel);
+    const config = getDomainConfig(domainTheme);
     return {
       logoSrc: variant === 'mobile' ? config.logoMobile : config.logo,
       alt: config.title,
     };
-  }, [currentPanel, variant]);
+  }, [domainTheme, variant]);
 
   if (!logoSrc) return null;
 

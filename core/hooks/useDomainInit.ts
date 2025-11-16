@@ -21,9 +21,6 @@ export function useDomainInit() {
   const selectedRole = useAppSelector((state: any) => state.auth.selectedRole);
   const isAuthenticated = useAppSelector((state: any) => state.auth.isAuthenticated);
 
-  // ============================================
-  // 1️⃣ تشخیص Domain Theme (فقط یکبار از URL)
-  // ============================================
   useEffect(() => {
     console.log('🚀 Initializing domain...');
 
@@ -31,23 +28,18 @@ export function useDomainInit() {
 
     console.log('📍 Detected domain theme:', detectedDomain);
 
-    // ✅ ذخیره Domain Theme در Redux
     if (!domainTheme || domainTheme !== detectedDomain) {
       dispatch(setDomainTheme(detectedDomain));
     }
 
-    // ✅ اعمال تنظیمات اولیه (favicon, title, meta)
     const config = getDomainConfig(detectedDomain);
     applyFavicon(detectedDomain);
     applyPageTitle(detectedDomain);
     applyMetaTags(detectedDomain);
     getDomainTheme()
     console.log('✅ Domain config applied:', config.domain);
-  }, []); // فقط یکبار اجرا شود
+  }, []);
 
-  // ============================================
-  // 2️⃣ اعمال Theme بر اساس Domain (نه Role)
-  // ============================================
   useEffect(() => {
     if (domainTheme && themeMode) {
       dispatch(initTheme());

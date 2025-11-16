@@ -59,7 +59,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
       <Button
         ref={ref}
         className={clsx(
-          'font-medium transition-all duration-200',
+          'font-medium transition-all h-fit duration-200',
           'flex items-center justify-center min-w-fit gap-2',
           sizeClasses[size as keyof typeof sizeClasses],
           radiusClasses[radius],

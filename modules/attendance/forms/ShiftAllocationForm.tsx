@@ -48,7 +48,6 @@ const ShiftAllocationForm = () => {
     handleSubmit,
     setFieldValue,
   } = useFormContext();
-  console.log(values, "vvvvv");
   return (
     <>
       <Form id="shift-allocation-edit" onSubmit={handleSubmit}>
@@ -61,7 +60,7 @@ const ShiftAllocationForm = () => {
             }}
             defaultValue="Person"
             orientation="horizontal"
-            value={values.type}
+            // value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
@@ -107,7 +106,7 @@ const ShiftAllocationForm = () => {
                 component={AppAutoComplete}
               />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {/* {values.type === "Person" || values.type === "Group" ? (
               <div className="w-full">
                 <FormField
                   name="Department"
@@ -123,9 +122,9 @@ const ShiftAllocationForm = () => {
                   component={AppAutoComplete}
                 />
               </div>
-            )}
+            )} */}
           </div>
-          {values.type === "Person" && (
+          {/* {values.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
@@ -136,7 +135,7 @@ const ShiftAllocationForm = () => {
               </div>
               <div className="w-full"></div>
             </div>
-          )}
+          )} */}
 
           <div className="w-full">
             <FormField

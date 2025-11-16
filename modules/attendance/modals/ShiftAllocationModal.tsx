@@ -9,34 +9,26 @@ import ShiftAllocationForm, {
 const ShiftAllocationModal=()=>{
   const {closeModal}=useModalContext();
   return(
-    <>
-      <AppModal.Body>
-        <FormProvider  formId='ShiftAllocation-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
-          handleSubmitAction(values);
-          closeModal('confirm', 'ShiftAllocation');
-        }} validationSchema={formValidationAction}>
-        <ShiftAllocationForm/>
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
-              onPress= {() => closeModal('confirm', 'ShiftAllocation')}
-              content= 'Cancel'
-          />
-          <AppButton
-              color= 'primary'
-              size= 'md'
-              radius= 'lg'
-              className= 'text-white'
-              content= 'Submit'
-          />
-        </div>
-      </AppModal.Footer>
-    </>
+     <FormProvider
+      formId="ShiftAllocation-form"
+      enableCache
+      clearCacheOnSubmit
+      // onSubmitAsync={handleSubmit}
+      validationSchema={formValidationAction}
+    >
+      {/* <AppModal
+        type="confirm"
+        name="ShiftAllocation"
+        title="تخصیص شیفت"
+        size="lg"
+        // onSubmit={handleSubmit}
+        // onCancel={handleCancel}
+        submitLabel="تایید"
+        cancelLabel="انصراف"
+      > */}
+          <ShiftAllocationForm />
+      {/* </AppModal> */}
+    </FormProvider>
   )
 }
 export default ShiftAllocationModal;
