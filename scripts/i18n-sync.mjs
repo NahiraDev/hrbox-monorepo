@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 const SRC_LANG = 'en';
 const TARGET_LANGS = ['fa'];
 
-const baseDir = path.resolve('core/translate');
+const baseDir = path.resolve('./core/translate');
 const translateCache = new Map();
 
 const GOOGLE_TRANSLATE_API_KEY = process.env.GOOGLE_TRANSLATE_API_KEY;
