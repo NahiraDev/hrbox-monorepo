@@ -45,7 +45,10 @@ const sizeClasses: Record<
   },
 };
 
-export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps>(
+export const AppAutoComplete = forwardRef<
+  HTMLInputElement,
+  AppAutoCompleteProps
+>(
   (
     {
       name,
@@ -115,7 +118,9 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
             )}
           >
             {label}
-            {required && !isViewMode && <span className="text-danger ml-1">*</span>}
+            {required && !isViewMode && (
+              <span className="text-danger ml-1">*</span>
+            )}
           </label>
         )}
 
@@ -124,7 +129,9 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
           classNames={{
             inputWrapper: clsx(
               modeStyles.inputWrapper,
-              hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
+              hasError &&
+                !isViewMode &&
+                "border-danger bg-danger-50 dark:bg-danger-900/20"
             ),
             listboxWrapper: "z-50 max-h-64",
           }}
