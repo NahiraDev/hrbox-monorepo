@@ -8,13 +8,16 @@ import {
   Profile,
 } from 'iconsax-reactjs';
 import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalActions, useModalContext } from '@hrbox/core/providers/ModalProvider';
 import AddPermisionTime from '@hrbox/modules/attendance/modals/AddPermisionTime';
 
-import { AppButton } from '@hrbox/uikit/components';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@heroui/react';
 import { useLocation, useNavigate } from '@tanstack/react-router';
+import { FormProvider } from '@hrbox/core/providers';
+import ShiftAllocationForm from '../forms/ShiftAllocationForm';
+import ShiftAllocationModal from '../modals/ShiftAllocationModal';
 
 const CalenderSubHeader = () => {
   const years = [
@@ -32,6 +35,17 @@ const CalenderSubHeader = () => {
   const navigate=useNavigate<any>();
   const location = useLocation();
   const isTrafficCalender = location.pathname === '/attendance/traffic-calender';
+  const shiftModal = useModalActions(ModalType.CONFIRM, 'ShiftAllocation');
+   const handleOpenShiftAllocationModal = () => {
+    shiftModal.open(
+      <ShiftAllocationModal />,
+      undefined,
+      ModalSize.LG,
+      "تخصیص شیفت"
+    );
+  };
+
+
   return (
     <div className="w-full flex flex-col ">
       <div className="w-full flex flex-row justify-between">
@@ -86,14 +100,15 @@ const CalenderSubHeader = () => {
               color= 'white'
               size= 'md'
               variant= 'solid'
-              radius= 'sm'
+              radius= 'lg'
               className= 'shadow-none border-1 border-solid border-primary'
               startContent= {(
                 <span>
                   <ExportSquare size={20} />
                 </span>
               )}
-              /* onPress= {() => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"3xl","Add Permision Time",<Hierarchy3 color="white"/>)} */
+              onPress={handleOpenShiftAllocationModal} 
+                      /* onPress= {() => openModal('confirm', 'AddPermisionTime', <AddPermisionTime />,undefined,"3xl","Add Permision Time",<Hierarchy3 color="white"/>)} */
               content= 'Export '
           />
         </div>

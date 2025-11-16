@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Profile, Briefcase, Building, PasswordCheck, Key } from "iconsax-reactjs";
+import { Profile, Briefcase, Building, PasswordCheck, Key, Chart } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 import {
@@ -209,7 +209,7 @@ export const AttendancePlugin: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/attendance/dashboard",
-      icon: <Profile size="24" />,
+      icon: <Chart size="24" />,
     },
     {
       id: "entry-exit",
