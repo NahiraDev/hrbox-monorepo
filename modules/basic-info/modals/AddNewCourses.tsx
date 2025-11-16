@@ -1,5 +1,7 @@
 import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox-monorepo/UIKit/components';
 import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
+import { FormField } from "@HRBox/UIKit/components/FormField";
+import { AppAutoComplete } from "@HRBox/UIKit/components";
 
 const AddNewCourses = () => {
   const { openModal } = useModalContext();
@@ -8,100 +10,8 @@ const AddNewCourses = () => {
       <>
         <AppModal.Body>
           <div className="flex flex-col gap-y-6">
-            <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Degree Level',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Educational Institution',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'University Type',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Field of Study',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              /> <AppInput
-              props={{
-                className: ' border border-[#DCF0F9]',
-                label: 'Field of Study',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-              }}
-            />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Field of Study',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Field of Study',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Field of Study',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-              <AppInput
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Field of Study',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
+            {/*<FormField name={} component={AppAutoComplete}/>*/}
 
-            </div>
-            <div>
-              <AppTextArea
-                props={{
-                  className: ' border border-[#DCF0F9]',
-                  label: 'Descriptions*',
-                  size: 'lg',
-                  color: 'primary',
-                  radius: 'lg',
-                }}
-              />
-            </div>
           </div>
         </AppModal.Body>
         <AppModal.Footer>

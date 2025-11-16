@@ -1,6 +1,9 @@
+// OrganizationDepartmentChoseModal.tsx
 import { AppInput, AppModal, AppTextArea } from '@hrbox/UIKit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { FC } from 'react';
+import { FormField } from "@HRBox/UIKit/components/FormField";
+import * as Yup from "yup";
 
 const colors = ['#000000', '#A61111', '#F4D082', '#05856F', '#0ED2F7', '#2F80ED', '#DB5918', '#9F9C90'] as const;
 
@@ -12,12 +15,46 @@ interface DepartmentFormData {
   color: ColorType;
 }
 
-interface OrganizationDepartmentChoseModalProps {
+interface TechnicalDepartmentModalProps {
   initialData: DepartmentFormData;
   selectedColor: ColorType;
 }
-
-export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseModalProps> = ({
+export const initialValuesAction = {
+    DepartmentTitle : null,
+    Description : null,
+};
+export const formValidationAction = Yup.object().shape({
+  title: Yup.string().required(),
+  type: Yup.string().required(),
+  ChooseIp: Yup.string().required(),
+  FromDate: Yup.string().required(),
+  organization: Yup.string().required(),
+  Department: Yup.string().required(),
+  JobTitle: Yup.string().required(),
+  Employee: Yup.string().required(),
+  Description: Yup.string().required(),
+});
+export const handleSubmitAction = (values: any) => {
+  console.log(values.title);
+  console.log(values.type);
+  console.log(values.ChooseShift);
+  console.log(values.FromDate);
+  console.log(values.organization);
+  console.log(values.Employee);
+  console.log(values.Description);
+  return {
+    title: values.title,
+    type: values.type,
+    ChooseIp: values.ChooseIp,
+    FromDate: values.FromDate,
+    organization: values.organization,
+    Department: values.Department,
+    JobTitle: values.JobTitle,
+    Employee: values.Employee,
+    Description: values.Description,
+  };
+};
+export const TechnicalDepartmentForm: FC<TechnicalDepartmentModalProps> = ({
                                                                                               initialData,
                                                                                               selectedColor
                                                                                             }) => {
@@ -52,16 +89,7 @@ export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseMod
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-6">
-            <AppInput
-              props={{
-                ...commonInputProps,
-                label: 'Department Title',
-                value: initialData.title,
-                placeholder: 'Describe Title',
-                readOnly: true,
-                className: 'bg-gray-50 cursor-not-allowed',
-              }}
-            />
+            <FormField name="Department Title" label='Department Title'/>
             <div className="flex items-center gap-3">
               <div
                 className="w-16 h-16 rounded-lg "
@@ -70,17 +98,7 @@ export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseMod
               <span className="!font-medium text-secondary-1000">Department Color</span>
             </div>
           </div>
-
-          <AppTextArea
-            props={{
-              ...commonInputProps,
-              label: 'Description',
-              value: initialData.description,
-              placeholder: 'Enter department description',
-              readOnly: true,
-              className: 'bg-gray-50',
-            }}
-          />
+          <FormField  name="Description" label='Description' component={AppTextArea} />
         </div>
       </AppModal.Body>
     </>
