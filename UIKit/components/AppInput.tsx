@@ -26,7 +26,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
       required = true,
       error,
       name,
-      formMode = FormMode.CREATE,
+      formMode = "view",
       isDisabled = false,
       onFocus,
       onBlur,
