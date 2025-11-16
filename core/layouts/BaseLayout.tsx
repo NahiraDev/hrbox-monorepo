@@ -44,7 +44,7 @@ export function BaseLayout({children}: BaseLayoutProps) {
                                 <div className="h-16 shrink-0 animate-pulse"/>
                             }
                         >
-                            <div className="shrink-0  dark:border-neutral-700">
+                            <div className="shrink-0 mb-3  dark:border-neutral-700">
                                 <SubHeader {...subHeaderProps} />
                             </div>
                         </Suspense>
