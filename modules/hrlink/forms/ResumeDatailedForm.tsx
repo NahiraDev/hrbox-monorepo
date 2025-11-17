@@ -9,85 +9,187 @@ import { companyPeopleOptions } from '@hrbox-monorepo/modules/hrlink/app/mock';
 import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
 import { FormField } from '@hrbox/uikit/components/FormField';
 
-export const initialValuesEditGeralSetting = {
-  NotificationByEmail: true,
-  NotificationBySms: true,
-  NotificationByPanel: true,
-  AdaptationWithOldCompanies: true,
-  AdaptationWithCurrentCompanies: true,
-  AdaptationWithLowerSalary: true,
-  AdaptationWithCompanyPersonalMax: 0,
-  AdaptationWithCompanyPersonalMin: 0,
-  AdaptationDistanceLimit: 0,
+export const initialValuesResume = {
+  firstName: "",
+  lastName: "",
+  nationalCode: "",
+  birthDate: "",
+  maritalStatus: "",
+  gender: "",
+  militaryStatus: "",
+  orgCategory: "",
+  minSalary: "",
+  workingCategory: "",
+  nationality: "",
+  country: "",
+  city: "",
+  address: "",
 };
 
-export const validationErrorEditGeneralSetting = Yup.object().shape({
-  NotificationByEmail: Yup.boolean().required(),
-  NotificationBySms: Yup.boolean().required(),
-  NotificationByPanel: Yup.boolean().required(),
 
-  AdaptationWithOldCompanies: Yup.boolean().required(),
-  AdaptationWithCurrentCompanies: Yup.boolean().required(),
-  AdaptationWithLowerSalary: Yup.boolean().required(),
+export const resumeValidation = Yup.object().shape({
+  firstName: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required"),
 
-  AdaptationWithCompanyPersonalMax: Yup.number()
-    .required('Panel status is required')
-    .oneOf([0, 1], 'Invalid panel status'),
+  nationalCode: Yup.string()
+    .matches(/^\d{10}$/, "Must be 10 digits")
+    .required("Required"),
 
-  AdaptationWithCompanyPersonalMin: Yup.number()
-    .oneOf(
-      companyPeopleOptions.map((opt: { id: any }) => opt.id),
-      'Invalid company size option',
-    )
-    .required('Company size is required'),
+  birthDate: Yup.date().required("Required"),
 
-  AdaptationDistanceLimit: Yup.number().min(0, 'Must be at least 0').required('Required'),
+  maritalStatus: Yup.string().required("Required"),
+  gender: Yup.string().required("Required"),
+  militaryStatus: Yup.string().required("Required"),
+  orgCategory: Yup.string().required("Required"),
+  minSalary: Yup.number().required("Required"),
+  workingCategory: Yup.string().required("Required"),
+
+  nationality: Yup.string().required("Required"),
+  country: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+
+  address: Yup.string().required("Required"),
 });
 
-export const ResumeDatailedForm = () => {
-  const { 
-    values, errors, touched, handleChange, handleBlur, handleSubmit 
-  } = useFormContext();
+export const maritalStatusOptions = [
+  { label: "Single", value: "single" },
+  { label: "Married", value: "married" },
+];
 
+export const genderOptions = [
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
+];
+
+export const militaryStatusOptions = [
+  { label: "Completed", value: "completed" },
+  { label: "Exempt", value: "exempt" },
+  { label: "Not Completed", value: "not_completed" },
+];
+
+export const orgCategoryOptions = [
+  { label: "Private", value: "private" },
+  { label: "Government", value: "government" },
+  { label: "NGO", value: "ngo" },
+];
+
+export const workingCategoryOptions = [
+  { label: "Full-time", value: "fulltime" },
+  { label: "Part-time", value: "parttime" },
+  { label: "Contract", value: "contract" },
+];
+
+export const nationalityOptions = [
+  { label: "Iran", value: "iran" },
+  { label: "Turkey", value: "turkey" },
+  { label: "USA", value: "usa" },
+];
+
+export const countryOptions = [
+  { label: "Iran", value: "iran" },
+  { label: "Turkey", value: "turkey" },
+  { label: "USA", value: "usa" },
+];
+
+export const cityOptions = [
+  { label: "Tehran", value: "tehran" },
+  { label: "Istanbul", value: "istanbul" },
+  { label: "New York", value: "newyork" },
+];
+
+
+
+export const ResumeDetailedForm = () => {
+  const { handleSubmit } = useFormContext();
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Trigger button */}
-        <AppButton
-          onPress={() => setOpen(true)}
-          variant="primary"
-          startContent={<Edit />}
-          content="Edit General Settings"
+      <AppButton
+        onPress={() => setOpen(true)}
+        variant="primary"
+        startContent={<Edit />}
+        content="Edit Resume Information"
+      />
+
+      <Form onSubmit={handleSubmit}>
+
+        {/* TEXT FIELDS */}
+        <FormField name="firstName" label="First Name" />
+        <FormField name="lastName" label="Last Name" />
+        <FormField name="nationalCode" label="National Code" />
+        <FormField name="birthDate" label="Date of Birth" type="date" />
+
+        {/* SELECT / AUTOCOMPLETE */}
+        <FormField
+          name="maritalStatus"
+          label="Marital Status"
+          component={AppAutoComplete}
+          options={maritalStatusOptions}
         />
 
-      {/* Your form — FormModal will use this Formik context */}
-      <Form onSubmit={handleSubmit}>
-              <FormField
-        name="NotificationByEmail"
-        label="Email Notifications"
-        type="checkbox"
-        component={AppSwitch} // custom UI component
-      />
+        <FormField
+          name="gender"
+          label="Gender"
+          component={AppAutoComplete}
+          options={genderOptions}
+        />
 
-      <FormField
-        name="AdaptationWithCompanyPersonalMin"
-        label="Min Company Size"
-        component={AppAutoComplete}
-        options={companyPeopleOptions}
-      />
+        <FormField
+          name="militaryStatus"
+          label="Military Service Status"
+          component={AppAutoComplete}
+          options={militaryStatusOptions}
+        />
 
-      <FormField
-        name="AdaptationDistanceLimit"
-        label="Distance Limit (KM)"
-        type="number"
-      />
+        <FormField
+          name="orgCategory"
+          label="Organizational Category"
+          component={AppAutoComplete}
+          options={orgCategoryOptions}
+        />
 
-      <AppButton
-        type="submit"
-        variant="primary"
-        content="Save Settings"
-      />
+        <FormField
+          name="minSalary"
+          label="Minimum Salary"
+          type="number"
+        />
+
+        <FormField
+          name="workingCategory"
+          label="Working Category"
+          component={AppAutoComplete}
+          options={workingCategoryOptions}
+        />
+
+        <FormField
+          name="nationality"
+          label="Nationality"
+          component={AppAutoComplete}
+          options={nationalityOptions}
+        />
+
+        <FormField
+          name="country"
+          label="Country"
+          component={AppAutoComplete}
+          options={countryOptions}
+        />
+
+        <FormField
+          name="city"
+          label="City"
+          component={AppAutoComplete}
+          options={cityOptions}
+        />
+
+        <FormField
+          name="address"
+          label="Address"
+          type="text"
+        />
+
+        <AppButton type="submit" variant="primary" content="Save" />
 
       </Form>
     </>

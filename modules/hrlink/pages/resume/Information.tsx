@@ -17,7 +17,7 @@ import { Card, Button } from '@heroui/react';
 import { GeneralInformation } from '@hrbox/modules/hrlink/components/GeneralInformation';
 import { UserLocation } from '@hrbox/modules/hrlink/components/UserLocation';
 import { GeneralInformationModal } from '@hrbox/modules/hrlink/modals/GeneralInformationModal';
-import { ResumeDatailedForm } from '@hrbox/modules/hrlink/forms/ResumeDatailedForm'
+import { ResumeDetailedForm } from '@hrbox/modules/hrlink/forms/ResumeDatailedForm'
 import { useFetchProfileQuery } from '@hrbox/modules/hrlink/apis/Setting';
 import { useNavigation } from '@hrbox/core/hooks/useNavigation';
 import { Paths } from '@hrbox/modules/paths';
@@ -310,7 +310,7 @@ const ResumeInfo = () => {
     formId='resumeDetailedForm'
     initialValues={t}
     >
-      <ResumeDatailedForm></ResumeDatailedForm>
+      <ResumeDetailedForm></ResumeDetailedForm>
     </FormProvider>
     
   );
