@@ -98,7 +98,6 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
       <motion.div
           className={clsx(
               "bg-gradient-to-r px-6 py-4 flex items-center justify-between",
-              "border-b border-neutral-200 dark:border-neutral-700",
               getHeaderColor()
           )}
           initial={{ opacity: 0 }}
@@ -154,7 +153,7 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
             <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 p-3 bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-700 rounded-lg"
+                className="mb-4 p-3 bg-danger-50 dark:bg-danger-900/20 rounded-lg"
             >
               <p className="text-sm text-danger dark:text-danger-300">
                 {formError}
@@ -204,8 +203,6 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
       <motion.div
           className={clsx(
               "px-6 py-4 flex items-center justify-end gap-3",
-              "border-t border-neutral-200 dark:border-neutral-700",
-              "bg-neutral-50 dark:bg-neutral-900/50",
               className
           )}
           initial={{ opacity: 0, y: 10 }}
@@ -375,7 +372,6 @@ const AppModalBase: React.FC<AppModalProps> & {
                   onClick={(e) => e.stopPropagation()}
                   className={clsx(
                       "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800",
-                      "border border-neutral-200 dark:border-neutral-700",
                       "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col",
                       sizeClasses[modalSize] || "max-w-md"
                   )}
@@ -385,22 +381,16 @@ const AppModalBase: React.FC<AppModalProps> & {
                   {(modalTitle || modalIcon) && <AppModalHeader />}
 
                   {/* Content */}
-                  {children ? (
-                      children
-                  ) : (
-                      <>
-                        <AppModalBody>{modalComponent}</AppModalBody>
+                <AppModalBody>
+  {children ?? modalComponent}
+</AppModalBody>
 
-                        {/* Footer (Default) */}
-                        {!hideFooter &&
-                            (isFormMode || isDirty || isSubmitting || onSubmit) && (
-                                <AppModalFooter
-                                    submitLabel={submitLabel}
-                                    cancelLabel={cancelLabel}
-                                />
-                            )}
-                      </>
-                  )}
+{!hideFooter && (
+  <AppModalFooter
+    submitLabel={submitLabel}
+    cancelLabel={cancelLabel}
+  />
+)}
                 </ModalContextProvider.Provider>
               </motion.div>
             </motion.div>
