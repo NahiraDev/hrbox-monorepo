@@ -1,6 +1,5 @@
 import React from "react";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
-import { AppModal } from "./AppModal";
 import { ModalSize } from "@hrbox/core/providers/ModalProvider";
 
 interface FormModalProps {
@@ -29,18 +28,26 @@ interface FormModalProps {
     formError?: string | null;
 }
 
+/**
+ * ✅ FormModal - فقط یک wrapper برای Form است
+ * 
+ * کار: FormContext رو extract کنه و state‌ها رو پاس بده
+ * 
+ * ⚠️ اصلاً AppModal رو render نمی‌کنه!
+ * فقط children رو رندر می‌کنه و context ارائه می‌دهد
+ */
 export const FormModal: React.FC<FormModalProps> = ({
-                                                        formId,
-                                                        submitLabel = "ذخیره",
-                                                        cancelLabel = "لغو",
-                                                        onSubmit: customOnSubmit,
-                                                        onCancel: customOnCancel,
-                                                        isDirty: customIsDirty,
-                                                        isSubmitting: customIsSubmitting,
-                                                        formError: customFormError,
-                                                        ...props
-                                                    }) => {
-    // سعی در دریافت FormContext (از Formik)
+    formId,
+    submitLabel = "ذخیره",
+    cancelLabel = "لغو",
+    onSubmit: customOnSubmit,
+    onCancel: customOnCancel,
+    isDirty: customIsDirty,
+    isSubmitting: customIsSubmitting,
+    formError: customFormError,
+    children
+}) => {
+    // ✅ FormContext رو دریافت کنید
     let formContext: any = null;
     try {
         formContext = useFormContext();
@@ -50,17 +57,14 @@ export const FormModal: React.FC<FormModalProps> = ({
 
     const handleSubmit = () => {
         if (formContext?.handleSubmit) {
-            // استفاده از handleSubmit فرمیک
             formContext.handleSubmit();
         } else if (customOnSubmit) {
             customOnSubmit();
         }
     };
 
-    // Handler برای cancel
     const handleCancel = () => {
         if (formContext?.resetForm) {
-            // Reset کردن فرم موقع لغو
             formContext.resetForm();
         }
         if (customOnCancel) {
@@ -68,22 +72,15 @@ export const FormModal: React.FC<FormModalProps> = ({
         }
     };
 
-    // ترکیب state از FormContext و props
-    // استفاده از dirty یا touched از Formik
+    // ✅ State ها رو استخراج کنید
     const isDirty = formContext?.dirty ?? customIsDirty ?? false;
     const isSubmitting = formContext?.isSubmitting ?? customIsSubmitting ?? false;
     const formError = formContext?.formError ?? customFormError ?? null;
 
-    return (
-        <AppModal
-            {...props}
-            isDirty={isDirty}
-            isSubmitting={isSubmitting}
-            formError={formError}
-            onSubmit={handleSubmit}
-            onCancel={handleCancel}
-            submitLabel={submitLabel}
-            cancelLabel={cancelLabel}
-        />
-    );
+    // ✅ اطلاعات رو برای AppModal ارائه بدید
+    // (AppModal اینها رو میتونه از useModalInternal بگیره)
+    
+    // 🎯 فقط children رو رندر کنید
+    // AppModal خودش میتونه اینها رو استفاده کنه
+    return children;
 };

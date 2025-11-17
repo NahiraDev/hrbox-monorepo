@@ -13,21 +13,9 @@ const ShiftAllocationModal=()=>{
       formId="ShiftAllocation-form"
       enableCache
       clearCacheOnSubmit
-      // onSubmitAsync={handleSubmit}
       validationSchema={formValidationAction}
-    >
-      {/* <AppModal
-        type="confirm"
-        name="ShiftAllocation"
-        title="تخصیص شیفت"
-        size="lg"
-        // onSubmit={handleSubmit}
-        // onCancel={handleCancel}
-        submitLabel="تایید"
-        cancelLabel="انصراف"
-      > */}
+    > 
           <ShiftAllocationForm />
-      {/* </AppModal> */}
     </FormProvider>
   )
 }
