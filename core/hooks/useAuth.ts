@@ -45,7 +45,7 @@ export function useAuth() {
   roles?: UserRole[]
 ) => dispatch(loginSuccess({ userId, displayName, Token, renewalToken, roles })),
 
-    roleSelected: (role: UserRole, accessToken: string) =>
+    roleSelected: (role: UserRole, accessToken: string | null) =>
       dispatch(roleSelected({ role, accessToken })),
 
     switchRole: (role: UserRole) => dispatch(switchRole(role)),

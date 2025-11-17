@@ -49,16 +49,13 @@ const SelectRole = () => {
         try {
             console.log('🎭 Selecting role:', role);
 
-            const selectResponse = await apiResponse.selectRole(role.slug);
-            const accessToken = selectResponse.accessToken || user?.id || 'temp-access-token';
+            const accessToken = localStorage.getItem('token');
 
             roleSelected(role, accessToken);
 
-            const profile = await apiResponse.getProfile();
 
-            localStorage.setItem('userProfile', JSON.stringify(profile));
+            // localStorage.setItem('userProfile', JSON.stringify(profile));
 
-            const isComplete = profile.name && profile.email;
 
             let dashboardPath = '/';
             switch (role.slug) {
@@ -73,13 +70,13 @@ const SelectRole = () => {
                     break;
             }
 
-            if (!isComplete) {
-                console.log('⚠️ Profile incomplete, redirecting to form');
-                await push({ to:'/hrlink/profile-form' });
-            } else {
-                console.log('✅ Redirecting to:', dashboardPath);
-                await push({ to: dashboardPath });
-            }
+            // if (!isComplete) {
+            //     console.log('⚠️ Profile incomplete, redirecting to form');
+            //     await push({ to:'/hrlink/profile-form' });
+            // } else {
+            //     console.log('✅ Redirecting to:', dashboardPath);
+            //     await push({ to: dashboardPath });
+            // }
 
         } catch (err) {
             console.error('❌ انتخاب نقش ناموفق:', err);
@@ -99,65 +96,38 @@ const SelectRole = () => {
 
     return (
         <div className="flex flex-col gap-12 p-6 max-w-4xl mx-auto">
-            <div className="text-center">
-                <h1 className="text-3xl font-bold text-secondary-1000">انتخاب نقش</h1>
-                <p className="text-secondary-600 mt-2">
-                    سلام <span className="font-semibold">{user.name}</span>! لطفاً نقش مورد نظر خود را انتخاب کنید.
-                </p>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {roles.map((role) => (
+                {roles.map((role:any) => (
                     <div
                         key={role.id}
                         className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
                         onClick={() => handleRoleSelect(role)}
                     >
                         <div className="flex flex-col items-center gap-4">
-                            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
-                                <img
-                                    src={user.avatar || '/default-avatar.png'}
-                                    alt={user.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
 
-                            {/* اطلاعات کاربر */}
-                            <div className="text-center">
-                                <h3 className="text-lg font-semibold text-secondary-1000">{user.name}</h3>
-                                <p className="text-sm text-primary-700 font-medium">{role.name}</p>
-                                <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
-                                    {role.slug}
-                                </div>
-                            </div>
 
-                            {/* دکمه انتخاب */}
-                            <Button
-                                onPress={() => handleRoleSelect(role)}
-                                className="w-full mt-3"
-                                color="primary"
-                                variant="flat"
+                            <button
+                                onclick={() => handleRoleSelect(role)}
                             >
-                                ورود به پنل {role.name}
-                            </Button>
+                                <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
+                                    <img
+                                        src={user.avatar || '/default-avatar.png'}
+                                        alt={user.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+
+                                <div className="text-center">
+                                    <h3 className="text-lg font-semibold text-secondary-1000">{user.name}</h3>
+                                    <p className="text-sm text-primary-700 font-medium">{role.name}</p>
+                                    <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
+                                        {role.slug === 'organization' && "Hrbox Holding"}
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 ))}
-            </div>
-
-            {/* دکمه خروج */}
-            <div className="text-center">
-                <Button
-                    onPress={() => {
-                        logout();
-                        push({ to: Paths.SSO.login });
-                    }}
-                    variant="light"
-                    color="danger"
-                    size="sm"
-                >
-                    خروج از حساب
-                </Button>
             </div>
         </div>
     );
