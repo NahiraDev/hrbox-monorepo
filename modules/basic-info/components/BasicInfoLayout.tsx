@@ -1,13 +1,15 @@
 import type { Key, ReactNode } from 'react';
-import { DynamicAddModal } from '@hrbox-monorepo/modules/basic-info/modals/DynamicAddModal';
+import { DynamicAddModal } from '@hrbox/modules/basic-info/modals/DynamicAddModal';
 import { AppButton, AppDeleteModal } from '@hrbox-monorepo/UIKit/components';
 import { Add, Category, FolderCross, MessageEdit, Trash } from 'iconsax-reactjs';
 import { Listbox, ListboxItem } from '@heroui/react';
 import { useEffect, useState, useRef } from 'react';
 import { AppTabs } from '@hrbox-monorepo/UIKit/components';
-import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
-import Report from '@hrbox-monorepo/modules/basic-info/components/Repport';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import Report from '@hrbox/modules/basic-info/components/Repport';
 import { BasicInfoPaths } from '@hrbox-monorepo/modules/basic-info/app/paths';
+import { useLocation } from "react-use";
+import { useNavigate } from "@tanstack/react-router";
 
 // ==================== INTERFACES ====================
 interface TabItem {

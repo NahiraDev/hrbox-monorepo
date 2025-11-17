@@ -7,7 +7,7 @@ import type { ModulePlugin } from '@hrbox/modules/types';
 import { RoleSlug } from '@hrbox/core/config/theme';
 import { Profile, Briefcase, Building } from 'iconsax-reactjs';
 import { lazyRouteComponent } from '@tanstack/react-router';
-import {Paths} from "@hrbox/modules/paths";
+import { Paths } from "@hrbox/modules/paths";
 
 // ============================================
 // Pages

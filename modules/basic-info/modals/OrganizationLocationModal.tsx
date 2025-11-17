@@ -3,7 +3,7 @@ import { Add } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 
-export const OrgLocation = () => {
+export const OrganizationLocationModal = () => {
   const { openModal } = useModalContext();
 
   return (

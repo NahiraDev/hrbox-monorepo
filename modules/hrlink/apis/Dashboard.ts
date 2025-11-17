@@ -9,3 +9,7 @@ export const DashboardApi = HRLinkBaseApi.injectEndpoints({
 });
 
 export const { useLazyDashboardQuery } = DashboardApi;
+
+function createEndpoint(build: any, getData: string, arg2: string, arg3: string[]) {
+  throw new Error('Function not implemented.');
+}

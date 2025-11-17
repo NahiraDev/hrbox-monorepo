@@ -1,7 +1,7 @@
 import { Listbox, ListboxItem, Avatar } from '@heroui/react';
 import { AppButton, AppDeleteModal, AppInput } from '@hrbox-monorepo/UIKit/components';
 import { MessageEdit, Trash } from 'iconsax-reactjs';
-import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 const users = [
   { id: '1', name: 'Zahra Pakniyati', role: 'UiUx Designer', section: 'Report To' },

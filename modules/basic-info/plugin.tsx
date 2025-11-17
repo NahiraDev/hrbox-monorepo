@@ -225,7 +225,7 @@ export const BasicInfoPlugin: ModulePlugin = {
             layout: "base",
             meta: {
                 title: "Contract List",
-                requireAuth: true,
+                requireAuth: false,
                 requiredRoles: [RoleSlug.ORGANIZATION],
             },
         },

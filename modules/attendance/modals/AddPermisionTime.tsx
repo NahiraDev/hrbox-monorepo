@@ -15,18 +15,18 @@ const AddPermisionTime=()=>{
       <AppModal.Footer>
         <div className="flex flex-row justify-end gap-[30px]">
           <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
+              color='white'
+              size='md'
+              radius='lg'
               onPress={ () => closeModal('confirm', 'AddPermisionTime')}
-              content= 'Cancel'
+              content='Cancel'
           />
           <AppButton
-              color= 'primary'
-              size= 'md'
-              radius= 'lg'
-              className= 'text-white'
-              content= 'Submit'
+              color='primary'
+              size='md'
+              radius='lg'
+              className='text-white'
+              content='Submit'
           />
         </div>
       </AppModal.Footer>

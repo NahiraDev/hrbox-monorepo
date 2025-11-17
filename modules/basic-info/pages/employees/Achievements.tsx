@@ -4,8 +4,8 @@ import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
-import AddNewCourses from '@hrbox-monorepo/modules/basic-info/modals/AddNewCourses';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components/BasicInfoLayout';
+import AddNewCourses from '@hrbox/modules/basic-info/modals/AddNewCourses';
 
 const Achievements = () => {
   const { openModal } = useModalContext();
