@@ -25,34 +25,69 @@ export const initialValuesAction = {
   DescriptionsandAchievements : null,
 };
 export const formValidationAction = Yup.object().shape({
-  title: Yup.string().required(),
-  type: Yup.string().required(),
-  ChooseIp: Yup.string().required(),
-  FromDate: Yup.string().required(),
-  organization: Yup.string().required(),
-  Department: Yup.string().required(),
-  JobTitle: Yup.string().required(),
-  Employee: Yup.string().required(),
-  Description: Yup.string().required(),
+  Type: Yup.string().required(),
+  DrugAddiction: Yup.string().required(),
+  Smoking: Yup.string().required(),
+  BloodType: Yup.string().required(),
+  GastrointestinalDisease: Yup.string().required(),
+  AlcoholConsumption: Yup.string().required(),
+  MusculoskeletalDisease: Yup.string().required(),
+  MentalHealthCondition: Yup.string().required(),
+  BloodSugarLevel: Yup.string().required(),
+  VitaminDLevel: Yup.string().required(),
+  BloodPressure: Yup.string().required(),
+  LiverEnzymeStatus: Yup.string().required(),
+  Audiometry: Yup.string().required(),
+  BreathTest: Yup.string().required(),
+  VisionTest: Yup.string().required(),
+  ECG: Yup.string().required(),
+  BloodLipidLevel: Yup.string().required(),
+  BloodIronLevel: Yup.string().required(),
+  Date: Yup.string().required(),
+  DescriptionsandAchievements: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
+  console.log(values.Type);
+  console.log(values.DrugAddiction);
+  console.log(values.Smoking);
+  console.log(values.BloodType);
+  console.log(values.GastrointestinalDisease);
+  console.log(values.AlcoholConsumption);
+  console.log(values.MusculoskeletalDisease);
+  console.log(values.MentalHealthCondition);
+  console.log(values.BloodSugarLevel);
+  console.log(values.VitaminDLevel);
+  console.log(values.BloodPressure);
+  console.log(values.LiverEnzymeStatus);
+  console.log(values.Audiometry);
+  console.log(values.BreathTest);
+  console.log(values.VisionTest);
+  console.log(values.ECG);
+  console.log(values.BloodLipidLevel);
+  console.log(values.BloodIronLevel);
+  console.log(values.Date);
+  console.log(values.DescriptionsandAchievements);
   return {
-    title: values.title,
-    type: values.type,
-    ChooseIp: values.ChooseIp,
-    FromDate: values.FromDate,
-    organization: values.organization,
-    Department: values.Department,
-    JobTitle: values.JobTitle,
-    Employee: values.Employee,
-    Description: values.Description,
+    Type: values.Type,
+    DrugAddiction: values.DrugAddiction,
+    Smoking: values.Smoking,
+    BloodType: values.BloodType,
+    GastrointestinalDisease: values.GastrointestinalDisease,
+    AlcoholConsumption: values.AlcoholConsumption,
+    MusculoskeletalDisease: values.MusculoskeletalDisease,
+    MentalHealthCondition: values.MentalHealthCondition,
+    BloodSugarLevel: values.BloodSugarLevel,
+    VitaminDLevel: values.VitaminDLevel,
+    BloodPressure: values.BloodPressure,
+    LiverEnzymeStatus: values.LiverEnzymeStatus,
+    Audiometry: values.Audiometry,
+    BreathTest: values.BreathTest,
+    VisionTest: values.VisionTest,
+    ECG: values.ECG,
+    BloodLipidLevel: values.BloodLipidLevel,
+    BloodIronLevel: values.BloodIronLevel,
+    Date: values.Date,
+    DescriptionsandAchievements: values.DescriptionsandAchievements,
   };
 };
 const PreEmploymentHealthRecords = () => {

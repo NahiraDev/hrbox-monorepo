@@ -10,36 +10,37 @@ export const initialValuesAction = {
   Industry : null,
   Province : null,
   'JobGroup' : null,
+  DescriptionsandAchievements : null,
+
 };
 export const formValidationAction = Yup.object().shape({
-  title: Yup.string().required(),
-  type: Yup.string().required(),
-  ChooseIp: Yup.string().required(),
-  FromDate: Yup.string().required(),
-  organization: Yup.string().required(),
-  Department: Yup.string().required(),
-  JobTitle: Yup.string().required(),
-  Employee: Yup.string().required(),
-  Description: Yup.string().required(),
+  Title: Yup.string().required(),
+  Company: Yup.string().required(),
+  StartDate: Yup.string().required(),
+  SalaryReceived: Yup.string().required(),
+  Industry: Yup.string().required(),
+  Province: Yup.string().required(),
+  JobGroup: Yup.string().required(),
+  DescriptionsandAchievements: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
+  console.log(values.Title);
+  console.log(values.Company);
+  console.log(values.StartDate);
+  console.log(values.SalaryReceived);
+  console.log(values.Industry);
+  console.log(values.Province);
+  console.log(values.JobGroup);
+  console.log(values.DescriptionsandAchievements);
   return {
-    title: values.title,
-    type: values.type,
-    ChooseIp: values.ChooseIp,
-    FromDate: values.FromDate,
-    organization: values.organization,
-    Department: values.Department,
-    JobTitle: values.JobTitle,
-    Employee: values.Employee,
-    Description: values.Description,
+    Title: values.Title,
+    Company: values.Company,
+    StartDate: values.StartDate,
+    SalaryReceived: values.SalaryReceived,
+    Industry: values.Industry,
+    Province: values.Province,
+    JobGroup: values.JobGroup,
+    DescriptionsandAchievements: values.DescriptionsandAchievements,
   };
 };
 const JobForm = () => {

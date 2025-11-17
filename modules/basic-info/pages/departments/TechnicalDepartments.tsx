@@ -1,7 +1,7 @@
 import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
-import { OrganizationDepartmentModal } from '@hrbox-monorepo/modules/basic-info/modals/OrganizationDepartmentModal';
+import { OrganizationDepartmentModal } from '@hrbox/modules/basic-info/modals/OrganizationDepartmentModal';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Category, TickCircle } from 'iconsax-reactjs';
 

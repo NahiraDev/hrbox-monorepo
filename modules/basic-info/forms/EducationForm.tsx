@@ -14,34 +14,39 @@ ToYear : null,
 Province : null,
 };
 export const formValidationAction = Yup.object().shape({
-  title: Yup.string().required(),
-  type: Yup.string().required(),
-  ChooseIp: Yup.string().required(),
-  FromDate: Yup.string().required(),
-  organization: Yup.string().required(),
-  Department: Yup.string().required(),
-  JobTitle: Yup.string().required(),
-  Employee: Yup.string().required(),
-  Description: Yup.string().required(),
+  DegreeLevel: Yup.string().required(),
+  EducationalInstitution: Yup.string().required(),
+  UniversityType: Yup.string().required(),
+  FieldofStudy: Yup.string().required(),
+  ThesisTitle: Yup.string().required(),
+  GPA: Yup.string().required(),
+  FromYear: Yup.string().required(),
+  ToYear: Yup.string().required(),
+  Province: Yup.string().required(),
+  Type: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
+  console.log(values.DegreeLevel);
+  console.log(values.EducationalInstitution);
+  console.log(values.UniversityType);
+  console.log(values.FieldofStudy);
+  console.log(values.ThesisTitle);
+  console.log(values.GPA);
+  console.log(values.FromYear);
+  console.log(values.ToYear);
+  console.log(values.Province);
+  console.log(values.Type);
   return {
-    title: values.title,
-    type: values.type,
-    ChooseIp: values.ChooseIp,
-    FromDate: values.FromDate,
-    organization: values.organization,
-    Department: values.Department,
-    JobTitle: values.JobTitle,
-    Employee: values.Employee,
-    Description: values.Description,
+    DegreeLevel: values.DegreeLevel,
+    EducationalInstitution: values.EducationalInstitution,
+    UniversityType: values.UniversityType,
+    FieldofStudy: values.FieldofStudy,
+    ThesisTitle: values.ThesisTitle,
+    GPA: values.GPA,
+    FromYear: values.FromYear,
+    ToYear: values.ToYear,
+    Province: values.Province,
+    Type: values.Type,
   };
 };
 const EducationForm = () => {

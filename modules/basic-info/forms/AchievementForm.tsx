@@ -4,9 +4,9 @@ import { Form } from "@heroui/react";
 import * as Yup from "yup";
 
 export const initialValuesAction = {
-  c: null,
-  c: null,
-  c: null,
+  Title: null,
+  Year: null,
+  Month: null,
 
 };
 export const formValidationAction = Yup.object().shape({

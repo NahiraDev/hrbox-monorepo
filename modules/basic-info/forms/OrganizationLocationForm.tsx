@@ -1,11 +1,11 @@
-import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@hrbox-monorepo/UIKit/components';
+import { AppAutoComplete, AppButton, AppModal, AppTextArea } from '@hrbox/UIKit/components';
 import { Add } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { Avatar } from '@heroui/react';
 import { FormField } from "@HRBox/UIKit/components/FormField";
 import * as Yup from "yup";
 export const initialValuesAction = {
-  ocationTitle : null,
+  LocationTitle : null,
   URL : null,
   Province : null,
   City: null,
@@ -14,41 +14,36 @@ export const initialValuesAction = {
   Descriptions : null,
 };
 export const formValidationAction = Yup.object().shape({
-  title: Yup.string().required(),
-  type: Yup.string().required(),
-  ChooseIp: Yup.string().required(),
-  FromDate: Yup.string().required(),
-  organization: Yup.string().required(),
-  Department: Yup.string().required(),
-  JobTitle: Yup.string().required(),
-  Employee: Yup.string().required(),
-  Description: Yup.string().required(),
+  LocationTitle: Yup.string().required(),
+  URL: Yup.string().required(),
+  Province: Yup.string().required(),
+  City: Yup.string().required(),
+  HRManager: Yup.string().required(),
+  Address: Yup.string().required(),
+  Descriptions: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
+  console.log(values.LocationTitle);
+  console.log(values.URL);
+  console.log(values.Province);
+  console.log(values.City);
+  console.log(values.HRManager);
+  console.log(values.Address);
+  console.log(values.Descriptions);
   return {
-    title: values.title,
-    type: values.type,
-    ChooseIp: values.ChooseIp,
-    FromDate: values.FromDate,
-    organization: values.organization,
-    Department: values.Department,
-    JobTitle: values.JobTitle,
-    Employee: values.Employee,
-    Description: values.Description,
+    LocationTitle: values.LocationTitle,
+    URL: values.URL,
+    Province: values.Province,
+    City: values.City,
+    HRManager: values.HRManager,
+    Address: values.Address,
+    Descriptions: values.Descriptions,
   };
 };
 export const OrganizationLocationModal = () => {
   const { openModal } = useModalContext();
 
   return (
-    // <AppModal icon={<Location color="white" />} size="3xl" title="Organizational Locations">
     <>
       <AppModal.Body>
         <div className="grid grid-cols-2 gap-6">
@@ -65,7 +60,7 @@ export const OrganizationLocationModal = () => {
                   color: 'white',
                   variant: 'solid',
                   isIconOnly: true,
-                  onPress: () => openModal('edit', undefined),
+                  onPress: () => '',
                   content: (
                     <div className='flex items-center gap-1'>
                       <Add className="text-primary-600" size="20" />
@@ -91,7 +86,7 @@ export const OrganizationLocationModal = () => {
             size: 'xs',
             radius: 'sm',
             variant: 'light',
-            onPress: () => openModal('delete', undefined),
+            onPress: () => '',
             content: <span>Cancel</span>,
             className:
               'text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200',
@@ -109,6 +104,5 @@ export const OrganizationLocationModal = () => {
         />
       </AppModal.Footer>
     </>
-    // {/*</AppModal>*/}
   );
 };

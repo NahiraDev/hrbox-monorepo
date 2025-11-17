@@ -19,8 +19,6 @@ export const formValidationAction = Yup.object().shape({
   Duration: Yup.string().required(),
   CenterName: Yup.string().required(),
   Year: Yup.string().required(),
-  FromNumber: Yup.string().required(),
-  ToNumber: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
   console.log(values.Type);
@@ -29,7 +27,6 @@ export const handleSubmitAction = (values: any) => {
   console.log(values.Duration);
   console.log(values.CenterName);
   console.log(values.Year);
-  console.log(values.FromNumber);
   return {
     Type: values.title,
     Title: values.type,
@@ -37,8 +34,6 @@ export const handleSubmitAction = (values: any) => {
     Duration: values.FromDate,
     CenterName: values.organization,
     Year: values.Department,
-    FromNumber: values.JobTitle,
-    ToNumber: values.Employee,
    };
 };
 
