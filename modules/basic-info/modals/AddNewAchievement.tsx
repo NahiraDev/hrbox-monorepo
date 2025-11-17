@@ -1,7 +1,7 @@
 // @module/basic-info/pages/employees/modals/AddNewJob.tsx
 import React, { useState } from 'react';
 import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@hrbox-monorepo/UIKit/components';
-import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
+import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 
 interface AddNewJobProps {
   onClose: () => void;
