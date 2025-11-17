@@ -4,49 +4,78 @@ import { Paths } from '../../paths';
 import { Button } from '@heroui/react';
 import { RoleSlug } from '@hrbox/core/config/theme';
 import { useEffect } from 'react';
+import { AuthApiEndpoints } from 'apis/endpoints';
+
+const apiResponse = {
+  getProfile: () => fetch(`${AuthApiEndpoints.baseUrl}/Profile/GetProfile`, { headers: { Authorization: 'Bearer token-from-local' } }).then(res => res.json()),
+  selectRole: (role: string) => fetch(`${AuthApiEndpoints.baseUrl}/auth/select-role`, { method: 'POST', body: JSON.stringify({ role }) }).then(res => res.json()),
+}
 
 const SelectRole = () => {
     const { user, roles, roleSelected, selectedRole, needsRoleSelection, logout } = useAuth();
     const { push } = useNavigation();
 
-    // ✅ اگر نیاز به انتخاب نقش نباشه → مستقیم ریدایرکت
+    // ✅ اگر نیاز به انتخاب نقش نباشه → چک پروفایل و ریدایرکت
     useEffect(() => {
-        if (!needsRoleSelection && selectedRole) {
-            let dashboardPath = '/';
+        const checkProfileAndRedirect = async () => {
+            if (!needsRoleSelection && selectedRole) {
+                try {
+                    const profile = await apiResponse.getProfile();
+                    // چک کامل بودن پروفایل (بر اساس فیلدهای مورد نیاز، مثلاً name و email)
+                    const isComplete = profile.name && profile.email; // اگر API فیلد isProfileComplete داشت، از اون استفاده کن
 
-            switch (selectedRole.slug) {
-                case RoleSlug.JOB_SEEKER:
-                    dashboardPath = Paths.HRLink.Dashboard;
-                    break;
-                case RoleSlug.ORGANIZATION:
-                    dashboardPath = Paths.HRLink.Dashboard;
-                    break;
-                case RoleSlug.SUPER_ADMIN:
-                    dashboardPath = '/super-admin/dashboard';
-                    break;
+                    let dashboardPath = '/';
+                    switch (selectedRole.slug) {
+                        case RoleSlug.JOB_SEEKER:
+                            dashboardPath = Paths.HRLink.Dashboard;
+                            break;
+                        case RoleSlug.ORGANIZATION:
+                            dashboardPath = Paths.HRLink.Dashboard;
+                            break;
+                        case RoleSlug.SUPER_ADMIN:
+                            dashboardPath = '/super-admin/dashboard';
+                            break;
+                    }
+
+                    if (!isComplete) {
+                        push({ to: Paths.HRLink.ResumeInformation || '/hrlink/resume/inforamtion' }); 
+                     } else {
+                        push({ to: dashboardPath });
+                    }
+                } catch (err) {
+                    console.error('❌ خطا در چک پروفایل:', err);
+                    // هندل خطا، مثلاً لاگ‌اوت یا صفحه خطا
+                }
             }
+        };
 
-            push({ to: dashboardPath });
-        }
+        checkProfileAndRedirect();
     }, [needsRoleSelection, selectedRole, push]);
 
     const handleRoleSelect = async (role: any) => {
         try {
             console.log('🎭 Selecting role:', role);
 
-            // ✅ در اینجا اگر API برای انتخاب نقش داری، فراخوانی کن
-            // const response = await selectRoleAPI({ roleId: role.id }).unwrap();
-            // const accessToken = response.accessToken;
-
-            // ✅ فعلاً از توکن فعلی استفاده می‌کنیم
-            const accessToken = user?.id || 'temp-access-token';
+            // ✅ فراخوانی API انتخاب نقش
+            const selectResponse = await apiResponse.selectRole(role.slug);
+            const accessToken = selectResponse.accessToken || user?.id || 'temp-access-token'; // اگر API توکن جدید داد، استفاده کن
 
             // ✅ ذخیره نقش و تنظیم پنل
             roleSelected(role, accessToken);
 
-            // ✅ ریدایرکت به داشبورد مربوطه
-            let dashboardPath = '/';
+            // ✅ فچ پروفایل بعد از انتخاب نقش
+            const profile = await apiResponse.getProfile();
 
+            // ✅ ذخیره پروفایل در Redux یا state (اگر useAuth از Redux استفاده می‌کنه، اینجا dispatch کن)
+            // مثلاً: dispatch(setUser(profile)); — اگر userSlice داری، اضافه کن
+            // فعلاً فرض می‌کنیم useAuth آپدیت می‌شه یا پروفایل در localStorage ذخیره می‌شه
+            localStorage.setItem('userProfile', JSON.stringify(profile)); // ذخیره در localStorage برای persistence
+
+            // ✅ چک کامل بودن پروفایل
+            const isComplete = profile.name && profile.email; // customize کن بر اساس نیاز
+
+            // ✅ ریدایرکت به داشبورد یا فرم پروفایل
+            let dashboardPath = '/';
             switch (role.slug) {
                 case RoleSlug.JOB_SEEKER:
                     dashboardPath = Paths.HRLink.Dashboard;
@@ -59,8 +88,13 @@ const SelectRole = () => {
                     break;
             }
 
-            console.log('✅ Redirecting to:', dashboardPath);
-            await push({ to: dashboardPath });
+            if (!isComplete) {
+                console.log('⚠️ Profile incomplete, redirecting to form');
+                await push({ to: Paths.HRLink.ProfileForm || '/hrlink/profile-form' });
+            } else {
+                console.log('✅ Redirecting to:', dashboardPath);
+                await push({ to: dashboardPath });
+            }
 
         } catch (err) {
             console.error('❌ انتخاب نقش ناموفق:', err);

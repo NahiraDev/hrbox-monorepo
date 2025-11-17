@@ -8,12 +8,12 @@ import authReducer from '@hrbox/core/redux/slices/authSlice';
 import themeReducer from '@hrbox/core/redux/slices/themeSlice';
 import languageReducer from '@hrbox/core/redux/slices/languageSlice';
 import formCacheReducer from '@hrbox/core/redux/slices/formCacheSlice';
-import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
+import { settingApiWithEndpoints } from "@hrbox/modules/hrlink/apis/Setting";
 
 const persistConfig = {
   key: 'hrbox-v3',
   storage,
-  whitelist: ['auth', 'theme', 'language'],
+  whitelist: ['auth', 'theme', 'language' , 'user'],
 };
 
 export function createStoreWithModules(ENABLED_MODULES: string[]) {
@@ -25,6 +25,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
+    // user: userReducer(state.user, action),
     [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
     [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
     ...Object.fromEntries(
@@ -67,3 +68,7 @@ export type RootState = ReturnType<
 export type AppDispatch = ReturnType<
   typeof createStoreWithModules
 >['store']['dispatch'];
+
+function userReducer(user: any, action: any) {
+  throw new Error("Function not implemented.");
+}

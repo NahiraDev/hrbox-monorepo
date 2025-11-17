@@ -4,6 +4,10 @@ import { AppModal } from "./AppModal";
 import { ModalSize } from "@hrbox/core/providers/ModalProvider";
 
 interface FormModalProps {
+    // AppModal props
+    isOpen?: boolean;
+    onClose: () => void;
+
     // Props برای Context Mode
     type?: string;
     name?: string;
