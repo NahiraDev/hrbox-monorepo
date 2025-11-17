@@ -22,6 +22,14 @@ interface AppAutoCompleteProps
   onChange?: (value: string | number) => void;
   helperText?: string;
   containerClassName?: string;
+
+  //   // ADD THIS 👇
+  // options?: Array<{
+  //   id: string | number;
+  //   label: string;
+  //   value?: string | number;
+  //   [key: string]: any;
+  // }>;
 }
 
 const sizeClasses: Record<
