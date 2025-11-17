@@ -135,13 +135,14 @@ export const AppAutoComplete = forwardRef<
         <Autocomplete
           ref={ref}
           classNames={{
-            inputWrapper: clsx(
-              modeStyles.inputWrapper,
-              hasError &&
-                !isViewMode &&
-                "border-danger bg-danger-50 dark:bg-danger-900/20"
-            ),
+            base: clsx("flex flex-col gap-1.5", containerClassName),
             listboxWrapper: "z-50 max-h-64",
+            listbox: "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
+            popoverContent: "p-1",
+            selectorButton: clsx(
+              modeStyles.inputWrapper,
+              hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
+            ),
           }}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
@@ -156,7 +157,6 @@ export const AppAutoComplete = forwardRef<
           {data.map((item) => (
             <AutocompleteItem
               key={item[valueKey]}
-              value={item[valueKey]}
               className="text-secondary-900 dark:text-white"
             >
               {item[displayKey]}

@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { companyPeopleOptions } from '@hrbox-monorepo/modules/hrlink/app/mock';
 import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
 import { FormField } from '@hrbox/uikit/components/FormField';
+import { iranProvinces } from './options';
 
 export const initialValuesResume = {
   firstName: "",
@@ -98,100 +99,57 @@ export const cityOptions = [
 ];
 
 
+// const mappedProvinces = iranProvinces.map(p => ({
+//   ...p,
+//   display: p.label.fa,
+// }));
+
 
 export const ResumeDetailedForm = () => {
   const { handleSubmit } = useFormContext();
-  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <AppButton
-        onPress={() => setOpen(true)}
-        variant="primary"
-        startContent={<Edit />}
-        content="Edit Resume Information"
-      />
-
-      <Form onSubmit={handleSubmit}>
-
-        {/* TEXT FIELDS */}
+    <Form onSubmit={handleSubmit} className="grid grid-cols-4 gap-6 h-full">
+      <div className="col-span-3 flex flex-col gap-4">
         <FormField name="firstName" label="First Name" />
         <FormField name="lastName" label="Last Name" />
         <FormField name="nationalCode" label="National Code" />
-        <FormField name="birthDate" label="Date of Birth" type="date" />
-
-        {/* SELECT / AUTOCOMPLETE */}
+        <FormField name="dateOfBirth" label="Date of Birth" type="date" />
         <FormField
           name="maritalStatus"
           label="Marital Status"
           component={AppAutoComplete}
           options={maritalStatusOptions}
         />
-
-        <FormField
-          name="gender"
-          label="Gender"
-          component={AppAutoComplete}
-          options={genderOptions}
-        />
-
+<FormField
+  name="province"
+  label="Province"
+  component={AppAutoComplete}   // tell FormField to use your Autocomplete
+  data={iranProvinces}          // your static options
+  displayKey="label.fa"          // what the user sees
+  valueKey="value"               // what gets stored in the form
+/>
         <FormField
           name="militaryStatus"
-          label="Military Service Status"
+          label="Military Status"
           component={AppAutoComplete}
           options={militaryStatusOptions}
         />
-
-        <FormField
-          name="orgCategory"
-          label="Organizational Category"
-          component={AppAutoComplete}
-          options={orgCategoryOptions}
-        />
-
-        <FormField
-          name="minSalary"
-          label="Minimum Salary"
-          type="number"
-        />
-
-        <FormField
-          name="workingCategory"
-          label="Working Category"
-          component={AppAutoComplete}
-          options={workingCategoryOptions}
-        />
-
-        <FormField
-          name="nationality"
-          label="Nationality"
-          component={AppAutoComplete}
-          options={nationalityOptions}
-        />
-
-        <FormField
-          name="country"
-          label="Country"
-          component={AppAutoComplete}
-          options={countryOptions}
-        />
-
+        <FormField name="organizationalCategory" label="Organizational Category" />
+        <FormField name="minimumSalary" label="Minimum Salary" type="number" />
+        <FormField name="workingCategory" label="Working Category" />
+        <FormField name="nationality" label="Nationality" />
+        <FormField name="country" label="Country" />
         <FormField
           name="city"
           label="City"
           component={AppAutoComplete}
-          options={cityOptions}
+          options={iranProvinces}
         />
+        <FormField name="address" label="Address" />
 
-        <FormField
-          name="address"
-          label="Address"
-          type="text"
-        />
-
-        <AppButton type="submit" variant="primary" content="Save" />
-
-      </Form>
-    </>
+        <AppButton type="submit" content="Save" variant="primary" />
+      </div>
+    </Form>
   );
 };
