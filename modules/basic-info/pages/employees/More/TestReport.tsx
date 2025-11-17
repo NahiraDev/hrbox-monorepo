@@ -22,7 +22,7 @@ const TestReport = () => {
             {testReport.map((worker, index) => (
               <Card key={index} className="p-3 flex flex-col gap-2 shadow-light-tight-1">
                 <div className="flex items-center justify-between gap-3">
-                  <User className="bg-primary-400 text-white rounded-4 p-2.5" size="50" />
+                  <User className="bg-primary-panel text-white rounded-4 p-2.5" size="50" />
                   <div className="flex flex-col gap-1">
                     <span className="text-sm font-semibold text-secondary-1000">{worker.titleJob}</span>
                     <AppButton

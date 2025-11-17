@@ -57,10 +57,10 @@ export class ThemeEngine {
   private applyColors(theme: ThemeConfig): void {
     const panelColors = PANEL_PRESETS[theme.panel][theme.mode];
 
-    this.setVariable('--color-panel-primary', panelColors.primary);
-    this.setVariable('--color-panel-secondary', panelColors.secondary);
-    this.setVariable('--color-panel-background', panelColors.background);
-    this.setVariable('--color-panel-surface', panelColors.surface);
+    this.setVariable('--color-primary', panelColors.primary);
+    this.setVariable('--color-secondary', panelColors.secondary);
+    this.setVariable('--color-background', panelColors.background);
+    this.setVariable('--color-surface', panelColors.surface);
 
     Object.entries(theme.colors.primary).forEach(([key, value]) => {
       this.setVariable(`--color-primary-${key}`, value);

@@ -65,11 +65,11 @@ export const HRLinkApiEndpoints = {
   },
 
   profile: {
-    getInfo: `${BaseUrl}/Profile/GetProfile`,
-    edit: `${BaseUrl}/Profile/EditProfile`,
-    changePassword: `${BaseUrl}/profile/ChangePassword`,
-    fetchSettings: `${BaseUrl}/Profile/GetGeneralSetting`,
-    editSettings: `${BaseUrl}/Profile/EditGeneralSetting`,
+    getInfo: `/Profile/GetProfile`,
+    edit: `/Profile/EditProfile`,
+    changePassword: `/profile/ChangePassword`,
+    fetchSettings: `/Profile/GetGeneralSetting`,
+    editSettings: ` /Profile/EditGeneralSetting`,
   },
 
   user: {
@@ -79,6 +79,7 @@ export const HRLinkApiEndpoints = {
     getMilitaryStatus: `${BaseUrl}/User/GetUserMilitaryStatus`,
     getUserCity: `${BaseUrl}/User/getUserCity`,
     downloadResume: `${BaseUrl}/User/DownloadResume`,
+    getProfileAvatar: '/User/GetProfilePhoto'
   },
 
   common: {
@@ -96,6 +97,10 @@ export const HRLinkApiEndpoints = {
   },
 
   dashboard: {
+    getViewResume: `/Dashboard/ViewedResumes?count=12`,
+    getResumePercent: `/Dashboard/GetResumePercent`,
+    getJobOpportunitiesSent: '/Dashboard/GetJobOpportunitiesSent?page=0&pageSize=10',
+    getCompaniesList: '/Company/GetCompaniesList?page=0&pageSize=12',
     getData: `${BaseUrl}/Dashboard/GetAllAdaptionByUserId`,
   },
 };

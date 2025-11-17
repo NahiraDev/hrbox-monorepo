@@ -18,7 +18,7 @@ const Employees = () => {
                 {/*<TickIcon color={worker.isActive ? '#0B76B7' : '#CCC'} />*/}
               </div>
               <span className="text-secondary-1000 font-medium">{worker.nameWorker}</span>
-              <Button className="h-6 text-primary-400 bg-[#DCF0F966]/40 border-2 border-primary" variant="faded">
+              <Button className="h-6 text-primary-panel bg-[#DCF0F966]/40 border-2 border-primary" variant="faded">
                 {worker.job}
               </Button>
             </Card>

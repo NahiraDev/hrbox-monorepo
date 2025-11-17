@@ -65,7 +65,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
               'bg-panel-surface dark:bg-neutral-800',
               'border-1.5 border-primary-200 dark:border-primary-700',
               'hover:border-primary-300 dark:hover:border-primary-600',
-              'focus-within:border-panel-primary focus-within:shadow-md'
+              'focus-within:border-primary focus-within:shadow-md'
             ),
             input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
             isDisabled: false,
@@ -79,7 +79,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
               'bg-white dark:bg-neutral-800',
               'dark:border-neutral-600',
               'hover:border-primary-300 dark:hover:border-primary-600',
-              'focus-within:border-panel-primary focus-within:shadow-lg'
+              'focus-within:border-primary focus-within:shadow-lg'
             ),
             input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
             isDisabled: false,

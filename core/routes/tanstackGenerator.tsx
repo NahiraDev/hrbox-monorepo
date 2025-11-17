@@ -276,7 +276,7 @@ function ForbiddenPage() {
           </button>
           <button
             onClick={() => (window.location.href = '/')}
-            className="px-6 py-2.5 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
+            className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
           >
             صفحه اصلی
           </button>
@@ -300,7 +300,7 @@ function NotFoundPage() {
 
         <button
           onClick={() => (window.location.href = '/')}
-          className="px-6 py-2.5 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
+          className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
         >
           بازگشت به صفحه اصلی
         </button>

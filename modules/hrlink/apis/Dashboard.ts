@@ -1,15 +1,39 @@
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from '@hrbox-monorepo/modules/hrlink/app/endpoints';
 
-export const DashboardApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    dashboard: createEndpoint(build, HRLinkApiEndpoints.dashboard.getData, 'GET', ['Dashboard']),
-  }),
-  overrideExisting: false,
+const DashboardApi = createModuleApi({
+  reducerPath: 'dashboardApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Dashboard'],
+  requiresAuth: true,
+  autoToast: true,
 });
 
-export const { useLazyDashboardQuery } = DashboardApi;
+export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
+  endpoints: (build:any) => ({
+    fetchViewResume: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.dashboard.getViewResume,
+      tags: ['Dashboard'],
+    }),
+    fetchResumePercent: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.dashboard.getResumePercent,
+      tags: ['Dashboard'],
+    }),
+    getJobOpportunitiesSent: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.dashboard.getJobOpportunitiesSent,
+      tags: ['Dashboard'],
+    }),
+    getCompaniesList: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.dashboard.getCompaniesList,
+      tags: ['Dashboard'],
+    }),
+  }),
+})
 
-function createEndpoint(build: any, getData: string, arg2: string, arg3: string[]) {
-  throw new Error('Function not implemented.');
-}
+export const {
+  useFetchViewResumeQuery,
+    useFetchResumePercentQuery,
+    useGetJobOpportunitiesSentQuery,
+    useGetCompaniesListQuery
+} = dashboardApiEndpoints;

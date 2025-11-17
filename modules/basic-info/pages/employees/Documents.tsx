@@ -126,7 +126,7 @@ const Documents = () => {
                               'lg'
                             ),
                           content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'p-2 hover:!bg-primary-400 transition-all duration-200',
+                          className: 'p-2 hover:!bg-primary-panel transition-all duration-200',
                         }}
                       />
                     </div>

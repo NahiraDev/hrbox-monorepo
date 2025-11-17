@@ -175,7 +175,7 @@ const CalenderSubHeader = () => {
               <p className="text-sm! font-open-sans">Zahra Pakniyat</p>
               <div className="flex justify-start items-center">
                 <div className="bg-[#DCF0F940] rounded-lg border border-primary-50 px-1 ">
-                  <p className="font-open-sans text-[10px]! text-center! text-primary-400! ">
+                  <p className="font-open-sans text-[10px]! text-center! text-primary-panel! ">
                     UiUx Designer
                   </p>
                 </div>

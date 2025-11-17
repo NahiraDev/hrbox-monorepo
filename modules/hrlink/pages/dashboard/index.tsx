@@ -17,6 +17,11 @@ import {
 import { data } from "autoprefixer";
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
+import {
+  useFetchResumePercentQuery,
+  useFetchViewResumeQuery, useGetCompaniesListQuery,
+  useGetJobOpportunitiesSentQuery
+} from "@hrbox/modules/hrlink/apis";
 
 
 ChartJS.register(
@@ -31,8 +36,11 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const sampleData = [12, 19, 3, 5, 2];
-
+  const {data:viewResumeQuery} = useFetchViewResumeQuery();
+  const {data:resumePercent} = useFetchResumePercentQuery();
+  const {data:getJobOpportunitiesSent} = useGetJobOpportunitiesSentQuery();
+  const {data:getCompaniesList} = useGetCompaniesListQuery();
+  const sampleData = [viewResumeQuery];
   const DashboardChartData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
     datasets: [
@@ -133,6 +141,7 @@ const Dashboard = () => {
     { id: 3, company: 'Orkid', sent: true },
     { id: 4, company: 'ZAT', sent: true },
   ];
+
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3 flex flex-col gap-3 h-full">
@@ -172,7 +181,7 @@ const Dashboard = () => {
                         filler: 'bg-tertiar-400',
                         track: '!h-1',
                       }}
-                      defaultValue={0.2}
+                      value={resumePercent && resumePercent?.data}
                       formatOptions={{ style: 'percent' }}
                       label="Info’s"
                       marks={[
@@ -235,11 +244,14 @@ const Dashboard = () => {
                       }}
                     />
                   </div>
-                  <div className="w-1/2 text-end">
-                    <Button className="bg-secondary-400 text-white font-semibold py-1 px-2 rounded-lg shadow-shadow-light-tight/1 !w-[144px] !min-w-fit h-[30px]">
-                      Finalize Resume
-                    </Button>
-                  </div>
+                  {
+                    resumePercent?.data !== 100 &&    <div className="w-1/2 text-end">
+                        <Button className="bg-secondary-400 text-white font-semibold py-1 px-2 rounded-lg shadow-shadow-light-tight/1 !w-[144px] !min-w-fit h-[30px]">
+                          Finalize Resume
+                        </Button>
+                      </div>
+                  }
+
                 </div>
               </CardBody>
             </Card>
@@ -250,7 +262,7 @@ const Dashboard = () => {
                   </span>
               </CardHeader>
               <CardBody>
-                {jobOpportunities.map((job: any) => (
+                {getJobOpportunitiesSent && getJobOpportunitiesSent.map((job: any) => (
                   <div key={job.id} className="flex justify-between items-center py-2 border-b border-gray-100">
                     <div className="flex gap-2 items-center">
                       <Buildings2 className="text-secondary-400" size="22" />

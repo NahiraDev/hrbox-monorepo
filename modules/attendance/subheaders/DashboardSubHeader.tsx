@@ -35,7 +35,7 @@ const DashboardSubHeader = () => {
               size= 'md'
               radius= 'sm'
               content= 'Dashboard'
-              className= 'text-white bg-primary-400 '
+              className= 'text-white bg-primary-panel '
               startContent= {<Chart />}
           />
         </div>

@@ -4,25 +4,19 @@ import { Paths } from '../../paths';
 import { Button } from '@heroui/react';
 import { RoleSlug } from '@hrbox/core/config/theme';
 import { useEffect } from 'react';
-import { AuthApiEndpoints } from 'apis/endpoints';
-
-const apiResponse = {
-  getProfile: () => fetch(`${AuthApiEndpoints.baseUrl}/Profile/GetProfile`, { headers: { Authorization: 'Bearer token-from-local' } }).then(res => res.json()),
-  selectRole: (role: string) => fetch(`${AuthApiEndpoints.baseUrl}/auth/select-role`, { method: 'POST', body: JSON.stringify({ role }) }).then(res => res.json()),
-}
+import {useFetchProfileInfoQuery, useGetProfilePhotoQuery} from "@hrbox/modules/hrlink/apis/Resume";
 
 const SelectRole = () => {
     const { user, roles, roleSelected, selectedRole, needsRoleSelection, logout } = useAuth();
     const { push } = useNavigation();
-
-    // ✅ اگر نیاز به انتخاب نقش نباشه → چک پروفایل و ریدایرکت
+    const {data:getRole} = useFetchProfileInfoQuery()
+    const {data:getProfilePhoto} = useGetProfilePhotoQuery()
     useEffect(() => {
         const checkProfileAndRedirect = async () => {
             if (!needsRoleSelection && selectedRole) {
                 try {
-                    const profile = await apiResponse.getProfile();
-                    // چک کامل بودن پروفایل (بر اساس فیلدهای مورد نیاز، مثلاً name و email)
-                    const isComplete = profile.name && profile.email; // اگر API فیلد isProfileComplete داشت، از اون استفاده کن
+                    const profile = null;
+                    const isComplete = getRole?.FirstName && getRole.Email;
 
                     let dashboardPath = '/';
                     switch (selectedRole.slug) {
@@ -38,43 +32,34 @@ const SelectRole = () => {
                     }
 
                     if (!isComplete) {
-                        push({ to: Paths.HRLink.ResumeInformation || '/hrlink/resume/inforamtion' }); 
+                        push({ to: Paths.HRLink.ResumeInformation || '/hrlink/resume/inforamtion' });
                      } else {
                         push({ to: dashboardPath });
                     }
                 } catch (err) {
                     console.error('❌ خطا در چک پروفایل:', err);
-                    // هندل خطا، مثلاً لاگ‌اوت یا صفحه خطا
                 }
             }
         };
 
         checkProfileAndRedirect();
-    }, [needsRoleSelection, selectedRole, push]);
+    }, [needsRoleSelection, selectedRole]);
 
     const handleRoleSelect = async (role: any) => {
         try {
             console.log('🎭 Selecting role:', role);
 
-            // ✅ فراخوانی API انتخاب نقش
             const selectResponse = await apiResponse.selectRole(role.slug);
-            const accessToken = selectResponse.accessToken || user?.id || 'temp-access-token'; // اگر API توکن جدید داد، استفاده کن
+            const accessToken = selectResponse.accessToken || user?.id || 'temp-access-token';
 
-            // ✅ ذخیره نقش و تنظیم پنل
             roleSelected(role, accessToken);
 
-            // ✅ فچ پروفایل بعد از انتخاب نقش
             const profile = await apiResponse.getProfile();
 
-            // ✅ ذخیره پروفایل در Redux یا state (اگر useAuth از Redux استفاده می‌کنه، اینجا dispatch کن)
-            // مثلاً: dispatch(setUser(profile)); — اگر userSlice داری، اضافه کن
-            // فعلاً فرض می‌کنیم useAuth آپدیت می‌شه یا پروفایل در localStorage ذخیره می‌شه
-            localStorage.setItem('userProfile', JSON.stringify(profile)); // ذخیره در localStorage برای persistence
+            localStorage.setItem('userProfile', JSON.stringify(profile));
 
-            // ✅ چک کامل بودن پروفایل
-            const isComplete = profile.name && profile.email; // customize کن بر اساس نیاز
+            const isComplete = profile.name && profile.email;
 
-            // ✅ ریدایرکت به داشبورد یا فرم پروفایل
             let dashboardPath = '/';
             switch (role.slug) {
                 case RoleSlug.JOB_SEEKER:
@@ -90,7 +75,7 @@ const SelectRole = () => {
 
             if (!isComplete) {
                 console.log('⚠️ Profile incomplete, redirecting to form');
-                await push({ to: Paths.HRLink.ProfileForm || '/hrlink/profile-form' });
+                await push({ to:'/hrlink/profile-form' });
             } else {
                 console.log('✅ Redirecting to:', dashboardPath);
                 await push({ to: dashboardPath });
@@ -101,7 +86,6 @@ const SelectRole = () => {
         }
     };
 
-    // ✅ بررسی وجود کاربر و نقش‌ها
     if (!user || roles.length === 0) {
         return (
             <div className="flex h-screen items-center justify-center">
@@ -130,7 +114,6 @@ const SelectRole = () => {
                         onClick={() => handleRoleSelect(role)}
                     >
                         <div className="flex flex-col items-center gap-4">
-                            {/* آواتار کاربر */}
                             <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-100">
                                 <img
                                     src={user.avatar || '/default-avatar.png'}
