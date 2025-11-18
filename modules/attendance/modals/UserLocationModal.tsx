@@ -42,7 +42,6 @@ const UserLocationModal = () => {
 
   return (
     <>
-      <AppModal.Body>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-row gap-3 items-center">
             <Avatar
@@ -98,28 +97,6 @@ const UserLocationModal = () => {
             </MapContainer>
           </div>
         </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-            color="white"
-            size="md"
-            radius="lg"
-            onPress={() => closeModal("confirm", "UserLocationModal")}
-            content="Cancel"
-          />
-          <AppButton
-            color="primary"
-            size="md"
-            radius="sm"
-            className="text-white"
-            onPress={() =>
-              openModal("confirm", "ActionsModal", <ActionsModal />)
-            }
-            content="Submit Again"
-          />
-        </div>
-      </AppModal.Footer>
     </>
   );
 };

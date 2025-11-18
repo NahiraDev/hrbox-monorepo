@@ -7,7 +7,7 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-  Spinner
+  Spinner,
 } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
@@ -57,7 +57,13 @@ export interface RowAction<T = any> {
   icon?: React.ReactNode;
   onClick: (row: T, index: number) => void | Promise<void>;
   visible?: (row: T, index: number) => boolean;
-  color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  color?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   confirmMessage?: string;
   disabled?: (row: T) => boolean;
 }
@@ -65,7 +71,11 @@ export interface RowAction<T = any> {
 export interface ExpandableConfig<T = any> {
   render: (row: T, index: number) => React.ReactNode;
   expandedRowClassName?: string;
-  onExpand?: (row: T, index: number, isExpanded: boolean) => void | Promise<void>;
+  onExpand?: (
+    row: T,
+    index: number,
+    isExpanded: boolean
+  ) => void | Promise<void>;
   defaultExpanded?: boolean | ((row: T) => boolean);
   expandButtonPosition?: "start" | "end";
 }
@@ -84,7 +94,9 @@ export interface TableStyleConfig {
   tableClassName?: string;
   headerClassName?: string;
   bodyClassName?: string;
-  rowClassName?: string | ((row: any, index: number, isSelected: boolean) => string);
+  rowClassName?:
+    | string
+    | ((row: any, index: number, isSelected: boolean) => string);
   cellClassName?: string;
   emptyClassName?: string;
   loadingClassName?: string;
@@ -187,7 +199,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
       onEdit,
       onDelete,
-      onView
+      onView,
     },
     ref
   ) => {
@@ -224,7 +236,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           key,
           label: key.replace(/([A-Z])/g, " $1").trim(),
           align: "center" as const,
-          type: "text" as const
+          type: "text" as const,
         }));
     }, [columns, data]);
 
@@ -361,7 +373,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                 top: rect.bottom + window.scrollY + 8,
                 left: rect.left + window.scrollX,
                 width: rect.width,
-                rowIndex: index
+                rowIndex: index,
               });
             }
           }, 0);
@@ -369,11 +381,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
         setExpandedRows(newExpanded);
         if (expandable?.onExpand) {
-          await expandable.onExpand(
-            paginatedData[index],
-            index,
-            !wasExpanded
-          );
+          await expandable.onExpand(paginatedData[index], index, !wasExpanded);
         }
       },
       [expandedRows, paginatedData, expandable]
@@ -400,17 +408,22 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         bordered: "border-b border-neutral-200 dark:border-neutral-700",
         minimal: "",
         attendance: "",
-        default: ""
+        default: "",
       }[variant];
 
-      return clsx(baseClass, variantClass, customClass, isSelected && "bg-primary-100 dark:bg-primary-900/40");
+      return clsx(
+        baseClass,
+        variantClass,
+        customClass,
+        isSelected && "bg-primary-100 dark:bg-primary-900/40"
+      );
     };
 
     const getDensityClass = () => {
       return {
         sm: "py-2 px-2",
         md: "py-3 px-3",
-        lg: "py-4 px-4"
+        lg: "py-4 px-4",
       }[density];
     };
 
@@ -429,16 +442,15 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         case "boolean":
           return value ? "✓" : "✗";
         case "date":
-          return value
-            ? new Date(value).toLocaleDateString()
-            : "-";
+          return value ? new Date(value).toLocaleDateString() : "-";
         case "number":
-          return typeof value === "number"
-            ? value.toLocaleString()
-            : value;
+          return typeof value === "number" ? value.toLocaleString() : value;
         case "email":
           return (
-            <a href={`mailto:${value}`} className="text-primary hover:underline">
+            <a
+              href={`mailto:${value}`}
+              className="text-primary hover:underline"
+            >
               {value}
             </a>
           );
@@ -506,7 +518,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         <TableColumn key="checkbox" width={40} className="text-center">
           <input
             type="checkbox"
-            checked={selectedRows.size === paginatedData.length && paginatedData.length > 0}
+            checked={
+              selectedRows.size === paginatedData.length &&
+              paginatedData.length > 0
+            }
             onChange={handleSelectAll}
             className="cursor-pointer"
           />
@@ -550,7 +565,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           style={{
             cursor: sortable ? "pointer" : "default",
             minWidth: col.minWidth,
-            maxWidth: col.maxWidth
+            maxWidth: col.maxWidth,
           }}
         >
           <div className="flex items-center justify-center gap-1">
@@ -566,7 +581,11 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     // Actions
     if (rowActions && rowActions.length > 0) {
       headerColumns.push(
-        <TableColumn key="actions" width={100} className="text-center font-semibold">
+        <TableColumn
+          key="actions"
+          width={100}
+          className="text-center font-semibold"
+        >
           عملیات
         </TableColumn>
       );
@@ -574,7 +593,11 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
     if (showStatus) {
       headerColumns.push(
-        <TableColumn key="status" width={100} className="text-center font-semibold">
+        <TableColumn
+          key="status"
+          width={100}
+          className="text-center font-semibold"
+        >
           وضعیت
         </TableColumn>
       );
@@ -589,7 +612,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     return (
       <div
         ref={ref}
-        className={clsx("w-full rounded-2xl overflow-hidden", styles.containerClassName)}
+        className={clsx(
+          "w-full rounded-2xl overflow-hidden",
+          styles.containerClassName
+        )}
       >
         <Table
           aria-label="Data table"
@@ -598,18 +624,25 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           classNames={{
             wrapper: "shadow-none bg-white dark:bg-neutral-800",
             table: "min-w-full",
-            th: clsx(getDensityClass(), "bg-primary dark:bg-primary-900 text-white"),
-            td: clsx(getDensityClass(), "border-b border-neutral-200 dark:border-neutral-700"),
-            tr: "hover:bg-primary-50 dark:hover:bg-primary-900/20"
+            th: clsx(
+              getDensityClass(),
+              "bg-primary dark:bg-primary-900 text-white"
+            ),
+            td: clsx(
+              getDensityClass(),
+              "border-b border-neutral-200 dark:border-neutral-700"
+            ),
+            tr: "hover:bg-primary-50 dark:hover:bg-primary-900/20",
           }}
         >
           <TableHeader>{headerColumns}</TableHeader>
 
           <TableBody>
             {paginatedData.map((row, index) => {
-              const key = typeof rowKey === "function"
-                ? rowKey(row, index)
-                : row[rowKey] || index;
+              const key =
+                typeof rowKey === "function"
+                  ? rowKey(row, index)
+                  : row[rowKey] || index;
 
               const isSelected = selectedRows.has(index);
               const isExpanded = expandedRows.has(index);
@@ -693,9 +726,13 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                               size="sm"
                               variant="light"
                               color={action.color}
-                              isDisabled={disabled || actionLoading === action.id}
+                              isDisabled={
+                                disabled || actionLoading === action.id
+                              }
                               isLoading={actionLoading === action.id}
-                              onPress={() => handleRowAction(action, row, index)}
+                              onPress={() =>
+                                handleRowAction(action, row, index)
+                              }
                               content={action.icon || "⋯"}
                             />
                           </Tooltip>
@@ -759,8 +796,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
         {/* Pagination */}
         {hasPagination && (
-          <div
-            className="flex justify-end items-center gap-2 p-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
+          <div className="flex justify-end items-center gap-2 p-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
             <span className="text-sm text-neutral-600 dark:text-neutral-400">
               صفحه {page} از {totalPages}
             </span>
@@ -794,7 +830,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                 top: `${expandedRowPosition.top}px`,
                 left: `${expandedRowPosition.left}px`,
                 width: `${expandedRowPosition.width}px`,
-                zIndex: 1000
+                zIndex: 1000,
               }}
               className="bg-white dark:bg-neutral-800 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700"
             >

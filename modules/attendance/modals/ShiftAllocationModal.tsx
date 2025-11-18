@@ -8,15 +8,8 @@ import ShiftAllocationForm, {
 
 const ShiftAllocationModal=()=>{
   const {closeModal}=useModalContext();
-  return(
-     <FormProvider
-      formId="ShiftAllocation-form"
-      enableCache
-      clearCacheOnSubmit
-      validationSchema={formValidationAction}
-    > 
+  return( 
           <ShiftAllocationForm />
-    </FormProvider>
   )
 }
 export default ShiftAllocationModal;

@@ -11,16 +11,7 @@ const FaceAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
-      <AppModal.Body>
-        <FormProvider 
-        formId='FaceAllocationShow-form' enableCache clearCacheOnSubmit
-        onSubmitAsync={async(values:any)=>{
-          handleSubmitAction(values);
-          closeModal('view', 'FaceAllocationShow');
-        }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
         <FaceAllocationShowForm/>
-        </FormProvider>
-      </AppModal.Body>
     </>
   )
 }

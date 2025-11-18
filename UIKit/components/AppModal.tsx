@@ -193,11 +193,22 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
     isContextMode
   } = useModalInternal();
 
+  // ✅ اگر isContextMode = false (standalone mode):
+  // showFooter = true (باید نمایش داده شود)
   const isFormMode = !isContextMode;
+  
   const showFooter =
       !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
 
   if (!showFooter) return null;
+
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    } else {
+      closeModal();
+    }
+  };
 
   return (
       <motion.div
@@ -216,7 +227,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
               <Button
                   color="default"
                   variant="light"
-                  onPress={onCancel || closeModal}
+                  onPress={handleCancel}
                   isDisabled={isSubmitting}
               >
                 {cancelLabel}
@@ -256,6 +267,8 @@ interface AppModalProps {
   cancelLabel?: string;
   hideFooter?: boolean;
   children?: React.ReactNode;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 const AppModalBase: React.FC<AppModalProps> & {
@@ -277,14 +290,15 @@ const AppModalBase: React.FC<AppModalProps> & {
        submitLabel = "ذخیره",
        cancelLabel = "لغو",
        hideFooter = false,
-       children
+       children,
+       isOpen = true,
+       onClose
      }) => {
   const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
 
-  // تشخیص حالت Context Mode
+  // ✅ تشخیص mode
   const isContextMode = !!(type && name);
-  const isFormMode = !isContextMode;
 
   // ترکیب props و modalData
   const modalTitle = title || modalData?.title;
@@ -297,9 +311,8 @@ const AppModalBase: React.FC<AppModalProps> & {
   // ✅ بررسی نمایش مودال
   const shouldShowModal = isContextMode
       ? isModalOpen(modalType, modalName)
-      : true;
+      : isOpen;
 
-  // اگر در Context Mode هستیم و مودال باز نیست، چیزی render نکن
   if (isContextMode && !shouldShowModal) {
     return null;
   }
@@ -314,6 +327,8 @@ const AppModalBase: React.FC<AppModalProps> & {
   const handleClose = () => {
     if (isContextMode) {
       closeModal(modalType, modalName);
+    } else if (onClose) {
+      onClose();
     } else if (onCancel) {
       onCancel();
     }
@@ -344,6 +359,7 @@ const AppModalBase: React.FC<AppModalProps> & {
     shouldShowModal,
     closeModal: handleClose,
     getHeaderColor,
+    // ✅ props رو مستقیم استفاده کنید
     isDirty,
     isSubmitting,
     formError,
@@ -381,16 +397,17 @@ const AppModalBase: React.FC<AppModalProps> & {
                   {(modalTitle || modalIcon) && <AppModalHeader />}
 
                   {/* Content */}
-                <AppModalBody>
-  {children ?? modalComponent}
-</AppModalBody>
+                  <AppModalBody>
+                    {children ?? modalComponent}
+                  </AppModalBody>
 
-{!hideFooter && (
-  <AppModalFooter
-    submitLabel={submitLabel}
-    cancelLabel={cancelLabel}
-  />
-)}
+                  {/* Footer */}
+                  {!hideFooter && (
+                      <AppModalFooter
+                          submitLabel={submitLabel}
+                          cancelLabel={cancelLabel}
+                      />
+                  )}
                 </ModalContextProvider.Provider>
               </motion.div>
             </motion.div>

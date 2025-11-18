@@ -26,15 +26,14 @@ const AllocationSubheader = ({
         <div className="flex flex-row gap-2.5">
           <AppSearchInput/>
           <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'sm',
-              startContent: <Add size={22} />,
-              className: 'border-1 border-primary',
-              onClick:handlerOpenModal,
-                content:'Add New One',
-            }}
+              color= 'white'
+              size= 'md'
+              radius= 'sm'
+              startContent= {<Add size={22} />}
+              className= 'border-1 border-primary'
+              onPress={handlerOpenModal}
+                content='Add New One'
+            
           />
         </div>
       </div>

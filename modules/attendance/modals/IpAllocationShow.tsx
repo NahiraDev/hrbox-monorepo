@@ -11,14 +11,7 @@ const IpAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
-      <AppModal.Body>
-        <FormProvider  formId='IpAllocationShow-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
-          handleSubmitAction(values);
-          closeModal('view', 'IpAllocationShow');
-        }} initialValues={initialValuesAction} validationSchema={formValidationAction}>
         <IpAllocationShowForm/>
-        </FormProvider>
-      </AppModal.Body>
     </>
   )
 }

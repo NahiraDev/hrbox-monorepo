@@ -7,7 +7,6 @@ const PersonnelReportModal = () => {
   const { closeModal } = useModalContext();
   return (
     <>
-      <AppModal.Body>
         <div className="flex flex-col gap-2">
           <div className="w-full flex flex-row justify-between items-center py-5 px-3 bg-gray-200 rounded-t-xl">
             <div className="flex flex-col items-center">
@@ -46,25 +45,6 @@ const PersonnelReportModal = () => {
             <AppTable data={ReportPersonnal}/>
           </div>
         </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
-              onPress={()=> closeModal('confirm', 'PersonnelReport')}
-              content= 'Cancel'
-          />
-          <AppButton
-              color= 'primary'
-              size= 'md'
-              radius= 'lg'
-              className= 'text-white'
-              content= 'Download File'
-          />
-        </div>
-      </AppModal.Footer>
     </>
   );
 };
