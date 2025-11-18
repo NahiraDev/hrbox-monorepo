@@ -78,7 +78,7 @@ export const AppSidebar = () => {
 
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-panel-primary text-white shadow-theme-sm hover:scale-110 transition-transform"
+                    className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white shadow-theme-sm hover:scale-110 transition-transform"
                     aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 >
                     {isExpanded ? <ArrowLeft2 size="12"/> : <ArrowRight2 size="12"/>}

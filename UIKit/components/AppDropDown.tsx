@@ -118,7 +118,7 @@ export const AppDropDown = forwardRef<HTMLButtonElement, AppDropDownProps>(
       variant === 'bordered' && clsx(
         'border border-neutral-300 dark:border-neutral-600',
         'hover:border-primary-300 dark:hover:border-primary-600',
-        'focus:border-panel-primary'
+        'focus:border-primary'
       ),
       hasError && variant === 'bordered' && 'border-danger bg-danger-50 dark:bg-danger-900/20',
       className

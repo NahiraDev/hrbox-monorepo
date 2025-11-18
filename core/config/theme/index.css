@@ -16,7 +16,7 @@
   :root {
 
     /* === Primary Colors (HRLink Default) === */
-    --color-primary-default: #0A9AD7;
+    --color-primary: #0A9AD7;
     --color-primary-50: #B8E2F3;
     --color-primary-100: #B8E2F3;
     --color-primary-150: #96D3ED;
@@ -32,7 +32,7 @@
     --color-primary-1000: #01161E;
 
     /* === Secondary Colors === */
-    --color-secondary-default: #1E3363;
+    --color-secondary: #1E3363;
     --color-secondary-50: #BEC4D2;
     --color-secondary-100: #BEC4D2;
     --color-secondary-150: #9EA7BC;
@@ -62,7 +62,7 @@
     --color-neutral-900: #111111;
     --color-neutral-1000: #090909;
 
-    --color-surface-default: #F5FBFE;
+    --color-surface: #F5FBFE;
     --color-surface-50: rgba(220, 240, 249, 0.4);
     --color-surface-100: rgba(4, 66, 92, 0.4);
     --color-surface-200: #044566;
@@ -74,7 +74,7 @@
     --color-success-150: #A0DBB9;
     --color-success-900: #09311A;
 
-    --color-warning-default: #FEEFDA;
+    --color-warning: #FEEFDA;
     --color-warning-50: #FEDFB6;
     --color-warning-100: #FEDFB6;
     --color-warning-900: #482800;
@@ -99,12 +99,6 @@
     --color-white: #FFFFFF;
     --color-black: #000000;
     --color-gold: #DDBA69;
-
-    /* === Panel-Specific Colors (HRLink Default) === */
-    --color-panel-primary: var(--color-primary-default);
-    --color-panel-secondary: var(--color-secondary-default);
-    --color-panel-background: var(--color-surface-default);
-    --color-panel-surface: var(--color-white);
 
     /* === Shadows === */
     --shadow-sm: 0px 1px 3px 0px rgba(8, 14, 28, 0.3);
@@ -171,30 +165,6 @@
 
   /* === DARK MODE === */
   .dark {
-    --color-primary-default: #044566;
-    --color-primary-50: #01161E;
-    --color-primary-100: #022C3D;
-    --color-primary-900: #B8E2F3;
-    --color-primary-1000: #B8E2F3;
-
-    --color-secondary-default: #FFFFFF;
-    --color-secondary-50: #04070E;
-    --color-secondary-100: #080E1C;
-    --color-secondary-900: #BEC4D2;
-    --color-secondary-1000: #BEC4D2;
-
-    --color-neutral-50: #090909;
-    --color-neutral-100: #111111;
-    --color-neutral-900: #E5E5E5;
-    --color-neutral-1000: #F6F6F6;
-
-    --color-surface-default: #01101A;
-    --color-surface-50: rgba(4, 66, 92, 0.4);
-    --color-surface-100: rgba(220, 240, 249, 0.4);
-
-    --color-panel-background: #04070E;
-    --color-panel-surface: #01101A;
-
     --shadow-sm: 0px 1px 3px 0px #152446;
     --shadow-md: 0px 2px 6px 0px #152446;
     --shadow-lg: 0px 3px 12px 0px #152446;
@@ -204,47 +174,47 @@
 
   /* === HRLINK PANEL === */
   :root.hrlink {
-    --color-panel-primary: #0A9AD7;
-    --color-panel-secondary: #1E3363;
-    --color-panel-background: #F5FBFE;
-    --color-panel-surface: #FFFFFF;
+    --color-primary: #0A9AD7;
+    --color-secondary: #1E3363;
+    --color-background: #F5FBFE;
+    --color-surface: #FFFFFF;
   }
 
   :root.hrlink.dark {
-    --color-panel-primary: #044566;
-    --color-panel-secondary: #FFFFFF;
-    --color-panel-background: #04070E;
-    --color-panel-surface: #01101A;
+    --color-primary: #DDBA69;
+    --color-secondary: #FFFFFF;
+    --color-background: #04070E;
+    --color-surface: #01101A;
   }
 
   /* === HRBOX PANEL === */
   :root.hrbox {
-    --color-panel-primary: #6366F1;
-    --color-panel-secondary: #1E293B;
-    --color-panel-background: #F8FAFC;
-    --color-panel-surface: #FFFFFF;
+    --color-primary: #6366F1;
+    --color-secondary: #1E293B;
+    --color-background: #F8FAFC;
+    --color-surface: #FFFFFF;
   }
 
   :root.hrbox.dark {
-    --color-panel-primary: #818CF8;
-    --color-panel-secondary: #FFFFFF;
-    --color-panel-background: #0F172A;
-    --color-panel-surface: #1E293B;
+    --color-primary: #818CF8;
+    --color-secondary: #FFFFFF;
+    --color-background: #0F172A;
+    --color-surface: #1E293B;
   }
 
   /* === SUPER ADMIN PANEL === */
   :root.super-admin {
-    --color-panel-primary: #EF4444;
-    --color-panel-secondary: #991B1B;
-    --color-panel-background: #FEF2F2;
-    --color-panel-surface: #FFFFFF;
+    --color-primary: #EF4444;
+    --color-secondary: #991B1B;
+    --color-background: #FEF2F2;
+    --color-surface: #FFFFFF;
   }
 
   :root.super-admin.dark {
-    --color-panel-primary: #F87171;
-    --color-panel-secondary: #FFFFFF;
-    --color-panel-background: #1F1917;
-    --color-panel-surface: #292524;
+    --color-primary: #F87171;
+    --color-secondary: #FFFFFF;
+    --color-background: #1F1917;
+    --color-surface: #292524;
   }
 }
 
@@ -278,7 +248,7 @@
     min-height: 100vh;
     height: 100%;
     overflow-x: hidden;
-    background-color: var(--color-panel-background);
+    background-color: var(--color-background);
     color: var(--color-secondary-1000);
     transition: background-color 300ms ease, color 300ms ease;
   }
@@ -398,15 +368,6 @@
     50% {
       opacity: 0.6;
       transform: scale(1.05);
-    }
-  }
-
-  @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 5px var(--color-panel-primary);
-    }
-    50% {
-      box-shadow: 0 0 20px var(--color-panel-primary);
     }
   }
 

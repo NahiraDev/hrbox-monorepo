@@ -6,7 +6,7 @@ export function GlobalLoader({ isLoading }: { isLoading: boolean }) {
       <AnimatePresence>
         {isLoading && (
           <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-panel-primary via-primary-300 to-panel-primary z-[9999]"
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary-300 to-panel-primary z-[9999]"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={isLoading ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
             exit={{ opacity: 0, scaleX: 0 }}

@@ -39,7 +39,7 @@ const MentorCard = ({ name, role, avatar, badgeColor }) => {
       <div className="flex flex-col gap-2">
         <Avatar className='w-24 h-24' radius="lg" src={avatar} />
         <span className="!font-semibold text-xs text-secondary-1000">{name}</span>
-        <span className="flex items-center justify-center !text-xs rounded-full px-2 h-5 border border-primary-50 text-primary-400 bg-surface-50">
+        <span className="flex items-center justify-center !text-xs rounded-full px-2 h-5 border border-primary-50 text-primary-panel bg-surface-50">
           {role}
         </span>
       </div>

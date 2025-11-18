@@ -28,8 +28,8 @@ const OrganizationDepartments = () => {
           <span className="!font-bold text-xs text-secondary-800 dark:text-white">{user.job}</span>
         </div>
         <div className="flex items-center gap-1.5 text-sm">
-          <User className="text-primary-400 dark:text-gold" size="18"/>
-          <span className="text-primary-400 dark:text-gold">
+          <User className="text-primary-panel dark:text-gold" size="18"/>
+          <span className="text-primary-panel dark:text-gold">
             {user.people} {t('people')}
           </span>
         </div>

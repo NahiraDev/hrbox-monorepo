@@ -14,7 +14,7 @@ export const forbiddenRoute = createRoute({
         </p>
         <button
           onClick={() => window.location.href = '/'}
-          className="mt-6 px-6 py-2 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-opacity"
+          className="mt-6 px-6 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity"
         >
           بازگشت به صفحه اصلی
         </button>

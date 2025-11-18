@@ -27,7 +27,6 @@ import { ThemeConfig, ThemeMode } from "@hrbox/core/config/theme/types";
 // ============================================
 
 interface UseAdvancedThemeReturn {
-  // State
   mode: ThemeMode;
   panel: Panel | null;
   config: ThemeConfig | null;

@@ -58,7 +58,7 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
             outlined
               ? "border border-dashed border-neutral-400 dark:border-white bg-transparent"
               : isActive
-                ? "bg-gradient-to-br from-panel-primary to-primary-300 text-white shadow-lg"
+                ? "bg-gradient-to-br from-primary to-primary-300 text-white shadow-lg"
                 : "bg-gradient-to-t from-neutral-200 to-white dark:from-neutral-700 dark:to-neutral-600 text-secondary-900 dark:text-white hover:shadow-md"
           }
           `}
@@ -90,7 +90,7 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
             max-w-[70px] text-center truncate
             ${
             isActive
-              ? "opacity-100 text-panel-primary dark:text-white"
+              ? "opacity-100 text-primary dark:text-white"
               : "opacity-0 group-hover:opacity-100 text-secondary-600 dark:text-neutral-300"
           }
           `}

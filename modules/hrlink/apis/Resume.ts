@@ -3,23 +3,27 @@ import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from '@hrbox-monorepo/modules/hrlink/app/endpoints';
 
 const ResumeApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: '/DesktopModules/Freelancer/api/User/',
-  tagTypes: ['ResumeInformation'],
+  reducerPath: 'resumeApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Profile'],
   requiresAuth: true,
   autoToast: true,
 });
 
-// this are the endpoints that i will cal for getting all of resume information
 export const resumeApiEndpoints = ResumeApi.injectEndpoints({
       endpoints: (build:any) => ({
         fetchProfileInfo: createQuery<any>(build, {
-          url: HRLinkApiEndpoints.job.offers,
-          tags: ['Jobs'],
+          url: HRLinkApiEndpoints.profile.getInfo,
+          tags: ['Profile'],
+        }),
+        getProfilePhoto: createQuery<any>(build, {
+          url: HRLinkApiEndpoints.user.getProfileAvatar,
+          tags: ['Profile'],
         }),
       }),
 })
 
 export const {
-  useLazyFetchProfileInfoQuery,
+  useFetchProfileInfoQuery,
+  useGetProfilePhotoQuery
 } = resumeApiEndpoints;

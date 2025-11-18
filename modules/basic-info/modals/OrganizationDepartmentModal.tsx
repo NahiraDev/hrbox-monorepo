@@ -67,7 +67,7 @@ export const OrganizationDepartmentModal = () => {
         key={color}
         className={`w-8 h-8 rounded-sm transition duration-100 cursor-pointer relative mt-2 ${
           isSelected
-            ? 'ring-2 ring-primary ring-offset-2 scale-110'
+            ? 'ring-2 ring-primary-panel ring-offset-2 scale-110'
             : 'hover:scale-125'
         }`}
         style={{
@@ -156,7 +156,7 @@ export const OrganizationDepartmentModal = () => {
             variant: 'light',
             onPress: handleSave,
             content: <span>Save Changes</span>,
-            className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg hover:bg-primary',
+            className: 'bg-primary-panel text-white py-1.5 px-3 text-xl rounded-lg hover:bg-primary-panel',
             disabled: !formData.color,
           }}
         />

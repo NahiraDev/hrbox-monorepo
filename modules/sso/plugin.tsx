@@ -71,7 +71,7 @@ export const SSOPlugin: ModulePlugin = {
     {
       path: Paths.SSO.welcome,
       component: WelcomePage,
-      layout: 'empty',
+      layout: 'base',
       meta: {
         title: 'Welcome',
         requireAuth: true,

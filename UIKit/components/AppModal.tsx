@@ -339,7 +339,7 @@ const AppModalBase: React.FC<AppModalProps> & {
       case ModalType.DELETE:
         return "from-danger to-danger-600";
       case ModalType.EDIT:
-        return "from-primary-400 to-primary-600";
+        return "from-primary-panel to-primary-600";
       case ModalType.VIEW:
         return "from-secondary-400 to-secondary-600";
       case ModalType.CREATE:

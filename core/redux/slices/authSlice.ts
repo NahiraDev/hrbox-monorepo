@@ -23,10 +23,8 @@ interface AuthState {
     refreshToken: string | null;
     selectedRole: UserRole | null;
     needsRoleSelection: boolean;
-
     domainTheme: Panel;
     currentPanel: Panel | null;
-
     loading: boolean;
     error: string | null;
 }
@@ -38,10 +36,8 @@ const initialState: AuthState = {
     refreshToken: null,
     selectedRole: null,
     needsRoleSelection: false,
-
     domainTheme: getCurrentDomain(),
     currentPanel: null,
-
     loading: false,
     error: null,
 };
@@ -66,15 +62,12 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // ✅ Domain Theme تغییر نمی‌کند (فقط برای override دستی)
         setDomainTheme: (state, action: PayloadAction<Panel>) => {
             state.domainTheme = action.payload;
-            console.log('✅ Domain theme overridden:', action.payload);
         },
 
         setCurrentPanel: (state, action: PayloadAction<Panel>) => {
             state.currentPanel = action.payload;
-            console.log('✅ Panel updated in Redux:', action.payload);
         },
 
         loginSuccess: (
@@ -114,10 +107,6 @@ export const authSlice = createSlice({
                 state.currentPanel = getRoleConfig(role.slug).panel;
                 state.needsRoleSelection = false;
                 localStorage.setItem('selectedRole', JSON.stringify(role));
-
-                console.log('✅ Single role auto-selected:', role.slug);
-                console.log('✅ Panel set to:', state.currentPanel);
-                console.log('✅ Domain theme:', state.domainTheme);
             }
         },
 
@@ -139,28 +128,18 @@ export const authSlice = createSlice({
 
             localStorage.setItem('token', accessToken);
             localStorage.setItem('selectedRole', JSON.stringify(role));
-
-            console.log('✅ Role selected:', role.slug);
-            console.log('✅ Panel access:', state.currentPanel);
-            console.log('✅ Domain theme:', state.domainTheme);
         },
 
         switchRole: (state, action: PayloadAction<UserRole>) => {
             state.selectedRole = action.payload;
-
-            // ✅ تغییر Panel بر اساس نقش جدید
             const roleConfig = getRoleConfig(action.payload.slug);
             state.currentPanel = roleConfig.panel;
 
             localStorage.setItem('selectedRole', JSON.stringify(action.payload));
-
-            console.log('✅ Role switched to:', action.payload.slug);
-            console.log('✅ Panel updated to:', state.currentPanel);
         },
 
         logout: (state) => {
             clearAuthStorage(state);
-            // Domain Theme حفظ می‌شود
         },
 
         updateToken: (state, action: PayloadAction<string>) => {
@@ -188,10 +167,6 @@ export const authSlice = createSlice({
                         state.selectedRole = selectedRole;
                         state.currentPanel = getRoleConfig(selectedRole.slug).panel;
                         state.needsRoleSelection = false;
-
-                        console.log('✅ Auth restored with role:', selectedRole.slug);
-                        console.log('✅ Panel:', state.currentPanel);
-                        console.log('✅ Theme:', state.domainTheme);
                     } else if (user.roles.length === 1) {
                         const role = user.roles[0];
                         state.selectedRole = role;
@@ -202,7 +177,6 @@ export const authSlice = createSlice({
                         state.needsRoleSelection = true;
                     }
                 } catch (e) {
-                    console.error('Failed to restore auth', e);
                     clearAuthStorage(state);
                 }
             }

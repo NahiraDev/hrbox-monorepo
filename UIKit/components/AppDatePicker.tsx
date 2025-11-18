@@ -58,10 +58,10 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
         case 'view':
           return 'bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700 cursor-default';
         case 'edit':
-          return 'bg-panel-surface dark:bg-neutral-800 border-primary-200 dark:border-primary-700 focus-within:border-panel-primary';
+          return 'bg-panel-surface dark:bg-neutral-800 border-primary-200 dark:border-primary-700 focus-within:border-primary';
         case 'create':
         default:
-          return 'bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-600 focus-within:border-panel-primary';
+          return 'bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-600 focus-within:border-primary';
       }
     };
 
@@ -107,7 +107,7 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
                 'flex items-center justify-between w-full px-3 py-2',
                 'rounded-lg border transition-all duration-200',
                 'text-sm font-medium text-secondary-900 dark:text-white',
-                'hover:border-primary-300 focus-within:border-panel-primary',
+                'hover:border-primary-300 focus-within:border-primary',
                 getModeClass(),
                 hasError && !isViewMode && 'border-danger bg-danger-50 dark:bg-danger-900/20',
                 isViewMode && 'pointer-events-none opacity-70'

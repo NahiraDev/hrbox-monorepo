@@ -88,7 +88,7 @@ export const DependentsModal = () => {
             variant: 'light',
             onPress: () => console.log('a'),
             content: <span>Submit</span>,
-            className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
+            className: 'bg-primary-panel text-white py-1.5 px-3 text-xl rounded-lg ',
           }}
         />
       </AppModal.Footer>
