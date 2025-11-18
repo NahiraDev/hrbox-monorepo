@@ -1,6 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
-import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
-import { HRLinkApiEndpoints } from '@hrbox-monorepo/modules/hrlink/app/endpoints';
+import { createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
 const DashboardApi = createModuleApi({
   reducerPath: 'dashboardApi',
@@ -11,29 +11,38 @@ const DashboardApi = createModuleApi({
 });
 
 export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
-  endpoints: (build:any) => ({
+  endpoints: (build: any) => ({
     fetchViewResume: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getViewResume,
       tags: ['Dashboard'],
     }),
+    
     fetchResumePercent: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getResumePercent,
       tags: ['Dashboard'],
     }),
-    getJobOpportunitiesSent: createQuery<any>(build, {
+    
+    fetchJobOpportunitiesSent: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getJobOpportunitiesSent,
       tags: ['Dashboard'],
     }),
-    getCompaniesList: createQuery<any>(build, {
+    
+    fetchCompaniesList: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getCompaniesList,
       tags: ['Dashboard'],
     }),
+    
+    fetchDashboardData: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.dashboard.getData,
+      tags: ['Dashboard'],
+    }),
   }),
-})
+});
 
 export const {
   useFetchViewResumeQuery,
-    useFetchResumePercentQuery,
-    useGetJobOpportunitiesSentQuery,
-    useGetCompaniesListQuery
+  useFetchResumePercentQuery,
+  useFetchJobOpportunitiesSentQuery,
+  useFetchCompaniesListQuery,
+  useFetchDashboardDataQuery,
 } = dashboardApiEndpoints;

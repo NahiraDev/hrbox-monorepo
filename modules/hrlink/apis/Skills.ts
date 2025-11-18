@@ -71,5 +71,5 @@ export const {
   useFetchHardSkillsQuery,
   useGetUserSoftSkillsQuery,
   useGetUserHardSkillsQuery,
-  useFetchProfessionalSkillsQuery,
+  useFetchProfessionalSkillsQuery
 } = skillsApiEndpoints;
