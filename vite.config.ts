@@ -161,9 +161,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             });
 
             proxy.on('proxyReq', (proxyReq, req, _res) => {
-              // ✅ تصحیح Host header: بدون protocol (https://) و فقط hostname:port
               proxyReq.setHeader('Host', 'hrlink.hrbox.me:50443');
-              // ✅ تغییر Origin به front.hrbox.me تا backend درخواست‌ها از react.hrbox.me رو به عنوان front.hrbox.me بشناسه
               proxyReq.setHeader('Origin', 'https://front.hrbox.me');
             });
 

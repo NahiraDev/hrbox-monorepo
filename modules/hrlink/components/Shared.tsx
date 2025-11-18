@@ -1,8 +1,8 @@
 import { Add, Share } from 'iconsax-reactjs';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { AppButton } from '@hrbox-monorepo/UIKit/components';
-import {InstagramIcon, LinkedinIcon, TelegramIcon} from "~/UIKit/icons";
+import { AppButton } from '@hrbox/uikit/components';
+import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
 
 export const Shared = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

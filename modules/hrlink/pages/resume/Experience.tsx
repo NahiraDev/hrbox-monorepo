@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { AppTable } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { GeneralInformation } from "@hrbox-monorepo/modules/hrlink/components/GeneralInformation";
+import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 import { useLazyFetchExperienceQuery } from "@hrbox/modules/hrlink/apis";
 

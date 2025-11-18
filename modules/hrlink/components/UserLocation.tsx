@@ -3,11 +3,11 @@ import {useEffect, useRef, useState} from 'react';
 import {Map as LeafletMap} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Add, Edit} from 'iconsax-reactjs';
-import {AppButton} from '@hrbox-monorepo/UIKit/components';
-import {useModalContext} from '@hrbox-monorepo/core/providers/ModalProvider';
+import {AppButton} from '@hrbox/uikit/components';
+import {useModalContext} from '@hrbox/core/providers/ModalProvider';
 import {Card, CardBody, CardHeader} from '@heroui/react';
-import {MarkerIcon} from "@hrbox-monorepo/modules/hrlink/components/MarkerMap";
-import {MapModal} from "@hrbox-monorepo/modules/hrlink/components/MapModal";
+import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
+import {MapModal} from "@hrbox/modules/hrlink/components/MapModal";
 
 export const UserLocation = () => {
     const profileString = localStorage.getItem('profile');

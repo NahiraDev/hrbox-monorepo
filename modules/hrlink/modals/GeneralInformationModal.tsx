@@ -1,9 +1,9 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { FormProvider } from '@hrbox-monorepo/core/providers/FormProvider';
+import { AppButton, AppModal } from '@hrbox/uikit/components';
+import { FormProvider } from '@hrbox/core/providers/FormProvider';
 import {
   formValidationGeneralInformation, GeneralInformationForm, handleSubmitGeneralInformation,
   initialValuesGeneralInformation
-} from "@hrbox-monorepo/modules/hrlink/forms/GeneralInformationForm";
+} from "@hrbox/modules/hrlink/forms/GeneralInformationForm";
 
 export const GeneralInformationModal = () =>{
   return(

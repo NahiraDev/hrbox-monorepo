@@ -1,7 +1,7 @@
 import {FormProvider} from '@hrbox/core/providers/FormProvider';
 
 import {initialValuesRegister, RegisterForm, validationSchemaRegister} from '../forms';
-import {useRegisterMutation} from "@hrbox-monorepo/modules/sso/apis/Auth";
+import {useRegisterMutation} from "@hrbox/modules/sso/apis/Auth";
 
 const Register = () => {
   const [register] = useRegisterMutation();

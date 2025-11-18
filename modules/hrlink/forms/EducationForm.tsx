@@ -1,12 +1,11 @@
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
-import { useLazyEducationGetFieldsQuery, useLazyFetchCityQuery } from '@hrbox-monorepo/modules/hrlink/apis/Common';
 import { useEffect } from 'react';
 
-import { AppAutoComplete, AppDatePicker, AppInput } from '@hrbox-monorepo/UIKit/components';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider'
-import { Degree, FieldOfStudyType } from '@hrbox-monorepo/modules/hrlink/app/mock';
-import { useLazyFetchUniversityQuery } from "@hrbox-monorepo/modules/hrlink/apis";
+import { AppAutoComplete, AppDatePicker, AppInput } from '@hrbox/uikit/components';
+import { useFormContext } from '@hrbox/core/providers/FormProvider'
+import { Degree, FieldOfStudyType } from '@hrbox/modules/hrlink/app/mock';
+import { useLazyFetchUniversityQuery } from "@hrbox/modules/hrlink/apis";
 
 export const initialValuesEducation = {
   UniversityId: null,

@@ -2,6 +2,7 @@ import { FormField } from "@HRBox/UIKit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@HRBox/UIKit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
+// import * as Yup from "yup";
 
 export const initialValuesAction = {
   Title: null,
@@ -30,7 +31,7 @@ const AchievementForm = () => {
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField name="Title" label='Title' />
-        <FormField name="Year" label='Year' component={AppAutoComplete}   />
+        <FormField name="Year" label='Year' component={AppAutoComplete} />
         <FormField name="Month" label='Month' component={AppAutoComplete} />
         {/*we dont have Attached File*/}
       </div>
