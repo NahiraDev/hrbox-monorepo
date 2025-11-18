@@ -47,13 +47,9 @@ const SelectRole = () => {
 
     const handleRoleSelect = async (role: any) => {
         try {
-            console.log('🎭 Selecting role:', role);
-
             const accessToken = localStorage.getItem('token');
 
             roleSelected(role, accessToken);
-
-
             // localStorage.setItem('userProfile', JSON.stringify(profile));
 
 

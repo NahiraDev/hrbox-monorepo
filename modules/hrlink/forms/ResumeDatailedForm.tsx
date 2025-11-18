@@ -1,4 +1,4 @@
-import {AppAutoComplete, AppButton, AppSwitch} from '@hrbox-monorepo/UIKit/components';
+import {AppAutoComplete, AppButton, AppDatePicker, AppSwitch} from '@hrbox-monorepo/UIKit/components';
 import {FormModal} from '@hrbox/uikit/components/FormModal'
 import {Edit, UserRemove, VolumeHigh} from 'iconsax-reactjs';
 import {Form} from '@heroui/react';
@@ -105,15 +105,20 @@ export const ResumeDetailedForm = () => {
     return (
         <Form onSubmit={handleSubmit} className="grid grid-cols-4 gap-6 h-full">
             <div className="col-span-3 flex flex-col gap-4">
+                <div className="grid grid-cols-2">
                 <FormField name="firstName" label="First Name"/>
                 <FormField name="lastName" label="Last Name"/>
+                </div>
+             
                 <FormField name="nationalCode" label="National Code"/>
-                <FormField name="dateOfBirth" label="Date of Birth" type="date"/>
+                <FormField name="dateOfBirth" label="Date of Birth" component={AppDatePicker}/>
                 <FormField
                     name="maritalStatus"
                     label="Marital Status"
                     component={AppAutoComplete}
-                    options={maritalStatusOptions}
+                    data={maritalStatusOptions}
+                    displayKey="label"
+                    displayValue="value"
                 />
                 <FormField
                     name="province"

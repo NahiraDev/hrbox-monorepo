@@ -28,7 +28,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
-    user: userReducer(state.user, action),
+    // user: userReducer(state.user, action),
     [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state[dashboardApiEndpoints.reducerPath], action),
     [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state[resumeApiEndpoints.reducerPath], action),
     [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),

@@ -23,7 +23,6 @@ export function useModuleAccess() {
       const module = moduleRegistry.getModule(moduleName);
       if (!module?.menu) return [];
 
-      // فیلتر کردن منو بر اساس دسترسی
       return filterMenuRecursively(module.menu, userRoles, userPermissions);
     },
     [userRoles, userPermissions]

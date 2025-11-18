@@ -8,6 +8,7 @@ import { useWindowSize } from 'react-use';
 import { Paths } from "@hrbox/modules/paths";
 import {useTranslation} from "react-i18next";
 import {AppButton} from "@hrbox-monorepo/UIKit/components";
+import { useAuth } from '@hrbox/core/hooks/useAuth';
 
 export const Welcome = () => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ export const Welcome = () => {
   const user = useAppSelector((state:any) => state.auth.user);
   const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
   const { width, height } = useWindowSize();
+  const userPannel = useAuth()
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -36,7 +38,7 @@ export const Welcome = () => {
 
         <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-4xl font-bold text-secondary-1000 mb-3">Welcome to HRBox!</h1>
+            <h1 className="text-5xl font-bold text-secondary-1000 mb-3">Welcome to {userPannel.currentDomain}!</h1>
             <h2 className="text-4xl font-normal text-secondary-1000">The Smart Human Resources Management Platform!</h2>
           </div>
           <p>

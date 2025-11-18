@@ -43,8 +43,8 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
 });
 
 export const {
-  useLazyFetchAwardsQuery,
-  useLazyFetchAwardDetailQuery,
+  useFetchAwardsQuery,
+  useFetchAwardDetailQuery,
   useCreateAwardMutation,
   useEditAwardMutation,
   useDeleteAwardMutation,

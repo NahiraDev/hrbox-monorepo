@@ -135,13 +135,6 @@ const Dashboard = () => {
       },
     },
   };
-  const jobOpportunities = [
-    { id: 1, company: 'Nahira', sent: true },
-    { id: 2, company: 'Kungfu Federation', sent: true },
-    { id: 3, company: 'Orkid', sent: true },
-    { id: 4, company: 'ZAT', sent: true },
-  ];
-
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3 flex flex-col gap-3 h-full">
@@ -245,7 +238,8 @@ const Dashboard = () => {
                     />
                   </div>
                   {
-                    resumePercent?.data !== 100 &&    <div className="w-1/2 text-end">
+                   resumePercent && resumePercent?.data !== 100 &&  
+                     <div className="w-1/2 text-end">
                         <Button className="bg-secondary-400 text-white font-semibold py-1 px-2 rounded-lg shadow-shadow-light-tight/1 !w-[144px] !min-w-fit h-[30px]">
                           Finalize Resume
                         </Button>

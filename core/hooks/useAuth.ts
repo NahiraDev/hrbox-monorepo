@@ -36,7 +36,6 @@ export function useAuth() {
     loading,
     error,
 
-
     loginSuccess: (
   userId: number,
   displayName: string,
@@ -45,7 +44,7 @@ export function useAuth() {
   roles?: UserRole[]
 ) => dispatch(loginSuccess({ userId, displayName, Token, renewalToken, roles })),
 
-    roleSelected: (role: UserRole, accessToken: string | null) =>
+    roleSelected: (role: UserRole, accessToken: string) =>
       dispatch(roleSelected({ role, accessToken })),
 
     switchRole: (role: UserRole) => dispatch(switchRole(role)),
