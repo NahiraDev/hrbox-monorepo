@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AppButton , AppPagination } from '@hrbox/uikit/components';
 
 import { useLazyJobOffersQuery } from '@hrbox/modules/hrlink/apis/Jobs';
-import { JobFilterModal } from '@hrbox-monorepo/modules/hrlink/modals/JobFilterModal';
+import { JobFilterModal } from '@hrbox/modules/hrlink/modals/JobFilterModal';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 const JobOffers = () => {

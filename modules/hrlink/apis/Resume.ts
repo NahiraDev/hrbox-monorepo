@@ -1,6 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
-import { HRLinkApiEndpoints } from '@hrbox-monorepo/modules/hrlink/app/endpoints';
+import { HRLinkApiEndpoints } from '@hrbox/modules/hrlink/app/endpoints';
 
 const ResumeApi = createModuleApi({
   reducerPath: 'resumeApi',

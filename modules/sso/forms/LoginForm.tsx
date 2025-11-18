@@ -7,9 +7,9 @@ import { useFormContext } from '@hrbox/core/providers/FormProvider';
 import {AppButton, AppSwitch} from "@hrbox/uikit/components";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { FormField } from "@hrbox/uikit/components/FormField";
-import {Paths} from "@hrbox-monorepo/modules/paths";
+import {Paths} from "@hrbox/modules/paths";
 import {useState} from "react";
-import {LoginButton} from "@hrbox-monorepo/modules/sso/components/LoginButton";
+import {LoginButton} from "@hrbox/modules/sso/components/LoginButton";
 
 export const initialValuesFormLogin = {
   Username: '',

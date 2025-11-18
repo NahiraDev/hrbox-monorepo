@@ -1,6 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
-import { AuthApiEndpoints } from "@hrbox-monorepo/modules/sso/apis/endpoints";
+import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
 
 const ssoApi = createModuleApi({
   reducerPath: 'ssoApi',

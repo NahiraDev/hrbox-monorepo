@@ -7,7 +7,7 @@ import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { Paths } from "@hrbox/modules/paths";
 import {useTranslation} from "react-i18next";
-import {AppButton} from "@hrbox-monorepo/UIKit/components";
+import {AppButton} from "@hrbox/uikit/components";
 import { useAuth } from '@hrbox/core/hooks/useAuth';
 
 export const Welcome = () => {

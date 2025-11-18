@@ -3,10 +3,10 @@ import {Form, InputOtp} from "@heroui/react";
 import {useFormContext} from "@hrbox/core/providers/FormProvider";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
-import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
+import {FormField} from "@hrbox/uikit/components/FormField";
 import * as Yup from "yup";
 import {t} from "i18next";
-import {useRegisterOtpConfirmMutation} from "@hrbox-monorepo/modules/sso/apis/Auth";
+import {useRegisterOtpConfirmMutation} from "@hrbox/modules/sso/apis/Auth";
 
 const OTP_EXPIRY_TIME = 120; // 2 minutes
 const OTP_STORAGE_KEY = 'register_otp_session';
