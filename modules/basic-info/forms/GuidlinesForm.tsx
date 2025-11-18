@@ -1,9 +1,9 @@
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@HRBox/UIKit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
 export const initialValuesAction = {
-  Form : null,
+  Form: null,
 };
 export const formValidationAction = Yup.object().shape({
   Form: Yup.string().required(),
@@ -17,7 +17,7 @@ export const handleSubmitAction = (values: any) => {
 const Guidlines = () => {
   return (
     <Form>
-        <FormField name="Form" label='Form' />
+      <FormField name="Form" label="Form" />
     </Form>
-  )
-}
+  );
+};

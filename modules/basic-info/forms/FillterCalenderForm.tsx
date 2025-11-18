@@ -1,13 +1,13 @@
-import { AppButton, AppInput, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete } from "@HRBox/UIKit/components";
+import { AppButton, AppInput, AppModal } from "@hrbox/uikit/components";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete } from "@hrbox/uikit/components";
 import * as Yup from "yup";
 export const initialValuesAction = {
-  EducationalInstitution : null,
-  SearchbyNameorPosition : null,
-  PersonnelCode : null,
-  NationalCode : null,
+  EducationalInstitution: null,
+  SearchbyNameorPosition: null,
+  PersonnelCode: null,
+  NationalCode: null,
 };
 export const formValidationAction = Yup.object().shape({
   EducationalInstitution: Yup.string().required(),
@@ -28,38 +28,43 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 const FilterCalenderModal = () => {
-
   const { openModal } = useModalContext();
 
   return (
     <>
-
       <AppModal.Body>
-        <FormField name="Educational Institution" label='Educational Institution' component={AppAutoComplete} />
-        <FormField name="Search by Name or Position" label='Search by Name or Position'/>
-        <FormField name=" Personnel Code" label=' Personnel Code'/>
-        <FormField name="National Code" label='National Code'/>
+        <FormField
+          name="Educational Institution"
+          label="Educational Institution"
+          component={AppAutoComplete}
+        />
+        <FormField
+          name="Search by Name or Position"
+          label="Search by Name or Position"
+        />
+        <FormField name=" Personnel Code" label=" Personnel Code" />
+        <FormField name="National Code" label="National Code" />
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton
           props={{
-            size: 'xs',
-            radius: 'sm',
-            variant: 'light',
+            size: "xs",
+            radius: "sm",
+            variant: "light",
             // onPress: () => openModal('delete', undefined),
             content: <span>Cancel</span>,
             className:
-              'text-white py-1.5 px-3 text-xl rounded-lg !bg-red-500 hover:text-white transition-all duration-200',
+              "text-white py-1.5 px-3 text-xl rounded-lg !bg-red-500 hover:text-white transition-all duration-200",
           }}
         />
         <AppButton
           props={{
-            size: 'xs',
-            radius: 'sm',
-            variant: 'light',
-            onPress: () => console.log('a'),
+            size: "xs",
+            radius: "sm",
+            variant: "light",
+            onPress: () => console.log("a"),
             content: <span>Submit</span>,
-            className: 'bg-primary text-white py-1.5 px-3 text-xl rounded-lg ',
+            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg ",
           }}
         />
       </AppModal.Footer>

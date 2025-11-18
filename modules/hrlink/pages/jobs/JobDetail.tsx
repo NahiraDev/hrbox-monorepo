@@ -12,33 +12,33 @@ import {
   Profile,
   ReceiptItem,
   TickCircle,
-} from 'iconsax-reactjs';
-import { useState } from 'react';
-import { AppButton } from '@hrbox/uikit/components';
+} from "iconsax-reactjs";
+import { useState } from "react";
+import { AppButton } from "@hrbox/uikit/components";
 
-import { BuildingIcon } from "~/UIKit/icons";
+import { BuildingIcon } from "@hrbox/uikit/icons";
 
 const JobDetail = () => {
-  const [selected, setSelected] = useState<'like' | 'dislike' | null>(null);
-  const buttonStyle = (type: 'like' | 'dislike') => {
+  const [selected, setSelected] = useState<"like" | "dislike" | null>(null);
+  const buttonStyle = (type: "like" | "dislike") => {
     const isActive = selected === type;
 
     return `
       !h-[22px] !w-[54px] !min-w-fit flex items-center gap-2 !px-2 !py-1 !rounded-2 shadow-shadow-light-tight/1
-      ${isActive ? 'bg-secondary-400' : 'bg-white dark:bg-info-1000'}
+      ${isActive ? "bg-secondary-400" : "bg-white dark:bg-info-1000"}
     `;
   };
 
-  const textStyle = (type: 'like' | 'dislike') => {
+  const textStyle = (type: "like" | "dislike") => {
     const isActive = selected === type;
 
-    return `text-base font-normal ${isActive ? 'text-white' : 'text-secondary-1000 dark:text-white '}`;
+    return `text-base font-normal ${isActive ? "text-white" : "text-secondary-1000 dark:text-white "}`;
   };
 
-  const iconStyle = (type: 'like' | 'dislike') => {
+  const iconStyle = (type: "like" | "dislike") => {
     const isActive = selected === type;
 
-    return `${isActive ? 'text-white' : 'text-secondary-1000 dark:text-white'}`;
+    return `${isActive ? "text-white" : "text-secondary-1000 dark:text-white"}`;
   };
 
   return (
@@ -49,15 +49,21 @@ const JobDetail = () => {
             <div className="flex gap-6">
               <AppButton
                 props={{
-                  variant: 'light',
-                  className:'!p-0',
-                  content: <img alt="" className="!w-[80px] !h-[80px]" src={''} />,
+                  variant: "light",
+                  className: "!p-0",
+                  content: (
+                    <img alt="" className="!w-[80px] !h-[80px]" src={""} />
+                  ),
                 }}
               />
               <div className="flex flex-col gap-1 w-full">
-                <span className="text-secondary-400 font-semibold text-xl">Sales Clerk</span>
+                <span className="text-secondary-400 font-semibold text-xl">
+                  Sales Clerk
+                </span>
                 <div className="flex justify-between">
-                  <span className="text-base font-semibold text-secondary-400">Degital Solution</span>
+                  <span className="text-base font-semibold text-secondary-400">
+                    Degital Solution
+                  </span>
                   <div className="flex items-center gap-1">
                     <Location className="text-secondary-400" size="16" />
                     <span className="text-sm text-secondary-400">Tehran</span>
@@ -69,30 +75,40 @@ const JobDetail = () => {
             <div className="flex gap-3 justify-end">
               <AppButton
                 props={{
-                  color: 'white',
-                  size: 'md',
-                  radius: 'sm',
-                  className: buttonStyle('dislike'),
-                  onPress: () => setSelected(selected === 'dislike' ? null : 'dislike'),
+                  color: "white",
+                  size: "md",
+                  radius: "sm",
+                  className: buttonStyle("dislike"),
+                  onPress: () =>
+                    setSelected(selected === "dislike" ? null : "dislike"),
                   content: (
                     <>
-                      <span className={textStyle('dislike')}>Dislike</span>
-                      <Dislike className={iconStyle('dislike')} size="12" variant="Bold" />
+                      <span className={textStyle("dislike")}>Dislike</span>
+                      <Dislike
+                        className={iconStyle("dislike")}
+                        size="12"
+                        variant="Bold"
+                      />
                     </>
                   ),
                 }}
               />
               <AppButton
                 props={{
-                  color: 'white',
-                  size: 'md',
-                  radius: 'sm',
-                  className: buttonStyle('like'),
-                  onPress: () => setSelected(selected === 'like' ? null : 'like'),
+                  color: "white",
+                  size: "md",
+                  radius: "sm",
+                  className: buttonStyle("like"),
+                  onPress: () =>
+                    setSelected(selected === "like" ? null : "like"),
                   content: (
                     <>
-                      <span className={textStyle('like')}>Like</span>
-                      <Like1 className={iconStyle('like')} size="12" variant="Bold" />
+                      <span className={textStyle("like")}>Like</span>
+                      <Like1
+                        className={iconStyle("like")}
+                        size="12"
+                        variant="Bold"
+                      />
                     </>
                   ),
                 }}
@@ -100,7 +116,13 @@ const JobDetail = () => {
             </div>
           </div>
           <div className="flex items-center gap-2 rounded-md bg-secondary-400 dark:bg-surface-200 shadow-shadow-light-tight/1 px-2 py-1 w-fit">
-            <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              fill="none"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M9.7207 7.79688C9.99435 7.79688 10.2023 7.84109 10.3408 7.93164C10.4784 8.02159 10.5488 8.15795 10.5488 8.34473C10.5488 8.54846 10.475 8.69823 10.3359 8.79785C10.196 8.898 9.98848 8.94823 9.7207 8.94824H9.18457V7.79688H9.7207Z"
                 fill="white"
@@ -140,34 +162,48 @@ const JobDetail = () => {
           <div className="grid grid-cols-2">
             <div className="flex gap-6">
               <DollarCircle className="text-[#292D32]" size="20" />
-              <span className="text-[#353535] text-base font-light">Salary</span>
+              <span className="text-[#353535] text-base font-light">
+                Salary
+              </span>
             </div>
             <div>
-              <span className="text-base text-[#353535]">Monthly salary from 15 to 20 Million Toman</span>
+              <span className="text-base text-[#353535]">
+                Monthly salary from 15 to 20 Million Toman
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-2">
             <div className="flex gap-6">
               <Calendar className="text-[#292D32]" size="20" />
-              <span className="text-[#353535] text-base font-light">Working days and hours</span>
+              <span className="text-[#353535] text-base font-light">
+                Working days and hours
+              </span>
             </div>
             <div>
-              <span className="text-base text-[#353535]">March 15, 2024, 9:00 AM</span>
+              <span className="text-base text-[#353535]">
+                March 15, 2024, 9:00 AM
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-2">
             <div className="flex gap-6">
               <LampCharge className="text-[#292D32]" size="20" />
-              <span className="text-[#353535] text-base font-light">Benefits and facilities</span>
+              <span className="text-[#353535] text-base font-light">
+                Benefits and facilities
+              </span>
             </div>
             <div>
-              <span className="text-base text-[#353535]">loan ,Bonus ,Insurance</span>
+              <span className="text-base text-[#353535]">
+                loan ,Bonus ,Insurance
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-2">
             <div className="flex gap-6">
               <Airplane className="text-[#292D32]" size="20" />
-              <span className="text-[#353535] text-base font-light">Business trips</span>
+              <span className="text-[#353535] text-base font-light">
+                Business trips
+              </span>
             </div>
             <div>
               <span className="text-base text-[#353535]">Yes</span>
@@ -181,11 +217,16 @@ const JobDetail = () => {
           </div>
           <div className="flex gap-4">
             <LampCharge className="text-[#292D32]" size="20" />
-            <span>Familiar with insurance and tax ,Familiar with insurance and tax laws</span>
+            <span>
+              Familiar with insurance and tax ,Familiar with insurance and tax
+              laws
+            </span>
           </div>
           <div className="flex gap-4">
             <LampCharge className="text-[#292D32]" size="20" />
-            <span>Proficient in accounting Familiar with insurance and tax laws.</span>
+            <span>
+              Proficient in accounting Familiar with insurance and tax laws.
+            </span>
           </div>
         </div>
         <div className="pb-4 border-b-1 border-neutral-100">
@@ -207,13 +248,15 @@ const JobDetail = () => {
       </div>
       <div className="bg-white shadow-shadow-light-tight/1 rounded-[14px] p-4">
         <div className="flex justify-between items-center border-b border-neutral-100 pb-2 mb-4">
-          <span className="text-secondary-900 text-xl font-semibold">About the company</span>
+          <span className="text-secondary-900 text-xl font-semibold">
+            About the company
+          </span>
           <AppButton
             props={{
               isIconOnly: true,
-              color: 'white',
-              size: 'md',
-              radius: 'sm',
+              color: "white",
+              size: "md",
+              radius: "sm",
               content: (
                 <>
                   <span className="text-secondary-1000">See More</span>
@@ -228,14 +271,18 @@ const JobDetail = () => {
           <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
             <div className="flex items-center gap-1.5">
               <BuildingIcon />
-              <span className="text-secondary-900 font-light">Establishment</span>
+              <span className="text-secondary-900 font-light">
+                Establishment
+              </span>
             </div>
             <span className="text-secondary-900 font-semibold">1400</span>
           </div>
           <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
             <div className="flex items-center gap-1.5">
               <Profile className="text-[#292D32]" size="16" />
-              <span className="text-secondary-900 font-light">No. Employees</span>
+              <span className="text-secondary-900 font-light">
+                No. Employees
+              </span>
             </div>
             <span className="text-secondary-900 font-semibold">120</span>
           </div>
@@ -270,7 +317,9 @@ const JobDetail = () => {
           <div className="p-4 rounded-[8px] border border-[rgba(220,240,249,0.40)] bg-gradient-to-r from-[#FBF1EF] via-[#FCF8F8] via-50% via-[#F9F0F0] to-[#FCF4F3] backdrop-blur-[4px] flex justify-between dark:border-[rgba(4,66,92,0.40)] dark:bg-[linear-gradient(90deg,_#080E1C_0%,_#111D38_50%,_#080E1C_100%)]">
             <div className="flex items-center gap-1.5">
               <Call className="text-[#292D32]" size="16" />
-              <span className="text-secondary-900 font-light">Phone Number</span>
+              <span className="text-secondary-900 font-light">
+                Phone Number
+              </span>
             </div>
             <span className="text-secondary-900 font-semibold">None</span>
           </div>

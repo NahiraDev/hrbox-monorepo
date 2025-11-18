@@ -1,6 +1,6 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { ArrowDown, Personalcard } from 'iconsax-reactjs';
-import { useState } from 'react';
+import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { ArrowDown, Personalcard } from "iconsax-reactjs";
+import { useState } from "react";
 
 export const SkillModal = () => {
   const [isOpenSkills, setIsOpenSkills] = useState<boolean>(false);
@@ -11,7 +11,7 @@ export const SkillModal = () => {
   const toggleField = () => setIsOpenField((prev) => !prev);
   const handleSkillSelect = (skill: any) => {
     const getParentIdAndTypes = {
-      type: '2',
+      type: "2",
       parentId: skill.Id,
     };
 
@@ -25,7 +25,11 @@ export const SkillModal = () => {
   const availableFields = selectedIndustrial;
 
   return (
-    <AppModal icon={<Personalcard className="text-white" size="22" />} size="3xl" title="Add New Soft Skills">
+    <AppModal
+      icon={<Personalcard className="text-white" size="22" />}
+      size="3xl"
+      title="Add New Soft Skills"
+    >
       <AppModal.Body>
         {/*<div className="flex flex-col gap-1">*/}
         {/*  <span className="text-secondary-1000 font-inter">Skills*</span>*/}
@@ -142,23 +146,23 @@ export const SkillModal = () => {
         <div className="flex gap-2">
           <AppButton
             props={{
-              size: 'md',
-              variant: 'light',
-              color: 'default',
-              content: 'Close',
+              size: "md",
+              variant: "light",
+              color: "default",
+              content: "Close",
             }}
           />
           <AppButton
             props={{
-              size: 'md',
-              variant: 'light',
-              color: 'secondary',
-              type: 'submit',
-              content: 'Submit',
+              size: "md",
+              variant: "light",
+              color: "secondary",
+              type: "submit",
+              content: "Submit",
             }}
           />
         </div>
       </AppModal.Footer>
     </AppModal>
-  )
-}
+  );
+};

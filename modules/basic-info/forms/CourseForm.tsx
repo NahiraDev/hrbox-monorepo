@@ -1,6 +1,6 @@
 import { Form } from "@heroui/react";
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@HRBox/UIKit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import * as Yup from "yup";
 export const initialValuesAction = {
   Type: null,
@@ -34,28 +34,44 @@ export const handleSubmitAction = (values: any) => {
     Duration: values.FromDate,
     CenterName: values.organization,
     Year: values.Department,
-   };
+  };
 };
 
-export const CourseForm = () =>{
-  return(
+export const CourseForm = () => {
+  return (
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Type" label='Type' />
-        <FormField name="Title" label='Title'  />
-        <FormField name="Level" label='Level' component={AppAutoComplete} />
-        <FormField name="Duration (Hours)" label='Duration (Hours)' component={AppAutoComplete} />
-        <FormField name="Center Name" label='Center Name' component={AppAutoComplete} />
-        <FormField name="Year" label='Year' component={AppAutoComplete} />
+        <FormField name="Type" label="Type" />
+        <FormField name="Title" label="Title" />
+        <FormField name="Level" label="Level" component={AppAutoComplete} />
+        <FormField
+          name="Duration (Hours)"
+          label="Duration (Hours)"
+          component={AppAutoComplete}
+        />
+        <FormField
+          name="Center Name"
+          label="Center Name"
+          component={AppAutoComplete}
+        />
+        <FormField name="Year" label="Year" component={AppAutoComplete} />
         {/*we dont have Attached File*/}
         {/*we dont have Check circle*/}
       </div>
 
       <div>
-        <FormField name="From Number" label='From Number' component={AppAutoComplete} />
-        <FormField name="To Number" label='To Number' component={AppAutoComplete} />
-        <FormField  name="Type" label='Type' component={AppTextArea} />
+        <FormField
+          name="From Number"
+          label="From Number"
+          component={AppAutoComplete}
+        />
+        <FormField
+          name="To Number"
+          label="To Number"
+          component={AppAutoComplete}
+        />
+        <FormField name="Type" label="Type" component={AppTextArea} />
       </div>
     </Form>
-  )
-}
+  );
+};

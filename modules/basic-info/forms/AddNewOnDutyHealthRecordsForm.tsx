@@ -1,5 +1,5 @@
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@HRBox/UIKit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
 export const initialValuesAction = {
@@ -23,10 +23,10 @@ const AddNewOnDutyHealthRecords = () => {
   return (
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Title" label='Title' />
-        <FormField name="Amount" label='Amount'  />
+        <FormField name="Title" label="Title" />
+        <FormField name="Amount" label="Amount" />
         {/*we dont have Attached File*/}
       </div>
     </Form>
-  )
-}
+  );
+};

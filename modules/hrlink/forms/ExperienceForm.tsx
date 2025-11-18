@@ -1,14 +1,18 @@
-import * as Yup from 'yup';
-import { Form } from '@heroui/react';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
-import { AppAutoComplete, AppDatePicker, AppInput } from '@hrbox-monorepo/UIKit/components';
+import * as Yup from "yup";
+import { Form } from "@heroui/react";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import {
+  AppAutoComplete,
+  AppDatePicker,
+  AppInput,
+} from "@hrbox/uikit/components";
 
 export const initialValuesExperience = {
   Id: null,
-  Title: '',
-  CompanyName: '',
-  DescriptionAndAchievements: '',
-  ResionsOfQuit: '',
+  Title: "",
+  CompanyName: "",
+  DescriptionAndAchievements: "",
+  ResionsOfQuit: "",
   SalaryRecieved: null,
   City: null,
   Industry: null,
@@ -63,11 +67,11 @@ export const handleSubmitExperience = (values: any) => {
   };
 };
 
-
 export const ExperienceForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
 
-  return(
+  return (
     <Form
       className="w-full flex flex-col gap-6"
       id="add-experience-form"
@@ -77,9 +81,9 @@ export const ExperienceForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: 'Title',
-              name: 'Title',
-              type: 'text',
+              label: "Title",
+              name: "Title",
+              type: "text",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Title && errors.Title,
@@ -89,8 +93,8 @@ export const ExperienceForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: 'Company Name',
-              name: 'CompanyName',
+              label: "Company Name",
+              name: "CompanyName",
               error: errors.CompanyName,
             }}
           />
@@ -100,23 +104,21 @@ export const ExperienceForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'IndustryId',
-              label: 'Industry',
-              displayKey: 'Name',
-              valueKey: 'Id',
-              error:
-                touched.IndustryId &&
-                errors.IndustryId,
+              name: "IndustryId",
+              label: "Industry",
+              displayKey: "Name",
+              valueKey: "Id",
+              error: touched.IndustryId && errors.IndustryId,
             }}
           />
         </div>
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: 'Salary received',
+              label: "Salary received",
               error: errors.Salary,
-              name: 'Salary',
-              type: 'text',
+              name: "Salary",
+              type: "text",
             }}
           />
         </div>
@@ -125,18 +127,18 @@ export const ExperienceForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppDatePicker
             props={{
-              label: 'Start Date',
+              label: "Start Date",
               error: errors.StartDate,
-              name: 'StartDate',
+              name: "StartDate",
             }}
           />
         </div>
         <div className="flex flex-col gap-1 w-1/2">
           <AppDatePicker
             props={{
-              label: 'End Date',
+              label: "End Date",
               error: errors.EndDate,
-              name: 'EndDate',
+              name: "EndDate",
             }}
           />
         </div>
@@ -145,20 +147,20 @@ export const ExperienceForm = () => {
         <div className="flex flex-col gap-1 w-1/2 relative z-[9999]">
           <AppAutoComplete
             props={{
-              name: 'PlaceId',
-              label: 'City',
+              name: "PlaceId",
+              label: "City",
               displayKey: `Name`,
-              valueKey: 'Id',
+              valueKey: "Id",
             }}
           />
         </div>
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'JobGroupId',
-              label: 'Occupational group',
-              displayKey: 'Name',
-              valueKey: 'Id',
+              name: "JobGroupId",
+              label: "Occupational group",
+              displayKey: "Name",
+              valueKey: "Id",
             }}
           />
         </div>
@@ -213,5 +215,5 @@ export const ExperienceForm = () => {
       {/*  </div>*/}
       {/*</div>*/}
     </Form>
-  )
-}
+  );
+};

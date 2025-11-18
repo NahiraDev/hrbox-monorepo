@@ -1,6 +1,6 @@
 // @module/basic-info/pages/employees/modals/AddNewCourse.tsx
-import React, { useState } from 'react';
-import { AppButton, AppInput, AppDatePicker } from '@hrbox-monorepo/UIKit/components';
+import React, { useState } from "react";
+import { AppButton, AppInput, AppDatePicker } from "@hrbox/uikit/components";
 
 interface AddNewCourseProps {
   onClose: () => void;
@@ -8,16 +8,16 @@ interface AddNewCourseProps {
 
 export default function AddNewCourse({ onClose }: AddNewCourseProps) {
   const [formData, setFormData] = useState({
-    title: '',
-    provider: '',
-    duration: '',
-    completionDate: '',
-    certificate: ''
+    title: "",
+    provider: "",
+    duration: "",
+    completionDate: "",
+    certificate: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New Course:', formData);
+    console.log("New Course:", formData);
     onClose();
   };
 
@@ -56,14 +56,18 @@ export default function AddNewCourse({ onClose }: AddNewCourseProps) {
         label="Certificate Number"
         placeholder="e.g., CERT-12345"
         value={formData.certificate}
-        onChange={(e) => setFormData({ ...formData, certificate: e.target.value })}
+        onChange={(e) =>
+          setFormData({ ...formData, certificate: e.target.value })
+        }
       />
 
       <div className="flex justify-end gap-3 pt-6">
-        <AppButton props={{ variant: 'light', type: 'button', onPress: onClose }}>
+        <AppButton
+          props={{ variant: "light", type: "button", onPress: onClose }}
+        >
           Cancel
         </AppButton>
-        <AppButton props={{ color: 'primary', type: 'submit' }}>
+        <AppButton props={{ color: "primary", type: "submit" }}>
           Add Course
         </AppButton>
       </div>

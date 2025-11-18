@@ -1,10 +1,10 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { FormProvider } from '@hrbox-monorepo/core/providers/FormProvider';
+import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { FormProvider } from "@hrbox/core/providers/FormProvider";
 import {
   AwardForm,
   formValidationAward,
   handleSubmitAward,
-  initialValuesAward
+  initialValuesAward,
 } from "@hrbox/modules/hrlink/forms/AwardForm";
 import { useCreateCourseMutation } from "@hrbox/modules/hrlink/apis";
 

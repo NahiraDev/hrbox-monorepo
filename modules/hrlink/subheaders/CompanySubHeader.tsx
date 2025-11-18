@@ -1,5 +1,5 @@
-import { AppButton, AppSearchInput } from '@hrbox-monorepo/UIKit/components';
-import { Buildings, DeviceMessage, Heart, Setting4 } from 'iconsax-reactjs';
+import { AppButton, AppSearchInput } from "@hrbox/uikit/components";
+import { Buildings, DeviceMessage, Heart, Setting4 } from "iconsax-reactjs";
 import { useNavigation } from "@hrbox-monorepo/core/hooks/useNavigation";
 import { Paths } from "@hrbox-monorepo/modules/paths";
 
@@ -11,23 +11,25 @@ export const CompanySubHeader = (props: any) => {
       <div className="flex gap-2">
         <AppButton
           props={{
-            color: 'white',
-            size: 'md',
-            radius: 'md',
+            color: "white",
+            size: "md",
+            radius: "md",
             // onPress: () => navigate(HRLinkPaths.AllCompanies),
             content: (
               <>
                 <Buildings className="text-secondary-400" size="22" />
-                <span className="text-secondary-400 text-xl">All Companies</span>
+                <span className="text-secondary-400 text-xl">
+                  All Companies
+                </span>
               </>
             ),
           }}
         />
         <AppButton
           props={{
-            color: 'secondary',
-            size: 'md',
-            radius: 'md',
+            color: "secondary",
+            size: "md",
+            radius: "md",
             // onPress: () => navigate(HRLinkPaths.CompanyRequested),
             content: (
               <>
@@ -39,10 +41,10 @@ export const CompanySubHeader = (props: any) => {
         />
         <AppButton
           props={{
-            color: 'secondary',
-            size: 'md',
-            radius: 'md',
-            onPress: () => navigate.push({to: Paths.HRLink.CompanyFavorites }),
+            color: "secondary",
+            size: "md",
+            radius: "md",
+            onPress: () => navigate.push({ to: Paths.HRLink.CompanyFavorites }),
             content: (
               <>
                 <Heart className="text-secondary-400" size="22" />
@@ -56,9 +58,9 @@ export const CompanySubHeader = (props: any) => {
         <AppSearchInput onSearch={props.onSearch} />
         <AppButton
           props={{
-            color: 'white',
-            size: 'md',
-            radius: 'md',
+            color: "white",
+            size: "md",
+            radius: "md",
             isIconOnly: true,
             content: <Setting4 className="text-secondary-1000" />,
           }}

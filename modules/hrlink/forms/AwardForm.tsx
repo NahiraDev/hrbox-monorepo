@@ -1,13 +1,13 @@
-import { Form } from '@heroui/react';
-import { Link21 } from 'iconsax-reactjs';
-import { AppDatePicker, AppInput, AppTextArea } from '@hrbox-monorepo/UIKit/components';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
-import * as Yup from 'yup';
+import { Form } from "@heroui/react";
+import { Link21 } from "iconsax-reactjs";
+import { AppDatePicker, AppInput, AppTextArea } from "@hrbox/uikit/components";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import * as Yup from "yup";
 
 export const initialValuesAward = {
   Title: null,
   Date: null,
-  Description: '',
+  Description: "",
   FileId: null,
 };
 
@@ -28,16 +28,21 @@ export const handleSubmitAward = (values: any) => {
 };
 
 export const AwardForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
 
   return (
-    <Form className="w-full flex flex-col gap-6" id="create-award-form" onSubmit={handleSubmit}>
+    <Form
+      className="w-full flex flex-col gap-6"
+      id="create-award-form"
+      onSubmit={handleSubmit}
+    >
       <div className="flex gap-[52px] w-full">
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: 'Title',
-              name: 'Name',
+              label: "Title",
+              name: "Name",
               error: touched.Name && errors.Name,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -47,8 +52,8 @@ export const AwardForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppDatePicker
             props={{
-              label: 'Date',
-              name: 'Date',
+              label: "Date",
+              name: "Date",
               error: touched.Date && errors.Date,
               onChange: handleChange,
               onBlur: handleBlur,
@@ -60,8 +65,8 @@ export const AwardForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: 'Upload portfolio',
-              name: 'FileId',
+              label: "Upload portfolio",
+              name: "FileId",
               endContent: <Link21 size="24" />,
               error: touched.FileId && errors.FileId,
               onChange: handleChange,
@@ -75,8 +80,8 @@ export const AwardForm = () => {
         <div className="flex flex-col gap-1 w-full">
           <AppTextArea
             props={{
-              label: 'Description',
-              name: 'Description',
+              label: "Description",
+              name: "Description",
               error: touched.Description && errors.Description,
               onChange: handleChange,
               onBlur: handleBlur,

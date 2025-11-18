@@ -1,6 +1,6 @@
 // @module/basic-info/pages/employees/modals/AddNewSkill.tsx
-import React, { useState } from 'react';
-import { AppButton, AppInput } from '@hrbox-monorepo/UIKit/components';
+import React, { useState } from "react";
+import { AppButton, AppInput } from "@hrbox/uikit/components";
 
 interface AddNewSkillProps {
   onClose: () => void;
@@ -8,18 +8,18 @@ interface AddNewSkillProps {
 
 export default function AddNewSkill({ onClose }: AddNewSkillProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    category: '',
-    level: '',
-    years: ''
+    name: "",
+    category: "",
+    level: "",
+    years: "",
   });
 
-  const categories = ['Technical', 'Soft Skills', 'Language', 'Tools'];
-  const levels = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+  const categories = ["Technical", "Soft Skills", "Language", "Tools"];
+  const levels = ["Beginner", "Intermediate", "Advanced", "Expert"];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New Skill:', formData);
+    console.log("New Skill:", formData);
     onClose();
   };
 
@@ -33,7 +33,7 @@ export default function AddNewSkill({ onClose }: AddNewSkillProps) {
         required
       />
 
-        <AppInput
+      <AppInput
         label="Years of Experience"
         placeholder="e.g., 3"
         type="number"
@@ -43,10 +43,12 @@ export default function AddNewSkill({ onClose }: AddNewSkillProps) {
       />
 
       <div className="flex justify-end gap-3 pt-6">
-        <AppButton props={{ variant: 'light', type: 'button', onPress: onClose }}>
+        <AppButton
+          props={{ variant: "light", type: "button", onPress: onClose }}
+        >
           Cancel
         </AppButton>
-        <AppButton props={{ color: 'primary', type: 'submit' }}>
+        <AppButton props={{ color: "primary", type: "submit" }}>
           Add Skill
         </AppButton>
       </div>

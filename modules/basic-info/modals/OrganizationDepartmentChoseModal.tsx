@@ -1,10 +1,19 @@
-import { AppInput, AppModal, AppTextArea } from '@hrbox/UIKit/components';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { FC } from 'react';
+import { AppInput, AppModal, AppTextArea } from "@hrbox/uikit/components";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { FC } from "react";
 
-const colors = ['#000000', '#A61111', '#F4D082', '#05856F', '#0ED2F7', '#2F80ED', '#DB5918', '#9F9C90'] as const;
+const colors = [
+  "#000000",
+  "#A61111",
+  "#F4D082",
+  "#05856F",
+  "#0ED2F7",
+  "#2F80ED",
+  "#DB5918",
+  "#9F9C90",
+] as const;
 
-type ColorType = typeof colors[number];
+type ColorType = (typeof colors)[number];
 
 interface DepartmentFormData {
   title: string;
@@ -17,34 +26,33 @@ interface OrganizationDepartmentChoseModalProps {
   selectedColor: ColorType;
 }
 
-export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseModalProps> = ({
-                                                                                              initialData,
-                                                                                              selectedColor
-                                                                                            }) => {
+export const OrganizationDepartmentChoseModal: FC<
+  OrganizationDepartmentChoseModalProps
+> = ({ initialData, selectedColor }) => {
   const { openModal } = useModalContext();
 
   const commonInputProps = {
-    className: 'border border-[#DCF0F9]',
-    size: 'lg',
-    color: 'primary',
-    radius: 'lg',
+    className: "border border-[#DCF0F9]",
+    size: "lg",
+    color: "primary",
+    radius: "lg",
   };
 
   const handleCancel = () => {
-    (openModal as any)('', '', null);
+    (openModal as any)("", "", null);
   };
 
   const handleSave = () => {
     // Save logic با داده‌های initial
-    console.log('Final save department:', {
+    console.log("Final save department:", {
       ...initialData,
-      color: selectedColor
+      color: selectedColor,
     });
 
     // TODO: API call یا store update
-    alert('Department saved successfully!');
+    alert("Department saved successfully!");
 
-    (openModal as any)('', '', null);
+    (openModal as any)("", "", null);
   };
 
   return (
@@ -55,11 +63,11 @@ export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseMod
             <AppInput
               props={{
                 ...commonInputProps,
-                label: 'Department Title',
+                label: "Department Title",
                 value: initialData.title,
-                placeholder: 'Describe Title',
+                placeholder: "Describe Title",
                 readOnly: true,
-                className: 'bg-gray-50 cursor-not-allowed',
+                className: "bg-gray-50 cursor-not-allowed",
               }}
             />
             <div className="flex items-center gap-3">
@@ -67,18 +75,20 @@ export const OrganizationDepartmentChoseModal: FC<OrganizationDepartmentChoseMod
                 className="w-16 h-16 rounded-lg "
                 style={{ backgroundColor: selectedColor }}
               />
-              <span className="!font-medium text-secondary-1000">Department Color</span>
+              <span className="!font-medium text-secondary-1000">
+                Department Color
+              </span>
             </div>
           </div>
 
           <AppTextArea
             props={{
               ...commonInputProps,
-              label: 'Description',
+              label: "Description",
               value: initialData.description,
-              placeholder: 'Enter department description',
+              placeholder: "Enter department description",
               readOnly: true,
-              className: 'bg-gray-50',
+              className: "bg-gray-50",
             }}
           />
         </div>

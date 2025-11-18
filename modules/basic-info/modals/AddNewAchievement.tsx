@@ -1,7 +1,15 @@
 // @module/basic-info/pages/employees/modals/AddNewJob.tsx
-import React, { useState } from 'react';
-import { AppButton, AppInput, AppDatePicker, AppModal, AppCheckBox, AppSwitch, AppTextArea } from '@hrbox-monorepo/UIKit/components';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import React, { useState } from "react";
+import {
+  AppButton,
+  AppInput,
+  AppDatePicker,
+  AppModal,
+  AppCheckBox,
+  AppSwitch,
+  AppTextArea,
+} from "@hrbox/uikit/components";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 interface AddNewJobProps {
   onClose: () => void;
@@ -11,12 +19,12 @@ export default function AddNewAchievement({ onClose }: AddNewJobProps) {
   const { closeModal } = useModalContext();
 
   const [formData, setFormData] = useState({
-    title: '',
-    department: '',
-    type: '',
-    startDate: '',
-    salary: '',
-    description: ''
+    title: "",
+    department: "",
+    type: "",
+    startDate: "",
+    salary: "",
+    description: "",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,14 +32,14 @@ export default function AddNewAchievement({ onClose }: AddNewJobProps) {
 
   const handleCancel = () => {
     onClose();
-    closeModal('edit', '');
+    closeModal("edit", "");
   };
 
-  const employmentTypes = ['Full-time', 'Part-time', 'Contract', 'Internship'];
+  const employmentTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 
   const handleSubmit = () => {
     if (!isSubmitted) {
-      console.log('New Job:', formData);
+      console.log("New Job:", formData);
       setIsSubmitted(true);
     } else {
       setIsSaved(true);
@@ -45,85 +53,86 @@ export default function AddNewAchievement({ onClose }: AddNewJobProps) {
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
             <AppInput
               props={{
-                className: 'border border-[#DCF0F9] w-full',
-                label: 'Title',
-                placeholder: 'Describe title',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-                isDisabled: isSubmitted
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                placeholder: "Describe title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
               }}
             />
             <AppInput
               props={{
-                className: 'border border-[#DCF0F9] w-full',
-                label: 'Title',
-                placeholder: 'Describe title',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-                isDisabled: isSubmitted
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                placeholder: "Describe title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
               }}
             />
             <AppInput
               props={{
-                className: 'border border-[#DCF0F9] w-full',
-                label: 'Title',
-                placeholder: 'Describe title',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-                isDisabled: isSubmitted
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                placeholder: "Describe title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
               }}
             />
             <AppInput
               props={{
-                className: 'border border-[#DCF0F9] w-full',
-                label: 'Title',
-                placeholder: 'Describe title',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
-                isDisabled: isSubmitted
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                placeholder: "Describe title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
               }}
             />
           </div>
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
             <AppTextArea
               props={{
-                className: 'border border-[#DCF0F9] w-[635px]',
-                label: 'Descriptions and Achievements',
-                placeholder: 'Description',
-                size: 'lg',
-                color: 'primary',
-                radius: 'lg',
+                className: "border border-[#DCF0F9] w-[635px]",
+                label: "Descriptions and Achievements",
+                placeholder: "Description",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
                 value: formData.description,
-                onChange: (e: any) => setFormData({ ...formData, description: e.target.value }),
-                isDisabled: isSubmitted
+                onChange: (e: any) =>
+                  setFormData({ ...formData, description: e.target.value }),
+                isDisabled: isSubmitted,
               }}
             />
           </div>
         </div>
       </AppModal.Body>
       <AppModal.Footer>
-        {!isSaved && (
-          !isSubmitted ? (
+        {!isSaved &&
+          (!isSubmitted ? (
             <div className="flex items-center justify-center gap-3 mt-5 ">
               <AppButton
                 props={{
-                  size: 'md',
-                  radius: 'lg',
+                  size: "md",
+                  radius: "lg",
                   onPress: handleCancel,
-                  content: 'Cancel'
+                  content: "Cancel",
                 }}
               />
               <AppButton
                 props={{
-                  className:"bg-primary text-white",
-                  size: 'md',
-                  radius: 'lg',
+                  className: "bg-primary text-white",
+                  size: "md",
+                  radius: "lg",
                   onPress: handleSubmit,
-                  content: 'Submit'
+                  content: "Submit",
                 }}
               />
             </div>
@@ -131,24 +140,23 @@ export default function AddNewAchievement({ onClose }: AddNewJobProps) {
             <div className="flex items-center justify-center gap-3 mt-5 ">
               <AppButton
                 props={{
-                  size: 'md',
-                  radius: 'lg',
+                  size: "md",
+                  radius: "lg",
                   onPress: handleCancel,
-                  content: 'Cancel'
+                  content: "Cancel",
                 }}
               />
               <AppButton
                 props={{
-                  className:"bg-primary text-white",
-                  size: 'md',
-                  radius: 'lg',
+                  className: "bg-primary text-white",
+                  size: "md",
+                  radius: "lg",
                   onPress: handleSubmit,
-                  content: 'Save Changes'
+                  content: "Save Changes",
                 }}
               />
             </div>
-          )
-        )}
+          ))}
       </AppModal.Footer>
     </div>
   );
