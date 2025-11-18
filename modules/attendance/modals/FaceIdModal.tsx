@@ -10,7 +10,6 @@ const FaceIdModal = () => {
 
   return (
     <>
-      <AppModal.Body>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-row gap-3 items-center">
             <Avatar className="w-16 h-16" radius="sm" src="/images/profile.png" />
@@ -64,25 +63,6 @@ const FaceIdModal = () => {
             </div>
           </div>
         </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
-              onPress= {() => closeModal('confirm', 'FaceIdModal')}
-              content= 'Cancel'
-          />
-          <AppButton
-              color= 'primary'
-              radius= 'sm'
-              size= 'md'
-              className= 'text-white'
-              content= 'Submit Again'
-          />
-        </div>
-      </AppModal.Footer>
     </>
   );
 };

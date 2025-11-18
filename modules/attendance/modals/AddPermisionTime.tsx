@@ -7,29 +7,7 @@ const AddPermisionTime=()=>{
   const {closeModal} = useModalContext();
   return(
     <>
-      <AppModal.Body>
-        <FormProvider formId='AddPermision-form' enableCache clearCacheOnSubmit initialValues={}>
           <AddPermisionForm/>
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-              color='white'
-              size='md'
-              radius='lg'
-              onPress={ () => closeModal('confirm', 'AddPermisionTime')}
-              content='Cancel'
-          />
-          <AppButton
-              color='primary'
-              size='md'
-              radius='lg'
-              className='text-white'
-              content='Submit'
-          />
-        </div>
-      </AppModal.Footer>
     </>
   )
 }

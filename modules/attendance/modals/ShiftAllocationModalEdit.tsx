@@ -22,32 +22,7 @@ const ShiftAllocationModalEdit=()=>{
   console.log(initialValues);
   return(
     <>
-      <AppModal.Body>
-        <FormProvider  formId='ShiftAllocation-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
-          handleSubmitAction(values);
-          closeModal('edit', 'ShiftAllocationModalEdit');
-        }} initialValues={initialValues} validationSchema={formValidationAction}>
           <ShiftAllocationEdit/>
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
-              onPress= {() => closeModal('edit', 'ShiftAllocationModalEdit')}
-              content= 'Cancel'
-          />
-          <AppButton
-              color= 'primary'
-              size= 'md'
-              radius= 'lg'
-              className= 'text-white'
-              content= 'Submit Again'
-          />
-        </div>
-      </AppModal.Footer>
     </>
   )
 }

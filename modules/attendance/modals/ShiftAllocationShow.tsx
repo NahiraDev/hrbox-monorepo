@@ -8,14 +8,7 @@ const ShiftAllocationShow=()=>{
   const {closeModal}=useModalContext();
   return(
     <>
-      <AppModal.Body>
-        <FormProvider formId='ShiftAllocationShow-form' enableCache clearCacheOnSubmit onSubmitAsync={async(values:any)=>{
-          handleSubmitAction(values);
-          closeModal('view', 'ShiftShowModal');
-        }} initialValues={{}} validationSchema={formValidationAction}>
         <ShiftAllocationShowForm/>
-        </FormProvider>
-      </AppModal.Body>
     </>
   )
 }

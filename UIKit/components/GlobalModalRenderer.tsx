@@ -1,20 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { AppModal } from "./AppModal";
 import { FormProvider } from "@hrbox/core/providers";
 
 /**
- * ✅ نقطه مهم:
- * 
- * اگر isForm = true:
- *   FormProvider > AppModal > component
- * 
- * اگر isForm = false:
- *   AppModal > component
+ * ✅ Wrapper برای pass کردن FormContext به AppModal
+ */
+const AppModalWithFormContext: React.FC<{
+    isOpen: boolean;
+    onClose: () => void;
+    size?: string;
+    title?: string;
+    icon?: React.ReactNode;
+    submitLabel?: string;
+    cancelLabel?: string;
+    children?: React.ReactNode;
+}> = ({
+    isOpen,
+    onClose,
+    size,
+    title,
+    icon,
+    submitLabel = "ذخیره",
+    cancelLabel = "لغو",
+    children
+}) => {
+    // ✅ FormContext رو اینجا دریافت کنید
+    let formContext: any = null;
+    try {
+        formContext = useFormContext();
+    } catch {
+        // نیست
+    }
+
+    // ✅ FormContext state‌ها رو pass کنید
+    return (
+        <AppModal
+            isOpen={isOpen}
+            onClose={onClose}
+            size={size}
+            title={title}
+            icon={icon}
+            submitLabel={submitLabel}
+            cancelLabel={cancelLabel}
+            // ✅ pass کنید FormContext state‌ها
+            isDirty={formContext?.dirty ?? false}
+            isSubmitting={formContext?.isSubmitting ?? false}
+            formError={formContext?.formError ?? null}
+            onSubmit={formContext?.handleSubmit}
+            onCancel={formContext?.resetForm}
+        >
+            {children}
+        </AppModal>
+    );
+};
+
+/**
+ * ✅ GlobalModalRenderer - نسخه درست
  */
 export const GlobalModalRenderer: React.FC = () => {
     const { getOpenModal, closeModal } = useModalContext();
     const openModal = getOpenModal();
+    const [isOpen, setIsOpen] = useState(true);
 
     React.useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -26,6 +74,9 @@ export const GlobalModalRenderer: React.FC = () => {
         if (openModal) {
             document.addEventListener("keydown", handleEscape);
             document.body.style.overflow = "hidden";
+            setIsOpen(true);
+        } else {
+            setIsOpen(false);
         }
 
         return () => {
@@ -52,22 +103,26 @@ export const GlobalModalRenderer: React.FC = () => {
                 clearCacheOnSubmit={formConfig.clearCacheOnSubmit}
                 onSubmitAsync={formConfig.onSubmitAsync}
             >
-                <AppModal
-                    type={openModal.type}
-                    name={openModal.name}
+                {/* ✅ Wrapper برای FormContext */}
+                <AppModalWithFormContext
+                    isOpen={isOpen}
+                    onClose={() => {
+                        setIsOpen(false);
+                        closeModal(openModal.type, openModal.name);
+                    }}
                     size={openModal.size}
                     title={openModal.data?.title}
                     icon={openModal.data?.icon}
-                    submitLabel={openModal.data?.submitLabel}
-                    cancelLabel={openModal.data?.cancelLabel}
+                    submitLabel={openModal.data?.submitLabel || "ذخیره"}
+                    cancelLabel={openModal.data?.cancelLabel || "لغو"}
                 >
                     {openModal.component}
-                </AppModal>
+                </AppModalWithFormContext>
             </FormProvider>
         );
     }
 
-    // ✅ اگر فرم نیست
+    // ✅ اگر فرم نیست - Context mode
     return (
         <AppModal
             type={openModal.type}
