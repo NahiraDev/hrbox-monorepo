@@ -25,11 +25,11 @@ import {CupStarIcon} from "~/UIKit/icons/CupStarIcon";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from '@module/paths';
 
-const ResumeSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/ResumeSubHeader'));
-const JobSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/JobSubHeader'));
-const JobDetailSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/JobDetailSubHeader'));
-const CompanySubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/CompanySubHeader'));
-const CompanyInformationSubHeader = lazyRouteComponent(() => import('@hrbox/modules/hrlink/components/subheaders/CompanyInformationSubHeader'));
+const ResumeSubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/hrlink/subheaders/ResumeSubHeader'));
+const JobSubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/hrlink/subheaders/JobSubHeader'));
+const JobDetailSubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/hrlink/subheaders/JobDetailSubHeader'));
+const CompanySubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/hrlink/subheaders/CompanySubHeader'));
+const CompanyInformationSubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/hrlink/subheaders/CompanyInformationSubHeader'));
 
 function createResumeSubHeaderWithHook(useHook: () => any, name: string) {
   const Wrapper = (props: any) => {

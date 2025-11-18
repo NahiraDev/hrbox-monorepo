@@ -102,9 +102,10 @@ export const AppHeader = () => {
                     <div className="flex items-center gap-2">
                         <AppButton
                             color={domainTheme === "hrbox" ? 'primary' : 'default'}
-                            variant={domainTheme === "hrbox" ? 'bordered' : 'solid'}
+                            variant={domainTheme === "hrbox" ? 'bordered' : 'default'}
                             size='md'
                             radius='md'
+                            className="!w-fit !h-fit !p-2"
                             content={<Play size="24"/>}
                         />
                         <AppButton
@@ -126,6 +127,7 @@ export const AppHeader = () => {
                         <AppButton
                             variant="light"
                             isIconOnly={true}
+                            className="!w-full !h-full !p-2.5"
                             content={isDark ? (
                                 <Sun1 size="20" className="text-secondary-900 dark:text-white"/>
                             ) : (
@@ -138,8 +140,9 @@ export const AppHeader = () => {
                             isIconOnly={true}
                             variant="light"
                             radius="md"
-                            size="md"
+                            size="xs"
                             onPress={() => navigate({to: "/notifications"})}
+                            className="!w-full !h-full !p-2.5"
                             content={<Notification size="20" className="text-secondary-900 dark:text-white"/>}
                         />
                         {/* Messages */}
@@ -147,7 +150,8 @@ export const AppHeader = () => {
                             onPress={() => navigate({to: "/messages"})}
                             content={<SmsNotification size="20" className="text-secondary-900 dark:text-white"/>}
                             variant="light"
-                            size="sm"
+                            size="xs"
+                            className="!w-full !h-full !p-2.5"
                             isIconOnly={true}
                         />
 

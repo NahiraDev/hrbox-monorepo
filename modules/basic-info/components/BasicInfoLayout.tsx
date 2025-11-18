@@ -72,7 +72,7 @@ const ProfileActions = ({ openModal }: { openModal: any }) => (
     <AppButton
       props={{
         size: 'xs', radius: 'sm', color: 'white', variant: 'solid',
-        className: 'p-1 bg-white hover:!bg-primary transition-all duration-200 w-7 h-7',
+        className: 'p-1 bg-white hover:!bg-primary-panel transition-all duration-200 w-7 h-7',
         content: <MessageEdit className="text-secondary-1000 group-hover:text-white" size={20} />,
       }}
     />
@@ -175,7 +175,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   return (
     <div>
       {/* Header */}
-      <div className="bg-primary-400 w-full rounded-t-xl px-4 pt-4">
+      <div className="bg-primary-panel w-full rounded-t-xl px-4 pt-4">
         <div className="flex items-center justify-between gap-7">
           {/* Profile Image & Actions */}
           <div className="w-36 h-36 rounded-lg relative"
@@ -216,7 +216,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                   cursor: '!rounded-b-none bg-[#F1F9FD]',
                   panel: 'p-0',
                   tab: '!p-3 h-[46px] !rounded-0',
-                  tabContent: 'group-data-[selected=true]:!text-primary text-white text-base font-semibold',
+                  tabContent: 'group-data-[selected=true]:!text-primary-panel text-white text-base font-semibold',
                 }}
                 color="default"
                 radius="sm"

@@ -25,7 +25,7 @@ const OrgChartNode = () => {
               <Briefcase size={12} />
               <span>0</span>
             </div>
-            <div className="flex items-center gap-1 border-2 border-dashed rounded-[5px] px-1 py-[2px] border-primary-400">
+            <div className="flex items-center gap-1 border-2 border-dashed rounded-[5px] px-1 py-[2px] border-primary-panel">
               <span>0</span>
             </div>
             <div className="relative">

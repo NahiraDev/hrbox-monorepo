@@ -27,7 +27,7 @@ const CompanyPage = lazyRouteComponent(() => import('./pages/companies/Companies
 
 const DashboardSubHeader = lazy(() => import('./subheaders/DashboardSubHeader'));
 const JobsSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
-const ResumeSubHeader = lazy(() => import('./subheaders/JobsSubHeader'));
+const ResumeSubHeader = lazy(() => import('./subheaders/ResumeSubHeader'));
 
 // ============================================
 // Plugin Definition

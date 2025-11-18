@@ -15,7 +15,6 @@ const Login = () => {
   const { loginSuccess } = useAuth();
   const { push } = useNavigation();
 
-  // دیکد کردن JWT بدون کتابخانه
   const decodeJWT = (token: string) => {
     try {
       const payload = token.split('.')[1];

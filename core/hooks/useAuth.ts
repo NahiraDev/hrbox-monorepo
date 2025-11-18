@@ -36,7 +36,6 @@ export function useAuth() {
     loading,
     error,
 
-
     loginSuccess: (
   userId: number,
   displayName: string,

@@ -44,7 +44,7 @@ const Dependents = () => {
                       color: 'white',
                       variant: 'solid',
                       isIconOnly: true,
-                      className: 'bg-white border-1 border-primary-400 p-2',
+                      className: 'bg-white border-1 border-primary-panel p-2',
                       content: <MessageEdit className="text-secondary-900" size="20" />,
                     }}
                   />
@@ -56,7 +56,7 @@ const Dependents = () => {
                       variant: 'solid',
                       isIconOnly: true,
                       onPress: () => openModal('edit',"", <SpouseModal />,undefined,"xl","Spouse", <Profile2User className='text-white'/> ),
-                      className: 'bg-white border-1 border-primary-400 p-2',
+                      className: 'bg-white border-1 border-primary-panel p-2',
                       content: <Add className="text-secondary-900" size="20" />,
                     }}
                   />
@@ -149,7 +149,7 @@ const Dependents = () => {
                       variant: 'solid',
                       isIconOnly: true,
                       onPress: () => openModal('edit',  "",<DependentsModal/>,undefined,'xl',"Dependents", <UserSquare className='text-white'/>),
-                      className: 'bg-white border-1 border-primary-400 p-2',
+                      className: 'bg-white border-1 border-primary-panel p-2',
                       content: <Add className="text-secondary-900" size="20"  />,
                     }}
                   />
@@ -255,7 +255,7 @@ const Dependents = () => {
                     variant: 'solid',
                     isIconOnly: true,
                     onPress: () => openModal('edit',"",<RelativesModal/> , undefined, 'xl',"Relatives",<People className='text-white'/>),
-                    className: 'bg-white border-1 border-primary-400 p-2',
+                    className: 'bg-white border-1 border-primary-panel p-2',
                     content: <Add className="text-secondary-900" size="20" />,
                   }}
                 />

@@ -77,13 +77,13 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
     },
     theme: {
       light: {
-        primary: '#0A9AD7',
-        secondary: '#1E3363',
+        primary: '#1E3363',
+        secondary: '#0A9AD7',
         background: '#F5FBFE',
         surface: '#FFFFFF',
       },
       dark: {
-        primary: '#044566',
+        primary: '#DDBA69',
         secondary: '#FFFFFF',
         background: '#04070E',
         surface: '#01101A',
@@ -109,11 +109,11 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
     description: 'سیستم جامع مدیریت منابع انسانی',
 
     loginBg: {
-      light: '/images/hrbox/login-bg-dark.webp',
+      light: '/images/hrbox/login-bg-light.webp',
       dark: '/images/hrbox/login-bg-dark.webp',
     },
     panelBg: {
-      light: '/images/hrbox/panel-bg-dark.webp',
+      light: '/images/hrbox/panel-bg-light.webp',
       dark: '/images/hrbox/panel-bg-dark.webp',
     },
 
@@ -169,8 +169,6 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
         surface: '#292524',
       },
     },
-
-    ogImage: '/images/admin/og-image.jpg',
   },
 };
 
@@ -308,10 +306,10 @@ export function applyDomainTheme(panel: Panel, mode: 'light' | 'dark') {
   root.classList.add(panel, mode);
   root.style.colorScheme = mode;
 
-  root.style.setProperty('--color-panel-primary', theme.primary);
-  root.style.setProperty('--color-panel-secondary', theme.secondary);
-  root.style.setProperty('--color-panel-background', theme.background);
-  root.style.setProperty('--color-panel-surface', theme.surface);
+  root.style.setProperty('--color-primary', theme.primary);
+  root.style.setProperty('--color-secondary', theme.secondary);
+  root.style.setProperty('--color-background', theme.background);
+  root.style.setProperty('--color-surface', theme.surface);
 
   console.log(`✅ Theme applied: ${panel} (${mode})`);
 }

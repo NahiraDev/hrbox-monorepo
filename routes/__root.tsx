@@ -88,7 +88,7 @@ export const rootRoute = createRootRouteWithContext<RootRouteContext>()({
 
                 <button
                     onClick={() => window.location.reload()}
-                    className="mt-6 px-6 py-2.5 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-all font-medium"
+                    className="mt-6 px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium"
                 >
                     بارگذاری مجدد
                 </button>

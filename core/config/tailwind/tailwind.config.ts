@@ -14,10 +14,10 @@ const config: Config = {
         extend: {
             colors: {
                 panel: {
-                    primary: 'var(--color-panel-primary)',
-                    secondary: 'var(--color-panel-secondary)',
-                    background: 'var(--color-panel-background)',
-                    surface: 'var(--color-panel-surface)',
+                    primary: 'var(--color-primary)',
+                    secondary: 'var(--color-secondary)',
+                    background: 'var(--color-background)',
+                    surface: 'var(--color-surface)',
                 },
                 primary:{
                     DEFAULT:"#0A9AD7",
