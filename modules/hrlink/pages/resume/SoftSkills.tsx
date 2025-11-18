@@ -1,13 +1,16 @@
-import { Edit, Trash } from 'iconsax-reactjs';
-import { AppButton, AppPagination } from '@hrbox/uikit/components';
-import { Card, CardBody, CardHeader } from '@heroui/react';
-import { useEffect } from 'react';
+import { Edit, Trash } from "iconsax-reactjs";
+import { AppButton, AppPagination } from "@hrbox/uikit/components";
+import { Card, CardBody, CardHeader } from "@heroui/react";
+import { useEffect } from "react";
 
-import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
-import { AppDoubleLineProgress } from '@hrbox/uikit/sections/AppDoubleLineProgress';
+import {
+  GeneralInformation,
+  UserLocation,
+} from "@module/hrlink/features/common";
+import { AppDoubleLineProgress } from "@hrbox/uikit/sections/AppDoubleLineProgress";
 
-import { useLazyFetchSoftSkillsQuery } from '@module/hrlink/features/resume/apis';
-import { SoftSkillsIcon } from "~/UIKit/icons";
+import { useLazyFetchSoftSkillsQuery } from "@hrbox/module/hrlink/features/resume/apis";
+import { SoftSkillsIcon } from "@hrbox/uikit/icons";
 
 const SoftSkills = () => {
   const [fetchSkills, { data }] = useLazyFetchSoftSkillsQuery();
@@ -28,23 +31,32 @@ const SoftSkills = () => {
                     <div className="flex justify-between">
                       <div className="flex gap-1.5">
                         <SoftSkillsIcon />
-                        <span className="font-semibold text-secondary-1000">{skill.name}</span>
+                        <span className="font-semibold text-secondary-1000">
+                          {skill.name}
+                        </span>
                       </div>
                       <div className="flex gap-1">
                         <AppButton
                           props={{
-                            color: 'white',
-                            size: 'md',
-                            radius: 'sm',
-                            content: <Edit className="text-secondary-1000" size="14" />,
+                            color: "white",
+                            size: "md",
+                            radius: "sm",
+                            content: (
+                              <Edit className="text-secondary-1000" size="14" />
+                            ),
                           }}
                         />
                         <AppButton
                           props={{
-                            color: 'white',
-                            size: 'md',
-                            radius: 'sm',
-                            content: <Trash className="text-secondary-1000" size="14" />,
+                            color: "white",
+                            size: "md",
+                            radius: "sm",
+                            content: (
+                              <Trash
+                                className="text-secondary-1000"
+                                size="14"
+                              />
+                            ),
                           }}
                         />
                       </div>
@@ -54,12 +66,20 @@ const SoftSkills = () => {
                     <div className="flex justify-between">
                       <div className="flex flex-col gap-2">
                         <div className="flex gap-4">
-                          <span className="text-secondary-1000 text-sm font-light">Level:</span>
-                          <span className="text-secondary-1000 text-sm font-normal">{skill.level}</span>
+                          <span className="text-secondary-1000 text-sm font-light">
+                            Level:
+                          </span>
+                          <span className="text-secondary-1000 text-sm font-normal">
+                            {skill.level}
+                          </span>
                         </div>
                         <div className="flex gap-4">
-                          <span className="text-secondary-1000 text-sm font-light">Grad:</span>
-                          <span className="text-secondary-1000 text-sm font-normal">{skill.grade}%</span>
+                          <span className="text-secondary-1000 text-sm font-light">
+                            Grad:
+                          </span>
+                          <span className="text-secondary-1000 text-sm font-normal">
+                            {skill.grade}%
+                          </span>
                         </div>
                       </div>
                       <div>

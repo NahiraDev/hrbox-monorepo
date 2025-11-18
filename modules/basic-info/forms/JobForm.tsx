@@ -1,17 +1,20 @@
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete, AppSwitch, AppTextArea } from "@HRBox/UIKit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import {
+  AppAutoComplete,
+  AppSwitch,
+  AppTextArea,
+} from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
 export const initialValuesAction = {
-  Title : null,
-  Company : null,
-  'StartDate' : null,
+  Title: null,
+  Company: null,
+  StartDate: null,
   SalaryReceived: null,
-  Industry : null,
-  Province : null,
-  'JobGroup' : null,
-  DescriptionsandAchievements : null,
-
+  Industry: null,
+  Province: null,
+  JobGroup: null,
+  DescriptionsandAchievements: null,
 };
 export const formValidationAction = Yup.object().shape({
   Title: Yup.string().required(),
@@ -47,21 +50,41 @@ const JobForm = () => {
   return (
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Title" label='Title'/>
-        <FormField name="Company" label='Company'/>
-        <FormField name="Start Date" label='Start Date' component={AppAutoComplete} />
-        <FormField name="Salary Received" label='Salary Received'  />
-        <FormField name="Industry" label='Industry' component={AppAutoComplete} />
+        <FormField name="Title" label="Title" />
+        <FormField name="Company" label="Company" />
+        <FormField
+          name="Start Date"
+          label="Start Date"
+          component={AppAutoComplete}
+        />
+        <FormField name="Salary Received" label="Salary Received" />
+        <FormField
+          name="Industry"
+          label="Industry"
+          component={AppAutoComplete}
+        />
       </div>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         {/*we don't have any element for upload work sample*/}
-        <FormField name="Province" label='Province' component={AppAutoComplete} />
-        <FormField name="Job Group" label='Job Group' component={AppAutoComplete} />
-        <AppSwitch/>
+        <FormField
+          name="Province"
+          label="Province"
+          component={AppAutoComplete}
+        />
+        <FormField
+          name="Job Group"
+          label="Job Group"
+          component={AppAutoComplete}
+        />
+        <AppSwitch />
       </div>
       <div>
-        <FormField  name="Descriptions and Achievements" label='Descriptions and Achievements' component={AppTextArea} />
+        <FormField
+          name="Descriptions and Achievements"
+          label="Descriptions and Achievements"
+          component={AppTextArea}
+        />
       </div>
     </Form>
-  )
-}
+  );
+};

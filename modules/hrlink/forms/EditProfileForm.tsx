@@ -1,10 +1,9 @@
-import { CallCalling, Profile, Sms } from 'iconsax-reactjs';
-import { AppButton, AppInput } from '@hrbox-monorepo/UIKit/components';
-import { useTranslation } from 'react-i18next';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
-import { Form } from '@heroui/react';
-import * as Yup from 'yup';
-
+import { CallCalling, Profile, Sms } from "iconsax-reactjs";
+import { AppButton, AppInput } from "@hrbox/uikit/components";
+import { useTranslation } from "react-i18next";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import { Form } from "@heroui/react";
+import * as Yup from "yup";
 
 export const validationErrorEditProfile = Yup.object().shape({
   FirstName: Yup.string(),
@@ -18,14 +17,14 @@ export const validationErrorEditProfile = Yup.object().shape({
 });
 
 export const initialValuesEditProfile = {
-  FirstName: '',
-  LastName: '',
-  Email: '',
-  LinkedinId: '',
-  InstagramId: '',
-  UrlOrTheOtherSocialMedia: '',
-  Description: '',
-  Phone: '',
+  FirstName: "",
+  LastName: "",
+  Email: "",
+  LinkedinId: "",
+  InstagramId: "",
+  UrlOrTheOtherSocialMedia: "",
+  Description: "",
+  Phone: "",
 };
 
 export const handleSubmitEditProfile = (values: any) => {
@@ -65,13 +64,13 @@ export const EditProfileForm = ({
             <div className="flex gap-1 items-center">
               <Profile className="text-[#292D32]" size="12" />
               <span className="text-xs text-secondary-1000">
-                {t('first_name')}
+                {t("first_name")}
               </span>
             </div>
             <AppInput
               props={{
-                label: 'FirstName',
-                name: 'FirstName',
+                label: "FirstName",
+                name: "FirstName",
                 error: touched.FirstName && errors.FirstName,
                 onChange: handleChange,
                 onBlur: handleBlur,
@@ -82,13 +81,13 @@ export const EditProfileForm = ({
             <div className="flex gap-1 items-center">
               <Profile className="text-[#292D32]" size="12" />
               <span className="text-xs text-secondary-1000">
-                {t('last_name')}
+                {t("last_name")}
               </span>
             </div>
             <AppInput
               props={{
-                label: 'LastName',
-                name: 'LastName',
+                label: "LastName",
+                name: "LastName",
                 error: touched.LastName && errors.LastName,
                 onChange: handleChange,
                 onBlur: handleBlur,
@@ -100,13 +99,13 @@ export const EditProfileForm = ({
           <div className="flex flex-col gap-1">
             <div className="flex gap-1 items-center">
               <Sms className="text-[#292D32]" size="12" />
-              <span className="text-xs text-secondary-1000">{t('email')}</span>
+              <span className="text-xs text-secondary-1000">{t("email")}</span>
             </div>
             <AppInput
               props={{
-                label: 'Email',
-                type: 'email',
-                name: 'Email',
+                label: "Email",
+                type: "email",
+                name: "Email",
                 error: touched.Email && errors.Email,
                 onChange: handleChange,
                 onBlur: handleBlur,
@@ -116,12 +115,12 @@ export const EditProfileForm = ({
           <div className="flex flex-col gap-1">
             <div className="flex gap-1 items-center">
               <CallCalling className="text-[#292D32]" size="12" />
-              <span className="text-xs text-secondary-1000">{t('phone')}</span>
+              <span className="text-xs text-secondary-1000">{t("phone")}</span>
             </div>
             <AppInput
               props={{
-                name: 'Phone',
-                label: 'Phone',
+                name: "Phone",
+                label: "Phone",
                 error: touched.Phone && errors.Phone,
                 onChange: handleChange,
                 onBlur: handleBlur,
@@ -135,16 +134,16 @@ export const EditProfileForm = ({
           <>
             <AppButton
               props={{
-                content: 'Cancel',
-                variant: 'light',
-                size: 'md',
+                content: "Cancel",
+                variant: "light",
+                size: "md",
               }}
             />
             <AppButton
               props={{
-                content: 'Save Changes',
-                variant: 'secondary',
-                size: 'md',
+                content: "Save Changes",
+                variant: "secondary",
+                size: "md",
                 isLoading: isSubmitting,
               }}
             />

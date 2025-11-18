@@ -12,15 +12,6 @@ const awardApi = createModuleApi({
 
 export const awardApiEndpoints = awardApi.injectEndpoints({
   endpoints: (build:any) => ({
-    fetchAwards: createPaginatedQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.award.getList,
-      tags: ['Award'],
-    }),
-
-    fetchAwardDetail: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.award.getDetail,
-      tags: ['Award'],
-    }),
 
     createAward: createMutation<any , any>(build, {
       url: HRLinkApiEndpoints.resume.award.create,
@@ -39,6 +30,18 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       method: 'DELETE',
       tags: ['Award'],
     }),
+
+    fetchAwards: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.award.getList,
+      tags: ['Award'],
+    }),
+
+    fetchAwardDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.award.getDetail,
+      tags: ['Award'],
+    }),
+
+
   }),
 });
 

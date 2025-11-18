@@ -1,6 +1,6 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { Avatar } from '@heroui/react';
-import { useRef, useState } from 'react';
+import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { Avatar } from "@heroui/react";
+import { useRef, useState } from "react";
 
 const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
   const fileInputRef = useRef(null);
@@ -15,7 +15,7 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      console.log('فایل انتخاب شده:', file);
+      console.log("فایل انتخاب شده:", file);
       setSelectedImage(URL.createObjectURL(file));
     }
   };
@@ -39,7 +39,11 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
     <AppModal.Body>
       <div className="flex flex-col gap-2">
         <div className="flex gap-1">
-          <Avatar radius="sm" size="lg" src={selectedImage || initialImage || undefined} />
+          <Avatar
+            radius="sm"
+            size="lg"
+            src={selectedImage || initialImage || undefined}
+          />
           <div className="flex flex-col gap-1">
             <span>Ali Asadi</span>
             <span>Identity Card</span>
@@ -67,40 +71,41 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
             <div className="flex gap-2">
               <AppButton
                 props={{
-                  size: 'xs',
-                  radius: 'sm',
+                  size: "xs",
+                  radius: "sm",
                   onPress: handleCancel,
                   content: <span>Cancel</span>,
-                  className: 'text-black py-1.5 px-3 text-xl rounded-lg hover:bg-red',
+                  className:
+                    "text-black py-1.5 px-3 text-xl rounded-lg hover:bg-red",
                 }}
               />
               <AppButton
                 props={{
-                  size: 'xs',
-                  radius: 'sm',
-                  color: 'primary',
+                  size: "xs",
+                  radius: "sm",
+                  color: "primary",
                   onPress: handleSubmit,
                   content: <span>Submit</span>,
-                  className: 'text-white py-1.5 px-3 text-xl rounded-lg',
+                  className: "text-white py-1.5 px-3 text-xl rounded-lg",
                 }}
               />
             </div>
           ) : (
             <AppButton
               props={{
-                size: 'xs',
-                radius: 'sm',
-                color:'primary',
+                size: "xs",
+                radius: "sm",
+                color: "primary",
                 onPress: handleButtonClick,
                 content: <span>Upload File</span>,
-                className: 'text-white py-1.5 px-3 text-xl rounded-lg ',
+                className: "text-white py-1.5 px-3 text-xl rounded-lg ",
               }}
             />
           )}
           <input
             type="file"
             ref={fileInputRef}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             accept="image/*"
             onChange={handleFileChange}
           />

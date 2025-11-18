@@ -1,14 +1,26 @@
-import { AppButton, AppInput, AppModal, AppTextArea } from '@hrbox-monorepo/UIKit/components';
-import { useModalContext } from '@hrbox-monorepo/core/providers/ModalProvider';
 import {
-  OrganizationDepartmentChoseModal
-} from '@hrbox-monorepo/modules/basic-info/modals/OrganizationDepartmentChoseModal';
-import { Category } from 'iconsax-reactjs';
-import { useState } from 'react';
+  AppButton,
+  AppInput,
+  AppModal,
+  AppTextArea,
+} from "@hrbox/uikit/components";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { OrganizationDepartmentChoseModal } from "@hrbox-monorepo/modules/basic-info/modals/OrganizationDepartmentChoseModal";
+import { Category } from "iconsax-reactjs";
+import { useState } from "react";
 
-const colors = ['#000000', '#A61111', '#F4D082', '#05856F', '#0ED2F7', '#2F80ED', '#DB5918', '#9F9C90'] as const;
+const colors = [
+  "#000000",
+  "#A61111",
+  "#F4D082",
+  "#05856F",
+  "#0ED2F7",
+  "#2F80ED",
+  "#DB5918",
+  "#9F9C90",
+] as const;
 
-type ColorType = typeof colors[number];
+type ColorType = (typeof colors)[number];
 
 interface DepartmentFormData {
   title: string;
@@ -19,43 +31,46 @@ interface DepartmentFormData {
 export const OrganizationDepartmentModal = () => {
   const { openModal } = useModalContext();
   const [formData, setFormData] = useState<DepartmentFormData>({
-    title: '',
-    description: '',
-    color: null
+    title: "",
+    description: "",
+    color: null,
   });
 
   const commonInputProps = {
-    className: 'border border-[#DCF0F9]',
-    size: 'lg',
-    color: 'primary',
-    radius: 'lg',
+    className: "border border-[#DCF0F9]",
+    size: "lg",
+    color: "primary",
+    radius: "lg",
   };
 
   const handleColorSelect = (color: ColorType) => {
-    setFormData(prev => ({ ...prev, color }));
+    setFormData((prev) => ({ ...prev, color }));
   };
 
-  const handleInputChange = (field: keyof DepartmentFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof DepartmentFormData,
+    value: string,
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleCancel = () => {
-    (openModal as any)('', '', null);
+    (openModal as any)("", "", null);
   };
 
   const handleSave = () => {
     if (formData.color) {
       openModal(
-        'custom',
+        "custom",
         "",
         <OrganizationDepartmentChoseModal
           initialData={formData}
           selectedColor={formData.color}
         />,
         undefined,
-        '3xl',
+        "3xl",
         "Organization Departments",
-        <Category className='text-white'/>
+        <Category className="text-white" />,
       );
     }
   };
@@ -67,14 +82,14 @@ export const OrganizationDepartmentModal = () => {
         key={color}
         className={`w-8 h-8 rounded-sm transition duration-100 cursor-pointer relative mt-2 ${
           isSelected
-            ? 'ring-2 ring-primary-panel ring-offset-2 scale-110'
-            : 'hover:scale-125'
+            ? "ring-2 ring-primary-panel ring-offset-2 scale-110"
+            : "hover:scale-125"
         }`}
         style={{
           backgroundColor: color,
           ...(isSelected && {
-            boxShadow: `0 0 0 2px ${color === '#000000' ? '#fff' : '#000'}`
-          })
+            boxShadow: `0 0 0 2px ${color === "#000000" ? "#fff" : "#000"}`,
+          }),
         }}
         onClick={() => handleColorSelect(color)}
         aria-label={`Select color ${color}`}
@@ -93,11 +108,11 @@ export const OrganizationDepartmentModal = () => {
             <AppInput
               props={{
                 ...commonInputProps,
-                label: 'Department Title',
-                placeholder: 'Enter department title',
+                label: "Department Title",
+                placeholder: "Enter department title",
                 required: true,
                 value: formData.title,
-                onChange: (e) => handleInputChange('title', e.target.value),
+                onChange: (e) => handleInputChange("title", e.target.value),
               }}
             />
             <div className="flex flex-col gap-1">
@@ -107,7 +122,9 @@ export const OrganizationDepartmentModal = () => {
               </div>
               <div
                 className={`mt-2 flex items-center gap-2 transition-all duration-300 ease-in-out ${
-                  formData.color ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+                  formData.color
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 -translate-y-2 pointer-events-none"
                 }`}
                 style={{
                   opacity: formData.color ? 0.85 : 0,
@@ -115,10 +132,10 @@ export const OrganizationDepartmentModal = () => {
               >
                 <div
                   className="w-4 h-4 rounded-sm"
-                  style={{ backgroundColor: formData.color || 'transparent' }}
+                  style={{ backgroundColor: formData.color || "transparent" }}
                 />
                 <span className="text-sm text-gray-600">
-                  Selected: {formData.color || ''}
+                  Selected: {formData.color || ""}
                 </span>
               </div>
             </div>
@@ -127,11 +144,11 @@ export const OrganizationDepartmentModal = () => {
           <AppTextArea
             props={{
               ...commonInputProps,
-              label: 'Description',
-              placeholder: 'Enter department description',
+              label: "Description",
+              placeholder: "Enter department description",
               rows: 4,
               value: formData.description,
-              onChange: (e) => handleInputChange('description', e.target.value),
+              onChange: (e) => handleInputChange("description", e.target.value),
             }}
           />
         </div>
@@ -140,23 +157,24 @@ export const OrganizationDepartmentModal = () => {
       <AppModal.Footer>
         <AppButton
           props={{
-            size: 'xs',
-            radius: 'sm',
-            variant: 'light',
+            size: "xs",
+            radius: "sm",
+            variant: "light",
             onPress: handleCancel,
             content: <span>Cancel</span>,
             className:
-              'text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200',
+              "text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200",
           }}
         />
         <AppButton
           props={{
-            size: 'xs',
-            radius: 'sm',
-            variant: 'light',
+            size: "xs",
+            radius: "sm",
+            variant: "light",
             onPress: handleSave,
             content: <span>Save Changes</span>,
-            className: 'bg-primary-panel text-white py-1.5 px-3 text-xl rounded-lg hover:bg-primary-panel',
+            className:
+              "bg-primary-panel text-white py-1.5 px-3 text-xl rounded-lg hover:bg-primary-panel",
             disabled: !formData.color,
           }}
         />

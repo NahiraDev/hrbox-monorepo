@@ -1,3 +1,5 @@
+// import { useGetJobOpportunitiesSentQuery } from "apis";
+
 const BaseUrl = "/DesktopModules/Freelancer/api";
 
 export const HRLinkApiEndpoints = {
@@ -13,8 +15,10 @@ export const HRLinkApiEndpoints = {
     course: {
       create: `/Course/Add`,
       edit: `/Course/Edit`,
+      getCourseList: 'Course/GetCourseTypeList',
+      getInstituList: 'Course/GetInstitutionsList',
       delete: `/Course/Delete`,
-      getList: `/Course/GetCourseList?TypeId=2`,
+      getList: `/Course/GetCourseList`,
       getDetail: `/Course/Get`,
     },
 
@@ -23,9 +27,8 @@ export const HRLinkApiEndpoints = {
       edit: `/Education/Edit`,
       delete: `/Education/Delete`,
       getList: `/Education/GetList`,
-      getDetail: `/Education/Get`,
+      getDetail: `/Education/GetDetail`,
       getUniversity: `/Education/GetUniversity`,
-      getField: `/MasterService/GetFieldOfEducation`,
     },
 
     experience: {
@@ -35,6 +38,7 @@ export const HRLinkApiEndpoints = {
       getList: `/Experience/GetList`,
       getDetail: `/Experience/GetDetails`,
       typeOfActivity: `/Experience/TypeOfActivity`,
+      reasonToQuite: 'Experience/ReasonsOfQuit',
     },
 
     skill: {
@@ -56,11 +60,19 @@ export const HRLinkApiEndpoints = {
     sendRequest: `/Company/SendRequest`,
     getDetail: `/Company/GetDetail`,
     followOrUnfollow: `/Company/FollowAndUnFollowCompany`,
+    reasyApply: 'Company/EasyApply',
   },
 
   job: {
     offers: `/JobOffers/GetAndSearchJobOffer`,
+    getJobOfferDetail: 'JobOffers/GetJobOfferDetail',
+    setTag: 'JobOffers/SetTag',
+    useGetJobOpportunitiesDetail: 'JobOffers/GetJobOpportunitiesDetail',
+    getUserOrganization: 'JobOffers/GetUserOrganization',
     opportunities: `/JobOffers/GetAndSearchJobOpportunities`,
+    getAboutCompany: 'JobOffers/AboutCompany',
+    getJobOfferListDetail: 'JobOffers/GetListDetail',
+    getListJobOffer: 'JobOffers/GetListJobOffer',
   },
 
   profile: {
@@ -68,7 +80,8 @@ export const HRLinkApiEndpoints = {
     edit: `/Profile/EditProfile`,
     changePassword: `/profile/ChangePassword`,
     fetchSettings: `/Profile/GetGeneralSetting`,
-    editSettings: ` /Profile/EditGeneralSetting`,
+    editSettings: `/Profile/EditGeneralSetting`,
+    deactivateAccount: '/Profile/DeactiveAccount',
   },
 
   user: {
@@ -78,7 +91,12 @@ export const HRLinkApiEndpoints = {
     getMilitaryStatus: `/User/GetUserMilitaryStatus`,
     getUserCity: `/User/getUserCity`,
     downloadResume: `/User/DownloadResume`,
-    getProfileAvatar: '/User/GetProfilePhoto'
+    getProfileAvatar: '/User/GetProfilePhoto',
+    editProfilePhoto: 'User/EditProfilePhoto',
+    gatUserAboutMe: '/User/AboutMe',
+    editAboutMe: 'User/EditAboutMe',
+    userEdTour: 'User/EdTour',
+    getUserNotification: 'User/GetUserNotification',
   },
 
   common: {

@@ -1,25 +1,30 @@
-import { Form } from '@heroui/react';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
-import { useTranslation } from 'react-i18next';
+import { Form } from "@heroui/react";
+import { useFormContext } from "@hrbox-monorepo/core/providers/FormProvider";
+import { useTranslation } from "react-i18next";
 
-import { AppAutoComplete, AppDatePicker, AppInput, AppTextArea } from '@hrbox-monorepo/UIKit/components';
-import * as Yup from 'yup';
+import {
+  AppAutoComplete,
+  AppDatePicker,
+  AppInput,
+  AppTextArea,
+} from "@hrbox/uikit/components";
+import * as Yup from "yup";
 
 export const initialValuesGeneralInformation = {
-  FirstName: '',
-  LastName: '',
-  NationalCode: '',
-  MilitaryStatusId: '',
-  MaritalStatus: '',
-  BirthDate: '',
-  Address: '',
-  AddressCityId: '',
-  Gender: '',
-  OtherSocials: '',
-  Biography: '',
-  UserjobGroup: '',
-  UserJobCategory: '',
-  RequestedSalary: '',
+  FirstName: "",
+  LastName: "",
+  NationalCode: "",
+  MilitaryStatusId: "",
+  MaritalStatus: "",
+  BirthDate: "",
+  Address: "",
+  AddressCityId: "",
+  Gender: "",
+  OtherSocials: "",
+  Biography: "",
+  UserjobGroup: "",
+  UserJobCategory: "",
+  RequestedSalary: "",
 };
 
 export const formValidationGeneralInformation = Yup.object().shape({
@@ -57,17 +62,22 @@ export const handleSubmitGeneralInformation = (values: any) => {
 };
 
 export const GeneralInformationForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
   const { t } = useTranslation();
-  const lang = 'en';
+  const lang = "en";
   return (
-    <Form className="w-full flex flex-col gap-6" id="edit-general-information" onSubmit={handleSubmit}>
+    <Form
+      className="w-full flex flex-col gap-6"
+      id="edit-general-information"
+      onSubmit={handleSubmit}
+    >
       <div className="flex gap-14 w-full">
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('first_name'),
-              name: 'FirstName',
+              label: t("first_name"),
+              name: "FirstName",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.FirstName && errors.FirstName,
@@ -77,8 +87,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('last_name'),
-              name: 'LastName',
+              label: t("last_name"),
+              name: "LastName",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.LastName && errors.LastName,
@@ -90,8 +100,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('national_code'),
-              name: 'NationalCode',
+              label: t("national_code"),
+              name: "NationalCode",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.NationalCode && errors.NationalCode,
@@ -101,8 +111,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppDatePicker
             props={{
-              label: t('date_of_birth'),
-              name: 'BirthDate',
+              label: t("date_of_birth"),
+              name: "BirthDate",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.BirthDate && errors.BirthDate,
@@ -114,10 +124,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'gender',
-              label: t('gender'),
+              name: "gender",
+              label: t("gender"),
               displayKey: `label.${lang}`,
-              valueKey: 'key',
+              valueKey: "key",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.Gender && errors.Gender,
@@ -128,10 +138,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'MaritalStatus',
-              label: t('marital_status'),
+              name: "MaritalStatus",
+              label: t("marital_status"),
               displayKey: `label.${lang}`,
-              valueKey: 'id',
+              valueKey: "id",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.MaritalStatus && errors.MaritalStatus,
@@ -144,10 +154,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'MilitaryStatusId',
-              label: 'Military Status',
-              displayKey: 'Namde',
-              valueKey: 'Id',
+              name: "MilitaryStatusId",
+              label: "Military Status",
+              displayKey: "Namde",
+              valueKey: "Id",
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
@@ -158,10 +168,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'AddressCityId',
-              label: 'city',
-              displayKey: 'Name',
-              valueKey: 'Id',
+              name: "AddressCityId",
+              label: "city",
+              displayKey: "Name",
+              valueKey: "Id",
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
@@ -174,8 +184,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('address'),
-              name: 'Address',
+              label: t("address"),
+              name: "Address",
               error: touched.Address && errors.Address,
             }}
           />
@@ -183,8 +193,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('minimum_salary'),
-              name: 'RequestedSalary',
+              label: t("minimum_salary"),
+              name: "RequestedSalary",
               onChange: handleChange,
               onBlur: handleBlur,
               error: touched.RequestedSalary && errors.RequestedSalary,
@@ -196,10 +206,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'UserJobCategory',
-              label: t('working_category'),
-              valueKey: 'Id',
-              displayKey: 'Name',
+              name: "UserJobCategory",
+              label: t("working_category"),
+              valueKey: "Id",
+              displayKey: "Name",
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
@@ -210,10 +220,10 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppAutoComplete
             props={{
-              name: 'UserjobGroup',
-              label: t('organizational_category'),
-              displayKey: 'Name',
-              valueKey: 'Id',
+              name: "UserjobGroup",
+              label: t("organizational_category"),
+              displayKey: "Name",
+              valueKey: "Id",
               data: [],
               onChange: handleChange,
               onBlur: handleBlur,
@@ -226,8 +236,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-1/2">
           <AppInput
             props={{
-              label: t('social_media_links'),
-              name: 'OtherSocials',
+              label: t("social_media_links"),
+              name: "OtherSocials",
               onChange: handleChange,
               onBlur: handleBlur,
               error: errors.OtherSocials,
@@ -239,8 +249,8 @@ export const GeneralInformationForm = () => {
         <div className="flex flex-col gap-1 w-full">
           <AppTextArea
             props={{
-              label: 'Biography',
-              name: 'Biography',
+              label: "Biography",
+              name: "Biography",
               onChange: handleChange,
               onBlur: handleBlur,
               error: errors.Biography,

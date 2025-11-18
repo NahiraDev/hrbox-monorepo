@@ -1,6 +1,6 @@
 import { Form } from "@heroui/react";
 import { AppAutoComplete, AppInput } from "@hrbox/uikit/components";
-import { FormField } from "@hrbox/UIKit/components/FormField";
+import { FormField } from "@hrbox/ui/components/FormField";
 
 const AddPermisionForm = () => {
   return (

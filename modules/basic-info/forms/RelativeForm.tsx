@@ -1,15 +1,15 @@
-import { FormField } from "@HRBox/UIKit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@HRBox/UIKit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
 export const initialValuesAction = {
-  FirstName : null,
-  astName : null,
-  NationalID : null,
+  FirstName: null,
+  astName: null,
+  NationalID: null,
   Education: null,
-  Mobile : null,
-  DateofBirth : null,
-  DescriptionsandAchievements : null,
+  Mobile: null,
+  DateofBirth: null,
+  DescriptionsandAchievements: null,
 };
 export const formValidationAction = Yup.object().shape({
   FirstName: Yup.string().required(),
@@ -42,17 +42,25 @@ const RelativeForm = () => {
   return (
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="First Name" label='First Name' />
-        <FormField name="Last Name" label='Last Name'  />
-        <FormField name="National ID" label='National ID'/>
-        <FormField name="Education" label='Education' />
-        <FormField name="Mobile'" label='Mobile' />
-        <FormField name="Date of Birth" label='Date of Birth' component={AppAutoComplete} />
+        <FormField name="First Name" label="First Name" />
+        <FormField name="Last Name" label="Last Name" />
+        <FormField name="National ID" label="National ID" />
+        <FormField name="Education" label="Education" />
+        <FormField name="Mobile'" label="Mobile" />
+        <FormField
+          name="Date of Birth"
+          label="Date of Birth"
+          component={AppAutoComplete}
+        />
       </div>
 
       <div>
-        <FormField  name="Descriptions and Achievements" label='Descriptions and Achievements' component={AppTextArea} />
+        <FormField
+          name="Descriptions and Achievements"
+          label="Descriptions and Achievements"
+          component={AppTextArea}
+        />
       </div>
     </Form>
-  )
-}
+  );
+};

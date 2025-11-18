@@ -12,6 +12,24 @@ const educationApi = createModuleApi({
 
 export const educationApiEndpoints = educationApi.injectEndpoints({
   endpoints: (build:any) => ({
+    createEducation: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.education.create,
+      method: 'POST',
+      tags: ['Education'],
+    }),
+
+    editEducation: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.education.edit,
+      method: 'POST',
+      tags: ['Education'],
+    }),
+
+    deleteEducation: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.education.delete,
+      method: 'DELETE',
+      tags: ['Education'],
+    }),
+
     fetchEducations: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.education.getList,
       tags: ['Education'],
@@ -32,31 +50,15 @@ export const educationApiEndpoints = educationApi.injectEndpoints({
       tags: ['Education'],
     }),
 
-    createEducation: createMutation<any , any>(build, {
-      url: HRLinkApiEndpoints.resume.education.create,
-      method: 'POST',
-      tags: ['Education'],
-    }),
 
-    editEducation: createMutation<any , any>(build, {
-      url: HRLinkApiEndpoints.resume.education.edit,
-      method: 'POST',
-      tags: ['Education'],
-    }),
-
-    deleteEducation: createMutation<any, any>(build, {
-      url: HRLinkApiEndpoints.resume.education.delete,
-      method: 'DELETE',
-      tags: ['Education'],
-    }),
   }),
 });
 
 export const {
-  useLazyFetchEducationsQuery,
-  useLazyFetchEducationDetailQuery,
-  useLazyFetchUniversityQuery,
-  useLazyFetchFieldQuery,
+  useFetchEducationsQuery,
+  useFetchEducationDetailQuery,
+  useFetchUniversityQuery,
+  useFetchFieldQuery,
   useCreateEducationMutation,
   useEditEducationMutation,
   useDeleteEducationMutation,

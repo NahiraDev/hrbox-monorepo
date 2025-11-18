@@ -11,41 +11,60 @@ const experienceApi = createModuleApi({
 });
 
 export const experienceApiEndpoints = experienceApi.injectEndpoints({
-  endpoints: (build:any) => ({
-    fetchExperiences: createPaginatedQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.experience.getList,
-      tags: ['Experience'],
-    }),
-
-    fetchExperienceDetail: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.experience.getDetail,
-      tags: ['Experience'],
-    }),
-
-    createExperience: createMutation<any , any>(build, {
+  endpoints: (build: any) => ({
+    // Create new experience
+    createExperience: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.experience.create,
       method: 'PUT',
       tags: ['Experience'],
     }),
 
-    editExperience: createMutation<any , any>(build, {
+    // Get paginated list of experiences
+    fetchExperiences: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.getList,
+      tags: ['Experience'],
+    }),
+
+    // Get single experience detail (usually needs an ID parameter)
+    fetchExperienceDetail: createQuery<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.getDetail,
+      tags: ['Experience'],
+    }),
+
+    // Update existing experience
+    editExperience: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.experience.edit,
       method: 'PUT',
       tags: ['Experience'],
     }),
 
+    // Delete experience
     deleteExperience: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.experience.delete,
       method: 'DELETE',
+      tags: ['Experience'],
+    }),
+
+    // Get type of activity options (NEW)
+    fetchTypeOfActivity: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.typeOfActivity,
+      tags: ['Experience'],
+    }),
+
+    // Get reasons to quit options (NEW)
+    fetchReasonsToQuit: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.reasonToQuite,
       tags: ['Experience'],
     }),
   }),
 });
 
 export const {
-  useLazyFetchExperiencesQuery,
-  useLazyFetchExperienceDetailQuery,
+  useFetchExperiencesQuery,
+  useFetchExperienceDetailQuery,
   useCreateExperienceMutation,
   useEditExperienceMutation,
   useDeleteExperienceMutation,
+  useFetchTypeOfActivityQuery,
+  useFetchReasonsToQuitQuery,
 } = experienceApiEndpoints;

@@ -1,5 +1,5 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
-import { createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
 const jobsApi = createModuleApi({
@@ -22,15 +22,52 @@ export const jobsApiEndpoints = jobsApi.injectEndpoints({
       tags: ['Jobs'],
     }),
 
-    fetchJobDetail: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.job.offers,
+    fetchJobOfferDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferDetail,
+      tags: ['Jobs'],
+    }),
+
+    setTag: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.job.setTag,
+      method: 'POST',
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOpportunitiesDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.useGetJobOpportunitiesDetail,
+      tags: ['Jobs'],
+    }),
+
+    fetchUserOrganization: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getUserOrganization,
+      tags: ['Jobs'],
+    }),
+
+    fetchAboutCompany: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getAboutCompany,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOfferListDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferListDetail,
+      tags: ['Jobs'],
+    }),
+
+    fetchListJobOffer: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getListJobOffer,
       tags: ['Jobs'],
     }),
   }),
 });
 
 export const {
-  useLazyFetchJobOffersQuery,
-  useLazyFetchJobOpportunitiesQuery,
-  useLazyFetchJobDetailQuery,
+  useFetchJobOffersQuery,
+  useFetchJobOpportunitiesQuery,
+  useFetchJobOfferDetailQuery,
+  useSetTagMutation,
+  useFetchJobOpportunitiesDetailQuery,
+  useFetchUserOrganizationQuery,
+  useFetchAboutCompanyQuery,
+  useFetchJobOfferListDetailQuery,
+  useFetchListJobOfferQuery,
 } = jobsApiEndpoints;

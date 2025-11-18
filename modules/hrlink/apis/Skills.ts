@@ -12,11 +12,6 @@ const skillsApi = createModuleApi({
 
 export const skillsApiEndpoints = skillsApi.injectEndpoints({
   endpoints: (build:any) => ({
-    fetchAllSkills: createPaginatedQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.skill.getAllSkills,
-      tags: ['Skills'],
-    }),
-
     createSkills: createMutation<any , any>(build, {
       url: HRLinkApiEndpoints.resume.skill.create,
       method: 'POST',
@@ -32,6 +27,16 @@ export const skillsApiEndpoints = skillsApi.injectEndpoints({
     deleteSkills: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.skill.delete,
       method: 'DELETE',
+      tags: ['Skills'],
+    }),
+
+    fetchProfessionalSkills: createPaginatedQuery<any> (build, {
+      url: HRLinkApiEndpoints.resume.skill.getProfessionalSkills,
+      tags: ['Skills']
+    }),
+
+    fetchAllSkills: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getAllSkills,
       tags: ['Skills'],
     }),
 
@@ -58,12 +63,13 @@ export const skillsApiEndpoints = skillsApi.injectEndpoints({
 });
 
 export const {
-  useLazyFetchAllSkillsQuery,
+  useFetchAllSkillsQuery,
   useCreateSkillsMutation,
   useEditSkillsMutation,
   useDeleteSkillsMutation,
-  useLazyFetchSoftSkillsQuery,
-  useLazyFetchHardSkillsQuery,
-  useLazyGetUserSoftSkillsQuery,
-  useLazyGetUserHardSkillsQuery,
+  useFetchSoftSkillsQuery,
+  useFetchHardSkillsQuery,
+  useGetUserSoftSkillsQuery,
+  useGetUserHardSkillsQuery,
+  useFetchProfessionalSkillsQuery
 } = skillsApiEndpoints;

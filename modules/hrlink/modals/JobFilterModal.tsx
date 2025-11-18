@@ -1,34 +1,32 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { Setting4 } from 'iconsax-reactjs';
+import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { Setting4 } from "iconsax-reactjs";
 
-export const JobFilterModal = () =>{
-  return(
+export const JobFilterModal = () => {
+  return (
     <AppModal
       title="Filter"
       icon={<Setting4 className="text-white" size="22" />}
       size="xl"
     >
-      <AppModal.Body>
-
-      </AppModal.Body>
+      <AppModal.Body></AppModal.Body>
       <AppModal.Footer>
         <AppButton
           props={{
-            color: 'secondary',
-            size: 'md',
-            radius: 'sm',
-            content:'Save Changes',
+            color: "secondary",
+            size: "md",
+            radius: "sm",
+            content: "Save Changes",
           }}
         />
         <AppButton
           props={{
-            color: 'white',
-            size: 'md',
-            radius: 'sm',
-            content:'Cancel',
+            color: "white",
+            size: "md",
+            radius: "sm",
+            content: "Cancel",
           }}
         />
       </AppModal.Footer>
     </AppModal>
-  )
-}
+  );
+};
