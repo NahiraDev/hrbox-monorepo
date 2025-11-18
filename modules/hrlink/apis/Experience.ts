@@ -12,6 +12,12 @@ const experienceApi = createModuleApi({
 
 export const experienceApiEndpoints = experienceApi.injectEndpoints({
   endpoints: (build:any) => ({
+    createExperience: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.experience.create,
+      method: 'PUT',
+      tags: ['Experience'],
+    }),
+
     fetchExperiences: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.experience.getList,
       tags: ['Experience'],
@@ -19,12 +25,6 @@ export const experienceApiEndpoints = experienceApi.injectEndpoints({
 
     fetchExperienceDetail: createQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.experience.getDetail,
-      tags: ['Experience'],
-    }),
-
-    createExperience: createMutation<any , any>(build, {
-      url: HRLinkApiEndpoints.resume.experience.create,
-      method: 'PUT',
       tags: ['Experience'],
     }),
 
@@ -43,8 +43,8 @@ export const experienceApiEndpoints = experienceApi.injectEndpoints({
 });
 
 export const {
-  useLazyFetchExperiencesQuery,
-  useLazyFetchExperienceDetailQuery,
+  useFetchExperiencesQuery,
+  useFetchExperienceDetailQuery,
   useCreateExperienceMutation,
   useEditExperienceMutation,
   useDeleteExperienceMutation,

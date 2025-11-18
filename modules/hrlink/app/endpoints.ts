@@ -13,8 +13,10 @@ export const HRLinkApiEndpoints = {
     course: {
       create: `/Course/Add`,
       edit: `/Course/Edit`,
+      getCourseList: 'Course/GetCourseTypeList',
+      getInstituList: 'Course/GetInstitutionsList',
       delete: `/Course/Delete`,
-      getList: `/Course/GetCourseList?TypeId=2`,
+      getList: `/Course/GetCourseList`,
       getDetail: `/Course/Get`,
     },
 
@@ -23,7 +25,7 @@ export const HRLinkApiEndpoints = {
       edit: `/Education/Edit`,
       delete: `/Education/Delete`,
       getList: `/Education/GetList`,
-      getDetail: `/Education/Get`,
+      getDetail: `/Education/GetDetail`,
       getUniversity: `/Education/GetUniversity`,
       getField: `/MasterService/GetFieldOfEducation`,
     },
@@ -35,6 +37,7 @@ export const HRLinkApiEndpoints = {
       getList: `/Experience/GetList`,
       getDetail: `/Experience/GetDetails`,
       typeOfActivity: `/Experience/TypeOfActivity`,
+      reasonToQuite: 'Experience/ReasonsOfQuit',
     },
 
     skill: {

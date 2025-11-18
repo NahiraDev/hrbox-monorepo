@@ -3,9 +3,9 @@ import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from '@hrbox-monorepo/modules/hrlink/app/endpoints';
 
 const userApi = createModuleApi({
-  reducerPath: 'commonApi',
+  reducerPath: 'userApi',
   baseUrl: 'https://hrlink.hrbox.me:50443',
-  tagTypes: ['Common'],
+  tagTypes: ['User'],
   requiresAuth: true,
   autoToast: true,
 });
@@ -16,7 +16,7 @@ export const userApiWithEndpoints = userApi.injectEndpoints({
         fetchCity: createQuery<any>(build, {
           url: HRLinkApiEndpoints.user.getUserCity,
           method: 'GET',
-          tags: ['Common'],
+          tags: ['User'],
         }),
 })
 })
