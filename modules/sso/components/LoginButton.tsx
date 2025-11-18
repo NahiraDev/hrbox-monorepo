@@ -1,6 +1,6 @@
-import {AppButton} from "@hrbox-monorepo/UIKit/components";
-import {Paths} from "@hrbox-monorepo/modules/paths";
-import {useNavigation} from "@hrbox-monorepo/core/hooks/useNavigation";
+import {AppButton} from "@hrbox/uikit/components";
+import {Paths} from "@hrbox/modules/paths";
+import {useNavigation} from "@hrbox/core/hooks/useNavigation";
 import {useTranslation} from "react-i18next";
 
 export const LoginButton = () =>{

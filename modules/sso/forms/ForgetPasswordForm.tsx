@@ -8,7 +8,7 @@ import {AppButton} from '@hrbox/uikit/components';
 import {useFormContext} from '@hrbox/core/providers/FormProvider';
 import {FormField} from "@hrbox/uikit/components/FormField";
 import {useResetPasswordSendOtpMutation, useResetPasswordVerifyOtpMutation} from "@hrbox/modules/sso/apis/Auth";
-import {LoginButton} from "@hrbox-monorepo/modules/sso/components/LoginButton";
+import {LoginButton} from "@hrbox/modules/sso/components/LoginButton";
 
 const OTP_EXPIRY_TIME = 120;
 const OTP_STORAGE_KEY = 'forget_password_otp_session';

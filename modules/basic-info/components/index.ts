@@ -1,1 +1,1 @@
-export * from '@hrbox-monorepo/modules/basic-info/components/BasicInfoLayout'
+export * from '@hrbox/modules/basic-info/components/BasicInfoLayout'
