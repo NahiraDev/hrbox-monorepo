@@ -20,7 +20,7 @@ const AddPermisionForm = () => {
               name="title"
               label="Choose Type"
               component={AppAutoComplete}
-              data={[
+              items={[
                 { id: 1, name: "فناوری اطلاعات" },
                 { id: 2, name: "منابع انسانی" },
                 { id: 3, name: "مالی" },

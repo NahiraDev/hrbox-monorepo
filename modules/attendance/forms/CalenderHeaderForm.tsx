@@ -70,9 +70,8 @@ export const CalenderHeaderForm = () => {
     modal.open(
       ModalType.CREATE,
       "event-form",
-      <EventModal />, // ✅ فقط component - بدون wrapper
+      <EventModal />, 
       {
-        // ✅ اینجا config برای GlobalModalRenderer
         isForm: true,
         title: "افزودن رویداد",
         submitLabel: "ذخیره",
@@ -85,7 +84,6 @@ export const CalenderHeaderForm = () => {
           clearCacheOnSubmit: true,
           onSubmitAsync: async (values: any) => {
             handleSubmitEvent(values);
-            // ✅ بعد از submit، modal رو ببند
             modal.close(ModalType.CREATE, "event-form");
           },
         },
@@ -97,9 +95,7 @@ export const CalenderHeaderForm = () => {
   return (
     <form>
       <div className="w-full flex flex-col">
-        {/* ======== بخش بالا ======== */}
         <div className="w-full flex flex-row justify-between">
-          {/* دکمه‌ها */}
           <div className="flex flex-row gap-3">
             <AppButton
               color={isTrafficCalender ? "white" : "primary"}
@@ -123,29 +119,20 @@ export const CalenderHeaderForm = () => {
               content="Group attendance calendar"
             />
           </div>
-
-          {/* ماه و سال */}
           <div className="flex flex-row gap-3">
-            {/* MONTH */}
             <FormField
               name="month"
-              label="Month"
               component={AppDropDown}
-              props={{
-                title: "Month",
-                item: months,
-              }}
+                title= "Month"
+                items= {months}
+                className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
             />
-
-            {/* YEAR */}
             <FormField
               name="year"
-              label="Year"
               component={AppDropDown}
-              props={{
-                title: "Year",
-                item: years,
-              }}
+                title= "Year"
+                item= {years}
+                className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
             />
 
             <AppButton
@@ -160,10 +147,8 @@ export const CalenderHeaderForm = () => {
             />
           </div>
         </div>
-
-        {/* ======== بخش پایین ======== */}
         {isTrafficCalender && (
-          <div className="flex flex-row items-center justify-between mt-4">
+          <div className="flex flex-row items-center justify-between mt-3">
             <div className="flex flex-row items-center gap-3">
               <Avatar
                 className="w-10 h-10"
@@ -176,26 +161,19 @@ export const CalenderHeaderForm = () => {
             </div>
 
             <div className="flex flex-row gap-3">
-              {/* PERSON */}
               <FormField
                 name="person"
-                label="Person"
                 component={AppDropDown}
-                props={{
-                  title: "Person",
-                  item: months,
-                }}
+                  title="Person"
+                  item= {months}
+                  className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
               />
-
-              {/* DEPARTMENT */}
               <FormField
                 name="department"
-                label="Department/Unit"
                 component={AppDropDown}
-                props={{
-                  title: "Department/Unit",
-                  item: months,
-                }}
+                  title= "Department/Unit"
+                  item= {months}
+                  className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
               />
             </div>
           </div>

@@ -41,18 +41,6 @@ const EntryExitSubHeader = (props: any) => {
       <div className="flex flex-col">
         <div className="flex">
           <AppPageTitle title={props.title} icon={props.icon} />
-          {/*<AppButton*/}
-          {/*  props={{*/}
-          {/*    color: 'primary',*/}
-          {/*    size: 'md',*/}
-          {/*    radius: 'sm',*/}
-          {/*    variant: 'solid',*/}
-          {/*    content: 'My Time',*/}
-          {/*    className: 'text-white',*/}
-          {/*    onClick: () => openModal('confirm', 'FaceIdModal', <FaceIdModal />,undefined,"lg",null,null),*/}
-          {/*    startContent: <PasswordCheck size={18} />,*/}
-          {/*  }}*/}
-          {/*/>*/}
         </div>
         <div className="mt-8 flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
