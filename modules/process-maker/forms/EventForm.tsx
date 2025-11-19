@@ -1,38 +1,33 @@
-import { AppInput } from '@UIKit/components';
-import { useFormContext } from '@core/providers/FormProvider';
+import {useFormContext} from '@hrbox/core/providers/FormProvider';
 import * as Yup from 'yup';
-import { Form } from '@heroui/react';
+import {Form} from '@heroui/react';
+import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
 
 export const initialValuesEvent = {
-  title: null,
+    title: null,
 };
 
 export const formValidationEvent = Yup.object().shape({
-  title: Yup.string().required(),
+    title: Yup.string().required(),
 });
 
 export const handleSubmitEvent = (values: any) => {
-  return {
-    title: values.title,
-  };
+    return {
+        title: values.title,
+    };
 };
 
 export const EventForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+    const {values, errors, touched, handleSubmit} = useFormContext();
 
-  return (
-    <Form onSubmit={handleSubmit}>
-      <AppInput
-        props={{
-          type: 'text',
-          label: 'Title',
-          name: 'title',
-          error: touched.title && errors.title,
-          onChange: handleChange,
-          onBlur: handleBlur,
-        }}
-      />
-    </Form>
-  );
+    return (
+        <Form onSubmit={handleSubmit}>
+            <FormField
+                label='Title'
+                name='title'
+                error={touched.title && errors.title}
+            />
+        </Form>
+    );
 };
 

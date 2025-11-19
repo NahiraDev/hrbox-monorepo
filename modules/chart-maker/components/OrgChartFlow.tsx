@@ -2,10 +2,10 @@ import { ReactFlow, addEdge, useNodesState, useEdgesState, Controls, type OnConn
 import { useCallback } from 'react';
 import '@xyflow/react/dist/style.css';
 
-import { initialEdges, initialNodes } from '@module/chart-maker/app/mock';
+import { initialEdges, initialNodes } from '@hrbox/modules/chart-maker/app/mock';
 
-import OrgChartNode from '@module/chart-maker/features/common/OrgChartNode';
-import { OrgChartEdge } from '@module/chart-maker/features/common/OrgChartEdge';
+import OrgChartNode from '@hrbox/modules/chart-maker/components/OrgChartNode';
+import { OrgChartEdge } from '@hrbox/modules/chart-maker/components/OrgChartEdge';
 
 const nodeTypes = {
   orgChart: OrgChartNode,

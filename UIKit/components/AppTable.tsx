@@ -800,15 +800,13 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           )}
 
         {/* Pagination */}
-        {shouldPaginate && (
-          <div className="mt-4 flex justify-end px-4">
-            <AppPagination
-              total={totalPages}
-              page={page}
-              onChange={handlePageChange}
-            />
-          </div>
-        )}
+        {/*{shouldPaginate && (*/}
+        {/*  <div className="mt-4 flex justify-end px-4">*/}
+        {/*    <AppPagination*/}
+        {/*      onChange={handlePageChange}*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
     );
   },

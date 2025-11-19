@@ -1,11 +1,8 @@
 import {Add, Hierarchy3, SearchNormal, Setting4} from 'iconsax-reactjs';
 
-import {AppButton} from '@hrbox-monorepo/UIKit/components';
-import {useModalContext} from '@hrbox-monorepo/core/providers/ModalProvider';
-import {NewOneModal} from "@hrbox/modules/process-maker/modals/NewOneModal";
+import {AppButton} from '@hrbox/uikit/components';
 
 const ProcessListSubHeader = () => {
-    const {openModal} = useModalContext();
 
     return (
         <div className="flex flex-row-reverse w-full justify-between">
@@ -15,39 +12,33 @@ const ProcessListSubHeader = () => {
                     size='md'
                     radius='lg'
                     startContent={<Add/>}
-                    onPress={() => openModal('confirm', 'NewOneModal', <NewOneModal/>)}
+                    // onPress={() => openModal('confirm', 'NewOneModal', <NewOneModal/>)}
                     className='border-1 border-primary'
                     content='Add new One'
                 />
-                {/*{isModalOpen('confirm', 'NewOneModal') && <NewOneModal />}*/}
                 <AppButton
-                    props={{
-                        color: 'bg-white',
-                        size: 'md',
-                        radius: 'lg',
-                        className: 'border-1 border-primary',
-                        startContent: <Setting4/>,
-                    }}
+                    color='bg-white'
+                    size='md'
+                    radius='lg'
+                    className={'border-1 border-primary'}
+                    startContent={<Setting4/>}
                 />
                 <AppButton
-                    props={{
-                        color: 'bg-white',
-                        size: 'md',
-                        radius: 'lg',
-                        className: 'border-1 border-primary',
-                        startContent: <SearchNormal/>,
-                    }}
+                    size='md'
+                    radius='lg'
+                    color="primary"
+                    variant="bordered"
+                    className='w-fit! p-2.5! text-lg'
+                    startContent=<SearchNormal/>
                 />
             </div>
             <div className="flex">
                 <AppButton
-                    props={{
-                        color: 'primary',
-                        size: 'md',
-                        radius: 'lg',
-                        startContent: <Hierarchy3/>,
-                        content: 'Processes',
-                    }}
+                    color='primary'
+                    size='md'
+                    radius='lg'
+                    startContent=<Hierarchy3/>
+                    content='Processes'
                 />
             </div>
         </div>

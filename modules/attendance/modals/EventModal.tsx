@@ -7,12 +7,10 @@ import {
 } from "@hrbox/modules/attendance/forms/EventForm";
 // import { FormProvider } from "@hrbox/core/providers";
 
-// ✅ EventModal فقط content است
 export const EventModal = () => {
   const { t } = useTranslation();
 
   return (
       <EventForm />
-
   );
 };

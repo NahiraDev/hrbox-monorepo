@@ -2,9 +2,8 @@ import {CheckboxGroup, Form} from '@heroui/react';
 import {Add, Message, Notification, Sms} from 'iconsax-reactjs';
 import * as Yup from 'yup';
 import {useFormContext} from '@hrbox/core/providers/FormProvider';
-import {AppCheckBox} from '@hrbox/uikit/components';
 
-import {AppAutoComplete, AppInput, AppTextArea} from '@hrbox/uikit/components';
+import {AppAutoComplete, AppCheckBox, AppInput, AppTextArea} from '@hrbox/uikit/components';
 import {FormField} from "@hrbox/uikit/components/FormField";
 import {useTranslation} from "react-i18next";
 
@@ -163,16 +162,15 @@ export const ActionsForm = () => {
                                     </>
                                 )}
                             />
-                            <AppCheckBox
-                                props={{
-                                    name: 'organization',
-                                    children: (
-                                        <>
-                                            <option>yes</option>
-                                            <option>no</option>
-                                        </>
-                                    ),
-                                }}
+                            <FormField
+                                name='organization'
+                                component={AppCheckBox}
+                                children={
+                                    <>
+                                        <option>yes</option>
+                                        <option>no</option>
+                                    </>
+                                }
                             />
                         </div>
                     </div>
@@ -269,25 +267,21 @@ export const ActionsForm = () => {
                         <div
                             className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
                             <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
-                                <AppCheckBox
-                                    props={{
-                                        name: 'eecipient',
-                                        children: (
-                                            <>
-                                                <option>Exporter</option>
-                                            </>
-                                        ),
-                                    }}
+                                <FormField
+                                    component={AppCheckBox}
+                                    name='eecipient'
+                                    children={
+                                        <>
+                                            <option>Exporter</option>
+                                        </>
+                                    }
                                 />
                             </div>
-                            <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
-                                <AppTextArea
-                                    props={{
-                                        name: 'descriptionexporter',
-                                        error: touched.descriptionexporter && errors.descriptionexporter,
-                                        onChange: handleChange,
-                                        onBlur: handleBlur,
-                                    }}
+                            <div className="flex mx-auto mt-3 mb-3 w-full">
+                                <FormField
+                                    name='descriptionexporter'
+                                    component={AppTextArea}
+                                    helperText={touched.descriptionexporter && errors.descriptionexporter}
                                 />
                             </div>
                             <div className="flex flex-row gap-2 mt-3 mb-11 mr-6 ml-[38px]">
@@ -312,22 +306,19 @@ export const ActionsForm = () => {
                             className="flex flex-row bg-[rgba(220,240,249,0.40)] dark:bg-[rgba(4,66,92,0.60)] rounded-4 ">
                             <div className="flex py-3 mt-3 mb-[41px] ml-6 mr-[53px]">
                                 <AppCheckBox
-                                    props={{
-                                        name: 'employee',
-                                        children: (
-                                            <>
-                                                <option>Eecipient</option>
-                                            </>
-                                        ),
-                                    }}
+                                    name='employee'
+                                    children={(
+                                        <>
+                                            <option>Eecipient</option>
+                                        </>
+                                    )}
                                 />
                             </div>
                             <div className="flex mx-auto mt-[13px] mb-[11px] w-full">
-                                <AppTextArea
-                                name: 'descriptionexporter',
-                                error: touched.descriptionexporter && errors.descriptionexporter,
-                                onChange: handleChange,
-                                onBlur: handleBlur,
+                                <FormField
+                                    name="descriptionexporter"
+                                    component={AppTextArea}
+                                    helperText={touched.descriptionexporter && errors.descriptionexporter}
                                 />
                             </div>
                             <div className="flex flex-row gap-2 mt-3 mb-11 mr-6 ml-[38px]">

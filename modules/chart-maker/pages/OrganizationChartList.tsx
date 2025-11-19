@@ -1,7 +1,7 @@
-import { AppPagination } from '@hrbox/uikit/components';
 import { organizationCharts } from '@module/chart-maker/app/mock';
 
-import { OrgChartCardListNode } from '@module/chart-maker/features/common';
+import { OrgChartCardListNode } from '@hrbox/modules/chart-maker/components/OrgChartCardList';
+import {AppPagination} from "@hrbox/uikit/components/AppPagination";
 
 const OrganizationChartList = () => {
   return (
@@ -13,7 +13,14 @@ const OrganizationChartList = () => {
       </div>
 
       <div className="flex justify-end">
-        <AppPagination total={100} />
+        <AppPagination meta={{
+                  page: 0,
+                  pageSize: 0,
+                  total: 0,
+                  totalPages: 0
+              }} onPageChange={function(page: number): void {
+                  throw new Error("Function not implemented.");
+              } }/>
       </div>
     </div>
   );

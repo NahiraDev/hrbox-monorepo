@@ -1,48 +1,21 @@
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, AppModal } from '@UIKit/components';
-import { FormProvider } from '@core/providers/FormProvider'
-import { formValidationPoint, handleSubmitPoint, initialValuesPoint, PointForm } from '@modules/process-maker/forms';
+import { FormProvider } from '@hrbox/core/providers/FormProvider'
+import { formValidationPoint, handleSubmitPoint, initialValuesPoint, PointForm } from '@hrbox/modules/process-maker/forms';
 
 export const PointModal = () => {
   const { t } = useTranslation();
 
   return (
-    // <AppModal icon={<Hierarchy3 />} size="4xl">
-    <>
-      <AppModal.Body>
-        <FormProvider
+      <FormProvider
+          formId={"point-form"}
           initialValues={initialValuesPoint}
           validationSchema={formValidationPoint}
           onSubmitAsync={async (value: any) => {
-            handleSubmitPoint(value);
+              handleSubmitPoint(value);
           }}
-        >
+      >
           <PointForm />
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-            props={{
-              color: 'white',
-              size: 'md',
-              radius: 'lg',
-              content: t('cancel'),
-            }}
-          />
-          <AppButton
-            props={{
-              color: 'primary',
-              type: 'submit',
-              size: 'md',
-              radius: 'lg',
-              content: t('submit'),
-            }}
-          />
-        </div>
-      </AppModal.Footer>
-    </>
-    // </AppModal>
+      </FormProvider>
   );
 };

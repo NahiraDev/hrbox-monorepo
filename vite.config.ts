@@ -94,7 +94,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           main: resolve(__dirname, "main.tsx"),
           sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
           processMaker: resolve(__dirname, './modules/process-maker/plugin.tsx'),
-          // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
+          chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
           hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
           attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
           basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
@@ -151,17 +151,17 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     assetsInclude: ["**/*.html"],
 
     server: {
-      port: 443,
+      port: 5173,
       host: true,
       allowedHosts: ["localhost", "front.hrbox.me", "react.hrbox.me"],
       strictPort: false,
       open: false,
       cors: true,
-      https: httpsConfig,
+      // https: httpsConfig,
       hmr: {
         overlay: true,
         protocol: "wss",
-        port: 443,
+        port: 5173,
       },
 
       proxy: {
