@@ -1,23 +1,24 @@
 import { useTranslation } from 'react-i18next';
 
-import { AppModal, AppButton } from '@hrbox/uikit/components';
-import { FormProvider } from '@hrbox/core/providers/FormProvider'
-import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '@module/process-maker/features/forms';
+import { AppButton, AppModal } from '@UIKit/components';
+import { FormProvider } from '@core/providers/FormProvider'
+import { formValidationPoint, handleSubmitPoint, initialValuesPoint, PointForm } from '@modules/process-maker/forms';
 
-export const NewOneModal = () => {
+export const PointModal = () => {
   const { t } = useTranslation();
 
   return (
+    // <AppModal icon={<Hierarchy3 />} size="4xl">
     <>
       <AppModal.Body>
         <FormProvider
-          initialValues={initialValuesNewOne}
-          validationSchema={formValidationNewOne}
-          onSubmitAsync={async (values: any) => {
-            handleSubmitNewOne(values);
+          initialValues={initialValuesPoint}
+          validationSchema={formValidationPoint}
+          onSubmitAsync={async (value: any) => {
+            handleSubmitPoint(value);
           }}
         >
-          <NewOneForm />
+          <PointForm />
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -42,5 +43,6 @@ export const NewOneModal = () => {
         </div>
       </AppModal.Footer>
     </>
+    // </AppModal>
   );
 };

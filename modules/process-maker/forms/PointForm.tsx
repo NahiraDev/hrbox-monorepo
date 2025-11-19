@@ -2,9 +2,9 @@ import { Form } from '@heroui/react';
 import { Add, Message, Notification, Sms } from 'iconsax-reactjs';
 import * as Yup from 'yup';
 
-import { AppAutoComplete, AppInput, AppTextArea } from '@hrbox/uikit/components';
-import { useFormContext } from '@hrbox/core/providers/FormProvider';
-import { AppCheckBox } from '@hrbox/uikit/components';
+import { AppAutoComplete, AppInput, AppTextArea } from '@UIKit/components';
+import { useFormContext } from '@core/providers/FormProvider';
+import { AppCheckBox } from '@UIKit/components';
 
 export const initialValuesPoint = {
   title: null,

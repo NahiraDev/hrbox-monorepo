@@ -1,25 +1,23 @@
 import { useTranslation } from 'react-i18next';
 
-import { EventAddForm } from '@module/process-maker/features/forms';
-import { AppModal, AppButton } from '@hrbox/uikit/components';
-import { FormProvider } from '@hrbox/core/providers/FormProvider'
-import { formValidationEventAdd, handleSubmitEventAdd, initialValuesEventAdd } from '@module/process-maker/features/forms';
+import { AppModal, AppButton } from '@UIKit/components';
+import { FormProvider } from '@core/providers/FormProvider'
+import { formValidationNewOne, handleSubmitNewOne, initialValuesNewOne, NewOneForm } from '@modules/process-maker/forms';
 
-export const NewEventModal = () => {
+export const NewOneModal = () => {
   const { t } = useTranslation();
 
   return (
-    // <AppModal size="4xl" title="AddEvent Modal">
     <>
       <AppModal.Body>
         <FormProvider
-          initialValues={initialValuesEventAdd}
-          validationSchema={formValidationEventAdd}
+          initialValues={initialValuesNewOne}
+          validationSchema={formValidationNewOne}
           onSubmitAsync={async (values: any) => {
-            handleSubmitEventAdd(values);
+            handleSubmitNewOne(values);
           }}
         >
-          <EventAddForm/>
+          <NewOneForm />
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>
@@ -44,6 +42,5 @@ export const NewEventModal = () => {
         </div>
       </AppModal.Footer>
     </>
-    // </AppModal>
   );
 };

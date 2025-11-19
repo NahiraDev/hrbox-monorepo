@@ -1,25 +1,25 @@
-
 import { useTranslation } from 'react-i18next';
+import { FormProvider } from '@core/providers/FormProvider';
 
-import { AppButton, AppModal } from '@hrbox/uikit/components';
-import { FormProvider } from '@hrbox/core/providers/FormProvider';
-import { EventForm, formValidationEvent, handleSubmitEvent, initialValuesEvent } from '@module/process-maker/features/forms';
+import { ActionsForm, formValidationAction, handleSubmitAction, initialValuesAction } from '@modules/process-maker/forms';
+import { AppModal, AppButton } from '@UIKit/components';
 
-export const EventModal = () => {
+export const AddActionsModall = () => {
   const { t } = useTranslation();
 
   return (
-    // <AppModal icon={<Hierarchy3 />} size="md" title="Event Modal">
+    // <AppModal size="4xl" title="Actioon Modal">
     <>
       <AppModal.Body>
         <FormProvider
-          initialValues={initialValuesEvent}
-          validationSchema={formValidationEvent}
+            formId="action-form"
+          initialValues={initialValuesAction}
+          validationSchema={formValidationAction}
           onSubmitAsync={async (values: any) => {
-            handleSubmitEvent(values);
+            handleSubmitAction(values);
           }}
         >
-          <EventForm />
+          <ActionsForm />
         </FormProvider>
       </AppModal.Body>
       <AppModal.Footer>

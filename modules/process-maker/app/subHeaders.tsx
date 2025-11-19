@@ -3,8 +3,7 @@ import { Personalcard } from 'iconsax-reactjs';
 import { ProcessMakerPath } from '@module/process-maker/app/paths';
 import { lazy } from "react";
 
-const ProcessListSubHeader = lazy(() => import('@module/process-maker/features/ProcessListSubHeader'));
-const DashboardSubHeader = lazy(() => import('@module/process-maker/features/DashboardSubHeader'));
+
 
 export const ProcessMakerSubHeaders: any = [
   {

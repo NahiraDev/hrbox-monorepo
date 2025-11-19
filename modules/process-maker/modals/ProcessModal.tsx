@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { AppButton, AppModal } from '@hrbox/uikit/components';
-import { FormProvider } from '@hrbox/core/providers/FormProvider'
-import { formValidationProcess, handleSubmitProcess, initialValuesProcess, ProcessForm } from '@module/process-maker/features/forms';
+import { AppButton, AppModal } from '@UIKit/components';
+import { FormProvider } from '@core/providers/FormProvider'
+import { formValidationProcess, handleSubmitProcess, initialValuesProcess, ProcessForm } from '@modules/process-maker/forms';
 
 export const ProcessModal = () => {
   const { t } = useTranslation();

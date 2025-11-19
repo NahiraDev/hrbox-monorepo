@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modeler from 'bpmn-js/lib/Modeler';
 
-import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from '@module/process-maker/features/modals';
+import { ProcessModal, EventModal, NewEventModal, AddActionsModall } from '@modules/process-maker/modals';
 
 import { AppButton, AppInput } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';

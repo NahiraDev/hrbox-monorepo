@@ -93,7 +93,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         input: {
           main: resolve(__dirname, "main.tsx"),
           sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
-          // processMaker: resolve(__dirname, 'modules/process-maker/plugin.tsx'),
+          processMaker: resolve(__dirname, './modules/process-maker/plugin.tsx'),
           // chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
           hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
           attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
