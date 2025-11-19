@@ -25,7 +25,7 @@ export const JobFilterForm = () => {
             classNames={{
               filler: "!bg-secondary-400",
               thumb:
-                "!bg-secondary-400 after:bg-primary-panel !w-4 !h-4 after:!w-3 after:!h-3",
+                "!bg-secondary-400 after:bg-primary !w-4 !h-4 after:!w-3 after:!h-3",
               track: "!h-1",
             }}
             formatOptions={{

@@ -69,7 +69,7 @@ const OrganizationalChart = () => {
       <div className="flex flex-col gap-1 ">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs !font-semibold text-secondary-1000">
+            <span className="text-xs font-semibold text-secondary-1000">
               Sign
             </span>
           </div>

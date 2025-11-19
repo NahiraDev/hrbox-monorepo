@@ -15,6 +15,7 @@ import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import Report from "@hrbox/modules/basic-info/components/Repport";
 import { useLocation } from "react-use";
 import { useNavigate } from "@tanstack/react-router";
+import { Paths } from "../../paths";
 
 // ==================== INTERFACES ====================
 interface TabItem {
@@ -36,17 +37,17 @@ const EmployeesTab: TabItem[] = [
     title: "Personal Information",
     href: Paths.BasicInfo.PersonalInformation,
   },
-  { key: "documents", title: "Documents", href: BasicInfoPaths.Documents },
-  { key: "jobs", title: "Jobs", href: BasicInfoPaths.Jobs },
-  { key: "education", title: "Educations", href: BasicInfoPaths.Educations },
-  { key: "skills", title: "Skills", href: BasicInfoPaths.Skills },
-  { key: "courses", title: "Courses", href: BasicInfoPaths.Courses },
+  { key: "documents", title: "Documents", href: Paths.BasicInfo.Documents },
+  { key: "jobs", title: "Jobs", href: Paths.BasicInfo.Jobs },
+  { key: "education", title: "Educations", href: Paths.BasicInfo.Educations },
+  { key: "skills", title: "Skills", href: Paths.BasicInfo.Skills },
+  { key: "courses", title: "Courses", href: Paths.BasicInfo.Courses },
   {
     key: "achievements",
     title: "Achievements",
-    href: BasicInfoPaths.Achievements,
+    href: Paths.BasicInfo.Achievements,
   },
-  { key: "dependents", title: "Dependents", href: BasicInfoPaths.Dependents },
+  { key: "dependents", title: "Dependents", href: Paths.BasicInfo.Dependents },
   { key: "more", title: "More" },
 ];
 
@@ -99,7 +100,7 @@ const ProfileActions = ({ openModal }: { openModal: any }) => (
         color: "white",
         variant: "solid",
         className:
-          "p-1 bg-white hover:!bg-primary-panel transition-all duration-200 w-7 h-7",
+          "p-1 bg-white hover:!bg-primary transition-all duration-200 w-7 h-7",
         content: (
           <MessageEdit
             className="text-secondary-1000 group-hover:text-white"
@@ -235,7 +236,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
   return (
     <div>
       {/* Header */}
-      <div className="bg-primary-panel w-full rounded-t-xl px-4 pt-4">
+      <div className="bg-primary w-full rounded-t-xl px-4 pt-4">
         <div className="flex items-center justify-between gap-7">
           {/* Profile Image & Actions */}
           <div
@@ -303,7 +304,7 @@ export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {
                     setShowMore(false);
                   }
                 }}
-                ref={(el) => {
+                ref={(el: any) => {
                   if (el) {
                     const moreTab = el.querySelector(
                       '[data-key="more"]',

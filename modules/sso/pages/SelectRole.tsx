@@ -1,90 +1,22 @@
 import { useAuth } from "@hrbox/core/hooks/useAuth";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { Paths } from "../../paths";
-import { Button } from "@heroui/react";
 import { RoleSlug } from "@hrbox/core/config/theme";
 import { useEffect } from "react";
 import {
   useFetchProfileInfoQuery,
   useGetProfilePhotoQuery,
 } from "@hrbox/modules/hrlink/apis/Resume";
+import { roleSelected } from "@hrbox/core/redux";
 
 const SelectRole = () => {
-  const {
-    user,
-    roles,
-    roleSelected,
-    selectedRole,
-    needsRoleSelection,
-    logout,
-  } = useAuth();
+  const { user, roles } = useAuth();
   const { push } = useNavigation();
-  const { data: getRole } = useFetchProfileInfoQuery();
-  const { data: getProfilePhoto } = useGetProfilePhotoQuery();
-  useEffect(() => {
-    const checkProfileAndRedirect = async () => {
-      if (!needsRoleSelection && selectedRole) {
-        try {
-          const profile = null;
-          const isComplete = getRole?.FirstName && getRole.Email;
-
-          let dashboardPath = "/";
-          switch (selectedRole.slug) {
-            case RoleSlug.JOB_SEEKER:
-              dashboardPath = Paths.HRLink.Dashboard;
-              break;
-            case RoleSlug.ORGANIZATION:
-              dashboardPath = Paths.HRLink.Dashboard;
-              break;
-            case RoleSlug.SUPER_ADMIN:
-              dashboardPath = "/super-admin/dashboard";
-              break;
-          }
-
-          if (!isComplete) {
-            push({
-              to:
-                Paths.HRLink.ResumeInformation || "/hrlink/resume/inforamtion",
-            });
-          } else {
-            push({ to: dashboardPath });
-          }
-        } catch (err) {
-          console.error("❌ خطا در چک پروفایل:", err);
-        }
-      }
-    };
-
-    checkProfileAndRedirect();
-  }, [needsRoleSelection, selectedRole]);
 
   const handleRoleSelect = async (role: any) => {
     try {
-      const accessToken = localStorage.getItem("token");
-
-      roleSelected(role, accessToken);
-      // localStorage.setItem('userProfile', JSON.stringify(profile));
-
-      let dashboardPath = "/";
-      switch (role.slug) {
-        case RoleSlug.JOB_SEEKER:
-          dashboardPath = Paths.HRLink.Dashboard;
-          break;
-        case RoleSlug.ORGANIZATION:
-          dashboardPath = Paths.HRLink.Dashboard;
-          break;
-        case RoleSlug.SUPER_ADMIN:
-          dashboardPath = "/super-admin/dashboard";
-          break;
-      }
-
-      // if (!isComplete) {
-      //     console.log('⚠️ Profile incomplete, redirecting to form');
-      //     await push({ to:'/hrlink/profile-form' });
-      // } else {
-      //     console.log('✅ Redirecting to:', dashboardPath);
-      //     await push({ to: dashboardPath });
-      // }
+      roleSelected(role);
+      push({ to: Paths.SSO.welcome });
     } catch (err) {
       console.error("❌ انتخاب نقش ناموفق:", err);
     }
@@ -106,11 +38,14 @@ const SelectRole = () => {
       {roles.map((role: any) => (
         <div
           key={role.id}
-          className="bg-white p-5  rounded-xl shadow-sm w-[200px] h-[290px] border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white p-5  rounded-xl shadow-sm w-[200px] h-[300px] hover:shadow-md transition-shadow cursor-pointer"
           onClick={() => handleRoleSelect(role)}
         >
-          <div className="flex flex-col items-center gap-4">
-            <button onclick={() => handleRoleSelect(role)}>
+          <div>
+            <button
+              className="flex flex-col gap-3"
+              onclick={() => handleRoleSelect(role)}
+            >
               <div className="w-40 h-40 rounded-2xl overflow-hidden">
                 <img
                   src={user.avatar || "/images/profile.webp"}
@@ -119,16 +54,28 @@ const SelectRole = () => {
                 />
               </div>
 
-              <div>
-                <h3 className="text-lg font-semibold text-secondary-1000">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-sm font-semibold text-secondary-1000 text-start">
                   {user.name}
                 </h3>
-                <p className="text-sm text-primary-700 font-medium">
-                  {role.name}
-                </p>
-                <div className="mt-2 inline-block px-3 py-1 bg-primary-50 text-primary-600 text-xs font-medium rounded-full">
-                  {role.slug === "organization" && "Hrbox Holding"}
-                </div>
+                {role.slug === "organization" ? (
+                  <p className="text-sm text-primary-700 font-semibold text-start">
+                    {role.name}
+                  </p>
+                ) : (
+                  <p className="text-sm text-[#900F2E] font-semibold text-start">
+                    {role.name}
+                  </p>
+                )}
+                {role.slug === "organization" ? (
+                  <div className="inline-block px-3 py-0.5 bg-[#DCF0F9]  text-primary-600 text-sm font-medium rounded-lg">
+                    Hrbox Holding
+                  </div>
+                ) : (
+                  <div className="inline-block px-3 py-0.5 bg-[#FEDEE6] text-[#900F2E] text-sm font-semibold rounded-lg">
+                    HRLink
+                  </div>
+                )}
               </div>
             </button>
           </div>

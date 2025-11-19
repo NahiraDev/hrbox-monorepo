@@ -1,11 +1,17 @@
-import { Avatar, Card } from '@heroui/react';
-import { identityCard } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Trash, ArrowRotateLeft, User, Status, Calendar } from 'iconsax-reactjs';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { useState } from 'react';
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
-import DocumentsModal from '../../modals/DocumentsModal';
+import { Avatar, Card } from "@heroui/react";
+import { identityCard } from "@module/basic-info/app/mock";
+import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
+import {
+  Trash,
+  ArrowRotateLeft,
+  User,
+  Status,
+  Calendar,
+} from "iconsax-reactjs";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { useState } from "react";
+import { BasicInfoLayout } from "@hrbox-monorepo/modules/basic-info/components";
+import DocumentsModal from "../../modals/DocumentsModal";
 
 interface Document {
   name: string;
@@ -19,22 +25,20 @@ const Documents = () => {
   const { openModal } = useModalContext();
   const [documentsList, setDocumentsList] = useState<Document[]>(identityCard);
 
-  const closeAllModals = () => {
-
-  };
+  const closeAllModals = () => {};
 
   const handleDeleteClick = (index: number) => {
     openModal(
-      'delete',
-      '',
+      "delete",
+      "",
       <AppDeleteModal
         onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log('Cancelled')}
+        onCancel={() => console.log("Cancelled")}
       />,
       undefined,
-      'sm',
-      'Do you want to remove it?',
-      <Trash className="text-white" />
+      "sm",
+      "Do you want to remove it?",
+      <Trash className="text-white" />,
     );
   };
 
@@ -65,21 +69,23 @@ const Documents = () => {
                   <div className="flex items-center gap-3">
                     <AppButton
                       props={{
-                        size: 'xs',
-                        radius: 'sm',
-                        variant: 'light',
+                        size: "xs",
+                        radius: "sm",
+                        variant: "light",
                         isIconOnly: true,
                         onPress: () =>
                           openModal(
-                            'custom',
-                            '',
+                            "custom",
+                            "",
                             <DocumentsModal
                               onClose={() => {}}
                               onCloseAll={closeAllModals}
-                              onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
+                              onSubmit={(imageSrc: string) =>
+                                handleImageSubmit(index, imageSrc)
+                              }
                             />,
                             undefined,
-                            'sm'
+                            "sm",
                           ),
                         content: (
                           <Avatar
@@ -96,37 +102,45 @@ const Documents = () => {
                     <div>
                       <AppButton
                         props={{
-                          size: 'xs',
-                          radius: 'sm',
-                          variant: 'light',
+                          size: "xs",
+                          radius: "sm",
+                          variant: "light",
                           isIconOnly: true,
                           onPress: () => handleDeleteClick(index),
-                          content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'p-2 hover:!bg-red-500 transition-all duration-200',
+                          content: (
+                            <Trash className="text-secondary-1000 group-hover:text-white" />
+                          ),
+                          className:
+                            "p-2 hover:!bg-red-500 transition-all duration-200",
                         }}
                       />
                     </div>
                     <div>
                       <AppButton
                         props={{
-                          size: 'xs',
-                          radius: 'sm',
-                          variant: 'light',
+                          size: "xs",
+                          radius: "sm",
+                          variant: "light",
                           isIconOnly: true,
                           onPress: () =>
                             openModal(
-                              'edit',
-                              '',
+                              "edit",
+                              "",
                               <DocumentsModal
                                 onClose={() => {}}
                                 onCloseAll={closeAllModals}
-                                onSubmit={(imageSrc: string) => handleImageSubmit(index, imageSrc)}
+                                onSubmit={(imageSrc: string) =>
+                                  handleImageSubmit(index, imageSrc)
+                                }
                               />,
                               undefined,
-                              'lg'
+                              "lg",
                             ),
-                          content: <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'p-2 hover:!bg-primary-panel transition-all duration-200',
+                          content: (
+                            <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
+                          ),
+                          className:
+                            "p-2 hover:!bg-primary transition-all duration-200",
                         }}
                       />
                     </div>

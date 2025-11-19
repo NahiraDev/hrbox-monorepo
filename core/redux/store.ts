@@ -1,43 +1,53 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { moduleRegistry } from '@hrbox/modules/registry';
-import { ssoApiWithEndpoints } from '@hrbox/modules/sso/apis/Auth';
-import authReducer from '@hrbox/core/redux/slices/authSlice';
-import themeReducer from '@hrbox/core/redux/slices/themeSlice';
-import languageReducer from '@hrbox/core/redux/slices/languageSlice';
-import formCacheReducer from '@hrbox/core/redux/slices/formCacheSlice';
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { moduleRegistry } from "@hrbox/modules/registry";
+import { ssoApiWithEndpoints } from "@hrbox/modules/sso/apis/Auth";
+import authReducer from "@hrbox/core/redux/slices/authSlice";
+import themeReducer from "@hrbox/core/redux/slices/themeSlice";
+import languageReducer from "@hrbox/core/redux/slices/languageSlice";
+import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
 import { settingApiWithEndpoints } from "@hrbox/modules/hrlink/apis/Setting";
-import {resumeApiEndpoints} from "@hrbox/modules/hrlink/apis/Resume";
-import userReducer from "@hrbox/core/redux/slices/userSlice";
-import {dashboardApiEndpoints} from "@hrbox/modules/hrlink/apis";
+import { resumeApiEndpoints } from "@hrbox/modules/hrlink/apis/Resume";
+import { dashboardApiEndpoints } from "@hrbox/modules/hrlink/apis";
 
 const persistConfig = {
-  key: 'hrbox-v3',
+  key: "hrbox-v3",
   storage,
-  whitelist: ['auth', 'theme', 'language' , 'user'],
+  whitelist: ["auth", "theme", "language", "user"],
 };
 
 export function createStoreWithModules(ENABLED_MODULES: string[]) {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
 
-  const rootReducer = (state: any ={}, action: any) => ({
+  const rootReducer = (state: any = {}, action: any) => ({
     auth: authReducer(state.auth, action),
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
-    // user: userReducer(state.user, action),
-    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state[dashboardApiEndpoints.reducerPath], action),
-    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state[resumeApiEndpoints.reducerPath], action),
-    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
-    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
+    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(
+      state[dashboardApiEndpoints.reducerPath],
+      action,
+    ),
+    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(
+      state[resumeApiEndpoints.reducerPath],
+      action,
+    ),
+    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(
+      state[ssoApiWithEndpoints.reducerPath],
+      action,
+    ),
+    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(
+      state[settingApiWithEndpoints.reducerPath],
+      action,
+    ),
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
         key,
         reducer(state[key], action),
-      ])
+      ]),
     ),
   });
 
@@ -48,7 +58,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+          ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
         },
       }).concat(
         moduleApis
@@ -57,7 +67,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
           .concat(ssoApiWithEndpoints.middleware)
           .concat(settingApiWithEndpoints.middleware)
           .concat(resumeApiEndpoints.middleware)
-          .concat(dashboardApiEndpoints.middleware)
+          .concat(dashboardApiEndpoints.middleware),
       ),
     devTools: import.meta.env.DEV,
   });
@@ -70,8 +80,8 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
 }
 
 export type RootState = ReturnType<
-  ReturnType<typeof createStoreWithModules>['store']['getState']
+  ReturnType<typeof createStoreWithModules>["store"]["getState"]
 >;
 export type AppDispatch = ReturnType<
   typeof createStoreWithModules
->['store']['dispatch'];
+>["store"]["dispatch"];

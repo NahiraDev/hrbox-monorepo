@@ -1,48 +1,91 @@
-import { useEffect } from 'react';
-import { Button } from '@heroui/react';
-import { useAppSelector } from '@hrbox/core/redux/hooks';
-import { useNavigation } from '@hrbox/core/hooks/useNavigation';
-import { motion } from 'framer-motion';
-import Confetti from 'react-confetti';
-import { useWindowSize } from 'react-use';
+import { useEffect } from "react";
+import { Button } from "@heroui/react";
+import { useAppSelector } from "@hrbox/core/redux/hooks";
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
+import { motion } from "framer-motion";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 import { Paths } from "@hrbox/modules/paths";
-import {useTranslation} from "react-i18next";
-import {AppButton} from "@hrbox/uikit/components";
-import { useAuth } from '@hrbox/core/hooks/useAuth';
+import { useTranslation } from "react-i18next";
+import { AppButton } from "@hrbox/uikit/components";
+import { useAuth } from "@hrbox/core/hooks/useAuth";
+import { RoleSlug } from "@hrbox/core/config/theme";
+import { useFetchProfileInfoQuery } from "@module/hrlink/apis/Resume";
 
 export const Welcome = () => {
   const { t } = useTranslation();
   const { push } = useNavigation();
-  const user = useAppSelector((state:any) => state.auth.user);
-  const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
   const { width, height } = useWindowSize();
-  const userPannel = useAuth()
+  const userPannel = useAuth();
+  const { user, roles, roleSelected, selectedRole, needsRoleSelection } =
+    useAuth();
+  const { data: getRole } = useFetchProfileInfoQuery();
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     push({to:Paths.HRLink.Dashboard});
-  //   }, 8000);
-  //
-  //   return () => clearTimeout(timer);
-  // }, [push]);
+  useEffect(() => {
+    const checkProfileAndRedirect = async () => {
+      if (!needsRoleSelection && selectedRole) {
+        try {
+          const isComplete = getRole?.FirstName && getRole.Email;
+          let dashboardPath = "/";
+          switch (selectedRole.slug) {
+            case RoleSlug.JOB_SEEKER:
+              dashboardPath = Paths.HRLink.Dashboard;
+              break;
+            case RoleSlug.ORGANIZATION:
+              dashboardPath = Paths.HRLink.Dashboard;
+              break;
+            case RoleSlug.SUPER_ADMIN:
+              dashboardPath = "/super-admin/dashboard";
+              break;
+          }
+
+          if (!isComplete) {
+            push({
+              to:
+                Paths.HRLink.ResumeInformation || "/hrlink/resume/inforamtion",
+            });
+          } else {
+            push({ to: dashboardPath });
+          }
+        } catch (err) {
+          console.error("❌ خطا در چک پروفایل:", err);
+        }
+      }
+    };
+
+    checkProfileAndRedirect();
+  }, [needsRoleSelection, selectedRole]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <Confetti width={width} height={height} recycle={false} numberOfPieces={200} />
+      <Confetti
+        width={width}
+        height={height}
+        recycle={false}
+        numberOfPieces={200}
+      />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className=" space-y-6 max-w-4xl"
       >
-
         <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-5xl font-bold text-secondary-1000 mb-3">Welcome to {userPannel.currentDomain}!</h1>
-            <h2 className="text-4xl font-normal text-secondary-1000">The Smart Human Resources Management Platform!</h2>
+            <h1 className="text-5xl font-bold text-secondary-1000 mb-3">
+              Welcome to {userPannel.currentDomain}!
+            </h1>
+            <h2 className="text-4xl font-normal text-secondary-1000">
+              The Smart Human Resources Management Platform!
+            </h2>
           </div>
           <p>
-            In a world where time and precision matter more than ever, we empower you to manage all your HR needs in an integrated, fast, and efficient way. With HRBox, everything you need for employee management, training, payroll, and organizational interactions is brought together in one place. Welcome to the HRBox family – where simplicity and innovation work for you!
+            In a world where time and precision matter more than ever, we
+            empower you to manage all your HR needs in an integrated, fast, and
+            efficient way. With HRBox, everything you need for employee
+            management, training, payroll, and organizational interactions is
+            brought together in one place. Welcome to the HRBox family – where
+            simplicity and innovation work for you!
           </p>
         </div>
         <motion.div
@@ -54,12 +97,12 @@ export const Welcome = () => {
             color="primary"
             size="lg"
             content="continue"
-            onPress={() => push({to:Paths.HRLink.Dashboard})}
+            onPress={() => push({ to: Paths.HRLink.Dashboard })}
           />
         </motion.div>
       </motion.div>
     </div>
   );
-}
+};
 
 export default Welcome;

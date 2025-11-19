@@ -40,7 +40,7 @@ const Onboarding = () => {
               <span className="text-xl font-semibold">DNN Supervisor</span>
             </div>
             {DNNSupervisor.map((box, index) => (
-              <details key={index} className="bg-white border border-primary-panel p-6 rounded-2xl">
+              <details key={index} className="bg-white border border-primary p-6 rounded-2xl">
                 <summary className="font-semibold flex justify-between items-center cursor-pointer">
                   <span>{box.title}</span>
                   <AppDoubleLineProgress size={30} value={80} />

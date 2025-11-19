@@ -4,7 +4,9 @@ class ModuleRegistry {
   private modules: Map<string, ModulePlugin> = new Map();
   register(plugin: ModulePlugin) {
     if (this.modules.has(plugin.name)) {
-      console.warn(`⚠️ Module "${plugin.name}" already registered, overwriting...`);
+      console.warn(
+        `⚠️ Module "${plugin.name}" already registered, overwriting...`,
+      );
     }
 
     this.modules.set(plugin.name, plugin);
@@ -15,20 +17,18 @@ class ModuleRegistry {
     }
   }
 
-
   getModule(name: string): ModulePlugin | undefined {
     return this.modules.get(name);
   }
-
 
   getAllModules(): ModulePlugin[] {
     return Array.from(this.modules.values());
   }
 
   getModuleByPath(pathname: string): ModulePlugin | undefined {
-    const basePath = pathname.split('/')[1];
+    const basePath = pathname.split("/")[1];
     return Array.from(this.modules.values()).find(
-      (module) => module.name === basePath || module.basePath === basePath
+      (module) => module.name === basePath || module.basePath === basePath,
     );
   }
 
@@ -42,7 +42,7 @@ class ModuleRegistry {
 
     for (const module of allModules) {
       if (module.routes) {
-        const route = module.routes.find(r => r.path === pathname);
+        const route = module.routes.find((r) => r.path === pathname);
         if (route?.subHeader) {
           return {
             component: route.subHeader,
@@ -52,7 +52,7 @@ class ModuleRegistry {
       }
 
       if (module.subHeaders) {
-        const subHeader = module.subHeaders.find(sh => sh.path === pathname);
+        const subHeader = module.subHeaders.find((sh) => sh.path === pathname);
         if (subHeader) {
           return {
             component: subHeader.component,
@@ -64,7 +64,6 @@ class ModuleRegistry {
 
     return null;
   }
-
 
   getAllRoutes() {
     const routes: any[] = [];
@@ -91,7 +90,6 @@ class ModuleRegistry {
     return reducers;
   }
 
-
   getAllApis() {
     const apis: any[] = [];
     this.getAllModules().forEach((module) => {
@@ -113,19 +111,23 @@ class ModuleRegistry {
     };
   }
 
-  hasModuleAccess(moduleName: string, userRoles: string[], userPermissions: string[]): boolean {
+  hasModuleAccess(
+    moduleName: string,
+    userRoles: string[],
+    userPermissions: string[],
+  ): boolean {
     const access = this.getModuleAccess(moduleName);
 
     if (access.requiredRoles.length > 0) {
       const hasRole = access.requiredRoles.some((role) =>
-        userRoles.includes(role)
+        userRoles.includes(role),
       );
       if (!hasRole) return false;
     }
 
     if (access.requiredPermissions.length > 0) {
       const hasPermission = access.requiredPermissions.some((perm) =>
-        userPermissions.includes(perm)
+        userPermissions.includes(perm),
       );
       if (!hasPermission) return false;
     }
@@ -163,7 +165,7 @@ class ModuleRegistry {
       }
     });
     this.modules.clear();
-    console.log('🗑️ All modules cleared');
+    console.log("🗑️ All modules cleared");
   }
 }
 

@@ -14,12 +14,12 @@ const TechnicalDepartments = () => {
           <Card
             key={index}
             className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
-            <Avatar className="w-30 h-30 " color="primary-panel" radius="lg" src="https://i.pravatar.cc/150?u=d04258114e29026302d" />
+            <Avatar className="w-30 h-30 " color="primary" radius="lg" src="https://i.pravatar.cc/150?u=d04258114e29026302d" />
             <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
             <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton
               props={{
-                className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary-panel',
+                className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary',
                 size: 'sm',
                 radius: 'sm',
                 onPress: () => openModal('custom', "",<OrganizationDepartmentModal/> , undefined, '3xl',"Organization Depatments", <Category className='text-white'/> ),

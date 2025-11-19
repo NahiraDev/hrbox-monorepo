@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   Table,
   TableHeader,
@@ -7,9 +13,9 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-} from '@heroui/react';
-import { AppButton, AppPagination } from '@hrbox/uikit/components';
-import { createPortal } from 'react-dom';
+} from "@heroui/react";
+import { AppButton, AppPagination } from "@hrbox/uikit/components";
+import { createPortal } from "react-dom";
 
 /**
  * ============================================
@@ -18,8 +24,8 @@ import { createPortal } from 'react-dom';
  */
 
 export enum SortDirection {
-  ASC = 'asc',
-  DESC = 'desc',
+  ASC = "asc",
+  DESC = "desc",
 }
 
 export interface ColumnConfig<T = any> {
@@ -28,7 +34,7 @@ export interface ColumnConfig<T = any> {
   width?: string | number;
   minWidth?: string | number;
   maxWidth?: string | number;
-  align?: 'left' | 'center' | 'right' | 'start' | 'end';
+  align?: "left" | "center" | "right" | "start" | "end";
   sortable?: boolean;
   filterable?: boolean;
 
@@ -45,7 +51,7 @@ export interface ColumnConfig<T = any> {
 
   // Formatting
   format?: (value: any) => string;
-  type?: 'text' | 'number' | 'date' | 'boolean' | 'email' | 'phone' | 'custom';
+  type?: "text" | "number" | "date" | "boolean" | "email" | "phone" | "custom";
 }
 
 export interface ColumnGroup {
@@ -62,26 +68,30 @@ export interface RowAction<T = any> {
   onClick: (row: T, index: number) => void | Promise<void>;
   visible?: (row: T, index: number) => boolean;
   color?:
-    | 'default'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'warning'
-    | 'danger';
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   confirmMessage?: string;
   disabled?: (row: T) => boolean;
 }
 
 export interface ExpandableConfig<T = any> {
-  render: (row: T, index: number, cellType?: 'first' | 'second') => React.ReactNode;
+  render: (
+    row: T,
+    index: number,
+    cellType?: "first" | "second",
+  ) => React.ReactNode;
   expandedRowClassName?: string;
   onExpand?: (
     row: T,
     index: number,
-    isExpanded: boolean
+    isExpanded: boolean,
   ) => void | Promise<void>;
   defaultExpanded?: boolean | ((row: T) => boolean);
-  expandButtonPosition?: 'start' | 'end';
+  expandButtonPosition?: "start" | "end";
 }
 
 export interface SortConfig {
@@ -98,7 +108,9 @@ export interface TableStyleConfig {
   tableClassName?: string;
   headerClassName?: string;
   bodyClassName?: string;
-  rowClassName?: string | ((row: any, index: number, isSelected?: boolean) => string);
+  rowClassName?:
+    | string
+    | ((row: any, index: number, isSelected?: boolean) => string);
   cellClassName?: string;
   emptyClassName?: string;
   loadingClassName?: string;
@@ -134,9 +146,9 @@ export interface AppTableProps<T = any> {
   onPageChange?: (page: number) => void;
 
   // Display
-  variant?: 'default' | 'striped' | 'bordered' | 'minimal' | 'attendance';
+  variant?: "default" | "striped" | "bordered" | "minimal" | "attendance";
   styles?: TableStyleConfig;
-  density?: 'sm' | 'md' | 'lg';
+  density?: "sm" | "md" | "lg";
 
   // States
   loading?: boolean;
@@ -167,7 +179,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       data = [],
       columns,
       columnGroups,
-      rowKey = 'id',
+      rowKey = "id",
 
       selectable = false,
       onSelectionChange,
@@ -188,13 +200,13 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       currentPage: controlledPage,
       onPageChange,
 
-      variant = 'default',
+      variant = "default",
       styles = {},
-      density = 'md',
+      density = "md",
 
       loading = false,
       error,
-      emptyMessage = 'No data available',
+      emptyMessage = "No data available",
 
       showCheckbox = selectable,
       showRowNumber = false,
@@ -205,7 +217,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       onDelete,
       onView,
     },
-    ref
+    ref,
   ) => {
     // ============================================
     // STATES
@@ -220,7 +232,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       left: number;
       width: number;
       rowIndex: number;
-      cellType?: 'first' | 'second';
+      cellType?: "first" | "second";
     } | null>(null);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
     const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -236,12 +248,14 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       if (data.length === 0) return [];
 
       return Object.keys(data[0])
-        .filter(key => key !== 'id')
-        .map(key => ({
+        .filter((key) => key !== "id")
+        .map((key) => ({
           key,
-          label: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-          align: 'center' as const,
-          type: 'text' as const,
+          label: key
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (str) => str.toUpperCase()),
+          align: "center" as const,
+          type: "text" as const,
         }));
     }, [columns, data]);
 
@@ -249,7 +263,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     // PAGINATION
     // ============================================
 
-    const shouldPaginate = variant === 'attendance' ? false : hasPagination;
+    const shouldPaginate = variant === "attendance" ? false : hasPagination;
 
     const paginatedData = useMemo(() => {
       if (!shouldPaginate) return data;
@@ -269,7 +283,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           setCurrentPage(newPage);
         }
       },
-      [onPageChange]
+      [onPageChange],
     );
 
     // ============================================
@@ -289,7 +303,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         setSort(newSort);
         onSort?.(newSort);
       },
-      [sort, sortable, onSort]
+      [sort, sortable, onSort],
     );
 
     // ============================================
@@ -311,7 +325,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           .filter(Boolean);
         onSelectionChange?.(selectedItems, Array.from(newSelected));
       },
-      [selectedRows, paginatedData, onSelectionChange]
+      [selectedRows, paginatedData, onSelectionChange],
     );
 
     const handleSelectAll = useCallback(() => {
@@ -342,7 +356,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           setActionLoading(null);
         }
       },
-      []
+      [],
     );
 
     // ============================================
@@ -362,7 +376,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           // Calculate position
           setTimeout(() => {
             const rowElement = document.querySelector(
-              `[data-row-index="${index}"]`
+              `[data-row-index="${index}"]`,
             ) as HTMLTableRowElement;
             if (rowElement) {
               const rect = rowElement.getBoundingClientRect();
@@ -381,7 +395,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           await expandable.onExpand(paginatedData[index], index, !wasExpanded);
         }
       },
-      [expandedRows, paginatedData, expandable]
+      [expandedRows, paginatedData, expandable],
     );
 
     // ============================================
@@ -393,28 +407,30 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
       const updatePosition = () => {
         const rowElement = document.querySelector(
-          `[data-row-index="${expandedRowPosition.rowIndex}"]`
+          `[data-row-index="${expandedRowPosition.rowIndex}"]`,
         ) as HTMLTableRowElement;
 
         if (!rowElement) return;
 
         const rowRect = rowElement.getBoundingClientRect();
-        setExpandedRowPosition(prev =>
-          prev ? {
-            ...prev,
-            top: rowRect.bottom + window.scrollY,
-            left: rowRect.left + window.scrollX,
-            width: rowRect.width,
-          } : null
+        setExpandedRowPosition((prev) =>
+          prev
+            ? {
+                ...prev,
+                top: rowRect.bottom + window.scrollY,
+                left: rowRect.left + window.scrollX,
+                width: rowRect.width,
+              }
+            : null,
         );
       };
 
-      window.addEventListener('scroll', updatePosition, true);
-      window.addEventListener('resize', updatePosition);
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
 
       return () => {
-        window.removeEventListener('scroll', updatePosition, true);
-        window.removeEventListener('resize', updatePosition);
+        window.removeEventListener("scroll", updatePosition, true);
+        window.removeEventListener("resize", updatePosition);
       };
     }, [expandedRowPosition]);
 
@@ -426,9 +442,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       if (!columnGroups) return null;
 
       for (const group of columnGroups) {
-        const startIdx = autoColumns.findIndex(c => c.key === group.startKey);
-        const endIdx = autoColumns.findIndex(c => c.key === group.endKey);
-        const currentIdx = autoColumns.findIndex(c => c.key === colKey);
+        const startIdx = autoColumns.findIndex((c) => c.key === group.startKey);
+        const endIdx = autoColumns.findIndex((c) => c.key === group.endKey);
+        const currentIdx = autoColumns.findIndex((c) => c.key === colKey);
 
         if (currentIdx >= startIdx && currentIdx <= endIdx) {
           return {
@@ -447,65 +463,75 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     // ============================================
 
     const getRowKey = (row: any, index: number): string | number => {
-      if (typeof rowKey === 'function') return rowKey(row, index);
+      if (typeof rowKey === "function") return rowKey(row, index);
       return row[rowKey] ?? index;
     };
 
     const getRowClassName = (row: any, index: number): string => {
       const isSelected = selectedRows.has(index);
-      const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ';
-      let statusClass = '';
+      const baseClass =
+        "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ";
+      let statusClass = "";
 
-      if (variant === 'attendance') {
-        const dateValue = row['Date']?.toString() || '';
-        if (dateValue.includes('Absence')) {
-          statusClass = 'bg-red-100';
+      if (variant === "attendance") {
+        const dateValue = row["Date"]?.toString() || "";
+        if (dateValue.includes("Absence")) {
+          statusClass = "bg-red-100";
         }
       }
 
       const customClass =
-        typeof styles.rowClassName === 'function'
+        typeof styles.rowClassName === "function"
           ? styles.rowClassName(row, index, isSelected)
-          : styles.rowClassName || '';
+          : styles.rowClassName || "";
 
       return `${baseClass} ${statusClass} ${customClass}`;
     };
 
-    const getCellClassName = (col: ColumnConfig<any>, value: any, row: any, index: number): string => {
-      if (typeof col.cellClassName === 'function') {
+    const getCellClassName = (
+      col: ColumnConfig<any>,
+      value: any,
+      row: any,
+      index: number,
+    ): string => {
+      if (typeof col.cellClassName === "function") {
         return col.cellClassName(value, row, index);
       }
-      return col.cellClassName || '';
+      return col.cellClassName || "";
     };
 
     const getHeaderClassName = (col: ColumnConfig<any>): string => {
       const groupInfo = getColumnGroupInfo(col.key);
 
       let baseClass =
-        variant === 'default'
-          ? 'text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12'
-          : '';
+        variant === "default"
+          ? "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12"
+          : "";
 
-      if (groupInfo && variant === 'attendance') {
+      if (groupInfo && variant === "attendance") {
         const { group, isFirst, isLast, isOnly } = groupInfo;
         const roundedClass = isOnly
-          ? 'rounded-xl'
+          ? "rounded-xl"
           : isFirst
-            ? 'rounded-l-xl'
+            ? "rounded-l-xl"
             : isLast
-              ? 'rounded-r-xl'
-              : '';
-        const spacingClass = !isLast ? 'border-r-4 border-transparent' : '';
-        baseClass = `${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
+              ? "rounded-r-xl"
+              : "";
+        const spacingClass = !isLast ? "border-r-4 border-transparent" : "";
+        baseClass = `${spacingClass} ${group.headerClassName || ""} ${roundedClass}`;
       }
 
-      if (typeof col.headerClassName === 'function') {
+      if (typeof col.headerClassName === "function") {
         return `${baseClass} ${col.headerClassName(col)}`;
       }
-      return `${baseClass} ${col.headerClassName || ''}`;
+      return `${baseClass} ${col.headerClassName || ""}`;
     };
 
-    const renderCellValue = (col: ColumnConfig<any>, row: any, index: number) => {
+    const renderCellValue = (
+      col: ColumnConfig<any>,
+      row: any,
+      index: number,
+    ) => {
       const value = row[col.key];
 
       if (col.render) {
@@ -517,20 +543,23 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       }
 
       switch (col.type) {
-        case 'boolean':
-          return value ? 'Yes' : 'No';
-        case 'date':
-          return value ? new Date(value).toLocaleDateString() : '-';
-        case 'number':
-          return typeof value === 'number' ? value.toLocaleString() : value;
-        case 'email':
+        case "boolean":
+          return value ? "Yes" : "No";
+        case "date":
+          return value ? new Date(value).toLocaleDateString() : "-";
+        case "number":
+          return typeof value === "number" ? value.toLocaleString() : value;
+        case "email":
           return (
-            <a href={`mailto:${value}`} className="text-primary hover:underline">
+            <a
+              href={`mailto:${value}`}
+              className="text-primary hover:underline"
+            >
               {value}
             </a>
           );
         default:
-          return value ?? '-';
+          return value ?? "-";
       }
     };
 
@@ -538,7 +567,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       if (!rowActions || rowActions.length === 0) return null;
 
       return (
-        <div className='flex items-center justify-center gap-2'>
+        <div className="flex items-center justify-center gap-2">
           {rowActions.map((action) => {
             const visible = action.visible ? action.visible(row, index) : true;
             const disabled = action.disabled ? action.disabled(row) : false;
@@ -548,16 +577,18 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             return (
               <Tooltip key={action.id} content={action.label}>
                 <AppButton
-                    size= 'sm'
-                    radius= 'full'
-                    variant= 'light'
-                    color= {action.color}
-                    isDisabled= {disabled || actionLoading === action.id}
-                    isLoading= {actionLoading === action.id}
-                    onPress= {() => handleRowAction(action, row, index)}
-                    content= {(
-                      <span className='cursor-pointer text-lg'>{action.icon || action.label}.</span>
-                    )}
+                  size="sm"
+                  radius="full"
+                  variant="light"
+                  color={action.color}
+                  isDisabled={disabled || actionLoading === action.id}
+                  isLoading={actionLoading === action.id}
+                  onPress={() => handleRowAction(action, row, index)}
+                  content={
+                    <span className="cursor-pointer text-lg">
+                      {action.icon || action.label}.
+                    </span>
+                  }
                 />
               </Tooltip>
             );
@@ -574,10 +605,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       return (
         <div
           ref={ref}
-          className={`bg-primary-50 rounded-2xl p-8 dark:bg-[rgba(4,66,92,0.60)] ${styles.loadingClassName || ''}`}
+          className={`bg-primary-50 rounded-2xl p-8 dark:bg-[rgba(4,66,92,0.60)] ${styles.loadingClassName || ""}`}
         >
-          <div className='flex items-center justify-center'>
-            <div className='text-center text-gray-500'>Loading...</div>
+          <div className="flex items-center justify-center">
+            <div className="text-center text-gray-500">Loading...</div>
           </div>
         </div>
       );
@@ -587,9 +618,11 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       return (
         <div
           ref={ref}
-          className='rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20'
+          className="rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20"
         >
-          <div className='text-center text-red-600 dark:text-red-400'>Error: {error}</div>
+          <div className="text-center text-red-600 dark:text-red-400">
+            Error: {error}
+          </div>
         </div>
       );
     }
@@ -598,9 +631,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       return (
         <div
           ref={ref}
-          className={`bg-primary-50 rounded-2xl p-4 dark:bg-[rgba(4,66,92,0.60)] ${styles.emptyClassName || ''}`}
+          className={`bg-primary-50 rounded-2xl p-4 dark:bg-[rgba(4,66,92,0.60)] ${styles.emptyClassName || ""}`}
         >
-          <div className='text-center text-gray-500'>{emptyMessage}</div>
+          <div className="text-center text-gray-500">{emptyMessage}</div>
         </div>
       );
     }
@@ -617,16 +650,20 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         <TableColumn
           key={col.key}
           className={getHeaderClassName(col)}
-          style={{ width: col.width, minWidth: col.minWidth, maxWidth: col.maxWidth }}
+          style={{
+            width: col.width,
+            minWidth: col.minWidth,
+            maxWidth: col.maxWidth,
+          }}
           onClick={() => sortable && handleSort(col.key)}
         >
-          <div className='flex items-center justify-center gap-1'>
+          <div className="flex items-center justify-center gap-1">
             {col.headerRender ? col.headerRender() : col.label || col.key}
             {sortable && sort?.key === col.key && (
-              <span>{sort.direction === SortDirection.ASC ? '↑' : '↓'}</span>
+              <span>{sort.direction === SortDirection.ASC ? "↑" : "↓"}</span>
             )}
           </div>
-        </TableColumn>
+        </TableColumn>,
       );
     });
 
@@ -634,11 +671,11 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     if (rowActions && rowActions.length > 0) {
       headerColumns.push(
         <TableColumn
-          key='actions'
-          className='bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
+          key="actions"
+          className="bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]"
         >
           Actions
-        </TableColumn>
+        </TableColumn>,
       );
     }
 
@@ -649,26 +686,33 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     return (
       <div
         ref={ref}
-        className={`w-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ''}`}
+        className={`w-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}
       >
         <Table
-          aria-label='Data table'
+          aria-label="Data table"
           className={`${styles.tableClassName}`}
-          isHeaderSticky={variant === 'attendance' || sticky}
+          isHeaderSticky={variant === "attendance" || sticky}
           classNames={{
-            base: variant === 'attendance' ? 'max-h-[760px] bg-transparent' : '!h-full bg-transparent',
-            wrapper: variant === 'attendance'
-              ? 'max-h-full overflow-y-scroll custom-scroll bg-transparent'
-              : 'bg-transparent h-full',
-            table: 'min-w-full',
-            thead: '[&>tr]:first:shadow-none',
-            tr: 'rounded-6',
-            th: variant === 'attendance'
-              ? 'first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500'
-              : 'bg-primary-400',
+            base:
+              variant === "attendance"
+                ? "bg-transparent"
+                : "!h-full bg-transparent",
+            wrapper:
+              variant === "attendance"
+                ? "max-h-full overflow-y-scroll custom-scroll bg-transparent"
+                : "bg-transparent h-full",
+            table: "min-w-full",
+            thead: "[&>tr]:first:shadow-none",
+            tr: "rounded-6",
+            th:
+              variant === "attendance"
+                ? "first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"
+                : "bg-primary-400",
           }}
         >
-          <TableHeader className={styles.headerClassName}>{headerColumns}</TableHeader>
+          <TableHeader className={styles.headerClassName}>
+            {headerColumns}
+          </TableHeader>
 
           <TableBody className={styles.bodyClassName}>
             {paginatedData.map((row, index) => {
@@ -687,8 +731,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                 cells.push(
                   <TableCell
                     key={col.key}
-                    className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ''} ${
-                      expandable && isFirstCell ? 'cursor-pointer hover:bg-opacity-80' : ''
+                    className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ""} ${
+                      expandable && isFirstCell
+                        ? "cursor-pointer hover:bg-opacity-80"
+                        : ""
                     }`}
                     onClick={(e) => {
                       if (expandable && isFirstCell) {
@@ -699,20 +745,22 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                       }
                     }}
                   >
-                    <div className='flex items-center justify-center gap-2'>
-                    
+                    <div className="flex items-center justify-center gap-2">
                       <span>{renderCellValue(col, row, index)}</span>
                     </div>
-                  </TableCell>
+                  </TableCell>,
                 );
               });
 
               // Actions
               if (rowActions && rowActions.length > 0) {
                 cells.push(
-                  <TableCell key='actions' className='text-secondary-400 text-xs'>
+                  <TableCell
+                    key="actions"
+                    className="text-secondary-400 text-xs"
+                  >
                     {renderRowActions(row, index)}
-                  </TableCell>
+                  </TableCell>,
                 );
               }
 
@@ -731,26 +779,29 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         </Table>
 
         {/* Expandable Row Portal */}
-        {expandable && expandedRowPosition && expandedRows.has(expandedRowPosition.rowIndex) && createPortal(
-          <div
-            style={{
-              position: 'absolute',
-              top: `${expandedRowPosition.top}px`,
-              left: `${expandedRowPosition.left}px`,
-              zIndex: 1000,
-            }}
-          >
-            {expandable.render(
-              paginatedData[expandedRowPosition.rowIndex],
-              expandedRowPosition.rowIndex
-            )}
-          </div>,
-          document.body
-        )}
+        {expandable &&
+          expandedRowPosition &&
+          expandedRows.has(expandedRowPosition.rowIndex) &&
+          createPortal(
+            <div
+              style={{
+                position: "absolute",
+                top: `${expandedRowPosition.top}px`,
+                left: `${expandedRowPosition.left}px`,
+                zIndex: 1000,
+              }}
+            >
+              {expandable.render(
+                paginatedData[expandedRowPosition.rowIndex],
+                expandedRowPosition.rowIndex,
+              )}
+            </div>,
+            document.body,
+          )}
 
         {/* Pagination */}
         {shouldPaginate && (
-          <div className='mt-4 flex justify-end px-4'>
+          <div className="mt-4 flex justify-end px-4">
             <AppPagination
               total={totalPages}
               page={page}
@@ -760,7 +811,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-AppTable.displayName = 'AppTable';
+AppTable.displayName = "AppTable";
