@@ -1,10 +1,14 @@
 import {
+    ArrowDown,
   ArrowDown2,
+  Building,
+  Buildings,
   Buildings2,
   Calendar,
   ExportSquare,
   People,
   Profile,
+  Profile2User,
 } from "iconsax-reactjs";
 
 import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
@@ -95,12 +99,12 @@ export const CalenderHeaderForm = () => {
   return (
     <form>
       <div className="w-full flex flex-col">
-        <div className="w-full flex flex-row justify-between">
+        <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row gap-3">
             <AppButton
               color={isTrafficCalender ? "white" : "primary"}
               size="md"
-              radius="sm"
+              radius="lg"
               startContent={<Profile size={18} />}
               className={isTrafficCalender ? "text-black" : "text-white"}
               onPress={() =>
@@ -112,7 +116,7 @@ export const CalenderHeaderForm = () => {
             <AppButton
               color={isTrafficCalender ? "primary" : "white"}
               size="md"
-              radius="sm"
+              radius="lg"
               className={isTrafficCalender ? "text-white" : "text-black"}
               startContent={<People size={18} />}
               onPress={() => navigate({ to: "/attendance/traffic-calender" })}
@@ -125,7 +129,11 @@ export const CalenderHeaderForm = () => {
               component={AppDropDown}
                 title= "Month"
                 items= {months}
+                size="md"
+              radius="lg"
                 className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                startIcon={<Calendar size={22} />}
+                endIcon={<ArrowDown2 size={20} />}
             />
             <FormField
               name="year"
@@ -133,6 +141,11 @@ export const CalenderHeaderForm = () => {
                 title= "Year"
                 item= {years}
                 className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                size="md"
+              radius="lg"
+              startIcon={<Calendar size={22} />}
+              endIcon={<ArrowDown2 size={20} />}
+
             />
 
             <AppButton
@@ -167,6 +180,8 @@ export const CalenderHeaderForm = () => {
                   title="Person"
                   item= {months}
                   className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                  startIcon={<Profile size={22} />}
+                  endIcon={<ArrowDown2 size={20} />}
               />
               <FormField
                 name="department"
@@ -174,6 +189,8 @@ export const CalenderHeaderForm = () => {
                   title= "Department/Unit"
                   item= {months}
                   className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                  startIcon={<Buildings2 size={22} />}
+                  endIcon={<ArrowDown2 size={20} />}
               />
             </div>
           </div>
