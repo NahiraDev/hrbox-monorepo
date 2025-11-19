@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import {
   Table,
   TableHeader,
@@ -7,12 +7,9 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-  Spinner,
-} from "@heroui/react";
-import { AppButton } from "@hrbox/uikit/components";
-import { createPortal } from "react-dom";
-import { Edit, Trash, Eye } from "iconsax-reactjs";
-import clsx from "clsx";
+} from '@heroui/react';
+import { AppButton, AppPagination } from '@hrbox/uikit/components';
+import { createPortal } from 'react-dom';
 
 /**
  * ============================================
@@ -21,8 +18,8 @@ import clsx from "clsx";
  */
 
 export enum SortDirection {
-  ASC = "asc",
-  DESC = "desc",
+  ASC = 'asc',
+  DESC = 'desc',
 }
 
 export interface ColumnConfig<T = any> {
@@ -31,7 +28,7 @@ export interface ColumnConfig<T = any> {
   width?: string | number;
   minWidth?: string | number;
   maxWidth?: string | number;
-  align?: "left" | "center" | "right";
+  align?: 'left' | 'center' | 'right' | 'start' | 'end';
   sortable?: boolean;
   filterable?: boolean;
 
@@ -48,7 +45,14 @@ export interface ColumnConfig<T = any> {
 
   // Formatting
   format?: (value: any) => string;
-  type?: "text" | "number" | "date" | "boolean" | "email" | "phone" | "custom";
+  type?: 'text' | 'number' | 'date' | 'boolean' | 'email' | 'phone' | 'custom';
+}
+
+export interface ColumnGroup {
+  label: string;
+  startKey: string;
+  endKey: string;
+  headerClassName?: string;
 }
 
 export interface RowAction<T = any> {
@@ -58,18 +62,18 @@ export interface RowAction<T = any> {
   onClick: (row: T, index: number) => void | Promise<void>;
   visible?: (row: T, index: number) => boolean;
   color?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "danger";
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'danger';
   confirmMessage?: string;
   disabled?: (row: T) => boolean;
 }
 
 export interface ExpandableConfig<T = any> {
-  render: (row: T, index: number) => React.ReactNode;
+  render: (row: T, index: number, cellType?: 'first' | 'second') => React.ReactNode;
   expandedRowClassName?: string;
   onExpand?: (
     row: T,
@@ -77,7 +81,7 @@ export interface ExpandableConfig<T = any> {
     isExpanded: boolean
   ) => void | Promise<void>;
   defaultExpanded?: boolean | ((row: T) => boolean);
-  expandButtonPosition?: "start" | "end";
+  expandButtonPosition?: 'start' | 'end';
 }
 
 export interface SortConfig {
@@ -94,9 +98,7 @@ export interface TableStyleConfig {
   tableClassName?: string;
   headerClassName?: string;
   bodyClassName?: string;
-  rowClassName?:
-    | string
-    | ((row: any, index: number, isSelected: boolean) => string);
+  rowClassName?: string | ((row: any, index: number, isSelected?: boolean) => string);
   cellClassName?: string;
   emptyClassName?: string;
   loadingClassName?: string;
@@ -106,6 +108,7 @@ export interface AppTableProps<T = any> {
   // Data
   data: T[];
   columns?: ColumnConfig<T>[];
+  columnGroups?: ColumnGroup[];
   rowKey?: string | ((row: T, index: number) => string | number);
 
   // Behavior
@@ -126,14 +129,14 @@ export interface AppTableProps<T = any> {
   // Pagination
   hasPagination?: boolean;
   pageSize?: number;
-  totalItems?: number; // برای server-side pagination
+  totalItems?: number;
   currentPage?: number;
   onPageChange?: (page: number) => void;
 
   // Display
-  variant?: "default" | "striped" | "bordered" | "minimal" | "attendance";
+  variant?: 'default' | 'striped' | 'bordered' | 'minimal' | 'attendance';
   styles?: TableStyleConfig;
-  density?: "sm" | "md" | "lg"; // compact, normal, spacious
+  density?: 'sm' | 'md' | 'lg';
 
   // States
   loading?: boolean;
@@ -144,7 +147,7 @@ export interface AppTableProps<T = any> {
   showCheckbox?: boolean;
   showRowNumber?: boolean;
   showStatus?: boolean;
-  sticky?: boolean; // Sticky header
+  sticky?: boolean;
 
   // Callbacks
   onEdit?: (row: T, index: number) => void;
@@ -163,7 +166,8 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     {
       data = [],
       columns,
-      rowKey = "id",
+      columnGroups,
+      rowKey = 'id',
 
       selectable = false,
       onSelectionChange,
@@ -184,13 +188,13 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       currentPage: controlledPage,
       onPageChange,
 
-      variant = "default",
+      variant = 'default',
       styles = {},
-      density = "md",
+      density = 'md',
 
       loading = false,
       error,
-      emptyMessage = "اطلاعات موجود نیست",
+      emptyMessage = 'No data available',
 
       showCheckbox = selectable,
       showRowNumber = false,
@@ -203,7 +207,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     },
     ref
   ) => {
-    // States
+    // ============================================
+    // STATES
+    // ============================================
+
     const [currentPage, setCurrentPage] = useState(1);
     const [sort, setSort] = useState<SortConfig | null>(defaultSort || null);
     const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
@@ -213,44 +220,42 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       left: number;
       width: number;
       rowIndex: number;
+      cellType?: 'first' | 'second';
     } | null>(null);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
     const tableContainerRef = useRef<HTMLDivElement>(null);
 
-    // Use controlled or uncontrolled page
     const page = controlledPage || currentPage;
 
-    /**
-     * ============================================
-     * AUTO COLUMNS
-     * ============================================
-     */
+    // ============================================
+    // AUTO COLUMNS
+    // ============================================
 
     const autoColumns = useMemo<ColumnConfig<any>[]>(() => {
       if (columns) return columns;
       if (data.length === 0) return [];
 
       return Object.keys(data[0])
-        .filter((key) => !["id", "_id"].includes(key))
-        .map((key) => ({
+        .filter(key => key !== 'id')
+        .map(key => ({
           key,
-          label: key.replace(/([A-Z])/g, " $1").trim(),
-          align: "center" as const,
-          type: "text" as const,
+          label: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
+          align: 'center' as const,
+          type: 'text' as const,
         }));
     }, [columns, data]);
 
-    /**
-     * ============================================
-     * PAGINATION
-     * ============================================
-     */
+    // ============================================
+    // PAGINATION
+    // ============================================
+
+    const shouldPaginate = variant === 'attendance' ? false : hasPagination;
 
     const paginatedData = useMemo(() => {
-      if (!hasPagination) return data;
+      if (!shouldPaginate) return data;
       const startIndex = (page - 1) * pageSize;
       return data.slice(startIndex, startIndex + pageSize);
-    }, [data, page, pageSize, hasPagination]);
+    }, [data, page, pageSize, shouldPaginate]);
 
     const totalPages = useMemo(() => {
       return Math.ceil((totalItems || data.length) / pageSize);
@@ -267,11 +272,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       [onPageChange]
     );
 
-    /**
-     * ============================================
-     * SORTING
-     * ============================================
-     */
+    // ============================================
+    // SORTING
+    // ============================================
 
     const handleSort = useCallback(
       (key: string) => {
@@ -289,11 +292,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       [sort, sortable, onSort]
     );
 
-    /**
-     * ============================================
-     * SELECTION
-     * ============================================
-     */
+    // ============================================
+    // SELECTION
+    // ============================================
 
     const handleRowSelect = useCallback(
       (index: number) => {
@@ -324,11 +325,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       }
     }, [selectedRows, paginatedData, onSelectionChange]);
 
-    /**
-     * ============================================
-     * ROW ACTIONS
-     * ============================================
-     */
+    // ============================================
+    // ROW ACTIONS
+    // ============================================
 
     const handleRowAction = useCallback(
       async (action: RowAction, row: any, index: number) => {
@@ -346,11 +345,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       []
     );
 
-    /**
-     * ============================================
-     * EXPAND
-     * ============================================
-     */
+    // ============================================
+    // EXPAND
+    // ============================================
 
     const handleRowExpand = useCallback(
       async (index: number) => {
@@ -387,47 +384,128 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       [expandedRows, paginatedData, expandable]
     );
 
-    /**
-     * ============================================
-     * RENDERING
-     * ============================================
-     */
+    // ============================================
+    // POSITION TRACKING
+    // ============================================
+
+    useEffect(() => {
+      if (!expandedRowPosition) return;
+
+      const updatePosition = () => {
+        const rowElement = document.querySelector(
+          `[data-row-index="${expandedRowPosition.rowIndex}"]`
+        ) as HTMLTableRowElement;
+
+        if (!rowElement) return;
+
+        const rowRect = rowElement.getBoundingClientRect();
+        setExpandedRowPosition(prev =>
+          prev ? {
+            ...prev,
+            top: rowRect.bottom + window.scrollY,
+            left: rowRect.left + window.scrollX,
+            width: rowRect.width,
+          } : null
+        );
+      };
+
+      window.addEventListener('scroll', updatePosition, true);
+      window.addEventListener('resize', updatePosition);
+
+      return () => {
+        window.removeEventListener('scroll', updatePosition, true);
+        window.removeEventListener('resize', updatePosition);
+      };
+    }, [expandedRowPosition]);
+
+    // ============================================
+    // COLUMN GROUP
+    // ============================================
+
+    const getColumnGroupInfo = (colKey: string) => {
+      if (!columnGroups) return null;
+
+      for (const group of columnGroups) {
+        const startIdx = autoColumns.findIndex(c => c.key === group.startKey);
+        const endIdx = autoColumns.findIndex(c => c.key === group.endKey);
+        const currentIdx = autoColumns.findIndex(c => c.key === colKey);
+
+        if (currentIdx >= startIdx && currentIdx <= endIdx) {
+          return {
+            group,
+            isFirst: currentIdx === startIdx,
+            isLast: currentIdx === endIdx,
+            isOnly: startIdx === endIdx,
+          };
+        }
+      }
+      return null;
+    };
+
+    // ============================================
+    // RENDERING HELPERS
+    // ============================================
+
+    const getRowKey = (row: any, index: number): string | number => {
+      if (typeof rowKey === 'function') return rowKey(row, index);
+      return row[rowKey] ?? index;
+    };
 
     const getRowClassName = (row: any, index: number): string => {
       const isSelected = selectedRows.has(index);
-      const baseClass =
-        "hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors";
+      const baseClass = 'hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ';
+      let statusClass = '';
+
+      if (variant === 'attendance') {
+        const dateValue = row['Date']?.toString() || '';
+        if (dateValue.includes('Absence')) {
+          statusClass = 'bg-red-100';
+        }
+      }
 
       const customClass =
-        typeof styles.rowClassName === "function"
+        typeof styles.rowClassName === 'function'
           ? styles.rowClassName(row, index, isSelected)
-          : styles.rowClassName || "";
+          : styles.rowClassName || '';
 
-      const variantClass = {
-        striped: index % 2 === 0 ? "bg-neutral-50 dark:bg-neutral-800" : "",
-        bordered: "border-b border-neutral-200 dark:border-neutral-700",
-        minimal: "",
-        attendance: "",
-        default: "",
-      }[variant];
-
-      return clsx(
-        baseClass,
-        variantClass,
-        customClass,
-        isSelected && "bg-primary-100 dark:bg-primary-900/40"
-      );
+      return `${baseClass} ${statusClass} ${customClass}`;
     };
 
-    const getDensityClass = () => {
-      return {
-        sm: "py-2 px-2",
-        md: "py-3 px-3",
-        lg: "py-4 px-4",
-      }[density];
+    const getCellClassName = (col: ColumnConfig<any>, value: any, row: any, index: number): string => {
+      if (typeof col.cellClassName === 'function') {
+        return col.cellClassName(value, row, index);
+      }
+      return col.cellClassName || '';
     };
 
-    const renderCellValue = (col: ColumnConfig, row: any, index: number) => {
+    const getHeaderClassName = (col: ColumnConfig<any>): string => {
+      const groupInfo = getColumnGroupInfo(col.key);
+
+      let baseClass =
+        variant === 'default'
+          ? 'text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12'
+          : '';
+
+      if (groupInfo && variant === 'attendance') {
+        const { group, isFirst, isLast, isOnly } = groupInfo;
+        const roundedClass = isOnly
+          ? 'rounded-xl'
+          : isFirst
+            ? 'rounded-l-xl'
+            : isLast
+              ? 'rounded-r-xl'
+              : '';
+        const spacingClass = !isLast ? 'border-r-4 border-transparent' : '';
+        baseClass = `${spacingClass} ${group.headerClassName || ''} ${roundedClass}`;
+      }
+
+      if (typeof col.headerClassName === 'function') {
+        return `${baseClass} ${col.headerClassName(col)}`;
+      }
+      return `${baseClass} ${col.headerClassName || ''}`;
+    };
+
+    const renderCellValue = (col: ColumnConfig<any>, row: any, index: number) => {
       const value = row[col.key];
 
       if (col.render) {
@@ -439,37 +517,68 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       }
 
       switch (col.type) {
-        case "boolean":
-          return value ? "✓" : "✗";
-        case "date":
-          return value ? new Date(value).toLocaleDateString() : "-";
-        case "number":
-          return typeof value === "number" ? value.toLocaleString() : value;
-        case "email":
+        case 'boolean':
+          return value ? 'Yes' : 'No';
+        case 'date':
+          return value ? new Date(value).toLocaleDateString() : '-';
+        case 'number':
+          return typeof value === 'number' ? value.toLocaleString() : value;
+        case 'email':
           return (
-            <a
-              href={`mailto:${value}`}
-              className="text-primary hover:underline"
-            >
+            <a href={`mailto:${value}`} className="text-primary hover:underline">
               {value}
             </a>
           );
         default:
-          return value ?? "-";
+          return value ?? '-';
       }
     };
+
+    const renderRowActions = (row: any, index: number) => {
+      if (!rowActions || rowActions.length === 0) return null;
+
+      return (
+        <div className='flex items-center justify-center gap-2'>
+          {rowActions.map((action) => {
+            const visible = action.visible ? action.visible(row, index) : true;
+            const disabled = action.disabled ? action.disabled(row) : false;
+
+            if (!visible) return null;
+
+            return (
+              <Tooltip key={action.id} content={action.label}>
+                <AppButton
+                    size= 'sm'
+                    radius= 'full'
+                    variant= 'light'
+                    color= {action.color}
+                    isDisabled= {disabled || actionLoading === action.id}
+                    isLoading= {actionLoading === action.id}
+                    onPress= {() => handleRowAction(action, row, index)}
+                    content= {(
+                      <span className='cursor-pointer text-lg'>{action.icon || action.label}.</span>
+                    )}
+                />
+              </Tooltip>
+            );
+          })}
+        </div>
+      );
+    };
+
+    // ============================================
+    // CONDITIONAL RENDERING
+    // ============================================
 
     if (loading) {
       return (
         <div
           ref={ref}
-          className={clsx(
-            "flex items-center justify-center rounded-2xl p-8",
-            "bg-neutral-50 dark:bg-neutral-800",
-            styles.loadingClassName
-          )}
+          className={`bg-primary-50 rounded-2xl p-8 dark:bg-[rgba(4,66,92,0.60)] ${styles.loadingClassName || ''}`}
         >
-          <Spinner label="بارگذاری..." color="primary" />
+          <div className='flex items-center justify-center'>
+            <div className='text-center text-gray-500'>Loading...</div>
+          </div>
         </div>
       );
     }
@@ -478,11 +587,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       return (
         <div
           ref={ref}
-          className="rounded-2xl border border-danger-200 bg-danger-50 p-4 dark:border-danger-800 dark:bg-danger-900/20"
+          className='rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20'
         >
-          <div className="text-center text-danger dark:text-danger-400">
-            ❌ خطا: {error}
-          </div>
+          <div className='text-center text-red-600 dark:text-red-400'>Error: {error}</div>
         </div>
       );
     }
@@ -491,87 +598,32 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       return (
         <div
           ref={ref}
-          className={clsx(
-            "rounded-2xl p-8 text-center",
-            "bg-neutral-50 dark:bg-neutral-800",
-            styles.emptyClassName
-          )}
+          className={`bg-primary-50 rounded-2xl p-4 dark:bg-[rgba(4,66,92,0.60)] ${styles.emptyClassName || ''}`}
         >
-          <div className="text-neutral-500 dark:text-neutral-400">
-            {emptyMessage}
-          </div>
+          <div className='text-center text-gray-500'>{emptyMessage}</div>
         </div>
       );
     }
 
-    /**
-     * ============================================
-     * HEADER COLUMNS
-     * ============================================
-     */
+    // ============================================
+    // HEADER COLUMNS BUILDING
+    // ============================================
 
     const headerColumns: React.ReactNode[] = [];
-
-    // Checkbox
-    if (showCheckbox) {
-      headerColumns.push(
-        <TableColumn key="checkbox" width={40} className="text-center">
-          <input
-            type="checkbox"
-            checked={
-              selectedRows.size === paginatedData.length &&
-              paginatedData.length > 0
-            }
-            onChange={handleSelectAll}
-            className="cursor-pointer"
-          />
-        </TableColumn>
-      );
-    }
-
-    // Row Number
-    if (showRowNumber) {
-      headerColumns.push(
-        <TableColumn key="rowNumber" width={40} className="text-center">
-          #
-        </TableColumn>
-      );
-    }
-
-    // Expand Button
-    if (expandable) {
-      headerColumns.push(
-        <TableColumn key="expand" width={40} className="text-center">
-          ⬇️
-        </TableColumn>
-      );
-    }
 
     // Data Columns
     autoColumns.forEach((col) => {
       headerColumns.push(
         <TableColumn
           key={col.key}
-          width={col.width}
-          className={clsx(
-            "font-semibold text-white text-center",
-            "bg-primary dark:bg-primary-900",
-            getDensityClass(),
-            typeof col.headerClassName === "function"
-              ? col.headerClassName(col)
-              : col.headerClassName
-          )}
+          className={getHeaderClassName(col)}
+          style={{ width: col.width, minWidth: col.minWidth, maxWidth: col.maxWidth }}
           onClick={() => sortable && handleSort(col.key)}
-          style={{
-            cursor: sortable ? "pointer" : "default",
-            minWidth: col.minWidth,
-            maxWidth: col.maxWidth,
-          }}
         >
-          <div className="flex items-center justify-center gap-1">
+          <div className='flex items-center justify-center gap-1'>
             {col.headerRender ? col.headerRender() : col.label || col.key}
             {sortable && sort?.key === col.key && (
-              <span>{sort.direction === SortDirection.ASC ? "↑" : "↓"}</span>
+              <span>{sort.direction === SortDirection.ASC ? '↑' : '↓'}</span>
             )}
           </div>
         </TableColumn>
@@ -582,124 +634,75 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     if (rowActions && rowActions.length > 0) {
       headerColumns.push(
         <TableColumn
-          key="actions"
-          width={100}
-          className="text-center font-semibold"
+          key='actions'
+          className='bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]'
         >
-          عملیات
+          Actions
         </TableColumn>
       );
     }
 
-    if (showStatus) {
-      headerColumns.push(
-        <TableColumn
-          key="status"
-          width={100}
-          className="text-center font-semibold"
-        >
-          وضعیت
-        </TableColumn>
-      );
-    }
-
-    /**
-     * ============================================
-     * RENDER
-     * ============================================
-     */
+    // ============================================
+    // RETURN JSX
+    // ============================================
 
     return (
       <div
         ref={ref}
-        className={clsx(
-          "w-full rounded-2xl overflow-hidden",
-          styles.containerClassName
-        )}
+        className={`w-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ''}`}
       >
         <Table
-          aria-label="Data table"
-          className={styles.tableClassName}
-          isHeaderSticky={sticky}
+          aria-label='Data table'
+          className={`${styles.tableClassName}`}
+          isHeaderSticky={variant === 'attendance' || sticky}
           classNames={{
-            wrapper: "shadow-none bg-white dark:bg-neutral-800",
-            table: "min-w-full",
-            th: clsx(
-              getDensityClass(),
-              "bg-primary dark:bg-primary-900 text-white"
-            ),
-            td: clsx(
-              getDensityClass(),
-              "border-b border-neutral-200 dark:border-neutral-700"
-            ),
-            tr: "hover:bg-primary-50 dark:hover:bg-primary-900/20",
+            base: variant === 'attendance' ? 'max-h-[760px] bg-transparent' : '!h-full bg-transparent',
+            wrapper: variant === 'attendance'
+              ? 'max-h-full overflow-y-scroll custom-scroll bg-transparent'
+              : 'bg-transparent h-full',
+            table: 'min-w-full',
+            thead: '[&>tr]:first:shadow-none',
+            tr: 'rounded-6',
+            th: variant === 'attendance'
+              ? 'first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500'
+              : 'bg-primary-400',
           }}
         >
-          <TableHeader>{headerColumns}</TableHeader>
+          <TableHeader className={styles.headerClassName}>{headerColumns}</TableHeader>
 
-          <TableBody>
+          <TableBody className={styles.bodyClassName}>
             {paginatedData.map((row, index) => {
-              const key =
-                typeof rowKey === "function"
-                  ? rowKey(row, index)
-                  : row[rowKey] || index;
-
+              const key = getRowKey(row, index);
               const isSelected = selectedRows.has(index);
               const isExpanded = expandedRows.has(index);
 
               const cells: React.ReactNode[] = [];
 
-              // Checkbox
-              if (showCheckbox) {
-                cells.push(
-                  <TableCell key="checkbox" className="text-center">
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => handleRowSelect(index)}
-                      className="cursor-pointer"
-                    />
-                  </TableCell>
-                );
-              }
-
-              // Row Number
-              if (showRowNumber) {
-                cells.push(
-                  <TableCell key="rowNumber" className="text-center text-sm">
-                    {(page - 1) * pageSize + index + 1}
-                  </TableCell>
-                );
-              }
-
-              // Expand Button
-              if (expandable) {
-                cells.push(
-                  <TableCell
-                    key="expand"
-                    className="text-center cursor-pointer hover:text-primary"
-                    onClick={() => handleRowExpand(index)}
-                  >
-                    {isExpanded ? "⬆️" : "⬇️"}
-                  </TableCell>
-                );
-              }
-
               // Data Cells
-              autoColumns.forEach((col) => {
+              autoColumns.forEach((col, colIndex) => {
                 const value = row[col.key];
+                const cellClass = getCellClassName(col, value, row, index);
+                const isFirstCell = colIndex === 0;
+
                 cells.push(
                   <TableCell
                     key={col.key}
-                    className={clsx(
-                      "text-center text-sm",
-                      typeof col.cellClassName === "function"
-                        ? col.cellClassName(value, row, index)
-                        : col.cellClassName
-                    )}
-                    onClick={() => onRowClick?.(row, index)}
+                    className={`text-center text-xs font-normal text-black ${cellClass} ${styles.cellClassName || ''} ${
+                      expandable && isFirstCell ? 'cursor-pointer hover:bg-opacity-80' : ''
+                    }`}
+                    onClick={(e) => {
+                      if (expandable && isFirstCell) {
+                        e.stopPropagation();
+                        handleRowExpand(index);
+                      } else {
+                        onRowClick?.(row, index);
+                      }
+                    }}
                   >
-                    {renderCellValue(col, row, index)}
+                    <div className='flex items-center justify-center gap-2'>
+                    
+                      <span>{renderCellValue(col, row, index)}</span>
+                    </div>
                   </TableCell>
                 );
               });
@@ -707,75 +710,8 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
               // Actions
               if (rowActions && rowActions.length > 0) {
                 cells.push(
-                  <TableCell key="actions" className="text-center">
-                    <div className="flex items-center justify-center gap-1">
-                      {rowActions.map((action) => {
-                        const visible = action.visible
-                          ? action.visible(row, index)
-                          : true;
-                        const disabled = action.disabled
-                          ? action.disabled(row)
-                          : false;
-
-                        if (!visible) return null;
-
-                        return (
-                          <Tooltip key={action.id} content={action.label}>
-                            <AppButton
-                              isIconOnly={true}
-                              size="sm"
-                              variant="light"
-                              color={action.color}
-                              isDisabled={
-                                disabled || actionLoading === action.id
-                              }
-                              isLoading={actionLoading === action.id}
-                              onPress={() =>
-                                handleRowAction(action, row, index)
-                              }
-                              content={action.icon || "⋯"}
-                            />
-                          </Tooltip>
-                        );
-                      })}
-                    </div>
-                  </TableCell>
-                );
-              }
-
-              // Status
-              if (showStatus) {
-                cells.push(
-                  <TableCell key="status" className="text-center">
-                    <div className="flex gap-1 justify-center">
-                      {onView && (
-                        <AppButton
-                          size="sm"
-                          isIconOnly={true}
-                          variant="light"
-                          onPress={() => onView(row, index)}
-                          content={<Eye size={16} />}
-                        />
-                      )}
-                      {onEdit && (
-                        <AppButton
-                          size="sm"
-                          isIconOnly={true}
-                          content={<Edit size={16} />}
-                          onPress={() => onEdit(row, index)}
-                        />
-                      )}
-                      {onDelete && (
-                        <AppButton
-                          size="sm"
-                          isIconOnly={true}
-                          variant="light"
-                          color="danger"
-                          onPress={() => onDelete(row, index)}
-                          content={<Trash size={16} />}
-                        />
-                      )}
-                    </div>
+                  <TableCell key='actions' className='text-secondary-400 text-xs'>
+                    {renderRowActions(row, index)}
                   </TableCell>
                 );
               }
@@ -785,7 +721,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                   key={key}
                   data-row-index={index}
                   className={getRowClassName(row, index)}
-                  onClick={() => !showCheckbox && onRowClick?.(row, index)}
+                  onClick={() => onRowClick?.(row, index)}
                 >
                   {cells}
                 </TableRow>
@@ -794,56 +730,37 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           </TableBody>
         </Table>
 
-        {/* Pagination */}
-        {hasPagination && (
-          <div className="flex justify-end items-center gap-2 p-4 bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
-            <span className="text-sm text-neutral-600 dark:text-neutral-400">
-              صفحه {page} از {totalPages}
-            </span>
-            <div className="flex gap-1">
-              <button
-                disabled={page === 1}
-                onClick={() => handlePageChange(page - 1)}
-                className="px-3 py-1 rounded border disabled:opacity-50"
-              >
-                ←
-              </button>
-              <button
-                disabled={page === totalPages}
-                onClick={() => handlePageChange(page + 1)}
-                className="px-3 py-1 rounded border disabled:opacity-50"
-              >
-                →
-              </button>
-            </div>
-          </div>
+        {/* Expandable Row Portal */}
+        {expandable && expandedRowPosition && expandedRows.has(expandedRowPosition.rowIndex) && createPortal(
+          <div
+            style={{
+              position: 'absolute',
+              top: `${expandedRowPosition.top}px`,
+              left: `${expandedRowPosition.left}px`,
+              zIndex: 1000,
+            }}
+          >
+            {expandable.render(
+              paginatedData[expandedRowPosition.rowIndex],
+              expandedRowPosition.rowIndex
+            )}
+          </div>,
+          document.body
         )}
 
-        {/* Expandable Row */}
-        {expandable &&
-          expandedRowPosition &&
-          expandedRows.has(expandedRowPosition.rowIndex) &&
-          createPortal(
-            <div
-              style={{
-                position: "absolute",
-                top: `${expandedRowPosition.top}px`,
-                left: `${expandedRowPosition.left}px`,
-                width: `${expandedRowPosition.width}px`,
-                zIndex: 1000,
-              }}
-              className="bg-white dark:bg-neutral-800 rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700"
-            >
-              {expandable.render(
-                paginatedData[expandedRowPosition.rowIndex],
-                expandedRowPosition.rowIndex
-              )}
-            </div>,
-            document.body
-          )}
+        {/* Pagination */}
+        {shouldPaginate && (
+          <div className='mt-4 flex justify-end px-4'>
+            <AppPagination
+              total={totalPages}
+              page={page}
+              onChange={handlePageChange}
+            />
+          </div>
+        )}
       </div>
     );
   }
 );
 
-AppTable.displayName = "AppTable";
+AppTable.displayName = 'AppTable';
