@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 const sizeClasses: Record<string, string> = {
   xs: 'px-2 py-1 text-xs h-fit',
   sm: 'px-3 py-1.5 text-sm h-fit',
-  md: 'px-4 py-2 text-base h-fit',
+  md: 'px-4 py-1.5 text-base h-fit',
   lg: 'px-5 py-2.5 text-lg h-fit',
   xl: 'px-6 py-3 text-xl h-fit',
 };

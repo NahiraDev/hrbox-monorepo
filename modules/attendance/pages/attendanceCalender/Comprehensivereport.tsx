@@ -52,7 +52,7 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
               isExpanded ? <ArrowLeft2 size={14} /> : <ArrowRight2 size={14} />
             }
             size="xs"
-            className="flex items-center justify-center w-6 h-[28.381px] absolute right-13 top-63 shadow-sm "
+            className="flex items-center justify-center w-6 h-[28.381px] fixed right-13 top-63 shadow-sm "
             isIconOnly={true}
             radius="full"
             onPress={onToggle}
