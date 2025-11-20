@@ -16,8 +16,8 @@ const AllocationSubheader = ({
   const modal=useModal();
   const handlerOpenModal=()=>{
     modal.open(
-      ModalType.VIEW,
-      "face-allocation",
+      ModalType.CREATE,
+      title,
       <ModalComponent />,
       {
         isForm: true,
