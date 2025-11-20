@@ -1,5 +1,5 @@
 import { Form } from "@heroui/react";
-import { useFormContext } from "@hrbox-monorepo/core/providers/FormProvider";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { useTranslation } from "react-i18next";
 
 import {

@@ -12,11 +12,11 @@ import {
   HeartEdit,
 } from 'iconsax-reactjs';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
-import PreEmploymentHealthRecordsModals from '@hrbox-monorepo/modules/basic-info/modals/PreEmploymentHealthRecordsModals';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
+import PreEmploymentHealthRecordsModals from '@hrbox/modules/basic-info/modals/PreEmploymentHealthRecordsModals';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import AddNewOnDutyHealthRecords from '@hrbox-monorepo/modules/basic-info/modals/AddNewOnDutyHealthRecords';
-import OnDutyHealthRecords from '@hrbox-monorepo/modules/basic-info/modals/OnDutyHealthRecords';
+import AddNewOnDutyHealthRecords from '@hrbox/modules/basic-info/modals/AddNewOnDutyHealthRecords';
+import OnDutyHealthRecords from '@hrbox/modules/basic-info/modals/OnDutyHealthRecords';
 
 const HealthRecord = () => {
   const { openModal } = useModalContext();

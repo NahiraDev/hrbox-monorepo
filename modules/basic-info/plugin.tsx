@@ -35,7 +35,7 @@ const EmployeeSatisfactionCalendar = lazyRouteComponent(() => import('./pages/em
 const OrganizationDepartmentSubHeader = lazyRouteComponent(
     () => import('./subheaders/OrganizationDepartmentsSubHeader'),
 );
-const TechnicalDepartmentsSubHeader = lazyRouteComponent(() => import('@hrbox-monorepo/modules/basic-info/subheaders/TechnicalDepartmentsSubHeader'));
+const TechnicalDepartmentsSubHeader = lazyRouteComponent(() => import('./subheaders/TechnicalDepartmentsSubHeader'));
 const OrganizationalLocationsSubHeader = lazyRouteComponent(
     () => import('./subheaders/OrganizationLocationSubHeader'),
 );

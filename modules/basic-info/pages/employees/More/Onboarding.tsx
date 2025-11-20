@@ -3,7 +3,7 @@ import { Calendar, Clipboard, UserAdd } from 'iconsax-reactjs';
 import { Card } from '@heroui/react';
 import { AppDoubleLineProgress } from '@core/sections';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 const Onboarding = () => {
   return (
     <BasicInfoLayout
@@ -40,7 +40,7 @@ const Onboarding = () => {
               <span className="text-xl font-semibold">DNN Supervisor</span>
             </div>
             {DNNSupervisor.map((box, index) => (
-              <details key={index} className="bg-white border border-primary-panel p-6 rounded-2xl">
+              <details key={index} className="bg-white border border-primary p-6 rounded-2xl">
                 <summary className="font-semibold flex justify-between items-center cursor-pointer">
                   <span>{box.title}</span>
                   <AppDoubleLineProgress size={30} value={80} />

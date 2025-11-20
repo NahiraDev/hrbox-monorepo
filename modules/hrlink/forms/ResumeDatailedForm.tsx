@@ -2,16 +2,11 @@ import {
   AppAutoComplete,
   AppButton,
   AppDatePicker,
-  AppSwitch,
 } from "@hrbox/uikit/components";
-import { FormModal } from "@hrbox/uikit/components/FormModal";
-import { Edit, UserRemove, VolumeHigh } from "iconsax-reactjs";
 import { Form } from "@heroui/react";
-import { useState } from "react";
 import * as Yup from "yup";
 
-import { companyPeopleOptions } from "@hrbox-monorepo/modules/hrlink/app/mock";
-import { useFormContext } from "@hrbox-monorepo/core/providers/FormProvider";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { iranProvinces } from "./options";
 

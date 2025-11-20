@@ -44,7 +44,8 @@ const ENABLED_MODULES =
         .filter(Boolean) || [
       'sso',
       'hrlink',
-      'hrbox',
+      'payroll',
+      'messenger',
       'process-maker',
       'chart-maker',
       'basic-info',
@@ -57,22 +58,15 @@ const ENABLED_MODULES =
 
 async function bootstrap() {
   try {
-    console.log('🚀 Starting application bootstrap...');
-
-    // ============================================
-    // 1️⃣ ثبت ماژول‌ها (Lazy Load)
-    // ============================================
-
     const moduleLoaders: Record<string, () => Promise<any>> = {
       sso: () => import('@hrbox/modules/sso/plugin'),
       hrlink: () => import('@hrbox/modules/hrlink/plugin'),
-      // 'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
-      // 'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
+      'process-maker': () => import('@hrbox/modules/process-maker/plugin'),
+      'chart-maker': () => import('@hrbox/modules/chart-maker/plugin'),
       'basic-info': () => import('@hrbox/modules/basic-info/plugin'),
       attendance: () => import('@hrbox/modules/attendance/plugin'),
     };
 
-    // 1. Load and register all modules first
     await Promise.all(
         ENABLED_MODULES.map(async (moduleName: any) => {
           if (moduleLoaders[moduleName]) {

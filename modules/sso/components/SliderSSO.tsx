@@ -88,12 +88,12 @@ export const SliderSSO = () => {
               aria-label={`Go to slide ${index + 1}`}
               className={`relative h-3 rounded-full transition-all duration-500 ${
                 activeIndex === index
-                  ? 'w-8 bg-primary-panel'
+                  ? 'w-8 bg-primary'
                   : 'w-3 bg-primary-100 hover:bg-primary-200'
               }`}
             >
               {activeIndex === index && (
-                <span className="absolute inset-0 rounded-full bg-primary-panel animate-pulse opacity-50" />
+                <span className="absolute inset-0 rounded-full bg-primary animate-pulse opacity-50" />
               )}
             </button>
           ))}

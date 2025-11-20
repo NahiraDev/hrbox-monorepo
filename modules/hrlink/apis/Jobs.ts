@@ -12,12 +12,12 @@ const jobsApi = createModuleApi({
 
 export const jobsApiEndpoints = jobsApi.injectEndpoints({
   endpoints: (build:any) => ({
-    fetchJobOffers: createPaginatedQuery<any>(build, {
-      url: HRLinkApiEndpoints.job.offers,
+    fetchJobOffers: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferDetail,
       tags: ['Jobs'],
     }),
 
-    fetchJobOpportunities: createPaginatedQuery<any>(build, {
+    fetchJobOpportunities: createQuery<any>(build, {
       url: HRLinkApiEndpoints.job.opportunities,
       tags: ['Jobs'],
     }),

@@ -12,8 +12,7 @@ const companyApi = createModuleApi({
 
 export const companyApiWithEndpoints = companyApi.injectEndpoints({
   endpoints: (build) => ({
-    // GET: Company List (Paginated)
-    fetchCompany: createPaginatedQuery<any>(build, {
+    fetchCompany: createQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getList,
       tags: ['Company'],
     }),

@@ -72,5 +72,10 @@ export const Paths = {
         FaceAllocation: '/attendance/face-allocation',
         IpAllocation: '/attendance/ip-allocation',
         LocationAllocation: '/attendance/location-allocation',
+    },
+    ProcessMaker:{
+        Dashboard: '/process-maker/dashboard',
+        ProcessList: '/process-maker/process-list',
+        ProcessExperience: '/process-maker/process-experience',
     }
 };

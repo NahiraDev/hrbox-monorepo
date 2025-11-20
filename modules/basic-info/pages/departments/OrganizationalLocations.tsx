@@ -56,7 +56,7 @@ const OrganizationalLocations = () => {
                     {filteredLocations.map((detail, index) => (
                         <div key={`${detail.title}-${index}`} className="relative group">
                             <Card
-                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border border-primary-panel transition-all duration-200 relative z-0"
+                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border border-primary transition-all duration-200 relative z-0"
                             >
                                 <Avatar
                                     className="w-full h-32 sm:h-40"
@@ -121,7 +121,7 @@ const OrganizationalLocations = () => {
                                     onPress={() => handleMoreClick(index, detail)}
                                     content={<MoreSquare/>}
                                     className={`text-black p-2 bg-white text-lg rounded-lg border-2 border-primary-panel shadow-md transition-all duration-200 ${
-                                        activeButton === index ? 'scale-105 ring-2 ring-primary-panel' : 'hover:scale-105'
+                                        activeButton === index ? 'scale-105 ring-2 ring-primary' : 'hover:scale-105'
                                     }`}
                                 />
                             </div>

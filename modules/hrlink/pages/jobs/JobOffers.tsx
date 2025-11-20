@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 
 import { AppButton , AppPagination } from '@hrbox/uikit/components';
 
-import { useLazyJobOffersQuery } from '@hrbox/modules/hrlink/apis/Jobs';
+import {useFetchJobOffersQuery} from '@hrbox/modules/hrlink/apis/Jobs';
 import { JobFilterModal } from '@hrbox/modules/hrlink/modals/JobFilterModal';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 const JobOffers = () => {
-  const [fetchJobOffers, { data }] = useLazyJobOffersQuery();
+    const {
+        data: jobs,
+        isLoading,
+        isError,
+    } = useFetchJobOffersQuery();
   const [selectedStates, setSelectedStates] = useState<Record<number, 'like' | 'dislike' | null>>({});
   const buttonStyle = (current: 'like' | 'dislike' | null, type: 'like' | 'dislike') => {
     const isActive = current === type;
@@ -33,15 +37,11 @@ const JobOffers = () => {
 
   const navigate = useNavigation();
 
-  useEffect(() => {
-    fetchJobOffers({});
-  }, []);
-
   return (
     <div className="flex flex-col w-full">
       <div className="grid grid-cols-3 gap-3">
-        {data &&
-          data.map((job: any) => (
+        {jobs &&
+            jobs.data.ViewList.map((job: any) => (
             <button key={job.id} onClick={() => navigate.push({to:'/job/detail/' + job.company})}>
               <div className="rounded-5 shadow-shadow-light-tight/1 px-3 py-4">
                 <div className="flex justify-between pb-1 border-b-1 border-neutral-100 dark:border-neutral-700">
@@ -131,9 +131,8 @@ const JobOffers = () => {
           ))}
       </div>
       <div className="flex justify-center">
-        <AppPagination total={100} />
+        {/*<AppPagination total={100} />*/}
       </div>
-      <JobFilterModal />
     </div>
   );
 };

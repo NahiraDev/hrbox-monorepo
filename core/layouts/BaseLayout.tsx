@@ -56,20 +56,19 @@ export function BaseLayout({ children }: BaseLayoutProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="flex-1 overflow-y-auto overflow-x-hidden"
+              className="flex-1 overflow-hidden"
             >
               {children}
             </motion.div>
-
-            {/*<div className="shrink-0">*/}
-            {/*    <AppDocs/>*/}
-            {/*</div>*/}
 
             <div className="shrink-0">
               <AppSupportButton />
             </div>
           </main>
         </div>
+      </div>
+      <div className="shrink-0 mx-auto">
+        <AppDocs />
       </div>
     </div>
   );

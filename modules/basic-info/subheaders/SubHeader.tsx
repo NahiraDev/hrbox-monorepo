@@ -1,6 +1,6 @@
 import { AppButton } from "@hrbox/uikit/components";
 import { Add, MessageEdit } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox-monorepo/core/providers/ModalProvider";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 const SubHeader = () => {
   const { openModal } = useModalContext();
@@ -14,7 +14,7 @@ const SubHeader = () => {
           variant: "solid",
           isIconOnly: true,
           onPress: () => openModal("edit", undefined),
-          className: "bg-white border-1 border-primary-panel",
+          className: "bg-white border-1 border-primary",
           content: <MessageEdit className="text-secondary-900" size="20" />,
         }}
       />
@@ -26,7 +26,7 @@ const SubHeader = () => {
           variant: "solid",
           isIconOnly: true,
           onPress: () => openModal("edit", undefined),
-          className: "bg-white border-1 border-primary-panel",
+          className: "bg-white border-1 border-primary",
           content: <Add className="text-secondary-900" size="20" />,
         }}
       />
