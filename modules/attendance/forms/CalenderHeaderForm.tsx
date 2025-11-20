@@ -145,7 +145,6 @@ export const CalenderHeaderForm = () => {
               radius="lg"
               startIcon={<Calendar size={22} />}
               endIcon={<ArrowDown2 size={20} />}
-
             />
 
             <AppButton
@@ -168,8 +167,11 @@ export const CalenderHeaderForm = () => {
                 radius="md"
                 src="/images/profile.png"
               />
-              <div>
+              <div className="flex flex-col gap-1">
                 <p className="text-sm font-open-sans">Zahra Pakniyat</p>
+                <div className="py-0.5 px-1 rounded-md border border-[#DCF0F9] bg-[#DCF0F940]">
+                <p className="text-primary text-[10px] text-center ">UiUx Designer</p>
+                </div>
               </div>
             </div>
 

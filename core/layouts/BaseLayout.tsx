@@ -39,12 +39,12 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         <aside className="shrink-0 h-full">
           <AppSidebar />
         </aside>
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col gap-3 overflow-hidden">
           {SubHeader && (
             <Suspense
               fallback={<div className="h-16 shrink-0 animate-pulse" />}
             >
-              <div className="shrink-0  dark:border-neutral-700">
+              <div className="shrink-0 dark:border-neutral-700">
                 <SubHeader {...subHeaderProps} />
               </div>
             </Suspense>
