@@ -1,8 +1,8 @@
-import {Form, Select, SelectItem, InputOtp} from '@heroui/react';
-import {useTranslation} from 'react-i18next';
-import * as Yup from 'yup';
-import {t} from 'i18next';
-import {useEffect, useState} from 'react';
+import { Form, Select, SelectItem, InputOtp } from "@heroui/react";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+import { t } from "i18next";
+import { useEffect, useState } from "react";
 
 import {AppButton} from '@hrbox/uikit/components';
 import {useFormContext} from '@hrbox/core/providers/FormProvider';
