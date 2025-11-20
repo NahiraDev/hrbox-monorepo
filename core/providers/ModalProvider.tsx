@@ -44,7 +44,7 @@ interface ModalContextType {
       options?: ModalOptions
   ) => void;
   closeModal: (type?: ModalType | string, name?: string) => void;
-  getModalData: (type: ModalType | string, name: string) => any;
+  getModalData: (name: string) => any;
   isModalOpen: (type?: ModalType | string, name?: string) => boolean;
   getOpenModal: () => Modal | null;
   getAllOpenModals: () => Modal[];
@@ -179,7 +179,6 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             modalToClose.onClose();
           }
 
-          // حذف مودال
           return prev.filter(
               (modal) => !(modal.type === type && modal.name === name)
           );
@@ -188,13 +187,10 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       []
   );
 
-  // ============================================
-  // دریافت data مودال
-  // ============================================
   const getModalData = useCallback(
-      (type: ModalType | string, name: string) => {
+      (name: string) => {
         return modals.find(
-            (modal) => modal.type === type && modal.name === name
+            (modal) => modal.name === name
         )?.data;
       },
       [modals]
@@ -316,7 +312,7 @@ export const useModalActions = (type: ModalType | string, name: string) => {
 
     isOpen: isModalOpen(type, name),
 
-    getData: () => getModalData(type, name),
+    getData: () => getModalData(name),
 
     updateData: (data: any) => updateModalData(type, name, data),
   };

@@ -5,6 +5,7 @@ import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { TimerStart } from "iconsax-reactjs";
 import * as Yup from "yup";
+import {useEffect} from "react";
 
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
@@ -48,7 +49,9 @@ const ShiftAllocationShowForm = () => {
     handleSubmit,
     setFieldValue,
   } = useFormContext();
-  console.log(values, "vvvvv");
+    useEffect(() => {
+        console.log(values)
+    }, [values]);
   return (
     <>
       <Form id="shift-allocation-edit" onSubmit={handleSubmit}>
@@ -59,6 +62,7 @@ const ShiftAllocationShowForm = () => {
               base: "w-full flex justify-between",
               wrapper: "w-full flex justify-between",
             }}
+            value={values.type}
             defaultValue="Person"
             orientation="horizontal"
             onValueChange={(value) => setFieldValue("type", value)}
@@ -103,15 +107,29 @@ const ShiftAllocationShowForm = () => {
               <FormField
                 name="organization"
                 label="Organization"
+                value={values.Department}
                 component={AppAutoComplete}
+                data={[
+                    {
+                        id:1,
+                        name:"test"
+                    }
+                ]}
               />
             </div>
-            {/* {values.type === "Person" || values.type === "Group" ? (
+            {values.type === "Person" || values.type === "Group" ? (
               <div className="w-full">
                 <FormField
                   name="Department"
                   label="Department"
+                  value={values.Department}
                   component={AppAutoComplete}
+                  data={[
+                      {
+                          id:1,
+                          name:"test"
+                      }
+                  ]}
                 />
               </div>
             ) : (
@@ -119,12 +137,19 @@ const ShiftAllocationShowForm = () => {
                 <FormField
                   name="JobTitle"
                   label="Job Title"
+                  value={values.JobTitle}
                   component={AppAutoComplete}
+                  data={[
+                      {
+                          id:1,
+                          name:"test"
+                      }
+                  ]}
                 />
               </div>
-            )} */}
+            )}
           </div>
-          {/* {values.type === "Person" && (
+          {values.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
@@ -135,7 +160,7 @@ const ShiftAllocationShowForm = () => {
               </div>
               <div className="w-full"></div>
             </div>
-          )} */}
+          )}
 
           <div className="w-full">
             <FormField

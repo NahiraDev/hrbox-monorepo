@@ -48,8 +48,8 @@ export const useModal = () => {
   );
 
   const getData = useCallback(
-      (type: ModalType | string, name: string) => {
-        return getModalData(type, name);
+      (name: string) => {
+        return getModalData(name);
       },
       [getModalData]
   );
