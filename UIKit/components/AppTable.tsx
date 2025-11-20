@@ -686,27 +686,29 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     return (
       <div
         ref={ref}
-        className={`w-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}
+        className={`w-full h-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}
       >
         <Table
           aria-label="Data table"
-          className={`${styles.tableClassName}`}
+          className={`${styles.tableClassName} h-full`}
           isHeaderSticky={variant === "attendance" || sticky}
           classNames={{
             base:
               variant === "attendance"
-                ? "bg-transparent"
+                ? "w-full"
                 : "!h-full bg-transparent",
             wrapper:
               variant === "attendance"
-                ? "max-h-full overflow-y-scroll custom-scroll bg-transparent"
+                ? "h-full overflow-y-scroll custom-scroll bg-transparent w-full"
                 : "bg-transparent h-full",
-            table: "min-w-full",
-            thead: "[&>tr]:first:shadow-none",
-            tr: "rounded-6",
+            table: "w-full h-full flex flex-col relative",
+         tbody:"flex flex-col w-full",
+           td:"w-fit",
+            thead: "w-full absolute top-0",
+            tr: "rounded-6 w-full",
             th:
               variant === "attendance"
-                ? "first:border-r-8 first:border-r-transparent first:rounded-r-2xl first:bg-[#999999] [&:nth-of-type(2)]:border-r-8 [&:nth-of-type(2)]:rounded-2xl [&:nth-of-type(2)]:bg-[#999999] [&:nth-of-type(2)]:border-r-transparent [&:nth-of-type(3)]:border-l-transparent [&:nth-of-type(3)]:border-l-8 [&:nth-of-type(3)]:rounded-l-2xl [&:nth-of-type(8)]:rounded-r-2xl [&:nth-of-type(8)]:border-r-8 [&:nth-of-type(8)]:border-r-transparent [&:nth-of-type(9)]:rounded-l-2xl [&:nth-of-type(9)]:border-l-8 [&:nth-of-type(9)]:border-l-transparent text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"
+                ? "w-full first:bg-[#999999] [&:nth-of-type(2)]:bg-[#999999] text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"
                 : "bg-primary-400",
           }}
         >
@@ -799,7 +801,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             document.body,
           )}
 
-        {/* Pagination */}
+        {/* Pagination*/}
         {/*{shouldPaginate && (*/}
         {/*  <div className="mt-4 flex justify-end px-4">*/}
         {/*    <AppPagination*/}

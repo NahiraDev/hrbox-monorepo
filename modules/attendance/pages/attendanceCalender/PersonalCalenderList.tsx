@@ -94,7 +94,6 @@ const PersonalCalenderList = () => {
       <div className="w-[80%]">
        <AppTable
        data={PersonalList}
-       variant="attendance"
        hasPagination={false}
        {...attendanceConfig} />
       </div>

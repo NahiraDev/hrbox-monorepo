@@ -32,34 +32,6 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
         theme: themeReducer(state.theme, action),
         language: languageReducer(state.language, action),
         formCache: formCacheReducer(state.formCache, action),
-        [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(
-            state[awardApiEndpoints.reducerPath],
-            action,
-        ),
-        [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(
-            state[jobsApiEndpoints.reducerPath],
-            action,
-        ),
-        [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(
-            state[userApiWithEndpoints.reducerPath],
-            action,
-        ),
-        [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(
-            state[dashboardApiEndpoints.reducerPath],
-            action,
-        ),
-        [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(
-            state[resumeApiEndpoints.reducerPath],
-            action,
-        ),
-        [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(
-            state[ssoApiWithEndpoints.reducerPath],
-            action,
-        ),
-        [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(
-            state[settingApiWithEndpoints.reducerPath],
-            action,
-        ),
         ...Object.fromEntries(
             Object.entries(moduleReducers).map(([key, reducer]) => [
                 key,
