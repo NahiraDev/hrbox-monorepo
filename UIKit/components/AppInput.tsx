@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import React, {useEffect, useMemo} from 'react';
 import { Input } from '@heroui/react';
 import { clsx } from 'clsx';
 import type { InputProps } from '@heroui/react';
 import { FormMode } from "@hrbox/uikit/components/types";
+import {useModal} from "@hrbox/core/hooks";
 
 interface AppInputProps extends Omit<InputProps, 'onChange' | 'onBlur' | 'onFocus'> {
   label?: string;
@@ -103,7 +104,6 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
       hasError && !isViewMode && 'text-danger dark:text-danger-400',
       'placeholder:text-neutral-400 dark:placeholder:text-neutral-500 border-[#DCF0F9]'
     );
-
     return (
       <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
         {label && (
