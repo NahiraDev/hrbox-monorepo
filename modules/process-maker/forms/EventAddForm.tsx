@@ -2,7 +2,7 @@ import {Form} from '@heroui/react';
 import {AppAutoComplete, AppInput} from '@hrbox/uikit/components';
 import * as Yup from 'yup';
 import {useFormContext} from '@hrbox/core/providers/FormProvider';
-import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
+import {FormField} from "@hrbox/uikit/components/FormField";
 
 export const initialValuesEventAdd = {
     title: null,

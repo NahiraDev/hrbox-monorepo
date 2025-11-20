@@ -1,8 +1,7 @@
-import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { ArrowDown } from "iconsax-reactjs";
 import { useState } from "react";
 import { Chip } from "@heroui/react";
-import {useFetchAllSkillsQuery, useFetchProfessionalSkillsQuery} from "@hrbox-monorepo/modules/hrlink/apis";
+import {useFetchAllSkillsQuery, useFetchProfessionalSkillsQuery} from "@hrbox/modules/hrlink/apis";
 
 export const SkillModal = () => {
     const [isOpenSkills, setIsOpenSkills] = useState<boolean>(false);

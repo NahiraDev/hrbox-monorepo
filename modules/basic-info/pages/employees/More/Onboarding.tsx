@@ -3,7 +3,7 @@ import { Calendar, Clipboard, UserAdd } from 'iconsax-reactjs';
 import { Card } from '@heroui/react';
 import { AppDoubleLineProgress } from '@core/sections';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 const Onboarding = () => {
   return (
     <BasicInfoLayout

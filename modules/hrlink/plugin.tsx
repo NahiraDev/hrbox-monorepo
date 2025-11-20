@@ -1,14 +1,9 @@
-// ============================================
-// modules/hrlink/plugin.tsx
-// ============================================
-
-import {lazy} from 'react';
 import type {ModulePlugin} from '@hrbox/modules/types';
 import {RoleSlug} from '@hrbox/core/config/theme';
 import {Profile, Briefcase, Building} from 'iconsax-reactjs';
 import {lazyRouteComponent} from '@tanstack/react-router';
 import {Paths} from "@hrbox/modules/paths";
-import SkillsSubHeader from "@hrbox-monorepo/modules/hrlink/subheaders/SkillsSubHeader";
+import SkillsSubHeader from "@hrbox/modules/hrlink/subheaders/SkillsSubHeader";
 
 // ============================================
 // Pages

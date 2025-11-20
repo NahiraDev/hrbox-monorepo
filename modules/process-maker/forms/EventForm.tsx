@@ -1,7 +1,7 @@
 import {useFormContext} from '@hrbox/core/providers/FormProvider';
 import * as Yup from 'yup';
 import {Form} from '@heroui/react';
-import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
+import {FormField} from "@hrbox/uikit/components/FormField";
 
 export const initialValuesEvent = {
     title: null,

@@ -5,7 +5,7 @@ import {
   AppTextArea,
 } from "@hrbox/uikit/components";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { OrganizationDepartmentChoseModal } from "@hrbox-monorepo/modules/basic-info/modals/OrganizationDepartmentChoseModal";
+import { OrganizationDepartmentChoseModal } from "@hrbox/modules/basic-info/modals/OrganizationDepartmentChoseModal";
 import { Category } from "iconsax-reactjs";
 import { useState } from "react";
 

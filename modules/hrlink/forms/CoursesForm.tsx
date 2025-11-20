@@ -5,7 +5,7 @@ import {
   AppDatePicker,
   AppInput,
   AppTextArea,
-} from "@hrbox-monorepo/uikit/components";
+} from "@hrbox/uikit/components";
 import { Link21 } from "iconsax-reactjs";
 
 export const initialValuesCourse = {

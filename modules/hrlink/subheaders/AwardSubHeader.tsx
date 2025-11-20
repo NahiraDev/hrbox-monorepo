@@ -10,7 +10,7 @@ import {
     Personalcard,
     ReceiveSquare,
 } from "iconsax-reactjs";
-import {useDownloadResumeQuery} from "@hrbox-monorepo/modules/hrlink/apis";
+import {useDownloadResumeQuery} from "@hrbox/modules/hrlink/apis";
 import {AwardModal} from "@hrbox/modules/hrlink/modals/AwardModal";
 import {ModalSize, ModalType} from "@hrbox/core/providers";
 import {useModal} from "@hrbox/core/hooks";
@@ -18,7 +18,7 @@ import {
     formValidationAward,
     handleSubmitAward,
     initialValuesAward
-} from "@hrbox-monorepo/modules/hrlink/forms/AwardForm";
+} from "@hrbox/modules/hrlink/forms/AwardForm";
 
 const AwardSubHeader = (props: any) => {
     const {data:downloadResume} = useDownloadResumeQuery()

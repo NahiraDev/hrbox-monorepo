@@ -5,7 +5,7 @@ import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsa
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useState } from 'react';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 
 const Courses = () => {
   const { openModal } = useModalContext();

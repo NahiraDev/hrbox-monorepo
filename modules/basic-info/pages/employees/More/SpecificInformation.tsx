@@ -1,7 +1,7 @@
 import { Building, TickSquare } from 'iconsax-reactjs';
 import { specificInformation } from '@module/basic-info/app/mock';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 
 const SpecificInformation = () => {
   return (

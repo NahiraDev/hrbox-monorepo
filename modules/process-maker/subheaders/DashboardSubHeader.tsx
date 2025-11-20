@@ -1,4 +1,4 @@
-import { AppButton } from '@hrbox-monorepo/UIKit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Add, Chart, SearchNormal, Setting4 } from 'iconsax-reactjs';
 
 const DashboardSubHeader = () => {

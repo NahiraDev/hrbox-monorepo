@@ -1,7 +1,7 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue } from '@heroui/react';
 import { Setting } from 'iconsax-reactjs';
 
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 
 const columns = [
   { key: 'no', label: 'No.' },

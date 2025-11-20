@@ -1,7 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
-import {moduleRegistry} from "@hrbox-monorepo/modules/registry";
 
 const jobsApi = createModuleApi({
   reducerPath: 'HRLinkApi',
@@ -10,8 +9,6 @@ const jobsApi = createModuleApi({
   requiresAuth: true,
   autoToast: true,
 });
-
-moduleRegistry.a
 
 export const jobsApiEndpoints = jobsApi.injectEndpoints({
   endpoints: (build:any) => ({

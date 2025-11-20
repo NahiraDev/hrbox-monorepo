@@ -3,7 +3,7 @@ import {Link21} from "iconsax-reactjs";
 import {AppDatePicker, AppInput, AppTextArea} from "@hrbox/uikit/components";
 import {useFormContext} from "@hrbox/core/providers/FormProvider";
 import * as Yup from "yup";
-import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
+import {FormField} from "@hrbox/uikit/components/FormField";
 
 export const initialValuesAward = {
     Title: null,

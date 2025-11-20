@@ -17,10 +17,10 @@ import {
   People,
 } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { BasicInfoLayout } from "@hrbox-monorepo/modules/basic-info/components";
-import { RelativesModal } from "@hrbox-monorepo/modules/basic-info/modals/RelativesModal";
-import { SpouseModal } from "@hrbox-monorepo/modules/basic-info/modals/SpouseModal";
-import { DependentsModal } from "@hrbox-monorepo/modules/basic-info/modals/DependentsModal";
+import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
+import { RelativesModal } from "@hrbox/modules/basic-info/modals/RelativesModal";
+import { SpouseModal } from "@hrbox/modules/basic-info/modals/SpouseModal";
+import { DependentsModal } from "@hrbox/modules/basic-info/modals/DependentsModal";
 
 const Dependents = () => {
   const { openModal } = useModalContext();

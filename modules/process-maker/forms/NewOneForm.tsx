@@ -1,9 +1,9 @@
 import {CheckboxGroup, Form} from '@heroui/react';
 import * as Yup from 'yup';
 
-import {AppAutoComplete, AppInput, AppTextArea, AppCheckBox} from '@hrbox/uikit/components';
+import {AppAutoComplete, AppTextArea, AppCheckBox} from '@hrbox/uikit/components';
 import {useFormContext} from '@hrbox/core/providers/FormProvider'
-import {FormField} from "@hrbox-monorepo/UIKit/components/FormField";
+import {FormField} from "@hrbox/uikit/components/FormField";
 import {useTranslation} from "react-i18next";
 
 export const initialValuesNewOne = {

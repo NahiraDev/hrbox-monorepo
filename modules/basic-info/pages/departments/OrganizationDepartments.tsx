@@ -2,9 +2,8 @@ import { User } from 'iconsax-reactjs';
 import { organizationDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { AppPagination } from '@hrbox/uikit/components/AppPagination';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
-import {Paths} from "@hrbox-monorepo/modules/paths";
+import {Paths} from "@hrbox/modules/paths";
 
 const borderColors = ['#000000', '#A61111', '#F4D082', '#05856F', '#DB5918', '#2F80ED', '#0ED2F7'];
 

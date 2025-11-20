@@ -3,7 +3,7 @@ import { education } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { BasicInfoLayout } from '@hrbox-monorepo/modules/basic-info/components';
+import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import { useState } from 'react';
 
 const Education = () => {

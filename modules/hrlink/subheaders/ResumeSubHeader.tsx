@@ -10,7 +10,7 @@ import {
     Personalcard,
     ReceiveSquare,
 } from "iconsax-reactjs";
-import {useDownloadResumeQuery} from "@hrbox-monorepo/modules/hrlink/apis";
+import {useDownloadResumeQuery} from "@hrbox/modules/hrlink/apis";
 
 const ResumeSubHeader = (props: any) => {
 

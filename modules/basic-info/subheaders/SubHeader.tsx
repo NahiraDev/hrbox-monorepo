@@ -1,6 +1,6 @@
 import { AppButton } from "@hrbox/uikit/components";
 import { Add, MessageEdit } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox-monorepo/core/providers/ModalProvider";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 const SubHeader = () => {
   const { openModal } = useModalContext();

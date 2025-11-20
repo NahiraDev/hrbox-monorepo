@@ -4,8 +4,7 @@ import {
   AppModal,
   AppTextArea,
 } from "@hrbox/uikit/components";
-import { People } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox-monorepo/core/providers/ModalProvider";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 export const RelativesModal = () => {
   const { openModal } = useModalContext();

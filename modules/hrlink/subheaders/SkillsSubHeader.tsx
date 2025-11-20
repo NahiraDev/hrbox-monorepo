@@ -10,10 +10,9 @@ import {
     Personalcard,
     ReceiveSquare,
 } from "iconsax-reactjs";
-import {useDownloadResumeQuery} from "@hrbox-monorepo/modules/hrlink/apis";
 import {ModalSize, ModalType} from "@hrbox/core/providers";
 import {useModal} from "@hrbox/core/hooks";
-import {SkillModal} from "@hrbox-monorepo/modules/hrlink/modals/SkillModal";
+import {SkillModal} from "@hrbox/modules/hrlink/modals/SkillModal";
 
 const SkillsSubHeader = (props: any) => {
     // const {data: downloadResume} = useDownloadResumeQuery()

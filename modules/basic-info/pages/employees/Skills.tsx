@@ -6,7 +6,7 @@ import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { AppDoubleLineProgress } from "@hrbox/uikit/sections";
 import { useState } from "react"; // Import useState
 
-import { BasicInfoLayout } from "@hrbox-monorepo/modules/basic-info/components";
+import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 
 const Education = () => {
   const { openModal } = useModalContext();

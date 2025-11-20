@@ -1,9 +1,8 @@
 import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { Avatar } from "@heroui/react";
-import { useState } from "react";
-import FilterCalenderModal from "@hrbox-monorepo/modules/basic-info/modals/FilterCalenderModal";
+import FilterCalenderModal from "@hrbox/modules/basic-info/modals/FilterCalenderModal";
 import { Filter } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox-monorepo/core/providers/ModalProvider";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 const sampleData = [
   {

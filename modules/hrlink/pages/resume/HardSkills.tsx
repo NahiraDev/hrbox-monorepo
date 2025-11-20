@@ -3,8 +3,8 @@ import {AppButton} from '@hrbox/uikit/components';
 import {Card} from '@heroui/react';
 
 import {GeneralInformation} from '@hrbox/modules/hrlink/components/GeneralInformation';
-import {useFetchHardSkillsQuery} from "@hrbox-monorepo/modules/hrlink/apis";
-import {UserLocation} from "@hrbox-monorepo/modules/hrlink/components/UserLocation";
+import {useFetchHardSkillsQuery} from "@hrbox/modules/hrlink/apis";
+import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";
 import {AppDoubleLineProgress} from "@hrbox/uikit/sections";
 
 

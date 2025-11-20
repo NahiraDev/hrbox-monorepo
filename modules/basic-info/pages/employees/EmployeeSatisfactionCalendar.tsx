@@ -2,7 +2,7 @@ import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
 import EmployeeSatisfactionCalendarModal from '../../modals/EmployeeSatisfactionCalendarModal';
-import HowAreYouTodayModal from '@hrbox-monorepo/modules/basic-info/modals/HowAreYouTodayModal';
+import HowAreYouTodayModal from '@hrbox/modules/basic-info/modals/HowAreYouTodayModal';
 
 // Pixel-based size and text size calculation
 const getCircleSizePx = (number: number): number => {

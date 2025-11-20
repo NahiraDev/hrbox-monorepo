@@ -10,8 +10,8 @@ import { Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
-import { BasicInfoLayout } from "@hrbox-monorepo/modules/basic-info/components";
-import { TestReportModal } from "@hrbox-monorepo/modules/basic-info/modals/TestReportModal";
+import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
+import { TestReportModal } from "@hrbox/modules/basic-info/modals/TestReportModal";
 const TestReport = () => {
   const { openModal } = useModalContext();
 

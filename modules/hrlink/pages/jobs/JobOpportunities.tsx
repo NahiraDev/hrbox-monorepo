@@ -1,7 +1,6 @@
 import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-reactjs';
-import { AppPagination } from '@hrbox/uikit/components';
-import {useFetchJobOpportunitiesQuery} from "@hrbox-monorepo/modules/hrlink/apis";
-import {useNavigation} from "@hrbox-monorepo/core/hooks/useNavigation";
+import {useFetchJobOpportunitiesQuery} from "@hrbox/modules/hrlink/apis";
+import {useNavigation} from "@hrbox/core/hooks/useNavigation";
 import {Button} from "@heroui/react";
 
 

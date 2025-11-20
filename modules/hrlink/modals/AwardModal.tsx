@@ -1,4 +1,3 @@
-import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { FormProvider } from "@hrbox/core/providers/FormProvider";
 import {
   AwardForm,
@@ -12,8 +11,6 @@ export const AwardModal = () => {
   const [createCourse] = useCreateCourseMutation();
 
   return (
-    <>
-      <AppModal.Body>
         <FormProvider
           formId="award-form"
           initialValues={initialValuesAward}
@@ -24,7 +21,5 @@ export const AwardModal = () => {
         >
           <AwardForm />
         </FormProvider>
-      </AppModal.Body>
-    </>
   );
 };

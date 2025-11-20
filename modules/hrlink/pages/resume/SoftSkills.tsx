@@ -8,8 +8,8 @@ import {
 import {AppDoubleLineProgress} from "@hrbox/uikit/sections/AppDoubleLineProgress";
 
 import {SoftSkillsIcon} from "@hrbox/uikit/icons";
-import {UserLocation} from "@hrbox-monorepo/modules/hrlink/components/UserLocation";
-import {useFetchSoftSkillsQuery} from "@hrbox-monorepo/modules/hrlink/apis";
+import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";
+import {useFetchSoftSkillsQuery} from "@hrbox/modules/hrlink/apis";
 
 const SoftSkills = () => {
     const {data: softSkills} = useFetchSoftSkillsQuery()

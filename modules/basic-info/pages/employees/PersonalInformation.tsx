@@ -1,5 +1,5 @@
 import { workerInfo } from "@module/basic-info/app/mock";
-import { BasicInfoLayout } from "@hrbox-monorepo/modules/basic-info/components";
+import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 
 const cardContainerClass = `grid h-full grid-cols-2 gap-5 m-4 overflow-y-auto max-h-[calc(100vh-100px)]
   [&::-webkit-scrollbar]:w-2
