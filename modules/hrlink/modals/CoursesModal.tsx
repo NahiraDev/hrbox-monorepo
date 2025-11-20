@@ -13,41 +13,15 @@ export const CourseModal = () => {
   const [createCourse] = useCreateCourseMutation();
 
   return (
-    // <AppModal icon={<Personalcard className="text-white" size="22" />} size="3xl" title="Edit General Informations">
-    <>
-      <AppModal.Body>
-        <FormProvider
+      <FormProvider
+          formId="course-form"
           initialValues={initialValuesCourse}
           validationSchema={formValidationCourse}
           onSubmitAsync={async (values: any) => {
-            await createCourse(handleSubmitCourse(values)).unwrap();
+              await createCourse(handleSubmitCourse(values)).unwrap();
           }}
-        >
+      >
           <CourseForm />
-        </FormProvider>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex gap-2">
-          <AppButton
-            props={{
-              size: "md",
-              variant: "light",
-              color: "default",
-              content: "Close",
-            }}
-          />
-          <AppButton
-            props={{
-              size: "md",
-              variant: "light",
-              color: "secondary",
-              type: "submit",
-              content: "Submit",
-            }}
-          />
-        </div>
-      </AppModal.Footer>
-    </>
-    // </AppModal>
+      </FormProvider>
   );
 };

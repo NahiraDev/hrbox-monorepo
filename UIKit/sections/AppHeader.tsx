@@ -66,7 +66,7 @@ export const AppHeader = () => {
     {
       key: "jobs",
       title: "Jobs",
-      href: getHRLinkPath("/jobs/offers"),
+      href: getHRLinkPath("/job/offers"),
     },
     {
       key: "company",

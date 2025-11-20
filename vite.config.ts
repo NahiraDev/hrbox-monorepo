@@ -151,17 +151,17 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     assetsInclude: ["**/*.html"],
 
     server: {
-      port: 5173,
+      port: 443,
       host: true,
       allowedHosts: ["localhost", "front.hrbox.me", "react.hrbox.me"],
       strictPort: false,
       open: false,
       cors: true,
-      // https: httpsConfig,
+      https: httpsConfig,
       hmr: {
         overlay: true,
         protocol: "wss",
-        port: 5173,
+        port: 443,
       },
 
       proxy: {
