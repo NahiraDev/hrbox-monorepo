@@ -28,13 +28,6 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
   return {
     title: values.title,
     type: values.type,
@@ -72,7 +65,6 @@ const IpAllocationShowForm = () => {
             }}
             defaultValue="Person"
             orientation="horizontal"
-            value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
@@ -118,7 +110,7 @@ const IpAllocationShowForm = () => {
                 component={AppAutoComplete}
               />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {/* {values.type === "Person" || values.type === "Group" ? (
               <div className="w-full">
                 <FormField
                   name="Department"
@@ -134,9 +126,9 @@ const IpAllocationShowForm = () => {
                   component={AppAutoComplete}
                 />
               </div>
-            )}
+            )} */}
           </div>
-          {values.type === "Person" && (
+          {/* {values.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
@@ -147,7 +139,7 @@ const IpAllocationShowForm = () => {
               </div>
               <div className="w-full"></div>
             </div>
-          )}
+          )} */}
 
           <div className="w-full">
             <FormField

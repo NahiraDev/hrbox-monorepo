@@ -23,7 +23,9 @@ export const EventForm = () => {
 
   return (
     <Form>
+      <div className='w-full'>
       <FormField name='title' label='Please enter the time.' type='text' component={AppInput}  />
+      </div>
     </Form>
   );
 };

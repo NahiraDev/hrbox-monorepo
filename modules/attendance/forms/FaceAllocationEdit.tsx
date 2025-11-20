@@ -71,7 +71,6 @@ const FaceAllocationEdit = () => {
             }}
             defaultValue="Person"
             orientation="horizontal"
-            value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
@@ -105,7 +104,7 @@ const FaceAllocationEdit = () => {
             <div className="w-full">
               <FormField name="organization" label="Organization" component={AppAutoComplete} />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {/* {values.type === "Person" || values.type === "Group" ? (
               <div className="w-full">
               <FormField name="Department" label="Department" component={AppAutoComplete} />
               </div>
@@ -113,16 +112,16 @@ const FaceAllocationEdit = () => {
               <div className="w-full">
               <FormField name="JobTitle" label="Job Title" component={AppAutoComplete} />
               </div>
-            )}
+            )} */}
           </div>
-          {values.type === "Person" && (
+          {/* {values.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
               <FormField name="Employee" label="Employee" component={AppAutoComplete} />
               </div>
               <div className="w-full"></div>
             </div>
-          )}
+          )} */}
 
           <div className="w-full">
               <FormField name="Description" label="Description" component={AppTextArea} />

@@ -61,7 +61,6 @@ const ShiftAllocationShowForm = () => {
             }}
             defaultValue="Person"
             orientation="horizontal"
-            value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
@@ -107,7 +106,7 @@ const ShiftAllocationShowForm = () => {
                 component={AppAutoComplete}
               />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {/* {values.type === "Person" || values.type === "Group" ? (
               <div className="w-full">
                 <FormField
                   name="Department"
@@ -123,9 +122,9 @@ const ShiftAllocationShowForm = () => {
                   component={AppAutoComplete}
                 />
               </div>
-            )}
+            )} */}
           </div>
-          {values.type === "Person" && (
+          {/* {values.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
@@ -136,7 +135,7 @@ const ShiftAllocationShowForm = () => {
               </div>
               <div className="w-full"></div>
             </div>
-          )}
+          )} */}
 
           <div className="w-full">
             <FormField
