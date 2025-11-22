@@ -4,6 +4,7 @@ import { Global } from "iconsax-reactjs";
 import * as Yup from "yup";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
+import { useModalContext } from "@hrbox/core/providers";
 
 export const initialValuesAction = {
   title: null,
@@ -51,13 +52,12 @@ export const handleSubmitAction = (values: any) => {
 const IpAllocationForm = () => {
   const {
     values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
     handleSubmit,
     setFieldValue,
   } = useFormContext();
+
+    const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
 
   return (
     <>
@@ -97,6 +97,7 @@ const IpAllocationForm = () => {
               <FormField
                 name="ChooseIp"
                 label="Choose Ip"
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
@@ -104,6 +105,7 @@ const IpAllocationForm = () => {
               <FormField
                 name="Description"
                 label="Description"
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
@@ -113,14 +115,16 @@ const IpAllocationForm = () => {
               <FormField
                 name="organization"
                 label="Organization"
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
-            {/* {values.type === "Person" || values.type === "Group" ? (
+            {values?.type === "Person" || values?.type === "Group" ? (
               <div className="w-full">
                 <FormField
                   name="Department"
                   label="Department"
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
@@ -129,28 +133,31 @@ const IpAllocationForm = () => {
                 <FormField
                   name="JobTitle"
                   label="Job Title"
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
-            )} */}
+            )}
           </div>
-          {/* {values.type === "Person" && (
+          {values?.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
                   name="Employee"
                   label="Employee"
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
               <div className="w-full"></div>
             </div>
-          )} */}
+          )}
 
           <div className="w-full">
             <FormField
               name="Description"
               label="Description"
+              formMode={currentType}
               component={AppTextArea}
             />
           </div>

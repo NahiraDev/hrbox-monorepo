@@ -4,6 +4,7 @@ import { Scan } from "iconsax-reactjs";
 import * as Yup from "yup";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
+import { useModalContext } from "@hrbox/core/providers";
 
 export const initialValuesAction = {
   title: null,
@@ -58,7 +59,8 @@ const FaceAllocationForm = () => {
     handleSubmit,
     setFieldValue,
   } = useFormContext();
-
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
   return (
     <>
       <Form id="face-allocation-form" onSubmit={handleSubmit}>
@@ -71,7 +73,6 @@ const FaceAllocationForm = () => {
             }}
             defaultValue="Person"
             orientation="horizontal"
-            value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
@@ -96,6 +97,7 @@ const FaceAllocationForm = () => {
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
+                formMode={currentType}
                 name="ChooseFace"
                 label="Choose Face Recognition Assignment"
                 component={AppAutoComplete}
@@ -103,6 +105,7 @@ const FaceAllocationForm = () => {
             </div>
             <div className="w-full">
               <FormField
+                formMode={currentType}
                 name="FromDate"
                 label="From Date"
                 component={AppAutoComplete}
@@ -112,14 +115,16 @@ const FaceAllocationForm = () => {
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
+                formMode={currentType}
                 name="organization"
                 label="Organization"
                 component={AppAutoComplete}
               />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {values?.type === "Person" || values?.type === "Group" ? (
               <div className="w-full">
                 <FormField
+                  formMode={currentType}
                   name="Department"
                   label="Department"
                   component={AppAutoComplete}
@@ -128,6 +133,7 @@ const FaceAllocationForm = () => {
             ) : (
               <div className="w-full">
                 <FormField
+                  formMode={currentType}
                   name="JobTitle"
                   label="Job Title"
                   component={AppAutoComplete}
@@ -135,10 +141,11 @@ const FaceAllocationForm = () => {
               </div>
             )}
           </div>
-          {values.type === "Person" && (
+          {values?.type === "Person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
+                  formMode={currentType}
                   name="Employee"
                   label="Employee"
                   component={AppAutoComplete}
@@ -150,6 +157,7 @@ const FaceAllocationForm = () => {
 
           <div className="w-full">
             <FormField
+              formMode={currentType}
               name="Description"
               label="Description"
               component={AppTextArea}
