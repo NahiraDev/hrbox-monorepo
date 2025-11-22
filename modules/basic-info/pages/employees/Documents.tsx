@@ -8,10 +8,13 @@ import {
   Status,
   Calendar,
 } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import DocumentsModal from "../../modals/DocumentsModal";
+import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 interface Document {
   name: string;
@@ -58,6 +61,32 @@ const Documents = () => {
     });
   };
 
+  const handleOpenDocuments = () => {
+    modal.open(
+      ModalType.CREATE,
+      " Relatives",
+      < DocumentsModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
   return (
     <BasicInfoLayout
       content={
@@ -73,20 +102,7 @@ const Documents = () => {
                         radius: "sm",
                         variant: "light",
                         isIconOnly: true,
-                        onPress: () =>
-                          openModal(
-                            "custom",
-                            "",
-                            <DocumentsModal
-                              onClose={() => {}}
-                              onCloseAll={closeAllModals}
-                              onSubmit={(imageSrc: string) =>
-                                handleImageSubmit(index, imageSrc)
-                              }
-                            />,
-                            undefined,
-                            "sm",
-                          ),
+                        onPress: () =>{handleOpenDocuments},
                         content: (
                           <Avatar
                             radius="sm"

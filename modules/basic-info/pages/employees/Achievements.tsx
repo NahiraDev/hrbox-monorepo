@@ -2,14 +2,59 @@ import { Card } from '@heroui/react';
 import { achivements } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components/BasicInfoLayout';
 import AddNewCourses from '@hrbox/modules/basic-info/modals/AddNewCourses';
+import {useModal} from "@HRBox/core/hooks";
+import {OrganizationDepartmentModal} from "@HRBox/modules/basic-info/modals/OrganizationDepartmentModal";
+import {formValidationAward, handleSubmitAward, initialValuesAward} from "@HRBox/modules/hrlink/forms/AwardForm";
 
 const Achievements = () => {
   const { openModal } = useModalContext();
 
+
+    const modal = useModal()
+    const handleOpenTechnicalDepartments = () => {
+        modal.open(
+            ModalType.CREATE,
+            "Organization Departments",
+            <OrganizationDepartmentModal />,
+            {
+                isForm: true,
+                title: "افزودن ",
+                submitLabel: "ذخیره",
+                cancelLabel: "لغو",
+                formConfig: {
+                    initialValues: initialValuesAward,
+                    validationSchema: formValidationAward,
+                    formId: "award-form",
+                    enableCache: true,
+                    clearCacheOnSubmit: true,
+                    onSubmitAsync: async (values: any) => {
+                        handleSubmitAward(values);
+                        modal.close(ModalType.CREATE, "award-form");
+                    },
+                },
+            },
+            ModalSize.XL,
+        );
+    };
+
+
+    const handleDeleteTechnicalDepartments = () => {
+        modal.open(
+            ModalType.DELETE,
+            "Delete Organization Departments",
+            {
+                isForm: true,
+                title: "افزودن ",
+                submitLabel: "ذخیره",
+                cancelLabel: "لغو",
+            },
+            ModalSize.XL,
+        );
+    };
   return (
     <BasicInfoLayout
       content={
@@ -25,15 +70,13 @@ const Achievements = () => {
                   <div className="flex gap-1">
                     <div>
                       <AppButton
-                        props={{
-                          size: 'xs',
-                          radius: 'sm',
-                          variant: 'light',
-                          isIconOnly: true,
-                          onPress: () => openModal('delete',"", <AppDeleteModal />, undefined, 'lg',"Do you want to remove it?",<Trash className='text-white'/>),
-                          content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                          className: 'p-2 hover:!bg-red-500 transition-all duration-200',
-                        }}
+                        size='xs'
+                        radius='sm'
+                        variant='light'
+                        isIconOnly={true}
+                        onPress={handleDeleteTechnicalDepartments}
+                        content={<Trash className="text-secondary-1000 group-hover:text-white" />}
+                        className: 'p-2 hover:!bg-red-500 transition-all duration-200'
                       />
                     </div>
                   </div>

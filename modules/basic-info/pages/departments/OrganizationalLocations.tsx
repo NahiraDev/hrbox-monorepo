@@ -2,10 +2,14 @@ import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
 import {Location, MoreSquare, Trash} from 'iconsax-reactjs';
 import {useState, useMemo} from 'react';
-import {useModalContext} from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import {AppButton, AppDeleteModal, AppPagination} from '@hrbox/uikit/components';
+import { useModal } from "@HRBox/core/hooks";
+import { AwardModal } from "@HRBox/modules/hrlink/modals/AwardModal";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import { formValidationOrganizationLocation, initialValuesOrganizationLocation } from "@HRBox/modules/basic-info/forms/OrganizationLocationForm";
 
-const OrganizationalLocations = () => {
+    const OrganizationalLocations = () => {
     const {openModal} = useModalContext();
     const [activeButton, setActiveButton] = useState<number | null>(null);
     const [locations, setLocations] = useState(OrganizationalLocation);
@@ -48,6 +52,33 @@ const OrganizationalLocations = () => {
     };
 
     const filteredLocations = useMemo(() => locations, [locations]);
+
+  const modal = useModal()
+  const handleOpenOrganizationLocation = () => {
+    modal.open(
+      ModalType.CREATE,
+      "award-form",
+      <AwardModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
 
     return (
         <>
@@ -104,11 +135,11 @@ const OrganizationalLocations = () => {
                                         <span className="!text-xs">Is it visible?</span>
                                     </div>
                                     <p className="!text-xs !font-bold">
-                    <span className={`px-2 py-1 rounded-full !text-xs ${
-                        detail.visible === 'Yes' ? '' : ''
-                    }`}>
-                      {detail.visible}
-                    </span>
+                                      <span className={`px-2 py-1 rounded-full !text-xs ${
+                                          detail.visible === 'Yes' ? '' : ''
+                                      }`}>
+                                        {detail.visible}
+                                      </span>
                                     </p>
                                 </div>
                             </Card>

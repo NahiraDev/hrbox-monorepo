@@ -8,12 +8,46 @@ import {
 } from "iconsax-reactjs";
 import { Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import { TestReportModal } from "@hrbox/modules/basic-info/modals/TestReportModal";
+import { useModal } from "@HRBox/core/hooks";
+import AddNewOnDutyHealthRecords from "@HRBox/modules/basic-info/modals/AddNewOnDutyHealthRecords";
+import {
+  formValidationHealth,
+  initialValuesHealth
+} from "@HRBox/modules/basic-info/forms/AddNewOnDutyHealthRecordsForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 const TestReport = () => {
   const { openModal } = useModalContext();
+
+  const modal = useModal()
+  const handleOpenAddNewOnDutyHealthRecords = () => {
+    modal.open(
+      ModalType.CREATE,
+      "Test Result",
+      < TestReportModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesHealth,
+          validationSchema: formValidationHealth,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
 
   return (
     <BasicInfoLayout

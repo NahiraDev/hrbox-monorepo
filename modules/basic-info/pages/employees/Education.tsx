@@ -2,9 +2,12 @@ import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-reactjs';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import { useState } from 'react';
+import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 const Education = () => {
   const { openModal } = useModalContext();
@@ -27,19 +30,20 @@ const Education = () => {
   };
 
   const handleDeleteConfirm = (index: number) => {
-    setEducationList(prev => { // ✅ اصلاح شد
+    setEducationList(prev => {
       const newEducation = [...prev];
       newEducation.splice(index, 1);
       return newEducation;
     });
   };
 
+
   return (
     <>
       <BasicInfoLayout
         content={
           <div className="grid grid-cols-4 gap-3 w-full p-4">
-            {educationList.map((user, index) => ( // ✅ تغییر education به educationList
+            {educationList.map((user, index) => (
               <Card key={index} className="py-2 px-3">
                 <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5">
                   <div className="flex items-center gap-2">
@@ -53,7 +57,7 @@ const Education = () => {
                         radius: 'sm',
                         variant: 'light',
                         isIconOnly: true,
-                        onPress: () => handleDeleteClick(index), // ✅ اصلاح شد
+                        onPress: () => handleDeleteClick(index),
                         content: <Trash className="text-secondary-1000 group-hover:text-white" />,
                         className: 'p-2 hover:!bg-red-500 transition-all duration-200',
                       }}

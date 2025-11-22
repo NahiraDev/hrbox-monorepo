@@ -28,11 +28,11 @@ interface TechnicalDepartmentModalProps {
   initialData: DepartmentFormData;
   selectedColor: ColorType;
 }
-export const initialValuesAction = {
+export const initialValuesTechnicalDepartment = {
   DepartmentTitle: null,
   Description: null,
 };
-export const formValidationAction = Yup.object().shape({
+export const formValidationTechnicalDepartment = Yup.object().shape({
   DepartmentTitle: Yup.string().required(),
   Description: Yup.string().required(),
 });

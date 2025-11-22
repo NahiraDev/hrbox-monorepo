@@ -2,11 +2,43 @@ import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@hrbox/modules/basic-info/modals/OrganizationDepartmentModal';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { Category, TickCircle } from 'iconsax-reactjs';
+import { useModal } from "@HRBox/core/hooks";
+import { initialValuesTechnicalDepartment,  formValidationTechnicalDepartment } from "@HRBox/modules/basic-info/forms/TechnicalDepartmentForm";
+import {handleSubmitAward} from "@HRBox/modules/hrlink/forms/AwardForm"
+import translate from "@HRBox/core/translate";
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();
+
+  const modal = useModal()
+  const handleOpenTechnicalDepartments = () => {
+    modal.open(
+      ModalType.CREATE,
+      "Organization Departments",
+      <OrganizationDepartmentModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesTechnicalDepartment,
+          validationSchema: formValidationTechnicalDepartment,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-between p-4">
       <div className="w-full grid grid-cols-9 gap-4">
@@ -22,7 +54,7 @@ const TechnicalDepartments = () => {
                 className: 'h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary',
                 size: 'sm',
                 radius: 'sm',
-                onPress: () => openModal('custom', "",<OrganizationDepartmentModal/> , undefined, '3xl',"Organization Depatments", <Category className='text-white'/> ),
+                onPress: () =>{handleOpenTechnicalDepartments},
                 content: <span>{user.job}</span>,
               }}
             />
