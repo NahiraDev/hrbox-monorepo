@@ -146,5 +146,17 @@
   "resend_code": "Resend Code",
   "otp_is_correct_redirecting": "OTP is correct. Redirecting",
   "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas.",
-  "Personal_attendance_calendar": "Personal attendance calendar"
+  "Personal_attendance_calendar": "Personal attendance calendar",
+  "entry_exit":"Entry Exit",
+  "my_time":"My Time",
+  "attendance_calendar":"Attendance Calendar",
+  "approvals":"Approvals",
+  "List_of_Approvals":"List of Approvals",
+  "ُshift_allocation":"ُShift Allocation",
+  "face_allocation":"Face Allocation",
+  "ip_allocation":"Ip Allocation",
+  "location_allocation":"Location Allocation",
+  "export":"Export",
+  "traffic_calendar":"Traffic Calendar"
+
 }
