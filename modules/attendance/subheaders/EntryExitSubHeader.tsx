@@ -137,7 +137,7 @@ const EntryExitSubHeader = (props: any) => {
               <div className="flex gap-8 w-full justify-end">
                 <FormField
                   name="project-name"
-                  title="Select project / Task"
+                  title={t("Selectproject/Task")}
                   component={AppDropDown}
                   size="md"
                   startIcon={<Trello size={24} />}
@@ -180,7 +180,7 @@ const EntryExitSubHeader = (props: any) => {
                   }}
                   content={
                     <span className="text-white">
-                      {clock ? "Clock out" : "Clock in"}
+                      {clock ? t("clock_out") : t("clock_in")}
                     </span>
                   }
                 />

@@ -98,7 +98,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: EntryExit,
       layout: "base",
       meta: {
-        title: "entry_exit",
+        title: "Entry Exit",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },

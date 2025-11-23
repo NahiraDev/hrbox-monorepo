@@ -3,6 +3,7 @@ import { Add, ArrowLeft2 } from 'iconsax-reactjs';
 import { ModalSize, ModalType, useModalContext } from '@hrbox/core/providers/ModalProvider';
 import React from 'react';
 import { useModal } from '@hrbox/core/hooks';
+import { useTranslation } from 'react-i18next';
 interface AllocationSubheaderProps {
   modalComponent: React.ComponentType;
   title: string;
@@ -13,6 +14,7 @@ const AllocationSubheader = ({
   title,
   icon
   }: AllocationSubheaderProps) => {
+    const {t}=useTranslation();
   const modal=useModal();
   const handlerOpenModal=()=>{
     modal.open(
@@ -35,7 +37,7 @@ const AllocationSubheader = ({
       <div className="w-full flex flex-row justify-between">
         <div className="flex flex-row gap-3 items-center">
           <span><ArrowLeft2/></span>
-          <AppPageTitle title={title} icon={icon}/>
+          <AppPageTitle title={t(title)} icon={icon}/>
         </div>
         <div className="flex flex-row gap-2.5">
           <AppSearchInput />
@@ -46,7 +48,7 @@ const AllocationSubheader = ({
               startContent= {<Add size={22} />}
               className= 'border-1 border-primary'
               onPress={handlerOpenModal}
-                content='Add New One'
+                content={t('add_new_one')}
             
           />
         </div>
