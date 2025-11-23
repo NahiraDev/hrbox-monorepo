@@ -64,7 +64,7 @@ const Documents = () => {
   const handleOpenDocuments = () => {
     modal.open(
       ModalType.CREATE,
-      " Relatives",
+      " Documents",
       < DocumentsModal />,
       {
         isForm: true,
@@ -97,67 +97,48 @@ const Documents = () => {
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
                     <AppButton
-                      props={{
-                        size: "xs",
-                        radius: "sm",
-                        variant: "light",
-                        isIconOnly: true,
-                        onPress: () =>{handleOpenDocuments},
-                        content: (
+                        size="xs"
+                        radius="sm"
+                        variant="light"
+                        isIconOnly={true}
+                        onPress={handleOpenDocuments}
+                        content={
                           <Avatar
                             radius="sm"
                             size="lg"
                             src={user.avatarSrc || undefined}
                           />
-                        ),
-                      }}
+                        }
                     />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
                     <div>
                       <AppButton
-                        props={{
-                          size: "xs",
-                          radius: "sm",
-                          variant: "light",
-                          isIconOnly: true,
-                          onPress: () => handleDeleteClick(index),
-                          content: (
+                          size="xs"
+                          radius="sm"
+                          variant="light"
+                          isIconOnly={true}
+                          onPress={handleDeleteClick(index)}
+                          content={
                             <Trash className="text-secondary-1000 group-hover:text-white" />
-                          ),
-                          className:
-                            "p-2 hover:!bg-red-500 transition-all duration-200",
-                        }}
+                          }
+                          className=
+                            "p-2 hover:!bg-red-500 transition-all duration-200"
                       />
                     </div>
                     <div>
                       <AppButton
-                        props={{
-                          size: "xs",
-                          radius: "sm",
-                          variant: "light",
-                          isIconOnly: true,
-                          onPress: () =>
-                            openModal(
-                              "edit",
-                              "",
-                              <DocumentsModal
-                                onClose={() => {}}
-                                onCloseAll={closeAllModals}
-                                onSubmit={(imageSrc: string) =>
-                                  handleImageSubmit(index, imageSrc)
-                                }
-                              />,
-                              undefined,
-                              "lg",
-                            ),
-                          content: (
+                          size="xs"
+                          radius="sm"
+                          variant="light"
+                          isIconOnly={true}
+                          onPress={handleOpenDocuments}
+                          content={
                             <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
-                          ),
-                          className:
-                            "p-2 hover:!bg-primary transition-all duration-200",
-                        }}
+                          }
+                          className=
+                            "p-2 hover:!bg-primary transition-all duration-200"
                       />
                     </div>
                   </div>

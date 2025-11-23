@@ -135,13 +135,11 @@ const handleOpenOnDutyHealthRecords = () => {
                 </span>
               </div>
               <AppButton
-                props={{
-                  isIconOnly: true,
-                  color: 'white',
-                  className: 'border border-primary',
-                  onPress: openPreEmploymentModal,
-                  content: <Add />,
-                }}
+                  isIconOnly={true}
+                  color='white'
+                  className='border border-primary'
+                  onPress={openPreEmploymentModal}
+                  content={<Add />}
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -150,18 +148,16 @@ const handleOpenOnDutyHealthRecords = () => {
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
-                      props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
-                        size: 'xs',
-                        radius: 'lg',
-                        onPress: () => {handleOpenAddNewOnDutyHealthRecords},
-                        content: (
+                        className='bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]'
+                        size='xs'
+                        radius='lg'
+                        onPress= {() => handleOpenAddNewOnDutyHealthRecords}
+                        content={
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
                             <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
-                        ),
-                      }}
+                        }
                     />
                   </div>
                   <div className="flex items-center justify-between p-1.5 border border-[#DCF0F9]/40 rounded-4">
@@ -202,13 +198,11 @@ const handleOpenOnDutyHealthRecords = () => {
                 <span className="text-xl font-semibold text-secondary-900">On-Duty Health Records</span>
               </div>
               <AppButton
-                props={{
-                  isIconOnly: true,
-                  color: 'white',
-                  className: 'border border-primary',
-                  onPress: () => {handleOpenOnDutyHealthRecords},
-                  content: <Add />,
-                }}
+                  isIconOnly={true}
+                  color='white'
+                  className='border border-primary'
+                  onPress={() => {handleOpenOnDutyHealthRecords}}
+                  content={<Add />}
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -217,18 +211,16 @@ const handleOpenOnDutyHealthRecords = () => {
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
-                      props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
-                        size: 'xs',
-                        radius: 'lg',
-                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'3xl',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
-                        content: (
+                        className='bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]'
+                        size='xs'
+                        radius='lg'
+                        onPress={() => handleOpenOnDutyHealthRecords }
+                        content={
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
                             <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
-                        ),
-                      }}
+                        }
                     />
                   </div>
                   <div className="flex items-center justify-between p-1.5 border border-[#DCF0F9]/40 rounded-4">

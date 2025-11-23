@@ -23,7 +23,7 @@ const TestReport = () => {
   const { openModal } = useModalContext();
 
   const modal = useModal()
-  const handleOpenAddNewOnDutyHealthRecords = () => {
+  const handleOpenTestReportModal = () => {
     modal.open(
       ModalType.CREATE,
       "Test Result",
@@ -74,36 +74,20 @@ const TestReport = () => {
                       {worker.titleJob}
                     </span>
                     <AppButton
-                      props={{
-                        className:
-                          "bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]",
-                        size: "xs",
-                        radius: "lg",
-                        onPress: () =>
-                          openModal(
-                            "edit",
-                            "",
-                            <TestReportModal />,
-                            undefined,
-                            "lg",
-                            "Test Result",
-                            <TickSquare className="text-white" />,
-                          ),
-                        content: <span>{worker.job}</span>,
-                      }}
+                        className=
+                          "bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]"
+                        size= "xs"
+                        radius= "lg"
+                        onPress={() => handleOpenTestReportModal}
+                        content= {<span>{worker.job}</span>}
                     />
                   </div>
                   <AppButton
-                    props={{
-                      className: "bg-[#DCF0F94]/40 ",
-                      size: "xs",
-                      onPress: () => {
-                        console.log("clicked");
-                      },
-                      content: <ArrowDown />,
-                    }}
+                      className= "bg-[#DCF0F94]/40 "
+                      size="xs"
+                      onPress={}
+                      content= { <ArrowDown />}
                   />
-                </div>
                 <div className="flex items-center justify-between p-1.5">
                   <div className="flex  gap-1">
                     <User size="16" />

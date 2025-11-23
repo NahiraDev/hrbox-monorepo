@@ -76,7 +76,7 @@ const Achievements = () => {
                         isIconOnly={true}
                         onPress={handleDeleteTechnicalDepartments}
                         content={<Trash className="text-secondary-1000 group-hover:text-white" />}
-                        className: 'p-2 hover:!bg-red-500 transition-all duration-200'
+                        className='p-2 hover:!bg-red-500 transition-all duration-200'
                       />
                     </div>
                   </div>

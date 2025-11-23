@@ -121,29 +121,25 @@ const Dependents = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
-                    props={{
-                      size: "xs",
-                      radius: "sm",
-                      color: "white",
-                      variant: "solid",
-                      isIconOnly: true,
-                      className: "bg-white border-1 border-primary p-2",
-                      content: (
+                      size="xs"
+                      radius="sm"
+                      color="white"
+                      variant="solid"
+                      isIconOnly={true}
+                      className="bg-white border-1 border-primary p-2"
+                      content={
                         <MessageEdit className="text-secondary-900" size="20" />
-                      ),
-                    }}
+                      }
                   />
                   <AppButton
-                    props={{
-                      size: "xs",
-                      radius: "sm",
-                      color: "white",
-                      variant: "solid",
-                      isIconOnly: true,
-                      onPress: () =>{handleOpenSpouse},
-                      className: "bg-white border-1 border-primary p-2",
-                      content: <Add className="text-secondary-900" size="20" />,
-                    }}
+                      size="xs"
+                      radius="sm"
+                      color="white"
+                      variant="solid"
+                      isIconOnly={true}
+                      onPress={handleOpenSpouse}
+                      className="bg-white border-1 border-primary p-2"
+                      content={<Add className="text-secondary-900" size="20" />}
                   />
                 </div>
               </div>
@@ -230,16 +226,14 @@ const Dependents = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <AppButton
-                    props={{
-                      size: "xs",
-                      radius: "sm",
-                      color: "white",
-                      variant: "solid",
-                      isIconOnly: true,
-                      onPress: () =>{handleOpenDependents},
-                      className: "bg-white border-1 border-primary p-2",
-                      content: <Add className="text-secondary-900" size="20" />,
-                    }}
+                      size="xs"
+                      radius="sm"
+                      color="white"
+                      variant="solid"
+                      isIconOnly={true}
+                      onPress={handleOpenDependents}
+                      className="bg-white border-1 border-primary p-2"
+                      content={<Add className="text-secondary-900" size="20" />}
                   />
                 </div>
               </div>
@@ -258,27 +252,10 @@ const Dependents = () => {
                         <div className="flex gap-1">
                           <div>
                             <AppButton
-                              props={{
-                                size: "xs",
-                                radius: "sm",
-                                variant: "light",
-                                isIconOnly: true,
-                                onPress: () =>
-                                  openModal(
-                                    "delete",
-                                    "",
-                                    <AppDeleteModal />,
-                                    undefined,
-                                    "lg",
-                                    "Do you want to remove it?",
-                                    <Trash className="text-white" />,
-                                  ),
-                                content: (
-                                  <Trash className="text-secondary-1000 group-hover:text-white" />
-                                ),
-                                className:
-                                  "p-2 hover:!bg-red-500 transition-all duration-200",
-                              }}
+                                size="xs"
+                                radius="sm"
+                                variant="light"
+                                isIconOnly={true}
                             />
                           </div>
                         </div>
@@ -351,16 +328,14 @@ const Dependents = () => {
               </div>
               <div className="flex items-center gap-2">
                 <AppButton
-                  props={{
-                    size: "xs",
-                    radius: "sm",
-                    color: "white",
-                    variant: "solid",
-                    isIconOnly: true,
-                    onPress: () =>{handleOpenRelative},
-                    className: "bg-white border-1 border-primary p-2",
-                    content: <Add className="text-secondary-900" size="20" />,
-                  }}
+                    size="xs"
+                    radius="sm"
+                    color="white"
+                    variant="solid"
+                    isIconOnly={true}
+                    onPress={handleOpenRelative}
+                    className="bg-white border-1 border-primary p-2"
+                    content={<Add className="text-secondary-900" size="20" />}
                 />
               </div>
             </div>
@@ -380,27 +355,10 @@ const Dependents = () => {
                         <div className="flex gap-1">
                           <div>
                             <AppButton
-                              props={{
-                                size: "xs",
-                                radius: "sm",
-                                variant: "light",
-                                isIconOnly: true,
-                                onPress: () =>
-                                  openModal(
-                                    "delete",
-                                    "",
-                                    <AppDeleteModal />,
-                                    undefined,
-                                    "lg",
-                                    "Do you want to remove it?",
-                                    <Trash className="text-white" />,
-                                  ),
-                                content: (
-                                  <Trash className="text-secondary-1000 group-hover:text-white" />
-                                ),
-                                className:
-                                  "p-2 hover:!bg-red-500 transition-all duration-200",
-                              }}
+                                size="xs"
+                                radius="sm"
+                                variant="light"
+                                isIconOnly={true}
                             />
                           </div>
                         </div>

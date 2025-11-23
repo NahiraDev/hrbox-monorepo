@@ -53,15 +53,13 @@ const Jobs = () => {
                   </div>
                   <div>
                     <AppButton
-                      props={{
-                        size: 'xs',
-                        radius: 'sm',
-                        variant: 'light',
-                        isIconOnly: true,
-                        onPress: () => handleDeleteClick(index),
-                        content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
-                      }}
+                        size= 'xs'
+                        radius= 'sm'
+                        variant= 'light'
+                        isIconOnly= {true}
+                        onPress= {() => handleDeleteClick(index)}
+                        content= {<Trash className="text-secondary-1000 group-hover:text-white" />}
+                        className= 'p-2 hover:!bg-red-500 transition-all duration-200'
                     />
                   </div>
                 </div>
