@@ -2,7 +2,7 @@ import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
-export const initialValuesAction = {
+export const initialValuesHealthDuty = {
   Type: null,
   DrugAddiction: null,
   Smoking: null,
@@ -24,7 +24,7 @@ export const initialValuesAction = {
   Date: null,
   DescriptionsandAchievements: null,
 };
-export const formValidationAction = Yup.object().shape({
+export const formValidationHealthDuty = Yup.object().shape({
   Type: Yup.string().required(),
   DrugAddiction: Yup.string().required(),
   Smoking: Yup.string().required(),
