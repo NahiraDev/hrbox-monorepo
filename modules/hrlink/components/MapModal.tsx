@@ -6,6 +6,7 @@ import {
   useAddLocationMutation,
   useEditLocationMutation,
 } from "@hrbox/modules/hrlink/apis/Common";
+import { DraggableMarker } from "./MarkerMap";
 
 export const MapModal = ({
   position,
@@ -67,20 +68,17 @@ export const MapModal = ({
       </AppModal.Body>
       <AppModal.Footer>
         <AppButton
-          props={{
-            size: "md",
-            color: "secondary",
-            content: "Cancel",
-            onPress: () => closeModal("confirm", ""),
-          }}
+          size="md"
+          color="secondary"
+          content="Cancel"
+          onPress={() => closeModal("confirm", "")}
         />
+
         <AppButton
-          props={{
-            size: "md",
-            color: "primary",
-            content: "Save",
-            onPress: () => handleSave(),
-          }}
+          size="md"
+          color="primary"
+          content="Save"
+          onPress={handleSave}
         />
       </AppModal.Footer>
     </>

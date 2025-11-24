@@ -4,16 +4,20 @@ import {Map as LeafletMap} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Add, Edit} from 'iconsax-reactjs';
 import {AppButton} from '@hrbox/uikit/components';
-import {useModalContext} from '@hrbox/core/providers/ModalProvider';
-import {Card, CardBody, CardHeader} from '@heroui/react';
+import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
+import {Card, CardBody, CardHeader, useModal } from '@heroui/react';
 import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
 import {MapModal} from "@hrbox/modules/hrlink/components/MapModal";
+import { handleSubmitAward } from 'forms/AwardForm';
 
 export const UserLocation = () => {
     const profileString = localStorage.getItem('profile');
     const {openModal, isModalOpen} = useModalContext();
     const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
     const [hasLocation, setHasLocation] = useState(false);
+
+    const handleOpenMapModal = () => {
+    }
 
     useEffect(() => {
         try {
@@ -56,9 +60,7 @@ export const UserLocation = () => {
                 <span className="text-secondary-1000 text-base font-semibold">Location</span>
                 <div>
                     <AppButton
-                        onPress={() => openModal('confirm', 'location', <MapModal isEdit={hasLocation}
-                                                                                  position={position}
-                                                                                  setPosition={setPosition}/>)}
+                        onPress={handleOpenMapModal}
                         content={hasLocation ? (
                             <Edit className="text-secondary-1000" size="14"/>
                         ) : (
