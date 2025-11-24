@@ -19,9 +19,9 @@ function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.Com
   return Wrapper;
 }
 
-export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('ShiftAllocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/>);
-export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('LocationAllocation',LocationAllocationModal,<LocationAdd color='white' size={18}/>);
-export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('IpAllocation',IpAllocationModal,<GlobalEdit color='white' size={18} />);
-export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('FaceAllocation',FaceAllocationModal,<Scan color='white' size={18}/>);
+export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('shiftallocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/>);
+export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('locationallocation',LocationAllocationModal,<LocationAdd color='white' size={18}/>);
+export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('ipallocation',IpAllocationModal,<GlobalEdit color='white' size={18} />);
+export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('faceallocation',FaceAllocationModal,<Scan color='white' size={18}/>);
 
 
