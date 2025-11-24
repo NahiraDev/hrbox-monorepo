@@ -1,4 +1,3 @@
-/*  hrlink/resume/information.tsx  */
 import {
   Calendar,
   DollarCircle,
@@ -25,11 +24,6 @@ import { useEffect } from 'react';
 import { FormProvider } from '@hrbox/core/providers/FormProvider';
 import { t } from 'i18next';
 
-/* --------------------------------------------------------------
-   Helper – decide if the profile is “complete”.
-   Add / remove fields here to match your business rule.
-   -------------------------------------------------------------- */
-   
 const isProfileComplete = (profile?: any): boolean => {
   if (!profile) return false;
   return !!(
@@ -73,13 +67,13 @@ const ResumeInfo = () => {
     );
   }
 
-  // if (isError || !profile) {
-  //   return (
-  //     <div className="flex h-screen items-center justify-center">
-  //       <p className="text-red-600">خطا در دریافت اطلاعات پروفایل</p>
-  //     </div>
-  //   );
-  // }
+  if (isError || !profile) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-red-600">خطا در دریافت اطلاعات پروفایل</p>
+      </div>
+    );
+  }
 
   /* ----------------------------------------------------------
      MAIN UI – unchanged from your original file
