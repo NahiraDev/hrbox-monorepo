@@ -2,17 +2,17 @@ import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { Avatar } from "@heroui/react";
 import { useRef, useState } from "react";
 
-const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
+const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }:any) => {
   const fileInputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+    if (fileInputRef?.current) {
+      fileInputRef.current?.click();
     }
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: { target: { files: any[]; }; }) => {
     const file = event.target.files[0];
     if (file) {
       console.log("فایل انتخاب شده:", file);
@@ -92,14 +92,12 @@ const DocumentsModal = ({ onClose, onSubmit, onCloseAll, initialImage }) => {
             </div>
           ) : (
             <AppButton
-              props={{
-                size: "xs",
-                radius: "sm",
-                color: "primary",
-                onPress: handleButtonClick,
-                content: <span>Upload File</span>,
-                className: "text-white py-1.5 px-3 text-xl rounded-lg ",
-              }}
+              size="xs"
+              radius="sm"
+              color="primary"
+              onPress={handleButtonClick}
+              content={<span>Upload File</span>}
+              className="text-white py-1.5 px-3 text-xl rounded-lg "
             />
           )}
           <input
