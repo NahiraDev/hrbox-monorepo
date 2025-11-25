@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { useModalContext } from "@hrbox/core/providers";
+import { useTranslation } from "react-i18next";
 
 export const initialValuesAction = {
   title: null,
@@ -50,6 +51,7 @@ export const handleSubmitAction = (values: any) => {
 };
 
 const FaceAllocationForm = () => {
+  const {t}=useTranslation();
   const {
     values,
     errors,
@@ -71,27 +73,27 @@ const FaceAllocationForm = () => {
               base: "w-full flex justify-between",
               wrapper: "w-full flex justify-between",
             }}
-            defaultValue="Person"
+            defaultValue={t("person")}
             orientation="horizontal"
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
-              value="Person"
+              value={t("person")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Person
+              {t("person")}
             </Radio>
             <Radio
-              value="Group"
+              value={t("group")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Group
+              {t("group")}
             </Radio>
             <Radio
-              value="JobTitle"
+              value={t("job_title")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Job Title
+              {t("job_title")}
             </Radio>
           </RadioGroup>
           <div className="flex flex-row justify-between gap-10">
@@ -99,7 +101,7 @@ const FaceAllocationForm = () => {
               <FormField
                 formMode={currentType}
                 name="ChooseFace"
-                label="Choose Face Recognition Assignment"
+                label={t("choose_face_recognition_assignment")}
                 component={AppAutoComplete}
               />
             </div>
@@ -107,7 +109,7 @@ const FaceAllocationForm = () => {
               <FormField
                 formMode={currentType}
                 name="FromDate"
-                label="From Date"
+                label={t("_date")}
                 component={AppAutoComplete}
               />
             </div>
@@ -117,16 +119,16 @@ const FaceAllocationForm = () => {
               <FormField
                 formMode={currentType}
                 name="organization"
-                label="Organization"
+                label={t("organizations")}
                 component={AppAutoComplete}
               />
             </div>
-            {values?.type === "Person" || values?.type === "Group" ? (
+            {values?.type === t("person") || values?.type === t("group") ? (
               <div className="w-full">
                 <FormField
                   formMode={currentType}
                   name="Department"
-                  label="Department"
+                  label={t("department")}
                   component={AppAutoComplete}
                 />
               </div>
@@ -135,19 +137,19 @@ const FaceAllocationForm = () => {
                 <FormField
                   formMode={currentType}
                   name="JobTitle"
-                  label="Job Title"
+                  label={t("job_title")}
                   component={AppAutoComplete}
                 />
               </div>
             )}
           </div>
-          {values?.type === "Person" && (
+          {values?.type === t("person") && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
                   formMode={currentType}
                   name="Employee"
-                  label="Employee"
+                  label={t("employee")}
                   component={AppAutoComplete}
                 />
               </div>
@@ -159,7 +161,7 @@ const FaceAllocationForm = () => {
             <FormField
               formMode={currentType}
               name="Description"
-              label="Description"
+              label={t("descriptions")}
               component={AppTextArea}
             />
           </div>

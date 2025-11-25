@@ -77,7 +77,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           return {
             wrapper: clsx(
               baseWrapper,
-              'bg-white dark:bg-neutral-800',
+              'bg-white dark:bg-neutral-800 ',
               'dark:border-neutral-600',
               'hover:border-primary-300 dark:hover:border-primary-600',
               'focus-within:border-primary focus-within:shadow-lg'

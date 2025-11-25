@@ -12,6 +12,7 @@ import { moduleRegistry } from "@hrbox/modules/registry";
 import { BaseLayout } from "@hrbox/core/layouts/BaseLayout";
 import { AuthLayout } from "@hrbox/core/layouts/AuthLayout";
 import { EmptyLayout } from "@hrbox/core/layouts/EmptyLayout";
+import { FramedLayout } from "@hrbox/core/layouts/FramedLayout";
 
 // ============================================
 // Types
@@ -48,12 +49,14 @@ function extractPanelFromPath(path: string): Panel | null {
 // Helper: Get Layout Component
 // ============================================
 
-function getLayoutComponent(layoutType?: 'base' | 'auth' | 'empty') {
+function getLayoutComponent(layoutType?: 'base' | 'auth' | 'empty' | 'framed') {
   switch (layoutType) {
     case 'auth':
       return AuthLayout;
     case 'empty':
       return EmptyLayout;
+    case 'framed':
+      return FramedLayout;
     case 'base':
     default:
       return BaseLayout;

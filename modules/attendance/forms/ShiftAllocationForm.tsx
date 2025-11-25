@@ -7,6 +7,7 @@ import { TimerStart } from "iconsax-reactjs";
 import * as Yup from "yup";
 import { useEffect } from "react";
 import { useModal } from "@hrbox/core/hooks";
+import { useTranslation } from "react-i18next";
 
 export const formValidationAction = Yup.object().shape({
   title: Yup.string().required(),
@@ -41,6 +42,7 @@ export const handleSubmitAction = (values: any) => {
 };
 
 const ShiftAllocationForm = () => {
+  const {t}=useTranslation();
   const {
     values,
     errors,
@@ -62,34 +64,34 @@ const ShiftAllocationForm = () => {
             base: "w-full flex justify-between",
             wrapper: "w-full flex justify-between",
           }}
-          defaultValue="Person"
+          defaultValue={t("person")}
           orientation="horizontal"
           onValueChange={(value) => setFieldValue("type", value)}
         >
           <Radio
-            value="Person"
+            value={t("person")}
             classNames={{ wrapper: "border-2 border-primary" }}
           >
-            Person
+            {t("person")}
           </Radio>
           <Radio
-            value="Group"
+            value={t("group")}
             classNames={{ wrapper: "border-2 border-primary" }}
           >
-            Group
+            {t("group")}
           </Radio>
           <Radio
-            value="JobTitle"
+            value={t("job_title")}
             classNames={{ wrapper: "border-2 border-primary" }}
           >
-            Job Title
+            {t("job_title")}
           </Radio>
         </RadioGroup>
         <div className="flex flex-row justify-between gap-10">
           <div className="w-full">
             <FormField
               name="ChooseShift"
-              label="Choose Shift"
+              label={t("choose_shift")}
               component={AppAutoComplete}
               formMode={currentType}
               data={[
@@ -103,7 +105,7 @@ const ShiftAllocationForm = () => {
           <div className="w-full">
             <FormField
               name="FromDate"
-              label="From Date"
+              label={t("form_date")}
               component={AppAutoComplete}
               formMode={currentType}
             />
@@ -113,17 +115,17 @@ const ShiftAllocationForm = () => {
           <div className="w-full">
             <FormField
               name="organization"
-              label="Organization"
+              label={t("organizations")}
               component={AppAutoComplete}
               formMode={currentType}
             />
           </div>
-          {(values && values?.type === "Person") ||
-          (values && values?.type === "Group") ? (
+          {(values && values?.type === t("person")) ||
+          (values && values?.type === t("group")) ? (
             <div className="w-full">
               <FormField
                 name="Department"
-                label="Department"
+                label={t("department")}
                 component={AppAutoComplete}
                 formMode={currentType}
               />
@@ -132,19 +134,19 @@ const ShiftAllocationForm = () => {
             <div className="w-full">
               <FormField
                 name="JobTitle"
-                label="Job Title"
+                label={t("job_title")}
                 component={AppAutoComplete}
                 formMode={currentType}
               />
             </div>
           )}
         </div>
-        {values && values?.type === "Person" && (
+        {values && values?.type === t("person") && (
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
                 name="Employee"
-                label="Employee"
+                label={t("employee")}
                 component={AppAutoComplete}
                 formMode={currentType}
               />
@@ -156,7 +158,7 @@ const ShiftAllocationForm = () => {
         <div className="w-full">
           <FormField
             name="Description"
-            label="Description"
+            label={t("descriptions")}
             component={AppTextArea}
             formMode={currentType}
           />
