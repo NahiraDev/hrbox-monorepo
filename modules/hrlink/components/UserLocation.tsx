@@ -7,7 +7,7 @@ import {AppButton} from '@hrbox/uikit/components';
 import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 import {Card, CardBody, CardHeader, useModal } from '@heroui/react';
 import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
-import {MapModal} from "@hrbox/modules/hrlink/components/MapModal";
+import { MapModal } from "@hrbox/modules/hrlink/components/MapModal";
 import { handleSubmitAward } from 'forms/AwardForm';
 
 export const UserLocation = () => {
@@ -16,9 +16,20 @@ export const UserLocation = () => {
     const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
     const [hasLocation, setHasLocation] = useState(false);
 
-    const handleOpenMapModal = () => {
-    }
-
+    const handleOpenMap = () => {
+      openModal({
+        content: (
+          <MapModal
+            position={{ lat: 35.6, lng: 51.4 }}        // e.g. { lat: 35.6, lng: 51.4 } or null
+            setPosition={(newPos) => {
+              // here you save it to your form state
+              setYourFormLocation(newPos);
+            }}
+            isEdit={false}   // or true when editing
+          />
+        ),
+      });
+    };
     useEffect(() => {
         try {
             if (profileString) {
@@ -60,7 +71,7 @@ export const UserLocation = () => {
                 <span className="text-secondary-1000 text-base font-semibold">Location</span>
                 <div>
                     <AppButton
-                        onPress={handleOpenMapModal}
+                        onPress={handleOpenMap}
                         content={hasLocation ? (
                             <Edit className="text-secondary-1000" size="14"/>
                         ) : (
