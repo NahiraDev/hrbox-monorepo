@@ -5,7 +5,7 @@ import {
   useAddLocationMutation,
   useEditLocationMutation,
 } from "@hrbox/modules/hrlink/apis/Common";
-import {DraggableMarker} from "@hrbox-monorepo/modules/hrlink/components/MarkerMap";
+import { DraggableMarker } from "./MarkerMap";
 
 export const MapModal = ({
   position,

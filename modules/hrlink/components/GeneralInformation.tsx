@@ -3,9 +3,11 @@ import { Edit } from "iconsax-reactjs";
 import { Avatar, Card } from "@heroui/react";
 import { useAppSelector } from "@hrbox/core/redux";
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
+import { useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
 
 export const GeneralInformation = () => {
   const profileData: any = useAppSelector((state) => state.profile);
+  const { data: aboutMe } = useFetchUserAboutMeQuery();
 
   return (
     <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
@@ -19,14 +21,36 @@ export const GeneralInformation = () => {
         <div className="flex justify-between">
           <div />
           <div>
-            <Avatar className="w-[70px] h-[70px]" src="" />
+            <Avatar
+              className="w-[70px] h-[70px]"
+              src={aboutMe?.avatarUrl || ""}
+            />
           </div>
           <div className="flex flex-col gap-1">
-            <AppButton content={<TelegramIcon />} isIconOnly={true} />
-            <AppButton content={<LinkedinIcon />} isIconOnly={true} />
-            <AppButton content={<InstagramIcon />} isIconOnly={true} />
+            <AppButton
+              content={<TelegramIcon />}
+              isIconOnly={true}
+              onPress={() =>
+                aboutMe?.telegram && window.open(aboutMe.telegram, "_blank")
+              }
+            />
+            <AppButton
+              content={<LinkedinIcon />}
+              isIconOnly={true}
+              onPress={() =>
+                aboutMe?.linkedin && window.open(aboutMe.linkedin, "_blank")
+              }
+            />
+            <AppButton
+              content={<InstagramIcon />}
+              isIconOnly={true}
+              onPress={() =>
+                aboutMe?.instagram && window.open(aboutMe.instagram, "_blank")
+              }
+            />
           </div>
         </div>
+
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1 items-center">
             <span className="text-secondary-900 dark:text-white font-semibold">
@@ -34,8 +58,9 @@ export const GeneralInformation = () => {
                 " " +
                 profileData?.profile?.lastName}
             </span>
+
             <span className="text-xs font-light text-secondary-900 dark:text-white">
-              PO.Inc.Alabama Machinery & Supply.
+              {aboutMe?.company || "PO.Inc.Alabama Machinery & Supply."}
             </span>
           </div>
 
@@ -44,7 +69,7 @@ export const GeneralInformation = () => {
               About Me
             </span>
             <p className="text-xs font-light text-secondary-1000 dark:text-white text-justify leading-normal">
-              {profileData?.profile?.biography}
+              {aboutMe?.biography || profileData?.profile?.biography}
             </p>
           </div>
         </div>
