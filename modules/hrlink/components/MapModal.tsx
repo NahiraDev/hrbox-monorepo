@@ -44,13 +44,6 @@ export const MapModal = ({
     }
   };
   return (
-    // <AppModal
-    //   icon={<Location className="text-white" size="22" />}
-    //   size="2xl"
-    //   title={isEdit ? "Edit Location" : "Add Location"}
-    // >
-    <>
-      <AppModal.Body>
         <div className="h-[400px] w-full rounded-md overflow-hidden">
           <MapContainer
             center={currentPosition}
@@ -65,23 +58,5 @@ export const MapModal = ({
             />
           </MapContainer>
         </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          size="md"
-          color="secondary"
-          content="Cancel"
-          onPress={() => closeModal("confirm", "")}
-        />
-
-        <AppButton
-          size="md"
-          color="primary"
-          content="Save"
-          onPress={handleSave}
-        />
-      </AppModal.Footer>
-    </>
-    // </AppModal>
   );
 };
