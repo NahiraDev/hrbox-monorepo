@@ -3,40 +3,42 @@ import "../../app/index.css";
 import { ArrowLeft2, ArrowRight2, InfoCircle } from "iconsax-reactjs";
 import { Tooltip } from "@heroui/react";
 import { isExpanded } from "bpmn-js/lib/util/DiUtil";
+import { useTranslation } from "react-i18next";
 const Comprehensivereport = ({ isExpanded, onToggle }) => {
+  const {t}=useTranslation();
   const inputs = [
-    "Total Daily Working Hours",
-    "Shift overtime",
-    "Work on a holiday",
-    "Remaining leave until today",
-    "Total hourly attendance hours",
-    "Approved overtime",
-    "Working on a confirmed holiday",
-    "Remaining leave this month",
-    "Fingerprint attendance",
-    "Unapproved overtime",
-    "Working on a holiday is not approved",
-    "Daily leave used",
-    "Attendance and absence system (IP/GPS)",
-    "Work on Friday",
+    "total_daily_working_hours",
+    "Shift_overtime",
+    "work_on_a_holiday",
+    "remaining_leave_until_today",
+    "total_hourly_attendance_hours",
+    "approved_overtime",
+    "working_on_a_confirmed_holiday",
+    "remaining_leave_this_month",
+    "fingerprint_attendance",
+    "unapproved_overtime",
+    "working_on_a_holiday_is_not_approved",
+    "daily_leave_used",
+    "attendance_and_absence_system_(IP/GPS)",
+    "work_on_friday",
     "absence",
-    "Hourly leave used",
-    "Manual human resources attendance",
-    "Work confirmed on Friday",
-    "Lack of working hours",
-    "Daily mission/task",
-    "Number of attendance deficiencies",
-    "Work not confirmed on Friday",
-    "Delay in arrival",
-    "Hourly mission/task",
-    "Night shift work",
-    "Hourly mission",
-    "Night overtime",
-    "Approved night overtime (closed)",
-    "Unapproved night overtime (closed)",
-    "Approved night overtime (Friday)",
-    "Unconfirmed night overtime (Friday)",
-    "Unconfirmed night overtime (Friday)",
+    "hourly_leave_used",
+    "manual_human_resources_attendance",
+    "work_confirmed_on_friday",
+    "lack_of_working_hours",
+    "daily_mission/task",
+    "number_of_attendance_deficiencies",
+    "work_not_confirmed_on_friday",
+    "delay_in_arrival",
+    "hourly_mission/task",
+    "night_shift_work",
+    "hourly_mission",
+    "night_overtime",
+    "approved_night_overtime_(closed)",
+    "unapproved_night_overtime_(closed)",
+    "approved_night_overtime_(Friday)",
+    "unconfirmed_night_overtime_(Friday)",
+    "unconfirmed_night_overtime_(Friday)",
   ];
   return (
     <>
@@ -45,7 +47,7 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
       >
         <div className="flex w-full justify-start border-b border-neutral-100">
           <p className="mb-1 text-lg! font-bold! font-open-sans!">
-            Comprehensive report
+            {t("comprehensive_report")}
           </p>
           <AppButton
             content={
@@ -73,7 +75,7 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
               >
                 <AppInput
                   name="title"
-                  label={label}
+                  label={t(label)}
                   size="lg"
                   radius="lg"
                   className="bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)] "

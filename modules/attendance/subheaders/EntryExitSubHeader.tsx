@@ -13,12 +13,14 @@ import { addToast, ToastProvider } from "@heroui/react";
 import { FormProvider } from "@hrbox/core/providers";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
+import { useTranslation } from "react-i18next";
 
 const EntryExitSubHeader = (props: any) => {
   const { openModal } = useModalContext();
   const [clock, setClock] = useState(false);
   const [time, setTime] = useState(0);
   const intervalRef = useRef(null);
+  const {t}=useTranslation();
   useEffect(() => {
     if (clock) {
       intervalRef.current = setInterval(() => {
@@ -62,7 +64,7 @@ const EntryExitSubHeader = (props: any) => {
         </div>
         <div className="flex flex-col">
           <div className="flex">
-            <AppPageTitle title={props.title} icon={props.icon} />
+            <AppPageTitle title={t(props.title)} icon={props.icon} />
           </div>
           <div className="mt-8 flex flex-row items-center justify-between">
             <div className="flex flex-row items-center">
@@ -135,7 +137,7 @@ const EntryExitSubHeader = (props: any) => {
               <div className="flex gap-8 w-full justify-end">
                 <FormField
                   name="project-name"
-                  title="Select project / Task"
+                  title={t("Selectproject/Task")}
                   component={AppDropDown}
                   size="md"
                   startIcon={<Trello size={24} />}
@@ -178,7 +180,7 @@ const EntryExitSubHeader = (props: any) => {
                   }}
                   content={
                     <span className="text-white">
-                      {clock ? "Clock out" : "Clock in"}
+                      {clock ? t("clock_out") : t("clock_in")}
                     </span>
                   }
                 />

@@ -9,7 +9,7 @@ import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { Avatar } from "@heroui/react";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import * as Yup from "yup";
-export const initialValuesAction = {
+export const initialValuesOrganizationLocation = {
   LocationTitle: null,
   URL: null,
   Province: null,
@@ -18,7 +18,7 @@ export const initialValuesAction = {
   Address: null,
   Descriptions: null,
 };
-export const formValidationAction = Yup.object().shape({
+export const formValidationOrganizationLocation = Yup.object().shape({
   LocationTitle: Yup.string().required(),
   URL: Yup.string().required(),
   Province: Yup.string().required(),

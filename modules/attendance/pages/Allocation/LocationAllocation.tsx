@@ -3,7 +3,7 @@ import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { useState } from 'react';
 import { useModal } from '@hrbox/core/hooks';
 import { ModalSize, ModalType } from '@hrbox/core/providers';
-import LocationAllocationShow from '../../modals/LocationAllocationShow';
+import LocationAllocationModal from '@hrbox/modules/attendance/modals/LocationAllocationModal';
 
 const LocationAllocation=()=>{
   const [data,setData]=useState(Allocatio);
@@ -12,7 +12,7 @@ const LocationAllocation=()=>{
         modal.open(
         ModalType.VIEW,
         "location-allocation",
-        <LocationAllocationShow/>,
+        <LocationAllocationModal/>,
         {
           isForm: true,
           submitLabel: "Submit Again",

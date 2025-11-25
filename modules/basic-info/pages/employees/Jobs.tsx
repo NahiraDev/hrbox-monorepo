@@ -2,10 +2,14 @@ import { Card } from '@heroui/react';
 import { Jobss } from '@module/basic-info/app/mock';
 import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { useState } from 'react';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
+import { useModal } from "@HRBox/core/hooks";
+import EmployeeSatisfactionCalendarModal from "@HRBox/modules/basic-info/modals/EmployeeSatisfactionCalendarModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 const Jobs = () => {
   const { openModal } = useModalContext();
@@ -34,6 +38,7 @@ const Jobs = () => {
     });
   };
 
+
   return (
     <>
       <BasicInfoLayout
@@ -48,15 +53,13 @@ const Jobs = () => {
                   </div>
                   <div>
                     <AppButton
-                      props={{
-                        size: 'xs',
-                        radius: 'sm',
-                        variant: 'light',
-                        isIconOnly: true,
-                        onPress: () => handleDeleteClick(index),
-                        content: <Trash className="text-secondary-1000 group-hover:text-white" />,
-                        className: 'p-2 hover:!bg-red-500 transition-all duration-200',
-                      }}
+                        size= 'xs'
+                        radius= 'sm'
+                        variant= 'light'
+                        isIconOnly= {true}
+                        onPress= {() => handleDeleteClick(index)}
+                        content= {<Trash className="text-secondary-1000 group-hover:text-white" />}
+                        className= 'p-2 hover:!bg-red-500 transition-all duration-200'
                     />
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { useState } from 'react';
 import { useModal } from '@hrbox/core/hooks';
 import { ModalSize, ModalType } from '@hrbox/core/providers';
-import ShiftAllocationShow from '../../modals/ShiftAllocationShow';
+import ShiftAllocationModal from '@hrbox/modules/attendance/modals/ShiftAllocationModal';
 const ShiftAllocation=()=>{
   const [data,setData]=useState(Allocatio);
   const modal=useModal();
@@ -11,7 +11,7 @@ const ShiftAllocation=()=>{
       modal.open(
       ModalType.VIEW,
       "shift-allocation",
-      <ShiftAllocationShow/>,
+      <ShiftAllocationModal/>,
       {
         isForm: true,
         submitLabel: "Submit Again",

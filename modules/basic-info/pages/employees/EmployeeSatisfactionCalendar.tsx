@@ -1,8 +1,12 @@
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
 import EmployeeSatisfactionCalendarModal from '../../modals/EmployeeSatisfactionCalendarModal';
 import HowAreYouTodayModal from '@hrbox/modules/basic-info/modals/HowAreYouTodayModal';
+import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import { useModal } from "@HRBox/core/hooks";
 
 // Pixel-based size and text size calculation
 const getCircleSizePx = (number: number): number => {
@@ -271,6 +275,33 @@ const EmployeeSatisfactionCalendar = () => {
     return baseCircles;
   };
 
+  const modal = useModal()
+  const handleOpenEmployeeSatisfactionCalendarModal = () => {
+    modal.open(
+      ModalType.CREATE,
+      " Organizational Locations",
+      < EmployeeSatisfactionCalendarModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
   return (
     <div className="w-screen h-screen flex items-center justify-center p-3">
       <div className="rounded-3xl overflow-hidden border-[3px] border-[#0ea5e9] w-full h-full flex flex-col bg-white">
@@ -326,20 +357,7 @@ const EmployeeSatisfactionCalendar = () => {
                         idx={idx}
                         topCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).topCircles : []}
                         bottomCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).bottomCircles : []}
-                        onPress={() => {
-                          if (isTodayOrPast(date.day, date.isCurrentMonth)) {
-                            openModal(
-                              'custom',
-                              '',
-                              <EmployeeSatisfactionCalendarModal
-                                onItemPress={(item) => console.log('Item pressed:', item)}
-                              />,
-                              undefined,
-                              '3xl',
-                              'Organizational Locations',
-                              <Category className="text-white" />
-                            );
-                          }
+                        onPress={() => {if (isTodayOrPast(date.day, date.isCurrentMonth)) {handleOpenEmployeeSatisfactionCalendarModal}
                         }}
                       />
                     )}

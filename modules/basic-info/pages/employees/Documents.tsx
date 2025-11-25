@@ -8,10 +8,13 @@ import {
   Status,
   Calendar,
 } from "iconsax-reactjs";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import DocumentsModal from "../../modals/DocumentsModal";
+import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 interface Document {
   name: string;
@@ -58,6 +61,32 @@ const Documents = () => {
     });
   };
 
+  const handleOpenDocuments = () => {
+    modal.open(
+      ModalType.CREATE,
+      " Documents",
+      < DocumentsModal />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
   return (
     <BasicInfoLayout
       content={
@@ -68,80 +97,48 @@ const Documents = () => {
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
                     <AppButton
-                      props={{
-                        size: "xs",
-                        radius: "sm",
-                        variant: "light",
-                        isIconOnly: true,
-                        onPress: () =>
-                          openModal(
-                            "custom",
-                            "",
-                            <DocumentsModal
-                              onClose={() => {}}
-                              onCloseAll={closeAllModals}
-                              onSubmit={(imageSrc: string) =>
-                                handleImageSubmit(index, imageSrc)
-                              }
-                            />,
-                            undefined,
-                            "sm",
-                          ),
-                        content: (
+                        size="xs"
+                        radius="sm"
+                        variant="light"
+                        isIconOnly={true}
+                        onPress={handleOpenDocuments}
+                        content={
                           <Avatar
                             radius="sm"
                             size="lg"
                             src={user.avatarSrc || undefined}
                           />
-                        ),
-                      }}
+                        }
                     />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
                     <div>
                       <AppButton
-                        props={{
-                          size: "xs",
-                          radius: "sm",
-                          variant: "light",
-                          isIconOnly: true,
-                          onPress: () => handleDeleteClick(index),
-                          content: (
+                          size="xs"
+                          radius="sm"
+                          variant="light"
+                          isIconOnly={true}
+                          onPress={handleDeleteClick(index)}
+                          content={
                             <Trash className="text-secondary-1000 group-hover:text-white" />
-                          ),
-                          className:
-                            "p-2 hover:!bg-red-500 transition-all duration-200",
-                        }}
+                          }
+                          className=
+                            "p-2 hover:!bg-red-500 transition-all duration-200"
                       />
                     </div>
                     <div>
                       <AppButton
-                        props={{
-                          size: "xs",
-                          radius: "sm",
-                          variant: "light",
-                          isIconOnly: true,
-                          onPress: () =>
-                            openModal(
-                              "edit",
-                              "",
-                              <DocumentsModal
-                                onClose={() => {}}
-                                onCloseAll={closeAllModals}
-                                onSubmit={(imageSrc: string) =>
-                                  handleImageSubmit(index, imageSrc)
-                                }
-                              />,
-                              undefined,
-                              "lg",
-                            ),
-                          content: (
+                          size="xs"
+                          radius="sm"
+                          variant="light"
+                          isIconOnly={true}
+                          onPress={handleOpenDocuments}
+                          content={
                             <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
-                          ),
-                          className:
-                            "p-2 hover:!bg-primary transition-all duration-200",
-                        }}
+                          }
+                          className=
+                            "p-2 hover:!bg-primary transition-all duration-200"
                       />
                     </div>
                   </div>

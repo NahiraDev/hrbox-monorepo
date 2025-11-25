@@ -104,7 +104,7 @@ export const AttendancePlugin: ModulePlugin = {
       },
       subHeader: EntryExitSubHeader,
       subHeaderProps:{
-        title:'My Time',
+        title:"my_time",
         icon:<PasswordCheck size={18} color="white"/>
       }
     },
@@ -113,7 +113,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: AttendanceCalender,
       layout: "base",
       meta: {
-        title: "Attendance Calendar",
+        title: "attendance_calender",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -124,13 +124,13 @@ export const AttendancePlugin: ModulePlugin = {
       component: ListOfApprovals,
       layout: "base",
       meta: {
-        title: "Approvals",
+        title: "approvals",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: ApprovalsSubHeader,
         subHeaderProps:{
-        title:'List of  Approvals',
+        title:'list_of_approvals',
         icon:<Key size={18} color="white"/>
       }
     },
@@ -139,7 +139,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: ShiftAllocation,
       layout: "base",
       meta: {
-        title: "ُShift Allocation",
+        title: "ُshift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -150,7 +150,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: LocationAllocation,
       layout: "base",
       meta: {
-        title: "Location Allocation",
+        title: "ُshift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -161,7 +161,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: IpAllocation,
       layout: "base",
       meta: {
-        title: "Ip Allocation",
+        title: "ُshift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -172,7 +172,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: FaceAllocation,
       layout: "base",
       meta: {
-        title: "Face Allocation",
+        title: "face_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -183,7 +183,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: ExportPage,
       layout: "base",
       meta: {
-        title: "Export",
+        title: "export",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -193,7 +193,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: TrafficCalender,
       layout: "base",
       meta: {
-        title: "Traffic Calendar",
+        title: "traffic_calendar",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },

@@ -3,7 +3,6 @@ import { TickSquare } from "iconsax-reactjs";
 
 export const TestReportModal = () => {
   return (
-    // <AppModal icon={<TickSquare color="white" />} size="3xl" title="Test Result">
     <AppModal.Body>
       <div className="grid grid-cols-2 gap-10">
         <AppInput
@@ -44,6 +43,5 @@ export const TestReportModal = () => {
         />
       </div>
     </AppModal.Body>
-    // </AppModal>
   );
 };

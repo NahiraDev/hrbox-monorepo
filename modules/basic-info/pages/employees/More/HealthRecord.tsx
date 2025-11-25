@@ -14,9 +14,15 @@ import {
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import PreEmploymentHealthRecordsModals from '@hrbox/modules/basic-info/modals/PreEmploymentHealthRecordsModals';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import AddNewOnDutyHealthRecords from '@hrbox/modules/basic-info/modals/AddNewOnDutyHealthRecords';
 import OnDutyHealthRecords from '@hrbox/modules/basic-info/modals/OnDutyHealthRecords';
+import { useModal } from "@HRBox/core/hooks";
+import EmployeeSatisfactionCalendarModal from "@HRBox/modules/basic-info/modals/EmployeeSatisfactionCalendarModal";
+import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
+import {formValidationHealth,initialValuesHealth} from "@HRBox/modules/basic-info/forms/AddNewOnDutyHealthRecordsForm";
+import {formValidationHealthDuty,initialValuesHealthDuty} from "@HRBox/modules/basic-info/forms/PreEmploymentHealthRecordsForm";
+import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 const HealthRecord = () => {
   const { openModal } = useModalContext();
@@ -39,6 +45,83 @@ const HealthRecord = () => {
     );
   };
 
+  const modal = useModal()
+  const handleOpenAddNewOnDutyHealthRecords = () => {
+    modal.open(
+      ModalType.CREATE,
+      " Edit Pre-Employment Health Records",
+      < AddNewOnDutyHealthRecords />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesHealth,
+          validationSchema: formValidationHealth,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+const handleOpenOnDutyHealthRecords = () => {
+    modal.open(
+      ModalType.CREATE,
+      " Add New On-Duty Health Records",
+      < OnDutyHealthRecords />,
+      {
+        isForm: true,
+        title: "افزودن ",
+        submitLabel: "ذخیره",
+        cancelLabel: "لغو",
+        formConfig: {
+          initialValues: initialValuesHealthDuty,
+          validationSchema: formValidationHealthDuty,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+// const handleOpenAddNewOnDutyHealthRecords = () => {
+//     modal.open(
+//       ModalType.CREATE,
+//       " Edit Pre-Employment Health Records",
+//       < AddNewOnDutyHealthRecords />,
+//       {
+//         isForm: true,
+//         title: "افزودن ",
+//         submitLabel: "ذخیره",
+//         cancelLabel: "لغو",
+//         formConfig: {
+//           initialValues: initialValuesHealthDuty,
+//           validationSchema: formValidationHealthDuty,
+//           formId: "award-form",
+//           enableCache: true,
+//           clearCacheOnSubmit: true,
+//           onSubmitAsync: async (values: any) => {
+//             handleSubmitAward(values);
+//             modal.close(ModalType.CREATE, "award-form");
+//           },
+//         },
+//       },
+//       ModalSize.XL,
+//     );
+//   };
+
   return (
     <BasicInfoLayout
       content={
@@ -52,13 +135,11 @@ const HealthRecord = () => {
                 </span>
               </div>
               <AppButton
-                props={{
-                  isIconOnly: true,
-                  color: 'white',
-                  className: 'border border-primary',
-                  onPress: openPreEmploymentModal,
-                  content: <Add />,
-                }}
+                  isIconOnly={true}
+                  color='white'
+                  className='border border-primary'
+                  onPress={openPreEmploymentModal}
+                  content={<Add />}
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -67,18 +148,16 @@ const HealthRecord = () => {
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
-                      props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
-                        size: 'xs',
-                        radius: 'lg',
-                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'3xl',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
-                        content: (
+                        className='bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]'
+                        size='xs'
+                        radius='lg'
+                        onPress= {() => handleOpenAddNewOnDutyHealthRecords}
+                        content={
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
                             <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
-                        ),
-                      }}
+                        }
                     />
                   </div>
                   <div className="flex items-center justify-between p-1.5 border border-[#DCF0F9]/40 rounded-4">
@@ -119,13 +198,11 @@ const HealthRecord = () => {
                 <span className="text-xl font-semibold text-secondary-900">On-Duty Health Records</span>
               </div>
               <AppButton
-                props={{
-                  isIconOnly: true,
-                  color: 'white',
-                  className: 'border border-primary',
-                  onPress: () => openModal('edit',"", <OnDutyHealthRecords/>,undefined ,'xl',"Add New On-Duty Health Records",<HeartEdit className='text-white'/>),
-                  content: <Add />,
-                }}
+                  isIconOnly={true}
+                  color='white'
+                  className='border border-primary'
+                  onPress={() => {handleOpenOnDutyHealthRecords}}
+                  content={<Add />}
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -134,18 +211,16 @@ const HealthRecord = () => {
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>
                     <AppButton
-                      props={{
-                        className: 'bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]',
-                        size: 'xs',
-                        radius: 'lg',
-                        onPress: () => openModal('edit', "",<AddNewOnDutyHealthRecords/>,undefined,'3xl',"Edit Pre-Employment Health Records",<NotificationFavorite className='text-white'/>),
-                        content: (
+                        className='bg-[#DCF0F94]/40 border border-[#DCF0F9] h-[20px] max-w-[107px]'
+                        size='xs'
+                        radius='lg'
+                        onPress={() => handleOpenOnDutyHealthRecords }
+                        content={
                           <div className="flex items-center gap-0.5">
                             <HeartAdd color="#05587A" size="11" />
                             <span className="!text-[10px] text-primary-700">{worker.titleButton}</span>
                           </div>
-                        ),
-                      }}
+                        }
                     />
                   </div>
                   <div className="flex items-center justify-between p-1.5 border border-[#DCF0F9]/40 rounded-4">

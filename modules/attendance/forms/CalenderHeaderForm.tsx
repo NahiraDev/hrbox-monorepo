@@ -31,9 +31,8 @@ import {
 import {
   ModalSize,
   ModalType,
-  useModalActions,
-  useModalContext,
 } from "@hrbox/core/providers/ModalProvider";
+import { useTranslation } from "react-i18next";
 
 export const CalenderHeaderForm = () => {
   const {
@@ -47,6 +46,7 @@ export const CalenderHeaderForm = () => {
   const navigate = useNavigate<any>();
   const location = useLocation();
   const modal = useModal();
+  const {t}=useTranslation(); 
 
   const isTrafficCalender =
     location.pathname === "/attendance/traffic-calender";
@@ -77,7 +77,6 @@ export const CalenderHeaderForm = () => {
       <EventModal />, 
       {
         isForm: true,
-        title: "افزودن رویداد",
         submitLabel: "ذخیره",
         cancelLabel: "لغو",
         formConfig: {
@@ -110,7 +109,7 @@ export const CalenderHeaderForm = () => {
               onPress={() =>
                 navigate({ to: "/attendance/attendance-calender" })
               }
-              content="Personal attendance calendar"
+              content={t("Personal_attendance_calendar")}
             />
 
             <AppButton
@@ -120,14 +119,14 @@ export const CalenderHeaderForm = () => {
               className={isTrafficCalender ? "text-white" : "text-black"}
               startContent={<People size={18} />}
               onPress={() => navigate({ to: "/attendance/traffic-calender" })}
-              content="Group attendance calendar"
+              content={t("group_attendance_calendar")}
             />
           </div>
           <div className="flex flex-row gap-3">
             <FormField
               name="month"
               component={AppDropDown}
-                title= "Month"
+                title= {t("month")}
                 items= {months}
                 size="md"
               radius="lg"
@@ -138,7 +137,7 @@ export const CalenderHeaderForm = () => {
             <FormField
               name="year"
               component={AppDropDown}
-                title= "Year"
+                title= {t("year")}
                 item= {years}
                 className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                 size="md"
@@ -155,7 +154,7 @@ export const CalenderHeaderForm = () => {
               className="shadow-none border-1 border-primary"
               startContent={<ExportSquare size={20} />}
               onPress={handleOpenEventModal}
-              content="Export"
+              content={t("export")}
             />
           </div>
         </div>
@@ -179,7 +178,7 @@ export const CalenderHeaderForm = () => {
               <FormField
                 name="person"
                 component={AppDropDown}
-                  title="Person"
+                  title={t("person")}
                   item= {months}
                   className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                   startIcon={<Profile size={22} />}
@@ -188,7 +187,7 @@ export const CalenderHeaderForm = () => {
               <FormField
                 name="department"
                 component={AppDropDown}
-                  title= "Department/Unit"
+                  title= {t("department/unit")}
                   item= {months}
                   className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                   startIcon={<Buildings2 size={22} />}
