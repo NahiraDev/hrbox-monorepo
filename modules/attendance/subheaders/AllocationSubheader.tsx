@@ -29,7 +29,7 @@ const AllocationSubheader = ({
           formId: "face-form",
         },
       },
-      ModalSize.LG
+      ModalSize['2XL']
     );
   }
   return(
