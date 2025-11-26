@@ -28,7 +28,6 @@ export const FormField: React.FC<FormFieldProps> = ({
   const error = touched?.[name] && errors?.[name] ? String(errors[name]) : undefined;
 
   const handleChange = (e: any) => {
-    // Handle both events and direct values
     const newValue = e?.target?.value !== undefined ? e.target.value : e;
     setFieldValue(name, newValue);
   };

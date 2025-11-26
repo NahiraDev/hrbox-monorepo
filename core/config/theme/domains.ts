@@ -13,22 +13,21 @@ export interface DomainConfig {
   panel: Panel;
   hosts: string[];
 
-  // Visual Assets
   logo: string;
   logoMobile: string;
   favicon: string;
 
-  // Page Meta
   title: string;
   description: string;
 
-  // Background Images
   loginBg: {
     light: string;
     dark: string;
   };
-
-  // Theme Colors
+  panelBg:{
+    light: string;
+    dark: string;
+  }
   theme: {
     light: {
       primary: string;
@@ -43,10 +42,6 @@ export interface DomainConfig {
       surface: string;
     };
   };
-
-  // Social/Meta
-  ogImage?: string;
-  twitterCard?: string;
 }
 
 // ============================================
@@ -54,7 +49,6 @@ export interface DomainConfig {
 // ============================================
 
 export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
-  // HRLink Configuration
   hrlink: {
     domain: 'hrlink',
     panel: Panel.HRLINK,
@@ -67,7 +61,7 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
     ],
 
     logo: '/images/hrlink/logo.svg',
-    logoMobile: '/images/hrlink/logo-mobile.svg',
+    logoMobile: '/images/hrlink/logo.svg',
     favicon: '/images/hrlink/favicon.ico',
 
     title: 'HRLink - استخدام و کاریابی',
@@ -77,23 +71,24 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
       light: '/images/hrlink/login-bg-light.webp',
       dark: '/images/hrlink/login-bg-dark.webp',
     },
-
+    panelBg:{
+      light: '/images/hrlink/panel-bg-light.webp',
+      dark: '/images/hrlink/panel-bg-dark.webp',
+    },
     theme: {
       light: {
-        primary: '#0A9AD7',
-        secondary: '#1E3363',
+        primary: '#1E3363',
+        secondary: '#0A9AD7',
         background: '#F5FBFE',
         surface: '#FFFFFF',
       },
       dark: {
-        primary: '#044566',
+        primary: '#DDBA69',
         secondary: '#FFFFFF',
         background: '#04070E',
         surface: '#01101A',
       },
-    },
-
-    ogImage: '/images/hrlink/og-image.jpg',
+    }
   },
 
   hrbox: {
@@ -107,33 +102,35 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
     ],
 
     logo: '/images/hrbox/logo.svg',
-    logoMobile: '/images/hrbox/logo-mobile.svg',
+    logoMobile: '/images/hrbox/logo.svg',
     favicon: '/images/hrbox/favicon.ico',
 
     title: 'HRBox - مدیریت منابع انسانی',
     description: 'سیستم جامع مدیریت منابع انسانی',
 
     loginBg: {
-      light: '/images/hrbox/login-bg-dark.webp',
+      light: '/images/hrbox/login-bg-light.webp',
       dark: '/images/hrbox/login-bg-dark.webp',
+    },
+    panelBg: {
+      light: '/images/hrbox/panel-bg-light.webp',
+      dark: '/images/hrbox/panel-bg-dark.webp',
     },
 
     theme: {
       light: {
-        primary: '#6366F1',
+        primary: '#0A9AD7',
         secondary: '#1E293B',
         background: '#F8FAFC',
         surface: '#FFFFFF',
       },
       dark: {
-        primary: '#818CF8',
+        primary: '#044566',
         secondary: '#FFFFFF',
         background: '#0F172A',
         surface: '#1E293B',
       },
-    },
-
-    ogImage: '/images/hrbox/og-image.jpg',
+    }
   },
 
   // Super Admin Configuration
@@ -172,8 +169,6 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
         surface: '#292524',
       },
     },
-
-    ogImage: '/images/admin/og-image.jpg',
   },
 };
 
@@ -185,38 +180,81 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
  * تشخیص دامنه فعلی
  */
 export function getCurrentDomain(): Panel {
-  if (typeof window === 'undefined') {
-    return Panel.HRBOX; // SSR fallback
-  }
-
   const hostname = window.location.hostname;
   const port = window.location.port;
-  const fullHost = port ? `${hostname}:${port}` : hostname;
 
-  console.log('🔍 Detecting domain from:', fullHost);
+  console.log('🔍 Domain Detection:');
+  console.log('   hostname:', hostname);
+  console.log('   port:', port);
 
-  for (const [panel, config] of Object.entries(DOMAIN_CONFIGS)) {
-    if (config.hosts.some(host => fullHost.includes(host) || hostname.includes(host))) {
-      console.log('✅ Domain detected:', panel);
-      return panel as Panel;
+
+  if (
+      hostname === 'front.hrbox.me' ||
+      hostname === 'hrlink.ir' ||
+      hostname === 'www.hrlink.ir' ||
+      hostname === 'hrlink.me'
+  ) {
+    console.log('✅ Detected: HRLINK (from domain)');
+    return Panel.HRLINK;
+  }
+
+  if (
+      hostname === 'react.hrbox.me' ||
+      hostname === 'hrbox.ir' ||
+      hostname === 'www.hrbox.ir' ||
+      hostname === 'hrbox.me'
+  ) {
+    console.log('✅ Detected: HRBOX (from domain)');
+    return Panel.HRBOX;
+  }
+
+  if (
+      hostname === 'admin.hrbox.me' ||
+      hostname === 'admin.hrbox.ir' ||
+      hostname === 'admin.hrlink.ir'
+  ) {
+    console.log('✅ Detected: SUPER_ADMIN (from domain)');
+    return Panel.SUPER_ADMIN;
+  }
+
+  if (hostname === 'localhost') {
+    if (port === '3000') {
+      console.log('✅ Detected: HRLINK (localhost:3000)');
+      return Panel.HRLINK;
+    }
+
+    if (port === '3001') {
+      console.log('✅ Detected: HRBOX (localhost:3001)');
+      return Panel.HRBOX;
+    }
+
+    if (port === '3002') {
+      console.log('✅ Detected: SUPER_ADMIN (localhost:3002)');
+      return Panel.SUPER_ADMIN;
     }
   }
 
-  console.warn('⚠️ Unknown domain, falling back to hrbox');
-  return Panel.HRBOX;
+  // 5. بررسی Environment Variable
+  const viteHrlinkUrl = import.meta.env.VITE_HRLINK_URL;
+  if (viteHrlinkUrl && hostname.includes(viteHrlinkUrl)) {
+    console.log('✅ Detected: HRLINK (from VITE_HRLINK_URL)');
+    return Panel.HRLINK;
+  }
+
+  // Default: HRLINK
+  console.warn('⚠️ Could not detect domain, using default: HRLINK');
+  return Panel.HRLINK;
 }
 
-/**
- * دریافت تنظیمات دامنه
- */
+export function getDomainTheme(): Panel {
+  return getCurrentDomain();
+}
+
 export function getDomainConfig(panel?: Panel): DomainConfig {
   const currentPanel = panel || getCurrentDomain();
   return DOMAIN_CONFIGS[currentPanel];
 }
 
-/**
- * اعمال Favicon
- */
 export function applyFavicon(panel: Panel) {
   const config = getDomainConfig(panel);
 
@@ -243,9 +281,6 @@ export function applyPageTitle(panel: Panel, pageTitle?: string) {
   console.log('✅ Page title applied:', title);
 }
 
-/**
- * اعمال Meta Tags
- */
 export function applyMetaTags(panel: Panel) {
   const config = getDomainConfig(panel);
 
@@ -258,46 +293,34 @@ export function applyMetaTags(panel: Panel) {
   }
   metaDesc.content = config.description;
 
-  // OG Tags
-  if (config.ogImage) {
-    let ogImage = document.querySelector<HTMLMetaElement>('meta[property="og:image"]');
-    if (!ogImage) {
-      ogImage = document.createElement('meta');
-      ogImage.setAttribute('property', 'og:image');
-      document.head.appendChild(ogImage);
-    }
-    ogImage.content = config.ogImage;
-  }
-
   console.log('✅ Meta tags applied');
 }
 
-/**
- * اعمال Theme به DOM
- */
 export function applyDomainTheme(panel: Panel, mode: 'light' | 'dark') {
   const config = getDomainConfig(panel);
   const theme = config.theme[mode];
   const root = document.documentElement;
 
-  // حذف کلاس‌های قبلی
   root.classList.remove('hrlink', 'hrbox', 'super-admin', 'light', 'dark');
 
   root.classList.add(panel, mode);
   root.style.colorScheme = mode;
 
-  root.style.setProperty('--color-panel-primary', theme.primary);
-  root.style.setProperty('--color-panel-secondary', theme.secondary);
-  root.style.setProperty('--color-panel-background', theme.background);
-  root.style.setProperty('--color-panel-surface', theme.surface);
+  root.style.setProperty('--color-primary', theme.primary);
+  root.style.setProperty('--color-secondary', theme.secondary);
+  root.style.setProperty('--color-background', theme.background);
+  root.style.setProperty('--color-surface', theme.surface);
 
   console.log(`✅ Theme applied: ${panel} (${mode})`);
 }
 
-/**
- * دریافت Login Background
- */
 export function getLoginBackground(panel: Panel, mode: 'light' | 'dark'): string {
   const config = getDomainConfig(panel);
   return config.loginBg[mode];
+}
+
+
+export function getPanelBackground(panel: Panel, mode: 'light' | 'dark'): string {
+  const config = getDomainConfig(panel);
+  return config.panelBg[mode];
 }

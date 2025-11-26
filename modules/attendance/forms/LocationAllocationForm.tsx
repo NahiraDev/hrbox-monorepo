@@ -4,6 +4,8 @@ import { Location } from "iconsax-reactjs";
 import * as Yup from "yup";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
+import { useModalContext } from "@hrbox/core/providers";
+import { useTranslation } from "react-i18next";
 
 export const initialValuesAction = {
   title: null,
@@ -49,15 +51,15 @@ export const handleSubmitAction = (values: any) => {
 };
 
 const LocationAllocationForm = () => {
+  const {t}=useTranslation();
   const {
     values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
     handleSubmit,
     setFieldValue,
   } = useFormContext();
+
+    const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
 
   return (
     <>
@@ -69,42 +71,43 @@ const LocationAllocationForm = () => {
               base: "w-full flex justify-between",
               wrapper: "w-full flex justify-between",
             }}
-            defaultValue="Person"
+            defaultValue={t("person")}
             orientation="horizontal"
-            value={values.type}
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
-              value="Person"
+              value={t("person")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Person
+              {t("person")}
             </Radio>
             <Radio
-              value="Group"
+              value={t("group")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Group
+              {t("group")}
             </Radio>
             <Radio
-              value="JobTitle"
+              value={t("job_title")}
               classNames={{ wrapper: "border-2 border-primary" }}
             >
-              Job Title
+              {t("job_title")}
             </Radio>
           </RadioGroup>
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
                 name="ChooseLocation"
-                label="Choose Location"
+                label={t("choose_location")}
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
             <div className="w-full">
               <FormField
                 name="FromDate"
-                label="From Date"
+                label={t("form_date")}
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
@@ -113,15 +116,17 @@ const LocationAllocationForm = () => {
             <div className="w-full">
               <FormField
                 name="organization"
-                label="Organization"
+                label={t("organizations")}
+                formMode={currentType}
                 component={AppAutoComplete}
               />
             </div>
-            {values.type === "Person" || values.type === "Group" ? (
+            {values?.type === t("person") || values?.type === t("group") ? (
               <div className="w-full">
                 <FormField
                   name="Department"
-                  label="Department"
+                  label={t("department")}
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
@@ -129,18 +134,20 @@ const LocationAllocationForm = () => {
               <div className="w-full">
                 <FormField
                   name="JobTitle"
-                  label="Job Title"
+                  label={t("job_title")}
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
             )}
           </div>
-          {values.type === "Person" && (
+          {values?.type === t("person") && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
                   name="Employee"
-                  label="Employee"
+                  label={t("employee")}
+                  formMode={currentType}
                   component={AppAutoComplete}
                 />
               </div>
@@ -151,7 +158,8 @@ const LocationAllocationForm = () => {
           <div className="w-full">
             <FormField
               name="Description"
-              label="Description"
+              label={t("descriptions")}
+              formMode={currentType}
               component={AppTextArea}
             />
           </div>

@@ -57,23 +57,19 @@ export class ThemeEngine {
   private applyColors(theme: ThemeConfig): void {
     const panelColors = PANEL_PRESETS[theme.panel][theme.mode];
 
-    // رنگ‌های پنل
-    this.setVariable('--color-panel-primary', panelColors.primary);
-    this.setVariable('--color-panel-secondary', panelColors.secondary);
-    this.setVariable('--color-panel-background', panelColors.background);
-    this.setVariable('--color-panel-surface', panelColors.surface);
+    this.setVariable('--color-primary', panelColors.primary);
+    this.setVariable('--color-secondary', panelColors.secondary);
+    this.setVariable('--color-background', panelColors.background);
+    this.setVariable('--color-surface', panelColors.surface);
 
-    // رنگ‌های Primary
     Object.entries(theme.colors.primary).forEach(([key, value]) => {
       this.setVariable(`--color-primary-${key}`, value);
     });
 
-    // رنگ‌های Secondary
     Object.entries(theme.colors.secondary).forEach(([key, value]) => {
       this.setVariable(`--color-secondary-${key}`, value);
     });
 
-    // رنگ‌های Neutral
     Object.entries(theme.colors.neutral).forEach(([key, value]) => {
       this.setVariable(`--color-neutral-${key}`, value);
     });
@@ -87,9 +83,6 @@ export class ThemeEngine {
     });
   }
 
-  /**
-   * اعمال تایپوگرافی
-   */
   private applyTypography(typography: TypographyConfig): void {
     // Font Families
     Object.entries(typography.fontFamily).forEach(([key, value]) => {
@@ -102,36 +95,24 @@ export class ThemeEngine {
     });
   }
 
-  /**
-   * اعمال Spacing
-   */
   private applySpacing(spacing: SpacingConfig): void {
     Object.entries(spacing).forEach(([key, value]) => {
       this.setVariable(`--spacing-${key}`, value);
     });
   }
 
-  /**
-   * اعمال Radius
-   */
   private applyRadius(radius: RadiusConfig): void {
     Object.entries(radius).forEach(([key, value]) => {
       this.setVariable(`--radius-${key}`, value);
     });
   }
 
-  /**
-   * اعمال Shadows
-   */
   private applyShadows(shadows: ShadowConfig): void {
     Object.entries(shadows).forEach(([key, value]) => {
       this.setVariable(`--shadow-${key}`, value);
     });
   }
 
-  /**
-   * اعمال CSS سفارشی
-   */
   private applyCustomCSS(css: string): void {
     let styleElement = document.getElementById('custom-theme-css');
 
@@ -144,17 +125,14 @@ export class ThemeEngine {
     styleElement.textContent = css;
   }
 
-  /**
-   * تنظیم متغیر CSS
-   */
   private setVariable(name: string, value: string): void {
     this.root.style.setProperty(name, value);
   }
 
   private mergeWithDefaults(theme: Partial<ThemeConfig>): ThemeConfig {
     return {
-      mode: theme.mode || 'light',
-      panel: theme.panel || 'hrbox',
+      mode: theme.mode,
+      panel: theme.panel,
       colors: {
         primary: { ...DEFAULT_COLORS.primary, ...theme.colors?.primary },
         secondary: { ...DEFAULT_COLORS.secondary, ...theme.colors?.secondary },

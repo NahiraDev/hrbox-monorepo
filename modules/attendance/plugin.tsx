@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Profile, Briefcase, Building, PasswordCheck } from "iconsax-reactjs";
+import { Profile, Briefcase, Building, PasswordCheck, Key, Chart } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 import {
@@ -84,7 +84,7 @@ export const AttendancePlugin: ModulePlugin = {
     {
       path: Paths.Attendance.Dashboard,
       component: Dashboard,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "Dashboard",
         requireAuth: false,
@@ -103,13 +103,17 @@ export const AttendancePlugin: ModulePlugin = {
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: EntryExitSubHeader,
+      subHeaderProps:{
+        title:"my_time",
+        icon:<PasswordCheck size={18} color="white"/>
+      }
     },
     {
       path: Paths.Attendance.AttendanceCalenders,
       component: AttendanceCalender,
       layout: "base",
       meta: {
-        title: "Attendance Calendar",
+        title: "attendance_calender",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -120,18 +124,22 @@ export const AttendancePlugin: ModulePlugin = {
       component: ListOfApprovals,
       layout: "base",
       meta: {
-        title: "Approvals",
+        title: "approvals",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: ApprovalsSubHeader,
+        subHeaderProps:{
+        title:'list_of_approvals',
+        icon:<Key size={18} color="white"/>
+      }
     },
     {
       path: Paths.Attendance.ShiftAllocation,
       component: ShiftAllocation,
       layout: "base",
       meta: {
-        title: "ُShift Allocation",
+        title: "ُshift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -142,7 +150,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: LocationAllocation,
       layout: "base",
       meta: {
-        title: "Location Allocation",
+        title: "ُshift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -153,7 +161,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: IpAllocation,
       layout: "base",
       meta: {
-        title: "Ip Allocation",
+        title: "shift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -164,7 +172,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: FaceAllocation,
       layout: "base",
       meta: {
-        title: "Face Allocation",
+        title: "face_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -173,9 +181,9 @@ export const AttendancePlugin: ModulePlugin = {
     {
       path: Paths.Attendance.Export,
       component: ExportPage,
-      layout: "base",
+      layout: "framed",
       meta: {
-        title: "Export",
+        title: "export",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -185,7 +193,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: TrafficCalender,
       layout: "base",
       meta: {
-        title: "Traffic Calendar",
+        title: "traffic_calendar",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -201,7 +209,7 @@ export const AttendancePlugin: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/attendance/dashboard",
-      icon: <Profile size="24" />,
+      icon: <Chart size="24" />,
     },
     {
       id: "entry-exit",

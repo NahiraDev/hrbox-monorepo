@@ -1,7 +1,6 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
-import { AuthApiEndpoints } from "@hrbox-monorepo/modules/sso/apis/endpoints";
-
+import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
 
 const ssoApi = createModuleApi({
   reducerPath: 'ssoApi',
@@ -35,13 +34,6 @@ export const ssoApiWithEndpoints = ssoApi.injectEndpoints({
     // Login with OTP
     loginByOtp: createMutation<any, any>(build, {
       url: AuthApiEndpoints.loginByOtp,
-      method: 'POST',
-      tags: ['Auth'],
-    }),
-
-    // Register
-    register: createMutation<any, any>(build, {
-      url: AuthApiEndpoints.registerApi,
       method: 'POST',
       tags: ['Auth'],
     }),

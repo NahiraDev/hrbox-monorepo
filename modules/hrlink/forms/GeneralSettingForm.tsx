@@ -1,11 +1,11 @@
-import { AppAutoComplete, AppButton, AppSwitch } from '@hrbox-monorepo/UIKit/components';
+import { AppAutoComplete, AppButton, AppSwitch } from '@hrbox/uikit/components';
 import { Edit, UserRemove, VolumeHigh } from 'iconsax-reactjs';
 import { Form } from '@heroui/react';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-import { companyPeopleOptions } from '@hrbox-monorepo/modules/hrlink/app/mock';
-import { useFormContext } from '@hrbox-monorepo/core/providers/FormProvider';
+import { companyPeopleOptions } from '@hrbox/modules/hrlink/app/mock';
+import { useFormContext } from '@hrbox/core/providers/FormProvider';
 
 export const initialValuesEditGeralSetting = {
   NotificationByEmail: true,

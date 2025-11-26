@@ -12,8 +12,7 @@ const companyApi = createModuleApi({
 
 export const companyApiWithEndpoints = companyApi.injectEndpoints({
   endpoints: (build) => ({
-    // GET: Company List (Paginated)
-    fetchCompany: createPaginatedQuery<any>(build, {
+    fetchCompany: createQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getList,
       tags: ['Company'],
     }),
@@ -37,6 +36,7 @@ export const companyApiWithEndpoints = companyApi.injectEndpoints({
       tags: ['Company'],
     }),
 
+    // POST: Follow or Unfollow Company
     followAndUnfollow: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.company.followOrUnfollow,
       method: 'POST',
@@ -46,9 +46,9 @@ export const companyApiWithEndpoints = companyApi.injectEndpoints({
 });
 
 export const {
-  useLazyFetchCompanyQuery,
-  useLazyFetchEventsQuery,
-  useLazyFetchCompanyDetailQuery,
+  useFetchCompanyQuery,
+  useFetchEventsQuery,
+  useFetchCompanyDetailQuery,
   useSendRequestMutation,
   useFollowAndUnfollowMutation,
 } = companyApiWithEndpoints;

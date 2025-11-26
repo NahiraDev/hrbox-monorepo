@@ -3,7 +3,7 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { Map as LeafletMap,LatLngExpression,icon   } from "leaflet";
 import { useRef, useState } from "react";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-
+import 'leaflet/dist/leaflet.css';
 import { AppButton, AppModal } from "@hrbox/uikit/components";
 import ActionsModal from "@hrbox/modules/attendance/modals/ActionsModal";
 import { MaskRight } from "iconsax-reactjs";
@@ -38,11 +38,9 @@ const LocationMarker = ({
 const UserLocationModal = () => {
   const [position, setPosition] = useState<LatLngExpression>([51.505, -0.09]);
   const mapRef = useRef<LeafletMap | null>(null);
-  const { closeModal, openModal } = useModalContext();
 
   return (
     <>
-      <AppModal.Body>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-row gap-3 items-center">
             <Avatar
@@ -98,28 +96,6 @@ const UserLocationModal = () => {
             </MapContainer>
           </div>
         </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <div className="flex flex-row justify-end gap-[30px]">
-          <AppButton
-            color="white"
-            size="md"
-            radius="lg"
-            onPress={() => closeModal("confirm", "UserLocationModal")}
-            content="Cancel"
-          />
-          <AppButton
-            color="primary"
-            size="md"
-            radius="sm"
-            className="text-white"
-            onPress={() =>
-              openModal("confirm", "ActionsModal", <ActionsModal />)
-            }
-            content="Submit Again"
-          />
-        </div>
-      </AppModal.Footer>
     </>
   );
 };

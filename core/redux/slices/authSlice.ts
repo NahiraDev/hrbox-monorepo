@@ -1,6 +1,10 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import {getRoleConfig, getCurrentDomain } from '@hrbox/core/config/theme';
-import {Domain, Panel, RoleSlug} from "../../config/theme";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  getCurrentDomain,
+  getRoleConfig,
+  Panel,
+  RoleSlug,
+} from "@hrbox/core/config/theme";
 
 export interface UserRole {
   id: string;
@@ -24,7 +28,7 @@ interface AuthState {
   refreshToken: string | null;
   selectedRole: UserRole | null;
   needsRoleSelection: boolean;
-  currentDomain: Domain;
+  domainTheme: Panel;
   currentPanel: Panel | null;
   loading: boolean;
   error: string | null;
@@ -37,125 +41,169 @@ const initialState: AuthState = {
   refreshToken: null,
   selectedRole: null,
   needsRoleSelection: false,
-  currentDomain: getCurrentDomain(),
+  domainTheme: getCurrentDomain(),
   currentPanel: null,
   loading: false,
   error: null,
 };
 
+const clearAuthStorage = (state: AuthState) => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("user");
+  localStorage.removeItem("selectedRole");
+
+  state.isAuthenticated = false;
+  state.user = null;
+  state.token = null;
+  state.refreshToken = null;
+  state.selectedRole = null;
+  state.needsRoleSelection = false;
+  state.currentPanel = null;
+  state.error = "جلسه منقضی شده است.";
+};
+
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    setCurrentDomain: (state, action: PayloadAction<Domain>) => {
-      state.currentDomain = action.payload;
+    setDomainTheme: (state, action: PayloadAction<Panel>) => {
+      state.domainTheme = action.payload;
     },
 
-    loginSuccess: (state, action: PayloadAction<{
-      user: User;
-      token: string;
-      refreshToken: string;
-    }>) => {
-      const { user, token, refreshToken } = action.payload;
+    setCurrentPanel: (state, action: PayloadAction<Panel>) => {
+      state.currentPanel = action.payload;
+    },
+
+    loginSuccess: (
+      state,
+      action: PayloadAction<{
+        userId: number;
+        displayName: string;
+        Token: string;
+        renewalToken: string;
+        roles?: UserRole[];
+      }>,
+    ) => {
+      const {
+        userId,
+        displayName,
+        Token,
+        renewalToken,
+        roles = [],
+      } = action.payload;
+
+      const user: User = {
+        id: String(userId),
+        name: displayName,
+        email: "",
+        roles,
+      };
+
       state.user = user;
-      state.token = token;
-      state.refreshToken = refreshToken;
+      state.token = Token;
+      state.refreshToken = renewalToken;
+      state.isAuthenticated = true;
       state.loading = false;
       state.error = null;
+      state.needsRoleSelection = roles.length > 1;
 
-      localStorage.setItem('Token', token);
-      localStorage.setItem('renewalToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("token", Token);
+      localStorage.setItem("refreshToken", renewalToken);
+      localStorage.setItem("user", JSON.stringify(user));
 
-      // اگر بیش از یک نقش داشت
-      if (user.roles.length > 1) {
-        state.needsRoleSelection = true;
-        state.isAuthenticated = false;
-      }
-      // اگر فقط یک نقش داشت
-      else if (user.roles.length === 1) {
-        const role = user.roles[0];
+      if (roles.length === 1) {
+        const role = roles[0];
         state.selectedRole = role;
         state.currentPanel = getRoleConfig(role.slug).panel;
-        state.isAuthenticated = true;
         state.needsRoleSelection = false;
-        localStorage.setItem('selectedRole', JSON.stringify(role));
+        localStorage.setItem("selectedRole", JSON.stringify(role));
       }
     },
 
-    // انتخاب نقش
-    roleSelected: (state, action: PayloadAction<{
-      role: UserRole;
-      accessToken: string;
-    }>) => {
+    roleSelected: (
+      state,
+      action: PayloadAction<{
+        role: UserRole;
+        accessToken: string;
+      }>,
+    ) => {
       const { role, accessToken } = action.payload;
       state.selectedRole = role;
       state.token = accessToken;
-      state.currentPanel = getRoleConfig(role.slug).panel;
+
+      const roleConfig = getRoleConfig(role.slug);
+      state.currentPanel = roleConfig.panel;
+
       state.isAuthenticated = true;
       state.needsRoleSelection = false;
       state.error = null;
 
-      localStorage.setItem('token', accessToken);
-      localStorage.setItem('selectedRole', JSON.stringify(role));
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("selectedRole", JSON.stringify(role));
     },
 
-    // تبدیل نقش
     switchRole: (state, action: PayloadAction<UserRole>) => {
       state.selectedRole = action.payload;
-      state.currentPanel = getRoleConfig(action.payload.slug).panel;
-      localStorage.setItem('selectedRole', JSON.stringify(action.payload));
+      const roleConfig = getRoleConfig(action.payload.slug);
+      state.currentPanel = roleConfig.panel;
+
+      localStorage.setItem("selectedRole", JSON.stringify(action.payload));
     },
 
-    // لاگ آوت
     logout: (state) => {
-      state.isAuthenticated = false;
-      state.user = null;
-      state.token = null;
-      state.refreshToken = null;
-      state.selectedRole = null;
-      state.needsRoleSelection = false;
-      state.currentPanel = null;
-      state.error = null;
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
-      localStorage.removeItem('selectedRole');
+      clearAuthStorage(state);
     },
 
-    // بروزرسانی توکن
     updateToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
-      localStorage.setItem('token', action.payload);
+      localStorage.setItem("token", action.payload);
     },
 
-    // بارگذاری اطلاعات ذخیره شده
     initAuth: (state) => {
-      const token = localStorage.getItem('token');
-      const user = localStorage.getItem('user');
-      const selectedRole = localStorage.getItem('selectedRole');
+      const token = localStorage.getItem("token");
+      const refreshToken = localStorage.getItem("refreshToken");
+      const userStr = localStorage.getItem("user");
+      const roleStr = localStorage.getItem("selectedRole");
 
-      if (token && user && selectedRole) {
+      if (token && refreshToken && userStr) {
         try {
+          const user = JSON.parse(userStr) as User;
+          const selectedRole = roleStr
+            ? (JSON.parse(roleStr) as UserRole)
+            : null;
+
           state.token = token;
-          state.user = JSON.parse(user);
-          state.selectedRole = JSON.parse(selectedRole);
-          state.currentPanel = getRoleConfig(JSON.parse(selectedRole).slug).panel;
+          state.refreshToken = refreshToken;
+          state.user = user;
           state.isAuthenticated = true;
+
+          if (
+            selectedRole &&
+            user.roles.some((r) => r.id === selectedRole.id)
+          ) {
+            state.selectedRole = selectedRole;
+            state.currentPanel = getRoleConfig(selectedRole.slug).panel;
+            state.needsRoleSelection = false;
+          } else if (user.roles.length === 1) {
+            const role = user.roles[0];
+            state.selectedRole = role;
+            state.currentPanel = getRoleConfig(role.slug).panel;
+            state.needsRoleSelection = false;
+            localStorage.setItem("selectedRole", JSON.stringify(role));
+          } else {
+            state.needsRoleSelection = true;
+          }
         } catch (e) {
-          console.error('Failed to parse auth data', e);
-          state.logout(state);
+          clearAuthStorage(state);
         }
       }
     },
 
-    // تنظیم حالت لودینگ
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
 
-    // تنظیم خطا
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
@@ -163,7 +211,8 @@ export const authSlice = createSlice({
 });
 
 export const {
-  setCurrentDomain,
+  setDomainTheme,
+  setCurrentPanel,
   loginSuccess,
   roleSelected,
   switchRole,

@@ -1,39 +1,23 @@
 import { motion } from "framer-motion";
-import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
-import type { IconProps } from "iconsax-reactjs";
+import { useRef } from "react";
 
 interface AppDocItemProps {
-  icon: React.ComponentType<IconProps>;
+  icon: React.ComponentType<any>;
   module: string;
-  path?: string;
   outlined?: boolean;
+  mouseX: any;
   index: number;
 }
 
-export const AppDocItem: React.FC<AppDocItemProps> = ({
-                                                        icon: Icon,
-                                                        module,
-                                                        path,
-                                                        outlined = false,
-                                                        index
-                                                      }) => {
-  const navigate = useNavigate();
+const AppDocItem: React.FC<AppDocItemProps> = ({
+  icon: Icon,
+  module,
+  outlined = false,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    if (path) {
-      const currentPath = window.location.pathname;
-      setIsActive(currentPath.includes(path));
-    }
-  }, [path]);
-
-  const handleClick = () => {
-    if (path) {
-      navigate({ to: path });
-    }
-  };
+  const currentPath = location.pathname.split("/")[1] || "";
+  const isActive = module.toLowerCase() === currentPath.toLowerCase();
 
   return (
     <motion.div
@@ -41,58 +25,39 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
       className="relative flex flex-col items-center justify-center"
       whileHover={{ y: -8 }}
       whileTap={{ scale: 0.9 }}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: index * 0.05, duration: 0.2 }}
     >
-      <motion.button
-        onClick={handleClick}
-        className="group flex flex-col items-center justify-center w-20 cursor-pointer"
-      >
-        {/* Icon Container */}
+      <motion.button className="group flex flex-col items-center justify-center w-20">
         <motion.div
           className={`
-            flex items-center justify-center rounded-xl transition-all duration-200
-            relative overflow-hidden w-16 h-16
+            flex items-center justify-center rounded-xl transition-all duration-200 relative overflow-hidden
+            w-16 h-16
             ${
-            outlined
-              ? "border border-dashed border-neutral-400 dark:border-white bg-transparent"
-              : isActive
-                ? "bg-gradient-to-br from-panel-primary to-primary-300 text-white shadow-lg"
-                : "bg-gradient-to-t from-neutral-200 to-white dark:from-neutral-700 dark:to-neutral-600 text-secondary-900 dark:text-white hover:shadow-md"
-          }
+              outlined
+                ? "border border-dashed dark:border-white bg-transparent dark:text-white"
+                : isActive
+                  ? "bg-linear-to-b from-[#1E3363] to-[#3D68C9] text-white dark:bg-linear-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:text-white"
+                  : "bg-linear-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-linear-to-b hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white shadow-md"
+            }
           `}
-          whileHover={!outlined ? { scale: 1.05 } : undefined}
         >
-          {/* Shimmer Effect */}
-          {isActive && (
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20"
-              animate={{ x: ["0%", "100%"] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          )}
+          <div className="absolute rounded-xl" />
+
+          {isActive && <motion.div className="absolute inset-0 rounded-xl" />}
 
           <Icon
-            className={`
-              relative z-10 transition-all duration-200
-              ${isActive ? "text-white" : "text-secondary-700 dark:text-white"}
-            `}
-            size={28}
-            variant={outlined ? "Outline" : "Bold"}
+            className="relative z-10 transition-all duration-200"
+            size={32}
           />
         </motion.div>
 
-        {/* Label */}
         <motion.span
           className={`
-            whitespace-nowrap text-xs font-semibold mt-2 transition-all duration-200
-            max-w-[70px] text-center truncate
+            whitespace-nowrap text-xs font-semibold mt-1 transition-all duration-200
             ${
-            isActive
-              ? "opacity-100 text-panel-primary dark:text-white"
-              : "opacity-0 group-hover:opacity-100 text-secondary-600 dark:text-neutral-300"
-          }
+              isActive
+                ? "opacity-100 text-[#1E3363] dark:text-white"
+                : "opacity-0 group-hover:opacity-100 dark:text-gray-300"
+            }
           `}
         >
           {module}
@@ -101,3 +66,5 @@ export const AppDocItem: React.FC<AppDocItemProps> = ({
     </motion.div>
   );
 };
+
+export default AppDocItem;

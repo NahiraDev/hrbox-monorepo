@@ -1,28 +1,75 @@
-import { createEndpoint, createPaginatedEndpoint } from '@core/apis';
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
-export const SkillsApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    fetchAllSkills: createPaginatedEndpoint(build, HRLinkApiEndpoints.resume.skill.getAllSkills, 'GET', ['Skills']),
-    createSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.create, 'POST', ['Skills']),
-    editSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.edit, 'PUT', ['Skills']),
-    deleteSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.delete, 'DELETE', ['Skills']),
-    fetchSoftSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.getSoftSkill, 'GET', ['Skills']),
-    fetchHardSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.getHardSkill, 'GET', ['Skills']),
-    getUserSoftSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.getUserSoftSkills, 'GET', ['Skills']),
-    getUserHardSkills: createEndpoint(build, HRLinkApiEndpoints.resume.skill.getUserHardSkills, 'GET', ['Skills']),
+const skillsApi = createModuleApi({
+  reducerPath: 'HRLinkApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Skills'],
+  requiresAuth: true,
+  autoToast: true,
+});
+
+export const skillsApiEndpoints = skillsApi.injectEndpoints({
+  endpoints: (build:any) => ({
+    createSkills: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.create,
+      method: 'POST',
+      tags: ['Skills'],
+    }),
+
+    editSkills: createMutation<any , any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.edit,
+      method: 'PUT',
+      tags: ['Skills'],
+    }),
+
+    deleteSkills: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.delete,
+      method: 'DELETE',
+      tags: ['Skills'],
+    }),
+
+    fetchProfessionalSkills: createPaginatedQuery<any> (build, {
+      url: HRLinkApiEndpoints.resume.skill.getProfessionalSkills,
+      tags: ['Skills']
+    }),
+
+    fetchAllSkills: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getAllSkills,
+      tags: ['Skills'],
+    }),
+
+    fetchSoftSkills: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getSoftSkill,
+      tags: ['Skills'],
+    }),
+
+    fetchHardSkills: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getHardSkill,
+      tags: ['Skills'],
+    }),
+
+    getUserSoftSkills: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getUserSoftSkills,
+      tags: ['Skills'],
+    }),
+
+    getUserHardSkills: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.skill.getUserHardSkills,
+      tags: ['Skills'],
+    }),
   }),
-  overrideExisting: false,
 });
 
 export const {
-  useLazyFetchAllSkillsQuery,
+  useFetchAllSkillsQuery,
   useCreateSkillsMutation,
   useEditSkillsMutation,
   useDeleteSkillsMutation,
-  useLazyFetchSoftSkillsQuery,
-  useLazyFetchHardSkillsQuery,
-  useLazyGetUserSoftSkillsQuery,
-  useLazyGetUserHardSkillsQuery,
-} = SkillsApi;
+  useFetchSoftSkillsQuery,
+  useFetchHardSkillsQuery,
+  useGetUserSoftSkillsQuery,
+  useGetUserHardSkillsQuery,
+  useFetchProfessionalSkillsQuery
+} = skillsApiEndpoints;

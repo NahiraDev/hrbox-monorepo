@@ -12,6 +12,7 @@ import { moduleRegistry } from "@hrbox/modules/registry";
 import { BaseLayout } from "@hrbox/core/layouts/BaseLayout";
 import { AuthLayout } from "@hrbox/core/layouts/AuthLayout";
 import { EmptyLayout } from "@hrbox/core/layouts/EmptyLayout";
+import { FramedLayout } from "@hrbox/core/layouts/FramedLayout";
 
 // ============================================
 // Types
@@ -48,12 +49,14 @@ function extractPanelFromPath(path: string): Panel | null {
 // Helper: Get Layout Component
 // ============================================
 
-function getLayoutComponent(layoutType?: 'base' | 'auth' | 'empty') {
+function getLayoutComponent(layoutType?: 'base' | 'auth' | 'empty' | 'framed') {
   switch (layoutType) {
     case 'auth':
       return AuthLayout;
     case 'empty':
       return EmptyLayout;
+    case 'framed':
+      return FramedLayout;
     case 'base':
     default:
       return BaseLayout;
@@ -105,19 +108,17 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           };
         }
 
-        if (!context.auth?.isAuthenticated) {
-          throw redirect({
-            to:'/sso/login',
-            search: { redirect: location.pathname },
-          });
-        }
-
-        if (context.auth?.needsRoleSelection) {
-          throw redirect({
-            to: '/sso/select-role',
-            search: { redirect: location.pathname },
-          });
-        }
+        // if (!context.auth?.isAuthenticated) {
+        //   throw redirect({
+        //     to:'/sso/login',
+        //   });
+        // }
+        //
+        // if (context.auth?.needsRoleSelection && location.pathname !== '/sso/select-role') {
+        //   throw redirect({
+        //     to: '/sso/select-role',
+        //   });
+        // }
 
         if (requiredPanel && context.auth?.currentPanel !== requiredPanel) {
           throw redirect({ to: '/403' });
@@ -152,7 +153,6 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         };
       },
 
-      // ✅ Component با Layout
       component: () => (
         <LayoutComponent>
           <Suspense
@@ -279,7 +279,7 @@ function ForbiddenPage() {
           </button>
           <button
             onClick={() => (window.location.href = '/')}
-            className="px-6 py-2.5 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
+            className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
           >
             صفحه اصلی
           </button>
@@ -303,7 +303,7 @@ function NotFoundPage() {
 
         <button
           onClick={() => (window.location.href = '/')}
-          className="px-6 py-2.5 bg-panel-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
+          className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
         >
           بازگشت به صفحه اصلی
         </button>

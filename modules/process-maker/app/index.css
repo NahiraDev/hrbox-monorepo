@@ -2,118 +2,121 @@
       display: none !important;
       }
 
-  /*.djs-palette.two-column .group[data-group="bpmn-elements"] {*/
-  /*  display: flex;*/
-  /*  flex-direction: row;*/
-  /*  flex-wrap: wrap;*/
-  /*  gap: 4px;*/
-  /*  padding: 8px;*/
-  /*}*/
+  /**
+  * Custom BPMN Palette Styles
+  * Two-column layout for palette
+  */
 
-  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry {*/
-  /*  width: calc(50% - 2px);*/
-  /*  aspect-ratio: 1 / 1;*/
-  /*  display: flex;*/
-  /*  align-items: center;*/
-  /*  justify-content: center;*/
-  /*  box-sizing: border-box;*/
-  /*  border-radius: 4px;*/
-  /*  background-color: #f9f9f9;*/
-  /*  cursor: grab;*/
-  /*  transition: background-color 0.2s ease;*/
-  /*}*/
-  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry img,*/
-  /*.djs-palette.two-column .group[data-group="bpmn-elements"] .entry svg {*/
-  /*  width: 80%;*/
-  /*  height: 80%;*/
-  /*  object-fit: contain;*/
-  /*}*/
+  /* دو ستونی کردن پالت */
+  .djs-palette.two-column {
+      width: 100px !important;
+  }
 
-  .djs-palette-entries,.djs-palette-entries .group,.separator{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 !important;
-    margin: 0 !important;
+  .djs-palette.two-column .djs-palette-entries {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
   }
-  .djs-palette .entry[data-action="lasso-tool"], .djs-palette .entry[data-action="hand-tool"], .djs-palette .entry[data-action="space-tool"], .djs-palette .entry[data-action="global-connect-tool"],.djs-palette .entry[data-action="create.subprocess-expanded"],.djs-palette .entry[data-action="create.data-object"],.djs-palette .entry[data-action="create.data-store"],.djs-palette .entry[data-action="create.participant-expanded"],.djs-palette .entry[data-action="create.group"],.djs-palette .entry[data-action="create.intermediate-event"],.djs-palette .entry[data-action="create.end-event"] {
-    display: none;
+
+  /* استایل‌های toolbar */
+  .bpmn-toolbar-fa {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
   }
-  .djs-palette .entry[data-action="create.start-event"]::before{
-    font-size: 52px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: 0;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    padding: 0px;
-    margin: 0;
+
+  .bpmn-toolbar-en {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
   }
-  .djs-palette .entry[data-action="create.intermediate-event"]::before{
-    font-size: 52px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: 0;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    padding: 0px;
-    margin: 0;
-    border: 0;
-    color: 0px;
+
+  /* استایل دکمه‌های toolbar */
+  .djs-button {
+      background: white !important;
+      border: 1px solid #ccc !important;
+      padding: 8px 16px !important;
+      border-radius: 4px !important;
+      cursor: pointer !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      font-size: 14px !important;
+      transition: all 0.3s ease !important;
   }
-.bpmn-icon-intermediate-event-success{
-  font-size: 52px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  padding: 0px;
-  margin: 0;
-  border: 0;
-}.bpmn-icon-intermediate-event-unsuccess{
-  font-size: 52px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  padding: 0;
-  margin: 5px 0;
-  border: 0;
-}.bpmn-icon-intermediate-event-delete{
-  font-size: 52px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  padding: 0px;
-  margin: 0;
-  border: 0;
-}
+
+  .djs-button:hover {
+      background: #f0f0f0 !important;
+      border-color: #0A9AD7 !important;
+  }
+
+  /* حذف separator های اضافی */
+  .djs-palette .separator {
+      display: none;
+  }
+
+  /* بهبود نمایش entries */
+  .djs-palette .entry {
+      width: 46px !important;
+      height: 46px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+  }
+
+  .djs-palette .entry:hover {
+      background: rgba(10, 154, 215, 0.1) !important;
+  }
+
+  /* استایل برای dark mode */
+  .dark .djs-palette {
+      background: #1a1a1a !important;
+      border-color: #333 !important;
+  }
+
+  .dark .djs-palette .entry:hover {
+      background: rgba(10, 154, 215, 0.2) !important;
+  }
+
+  /* Canvas background */
+  .bjs-container {
+      background: white !important;
+  }
+
+  .dark .bjs-container {
+      background: #0a0a0a !important;
+  }
+
+  /* بهبود نمایش آیکون‌ها */
+  .djs-palette .entry [class^="bpmn-icon-"],
+  .djs-palette .entry [class*=" bpmn-icon-"] {
+      font-size: 18px !important;
+  }
+
+  /* حذف عنوان‌های اضافی */
+  .djs-palette-toggle {
+      display: block !important;
+  }
+
+  /* Group styles */
+  .djs-palette [data-group] {
+      border: none !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+      .djs-palette.two-column {
+          width: 80px !important;
+      }
+
+      .djs-palette .entry {
+          width: 38px !important;
+          height: 38px !important;
+      }
+  }

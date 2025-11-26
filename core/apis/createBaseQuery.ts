@@ -5,7 +5,8 @@ import {
   type FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { toast } from 'sonner';
-import { RootState } from "@hrbox/core/";
+import { RootState } from "@hrbox/core/redux";
+import { updateToken , logout } from '@hrbox/core/redux/slices/authSlice';
 
 let isRefreshing = false;
 let refreshPromise: Promise<boolean> | null = null;
@@ -33,6 +34,8 @@ export function createEnhancedBaseQuery({
           headers.set('Authorization', `Bearer ${token}`);
         }
       }
+
+
 
       // Add language header
       const lang = state.language?.lang || 'en';
@@ -86,7 +89,7 @@ async function handleTokenRefresh(
 ): Promise<boolean> {
   try {
     const state = api.getState() as RootState;
-    const refreshToken = state.auth?.refreshToken;
+    const refreshToken = state.auth?.rtoken;
 
     if (!refreshToken) {
       handleLogout(api);
@@ -105,7 +108,7 @@ async function handleTokenRefresh(
 
     if (refreshResult.data) {
       const { token } = refreshResult.data as { token: string };
-      api.dispatch({ type: 'auth/updateToken', payload: token });
+      api.dispatch(updateToken(token));
       return true;
     }
 
@@ -119,7 +122,7 @@ async function handleTokenRefresh(
 
 // Logout Handler
 function handleLogout(api: any) {
-  api.dispatch({ type: 'auth/logout' });
+ api.dispatch(logout());
   window.location.href = '/sso/login';
 }
 

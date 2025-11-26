@@ -1,10 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 const ExportPage =()=>{
+  const {t}=useTranslation();
   return(
   <>
-    <div className="w-full !h-full flex items-center justify-center ">
+    <div className="w-full h-full! flex items-center justify-center ">
       <div className="flex flex-col items-center font-semibold text-2xl ">
-        <p className="!font-semibold !text-2xl">There is no data to show!</p>
-        <img src="/images/nothing-found-mP9ZWosWHo.png"/>
+        <p className="font-semibold! text-2xl!">{t("there_is_no_data_to_show")}</p>
+        <img src="/public/images/nothing-found-mP9ZWosWHo.webp"/>
       </div>
     </div>
   </>

@@ -8,5 +8,5 @@
     "declarationDir": "../../dist/types",
     "types": ["node"]
     },
-  "include": ["." , "./*"]
+  "include": ["." , "./*", "../sso/apis/apihelper.ts"]
 }

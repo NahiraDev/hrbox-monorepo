@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 const sizeClasses: Record<string, string> = {
   xs: 'px-2 py-1 text-xs h-fit',
   sm: 'px-3 py-1.5 text-sm h-fit',
-  md: 'px-4 py-2 text-base h-fit',
+  md: 'px-4 py-1.5 text-base h-fit',
   lg: 'px-5 py-2.5 text-lg h-fit',
   xl: 'px-6 py-3 text-xl h-fit',
 };
@@ -29,6 +29,7 @@ interface AppButtonProps {
   radius?: keyof typeof radiusClasses;
   disableRipple?: boolean;
   size?: keyof typeof sizeClasses;
+  type?:any;
   variant?: string;
   color?: string;
   className?:string;
@@ -45,6 +46,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
       size = 'md',
       radius = 'md',
       variant = 'solid',
+      type = 'button',
       color,
       className,
       isLoading = false,
@@ -57,7 +59,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
       <Button
         ref={ref}
         className={clsx(
-          'font-medium transition-all duration-200',
+          'font-medium transition-all h-fit duration-200',
           'flex items-center justify-center min-w-fit gap-2',
           sizeClasses[size as keyof typeof sizeClasses],
           radiusClasses[radius],
@@ -67,7 +69,7 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
         )}
         color={color as any}
         variant={variant as any}
-        type="submit"
+        type={type}
         radius={radius as any}
         size={size as any}
         isLoading={isLoading}
@@ -81,3 +83,5 @@ export const AppButton = forwardRef<HTMLButtonElement, AppButtonProps>(
 );
 
 AppButton.displayName = 'AppButton';
+
+

@@ -22,6 +22,14 @@ interface AppAutoCompleteProps
   onChange?: (value: string | number) => void;
   helperText?: string;
   containerClassName?: string;
+
+  //   // ADD THIS 👇
+  // options?: Array<{
+  //   id: string | number;
+  //   label: string;
+  //   value?: string | number;
+  //   [key: string]: any;
+  // }>;
 }
 
 const sizeClasses: Record<
@@ -45,7 +53,10 @@ const sizeClasses: Record<
   },
 };
 
-export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps>(
+export const AppAutoComplete = forwardRef<
+  HTMLInputElement,
+  AppAutoCompleteProps
+>(
   (
     {
       name,
@@ -89,7 +100,7 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
               baseWrapper,
               "bg-panel-surface dark:bg-neutral-800",
               "border-1.5 border-primary-200 dark:border-primary-700",
-              "focus-within:border-panel-primary"
+              "focus-within:border-primary"
             ),
           };
         case FormMode.CREATE:
@@ -97,9 +108,9 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
           return {
             inputWrapper: clsx(
               baseWrapper,
-              "bg-white dark:bg-neutral-800",
-              "border border-neutral-300 dark:border-neutral-600",
-              "focus-within:border-panel-primary"
+              "bg-none text-primary",
+              "",
+              "focus-within:border-primary"
             ),
           };
       }
@@ -115,18 +126,23 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
             )}
           >
             {label}
-            {required && !isViewMode && <span className="text-danger ml-1">*</span>}
+            {required && !isViewMode && (
+              <span className="text-danger ml-1">*</span>
+            )}
           </label>
         )}
 
         <Autocomplete
           ref={ref}
           classNames={{
-            inputWrapper: clsx(
+            base: clsx("flex flex-col gap-1.5 ", containerClassName),
+            listboxWrapper: "z-50 max-h-64 ",
+            listbox: "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
+            popoverContent: "p-1",
+            selectorButton: clsx(
               modeStyles.inputWrapper,
               hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
             ),
-            listboxWrapper: "z-50 max-h-64",
           }}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
@@ -141,7 +157,6 @@ export const AppAutoComplete = forwardRef<HTMLInputElement, AppAutoCompleteProps
           {data.map((item) => (
             <AutocompleteItem
               key={item[valueKey]}
-              value={item[valueKey]}
               className="text-secondary-900 dark:text-white"
             >
               {item[displayKey]}

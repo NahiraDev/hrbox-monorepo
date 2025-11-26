@@ -77,7 +77,7 @@ export const AppTextArea = forwardRef<HTMLTextAreaElement, AppTextAreaProps>(
                   baseWrapper,
                   'bg-panel-surface dark:bg-neutral-800',
                   'border-1.5 border-primary-200 dark:border-primary-700',
-                  'focus-within:border-panel-primary'
+                  'focus-within:border-primary'
               ),
               input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
             };
@@ -89,7 +89,7 @@ export const AppTextArea = forwardRef<HTMLTextAreaElement, AppTextAreaProps>(
                   baseWrapper,
                   'bg-white dark:bg-neutral-800',
                   'border border-neutral-300 dark:border-neutral-600',
-                  'focus-within:border-panel-primary'
+                  'focus-within:border-primary'
               ),
               input: clsx(sizeClasses[size]?.input, 'text-secondary-900 dark:text-white'),
             };

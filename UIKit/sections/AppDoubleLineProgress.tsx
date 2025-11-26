@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface DoubleLineProgressProps {
   value: number;
@@ -18,10 +18,10 @@ export const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
   const startTimeRef = useRef<number | null>(null);
 
   const getColor = (value: number): string => {
-    if (value < 30) return '#0B76B7';
-    if (value < 70) return '#FD8F02';
+    if (value < 30) return "#0B76B7";
+    if (value < 70) return "#FD8F02";
 
-    return '#22AD5C';
+    return "#22AD5C";
   };
 
   const strokeColor = getColor(value);
@@ -69,10 +69,10 @@ export const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
   return (
     <div
       style={{
-        position: 'relative',
+        position: "relative",
         width: size,
         height: size,
-        display: 'inline-block',
+        display: "inline-block",
       }}
     >
       <svg height={size} width={size}>
@@ -122,14 +122,14 @@ export const AppDoubleLineProgress: React.FC<DoubleLineProgressProps> = ({
 
       <div
         style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontWeight: '900',
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          fontWeight: "900",
           fontSize: `${size / 4}px`,
           color: strokeColor,
-          fontFamily: 'Nunito',
+          fontFamily: "Nunito",
         }}
       >
         {animatedValue.toFixed(0)}%

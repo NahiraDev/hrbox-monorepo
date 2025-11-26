@@ -1,26 +1,20 @@
 import { Edit, Trash } from 'iconsax-reactjs';
 import { AppButton, AppPagination } from '@hrbox/uikit/components';
-import { useEffect } from 'react';
-
-import { AcademyIcon } from '@module/hrlink/icons';
-import { GeneralInformation, UserLocation } from '@module/hrlink/features/common';
-
-import { useLazyFetchCoursesQuery } from '@module/hrlink/features/resume/apis';
+import {useFetchCoursesQuery} from "@hrbox-monorepo/modules/hrlink/apis";
+import {AcademyIcon} from "@hrbox/uikit/icons";
+import {GeneralInformation} from "@hrbox/modules/hrlink/components/GeneralInformation";
+import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";
 
 const Courses = () => {
-  const [fetchCourses, { data }] = useLazyFetchCoursesQuery();
-
-  useEffect(() => {
-    fetchCourses({});
-  }, []);
+    const {data:fetchCourses} = useFetchCoursesQuery()
 
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-3">
-            {data &&
-              data.map((course: any, index: number) => (
+            {fetchCourses &&
+                fetchCourses.map((course: any, index: number) => (
                 <div key={index} className="rounded-5 shdow-theme-sm p-4 bg-white">
                   <div className="flex flex-col gap-2.5">
                     <div className="flex flex-col gap-1.5 border-b-1 border-neutral-100 pb-1.5">
@@ -31,22 +25,18 @@ const Courses = () => {
                         </div>
                         <div className="flex gap-1">
                           <AppButton
-                            props={{
-                              isIconOnly: true,
-                              color: 'white',
-                              size: 'md',
-                              radius: 'sm',
-                              content: <Edit className="text-secondary-1000" size="14" />,
-                            }}
+                            isIconOnly={true}
+                            color='white'
+                            size='md'
+                            radius='sm'
+                            content={<Edit className="text-secondary-1000" size="14" />}
                           />
                           <AppButton
-                            props={{
-                              isIconOnly: true,
-                              color: 'white',
-                              size: 'md',
-                              radius: 'sm',
-                              content: <Trash className="text-secondary-1000" size="14" />,
-                            }}
+                            isIconOnly={true}
+                            color='white'
+                            size='md'
+                            radius='sm'
+                            content={<Trash className="text-secondary-1000" size="14" />}
                           />
                         </div>
                       </div>
@@ -74,7 +64,14 @@ const Courses = () => {
               ))}
           </div>
           <div className="flex justify-center">
-            <AppPagination total={10} />
+              <AppPagination meta={{
+                  page: 0,
+                  pageSize: 0,
+                  total: 0,
+                  totalPages: 0
+              }} onPageChange={function(page: number): void {
+                  throw new Error("Function not implemented.");
+              } }/>
           </div>
         </div>
       </div>

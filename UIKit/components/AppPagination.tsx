@@ -1,5 +1,5 @@
-import type { PaginatedResponse } from '@hrbox/core/api/types';
 import { Pagination as HeroPagination } from '@heroui/react';
+import {PaginatedResponse} from "@hrbox/core/apis/types";
 
 interface PaginationProps {
   meta: PaginatedResponse<any>['meta'];
@@ -7,13 +7,13 @@ interface PaginationProps {
 }
 
 export function AppPagination({ meta, onPageChange }: PaginationProps) {
-  if (meta.totalPages <= 1) return null;
+  // if (meta.totalPages <= 1) return null;
 
   return (
     <div className="flex items-center justify-center py-4">
       <HeroPagination
-        total={meta.totalPages}
-        page={meta.page}
+        // total={meta.totalPages}
+        // page={meta.page}
         onChange={onPageChange}
         showControls
         color="primary"

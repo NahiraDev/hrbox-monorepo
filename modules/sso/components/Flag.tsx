@@ -3,7 +3,7 @@ const Flag = () => {
     {
       id: 1,
       name: 'Afghanistan',
-      avatar: '/flags/af.svg',
+      avatar: '/images/flags/af.svg',
     },
     {
       id: 2,

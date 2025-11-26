@@ -12,31 +12,27 @@ const courseApi = createModuleApi({
 
 export const courseApiWithEndpoints = courseApi.injectEndpoints({
   endpoints: (build) => ({
-    // GET: لیست دوره‌ها
-    fetchCourses: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.course.getList,
-      method: 'GET',
-      tags: ['Course'],
-    }),
-
-    // GET: جزئیات یک دوره
-    fetchCourseDetail: createQuery<any, { id: string }>(build, {
-      url: HRLinkApiEndpoints.resume.course.getDetail,
-      method: 'GET',
-      tags: ['Course'],
-    }),
-
-    // POST: ایجاد دوره جدید
     createCourse: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.course.create,
       method: 'POST',
       tags: ['Course'],
     }),
 
-    // POST: ویرایش دوره
     editCourse: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.course.edit,
       method: 'POST',
+      tags: ['Course'],
+    }),
+
+    fetchCourseList: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.course.getCourseList,
+      method: 'GET',
+      tags: ['Course'],
+    }),
+
+    fetchInstituList: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.course.getInstituList,
+      method: 'GET',
       tags: ['Course'],
     }),
 
@@ -45,12 +41,27 @@ export const courseApiWithEndpoints = courseApi.injectEndpoints({
       method: 'DELETE',
       tags: ['Course'],
     }),
+
+    fetchCourses: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.course.getList,
+      method: 'GET',
+      tags: ['Course'],
+    }),
+
+    fetchCourseDetail: createQuery<any, { id: string }>(build, {
+      url: HRLinkApiEndpoints.resume.course.getDetail,
+      method: 'GET',
+      tags: ['Course'],
+    }),
+
   }),
 });
 
 export const {
-  useLazyFetchCoursesQuery,
-  useLazyFetchCourseDetailQuery,
+  useFetchCoursesQuery,
+  useFetchCourseDetailQuery,
+  useFetchCourseListQuery,
+  useFetchInstituListQuery,
   useCreateCourseMutation,
   useEditCourseMutation,
   useDeleteCourseMutation,

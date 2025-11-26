@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { AppButton, AppPagination } from '@hrbox/uikit/components';
 import { Card, CardBody, CardHeader } from '@heroui/react';
 
-import { HRLinkPaths, Paths } from "@module/paths";
+import { Paths } from "@hrbox/modules/paths";
 
-import { useLazyFetchCompanyQuery, useSendRequestMutation } from '@module/hrlink/features/companies/apis';
+import { useLazyFetchCompanyQuery, useSendRequestMutation } from '@hrbox/modules/hrlink/apis/Company';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 
 const Companies = () => {

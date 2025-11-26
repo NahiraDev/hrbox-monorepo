@@ -1,24 +1,19 @@
 import { Buildings2, Clock, DocumentForward, DollarCircle, Location, Status } from 'iconsax-reactjs';
-import { Button } from '@heroui/button';
-import { useNavigate } from 'react-router-dom';
-import { AppPagination } from '@hrbox/uikit/components';
+import {useFetchJobOpportunitiesQuery} from "@hrbox/modules/hrlink/apis";
+import {useNavigation} from "@hrbox/core/hooks/useNavigation";
+import {Button} from "@heroui/react";
 
-import { useLazyJobOffersQuery } from '@module/hrlink/features/jobs/apis';
-import { useEffect } from 'react';
 
 const JobOpportunities = () => {
-  const [fetchJobOpportunities, { data }] = useLazyJobOffersQuery();
-  const navigate = useNavigate();
+  const {data:jobs} = useFetchJobOpportunitiesQuery();
+  const {push} = useNavigation();
 
-  useEffect(() => {
-    fetchJobOpportunities({})
-  }, []);
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="grid grid-cols-3 gap-3">
-        {data &&
-          data.map((oppertunitie: any) => (
-            <button key={oppertunitie.id} onClick={() => navigate('/job/detail/' + oppertunitie.company)}>
+        {jobs &&
+            jobs.data.ViewList.map((oppertunitie: any) => (
+            <button key={oppertunitie.id} onClick={() => push({to:'/job/detail/' + oppertunitie.company})}>
               <div className="rounded-5 shadow-shadow-light-tight/1 px-3 py-4">
                 <div className="flex justify-between pb-1 border-b-1 border-neutral-100 dark:border-neutral-700">
                   <div className="flex items-center gap-2">
@@ -70,7 +65,7 @@ const JobOpportunities = () => {
           ))}
       </div>
       <div className="flex justify-center">
-        <AppPagination total={100} />
+        {/*<AppPagination total={100} />*/}
       </div>
     </div>
   );

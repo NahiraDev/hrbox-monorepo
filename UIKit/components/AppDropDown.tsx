@@ -116,9 +116,9 @@ export const AppDropDown = forwardRef<HTMLButtonElement, AppDropDownProps>(
       sizeClasses[size]?.button,
       radiusClasses[radius],
       variant === 'bordered' && clsx(
-        'border border-neutral-300 dark:border-neutral-600',
+        'border border-primary px-3 py-2 gap-2 rounded-lg bg-white',
         'hover:border-primary-300 dark:hover:border-primary-600',
-        'focus:border-panel-primary'
+        'focus:border-primary'
       ),
       hasError && variant === 'bordered' && 'border-danger bg-danger-50 dark:bg-danger-900/20',
       className
@@ -144,6 +144,9 @@ export const AppDropDown = forwardRef<HTMLButtonElement, AppDropDownProps>(
         <Dropdown
           onOpenChange={onOpenChange}
           isDisabled={isDisabled || isLoading}
+          classNames={{
+            content:"dark:dark:bg-[#01101A]",
+          }}
         >
           <DropdownTrigger>
             <Button
@@ -165,16 +168,19 @@ export const AppDropDown = forwardRef<HTMLButtonElement, AppDropDownProps>(
             items={items}
             onAction={(key) => handleSelect(key as string | number)}
             classNames={{
-              base: 'dark:bg-neutral-800 dark:border-neutral-700',
+              emptyContent:"dark:bg-[#01101A]"
             }}
           >
             {(item) => (
               <DropdownItem
                 key={item.key}
-                color={item.color || 'default'}
+                color={item.color || 'primary'}
                 className="transition-colors duration-200"
                 startContent={item.icon}
                 description={item.description}
+                  classNames={{
+        base: 'dark:data-[hover=true]:bg-[#04425C] data-[hover=true]:bg-[#DCF0F940] data-[hover=true]:text-black',
+      }}
               >
                 {item.label}
               </DropdownItem>

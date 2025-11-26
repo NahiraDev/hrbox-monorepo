@@ -21,7 +21,7 @@ export interface ModuleMenuItem {
 export interface ModuleRoute {
   path: string;
   component: LazyExoticComponent<ComponentType<any>> | ComponentType<any>;
-  layout?: 'base' | 'auth' | 'empty';
+  layout?: 'base' | 'auth' | 'empty' | 'framed';
   meta?: {
     title?: string;
     description?: string;
@@ -36,7 +36,7 @@ export interface ModuleRoute {
 export interface ModuleConfig {
   name: string;
   basePath: string;
-  layout?: 'base' | 'auth' | 'empty';
+  layout?: 'base' | 'auth' | 'empty' | 'framed';
 
   routes?: ModuleRoute[];
 

@@ -1,10 +1,12 @@
-import { useFormContext } from '@hrbox/core/providers';
+import { useFormContext, useModalContext } from '@hrbox/core/providers';
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
 import { FormField } from '@hrbox/uikit/components/FormField';
+import { AppInput } from '@hrbox/uikit/components';
+import { useTranslation } from 'react-i18next';
 
 export const initialValuesEvent = {
-  title: null,
+  title: '',
 };
 
 export const formValidationEvent = Yup.object().shape({
@@ -18,11 +20,16 @@ export const handleSubmitEvent = (values: any) => {
 };
 
 export const EventForm = () => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormContext();
+  const {t}=useTranslation();
+  const {getOpenModal}=useModalContext();
+  const currentType=getOpenModal()?.type;
+
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormField name='title' label='Please enter the time.' type='text'  />
+    <Form id='event-form'>
+      <div className='w-full'>
+      <FormField name='title' label={t('please_enter_the_time')} type='text' formMode={currentType} component={AppInput}  />
+      </div>
     </Form>
   );
 };

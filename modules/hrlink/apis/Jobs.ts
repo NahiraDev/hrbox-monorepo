@@ -1,14 +1,73 @@
-import { createEndpoint, createPaginatedEndpoint } from '@core/apis';
-import { HRLinkApiEndpoints } from '@module/hrlink/app/endpoints';
-import { HRLinkBaseApi } from '@module/hrlink/app/baseApiConfig';
+import { createModuleApi } from '@hrbox/core/apis/baseApi';
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
-export const JobsApi = HRLinkBaseApi.injectEndpoints({
-  endpoints: (build) => ({
-    jobOffers: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
-    jobOpportunities: createPaginatedEndpoint(build, HRLinkApiEndpoints.job.opportunities, 'GET', ['Jobs']),
-    jobDetail: createEndpoint(build, HRLinkApiEndpoints.job.offers, 'GET', ['Jobs']),
-  }),
-  overrideExisting: false,
+const jobsApi = createModuleApi({
+  reducerPath: 'HRLinkApi',
+  baseUrl: '/DesktopModules/Freelancer/api',
+  tagTypes: ['Jobs'],
+  requiresAuth: true,
+  autoToast: true,
 });
 
-export const { useLazyJobOffersQuery, useLazyJobDetailQuery, useLazyJobOpportunitiesQuery } = JobsApi;
+export const jobsApiEndpoints = jobsApi.injectEndpoints({
+  endpoints: (build:any) => ({
+    fetchJobOffers: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferDetail,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOpportunities: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.opportunities,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOfferDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferDetail,
+      tags: ['Jobs'],
+    }),
+
+    setTag: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.job.setTag,
+      method: 'POST',
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOpportunitiesDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.useGetJobOpportunitiesDetail,
+      tags: ['Jobs'],
+    }),
+
+    fetchUserOrganization: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getUserOrganization,
+      tags: ['Jobs'],
+    }),
+
+    fetchAboutCompany: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getAboutCompany,
+      tags: ['Jobs'],
+    }),
+
+    fetchJobOfferListDetail: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getJobOfferListDetail,
+      tags: ['Jobs'],
+    }),
+
+    fetchListJobOffer: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.job.getListJobOffer,
+      tags: ['Jobs'],
+    }),
+  }),
+});
+
+export const {
+  useFetchJobOffersQuery,
+  useFetchJobOpportunitiesQuery,
+  useFetchJobOfferDetailQuery,
+  useSetTagMutation,
+  useFetchJobOpportunitiesDetailQuery,
+  useFetchUserOrganizationQuery,
+  useFetchAboutCompanyQuery,
+  useFetchJobOfferListDetailQuery,
+  useFetchListJobOfferQuery,
+} = jobsApiEndpoints;

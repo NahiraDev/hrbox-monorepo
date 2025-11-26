@@ -1,8 +1,8 @@
-import { AppButton } from '@hrbox/uikit/components/AppButton';
-import { Edit } from 'iconsax-reactjs';
-import { Avatar, Card } from '@heroui/react';
-import { useAppSelector } from '@hrbox/core/redux';
-import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox-monorepo/UIKit/icons";
+import { AppButton } from "@hrbox/uikit/components/AppButton";
+import { Edit } from "iconsax-reactjs";
+import { Avatar, Card } from "@heroui/react";
+import { useAppSelector } from "@hrbox/core/redux";
+import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
 
 export const GeneralInformation = () => {
   const profileData: any = useAppSelector((state) => state.profile);
@@ -22,25 +22,16 @@ export const GeneralInformation = () => {
             <Avatar className="w-[70px] h-[70px]" src="" />
           </div>
           <div className="flex flex-col gap-1">
-            <AppButton
-              content={<TelegramIcon />}
-              isIconOnly={true}
-            />
-            <AppButton
-              content={ <LinkedinIcon />}
-              isIconOnly={true}
-            />
-            <AppButton
-              content={<InstagramIcon />}
-              isIconOnly={true}
-            />
+            <AppButton content={<TelegramIcon />} isIconOnly={true} />
+            <AppButton content={<LinkedinIcon />} isIconOnly={true} />
+            <AppButton content={<InstagramIcon />} isIconOnly={true} />
           </div>
         </div>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1 items-center">
             <span className="text-secondary-900 dark:text-white font-semibold">
               {profileData?.profile?.name +
-                ' ' +
+                " " +
                 profileData?.profile?.lastName}
             </span>
             <span className="text-xs font-light text-secondary-900 dark:text-white">

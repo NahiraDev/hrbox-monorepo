@@ -3,7 +3,6 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "rootDir": "../",
-  },
-  "include": ["." , "./*"]
+    "rootDir": "../"
+  }
 }

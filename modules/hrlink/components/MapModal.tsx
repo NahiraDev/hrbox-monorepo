@@ -1,8 +1,11 @@
-import { AppButton, AppModal } from '@hrbox-monorepo/UIKit/components';
-import { MapContainer, TileLayer } from 'react-leaflet';
-import { useEffect, useState } from 'react';
-import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { useAddLocationMutation, useEditLocationMutation } from "@hrbox/modules/hrlink/apis/Common";
+import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { MapContainer, TileLayer } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import {
+  useAddLocationMutation,
+  useEditLocationMutation,
+} from "@hrbox/modules/hrlink/apis/Common";
 
 export const MapModal = ({
   position,
@@ -17,7 +20,7 @@ export const MapModal = ({
   const [addLocation] = useAddLocationMutation();
   const { closeModal } = useModalContext();
   const [currentPosition, setCurrentPosition] = useState(
-    position || { lat: 35.6892, lng: 51.3890 }
+    position || { lat: 35.6892, lng: 51.389 },
   );
 
   useEffect(() => {
@@ -36,7 +39,7 @@ export const MapModal = ({
       setPosition(currentPosition);
       closeModal("confirm", "");
     } catch (error) {
-      console.error('Error saving location:', error);
+      console.error("Error saving location:", error);
     }
   };
   return (
@@ -54,9 +57,7 @@ export const MapModal = ({
             scrollWheelZoom={true}
             zoom={13}
           >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <DraggableMarker
               position={currentPosition}
               setPosition={setCurrentPosition}
@@ -67,18 +68,18 @@ export const MapModal = ({
       <AppModal.Footer>
         <AppButton
           props={{
-            size: 'md',
-            color: 'secondary',
-            content: 'Cancel',
-            onPress:()=> closeModal("confirm", ""),
+            size: "md",
+            color: "secondary",
+            content: "Cancel",
+            onPress: () => closeModal("confirm", ""),
           }}
         />
         <AppButton
           props={{
-            size: 'md',
-            color: 'primary',
-            content: 'Save',
-            onPress:()=> handleSave(),
+            size: "md",
+            color: "primary",
+            content: "Save",
+            onPress: () => handleSave(),
           }}
         />
       </AppModal.Footer>
