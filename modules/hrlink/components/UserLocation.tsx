@@ -5,20 +5,41 @@ import 'leaflet/dist/leaflet.css';
 import {Add, Edit} from 'iconsax-reactjs';
 import {AppButton} from '@hrbox/uikit/components';
 import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
-import {Card, CardBody, CardHeader, useModal } from '@heroui/react';
+import {Card, CardBody, CardHeader } from '@heroui/react';
 import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
-import {MapModal} from "@hrbox/modules/hrlink/components/MapModal";
-import { handleSubmitAward } from 'forms/AwardForm';
+import { MapModal } from "@hrbox/modules/hrlink/components/MapModal";
+import { useModal } from '@hrbox/core/hooks/useModal';
 
 export const UserLocation = () => {
     const profileString = localStorage.getItem('profile');
     const {openModal, isModalOpen} = useModalContext();
     const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
     const [hasLocation, setHasLocation] = useState(false);
-
-    const handleOpenMapModal = () => {
-    }
-
+    const modal = useModal()
+    const handleOpenMap = () => {
+      modal.open(
+        ModalType.CREATE,
+        "face-allocation",
+         <MapModal
+              position={{ lat: 35.6, lng: 51.4 }}        // e.g. { lat: 35.6, lng: 51.4 } or null
+              setPosition={(e:any)=> setPosition({
+                      lat: e.latLng.lat(),
+                      lng: e.latLng.lng(),
+                    })}
+              isEdit={false}   // or true when editing
+            />,
+        {
+          isForm: true,
+          submitLabel: "Submit Again",
+          cancelLabel: "Cancel",
+          formConfig: {
+            formId: "face-form",
+          },
+        },
+        ModalSize.LG
+      );
+    };
+    
     useEffect(() => {
         try {
             if (profileString) {
@@ -60,7 +81,7 @@ export const UserLocation = () => {
                 <span className="text-secondary-1000 text-base font-semibold">Location</span>
                 <div>
                     <AppButton
-                        onPress={handleOpenMapModal}
+                        onPress={handleOpenMap}
                         content={hasLocation ? (
                             <Edit className="text-secondary-1000" size="14"/>
                         ) : (
