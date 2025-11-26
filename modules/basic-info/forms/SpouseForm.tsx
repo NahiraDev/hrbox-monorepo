@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import {FormField} from "@hrbox/uikit/components/FormField";
 
-export const initialValuesSpouse = {
+export const initialValuesSpouseForm = {
   FirstName: null,
   LastName: null,
   NationalID: null,
@@ -10,7 +12,7 @@ export const initialValuesSpouse = {
   Descriptions: null,
 };
 
-export const formValidationSpouse = Yup.object().shape({
+export const formValidationSpouseForm = Yup.object().shape({
   FirstName: Yup.string().required(),
   LastName: Yup.string().required(),
   NationalID: Yup.string().required(),
@@ -22,7 +24,7 @@ export const formValidationSpouse = Yup.object().shape({
 
 });
 
-export const handleSubmitSpouse = (values: any) => {
+export const handleSubmitSpouseForm = (values: any) => {
   return {
     FirstName: values.FirstName,
     LastName: values.LastName,
@@ -31,7 +33,55 @@ export const handleSubmitSpouse = (values: any) => {
     Mobile: values.Mobile,
     DateOfBirth: values.DateOfBirth,
     Descriptions: values.Descriptions,
-
-
   };
 };
+
+
+export const SpouseForm = () =>{
+    const {values , errors , touched} = useFormContext()
+    return (
+        <div className="flex flex-col gap-y-6">
+            <div className="grid grid-cols-2 gap-y-6 gap-x-10">
+                <FormField
+                    label="First Name"
+                    name="FirstName"
+                    helperText={touched.FirstName && errors.FirstName}
+                />
+                <FormField
+                    label="Last Name"
+                    name="LastName"
+                    helperText={touched.LastName && errors.LastName}
+                />
+                <FormField
+                    label="National ID"
+                    name="NationalID"
+                    helperText={touched.NationalID && errors.NationalID}
+                />
+                <FormField
+                    label="Education"
+                    name="Education"
+                    helperText={touched.Education && errors.Education}
+                />
+
+                <FormField
+                    label="Mobile"
+                    name="Mobile"
+                    helperText={touched.Mobile && errors.Mobile}
+                />
+
+                <FormField
+                    label="Date of Birth"
+                    name="DateOfBirth"
+                    helperText={touched.DateOfBirth && errors.DateOfBirth}
+                />
+            </div>
+            <div>
+                <FormField
+                    label="Descriptions and Achievements"
+                    name="Descriptions"
+                    helperText={touched.Descriptions && errors.Descriptions}
+                />
+            </div>
+        </div>
+    )
+}

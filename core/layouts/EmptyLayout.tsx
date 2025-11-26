@@ -2,7 +2,6 @@ import {ReactNode, useEffect, useMemo} from "react";
 import { ArrowLeft } from "iconsax-reactjs";
 import { motion } from "framer-motion";
 import { AppButton } from "@hrbox/uikit/components/AppButton";
-import { SliderSSO } from "@hrbox/modules/sso/components/SliderSSO";
 import { ThemeToggle } from "@hrbox/core/components/ThemeToggle";
 import { LanguageToggle } from "@hrbox/core/components/LanguageToggle";
 import { useAppSelector } from "@hrbox/core/redux";

@@ -1,15 +1,18 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
 import {Location, MoreSquare, Trash} from 'iconsax-reactjs';
-import {useState, useMemo} from 'react';
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import {AppButton, AppDeleteModal, AppPagination} from '@hrbox/uikit/components';
-import { useModal } from "@HRBox/core/hooks";
-import { AwardModal } from "@HRBox/modules/hrlink/modals/AwardModal";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
-import { formValidationOrganizationLocation, initialValuesOrganizationLocation } from "@HRBox/modules/basic-info/forms/OrganizationLocationForm";
+import {useMemo, useState} from 'react';
+import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
+import {AppButton, AppDeleteModal} from '@hrbox/uikit/components';
+import {useModal} from "@hrbox/core/hooks";
+import {AwardModal} from "@hrbox/modules/hrlink/modals/AwardModal";
+import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
+import {
+    formValidationOrganizationLocation,
+    initialValuesOrganizationLocation
+} from "@hrbox/modules/basic-info/forms/OrganizationLocationForm";
 
-    const OrganizationalLocations = () => {
+const OrganizationalLocations = () => {
     const {openModal} = useModalContext();
     const [activeButton, setActiveButton] = useState<number | null>(null);
     const [locations, setLocations] = useState(OrganizationalLocation);
@@ -53,32 +56,32 @@ import { formValidationOrganizationLocation, initialValuesOrganizationLocation }
 
     const filteredLocations = useMemo(() => locations, [locations]);
 
-  const modal = useModal()
-  const handleOpenOrganizationLocation = () => {
-    modal.open(
-      ModalType.CREATE,
-      "award-form",
-      <AwardModal />,
-      {
-        isForm: true,
-        title: "افزودن ",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
-        formConfig: {
-          initialValues: initialValuesOrganizationLocation,
-          validationSchema: formValidationOrganizationLocation,
-          formId: "award-form",
-          enableCache: true,
-          clearCacheOnSubmit: true,
-          onSubmitAsync: async (values: any) => {
-            handleSubmitAward(values);
-            modal.close(ModalType.CREATE, "award-form");
-          },
-        },
-      },
-      ModalSize.XL,
-    );
-  };
+    const modal = useModal()
+    const handleOpenOrganizationLocation = () => {
+        modal.open(
+            ModalType.CREATE,
+            "award-form",
+            <AwardModal/>,
+            {
+                isForm: true,
+                title: "افزودن ",
+                submitLabel: "ذخیره",
+                cancelLabel: "لغو",
+                formConfig: {
+                    initialValues: initialValuesOrganizationLocation,
+                    validationSchema: formValidationOrganizationLocation,
+                    formId: "award-form",
+                    enableCache: true,
+                    clearCacheOnSubmit: true,
+                    onSubmitAsync: async (values: any) => {
+                        handleSubmitAward(values);
+                        modal.close(ModalType.CREATE, "award-form");
+                    },
+                },
+            },
+            ModalSize.XL,
+        );
+    };
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppButton,
   AppInput,
@@ -7,57 +7,32 @@ import {
   AppSwitch,
   AppTextArea,
 } from "@hrbox/uikit/components";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import {useModal} from "@hrbox/core/hooks";
+import {FormField} from "@hrbox/uikit/components/FormField";
 
-interface AddNewJobProps {
-  onClose: () => void;
+export const JobModalProps = {
+        title:"",
+        department: "",
+        type: "",
+        startDate: "",
+        salary: "",
+        description: "",
 }
 
-export default function AddNewJob({ onClose }: AddNewJobProps) {
-  const { closeModal } = useModalContext();
-
-  const [formData, setFormData] = useState({
-    title: "",
-    department: "",
-    type: "",
-    startDate: "",
-    salary: "",
-    description: "",
-  });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
-
-  const handleCancel = () => {
-    onClose();
-    closeModal("edit", "");
-  };
-
-  const employmentTypes = ["Full-time", "Part-time", "Contract", "Internship"];
-
-  const handleSubmit = () => {
-    if (!isSubmitted) {
-      console.log("New Job:", formData);
-      setIsSubmitted(true);
-    } else {
-      setIsSaved(true);
-    }
-  };
+export default function JobModal() {
+  const { close } = useModal();
 
   return (
-    <div className="w-[645px]">
+    <div className="">
       <AppModal.Body>
         <div className="flex flex-col gap-y-6 overflow-y-scroll max-h-[70vh]">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9] w-full",
-                label: "Title",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-                isDisabled: isSubmitted,
-              }}
+            <FormField
+                label="Title"
+              size="lg"
+              color="primary"
+              radius="lg"
+              disabled: isSubmitted
             />
             <AppInput
               props={{
@@ -201,13 +176,11 @@ export default function AddNewJob({ onClose }: AddNewJobProps) {
                 }}
               />
               <AppButton
-                props={{
-                  className: "bg-primary text-white",
-                  size: "md",
-                  radius: "lg",
-                  onPress: handleSubmit,
-                  content: "Save Changes",
-                }}
+                size="md"
+                radius="lg"
+                type="submit"
+                variant="solid"
+                content="Save Changes"
               />
             </div>
           ))}

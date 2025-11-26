@@ -2,6 +2,7 @@ import { Form } from "@heroui/react";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import * as Yup from "yup";
+import {useFormContext, useModalContext} from "@hrbox-monorepo/core/providers";
 export const initialValuesAction = {
   Type: null,
   Title: null,
@@ -19,14 +20,10 @@ export const formValidationAction = Yup.object().shape({
   Duration: Yup.string().required(),
   CenterName: Yup.string().required(),
   Year: Yup.string().required(),
+    FromNumber: Yup.string().required(),
+    ToNumber: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.Type);
-  console.log(values.Title);
-  console.log(values.Level);
-  console.log(values.Duration);
-  console.log(values.CenterName);
-  console.log(values.Year);
   return {
     Type: values.title,
     Title: values.type,
@@ -34,43 +31,55 @@ export const handleSubmitAction = (values: any) => {
     Duration: values.FromDate,
     CenterName: values.organization,
     Year: values.Department,
+      FromNumber: values.FromNumber,
+      ToNumber: values.ToNumber,
   };
 };
 
 export const CourseForm = () => {
+    const { errors, touched } =
+        useFormContext();
+
+    const { getOpenModal } = useModalContext();
+    const currentType = getOpenModal()?.type;
   return (
     <Form>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Type" label="Type" />
-        <FormField name="Title" label="Title" />
-        <FormField name="Level" label="Level" component={AppAutoComplete} />
+        <FormField name="Type" label="Type" helperText={touched.Type && errors.Type} formMode={currentType} />
+        <FormField name="Title" label="Title" helperText={touched.Title && errors.Title} formMode={currentType}/>
+        <FormField name="Level" label="Level" helperText={touched.Level && errors.Level} component={AppAutoComplete} formMode={currentType}/>
         <FormField
           name="Duration (Hours)"
           label="Duration (Hours)"
           component={AppAutoComplete}
+          helperText={touched.Duration && errors.Duration}
+          formMode={currentType}
         />
         <FormField
           name="Center Name"
           label="Center Name"
           component={AppAutoComplete}
+          helperText={touched.CenterName && errors.CenterName}
+          formMode={currentType}
         />
-        <FormField name="Year" label="Year" component={AppAutoComplete} />
-        {/*we dont have Attached File*/}
-        {/*we dont have Check circle*/}
+        <FormField name="Year" label="Year" component={AppAutoComplete} helperText={touched.Year && errors.Year} formMode={currentType}/>
       </div>
 
       <div>
         <FormField
           name="From Number"
           label="From Number"
+          helperText={touched.FromNumber && errors.FromNumber}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
           name="To Number"
           label="To Number"
+          helperText={touched.ToNumber && errors.ToNumber}
           component={AppAutoComplete}
+          formMode={currentType}
         />
-        <FormField name="Type" label="Type" component={AppTextArea} />
       </div>
     </Form>
   );

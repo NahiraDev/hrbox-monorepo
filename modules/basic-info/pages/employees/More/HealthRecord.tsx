@@ -15,22 +15,20 @@ import {
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import PreEmploymentHealthRecordsModals from '@hrbox/modules/basic-info/modals/PreEmploymentHealthRecordsModals';
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import AddNewOnDutyHealthRecords from '@hrbox/modules/basic-info/modals/AddNewOnDutyHealthRecords';
+import AddNewOnDutyHealthRecords from '@hrbox-monorepo/modules/basic-info/modals/OnDutyHealthRecords';
 import OnDutyHealthRecords from '@hrbox/modules/basic-info/modals/OnDutyHealthRecords';
-import { useModal } from "@HRBox/core/hooks";
-import EmployeeSatisfactionCalendarModal from "@HRBox/modules/basic-info/modals/EmployeeSatisfactionCalendarModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import {formValidationHealth,initialValuesHealth} from "@HRBox/modules/basic-info/forms/AddNewOnDutyHealthRecordsForm";
-import {formValidationHealthDuty,initialValuesHealthDuty} from "@HRBox/modules/basic-info/forms/PreEmploymentHealthRecordsForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import { useModal } from "@hrbox/core/hooks";
+import {formValidationHealth,initialValuesHealth} from "@hrbox-monorepo/modules/basic-info/forms/OnDutyHealthRecordsForm";
+import {formValidationHealthDuty,initialValuesHealthDuty} from "@hrbox/modules/basic-info/forms/PreEmploymentHealthRecordsForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
 
 const HealthRecord = () => {
   const { openModal } = useModalContext();
 
   const [preEmploymentRecords, setPreEmploymentRecords] = useState([]);
 
-  const handlePreEmploymentSubmit = (newRecord) => {
-    setPreEmploymentRecords(prev => [...prev, newRecord]);
+  const handlePreEmploymentSubmit = (newRecord: any) => {
+    setPreEmploymentRecords((prev) => [...prev, newRecord]);
   };
 
   const openPreEmploymentModal = () => {
@@ -143,7 +141,7 @@ const handleOpenOnDutyHealthRecords = () => {
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {[...healthy, ...preEmploymentRecords].map((worker, index) => (
+              {[...healthy, ...preEmploymentRecords].map((worker:any, index) => (
                 <Card key={worker.id || index} className="p-3 flex flex-col gap-2">
                   <div className="flex flex-col gap-1">
                     <span className="text-sm text-secondary-900 font-semibold">{worker.title}</span>

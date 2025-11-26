@@ -27,13 +27,13 @@ export const FormField: React.FC<FormFieldProps> = ({
   const value = values?.[name] || '';
   const error = touched?.[name] && errors?.[name] ? String(errors[name]) : undefined;
 
-  const handleChange = (e: any) => {
+  const handleChange = async (e: any) => {
     const newValue = e?.target?.value !== undefined ? e.target.value : e;
-    setFieldValue(name, newValue);
+    await setFieldValue(name, newValue);
   };
 
-  const handleBlur = () => {
-    setFieldTouched(name, true);
+  const handleBlur = async () => {
+    await setFieldTouched(name, true);
   };
 
   if (Component) {
@@ -63,11 +63,11 @@ export const FormField: React.FC<FormFieldProps> = ({
       formMode={formMode}
       value={value}
       error={error}
-      onChange={(e) => {
-        setFieldValue(name, e.target.value);
+      onChange={async (e) => {
+        await setFieldValue(name, e.target.value);
       }}
-      onBlur={(e) => {
-        setFieldTouched(name, true);
+      onBlur={async(e) => {
+        await setFieldTouched(name, true);
       }}
       helperText={helperText}
       {...rest}

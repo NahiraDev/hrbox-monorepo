@@ -1,8 +1,7 @@
 {
-  "extends": "../../core/config/typescript/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "baseUrl": ".",
     "rootDir": "../../",
     "outDir": "../../dist/modules/basic-info",
     "declarationDir": "../../dist/types",

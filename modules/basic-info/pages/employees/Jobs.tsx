@@ -1,33 +1,29 @@
 import { Card } from '@heroui/react';
 import { Jobss } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { useState } from 'react';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
-import { useModal } from "@HRBox/core/hooks";
-import EmployeeSatisfactionCalendarModal from "@HRBox/modules/basic-info/modals/EmployeeSatisfactionCalendarModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import {useModal} from "@hrbox/core/hooks";
 
 const Jobs = () => {
-  const { openModal } = useModalContext();
+  const modal = useModal();
   const [jobs, setJobs] = useState(Jobss);
 
   const handleDeleteClick = (index: number) => {
-    openModal(
-      'delete',
-      '',
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log('Cancelled')}
-      />,
-      undefined,
-      'sm',
-      'Do you want to remove it?',
-      <Trash className='text-white'/>
-    );
+    // openModal(
+    //   'delete',
+    //   '',
+    //   <AppDeleteModal
+    //     onConfirm={() => handleDeleteConfirm(index)}
+    //     onCancel={() => console.log('Cancelled')}
+    //   />,
+    //   undefined,
+    //   'sm',
+    //   'Do you want to remove it?',
+    //   <Trash className='text-white'/>
+    // );
   };
 
   const handleDeleteConfirm = (index: number) => {

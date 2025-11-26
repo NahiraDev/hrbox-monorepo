@@ -1,5 +1,3 @@
-import SelectRole from "sso/pages/SelectRole";
-
 export const Paths = {
     SSO: {
         login: '/sso/login',
@@ -73,7 +71,7 @@ export const Paths = {
         IpAllocation: '/attendance/ip-allocation',
         LocationAllocation: '/attendance/location-allocation',
     },
-    ProcessMaker:{
+    ProcessMaker: {
         Dashboard: '/process-maker/dashboard',
         ProcessList: '/process-maker/process-list',
         ProcessExperience: '/process-maker/process-experience',
