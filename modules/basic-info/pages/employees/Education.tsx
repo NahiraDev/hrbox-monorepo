@@ -1,13 +1,10 @@
 import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
-import { Buildings, Calendar, User, Designtools, Location, Trash } from 'iconsax-reactjs';
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { AppButton } from '@hrbox/uikit/components';
+import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import { useState } from 'react';
-import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
 
 const Education = () => {
   const { openModal } = useModalContext();
@@ -15,18 +12,18 @@ const Education = () => {
   const [educationList, setEducationList] = useState(education);
 
   const handleDeleteClick = (index: number) => {
-    openModal(
-      'delete',
-      '',
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log('Cancelled')}
-      />,
-      undefined,
-      'sm',
-      'Do you want to remove it?',
-      <Trash className='text-white'/>
-    );
+    // openModal(
+    //   'delete',
+    //   '',
+    //   <AppDeleteModal
+    //     onConfirm={() => handleDeleteConfirm(index)}
+    //     onCancel={() => console.log('Cancelled')}
+    //   />,
+    //   undefined,
+    //   'sm',
+    //   'Do you want to remove it?',
+    //   <Trash className='text-white'/>
+    // );
   };
 
   const handleDeleteConfirm = (index: number) => {

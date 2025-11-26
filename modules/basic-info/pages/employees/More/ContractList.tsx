@@ -2,6 +2,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKey
 import { Setting } from 'iconsax-reactjs';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
+import {useTranslation} from "react-i18next";
 
 const columns = [
   { key: 'no', label: 'No.' },
@@ -116,13 +117,15 @@ const rows = [
 ];
 
 const ContractList = () => {
+  const {t} = useTranslation()
+
   return (
     <BasicInfoLayout
       content={
         <>
           <div className="flex items-center gap-1 text-xl text-secondary-900 font-semibold py-5">
             <Setting size="24" />
-            <span>Contract List</span>
+            <span>{t('contract_list')}</span>
           </div>
           <Table
             removeWrapper

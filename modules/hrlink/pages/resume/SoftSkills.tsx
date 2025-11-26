@@ -5,7 +5,7 @@ import {Card, CardBody, CardHeader} from "@heroui/react";
 import {
     GeneralInformation,
 } from "@hrbox/modules/hrlink/components/GeneralInformation";
-import {AppDoubleLineProgress} from "@hrbox/uikit/sections/AppDoubleLineProgress";
+import {AppDoubleLineProgress} from "@hrbox-monorepo/UIKit/components/AppDoubleLineProgress";
 
 import {SoftSkillsIcon} from "@hrbox/uikit/icons";
 import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";

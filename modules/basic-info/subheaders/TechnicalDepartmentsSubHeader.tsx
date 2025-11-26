@@ -5,9 +5,7 @@ const TechnicalDepartmentsSubHeader = (props: any) => {
   return (
     <div>
       <AppButton
-        props={{
-          content: <ArrowLeft color="#292D32" size={24} />,
-        }}
+          content={<ArrowLeft color="#292D32" size={24} />}
       />
       <div className="flex items-center gap-2 rounded-md bg-primary shdow-theme-sm px-3 py-1.5 w-fit">
         {props.icon && <props.icon color="#fff" />}

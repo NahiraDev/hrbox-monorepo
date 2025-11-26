@@ -2,7 +2,7 @@ import {Form} from '@heroui/react';
 import {departmentUnit} from '@hrbox/modules/chart-maker/app/mock';
 import {FormField} from "@hrbox/uikit/components/FormField";
 import * as Yup from 'yup';
-import {AppAutoComplete} from "@hrbox/uikit/components";
+import {AppAutoComplete} from "@hrbox/uikit/components/AppAutoComplete";
 
 export const initialValuesForm = {
     CurrentPassWord: '',

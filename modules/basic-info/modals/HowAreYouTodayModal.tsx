@@ -1,6 +1,7 @@
 import { AppButton } from "@hrbox/uikit/components";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BeHappy, Frown, Happy, Sad } from "@hrbox/uikit/icons";
+import React from "react";
 
 interface HowAreYouTodayModalProps {
   onMoodSelect: (mood: string) => void;
@@ -45,14 +46,12 @@ const HowAreYouTodayModal: React.FC<HowAreYouTodayModalProps> = ({
         {moods.map((mood) => (
           <AppButton
             key={mood.value}
-            props={{
-              size: "lg",
-              radius: "full",
-              variant: "light",
-              color: "white",
-              content: mood.icon,
-              onPress: () => handleMoodSelect(mood.value),
-            }}
+            size="lg"
+            radius="full"
+            variant="light"
+            color="white"
+            content={mood.icon}
+            onPress={() => handleMoodSelect(mood.value)}
           />
         ))}
       </div>

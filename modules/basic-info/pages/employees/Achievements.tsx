@@ -5,7 +5,7 @@ import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsa
 import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components/BasicInfoLayout';
-import AddNewCourses from '@hrbox/modules/basic-info/modals/AddNewCourses';
+import CoursesModal from '@hrbox-monorepo/modules/basic-info/modals/CoursesModal';
 import {useModal} from "@HRBox/core/hooks";
 import {OrganizationDepartmentModal} from "@HRBox/modules/basic-info/modals/OrganizationDepartmentModal";
 import {formValidationAward, handleSubmitAward, initialValuesAward} from "@HRBox/modules/hrlink/forms/AwardForm";
@@ -111,7 +111,7 @@ const Achievements = () => {
               </div>
             </Card>
           ))}
-          <AddNewCourses/>
+          <CoursesModal/>
           <AppDeleteModal />
         </div>
       }

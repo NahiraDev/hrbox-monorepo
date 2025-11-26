@@ -1,10 +1,9 @@
 {
-  "extends": "@hrbox/core/config/typescript/tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "outDir": "../dist/core",
     "rootDir": "../",
-    "baseUrl": ".",
     "declarationDir": "../dist/types"
   },
   "include": ["." , "./*"]

@@ -12,7 +12,7 @@ interface AppTextAreaProps extends Omit<TextAreaProps, 'onChange' | 'onBlur' | '
   onFocus?: (e: React.FocusEvent) => void;
   onBlur?: (e: React.FocusEvent) => void;
   onChange?: (e: React.ChangeEvent) => void;
-  helperText?: string;
+  helperText?: any;
   containerClassName?: string;
 }
 

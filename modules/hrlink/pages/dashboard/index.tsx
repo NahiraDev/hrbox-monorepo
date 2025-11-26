@@ -21,7 +21,6 @@ import {
   useFetchCompaniesListQuery,
   useFetchJobOpportunitiesSentQuery,
   useFetchResumePercentQuery,
-  useFetchUserAboutMeQuery,
   useFetchViewResumeQuery,
 } from "@hrbox/modules/hrlink/apis";
 
