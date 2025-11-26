@@ -130,7 +130,6 @@ export const CalenderHeaderForm = () => {
                 items= {months}
                 size="md"
               radius="lg"
-                className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                 startIcon={<Calendar size={22} />}
                 endIcon={<ArrowDown2 size={20} />}
             />

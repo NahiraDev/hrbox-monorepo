@@ -84,7 +84,7 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
                     name={label}
                     size="lg"
                     radius="lg"
-                    className="bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)]"
+                    className="bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)] dark:bg-[linear-gradient(90deg,var(--Primary-900,#022C3D)_5%,var(--Primary-700,#05587A)_50%,var(--Primary-900,#022C3D)_95%)] dark:border-[rgba(4,66,92,0.60)]"
                     endContent={
                       <Tooltip
                         classNames={{
@@ -97,24 +97,29 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
                               <span>
                                 <InfoCircle color="#FD8F02" size={16} />
                               </span>
-                              <p className="text-xs font-bold">
+                              <p className="text-xs font-semibold">
                                 Total Number of All Attendance Days This Month
                               </p>
                             </div>
-                            <div>
-                              <p className="text-secondary-1000 text-sm!">
-                                <span className="text-xs! font-bold! text-orange-400">
+                            <div className="flex flex-col">
+                              <div>
+                                <span className="text-xs! font-semibold! text-orange-400!">
                                   Note1:{" "}
-                                </span>
-                                Days without shifts are not included in this
-                                list.
-                                <span className="text-xs! font-bold! text-orange-400">
+                              </span>
+                              <p className="text-secondary-1000 font-normal text-xs! inline">
+                                Days without shifts are not included in this list.
+                                </p>
+                              </div>
+                                <div>
+                                  <span className="text-xs! font-semibold! text-orange-400!">
                                   Note2:{" "}
                                 </span>
+                                <p className="text-secondary-1000 font-normal text-xs! inline">
                                 Monthly working hours refer to the total of
                                 attendance days + official holidays + Fridays +
                                 leaves + daily missions.
                               </p>
+                                </div>
                             </div>
                           </div>
                         }
