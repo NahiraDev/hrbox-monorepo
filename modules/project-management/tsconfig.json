@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "."
+  },
+  "references": [
+    { "path": "../../core" },
+    { "path": "../../mock" },
+    { "path": "../../configs" },
+  ],
+  "include": [
+    "app",
+    "features",
+    "icons",
+    "vite.config.ts",
+    "index.html"
+  ]
+}
