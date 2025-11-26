@@ -2,46 +2,45 @@
 // core/config/theme/domains.ts (COMPLETE)
 // ============================================
 
-import {Panel} from './roles';
+import { Panel } from "./roles";
+import * as process from "node:process";
 
-
-export type Domain = "front.hrbox.me" | 'react.hrbox.me' | 'super-admin'
-
+export type Domain = "front.hrbox.me" | "react.hrbox.me" | "super-admin";
 
 export interface DomainConfig {
-    domain: string;
-    panel: Panel;
-    hosts: string[];
+  domain: string;
+  panel: Panel;
+  hosts: string[];
 
-    logo: string;
-    logoMobile: string;
-    favicon: string;
+  logo: string;
+  logoMobile: string;
+  favicon: string;
 
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 
-    loginBg: {
-        light: string;
-        dark: string;
+  loginBg: {
+    light: string;
+    dark: string;
+  };
+  panelBg: {
+    light: string;
+    dark: string;
+  };
+  theme: {
+    light: {
+      primary: string;
+      secondary: string;
+      background: string;
+      surface: string;
     };
-    panelBg: {
-        light: string;
-        dark: string;
-    }
-    theme: {
-        light: {
-            primary: string;
-            secondary: string;
-            background: string;
-            surface: string;
-        };
-        dark: {
-            primary: string;
-            secondary: string;
-            background: string;
-            surface: string;
-        };
+    dark: {
+      primary: string;
+      secondary: string;
+      background: string;
+      surface: string;
     };
+  };
 }
 
 // ============================================
@@ -49,258 +48,192 @@ export interface DomainConfig {
 // ============================================
 
 export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
-    hrlink: {
-        domain: 'hrlink',
-        panel: Panel.HRLINK,
-        hosts: [
-            'hrlink.ir',
-            'www.hrlink.ir',
-            'hrlink.me',
-            'front.hrbox.me',
-            'localhost',
-        ],
+  hrlink: {
+    domain: "hrlink",
+    panel: Panel.HRLINK,
+    hosts: [
+      "hrlink.ir",
+      "www.hrlink.ir",
+      "hrlink.me",
+      "front.hrbox.me",
+      "localhost",
+    ],
 
-        logo: '/images/hrlink/logo.svg',
-        logoMobile: '/images/hrlink/logo.svg',
-        favicon: '/images/hrlink/favicon.ico',
+    logo: "/images/hrlink/logo.svg",
+    logoMobile: "/images/hrlink/logo.svg",
+    favicon: "/images/hrlink/favicon.ico",
 
-        title: 'HRLink - استخدام و کاریابی',
-        description: 'پلتفرم جامع استخدام و کاریابی',
+    title: "HRLink - استخدام و کاریابی",
+    description: "پلتفرم جامع استخدام و کاریابی",
 
-        loginBg: {
-            light: '/images/hrlink/login-bg-light.webp',
-            dark: '/images/hrlink/login-bg-dark.webp',
-        },
-        panelBg: {
-            light: '/images/hrlink/panel-bg-light.webp',
-            dark: '/images/hrlink/panel-bg-dark.webp',
-        },
-        theme: {
-            light: {
-                primary: '#1E3363',
-                secondary: '#0A9AD7',
-                background: '#F5FBFE',
-                surface: '#FFFFFF',
-            },
-            dark: {
-                primary: '#DDBA69',
-                secondary: '#FFFFFF',
-                background: '#04070E',
-                surface: '#01101A',
-            },
-        }
+    loginBg: {
+      light: "/images/hrlink/login-bg-light.webp",
+      dark: "/images/hrlink/login-bg-dark.webp",
+    },
+    panelBg: {
+      light: "/images/hrlink/panel-bg-light.webp",
+      dark: "/images/hrlink/panel-bg-dark.webp",
+    },
+    theme: {
+      light: {
+        primary: "#1E3363",
+        secondary: "#0A9AD7",
+        background: "#F5FBFE",
+        surface: "#FFFFFF",
+      },
+      dark: {
+        primary: "#DDBA69",
+        secondary: "#FFFFFF",
+        background: "#04070E",
+        surface: "#01101A",
+      },
+    },
+  },
+
+  hrbox: {
+    domain: "hrbox",
+    panel: Panel.HRBOX,
+    hosts: ["hrbox.ir", "www.hrbox.ir", "hrbox.me", "react.hrbox.me"],
+
+    logo: "/images/hrbox/logo.svg",
+    logoMobile: "/images/hrbox/logo.svg",
+    favicon: "/images/hrbox/favicon.ico",
+
+    title: "HRBox - مدیریت منابع انسانی",
+    description: "سیستم جامع مدیریت منابع انسانی",
+
+    loginBg: {
+      light: "/images/hrbox/login-bg-light.webp",
+      dark: "/images/hrbox/login-bg-dark.webp",
+    },
+    panelBg: {
+      light: "/images/hrbox/panel-bg-light.webp",
+      dark: "/images/hrbox/panel-bg-dark.webp",
     },
 
-    hrbox: {
-        domain: 'hrbox',
-        panel: Panel.HRBOX,
-        hosts: [
-            'hrbox.ir',
-            'www.hrbox.ir',
-            'hrbox.me',
-            'react.hrbox.me',
-        ],
-
-        logo: '/images/hrbox/logo.svg',
-        logoMobile: '/images/hrbox/logo.svg',
-        favicon: '/images/hrbox/favicon.ico',
-
-        title: 'HRBox - مدیریت منابع انسانی',
-        description: 'سیستم جامع مدیریت منابع انسانی',
-
-        loginBg: {
-            light: '/images/hrbox/login-bg-light.webp',
-            dark: '/images/hrbox/login-bg-dark.webp',
-        },
-        panelBg: {
-            light: '/images/hrbox/panel-bg-light.webp',
-            dark: '/images/hrbox/panel-bg-dark.webp',
-        },
-
-        theme: {
-            light: {
-                primary: '#0A9AD7',
-                secondary: '#1E293B',
-                background: '#F8FAFC',
-                surface: '#FFFFFF',
-            },
-            dark: {
-                primary: '#044566',
-                secondary: '#FFFFFF',
-                background: '#0F172A',
-                surface: '#1E293B',
-            },
-        }
+    theme: {
+      light: {
+        primary: "#0A9AD7",
+        secondary: "#1E293B",
+        background: "#F8FAFC",
+        surface: "#FFFFFF",
+      },
+      dark: {
+        primary: "#044566",
+        secondary: "#FFFFFF",
+        background: "#0F172A",
+        surface: "#1E293B",
+      },
     },
-
-    // Super Admin Configuration
-    'super-admin': {
-        domain: 'super-admin',
-        panel: Panel.SUPER_ADMIN,
-        hosts: [
-            'admin.hrbox.ir',
-            'admin.hrlink.ir',
-            'localhost:3002',
-        ],
-
-        logo: '/images/admin/logo.svg',
-        logoMobile: '/images/admin/logo-mobile.svg',
-        favicon: '/images/admin/favicon.ico',
-
-        title: 'Super Admin - مدیریت سیستم',
-        description: 'پنل مدیریت کل سیستم',
-
-        loginBg: {
-            light: '/images/admin/login-bg-dark.webp',
-            dark: '/images/admin/login-bg-dark.webp',
-        },
-
-        theme: {
-            light: {
-                primary: '#EF4444',
-                secondary: '#991B1B',
-                background: '#FEF2F2',
-                surface: '#FFFFFF',
-            },
-            dark: {
-                primary: '#F87171',
-                secondary: '#FFFFFF',
-                background: '#1F1917',
-                surface: '#292524',
-            },
-        },
-    },
+  },
 };
 
 export function getCurrentDomain(): Panel {
-    const hostname = window.location.hostname;
-    const port = window.location.port;
+  const hostname = window.location.hostname;
+  const port = window.location.port;
 
-    if (
-        hostname === 'front.hrbox.me' ||
-        hostname === 'hrlink.ir' ||
-        hostname === 'www.hrlink.ir' ||
-        hostname === 'hrlink.me'
-    ) {
-        return Panel.HRLINK;
-    }
-
-    if (
-        hostname === 'react.hrbox.me' ||
-        hostname === 'hrbox.ir' ||
-        hostname === 'www.hrbox.ir' ||
-        hostname === 'hrbox.me'
-    ) {
-        return Panel.HRBOX;
-    }
-
-    if (
-        hostname === 'admin.hrbox.me' ||
-        hostname === 'admin.hrbox.ir' ||
-        hostname === 'admin.hrlink.ir'
-    ) {
-        return Panel.SUPER_ADMIN;
-    }
-
-    if (hostname === 'localhost') {
-        if (port === '3000') {
-            return Panel.HRLINK;
-        }
-
-        if (port === '3001') {
-            return Panel.HRBOX;
-        }
-
-        if (port === '3002') {
-            return Panel.SUPER_ADMIN;
-        }
-    }
-
-    const viteHrlinkUrl = import.meta.env.VITE_HRLINK_URL;
-    if (viteHrlinkUrl && hostname.includes(viteHrlinkUrl)) {
-        console.log('✅ Detected: HRLINK (from VITE_HRLINK_URL)');
-        return Panel.HRLINK;
-    }
-
-    console.warn('⚠️ Could not detect domain, using default: HRLINK');
+  if (
+    hostname === "front.hrbox.me" ||
+    hostname === "hrlink.ir" ||
+    hostname === "www.hrlink.ir" ||
+    hostname === "hrlink.me"
+  ) {
     return Panel.HRLINK;
+  }
+
+  if (
+    hostname === "react.hrbox.me" ||
+    hostname === "hrbox.ir" ||
+    hostname === "www.hrbox.ir" ||
+    hostname === "hrbox.me"
+  ) {
+    return Panel.HRBOX;
+  }
+
+  const viteHrlinkUrl = process.env.VITE_HRLINK_URL;
+  if (viteHrlinkUrl && hostname.includes(viteHrlinkUrl)) {
+    return Panel.HRLINK;
+  }
+  return Panel.HRLINK;
 }
 
 export function getDomainTheme(): Panel {
-    return getCurrentDomain();
+  return getCurrentDomain();
 }
 
 export function getDomainConfig(panel?: Panel): DomainConfig {
-    const currentPanel = panel || getCurrentDomain();
-    return DOMAIN_CONFIGS[currentPanel];
+  const currentPanel = panel || getCurrentDomain();
+  return DOMAIN_CONFIGS[currentPanel];
 }
 
 export function applyFavicon(panel: Panel) {
-    const config = getDomainConfig(panel);
+  const config = getDomainConfig(panel);
 
-    let link = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
+  let link = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
 
-    if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-    }
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
 
-    link.href = config.favicon;
-    console.log('✅ Favicon applied:', config.favicon);
+  link.href = config.favicon;
+  console.log("✅ Favicon applied:", config.favicon);
 }
 
-/**
- * اعمال Page Title
- */
 export function applyPageTitle(panel: Panel, pageTitle?: string) {
-    const config = getDomainConfig(panel);
-    const title = pageTitle ? `${pageTitle} | ${config.title}` : config.title;
+  const config = getDomainConfig(panel);
+  const title = pageTitle ? `${pageTitle} | ${config.title}` : config.title;
 
-    document.title = title;
-    console.log('✅ Page title applied:', title);
+  document.title = title;
+  console.log("✅ Page title applied:", title);
 }
 
 export function applyMetaTags(panel: Panel) {
-    const config = getDomainConfig(panel);
+  const config = getDomainConfig(panel);
+  let metaDesc = document.querySelector<HTMLMetaElement>(
+    'meta[name="description"]',
+  );
+  if (!metaDesc) {
+    metaDesc = document.createElement("meta");
+    metaDesc.name = "description";
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.content = config.description;
 
-    // Description
-    let metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.name = 'description';
-        document.head.appendChild(metaDesc);
-    }
-    metaDesc.content = config.description;
-
-    console.log('✅ Meta tags applied');
+  console.log("✅ Meta tags applied");
 }
 
-export function applyDomainTheme(panel: Panel, mode: 'light' | 'dark') {
-    const config = getDomainConfig(panel);
-    const theme = config.theme[mode];
-    const root = document.documentElement;
+export function applyDomainTheme(panel: Panel, mode: "light" | "dark") {
+  const config = getDomainConfig(panel);
+  const theme = config.theme[mode];
+  const root = document.documentElement;
 
-    root.classList.remove('hrlink', 'hrbox', 'super-admin', 'light', 'dark');
+  root.classList.remove("hrlink", "hrbox", "light", "dark");
 
-    root.classList.add(panel, mode);
-    root.style.colorScheme = mode;
+  root.classList.add(panel, mode);
+  root.style.colorScheme = mode;
 
-    root.style.setProperty('--color-primary', theme.primary);
-    root.style.setProperty('--color-secondary', theme.secondary);
-    root.style.setProperty('--color-background', theme.background);
-    root.style.setProperty('--color-surface', theme.surface);
+  root.style.setProperty("--color-primary", theme.primary);
+  root.style.setProperty("--color-secondary", theme.secondary);
+  root.style.setProperty("--color-background", theme.background);
+  root.style.setProperty("--color-surface", theme.surface);
 
-    console.log(`✅ Theme applied: ${panel} (${mode})`);
+  console.log(`✅ Theme applied: ${panel} (${mode})`);
 }
 
-export function getLoginBackground(panel: Panel, mode: 'light' | 'dark'): string {
-    const config = getDomainConfig(panel);
-    return config.loginBg[mode];
+export function getLoginBackground(
+  panel: Panel,
+  mode: "light" | "dark",
+): string {
+  const config = getDomainConfig(panel);
+  return config.loginBg[mode];
 }
 
-
-export function getPanelBackground(panel: Panel, mode: 'light' | 'dark'): string {
-    const config = getDomainConfig(panel);
-    return config.panelBg[mode];
+export function getPanelBackground(
+  panel: Panel,
+  mode: "light" | "dark",
+): string {
+  const config = getDomainConfig(panel);
+  return config.panelBg[mode];
 }

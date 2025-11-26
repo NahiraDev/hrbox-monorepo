@@ -1,74 +1,66 @@
-import { AppButton, AppInput, AppModal } from "@hrbox/uikit/components";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete } from "@hrbox/uikit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
 import * as Yup from "yup";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
+
 export const initialValuesAction = {
   EducationalInstitution: null,
-  SearchbyNameorPosition: null,
+  SearchByNameOrPosition: null,
   PersonnelCode: null,
   NationalCode: null,
 };
 export const formValidationAction = Yup.object().shape({
   EducationalInstitution: Yup.string().required(),
-  SearchbyNameorPosition: Yup.string().required(),
+  SearchByNameOrPosition: Yup.string().required(),
   PersonnelCode: Yup.string().required(),
   NationalCode: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.EducationalInstitution);
-  console.log(values.SearchbyNameorPosition);
-  console.log(values.PersonnelCode);
-  console.log(values.NationalCode);
   return {
     EducationalInstitution: values.EducationalInstitution,
-    SearchbyNameorPosition: values.SearchbyNameorPosition,
+    SearchByNameOrPosition: values.SearchByNameOrPosition,
     PersonnelCode: values.PersonnelCode,
     NationalCode: values.NationalCode,
   };
 };
 const FilterCalenderModal = () => {
-  const { openModal } = useModalContext();
-
+  const { touched, errors, handleSubmit, handleReset } = useFormContext();
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
   return (
-    <>
-      <AppModal.Body>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
+      <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField
-          name="Educational Institution"
+          name="EducationalInstitution"
           label="Educational Institution"
+          helperText={
+            touched.EducationalInstitution && errors.EducationalInstitution
+          }
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Search by Name or Position"
+          name="SearchByNameOrPosition"
           label="Search by Name or Position"
+          helperText={
+            touched.SearchByNameOrPosition && errors.SearchByNameOrPosition
+          }
+          formMode={currentType}
         />
-        <FormField name=" Personnel Code" label=" Personnel Code" />
-        <FormField name="National Code" label="National Code" />
-      </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            // onPress: () => openModal('delete', undefined),
-            content: <span>Cancel</span>,
-            className:
-              "text-white py-1.5 px-3 text-xl rounded-lg !bg-red-500 hover:text-white transition-all duration-200",
-          }}
+        <FormField
+          name="PersonnelCode"
+          label="Personnel Code"
+          helperText={touched.PersonnelCode && errors.PersonnelCode}
+          formMode={currentType}
         />
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => console.log("a"),
-            content: <span>Submit</span>,
-            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg ",
-          }}
+        <FormField
+          name="NationalCode"
+          label="National Code"
+          helperText={touched.NationalCode && errors.NationalCode}
+          formMode={currentType}
         />
-      </AppModal.Footer>
-    </>
+      </div>
+    </form>
   );
 };
 
