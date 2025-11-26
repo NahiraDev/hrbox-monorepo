@@ -63,7 +63,7 @@ const sampleData = [
   },
 ];
 
-const getBadgeGradient = (color) => {
+const getBadgeGradient = (color: any) => {
   switch (color) {
     case "green":
       return "bg-gradient-to-br from-green-400 to-green-700";
@@ -76,7 +76,7 @@ const getBadgeGradient = (color) => {
   }
 };
 
-const MentorCard = ({ name, role, avatar, badgeColor }) => {
+const MentorCard = ({ name, role, avatar, badgeColor }:any) => {
   return (
     <div className="flex flex-col gap-4 items-center justify-center px-5 py-6 relative">
       <div className="absolute z-100 top-1 right-2">
@@ -102,39 +102,27 @@ const EmployeeSatisfactionCalendarModal = ({
   onItemPress,
 }) => {
   const { openModal } = useModalContext();
-  const handlePress = (item) => {
+  const handlePress = (item: any) => {
     if (onItemPress) onItemPress(item);
   };
 
+
   return (
-    <AppModal.Body>
       <div className="grid grid-cols-4 gap-10 p-5">
         {data.map((item) => (
           <AppButton
             key={item.id}
-            props={{
-              size: "xs",
-              radius: "sm",
-              color: "white",
-              variant: "solid",
-              isIconOnly: true,
-              onPress: () =>
-                openModal(
-                  "edit",
-                  "",
-                  <FilterCalenderModal />,
-                  undefined,
-                  "sm",
-                  "Filter",
-                  <Filter className="text-white" />,
-                ),
-              className: "shadow-sm rounded-2xl",
-              content: <MentorCard {...item} />,
-            }}
+            size="xs"
+            radius="sm"
+            color="white"
+            variant="solid"
+            isIconOnly
+            onPress={() =>}
+            className="shadow-sm rounded-2xl"
+            content={<MentorCard {...item} />}
           />
         ))}
       </div>
-    </AppModal.Body>
   );
 };
 

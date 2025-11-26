@@ -8,13 +8,14 @@ import {
   Status,
   Calendar,
 } from "iconsax-reactjs";
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import DocumentsModal from "../../modals/DocumentsModal";
-import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import { formValidationRelative, initialValuesRelative } from "@hrbox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import {useModal} from "@hrbox/core/hooks";
+import {useTranslation} from "react-i18next";
 
 interface Document {
   name: string;
@@ -25,24 +26,22 @@ interface Document {
 }
 
 const Documents = () => {
-  const { openModal } = useModalContext();
+    const modal = useModal()
+    const {t} = useTranslation()
   const [documentsList, setDocumentsList] = useState<Document[]>(identityCard);
-
-  const closeAllModals = () => {};
-
   const handleDeleteClick = (index: number) => {
-    openModal(
-      "delete",
-      "",
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log("Cancelled")}
-      />,
-      undefined,
-      "sm",
-      "Do you want to remove it?",
-      <Trash className="text-white" />,
-    );
+      // modal.open(
+      //     ModalType.DELETE,
+      //     "",
+      //     < DocumentsModal />,
+      //     {
+      //         isForm: false,
+      //         title:t("Do you want to remove it?"),
+      //         submitLabel: "ذخیره",
+      //         cancelLabel: "لغو",
+      //     },
+      //     ModalSize.XL,
+      // );
   };
 
   const handleDeleteConfirm = (index: number) => {
@@ -119,7 +118,7 @@ const Documents = () => {
                           radius="sm"
                           variant="light"
                           isIconOnly={true}
-                          onPress={handleDeleteClick(index)}
+                          onPress={()=>handleDeleteClick(index)}
                           content={
                             <Trash className="text-secondary-1000 group-hover:text-white" />
                           }

@@ -207,5 +207,6 @@
   "locationallocation": "اختصاص موقعیت مکانی",
   "ipallocation": "اختصاص آی پی",
   "faceallocation": "اختصاص تشخیص چهره",
-  "add_new_one": "افزودن مورد جدید"
+  "add_new_one": "افزودن مورد جدید",
+  "personal_attendance_calendar": "Personal attendance calendar (fa)"
 }

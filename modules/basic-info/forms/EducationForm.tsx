@@ -1,12 +1,13 @@
-import { FormField } from "@HRBox/uikit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@HRBox/uikit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
+import {useFormContext, useModalContext} from "@hrbox-monorepo/core/providers";
 export const initialValuesAction = {
   DegreeLevel: null,
   EducationalInstitution: null,
   UniversityType: null,
-  FieldofStudy: null,
+  FieldOfStudy: null,
   ThesisTitle: null,
   GPA: null,
   FromYear: null,
@@ -17,7 +18,7 @@ export const formValidationAction = Yup.object().shape({
   DegreeLevel: Yup.string().required(),
   EducationalInstitution: Yup.string().required(),
   UniversityType: Yup.string().required(),
-  FieldofStudy: Yup.string().required(),
+  FieldOfStudy: Yup.string().required(),
   ThesisTitle: Yup.string().required(),
   GPA: Yup.string().required(),
   FromYear: Yup.string().required(),
@@ -26,21 +27,11 @@ export const formValidationAction = Yup.object().shape({
   Type: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.DegreeLevel);
-  console.log(values.EducationalInstitution);
-  console.log(values.UniversityType);
-  console.log(values.FieldofStudy);
-  console.log(values.ThesisTitle);
-  console.log(values.GPA);
-  console.log(values.FromYear);
-  console.log(values.ToYear);
-  console.log(values.Province);
-  console.log(values.Type);
   return {
     DegreeLevel: values.DegreeLevel,
     EducationalInstitution: values.EducationalInstitution,
     UniversityType: values.UniversityType,
-    FieldofStudy: values.FieldofStudy,
+    FieldOfStudy: values.FieldofStudy,
     ThesisTitle: values.ThesisTitle,
     GPA: values.GPA,
     FromYear: values.FromYear,
@@ -50,12 +41,16 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 const EducationForm = () => {
+    const {handleSubmit} = useFormContext()
+    const { getOpenModal } = useModalContext();
+    const currentType = getOpenModal()?.type;
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField
           name="Degree Level"
           label="Degree Level"
+
           component={AppAutoComplete}
         />
         <FormField

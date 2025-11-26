@@ -2,11 +2,7 @@ import type {ModulePlugin} from "@hrbox/modules/types";
 import {RoleSlug} from "@hrbox/core/config/theme/roles";
 import {Chart2, Briefcase, Building, LocationAdd, Profile2User, ReceiveSquare, Setting3} from "iconsax-reactjs";
 import {lazyRouteComponent} from "@tanstack/react-router";
-import {Paths} from "@hrbox/modules/paths";
-
-// ============================================
-// Pages
-// ============================================
+import {Paths} from "../paths";
 
 const AllEmployees = lazyRouteComponent(() => import("./pages/employees/Employees"));
 const OrganizationDepartments = lazyRouteComponent(() => import('./pages/departments/OrganizationDepartments'));

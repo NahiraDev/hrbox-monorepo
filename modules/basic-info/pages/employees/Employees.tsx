@@ -1,6 +1,6 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
-import { AppPagination } from '@hrbox/uikit/components';
+import {TickIcon} from "@hrbox/uikit/icons";
 
 
 const Employees = () => {
@@ -15,7 +15,7 @@ const Employees = () => {
             >
               <Avatar className="w-24 h-24 rounded-3xl" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
               <div className="absolute top-3 right-3">
-                {/*<TickIcon color={worker.isActive ? '#0B76B7' : '#CCC'} />*/}
+                <TickIcon color={worker.isActive ? '#0B76B7' : '#CCC'} />
               </div>
               <span className="text-secondary-1000 font-medium">{worker.nameWorker}</span>
               <Button className="h-6 text-primary bg-[#DCF0F966]/40 border-2 border-primary" variant="faded">
@@ -26,14 +26,7 @@ const Employees = () => {
         })}
       </div>
       <div className="flex justify-end">
-        {/*<AppPagination*/}
-        {/*  props={{*/}
-        {/*    size: 'sm',*/}
-        {/*    initialPage: 2,*/}
-        {/*    showControls: true,*/}
-        {/*    dotsJump: 5,*/}
-        {/*  }}*/}
-        {/*/>*/}
+
       </div>
 
     </div>

@@ -1,5 +1,4 @@
 import { FormField } from "@hrbox/uikit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
 export const initialValuesHealth = {
@@ -11,8 +10,6 @@ export const formValidationHealth = Yup.object().shape({
   Amount: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.Title);
-  console.log(values.Amount);
   return {
     Title: values.title,
     Amount: values.type,
