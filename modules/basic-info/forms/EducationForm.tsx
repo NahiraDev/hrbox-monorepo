@@ -2,7 +2,8 @@ import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Form } from "@heroui/react";
 import * as Yup from "yup";
-import {useFormContext, useModalContext} from "@hrbox-monorepo/core/providers";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
+
 export const initialValuesAction = {
   DegreeLevel: null,
   EducationalInstitution: null,
@@ -41,16 +42,15 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 const EducationForm = () => {
-    const {handleSubmit} = useFormContext()
-    const { getOpenModal } = useModalContext();
-    const currentType = getOpenModal()?.type;
+  const { handleSubmit } = useFormContext();
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
   return (
     <Form onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField
           name="Degree Level"
           label="Degree Level"
-
           component={AppAutoComplete}
         />
         <FormField
