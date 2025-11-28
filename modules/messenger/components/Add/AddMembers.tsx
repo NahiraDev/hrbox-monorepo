@@ -1,8 +1,7 @@
-import { Avatar, Button, Modal, ModalContent } from "@nextui-org/react";
+import { Avatar, Button, Modal, ModalContent } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import SearchBox from "../SearchBox";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
 import { AddMembersProps } from "./types";
 import { handleGetContactsApi } from "../../services/Messenger/UserService/apis";
 import { GroupAndChannelTypes, MemberTypes } from "../../types";

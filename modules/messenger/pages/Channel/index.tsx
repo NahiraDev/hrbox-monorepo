@@ -1,22 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
-import TextBox from "../../../components/TextBox";
-import EmptyChat from "../../../components/EmptyChat";
-import TextMessage from "../../../components/Messages/TextMessage";
-import { MessageProps } from "../../../components/Messages/types";
-import PhotoMessage from "../../../components/Messages/PhotoMessage";
-import FileMessage from "../../../components/Messages/FileMessage";
-import AudioMessage from "../../../components/Messages/AudioMessage";
-import LinkMessage from "../../../components/Messages/LinkMessage";
-import { useWebSocket } from "../../../context/SignalRWebSocket";
-import {
-  handleFetchChannelChatsApi,
-  handleFetchChannelsApi,
-  handleMarkMessageAsSeenChannelChatApi
-} from "../../../services/Messenger/ChannelChatService/apis";
 import { debounce } from "lodash";
 import { AppDispatch, RootState } from "@hrbox/core/redux";
 import ChannelFooter from "@hrbox/modules/messenger/components/ChannelFooter";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
 
 export default function ChannelPage() {
   const { messages } = useWebSocket();
@@ -93,7 +80,7 @@ export default function ChannelPage() {
   }, [chatContainerRef]);
 
   useEffect(() => {
-    loadMessages();
+    await loadMessages();
   }, [allChats, userProfile]);
 
   useEffect(() => {

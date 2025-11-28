@@ -1,0 +1,16 @@
+export const errorMessages = {
+  ADD_GROUP_FAILED: "Failed to add group",
+  UPDATE_GROUP_FAILED: "Failed to update group",
+  MARK_AS_SEEN_GROUP_MESSAGE_FAILED: "Failed to mark message as seen",
+  REMOVE_GROUP_FAILED: "Failed to remove group",
+  FETCH_GROUPS_FAILED: "Failed to fetch groups",
+  MUTE_GROUP_FAILED: "Failed to mute group",
+  PIN_GROUP_MESSAGE_FAILED: "Failed to pin group message",
+  UNPIN_GROUP_MESSAGE_FAILED: "Failed to unpin group message",
+  PIN_GROUP_FAILED: "Failed to pin groups",
+  FETCH_GROUP_CHATS_FAILED: "Failed to fetch group chats",
+  REMOVE_MESSAGE_GROUP_FAILED: "Failed to remove message",
+  ADD_TO_SAVE_MESSAGE_GROUP_FAILED: "Failed to save message",
+  REMOVE_USER_FROM_GROUP_FAILED: "Failed to remove user from group",
+  CHANGE_ROLE_USER_GROUP_FAILED: "Failed to change user role",
+};

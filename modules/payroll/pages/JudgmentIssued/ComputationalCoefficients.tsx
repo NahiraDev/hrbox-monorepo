@@ -1,28 +1,22 @@
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-} from "@heroui/react";
-import { Tooltip } from "@heroui/tooltip";
-import { Edit, Trash } from "iconsax-react";
-import {
   Button,
   Modal,
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
   useDisclosure,
 } from "@heroui/react";
+import { Edit, Trash } from "iconsax-reactjs";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-
-import { CloseIcon } from "@/icons/CloseIcon.tsx";
-import { AppAutoComplete } from "@/components/AppAutoComplete.tsx";
-import { AppInput } from "@/components/AppInput.tsx";
-import AppCheckbox from "@/components/AppCheckbox.tsx";
+import { AppAutoComplete } from "@hrbox/uikit/components";
 
 const ComputationalCoefficients = ({ props }: { props: any }) => {
   const { data } = props;
