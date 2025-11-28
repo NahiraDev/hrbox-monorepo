@@ -10,7 +10,7 @@ export const Paths = {
     SelectRole: "/sso/select-role",
   },
   HRLink: {
-    Dashboard: "/hrlink/dashboard",
+    Dashboard: "/hrlink",
     ResumeInformation: "/hrlink/resume/information",
     ResumeExperience: "/hrlink/resume/experience",
     ResumeEducation: "/hrlink/resume/education",
@@ -30,15 +30,16 @@ export const Paths = {
     CompanyInformation: "/hrlink/company/company-information",
   },
   ChartMaker: {
-    Dashboard: "/chart-maker/dashboard",
+    Dashboard: "/chart-maker",
     ProcessMaker: "/chart-maker/process",
     ProcessList: "/chart-maker/process-list",
   },
   ProjectManagement: {
-    Dashboard: "/project-management/dashboard",
+    Dashboard: "/project-management",
+    Projects: "/project-management/projects",
   },
   BasicInfo: {
-    Dashboard: "/basic-info/dashboard",
+    Dashboard: "/basic-info",
     TechnicalDepartment: "/basic-info/technical-departments",
     OrganizationDepartments: "/basic-info/organization-departments",
     OrganizationalLocations: "/basic-info/organizational-locations",
@@ -64,7 +65,7 @@ export const Paths = {
     EmployeeSatisfactionCalendar: "/basic-info/employee-satisfaction-calendar",
   },
   Attendance: {
-    Dashboard: "/attendance/dashboard",
+    Dashboard: "/attendance",
     EntryExitRegistration: "/attendance/entry-exit",
     AttendanceCalenders: "/attendance/attendance-calender",
     TrafficCalender: "/attendance/traffic-calender",
@@ -76,8 +77,18 @@ export const Paths = {
     LocationAllocation: "/attendance/location-allocation",
   },
   ProcessMaker: {
-    Dashboard: "/process-maker/dashboard",
+    Dashboard: "/process-maker",
     ProcessList: "/process-maker/process-list",
     ProcessExperience: "/process-maker/process-experience",
+  },
+  Messenger: {
+    Home: "/messenger",
+    Channel: "/messenger/channel",
+    Group: "/messenger/group",
+    Private: "/messenger/private",
+    SaveMessage: "/messenger/save-message",
+  },
+  Payroll: {
+    Dashboard: "/payroll",
   },
 };

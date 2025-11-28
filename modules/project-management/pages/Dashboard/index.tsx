@@ -1,7 +1,7 @@
-import AppTasksList from "../../components/AppTaskList";
-import { AppDashboardChart } from "../../components/AppDashboardChart";
-import { AppTaskProgressChart } from "../../components/AppTaskProgressChart";
-import { AppCoWorks } from "../../components/AppCoWorks";
+import AppTasksList from "@hrbox/modules/project-management/components/AppTaskList";
+import { AppDashboardChart } from "@hrbox/modules/project-management/components/AppDashboardChart";
+import { AppTaskProgressChart } from "@hrbox/modules/project-management/components/AppTaskProgressChart";
+import { AppCoWorks } from "@hrbox/modules/project-management/components/AppCoWorks";
 
 export default function Dashboard() {
   return (

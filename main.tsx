@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { I18nextProvider } from "react-i18next";
@@ -115,8 +114,6 @@ async function bootstrap() {
                   </LoadingProvider>
                 </HeroUIProvider>
               </I18nextProvider>
-
-              {import.meta.env.DEV && <ReactQueryDevtools />}
             </QueryClientProvider>
           </PersistGate>
         </ReduxProvider>

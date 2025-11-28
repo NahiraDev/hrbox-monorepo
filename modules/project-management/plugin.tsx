@@ -13,6 +13,8 @@ import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "../paths";
 
 const Dashboard = lazyRouteComponent(() => import("./pages/Dashboard"));
+const Projects = lazyRouteComponent(() => import("./pages/Dashboard"));
+
 export const ProjectManagementPlugin: ModulePlugin = {
   name: "project-management",
   version: "1.0.0",
@@ -22,11 +24,21 @@ export const ProjectManagementPlugin: ModulePlugin = {
   author: "HRBox Team",
   routes: [
     {
-      path: Paths.BasicInfo.AllEmployees,
+      path: Paths.ProjectManagement.Dashboard,
       component: Dashboard,
       layout: "base",
       meta: {
         title: "Dashboard",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+    },
+    {
+      path: Paths.ProjectManagement.Projects,
+      component: Projects,
+      layout: "base",
+      meta: {
+        title: "Projects",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },

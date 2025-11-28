@@ -1,6 +1,5 @@
-import { Button } from '@heroui/react';
-import { ArrowRight } from 'iconsax-react';
-
+import { Button } from "@heroui/react";
+import { ArrowRight } from "iconsax-reactjs";
 
 export const AppCoWorks = () => {
   return (

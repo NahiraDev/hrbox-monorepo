@@ -1,16 +1,10 @@
-import {
-  Add,
-  ArrowRight,
-  Candle2,
-  SearchNormal1,
-  Setting4,
-} from "iconsax-react";
+import { Add, ArrowRight, Candle2, SearchNormal1, Setting4 } from "iconsax-reactjs";
 import { Button, Input } from "@heroui/react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CloseIcon } from "core";
 
-import { AppTaskProgressChart } from "../../components/AppTaskProgressChart";
+import { AppTaskProgressChart } from "@hrbox/modules/project-management/components/AppTaskProgressChart";
+import { ClockIcon, CloseIcon } from "@hrbox/uikit/icons";
 
 export const tasks = [
   {
@@ -255,7 +249,7 @@ export default function Projects() {
                             </div>
                           </div>
                           <div className="flex gap-4">
-                            {/*<ClockIcon props={{ color: "#04070E" }} />*/}
+                            <ClockIcon props={{ color: "#04070E" }} />
                             <div className="flex gap-2">
                               <span className="text-secondary-1000 dark:text-white text-sm font-normal">
                                 Start
@@ -266,7 +260,7 @@ export default function Projects() {
                             </div>
                           </div>
                           <div className="flex gap-4">
-                            {/*<ClockIcon props={{ color: "#F23030" }} />*/}
+                            <ClockIcon props={{ color: "#F23030" }} />
                             <span
                               className={`text-danger-700 dark:text-white text-sm font-normal`}
                             >

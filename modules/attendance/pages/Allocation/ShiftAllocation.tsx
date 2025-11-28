@@ -28,12 +28,7 @@ const ShiftAllocation = () => {
   return (
     <>
       <div className="h-full w-full flex flex-col ">
-        <AppTable
-          data={data}
-          showStatus={true}
-          hasPagination={true}
-          onRowClick={handleRowClick}
-        />
+        <AppTable data={data} onRowClick={handleRowClick} />
       </div>
     </>
   );

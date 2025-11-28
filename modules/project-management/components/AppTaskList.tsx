@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { DndContext, closestCenter } from '@dnd-kit/core';
+import { useState } from "react";
+import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   useSortable,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { Button } from '@heroui/react';
-import { ArrowRight, ClipboardTick, Designtools } from 'iconsax-react';
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { Button } from "@heroui/react";
+import { ArrowRight, ClipboardTick, Designtools } from "iconsax-reactjs";
 
 const SortableTaskCard = ({ id }: { id: string }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -33,11 +33,7 @@ const SortableTaskCard = ({ id }: { id: string }) => {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-4 w-full">
                 <div className="flex items-center gap-2">
-                  <img
-                    alt="Avatar"
-                    className="rounded-3 w-8 h-8"
-                    src=""
-                  />
+                  <img alt="Avatar" className="rounded-3 w-8 h-8" src="" />
                   <span className="text-secondary-1000 font-normal text-sm ">
                     Nima Rahimloo
                   </span>
@@ -65,13 +61,13 @@ const SortableTaskCard = ({ id }: { id: string }) => {
 
 export default function AppTasksList() {
   const [tasks, setTasks] = useState([
-    'task-1',
-    'task-2',
-    'task-3',
-    'task-4',
-    'task-5',
-    'task-6',
-    'task-7',
+    "task-1",
+    "task-2",
+    "task-3",
+    "task-4",
+    "task-5",
+    "task-6",
+    "task-7",
   ]);
 
   function handleDragEnd(event: any) {
