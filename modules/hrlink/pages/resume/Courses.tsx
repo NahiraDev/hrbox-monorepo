@@ -4,7 +4,7 @@ import { useFetchCoursesQuery } from "@hrbox-monorepo/modules/hrlink/apis";
 import { AcademyIcon } from "@hrbox/uikit/icons";
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
-import { ChartCircle } from 'iconsax-reactjs'; // or any error icon you have
+import { AlertCircle } from 'iconsax-reactjs'; // or any error icon you have
 
 const Courses = () => {
   {
