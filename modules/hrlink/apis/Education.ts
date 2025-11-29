@@ -32,6 +32,7 @@ export const educationApiEndpoints = educationApi.injectEndpoints({
 
     fetchEducations: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.education.getList,
+      method: 'GET',
       tags: ['Education'],
     }),
 

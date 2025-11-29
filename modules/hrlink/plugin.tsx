@@ -13,6 +13,7 @@ const DashboardPage = lazyRouteComponent(() => import('./pages/dashboard'));
 const ResumePage = lazyRouteComponent(() => import('./pages/resume/Information'));
 const AwardPage = lazyRouteComponent(() => import('./pages/resume/Awards'));
 const EducationPage = lazyRouteComponent(() => import('./pages/resume/Education'));
+const CoursePage = lazyRouteComponent(() => import('./pages/resume/Courses'));
 const SoftSkillsPage = lazyRouteComponent(() => import('./pages/resume/SoftSkills'));
 const HardSkillsPage = lazyRouteComponent(() => import('./pages/resume/HardSkills'));
 const ExperiencePage = lazyRouteComponent(() => import('./pages/resume/Experience'));
@@ -110,7 +111,39 @@ export const HRLinkPlugin: ModulePlugin = {
             },
             subHeader: JobsSubHeader,
         },
-
+        {
+            path: Paths.HRLink.ResumeCourse,
+            component: CoursePage,
+            layout: 'base',
+            meta: {
+                title: 'Courses',
+                requireAuth: false,
+                requiredRoles: [RoleSlug.JOB_SEEKER],
+            },
+            // subHeader: JobsSubHeader,
+        },
+        {
+            path: Paths.HRLink.ResumeExperience,
+            component: ExperiencePage,
+            layout: 'base',
+            meta: {
+                title: 'Experience',
+                requireAuth: false,
+                requiredRoles: [RoleSlug.JOB_SEEKER],
+            },
+            // subHeader: JobsSubHeader,
+        },
+        {
+            path: Paths.HRLink.ResumeEducation,
+            component: EducationPage,
+            layout: 'base',
+            meta: {
+                title: 'Education',
+                requireAuth: false,
+                requiredRoles: [RoleSlug.JOB_SEEKER],
+            },
+            // subHeader: JobsSubHeader,
+        },
         {
             path: Paths.HRLink.JobOpportunities,
             component: JobOpportunitiesPage,
@@ -122,7 +155,6 @@ export const HRLinkPlugin: ModulePlugin = {
             },
             subHeader: JobsSubHeader,
         },
-
 
         {
             path: '/hrlink/company/:id',

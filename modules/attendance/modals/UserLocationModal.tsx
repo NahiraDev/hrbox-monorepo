@@ -8,7 +8,7 @@ import { AppButton, AppModal } from "@hrbox/uikit/components";
 import ActionsModal from "@hrbox/modules/attendance/modals/ActionsModal";
 import { MaskRight } from "iconsax-reactjs";
 const LocationMarker = ({ 
-  position, 
+  position,
   setPosition 
 }: { 
   position: LatLngExpression | null; 
