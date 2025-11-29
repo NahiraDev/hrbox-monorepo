@@ -75,7 +75,8 @@ const Awards = () => {
                             <span className="text-secondary-1000 dark:text-secondary-0 text-sm font-normal">
                               {achievement.GainYear +
                                 "/" +
-                                achievement.GainMonth}
+                                achievement.GainMonth
+                              }
                             </span>
                           </div>
                           <div className="flex gap-4">
