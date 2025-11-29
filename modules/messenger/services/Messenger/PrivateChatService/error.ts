@@ -1,0 +1,16 @@
+export const errorMessages = {
+  MARK_MESSAGE_FAILED: "Failed to mark message as seen",
+  MUTE_CHAT_FAILED: "Failed to mute chat",
+  FORWARD_MESSAGE_FAILED: "Failed to forward message",
+  PIN_MESSAGE_FAILED: "Failed to pin message",
+  UNPIN_MESSAGE_FAILED: "Failed to unpin message",
+  PIN_CHAT_FAILED: "Failed to pin chat",
+  UNPIN_CHAT_FAILED: "Failed to unpin chat",
+  CREATE_CHAT_FAILED: "Failed to create chat",
+  FETCH_CHAT_MESSAGE_FAILED: "Failed to fetch chat message",
+  FETCH_USER_CHATS_FAILED: "Failed to fetch user chats",
+  CLEAR_HISTORY_FAILED: "Failed to clear history chat",
+  REMOVE_MESSAGE_FAILED: "Failed to remove message",
+  SAVE_MESSAGE_FAILED: "Failed to save message",
+  REMOVE_CHAT_FAILED: "Failed to remove chat",
+};

@@ -2,18 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "rootDir": "."
+    "rootDir": "../../",
+    "outDir": "../../dist/modules/project-management",
+    "declarationDir": "../../dist/types"
   },
-  "references": [
-    { "path": "../../core" },
-    { "path": "../../mock" },
-    { "path": "../../configs" },
-  ],
-  "include": [
-    "app",
-    "features",
-    "icons",
-    "vite.config.ts",
-    "index.html"
-  ]
+  "include": [".", "./*"]
 }

@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable",
-      "WebWorker"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowJs": true,
@@ -19,22 +14,13 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@hrbox/modules/*": [
-        "./modules/*"
-      ],
-      "@hrbox/core/*": [
-        "./core/*"
-      ],
-      "@hrbox/uikit/*": [
-        "./UIKit/*"
-      ]
+      "@hrbox/modules/*": ["./modules/*"],
+      "@hrbox/modules": ["./modules"],
+      "@hrbox/core/*": ["./core/*"],
+      "@hrbox/uikit/*": ["./UIKit/*"]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -70,36 +56,25 @@
     "newLine": "lf",
     "stripInternal": true,
     "composite": true,
-    /* JavaScript Support */
     "allowUmdGlobalAccess": false,
-    "moduleSuffixes": [
-      ".ios",
-      ".native",
-      ""
-    ],
-    /* Editor Support */
+    "moduleSuffixes": [".ios", ".native", ""],
     "disableSizeLimit": false,
     "plugins": [
       {
         "name": "@emotion/typescript-plugin"
       }
     ],
-    /* Backwards Compatibility */
     "keyofStringsOnly": false,
     "noStrictGenericChecks": false,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    /* Language Service */
     "disableSourceOfProjectReferenceRedirect": false,
     "disableSolutionSearching": false,
     "disableReferencedProjectLoad": false,
-    /* Output Formatting */
     "noErrorTruncation": false,
     "preserveWatchOutput": false,
     "pretty": false,
-    /* Watch Options */
     "assumeChangesOnlyAffectDirectDependencies": true,
-    /* Advanced */
     "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "maxNodeModuleJsDepth": 0,
@@ -111,13 +86,10 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": [
-    "**/*.d.ts"
-  ],
+  "include": ["vite-env.d.ts"],
   "exclude": [
     "node_modules",
     "dist",
-    ".next",
     ".turbo",
     "**/*.min.js",
     "public",

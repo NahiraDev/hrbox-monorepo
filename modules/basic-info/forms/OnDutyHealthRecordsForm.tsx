@@ -1,6 +1,7 @@
 import { FormField } from "@hrbox/uikit/components/FormField";
-import { Form } from "@heroui/react";
 import * as Yup from "yup";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
+
 export const initialValuesHealth = {
   Title: null,
   Amount: null,
@@ -16,14 +17,26 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 
-const AddNewOnDutyHealthRecords = () => {
+const OnDutyHealthRecords = () => {
+  const { touched, errors, handleSubmit, handleReset } = useFormContext();
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
   return (
-    <Form>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Title" label="Title" />
-        <FormField name="Amount" label="Amount" />
-        {/*we dont have Attached File*/}
+        <FormField
+          name="Title"
+          label="Title"
+          helperText={touched.Title && errors.Title}
+          formMode={currentType}
+        />
+        <FormField
+          name="Amount"
+          label="Amount"
+          helperText={touched.Amount && errors.Amount}
+          formMode={currentType}
+        />
       </div>
-    </Form>
+    </form>
   );
 };

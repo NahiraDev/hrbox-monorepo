@@ -1,7 +1,8 @@
 import { FormField } from "@hrbox/uikit/components/FormField";
-import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
-import { Form } from "@heroui/react";
+import { AppAutoComplete, AppDatePicker, AppTextArea } from "@hrbox/uikit/components";
 import * as Yup from "yup";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
+
 export const initialValuesHealthDuty = {
   Type: null,
   DrugAddiction: null,
@@ -22,7 +23,7 @@ export const initialValuesHealthDuty = {
   BloodLipidLevel: null,
   BloodIronLevel: null,
   Date: null,
-  DescriptionsandAchievements: null,
+  DescriptionSandAchievements: null,
 };
 export const formValidationHealthDuty = Yup.object().shape({
   Type: Yup.string().required(),
@@ -44,29 +45,9 @@ export const formValidationHealthDuty = Yup.object().shape({
   BloodLipidLevel: Yup.string().required(),
   BloodIronLevel: Yup.string().required(),
   Date: Yup.string().required(),
-  DescriptionsandAchievements: Yup.string().required(),
+  DescriptionSandAchievements: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.Type);
-  console.log(values.DrugAddiction);
-  console.log(values.Smoking);
-  console.log(values.BloodType);
-  console.log(values.GastrointestinalDisease);
-  console.log(values.AlcoholConsumption);
-  console.log(values.MusculoskeletalDisease);
-  console.log(values.MentalHealthCondition);
-  console.log(values.BloodSugarLevel);
-  console.log(values.VitaminDLevel);
-  console.log(values.BloodPressure);
-  console.log(values.LiverEnzymeStatus);
-  console.log(values.Audiometry);
-  console.log(values.BreathTest);
-  console.log(values.VisionTest);
-  console.log(values.ECG);
-  console.log(values.BloodLipidLevel);
-  console.log(values.BloodIronLevel);
-  console.log(values.Date);
-  console.log(values.DescriptionsandAchievements);
   return {
     Type: values.Type,
     DrugAddiction: values.DrugAddiction,
@@ -87,59 +68,99 @@ export const handleSubmitAction = (values: any) => {
     BloodLipidLevel: values.BloodLipidLevel,
     BloodIronLevel: values.BloodIronLevel,
     Date: values.Date,
-    DescriptionsandAchievements: values.DescriptionsandAchievements,
+    DescriptionSandAchievements: values.DescriptionsandAchievements,
   };
 };
 const PreEmploymentHealthRecords = () => {
+  const { touched, errors, handleSubmit, handleReset } = useFormContext();
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
   return (
-    <Form>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Type" label="Type" component={AppAutoComplete} />
         <FormField
-          name="Drug Addiction"
+          name="Type"
+          label="Type"
+          component={AppAutoComplete}
+          helperText={touched.Type && errors.Type}
+          formMode={currentType}
+        />
+        <FormField
+          name="DrugAddiction"
           label="Drug Addiction"
+          helperText={touched.DrugAddiction && errors.DrugAddiction}
           component={AppAutoComplete}
+          formMode={currentType}
         />
-        <FormField name="Smoking" label="Smoking" component={AppAutoComplete} />
         <FormField
-          name="Blood Type"
+          name="Smoking"
+          label="Smoking"
+          helperText={touched.Smoking && errors.Smoking}
+          component={AppAutoComplete}
+          formMode={currentType}
+        />
+        <FormField
+          name="BloodType"
           label="Blood Type"
+          helperText={touched.BloodType && errors.BloodType}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Gastrointestinal Disease"
+          name="GastrointestinalDisease"
           label="Gastrointestinal Disease"
+          helperText={
+            touched.GastrointestinalDisease && errors.GastrointestinalDisease
+          }
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Alcohol Consumption"
+          name="AlcoholConsumption"
           label="Alcohol Consumption"
+          helperText={touched.AlcoholConsumption && errors.AlcoholConsumption}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Musculoskeletal Disease"
+          name="MusculoskeletalDisease"
           label="Musculoskeletal Disease"
+          helperText={
+            touched.MusculoskeletalDisease && errors.MusculoskeletalDisease
+          }
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Mental Health Condition"
+          name="MentalHealthCondition"
           label="Mental Health Condition"
+          helperText={
+            touched.MentalHealthCondition && errors.MentalHealthCondition
+          }
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Blood Sugar Level"
+          name="BloodSugarLevel"
           label="Blood Sugar Level"
+          helperText={touched.BloodSugarLevel && errors.BloodSugarLevel}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Vitamin D Level"
+          name="VitaminDLevel"
           label="Vitamin D Level"
+          helperText={touched.VitaminDLevel && errors.VitaminDLevel}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
-          name="Blood Pressure "
-          label="Blood Pressure "
+          name="BloodPressure"
+          label="Blood Pressure"
+          helperText={touched.BloodPressure && errors.BloodPressure}
           component={AppAutoComplete}
+          formMode={currentType}
         />
         <FormField
           name="Liver Enzyme Status"
@@ -172,8 +193,7 @@ const PreEmploymentHealthRecords = () => {
           label="Blood Iron Level"
           component={AppAutoComplete}
         />
-        {/*we dont have Attached File*/}
-        <FormField name="Date" label="Date" component={AppAutoComplete} />
+        <FormField name="Date" label="Date" component={AppDatePicker} />
       </div>
 
       <div>
@@ -183,6 +203,6 @@ const PreEmploymentHealthRecords = () => {
           component={AppTextArea}
         />
       </div>
-    </Form>
+    </form>
   );
 };

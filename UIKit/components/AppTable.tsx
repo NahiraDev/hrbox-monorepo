@@ -1,27 +1,7 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  Tooltip,
-} from "@heroui/react";
-import { AppButton, AppPagination } from "@hrbox/uikit/components";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@heroui/react";
+import { AppButton } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
-
-/**
- * ============================================
- * TYPES & INTERFACES
- * ============================================
- */
 
 export enum SortDirection {
   ASC = "asc",
@@ -38,18 +18,14 @@ export interface ColumnConfig<T = any> {
   sortable?: boolean;
   filterable?: boolean;
 
-  // Rendering
   render?: (value: any, row: T, index: number) => React.ReactNode;
   headerRender?: () => React.ReactNode;
 
-  // Styling
   headerClassName?: string | ((col: ColumnConfig<T>) => string);
   cellClassName?: string | ((value: any, row: T, index: number) => string);
 
-  // Visibility
   visible?: boolean | ((row: T) => boolean);
 
-  // Formatting
   format?: (value: any) => string;
   type?: "text" | "number" | "date" | "boolean" | "email" | "phone" | "custom";
 }
@@ -145,23 +121,19 @@ export interface AppTableProps<T = any> {
   currentPage?: number;
   onPageChange?: (page: number) => void;
 
-  // Display
   variant?: "default" | "striped" | "bordered" | "minimal" | "attendance";
   styles?: TableStyleConfig;
   density?: "sm" | "md" | "lg";
 
-  // States
   loading?: boolean;
   error?: string;
   emptyMessage?: string | React.ReactNode;
 
-  // Features
   showCheckbox?: boolean;
   showRowNumber?: boolean;
   showStatus?: boolean;
   sticky?: boolean;
 
-  // Callbacks
   onEdit?: (row: T, index: number) => void;
   onDelete?: (row: T, index: number) => void;
   onView?: (row: T, index: number) => void;
@@ -694,16 +666,14 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           isHeaderSticky={variant === "attendance" || sticky}
           classNames={{
             base:
-              variant === "attendance"
-                ? "w-full"
-                : "!h-full bg-transparent",
+              variant === "attendance" ? "w-full" : "!h-full bg-transparent",
             wrapper:
               variant === "attendance"
                 ? "h-full overflow-y-scroll custom-scroll bg-transparent w-full"
                 : "bg-transparent h-full",
             table: "w-full h-full flex flex-col relative",
-         tbody:"flex flex-col w-full",
-           td:"w-fit",
+            tbody: "flex flex-col w-full",
+            td: "w-fit",
             thead: "w-full absolute top-0",
             tr: "rounded-6 w-full",
             th:
