@@ -2,23 +2,27 @@ import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { EntryExitData } from "@hrbox/modules/attendance/app/mock";
 import { AppTable } from "@hrbox/uikit/components";
-import UserLocationModal from "modals/UserLocationModal";
 import FaceIdModal from "../../modals/FaceIdModal";
+import UserLocationModal from "@hrbox/modules/attendance/modals/UserLocationModal";
 
 const EntryExit = () => {
   const modal = useModal();
-  const handlerRowClick = (row:any) => {
+  const handlerRowClick = (row: any) => {
     modal.open(
       ModalType.CREATE,
       "entry-exit",
-      row.Type2.props.children[2].props.children==="Ip"?<UserLocationModal/>:<FaceIdModal/>,
+      row.Type2.props.children[2].props.children === "Ip" ? (
+        <UserLocationModal />
+      ) : (
+        <FaceIdModal />
+      ),
       {
         isForm: true,
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
-        formConfig:{
+        formConfig: {
           formId: "event-form",
-        }
+        },
       },
       ModalSize.MD,
     );
@@ -26,7 +30,10 @@ const EntryExit = () => {
   return (
     <>
       <div className="w-full h-full flex ">
-        <AppTable data={EntryExitData} onRowClick={(row)=>handlerRowClick(row)} />
+        <AppTable
+          data={EntryExitData}
+          onRowClick={(row) => handlerRowClick(row)}
+        />
       </div>
     </>
   );
