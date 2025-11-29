@@ -84,7 +84,7 @@ export const AttendancePlugin: ModulePlugin = {
     {
       path: Paths.Attendance.Dashboard,
       component: Dashboard,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "Dashboard",
         requireAuth: false,
@@ -161,7 +161,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: IpAllocation,
       layout: "base",
       meta: {
-        title: "ُshift_allocation",
+        title: "shift_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -181,7 +181,7 @@ export const AttendancePlugin: ModulePlugin = {
     {
       path: Paths.Attendance.Export,
       component: ExportPage,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "export",
         requireAuth: false,

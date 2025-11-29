@@ -1,4 +1,3 @@
-import { Form } from "@heroui/react";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete } from "@hrbox/uikit/components";
 import * as Yup from "yup";
@@ -38,12 +37,12 @@ export const handleSubmitAction = (values: any) => {
 };
 
 export const CourseForm = () => {
-  const { errors, touched } = useFormContext();
+  const { errors, touched, handleSubmit, handleReset } = useFormContext();
 
   const { getOpenModal } = useModalContext();
   const currentType = getOpenModal()?.type;
   return (
-    <Form>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField
           name="Type"
@@ -103,6 +102,6 @@ export const CourseForm = () => {
           formMode={currentType}
         />
       </div>
-    </Form>
+    </form>
   );
 };

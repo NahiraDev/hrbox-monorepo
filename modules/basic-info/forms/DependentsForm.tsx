@@ -1,6 +1,5 @@
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
-import { Form } from "@heroui/react";
 import * as Yup from "yup";
 import { useFormContext, useModalContext } from "@hrbox/core/providers";
 
@@ -37,11 +36,11 @@ export const handleSubmitAction = (values: any) => {
   };
 };
 const DependentsForm = () => {
-  const { errors, touched, handleSubmit } = useFormContext();
+  const { errors, touched, handleSubmit, handleReset } = useFormContext();
   const { getOpenModal } = useModalContext();
   const currentType = getOpenModal()?.type;
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
         <FormField
           name="First Name"
@@ -101,6 +100,6 @@ const DependentsForm = () => {
           component={AppTextArea}
         />
       </div>
-    </Form>
+    </form>
   );
 };

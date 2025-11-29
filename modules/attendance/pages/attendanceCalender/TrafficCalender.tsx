@@ -80,7 +80,6 @@ const TrafficCalender = () => {
             {...attendanceConfig}
           />
         )}
-
         <Comprehensivereport
           isExpanded={IsReportHidden}
           onToggle={() => setIsReportHidden(!IsReportHidden)}

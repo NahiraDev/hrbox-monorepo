@@ -108,8 +108,8 @@ export const AppAutoComplete = forwardRef<
           return {
             inputWrapper: clsx(
               baseWrapper,
-              "bg-white dark:bg-neutral-800",
-              "border border-neutral-300 dark:border-neutral-600",
+              "bg-none text-primary",
+              "",
               "focus-within:border-primary"
             ),
           };
@@ -135,8 +135,8 @@ export const AppAutoComplete = forwardRef<
         <Autocomplete
           ref={ref}
           classNames={{
-            base: clsx("flex flex-col gap-1.5", containerClassName),
-            listboxWrapper: "z-50 max-h-64",
+            base: clsx("flex flex-col gap-1.5 ", containerClassName),
+            listboxWrapper: "z-50 max-h-64 ",
             listbox: "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
             popoverContent: "p-1",
             selectorButton: clsx(

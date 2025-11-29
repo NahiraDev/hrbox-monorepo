@@ -717,7 +717,7 @@
 //     ]);
 //
 //     const productModal = useCRUDModal({
-//         name: "product-modal",
+//         name: "product-modals",
 //         size: ModalSize.XL,
 //     });
 //
@@ -896,7 +896,7 @@
 //
 //                         <FormModal
 //                             type="create"
-//                             name="product-modal"
+//                             name="product-modals"
 //                             submitLabel="ذخیره محصول"
 //                             cancelLabel="انصراف"
 //                         />
@@ -928,7 +928,7 @@
 //                     return (
 //                         <FormModal
 //                             type="edit"
-//                             name="product-modal"
+//                             name="product-modals"
 //                             submitLabel="بروزرسانی"
 //                             cancelLabel="انصراف"
 //                         />
@@ -950,7 +950,7 @@
 //                     return (
 //                         <FormModal
 //                             type="view"
-//                             name="product-modal"
+//                             name="product-modals"
 //                             hideFooter={true}
 //                         />
 //                     );
@@ -965,7 +965,7 @@
 //             >
 //                 <FormModal
 //                     type="delete"
-//                     name="product-modal"
+//                     name="product-modals"
 //                     submitLabel="تایید حذف"
 //                     cancelLabel="انصراف"
 //                 />
@@ -1036,18 +1036,18 @@
 // // Main Component
 // function UserManager() {
 //     const [users, setUsers] = useState([]);
-//     const modal = useCRUDModal({ name: "user" });
+//     const modals = useCRUDModal({ name: "user" });
 //
 //     const handleAdd = async (values) => {
 //         await api.addUser(values);
 //         setUsers([...users, values]);
-//         modal.close("create");
+//         modals.close("create");
 //     };
 //
 //     return (
 //         <div>
 //             <button onClick={() =>
-//                 modal.openCreate(<UserForm />, "افزودن کاربر")
+//                 modals.openCreate(<UserForm />, "افزودن کاربر")
 //             }>
 //                 افزودن
 //             </button>
@@ -1084,12 +1084,12 @@
 // import { ModalType } from "@hrbox/core/providers/ModalProvider";
 //
 // function MyComponent() {
-//     const modal = useModal();
+//     const modals = useModal();
 //
 //     const handleOpen = () => {
-//         modal.open(
+//         modals.open(
 //             ModalType.CREATE,      // نوع
-//             "my-modal",           // نام یکتا
+//             "my-modals",           // نام یکتا
 //             <MyContent />,        // محتوا
 //             { userId: 1 },        // دیتا (optional)
 //             "md",                 // سایز
@@ -1101,7 +1101,7 @@
 //     return (
 //         <>
 //             <button onClick={handleOpen}>باز کن</button>
-//             <AppModal type={ModalType.CREATE} name="my-modal" />
+//             <AppModal type={ModalType.CREATE} name="my-modals" />
 //         </>
 //     );
 // }
@@ -1117,7 +1117,7 @@
 //
 // function MyComponent() {
 //     const userModal = useCRUDModal({
-//         name: "user-modal",
+//         name: "user-modals",
 //         size: ModalSize.LG
 //     });
 //
@@ -1138,7 +1138,7 @@
 //                 initialValues={{ name: "", email: "" }}
 //                 onSubmitAsync={handleSubmit}
 //             >
-//                 <FormModal type="create" name="user-modal" />
+//                 <FormModal type="create" name="user-modals" />
 //             </FormProvider>
 //         </>
 //     );
@@ -1223,16 +1223,16 @@
 // };
 //
 // export const UseModalTest = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //
 //     return (
 //         <div className="p-4 border rounded">
 //             <h3 className="font-bold mb-2">تست 2: استفاده از useModal</h3>
 //             <button
 //                 onClick={() =>
-//                     modal.open(
+//                     modals.open(
 //                         "custom",
-//                         "test-modal",
+//                         "test-modals",
 //                         <CustomContent />,
 //                         undefined,
 //                         "md",
@@ -1245,7 +1245,7 @@
 //                 باز کردن
 //             </button>
 //
-//             <AppModal type="custom" name="test-modal" />
+//             <AppModal type="custom" name="test-modals" />
 //         </div>
 //     );
 // };
@@ -1445,23 +1445,23 @@
 // // تست 4: چند مودال همزمان
 // // ============================================
 // export const MultiModalTest = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //
 //     return (
 //         <div className="p-4 border rounded">
 //             <h3 className="font-bold mb-2">تست 4: چند مودال همزمان</h3>
 //             <button
 //                 onClick={() =>
-//                     modal.open(
+//                     modals.open(
 //                         "first",
-//                         "modal-1",
+//                         "modals-1",
 //                         <div>
 //                             <p className="mb-4">این مودال اول است</p>
 //                             <button
 //                                 onClick={() =>
-//                                     modal.open(
+//                                     modals.open(
 //                                         "second",
-//                                         "modal-2",
+//                                         "modals-2",
 //                                         <div>
 //                                             <p>این مودال دوم است (روی مودال اول)</p>
 //                                         </div>,
@@ -1485,8 +1485,8 @@
 //                 باز کردن مودال اول
 //             </button>
 //
-//             <AppModal type="first" name="modal-1" />
-//             <AppModal type="second" name="modal-2" />
+//             <AppModal type="first" name="modals-1" />
+//             <AppModal type="second" name="modals-2" />
 //         </div>
 //     );
 // };
@@ -1495,7 +1495,7 @@
 // // تست 5: مودال با خطا
 // // ============================================
 // export const ErrorModalTest = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //
 //     const handleSubmitWithError = async () => {
 //         // شبیه‌سازی خطا
@@ -1507,9 +1507,9 @@
 //             <h3 className="font-bold mb-2">تست 5: مدیریت خطا</h3>
 //             <button
 //                 onClick={() =>
-//                     modal.open(
+//                     modals.open(
 //                         "error",
-//                         "error-modal",
+//                         "error-modals",
 //                         <div>
 //                             <p>این عملیات خطا خواهد داشت</p>
 //                         </div>,
@@ -1528,7 +1528,7 @@
 //                 initialValues={{}}
 //                 onSubmitAsync={handleSubmitWithError}
 //             >
-//                 <FormModal type="error" name="error-modal" submitLabel="ارسال (خطا)" />
+//                 <FormModal type="error" name="error-modals" submitLabel="ارسال (خطا)" />
 //             </FormProvider>
 //         </div>
 //     );
@@ -1604,7 +1604,7 @@
 // // مثال 1: مودال با onClose callback
 // // ============================================
 // export const ModalWithCallbackExample = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //     const [logs, setLogs] = useState<string[]>([]);
 //
 //     const addLog = (message: string) => {
@@ -1617,7 +1617,7 @@
 //
 //             <button
 //                 onClick={() =>
-//                     modal.open(
+//                     modals.open(
 //                         "callback",
 //                         "test",
 //                         <div className="p-4">محتوای مودال</div>,
@@ -1654,12 +1654,12 @@
 // // مثال 2: مودال که نمیشه با backdrop یا ESC بست
 // // ============================================
 // export const UnclosableModalExample = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //     const [step, setStep] = useState(1);
 //
 //     const openWizard = () => {
 //         setStep(1);
-//         modal.open(
+//         modals.open(
 //             "wizard",
 //             "setup-wizard",
 //             <div className="space-y-4">
@@ -1688,7 +1688,7 @@
 //                         </button>
 //                     ) : (
 //                         <button
-//                             onClick={() => modal.close("wizard", "setup-wizard")}
+//                             onClick={() => modals.close("wizard", "setup-wizard")}
 //                             className="px-4 py-2 bg-green-500 text-white rounded"
 //                         >
 //                             اتمام
@@ -1735,12 +1735,12 @@
 // }
 //
 // const CounterModal = () => {
-//     const modal = useModal();
-//     const data = modal.getData("counter", "live-counter") as CounterData || { count: 0, history: [] };
+//     const modals = useModal();
+//     const data = modals.getData("counter", "live-counter") as CounterData || { count: 0, history: [] };
 //
 //     const increment = () => {
 //         const newCount = data.count + 1;
-//         modal.updateData("counter", "live-counter", {
+//         modals.updateData("counter", "live-counter", {
 //             count: newCount,
 //             history: [...data.history, newCount]
 //         });
@@ -1748,7 +1748,7 @@
 //
 //     const decrement = () => {
 //         const newCount = data.count - 1;
-//         modal.updateData("counter", "live-counter", {
+//         modals.updateData("counter", "live-counter", {
 //             count: newCount,
 //             history: [...data.history, newCount]
 //         });
@@ -1788,7 +1788,7 @@
 // };
 //
 // export const UpdateDataModalExample = () => {
-//     const modal = useModal();
+//     const modals = useModal();
 //
 //     return (
 //         <div className="p-4 border rounded">
@@ -1796,7 +1796,7 @@
 //
 //             <button
 //                 onClick={() =>
-//                     modal.open(
+//                     modals.open(
 //                         "counter",
 //                         "live-counter",
 //                         <CounterModal />,
@@ -1823,7 +1823,7 @@
 //         name: "user",
 //         size: "lg",
 //         defaultOptions: {
-//             onClose: () => console.log("User modal closed")
+//             onClose: () => console.log("User modals closed")
 //         }
 //     });
 //
@@ -1881,7 +1881,7 @@
 // // ============================================
 // export const ModalCounterExample = () => {
 //     const { getModalCount, getAllOpenModals, closeAllModals } = useModalContext();
-//     const modal = useModal();
+//     const modals = useModal();
 //     const openModals = getAllOpenModals();
 //
 //     return (
@@ -1904,7 +1904,7 @@
 //             <div className="space-y-2">
 //                 <button
 //                     onClick={() =>
-//                         modal.open("test", "modal-1", <div>مودال 1</div>, undefined, "sm", "مودال 1")
+//                         modals.open("test", "modals-1", <div>مودال 1</div>, undefined, "sm", "مودال 1")
 //                     }
 //                     className="block w-full px-4 py-2 bg-blue-500 text-white rounded"
 //                 >
@@ -1913,7 +1913,7 @@
 //
 //                 <button
 //                     onClick={() =>
-//                         modal.open("test", "modal-2", <div>مودال 2</div>, undefined, "sm", "مودال 2")
+//                         modals.open("test", "modals-2", <div>مودال 2</div>, undefined, "sm", "مودال 2")
 //                     }
 //                     className="block w-full px-4 py-2 bg-green-500 text-white rounded"
 //                 >
@@ -1922,7 +1922,7 @@
 //
 //                 <button
 //                     onClick={() =>
-//                         modal.open("test", "modal-3", <div>مودال 3</div>, undefined, "sm", "مودال 3")
+//                         modals.open("test", "modals-3", <div>مودال 3</div>, undefined, "sm", "مودال 3")
 //                     }
 //                     className="block w-full px-4 py-2 bg-purple-500 text-white rounded"
 //                 >
@@ -1938,9 +1938,9 @@
 //                 </button>
 //             </div>
 //
-//             <AppModal type="test" name="modal-1" />
-//             <AppModal type="test" name="modal-2" />
-//             <AppModal type="test" name="modal-3" />
+//             <AppModal type="test" name="modals-1" />
+//             <AppModal type="test" name="modals-2" />
+//             <AppModal type="test" name="modals-3" />
 //         </div>
 //     );
 // };
@@ -1967,17 +1967,17 @@
 
 // // پیش‌فرض: فعال
 // // میتونی غیرفعالش کنی:
-// modal.open(type, name, component, data, size, title, icon, {
+// modals.open(type, name, component, data, size, title, icon, {
 //     closeOnEsc: false
 // });
 //
 // // پیش‌فرض: فعال
 // // میتونی غیرفعالش کنی:
-// modal.open(type, name, component, data, size, title, icon, {
+// modals.open(type, name, component, data, size, title, icon, {
 //     closeOnBackdrop: false
 // });
 //
-// modal.open(type, name, component, data, size, title, icon, {
+// modals.open(type, name, component, data, size, title, icon, {
 //     onClose: () => {
 //         console.log('Modal closed!');
 //         // پاک کردن state، ارسال analytics، و غیره
@@ -1986,9 +1986,9 @@
 //
 //
 // // بروزرسانی data مودال بدون بستن و باز کردن مجدد
-// modal.updateData('create', 'user-modal', { step: 2 });
+// modals.updateData('create', 'user-modals', { step: 2 });
 //
-// const modal = useCRUDModal({
+// const modals = useCRUDModal({
 //     name: 'user',
 //     size: 'lg',
 //     defaultOptions: {
@@ -1999,11 +1999,11 @@
 // });
 //
 // // متدهای جدید:
-// modal.openConfirm(component, data, title, icon);
-// modal.updateData({ step: 2 });
-// modal.getData();
-// modal.isOpen(); // بدون type - چک میکنه هر type ای باز هست
-// modal.close(); // بدون type - همه type ها رو میبنده
+// modals.openConfirm(component, data, title, icon);
+// modals.updateData({ step: 2 });
+// modals.getData();
+// modals.isOpen(); // بدون type - چک میکنه هر type ای باز هست
+// modals.close(); // بدون type - همه type ها رو میبنده
 
 
 
@@ -2012,7 +2012,7 @@
 
 
 //
-// const userModal = useModalActions('create', 'user-modal');
+// const userModal = useModalActions('create', 'user-modals');
 //
 // userModal.open(component, data, size, title, icon);
 // userModal.close();

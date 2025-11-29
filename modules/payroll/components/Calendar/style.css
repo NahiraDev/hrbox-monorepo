@@ -1,0 +1,7 @@
+.dark .custom-selected-bg span[data-range-selection="true"][data-selected="true"]::before {
+    background-color: rgba(4, 66, 92, 0.60) !important;
+}
+
+.custom-selected-bg span[data-range-selection="true"][data-selected="true"]::before {
+    background-color: #DCF0F9 !important;
+}

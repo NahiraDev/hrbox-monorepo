@@ -1,8 +1,7 @@
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
-import { Form } from "@heroui/react";
 import * as Yup from "yup";
-import {useModalContext} from "@hrbox/core/providers";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
 
 export const initialValuesAction = {
   Title: null,
@@ -14,6 +13,7 @@ export const formValidationAction = Yup.object().shape({
   Year: Yup.string().required(),
   Month: Yup.string().required(),
 });
+
 export const handleSubmitAction = (values: any) => {
   return {
     Title: values.title,
@@ -23,18 +23,42 @@ export const handleSubmitAction = (values: any) => {
 };
 
 export const AchievementForm = () => {
-    const { getOpenModal } = useModalContext();
-    const currentType = getOpenModal()?.type;
+  const { touched, errors, handleSubmit, handleReset } = useFormContext();
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
   return (
-    <Form>
+    <form onSubmit={handleSubmit} onReset={handleReset}>
       <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-        <FormField name="Title" label="Title" formMode={currentType}/>
-        <FormField name="Year" label="Year" component={AppAutoComplete} formMode={currentType}/>
-        <FormField name="Month" label="Month" component={AppAutoComplete} formMode={currentType}/>
+        <FormField
+          name="Title"
+          label="Title"
+          helperText={touched.Title && errors.Title}
+          formMode={currentType}
+        />
+        <FormField
+          name="Year"
+          label="Year"
+          helperText={touched.Year && errors.Year}
+          component={AppAutoComplete}
+          formMode={currentType}
+        />
+        <FormField
+          name="Month"
+          label="Month"
+          helperText={touched.Month && errors.Month}
+          component={AppAutoComplete}
+          formMode={currentType}
+        />
       </div>
       <div>
-        <FormField name="Type" label="Type" component={AppTextArea} />
+        <FormField
+          name="Type"
+          label="Type"
+          helperText={touched.Type && errors.Type}
+          component={AppTextArea}
+          formMode={currentType}
+        />
       </div>
-    </Form>
+    </form>
   );
 };
