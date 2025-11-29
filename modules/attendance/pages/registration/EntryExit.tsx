@@ -2,7 +2,7 @@ import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { EntryExitData } from "@hrbox/modules/attendance/app/mock";
 import { AppTable } from "@hrbox/uikit/components";
-import UserLocationModal from "modals/UserLocationModal";
+import UserLocationModal from "@hrbox/modules/attendance/modals/UserLocationModal";
 import FaceIdModal from "../../modals/FaceIdModal";
 
 const EntryExit = () => {

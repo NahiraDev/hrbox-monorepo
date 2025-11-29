@@ -1,6 +1,6 @@
 import { PersonalList } from '@hrbox/modules/attendance/app/mock';
 
-import { AppButton, AppTable } from '@hrbox/uikit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Add, Calendar, Edit, Trash } from 'iconsax-reactjs';
 const PersonalCalenderList = () => {
   const columns = [
@@ -91,11 +91,37 @@ const PersonalCalenderList = () => {
   };
   return (
     <>
-      <div className="w-[80%]">
-       <AppTable
-       data={PersonalList}
-       hasPagination={false}
-       {...attendanceConfig} />
+      <div className="w-[80%] border border-primary rounded-xl py-4 px-3">
+        <div className='w-full flex flex-col '>
+          <div className='flex flex-row gap-2 text-white'>
+            <div className='bg-[#999999] px-2 py-3 rounded-lg '>
+              <p>Date</p>
+            </div>
+            <div className='bg-[#999999] px-2 py-3 rounded-lg'>
+              <p>Date</p>
+            </div>
+            <div className='flex flex-row bg-primary rounded-lg w-full'>
+              <div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div><div className='px-2 py-3 w-full'>
+              <p>Date</p>
+            </div>
+            </div>
+            <div className='px-2 py-3 w-ful bg-success rounded-lg'>
+              <p>Request</p>
+            </div>
+          </div>
+        </div>
       </div>
       </>
   );
