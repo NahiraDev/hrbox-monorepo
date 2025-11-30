@@ -1,8 +1,11 @@
 import { PersonalList } from '@hrbox/modules/attendance/app/mock';
 
 import { AppButton } from '@hrbox/uikit/components';
-import { Add, Calendar, Edit, Trash } from 'iconsax-reactjs';
+import { Add, Additem, AddSquare, Calendar, Edit, Trash } from 'iconsax-reactjs';
+import { useState } from 'react';
 const PersonalCalenderList = () => {
+  const [menu1,setMenu1]=useState(false);
+  const [menu2,setMenu2]=useState(false);
   const columns = [
     {
       key: 'Date',
@@ -18,6 +21,13 @@ const PersonalCalenderList = () => {
     { key: 'Haste to leave', label: 'Haste to Leave' },
     { key: 'Request', label: 'Request' },
   ];
+
+  const handelmenubutton1=()=>{
+    setMenu1(!menu1)
+  }
+  const handelmenubutton2=()=>{
+    setMenu2(!menu2)
+  }
 
   const attendanceConfig = {
     columns,
@@ -93,7 +103,7 @@ const PersonalCalenderList = () => {
     <>
       <div className="w-[80%] border border-primary rounded-xl py-4 px-3">
         {/* start table */}
-        <div className='w-full flex flex-col '>
+        <div className='w-full flex flex-col  h-full '>
           {/* start Header */}
           <div className='grid grid-cols-12 gap-2 text-white text-sm '>
             <div className='bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2' >
@@ -124,17 +134,805 @@ const PersonalCalenderList = () => {
           {/* end Header */}
 
           {/* start Rows */}
-          <div className='grid w-full gap-1'>
+          <div className='grid w-full gap-1 overflow-y-scroll h-full custom-scroll-table'>
             {/* start row */}
               <div className='gap-0.5 rounded-md'>
             <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
-              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start!'>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
                 <p>2025/01/01</p> 
                 <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
               </div>
-              <div className='absolute px-4 py-2 bg-white'></div>
-              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center'>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
                 <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer' onClick={handelmenubutton1} >
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-12 ${menu1?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */}
+              </div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer' onClick={handelmenubutton2} >
+                <p>123456</p>
+                {/* start menu button */}
+              <div className={`absolute px-4 py-2 bg-white rounded-md top-28 ${menu2?"flex":"hidden"} `}>
+                <div className='flex flex-col items-start gap-1.5 '>
+                  <AppButton content="Daily Leave" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Daily Mission" startContent={<Add size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Edit Traffic Entry" startContent={<Edit size={18} />} className='gap-1.5 text-sm' />
+                  <AppButton content="Delete Request" startContent={<Trash size={18} />} className='gap-1.5 text-sm' />
+                </div>
+              </div>
+              {/* end menu button */} 
               </div>
               <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
               <div className='px-2 py-3'>
