@@ -92,36 +92,82 @@ const PersonalCalenderList = () => {
   return (
     <>
       <div className="w-[80%] border border-primary rounded-xl py-4 px-3">
+        {/* start table */}
         <div className='w-full flex flex-col '>
-          <div className='flex flex-row gap-2 text-white'>
-            <div className='bg-[#999999] px-2 py-3 rounded-lg '>
+          {/* start Header */}
+          <div className='grid grid-cols-12 gap-2 text-white text-sm '>
+            <div className='bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2' >
               <p>Date</p>
             </div>
-            <div className='bg-[#999999] px-2 py-3 rounded-lg'>
-              <p>Date</p>
+            <div className='bg-[#999999] px-2 py-3 rounded-lg col-span-1'>
+              <p>Shift</p>
             </div>
-            <div className='flex flex-row bg-primary rounded-lg w-full'>
+            <div className='grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5'>
               <div className='px-2 py-3 w-full'>
-              <p>Date</p>
+              <p>Check in</p>
             </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
+              <p>Check out</p>
             </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
+              <p>Presence</p>
             </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
+              <p>Overdue</p>
             </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
-            </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
-            </div><div className='px-2 py-3 w-full'>
-              <p>Date</p>
+              <p>Delay</p>
+            </div><div className='px-2 py-3 w-full col-span-2'>
+              <p>Haste to leave</p>
             </div>
             </div>
-            <div className='px-2 py-3 w-ful bg-success rounded-lg'>
+            <div className='px-2 py-3 w-full bg-success rounded-lg col-span-2'>
               <p>Request</p>
             </div>
           </div>
+          {/* end Header */}
+
+          {/* start Rows */}
+          <div className='grid w-full gap-1'>
+            {/* start row */}
+              <div className='gap-0.5 rounded-md'>
+            <div className='grid grid-cols-12 gap-2 w-full text-xs  text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md '>
+              <div className='col-span-2 p-1 border-b-1 border-white items-center text-start!'>
+                <p>2025/01/01</p> 
+                <p>Wednesday (Present)</p>
+              </div>
+              <div className='absolute px-4 py-2 bg-white'></div>
+              <div className='col-span-1 px-2 py-3 border-b-1 border-white items-center'>
+                <p>123456</p>
+              </div>
+              <div className='grid grid-cols-7 col-span-7 border-b-1 border-white items-center'>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3'>
+                <p>09:00</p>
+              </div>
+              <div className='px-2 py-3 col-span-2 text-center'>
+                <p>09:00</p>
+              </div>
+              </div>
+              <div className='col-span-2 px-2 py-3 border-b-1 border-white'>
+                <p>
+                  Permision from 13:00 to 18:00
+                </p>
+              </div>
+              </div>
+            </div>
+            {/* end row */}
+          </div>
+          {/* end Rows */}
         </div>
+        {/* end table */}
       </div>
       </>
   );
