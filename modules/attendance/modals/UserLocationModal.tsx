@@ -4,7 +4,7 @@ import { Map as LeafletMap,LatLngExpression,icon   } from "leaflet";
 import { useRef, useState } from "react";
 import 'leaflet/dist/leaflet.css';
 const LocationMarker = ({ 
-  position, 
+  position,
   setPosition 
 }: { 
   position: LatLngExpression | null; 

@@ -88,7 +88,8 @@ export const UserLocation = () => {
                             <>
                                 <Add className="text-secondary-1000" size="14"/>
                                 <span
-                                    className="text-secondary-1000 dark:text-white font-normal text-xs">Add New One</span>
+                                    className="text-secondary-1000 dark:text-white font-normal text-xs">Add New One\
+                                </span>
                             </>
                         )}
                     />

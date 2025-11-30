@@ -4,6 +4,7 @@ import { Avatar, Card } from "@heroui/react";
 import { useAppSelector } from "@hrbox/core/redux";
 import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
 import { useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
+import { GeneralInformationModal } from "../modals/GeneralInformationModal";
 
 // Realistic mock data (only used when API returns nothing or invalid data)
 const MOCK_DATA = {
