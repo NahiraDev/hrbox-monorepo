@@ -5,6 +5,7 @@ interface EndpointConfig {
   url: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   tags?: readonly string[];
+  transformResponse?: (baseQueryResponse: any) => PaginatedResponse<TData>;
 }
 
 /**
@@ -12,8 +13,15 @@ interface EndpointConfig {
  */
 export function createPaginatedQuery<TData>(
   build: EndpointBuilder<any, any, any>,
-  { url, tags = [] }: EndpointConfig
+  config: EndpointConfig
 ) {
+  const {
+    url,
+    method = 'GET',
+    tags = [],
+    transformResponse,               // destructure it
+  } = config;
+
   return build.query<PaginatedResponse<TData>, PaginationParams>({
     query: (params = {}) => {
       const {
@@ -27,7 +35,7 @@ export function createPaginatedQuery<TData>(
 
       return {
         url,
-        method: 'GET',
+        method,
         params: {
           Page: page,
           PageSize: pageSize,
@@ -42,24 +50,25 @@ export function createPaginatedQuery<TData>(
       ...tags,
       { type: tags[0] as string, id: 'LIST' },
     ],
-    // Transform response to ensure consistent format
-    transformResponse: (response: any): PaginatedResponse<TData> => {
-      // If response already has correct format
-      if (response.data && response.meta) {
-        return response;
-      }
 
-      // If response is array with pagination headers
-      return {
-        data: response.items || response.data || response,
-        meta: {
-          page: response.page || 1,
-          pageSize: response.pageSize || response.size || 10,
-          total: response.total || response.totalCount || 0,
-          totalPages: response.totalPages || Math.ceil((response.total || 0) / (response.pageSize || 10)),
-        },
-      };
-    },
+    // Use custom transform if provided, otherwise fall back to default logic
+    transformResponse:
+      transformResponse ??
+      ((response: any): PaginatedResponse<TData> => {
+        if (response.data && response.meta) return response;
+
+        return {
+          data: response.items || response.data || response || [],
+          meta: {
+            page: response.page || 1,
+            pageSize: response.pageSize || response.size || 10,
+            total: response.total || response.totalCount || 0,
+            totalPages:
+              response.totalPages ||
+              Math.ceil((response.total || 0) / (response.pageSize || 10)),
+          },
+        };
+      }),
   });
 }
 
@@ -80,16 +89,23 @@ export function createQuery<TData, TParams = void>(
 /**
  * Create a mutation endpoint (POST, PUT, PATCH, DELETE)
  */
-export function createMutation<TData, TBody>(
+export function createMutation<TData, TArg>(
   build: EndpointBuilder<any, any, any>,
-  { url, method = 'POST', tags = [] }: EndpointConfig
+  { url, method = 'POST', tags = [] }: {
+    url: string | ((arg: TArg) => string);
+    method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    tags?: string[];
+  }
 ) {
-  return build.mutation<TData, TBody>({
-    query: (body) => ({
-      url,
+  return build.mutation<TData, TArg>({
+    query: (arg) => ({
+      url: typeof url === 'function' ? url(arg) : url,
       method,
-      body,
+      ...(method !== 'GET' && method !== 'DELETE' ? { body: arg } : {}),
     }),
-    invalidatesTags: tags,
+    invalidatesTags: (result, error, arg) => [
+      ...tags.map(tag => ({ type: tag, id: 'LIST' } as const)),
+      ...tags.map(tag => ({ type: tag } as const)), // optional: invalidate single items too
+    ],
   });
 }

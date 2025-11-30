@@ -4,6 +4,7 @@ import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { CupStarIcon } from "@hrbox/uikit/icons/CupStarIcon";
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
+import { useFetchAwardsQuery, useDeleteAwardMutation } from "@hrbox/modules/hrlink/apis";
 
 // MOCK DATA — Exactly matches your real API structure
 const MOCK_RESPONSE = {
@@ -30,12 +31,35 @@ const MOCK_RESPONSE = {
 
 const Awards = () => {
   // Replace real query with mock data
-  const response = MOCK_RESPONSE;
+  const { 
+    data: responseData, 
+    isLoading, 
+    isError, 
+    error 
+  } = useFetchAwardsQuery({ page: 0, pageSize: 10 });
+
+  const [deleteAward, { isLoading: isDeleting }] = useDeleteAwardMutation();
+ 
+  const response = responseData || MOCK_RESPONSE;
   const awards = response.data.ViewList;
   const pagination = {
     currentPage: response.data.Page + 1, // UI usually starts from page 1
     totalPages: response.data.LastPage,
   };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('آیا از حذف این جایزه مطمئن هستید؟')) return;
+
+    try {
+      await deleteAward(id).unwrap(); // unwrap() throws on error
+      // Optional: show success toast
+      // toast.success('جایزه با موفقیت حذف شد');
+    } catch (err) {
+      console.error('Delete failed:', err);
+      // toast.error('حذف جایزه失敗 کرد');
+    }
+  };
+
 
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
@@ -43,7 +67,7 @@ const Awards = () => {
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((achievement) => (
+            {awards.map((achievement: any) => (
               <Card
                 key={achievement.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
@@ -64,13 +88,22 @@ const Awards = () => {
                         size="md"
                         radius="sm"
                         content={<Edit size="16" className="text-secondary-700" />}
+                        onPress={() => console.log("open editing award modal")}
                       />
                       <AppButton
                         isIconOnly
                         color="white"
                         size="md"
                         radius="sm"
-                        content={<Trash size="16" className="text-red-600" />}
+                        isDisabled={isDeleting}
+                        content={
+                          isDeleting ? (
+                            <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <Trash size="16" className="text-red-600" />
+                          )
+                        }
+                        onPress={() => handleDelete(achievement.Id)}
                       />
                     </div>
                   </div>

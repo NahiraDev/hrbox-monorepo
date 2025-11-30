@@ -31,9 +31,29 @@
           tags: ['Award'],
         }),
 
-        fetchAwards: createQuery<any>(build, {
+        fetchAwards: createPaginatedQuery<any>(build, {
+          // url: HRLinkApiEndpoints.resume.award.getList,
+          // method: 'GET',
+          // tags: ['Award'],
+
           url: HRLinkApiEndpoints.resume.award.getList,
+          method: 'GET',
           tags: ['Award'],
+          // Add custom transformResponse to match your real API
+          transformResponse: (response: any) => {
+            // Your actual backend format
+            const backendData = response.data; // { ViewList, LastPage, Page, PageSize }
+
+            return {
+              data: backendData.ViewList || [],
+              meta: {
+                page: (backendData.Page || 0) + 1,        // Your backend uses 0-based, but UI usually wants 1-based
+                pageSize: backendData.PageSize || 10,
+                total: (backendData.LastPage + 1) * backendData.PageSize, // approximate total items
+                totalPages: backendData.LastPage + 1,     // since Page: 0 → LastPage: 2 means 3 pages
+              },
+            };
+          },
         }),
 
         fetchAwardDetail: createQuery<any>(build, {
