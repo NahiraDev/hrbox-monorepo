@@ -33,6 +33,8 @@ import {
   ModalType,
 } from "@hrbox/core/providers/ModalProvider";
 import { useTranslation } from "react-i18next";
+import { ReportPersonnal } from "../app/mock";
+import { useMemo } from "react";
 
 export const CalenderHeaderForm = () => {
   const {
@@ -69,6 +71,80 @@ export const CalenderHeaderForm = () => {
     person: "",
     department: "",
   };
+
+    const uniqueYears = useMemo(() => {
+    const years = new Set<string>();
+    ReportPersonnal.forEach((record) => {
+      const year = new Date(record.date).getFullYear().toString();
+      years.add(year);
+    });
+    return Array.from(years)
+      .sort()
+      .reverse()
+      .map((year) => ({ key: year, label: year }));
+  }, []);
+
+  // Extract unique months
+  const uniqueMonths = useMemo(() => {
+    const months = new Set<string>();
+    ReportPersonnal.forEach((record) => {
+      const month = String(new Date(record.date).getMonth() + 1).padStart(
+        2,
+        "0"
+      );
+      months.add(month);
+    });
+
+    const monthNames: Record<string, string> = {
+      "01": "January",
+      "02": "February",
+      "03": "March",
+      "04": "April",
+      "05": "May",
+      "06": "June",
+      "07": "July",
+      "08": "August",
+      "09": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December",
+    };
+
+    return Array.from(months)
+      .sort()
+      .map((month) => ({
+        key: month,
+        label: monthNames[month],
+      }));
+  }, []);
+
+  // Extract unique persons
+  const uniquePersons = useMemo(() => {
+    const persons = new Set<string>();
+    ReportPersonnal.forEach((record) => {
+      persons.add(record.person);
+    });
+    return Array.from(persons)
+      .sort()
+      .map((person) => ({
+        key: person,
+        label: person,
+      }));
+  }, []);
+
+  // Extract unique departments
+  const uniqueDepartments = useMemo(() => {
+    const departments = new Set<string>();
+    ReportPersonnal.forEach((record) => {
+      departments.add(record.department);
+    });
+    return Array.from(departments)
+      .sort()
+      .map((department) => ({
+        key: department,
+        label: department,
+      }));
+  }, []);
 
    const handleOpenEventModal = () => {
     modal.open(
@@ -127,7 +203,7 @@ export const CalenderHeaderForm = () => {
               name="month"
               component={AppDropDown}
                 title= {t("month")}
-                items= {months}
+                items= {uniqueMonths}
                 size="md"
               radius="lg"
                 startIcon={<Calendar size={22} />}
@@ -137,7 +213,7 @@ export const CalenderHeaderForm = () => {
               name="year"
               component={AppDropDown}
                 title= {t("year")}
-                item= {years}
+                item= {uniqueYears}
                 className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                 size="md"
               radius="lg"
