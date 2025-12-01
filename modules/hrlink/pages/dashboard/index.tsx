@@ -41,8 +41,6 @@ const Dashboard = () => {
   const { data: resumePercent } = useFetchResumePercentQuery();
   const { data: jobOpportunities } = useFetchJobOpportunitiesSentQuery();
 
-  // 2. Calculate Percentages (Normalization)
-  // API returns 100.0 -> We convert to 1.0 for the Slider
   const rawPercent = resumePercent?.data || 0; // e.g., 100
   const sliderValue = rawPercent / 100;        // e.g., 1
 

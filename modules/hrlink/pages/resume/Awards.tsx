@@ -4,9 +4,16 @@ import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { CupStarIcon } from "@hrbox/uikit/icons/CupStarIcon";
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
-import { useFetchAwardsQuery, useDeleteAwardMutation } from "@hrbox/modules/hrlink/apis";
+import { AwardModal } from "@hrbox/modules/hrlink/modals/AwardModal";
+import {
+  useFetchAwardsQuery,
+  useDeleteAwardMutation,
+} from "@hrbox/modules/hrlink/apis";
+import { useState } from "react";
+import { ModalSize } from "@hrbox/core/providers";
+import { ModalType } from "@hrbox/core/providers";
+import { useModal } from "@hrbox/core/hooks/useModal";
 
-// MOCK DATA — Exactly matches your real API structure
 const MOCK_RESPONSE = {
   data: {
     ViewList: [
@@ -30,46 +37,86 @@ const MOCK_RESPONSE = {
 };
 
 const Awards = () => {
-  // Replace real query with mock data
-  const { 
-    data: responseData, 
-    isLoading, 
-    isError, 
-    error 
-  } = useFetchAwardsQuery({ page: 0, pageSize: 10 });
+  const { data: responseData, isLoading, isError } = useFetchAwardsQuery({
+    page: 0,
+    pageSize: 10,
+  });
 
-  const [deleteAward, { isLoading: isDeleting }] = useDeleteAwardMutation();
- 
+  const [deleteAward] = useDeleteAwardMutation();
+
+  // Track which award is currently being deleted
+  const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
+
   const response = responseData || MOCK_RESPONSE;
   const awards = response.data.ViewList;
   const pagination = {
-    currentPage: response.data.Page + 1, // UI usually starts from page 1
-    totalPages: response.data.LastPage,
+    currentPage: (response.data.Page ?? 0) + 1,
+    totalPages: response.data.LastPage ?? 1,
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm('آیا از حذف این جایزه مطمئن هستید؟')) return;
+    if (!confirm("Are you sure you want to delete this award?")) return;
+
+    setDeletingIds((prev) => new Set(prev).add(id));
 
     try {
-      await deleteAward(id).unwrap(); // unwrap() throws on error
-      // Optional: show success toast
-      // toast.success('جایزه با موفقیت حذف شد');
+      await deleteAward(id).unwrap();
+      // RTK Query will automatically refetch/invalidate the list
     } catch (err) {
-      console.error('Delete failed:', err);
-      // toast.error('حذف جایزه失敗 کرد');
+      console.error("Delete failed:", err);
+      alert("Failed to delete the award");
+    } finally {
+      setDeletingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
     }
   };
 
+  //edit awards modal
+  const modal = useModal();
+  const [isOpen] = useState()
+  const handleEdit = (award: any) => {
+    modal.open(
+      ModalType.EDIT,
+      "edit-award",
+      <AwardModal
+        award={award}
+        onSuccess={() => {
+          modal.close(); // optional: close after success
+          // RTK Query will auto-refetch thanks to tags
+        }}
+      />,
+      {
+        title: "Edit Award",
+        isForm: true,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: "award-form",
+        },
+
+        onCancel: () => modal.close("edit-award"),
+      },
+      ModalSize.MD
+    );
+  };
+
+  const isDeleting = (id: number) => deletingIds.has(id);
+
+  // if (isLoading) return <div className="p-8 text-center">Loading awards...</div>;
+  // if (isError) return <div className="p-8 text-center text-red-600">Error loading awards</div>;
 
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
-      {/* Main Content - Awards List */}
+      {/* Awards List */}
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((achievement: any) => (
+            {awards.map((award) => (
               <Card
-                key={achievement.Id}
+                key={award.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
               >
                 <CardHeader className="border-b border-neutral-100 pb-3">
@@ -77,7 +124,7 @@ const Awards = () => {
                     <div className="flex items-center gap-2">
                       <CupStarIcon color="#04070e" size={20} />
                       <h3 className="text-lg font-bold text-secondary-1000">
-                        {achievement.Title}
+                        {award.Title}
                       </h3>
                     </div>
 
@@ -88,22 +135,23 @@ const Awards = () => {
                         size="md"
                         radius="sm"
                         content={<Edit size="16" className="text-secondary-700" />}
-                        onPress={() => console.log("open editing award modal")}
+                        onPress={() => handleEdit(award)}
                       />
+
                       <AppButton
                         isIconOnly
                         color="white"
                         size="md"
                         radius="sm"
-                        isDisabled={isDeleting}
+                        isDisabled={isDeleting(award.Id)}
                         content={
-                          isDeleting ? (
+                          isDeleting(award.Id) ? (
                             <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
                           ) : (
                             <Trash size="16" className="text-red-600" />
                           )
                         }
-                        onPress={() => handleDelete(achievement.Id)}
+                        onPress={() => handleDelete(award.Id)}
                       />
                     </div>
                   </div>
@@ -112,29 +160,29 @@ const Awards = () => {
                 <CardBody className="text-sm space-y-3">
                   <div className="grid grid-cols-2 gap-3 text-secondary-900">
                     <div>
-                      <span className="font-light text-secondary-600">عنوان: </span>
-                      <span className="font-medium">{achievement.Title}</span>
+                      <span className="font-light text-secondary-600">Title: </span>
+                      <span className="font-medium">{award.Title}</span>
                     </div>
                     <div>
-                      <span className="font-light text-secondary-600">سال: </span>
-                      <span className="font-medium">{achievement.Date}</span>
+                      <span className="font-light text-secondary-600">Year: </span>
+                      <span className="font-medium">{award.Date}</span>
                     </div>
                   </div>
 
-                  {achievement.Place && achievement.Place !== "-" && (
+                  {award.Place && award.Place !== "-" && (
                     <div>
-                      <span className="font-light text-secondary-600">مکان: </span>
+                      <span className="font-light text-secondary-600">Location: </span>
                       <span className="font-medium">
-                        {achievement.Place.replace(/^[-–—]\s*/, "")}
+                        {award.Place.replace(/^[-–—]\s*/, "")}
                       </span>
                     </div>
                   )}
 
-                  {achievement.Description && achievement.Description.trim() && achievement.Description !== "description" && (
+                  {award.Description && award.Description.trim() && award.Description !== "description" && (
                     <div>
-                      <span className="font-light text-secondary-600">توضیحات: </span>
+                      <span className="font-light text-secondary-600">Description: </span>
                       <p className="font-medium text-secondary-800 mt-1">
-                        {achievement.Description}
+                        {award.Description}
                       </p>
                     </div>
                   )}
@@ -149,7 +197,6 @@ const Awards = () => {
               meta={{
                 page: pagination.currentPage,
                 totalPages: pagination.totalPages,
-                // onPageChange: (page) => console.log("Go to page", page),
               }}
             />
           </div>
