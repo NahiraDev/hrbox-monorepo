@@ -248,21 +248,9 @@ export const AttendancePlugin: ModulePlugin = {
       icon: <Building size="24" />,
     },
     {
-      id: "export",
-      label: "Export",
-      path: "/attendance/export",
-      icon: <Building size="24" />,
-    },
-    {
       id: "face",
       label: "Face Allocation",
       path: "/attendance/face-allocation",
-      icon: <Building size="24" />,
-    },
-    {
-      id: "shift",
-      label: "Shift Allocation",
-      path: "/attendance/shift-allocation",
       icon: <Building size="24" />,
     },
     {

@@ -43,7 +43,7 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
   ];
   return (
     <>
-      <FormProvider formId="report-form">
+      <FormProvider formId="report-form" initialValues={inputs}>
         <div
           className={`bg-surface-50 flex h-full flex-col items-center rounded-xl p-3 font-sans ${isExpanded ? "w-full border-primary border-1" : "border-primary w-[20%] border-1"} `}
         >

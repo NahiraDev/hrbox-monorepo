@@ -1,22 +1,15 @@
 import {
-    ArrowDown,
   ArrowDown2,
-  Building,
-  Buildings,
   Buildings2,
   Calendar,
   ExportSquare,
   People,
   Profile,
-  Profile2User,
 } from "iconsax-reactjs";
 
 import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
 import { AppButton } from "@hrbox/uikit/components";
 import { FormField } from "@hrbox/uikit/components/FormField";
-
-import { FormProvider, useFormContext } from "@hrbox/core/providers";
-import { Form } from "formik";
 
 import { Avatar } from "@heroui/react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
@@ -28,97 +21,47 @@ import {
   initialValuesEvent,
   handleSubmitEvent,
 } from "@hrbox/modules/attendance/forms/EventForm";
-import {
-  ModalSize,
-  ModalType,
-} from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { useTranslation } from "react-i18next";
 import { ReportPersonnal } from "../app/mock";
 import { useMemo } from "react";
+import { useFormContext } from "@hrbox/core/providers/FormProvider";
 
 export const CalenderHeaderForm = () => {
-  const {
-    errors,
-    touched,
-    handleSubmit,
-    isSubmitting,
-    setSubmitting,
-    setErrors,
-  } = useFormContext();
   const navigate = useNavigate<any>();
   const location = useLocation();
   const modal = useModal();
-  const {t}=useTranslation(); 
+  const { t } = useTranslation();
+  const { handleSubmit, values, setFieldValue } = useFormContext();
 
   const isTrafficCalender =
     location.pathname === "/attendance/traffic-calender";
 
-  const years = [
+  // ============= STATIC: تمام 12 ماه =============
+  const allMonths = [
+    { key: "01", label: "January" },
+    { key: "02", label: "February" },
+    { key: "03", label: "March" },
+    { key: "04", label: "April" },
+    { key: "05", label: "May" },
+    { key: "06", label: "June" },
+    { key: "07", label: "July" },
+    { key: "08", label: "August" },
+    { key: "09", label: "September" },
+    { key: "10", label: "October" },
+    { key: "11", label: "November" },
+    { key: "12", label: "December" },
+  ];
+
+  // ============= STATIC: آخرین 4 سال =============
+  const allYears = [
     { key: "2025", label: "2025" },
     { key: "2024", label: "2024" },
     { key: "2023", label: "2023" },
+    { key: "2022", label: "2022" },
   ];
 
-  const months = [
-    { key: "January", label: "January" },
-    { key: "February", label: "February" },
-    { key: "March", label: "March" },
-  ];
-
-  const headerInitialValues = {
-    month: "",
-    year: "",
-    person: "",
-    department: "",
-  };
-
-    const uniqueYears = useMemo(() => {
-    const years = new Set<string>();
-    ReportPersonnal.forEach((record) => {
-      const year = new Date(record.date).getFullYear().toString();
-      years.add(year);
-    });
-    return Array.from(years)
-      .sort()
-      .reverse()
-      .map((year) => ({ key: year, label: year }));
-  }, []);
-
-  // Extract unique months
-  const uniqueMonths = useMemo(() => {
-    const months = new Set<string>();
-    ReportPersonnal.forEach((record) => {
-      const month = String(new Date(record.date).getMonth() + 1).padStart(
-        2,
-        "0"
-      );
-      months.add(month);
-    });
-
-    const monthNames: Record<string, string> = {
-      "01": "January",
-      "02": "February",
-      "03": "March",
-      "04": "April",
-      "05": "May",
-      "06": "June",
-      "07": "July",
-      "08": "August",
-      "09": "September",
-      "10": "October",
-      "11": "November",
-      "12": "December",
-    };
-
-    return Array.from(months)
-      .sort()
-      .map((month) => ({
-        key: month,
-        label: monthNames[month],
-      }));
-  }, []);
-
-  // Extract unique persons
+  // ============= DYNAMIC: افراد از داده‌ها =============
   const uniquePersons = useMemo(() => {
     const persons = new Set<string>();
     ReportPersonnal.forEach((record) => {
@@ -132,7 +75,7 @@ export const CalenderHeaderForm = () => {
       }));
   }, []);
 
-  // Extract unique departments
+  // ============= DYNAMIC: بخش‌ها از داده‌ها =============
   const uniqueDepartments = useMemo(() => {
     const departments = new Set<string>();
     ReportPersonnal.forEach((record) => {
@@ -146,11 +89,11 @@ export const CalenderHeaderForm = () => {
       }));
   }, []);
 
-   const handleOpenEventModal = () => {
+  const handleOpenEventModal = () => {
     modal.open(
       ModalType.CREATE,
       "event-form",
-      <EventModal />, 
+      <EventModal />,
       {
         isForm: true,
         submitLabel: "ذخیره",
@@ -171,8 +114,15 @@ export const CalenderHeaderForm = () => {
     );
   };
 
+  const handleFieldChange = (fieldName: string, value: any) => {
+    setFieldValue(fieldName, value);
+  };
+
+    const getMonthLabel = (monthKey: string) => {
+    return allMonths.find((m) => m.key === monthKey)?.label || "";
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row gap-3">
@@ -199,23 +149,40 @@ export const CalenderHeaderForm = () => {
             />
           </div>
           <div className="flex flex-row gap-3">
-            <FormField
+              <FormField
               name="month"
               component={AppDropDown}
-                title= {t("month")}
-                items= {uniqueMonths}
-                size="md"
+               title={
+                values.month
+                  ? `${getMonthLabel(values.month)}`
+                  : t("month")
+              }
+              items={allMonths}
+              valueKey="key"
+              labelKey="label"
+              onChange={(value: any) => handleFieldChange("month", value)}
+              size="md"
               radius="lg"
-                startIcon={<Calendar size={22} />}
-                endIcon={<ArrowDown2 size={20} />}
+               onSelectionChange={(value: any) =>
+                handleFieldChange("month", value)
+              }
+              startIcon={<Calendar size={22} />}
+              endIcon={<ArrowDown2 size={20} />}
             />
-            <FormField
+
+           <FormField
               name="year"
               component={AppDropDown}
-                title= {t("year")}
-                item= {uniqueYears}
-                className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
-                size="md"
+                title={
+                values.year
+                  ? `${values.year}`
+                  : t("year")
+              }
+              items={allYears}
+              valueKey="key"
+              labelKey="label"
+              onChange={(value: any) => handleFieldChange("year", value)}
+              size="md"
               radius="lg"
               startIcon={<Calendar size={22} />}
               endIcon={<ArrowDown2 size={20} />}
@@ -244,7 +211,9 @@ export const CalenderHeaderForm = () => {
               <div className="flex flex-col gap-1">
                 <p className="text-sm font-open-sans">Zahra Pakniyat</p>
                 <div className="py-0.5 px-1 rounded-md border border-[#DCF0F9] bg-[#DCF0F940]">
-                <p className="text-primary text-[10px] text-center ">UiUx Designer</p>
+                  <p className="text-primary text-[10px] text-center ">
+                    UiUx Designer
+                  </p>
                 </div>
               </div>
             </div>
@@ -253,20 +222,32 @@ export const CalenderHeaderForm = () => {
               <FormField
                 name="person"
                 component={AppDropDown}
-                  title={t("person")}
-                  item= {months}
-                  className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
-                  startIcon={<Profile size={22} />}
-                  endIcon={<ArrowDown2 size={20} />}
+                title={
+                  values.person?`${values.person}`:t("person")
+                }
+                items={uniquePersons}
+                className="border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                valueKey="key"
+                onChange={(value: any) =>
+                  handleFieldChange("person", value)
+                }
+                startIcon={<Profile size={22} />}
+                endIcon={<ArrowDown2 size={20} />}
               />
               <FormField
                 name="department"
                 component={AppDropDown}
-                  title= {t("department/unit")}
-                  item= {months}
-                  className= "border-1 border-primary px-3 py-2 gap-2 rounded-lg"
-                  startIcon={<Buildings2 size={22} />}
-                  endIcon={<ArrowDown2 size={20} />}
+                title={
+                  values.department?`${values.department}`:t("department/unit")
+                }
+                items={uniqueDepartments}
+                valueKey="key"
+                onChange={(value: any) =>
+                  handleFieldChange("department", value)
+                }
+                className="border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                startIcon={<Buildings2 size={22} />}
+                endIcon={<ArrowDown2 size={20} />}
               />
             </div>
           </div>

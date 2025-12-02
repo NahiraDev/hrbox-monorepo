@@ -68,6 +68,7 @@ export const AppSidebar = () => {
       navigate({ to: item.path });
     }
   };
+  
 
   return (
     <motion.div
