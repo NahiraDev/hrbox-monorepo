@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ModalSize } from "@hrbox/core/providers";
 import { ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks/useModal";
+import DeleteConfirmModal from '@hrbox/core/components/DeleteConfirmModal';
 
 const MOCK_RESPONSE = {
   data: {
@@ -54,17 +55,35 @@ const Awards = () => {
     totalPages: response.data.LastPage ?? 1,
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this award?")) return;
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    awardId: number | null;
+    awardName: string;
+  }>({
+    isOpen: false,
+    awardId: null,
+    awardName: '',
+  });
+
+  const openDeleteModal = (id: number, name: string) => {
+    setDeleteModal({ isOpen: true, awardId: id, awardName: name });
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModal({ isOpen: false, awardId: null, awardName: '' });
+  };
+
+  const handleDelete = async () => {
+    const id = deleteModal.awardId;
+    if (!id) return;
 
     setDeletingIds((prev) => new Set(prev).add(id));
 
     try {
       await deleteAward(id).unwrap();
-      // RTK Query will automatically refetch/invalidate the list
     } catch (err) {
       console.error("Delete failed:", err);
-      alert("Failed to delete the award");
+      alert("حذف با خطا مواجه شد");
     } finally {
       setDeletingIds((prev) => {
         const next = new Set(prev);
