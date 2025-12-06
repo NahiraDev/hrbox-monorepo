@@ -11,15 +11,15 @@ const awardApi = createModuleApi({
 });
 
 export const awardApiEndpoints = awardApi.injectEndpoints({
-  endpoints: (build: any) => ({
+  endpoints: (build:any) => ({
 
-    createAward: createMutation<any, any>(build, {
+    createAward: createMutation<any , any>(build, {
       url: HRLinkApiEndpoints.resume.award.create,
       method: 'POST',
       tags: ['Award'],
     }),
 
-    editAward: createMutation<any, any>(build, {
+    editAward: createMutation<any , any>(build, {
       url: HRLinkApiEndpoints.resume.award.edit,
       method: 'POST',
       tags: ['Award'],
@@ -32,6 +32,10 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
     }),
 
     fetchAwards: createPaginatedQuery<any>(build, {
+      // url: HRLinkApiEndpoints.resume.award.getList,
+      // method: 'GET',
+      // tags: ['Award'],
+
       url: HRLinkApiEndpoints.resume.award.getList,
       method: 'GET',
       tags: ['Award'],
@@ -43,10 +47,10 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
         return {
           data: backendData.ViewList || [],
           meta: {
-            page: (backendData.Page || 0) + 1,
+            page: (backendData.Page || 0) + 1,        // Your backend uses 0-based, but UI usually wants 1-based
             pageSize: backendData.PageSize || 10,
-            total: (backendData.LastPage + 1) * backendData.PageSize,
-            totalPages: backendData.LastPage + 1,
+            total: (backendData.LastPage + 1) * backendData.PageSize, // approximate total items
+            totalPages: backendData.LastPage + 1,     // since Page: 0 → LastPage: 2 means 3 pages
           },
         };
       },
