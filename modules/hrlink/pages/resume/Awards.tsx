@@ -8,12 +8,14 @@ import { AwardModal } from "@hrbox/modules/hrlink/modals/AwardModal";
 import {
   useFetchAwardsQuery,
   useDeleteAwardMutation,
+  useEditAwardMutation,
 } from "@hrbox/modules/hrlink/apis";
 import { useState } from "react";
 import { ModalSize } from "@hrbox/core/providers";
 import { ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks/useModal";
 
+// IMPORTANT: get rid of this and use real data
 const MOCK_RESPONSE = {
   data: {
     ViewList: [
@@ -37,24 +39,29 @@ const MOCK_RESPONSE = {
 };
 
 const Awards = () => {
+  // Handle getting the awrds and the state of the fetching data
+  const [page, setPage] = useState(1)
   const { data: responseData, isLoading, isError } = useFetchAwardsQuery({
-    // Chnage this for dynamic pagination
-    // add a state holding the page in front end and request based on that
-    page: 0,
+    page,
     pageSize: 10,
   });
+  const meta = responseData?.meta || {
+    page: 1,
+    totalPages: 1
+  };
 
+  // Handle deleting awards 
   const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
-
   // Track which award is currently being deleted
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
 
+  // Handel edititng awards
+  const [editAward, {error: errorEditing , isLoading: loadingEdit, isSuccess: editedSuccessfully}] = useEditAwardMutation();
+  const [editingId, setEditingId] = useState(null);
+
+
   const response = responseData || MOCK_RESPONSE;
   const awards = response.data.ViewList;
-  const pagination = {
-    currentPage: (response.data.Page ?? 0) + 1,
-    totalPages: response.data.LastPage ?? 1,
-  };
 
 
   const handleDelete = async (id: number) => {
@@ -78,15 +85,47 @@ const Awards = () => {
 
   //edit awards modal
   const modal = useModal();
-  const [isOpen] = useState()
+
   const handleEdit = (award: any) => {
+
+    // modal.open(
+  //     ModalType.EDIT,
+  //     "edit-award",
+  //     <AwardModal 
+  //       award={
+  //         award
+  //       }
+  //       onSuccess={() => {
+  //         modal.close("edit-award"); 
+  //       }}
+  //     />, 
+  //     {
+  //       isForm: true,
+  //       submitLabel: "ذخیره",
+  //       cancelLabel: "لغو",
+  //       formConfig: {
+  //         initialValues: {defaultInitialValues},
+  //         validationSchema: formValidationEvent,
+  //         formId: "award-form",
+  //         enableCache: true,
+  //         clearCacheOnSubmit: true,
+  //         onSubmitAsync: async (values: any) => {
+  //           handleSubmitEvent(values);
+  //           modal.close(ModalType.CREATE, "event-form");
+  //         },
+  //       },
+  //     },
+  //     ModalSize.MD
+  //   );
     modal.open(
       ModalType.EDIT,
       "edit-award",
       <AwardModal
-        award={award}
+        award={
+          award
+        }
         onSuccess={() => {
-          modal.close(); 
+          modal.close("edit-award"); 
         }}
       />,
       {
@@ -106,9 +145,6 @@ const Awards = () => {
 
   const isDeleting = (id: number) => deletingIds.has(id);
 
-  // if (isLoading) return <div className="p-8 text-center">Loading awards...</div>;
-  // if (isError) return <div className="p-8 text-center text-red-600">Error loading awards</div>;
-
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       {/* Awards List */}
@@ -123,7 +159,7 @@ const Awards = () => {
                 <CardHeader className="border-b border-neutral-100 pb-3">
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
-                      <CupStarIcon color="#04070e" size={20} />
+                      <CupStarIcon color="#04070e"/>
                       <h3 className="text-lg font-bold text-secondary-1000">
                         {award.Title}
                       </h3>
@@ -194,12 +230,13 @@ const Awards = () => {
 
           {/* Pagination */}
           <div className="flex justify-center mt-8">
-            <AppPagination
-              meta={{
-                page: pagination.currentPage,
-                totalPages: pagination.totalPages,
-              }}
-            />
+          <AppPagination
+            meta={{
+              page: meta.page,
+              totalPages: meta.totalPages,
+            }}
+            onPageChange={setPage}  // This is the key!
+          />
           </div>
         </div>
       </div>

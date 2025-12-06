@@ -12,11 +12,27 @@ export const initialValuesAward = {
     FileId: null,
 };
 
+
+export const defaultInitialValues = 
+    {
+      Title: "",
+      Date:  null,
+      Description:  "",
+      FileId: null,
+    }
+
+// export const formValidationAward = Yup.object().shape({
+//     Title: Yup.string().required(),
+//     Date: Yup.string().required(),
+//     Description: Yup.string().required(),
+//     FileId: Yup.string().required(),
+// });
+
 export const formValidationAward = Yup.object().shape({
-    Title: Yup.string().required(),
-    Date: Yup.string().required(),
-    Description: Yup.string().required(),
-    FileId: Yup.string().required(),
+  Title: Yup.string().nullable(),
+  Date: Yup.string().nullable(),
+  Description: Yup.string().nullable(),
+  FileId: Yup.mixed().nullable(),
 });
 
 export const handleSubmitAward = (values: any) => {
@@ -74,6 +90,9 @@ export const AwardForm = ({ isEdit }: { isEdit?: boolean }) => {
           placeholder="Brief description of the award..."
         />
       </div>
+
+      
     </Form>
   );
 };
+
