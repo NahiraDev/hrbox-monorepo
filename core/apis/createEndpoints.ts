@@ -8,9 +8,6 @@ interface EndpointConfig {
   transformResponse?: (baseQueryResponse: any) => PaginatedResponse<TData>;
 }
 
-/**
- * Create a paginated query endpoint
- */
 export function createPaginatedQuery<TData>(
   build: EndpointBuilder<any, any, any>,
   config: EndpointConfig
@@ -19,7 +16,7 @@ export function createPaginatedQuery<TData>(
     url,
     method = 'GET',
     tags = [],
-    transformResponse,               // destructure it
+    transformResponse,
   } = config;
 
   return build.query<PaginatedResponse<TData>, PaginationParams>({

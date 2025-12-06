@@ -10,12 +10,13 @@ interface ApiConfig {
 }
 
 export function createModuleApi({
-                                    reducerPath,
-                                    baseUrl,
-                                    tagTypes = [],
-                                    requiresAuth = true,
-                                    autoToast = true
-                                }: ApiConfig) {
+    reducerPath,
+    baseUrl,
+    tagTypes = [],
+    requiresAuth = true,
+    autoToast = true
+    }: ApiConfig) {
+
     return createApi({
         reducerPath,
         baseQuery: createEnhancedBaseQuery({

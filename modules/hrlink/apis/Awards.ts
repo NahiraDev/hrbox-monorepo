@@ -32,17 +32,12 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
     }),
 
     fetchAwards: createPaginatedQuery<any>(build, {
-      // url: HRLinkApiEndpoints.resume.award.getList,
-      // method: 'GET',
-      // tags: ['Award'],
-
       url: HRLinkApiEndpoints.resume.award.getList,
       method: 'GET',
       tags: ['Award'],
       // Add custom transformResponse to match your real API
       transformResponse: (response: any) => {
-        // Your actual backend format
-        const backendData = response.data; // { ViewList, LastPage, Page, PageSize }
+        const backendData = response.data;
 
         return {
           data: backendData.ViewList || [],

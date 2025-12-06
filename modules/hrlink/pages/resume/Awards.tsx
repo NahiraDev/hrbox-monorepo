@@ -13,7 +13,6 @@ import { useState } from "react";
 import { ModalSize } from "@hrbox/core/providers";
 import { ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks/useModal";
-import DeleteConfirmModal from '@hrbox/core/components/DeleteConfirmModal';
 
 const MOCK_RESPONSE = {
   data: {
@@ -39,11 +38,13 @@ const MOCK_RESPONSE = {
 
 const Awards = () => {
   const { data: responseData, isLoading, isError } = useFetchAwardsQuery({
+    // Chnage this for dynamic pagination
+    // add a state holding the page in front end and request based on that
     page: 0,
     pageSize: 10,
   });
 
-  const [deleteAward] = useDeleteAwardMutation();
+  const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
 
   // Track which award is currently being deleted
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
@@ -55,30 +56,12 @@ const Awards = () => {
     totalPages: response.data.LastPage ?? 1,
   };
 
-  const [deleteModal, setDeleteModal] = useState<{
-    isOpen: boolean;
-    awardId: number | null;
-    awardName: string;
-  }>({
-    isOpen: false,
-    awardId: null,
-    awardName: '',
-  });
 
-  const openDeleteModal = (id: number, name: string) => {
-    setDeleteModal({ isOpen: true, awardId: id, awardName: name });
-  };
-
-  const closeDeleteModal = () => {
-    setDeleteModal({ isOpen: false, awardId: null, awardName: '' });
-  };
-
-  const handleDelete = async () => {
-    const id = deleteModal.awardId;
+  const handleDelete = async (id: number) => {
     if (!id) return;
-
     setDeletingIds((prev) => new Set(prev).add(id));
 
+    // chagne this code and use the states provided automatically(errorDeleting, loadingDelete, deletedSeccessfully)
     try {
       await deleteAward(id).unwrap();
     } catch (err) {
@@ -103,8 +86,7 @@ const Awards = () => {
       <AwardModal
         award={award}
         onSuccess={() => {
-          modal.close(); // optional: close after success
-          // RTK Query will auto-refetch thanks to tags
+          modal.close(); 
         }}
       />,
       {
@@ -133,7 +115,7 @@ const Awards = () => {
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((award) => (
+            {awards.map((award:any) => (
               <Card
                 key={award.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
