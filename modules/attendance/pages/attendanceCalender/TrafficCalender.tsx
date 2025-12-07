@@ -84,15 +84,15 @@ const TrafficCalender = () => {
               {/* end Header */}
 
               {/* start Rows */}
-              <div className="grid w-full gap-1 overflow-y-scroll overflow-x-scroll h-full custom-scroll-table">
+              <div className="grid w-full gap-1 overflow-y-scroll h-full custom-scroll-table">
                 {/* start row */}
                 <div className="rounded-md">
-                  <div className="grid grid-cols-12 gap-2 w-full text-xs text-[#1E3363] items-center text-center hover:bg-[#DCF0F9] rounded-md ">
+                  <div className="grid grid-cols-12 gap-2 w-full text-xs text-[#1E3363] dark:text-[#DEE1E8] items-center text-center hover:bg-[#DCF0F9] dark:hover:bg-[#04425C60] rounded-md ">
                     <div
                       ref={(el) => {
                         if (el) cellRefs.current[`0-date`] = el;
                       }}
-                      className="col-span-2 p-1 border-b-1 border-white items-center text-start! relative cursor-pointer"
+                      className="col-span-2 p-1 border-b-1 border-white dark:border-[#01101A] items-center text-start! relative cursor-pointer"
                       onClick={() => toggleMenu(0, "date")}
                     >
                       <p>11/02/2025</p>
@@ -102,12 +102,12 @@ const TrafficCalender = () => {
                       ref={(el) => {
                         if (el) cellRefs.current[`0-shift`] = el;
                       }}
-                      className="col-span-1 px-2 py-3 border-b-1 border-white items-center cursor-pointer"
+                      className="col-span-1 px-2 py-3 border-b-1 border-white dark:border-[#01101A] items-center cursor-pointer"
                       onClick={() => toggleMenu(0, "shift")}
                     >
                       <p>12354</p>
                     </div>
-                    <div className="grid grid-cols-7 col-span-7 border-b-1 border-white items-center">
+                    <div className="grid grid-cols-7 col-span-7 border-b-1 border-white dark:border-[#01101A] items-center">
                       <div className="px-2 py-3">
                         <p>09:00</p>
                       </div>
@@ -127,7 +127,7 @@ const TrafficCalender = () => {
                         <p>00:00</p>
                       </div>
                     </div>
-                    <div className="col-span-2 px-2 py-3 border-b-1 border-white">
+                    <div className="col-span-2 px-2 py-3 h-full border-b-1 border-white dark:border-[#01101A]">
                       <p>-</p>
                     </div>
                   </div>
@@ -155,28 +155,28 @@ const TrafficCalender = () => {
                   <AppButton
                     content="Daily Leave"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm text-white bg-[#01101A]"
                     size=""
                     key="Daily_Leave"
                   />
                   <AppButton
                     content="Daily Mission"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     size=""
                     key="Daily_Mission"
                   />
                   <AppButton
                     content="Edit Traffic Entry"
                     startContent={<Edit size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     key="Edit_Traffic_Entry"
                     size=""
                   />
                   <AppButton
                     content="Delete Request"
                     startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     size=""
                     key="Delete_Request"
                   />
@@ -186,21 +186,21 @@ const TrafficCalender = () => {
                   <AppButton
                     content="Daily Leave"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     key="Daily_Leave"
                     size=""
                   />
                   <AppButton
                     content="Daily Mission"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     size=""
                     key="Daily_Mission"
                   />
                   <AppButton
                     content="Delete Request"
                     startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm"
+                    className="gap-1.5 text-sm bg-[#01101A]"
                     size=""
                     key="Delete_Request"
                   />

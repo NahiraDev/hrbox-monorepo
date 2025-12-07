@@ -49,7 +49,7 @@ const UserLocationModal = () => {
               <p className="text-sm! font-medium!">192.168.1.1</p>
             </div>
           </div>
-          <div className="p-3 bg-[#DCF0F940] rounded-lg flex flex-col w-full">
+          <div className="p-3 bg-[#DCF0F940] dark:bg-[#04425C60] rounded-lg flex flex-col w-full">
             <p className="font-semibold! text-sm!">
               Please note the following points:
             </p>
