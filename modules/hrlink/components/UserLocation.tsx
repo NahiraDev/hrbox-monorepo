@@ -9,19 +9,24 @@ import {Card, CardBody, CardHeader } from '@heroui/react';
 import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
 import { MapModal } from "@hrbox/modules/hrlink/components/MapModal";
 import { useModal } from '@hrbox/core/hooks/useModal';
+import { useEditLocationMutation, useGetLocationQuery } from '../apis/Common';
 
 export const UserLocation = () => {
+    const [ editLocation, { error: errorEditigLocation }] = useEditLocationMutation(); // use in modal to edit user location
+    const {data: userLocation, error: errorFetchingLocation } = useGetLocationQuery(); // use to get user location
     const profileString = localStorage.getItem('profile');
     const {openModal, isModalOpen} = useModalContext();
     const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
     const [hasLocation, setHasLocation] = useState(false);
     const modal = useModal()
+
+    
     const handleOpenMap = () => {
       modal.open(
         ModalType.CREATE,
         "face-allocation",
          <MapModal
-              position={{ lat: 35.6, lng: 51.4 }}        // e.g. { lat: 35.6, lng: 51.4 } or null
+              position={{ lat: userLocation?.data?.Longitude , lng: userLocation?.data?.Latitude }}        // e.g. { lat: 35.6, lng: 51.4 } or null
               setPosition={(e:any)=> setPosition({
                       lat: e.latLng.lat(),
                       lng: e.latLng.lng(),

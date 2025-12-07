@@ -2,8 +2,8 @@ import { AppButton } from "@hrbox/uikit/components/AppButton";
 import { Edit } from "iconsax-reactjs";
 import { Avatar, Card } from "@heroui/react";
 import { useAppSelector } from "@hrbox/core/redux";
-import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
-import { useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
+import { InstagramIcon, LinkedinIcon, TelegramIcon, WhatsAppIcon } from "@hrbox/uikit/icons";
+import { useFetchProfileAvatarQuery, useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
 import { GeneralInformationModal } from "../modals/GeneralInformationModal";
 
 // Realistic mock data (only used when API returns nothing or invalid data)
@@ -17,21 +17,28 @@ const MOCK_DATA = {
 };
 
 export const GeneralInformation = () => {
-  const profileData: any = useAppSelector((state) => state.profile);
-  const { data: aboutMe, isLoading, isError } = useFetchUserAboutMeQuery();
+  const { data: aboutMe, isError } = useFetchUserAboutMeQuery();
+  const { data: profilePhoto, error: errorFetchProfile } = useFetchProfileAvatarQuery();
+
+  // NOTE: FOR DEBUGING 
+  if (!errorFetchProfile?.data){
+    console.log(`error fetching profile photo ${errorFetchProfile}`);
+  }
 
   // Determine final data to display (API → fallback to profile → mock)
   const displayData = aboutMe && !isError && Object.keys(aboutMe).length > 0
     ? aboutMe
     : MOCK_DATA;
 
+  // NOTE: FOR DEBUGING
+  console.log(aboutMe?.data);
   // Full name from profile (usually more reliable)
-  const fullName = profileData?.profile?.name && profileData?.profile?.lastName
-    ? `${profileData.profile.name} ${profileData.profile.lastName}`
+  const fullName = aboutMe?.data?.DisplayName 
+    ? `${aboutMe.data.DisplayName} `
     : "John Doe";
 
-  const company = displayData.company || profileData?.profile?.company || MOCK_DATA.company;
-  const biography = displayData.biography || profileData?.profile?.biography || MOCK_DATA.biography;
+  const industry = aboutMe?.data?.Industry || MOCK_DATA.company;
+  const biography = aboutMe?.data?.AboutMe  || MOCK_DATA.biography;
 
   return (
     <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
@@ -50,34 +57,42 @@ export const GeneralInformation = () => {
 
           <Avatar
             className="w-[70px] h-[70px] ring-4 ring-white shadow-lg"
-            src={displayData.avatarUrl || MOCK_DATA.avatarUrl}
+            src={ profilePhoto?.data || MOCK_DATA.avatarUrl}
             alt="Profile"
             fallback="JD"
           />
 
           <div className="flex flex-col gap-2">
-            {displayData.telegram && (
+            {displayData?.data?.Telegram && (
               <AppButton
                 content={<TelegramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.telegram!, "_blank")}
+                onPress={() => window.open(displayData?.data?.Telegram!, "_blank")}
               />
             )}
-            {displayData.linkedin && (
+            {displayData?.data?.Whatsapp && (
+              <AppButton
+                content={<WhatsAppIcon className="w-5 h-5" />}
+                isIconOnly
+                variant="light"
+                onPress={() => window.open(displayData?.data?.Whatsapp!, "_blank")}
+              />
+            )}
+            {displayData?.data?.Linkedin && (
               <AppButton
                 content={<LinkedinIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.linkedin!, "_blank")}
+                onPress={() => window.open(displayData?.data?.Linkedin!, "_blank")}
               />
             )}
-            {displayData.instagram && (
+            {displayData?.data?.Instagram && (
               <AppButton
                 content={<InstagramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.instagram!, "_blank")}
+                onPress={() => window.open(displayData?.data?.Instagram!, "_blank")}
               />
             )}
           </div>
@@ -89,7 +104,7 @@ export const GeneralInformation = () => {
               {fullName}
             </h2>
             <p className="text-xs font-medium text-secondary-600 dark:text-secondary-400 mt-1">
-              {company}
+              {industry}
             </p>
           </div>
 

@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
 const awardApi = createModuleApi({
   reducerPath: 'HRLinkApi',
-  baseUrl: '/DesktopModules/Freelancer/api',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
   tagTypes: ['Award'],
   requiresAuth: true,
   autoToast: true,
@@ -35,14 +35,14 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       url: HRLinkApiEndpoints.resume.award.getList,
       method: 'GET',
       tags: ['Award'],
-      // Add custom transformResponse to match your real API
+      // Add custom transformResponse to match  real API
       transformResponse: (response: any) => {
         const backendData = response.data;
 
         return {
           data: backendData.ViewList || [],
           meta: {
-            page: (backendData.Page || 0) + 1,        // Your backend uses 0-based, but UI usually wants 1-based
+            page: (backendData.Page || 0) + 1,        // backend uses 0-based, but UI usually wants 1-based
             pageSize: backendData.PageSize || 10,
             total: (backendData.LastPage + 1) * backendData.PageSize, // approximate total items
             totalPages: backendData.LastPage + 1,     // since Page: 0 → LastPage: 2 means 3 pages

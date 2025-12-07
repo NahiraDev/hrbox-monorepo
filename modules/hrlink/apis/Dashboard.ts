@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from "@hrbox/modules/hrlink/app/endpoints";
 
 const DashboardApi = createModuleApi({
   reducerPath: "dashboardApi",
-  baseUrl: "/DesktopModules/Freelancer/api",
+  baseUrl: "https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api",
   tagTypes: ["Dashboard"],
   requiresAuth: true,
   autoToast: true,
