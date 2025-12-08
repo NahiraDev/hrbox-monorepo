@@ -5,16 +5,38 @@ import {
 } from "@hrbox/uikit/components";
 import {
     Add,
+    Edit,
     ArrowLeft2,
     ArrowRight2,
     Personalcard,
     ReceiveSquare,
 } from "iconsax-reactjs";
 import {useDownloadResumeQuery} from "@hrbox/modules/hrlink/apis";
+import { GeneralInformationModal } from "../modals/GeneralInformationModal";
+import { useModal } from "@hrbox/core/hooks";
+import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 
 const ResumeSubHeader = (props: any) => {
 
     const {data: downloadResume} = useDownloadResumeQuery()
+
+    const modal = useModal();
+    const handleGeneralInfoEdit = () => {
+        modal.open(
+        ModalType.EDIT,
+        "face-allocation",
+            <GeneralInformationModal/>,
+        {
+            isForm: true,
+            submitLabel: "Submit Again",
+            cancelLabel: "Cancel",
+            formConfig: {
+            formId: "face-form",
+            },
+        },
+        ModalSize.LG
+        );
+    }
     return (
         <div className="flex justify-between">
             <AppPageTitle
@@ -22,6 +44,18 @@ const ResumeSubHeader = (props: any) => {
                 icon={<Personalcard size={24} color="white"/>}
             />
             <div className="flex gap-2">
+                <AppButton
+                    color="default"
+                    size="md"
+                    radius="sm"
+                    startContent={<Edit className="text-secondary-1000" size="16" />}
+                    content={
+                    <span className="text-secondary-1000 font-semibold text-base">
+                      Edit
+                    </span>
+                    }
+                    onPress={handleGeneralInfoEdit}
+                /> 
                 <AppButton
                     isIconOnly
                     color="default"
@@ -37,17 +71,6 @@ const ResumeSubHeader = (props: any) => {
                     content={<ArrowRight2 className="text-secondary-1000" size="24"/>}
                 />
                 <AppSearchInput onSearch={props.onSearch}/>
-                {/*<AppButton*/}
-                {/*  color="default"*/}
-                {/*  size="md"*/}
-                {/*  radius="sm"*/}
-                {/*  startContent={<Add className="text-secondary-1000" size="16" />}*/}
-                {/*  content={*/}
-                {/*    <span className="text-secondary-1000 font-semibold text-base">*/}
-                {/*      Add New One*/}
-                {/*    </span>*/}
-                {/*  }*/}
-                {/*/>*/}
                 <AppButton
                     color="default"
                     size="md"

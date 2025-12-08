@@ -9,6 +9,7 @@ import {
   useFetchAwardsQuery,
   useDeleteAwardMutation,
   useEditAwardMutation,
+  useLazyFetchAwardDetailQuery,
 } from "@hrbox/modules/hrlink/apis";
 import { useState } from "react";
 import { ModalSize } from "@hrbox/core/providers";
@@ -40,11 +41,14 @@ const MOCK_RESPONSE = {
 
 const Awards = () => {
   // Handle getting the awrds and the state of the fetching data
-  const [page, setPage] = useState(1)
-  const { data: responseData, isLoading, isError } = useFetchAwardsQuery({
-    page,
+  const [page, setPage] = useState(0)
+  const { data: responseData, isLoading,isFetching, isError } = useFetchAwardsQuery({
+    page: page ?? 0,
     pageSize: 10,
   });
+
+  const [getAwards] = useLazyFetchAwardDetailQuery()
+
   const meta = responseData?.meta || {
     page: 1,
     totalPages: 1
@@ -59,10 +63,9 @@ const Awards = () => {
   const [editAward, {error: errorEditing , isLoading: loadingEdit, isSuccess: editedSuccessfully}] = useEditAwardMutation();
   const [editingId, setEditingId] = useState(null);
 
-
   const response = responseData || MOCK_RESPONSE;
-  const awards = response.data.ViewList;
-
+  const awards = response?.data.ViewList;
+  console.log(`here is the award response \n${responseData?.data}\n ${isLoading} \n ${isError}`);
 
   const handleDelete = async (id: number) => {
     if (!id) return;
@@ -88,35 +91,6 @@ const Awards = () => {
 
   const handleEdit = (award: any) => {
 
-    // modal.open(
-  //     ModalType.EDIT,
-  //     "edit-award",
-  //     <AwardModal 
-  //       award={
-  //         award
-  //       }
-  //       onSuccess={() => {
-  //         modal.close("edit-award"); 
-  //       }}
-  //     />, 
-  //     {
-  //       isForm: true,
-  //       submitLabel: "ذخیره",
-  //       cancelLabel: "لغو",
-  //       formConfig: {
-  //         initialValues: {defaultInitialValues},
-  //         validationSchema: formValidationEvent,
-  //         formId: "award-form",
-  //         enableCache: true,
-  //         clearCacheOnSubmit: true,
-  //         onSubmitAsync: async (values: any) => {
-  //           handleSubmitEvent(values);
-  //           modal.close(ModalType.CREATE, "event-form");
-  //         },
-  //       },
-  //     },
-  //     ModalSize.MD
-  //   );
     modal.open(
       ModalType.EDIT,
       "edit-award",

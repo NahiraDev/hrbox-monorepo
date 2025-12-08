@@ -31,7 +31,7 @@ export const UserLocation = () => {
                       lat: e.latLng.lat(),
                       lng: e.latLng.lng(),
                     })}
-              isEdit={false}   // or true when editing
+              isEdit={true}   // or true when editing
             />,
         {
           isForm: true,

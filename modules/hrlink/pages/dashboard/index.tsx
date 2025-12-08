@@ -18,6 +18,8 @@ import {
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 import {
+  useFetchAwardDetailQuery,
+  useFetchAwardsQuery,
   useFetchCompaniesListQuery,
   useFetchJobOpportunitiesSentQuery,
   useFetchResumePercentQuery,

@@ -3,8 +3,10 @@ import { Edit } from "iconsax-reactjs";
 import { Avatar, Card } from "@heroui/react";
 import { useAppSelector } from "@hrbox/core/redux";
 import { InstagramIcon, LinkedinIcon, TelegramIcon, WhatsAppIcon } from "@hrbox/uikit/icons";
-import { useFetchProfileAvatarQuery, useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
+import { useEditAboutMeMutation, useFetchProfileAvatarQuery, useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
 import { GeneralInformationModal } from "../modals/GeneralInformationModal";
+import { useModal } from "@hrbox/core/hooks";
+import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 
 // Realistic mock data (only used when API returns nothing or invalid data)
 const MOCK_DATA = {
@@ -19,10 +21,33 @@ const MOCK_DATA = {
 export const GeneralInformation = () => {
   const { data: aboutMe, isError } = useFetchUserAboutMeQuery();
   const { data: profilePhoto, error: errorFetchProfile } = useFetchProfileAvatarQuery();
+  const [ editAboutMe, { error: errorEditingAboutMe }] = useEditAboutMeMutation();
 
   // NOTE: FOR DEBUGING 
   if (!errorFetchProfile?.data){
     console.log(`error fetching profile photo ${errorFetchProfile}`);
+  }
+  if (!errorEditingAboutMe){
+    console.log(`error editing about me ${errorEditingAboutMe}`)
+  }
+
+  const modal = useModal();
+  const handleEditAboutMe = () => {
+    modal.open(
+      ModalType.CREATE,
+      "face-allocation",
+      // IMPORTANT: Use the correct edit about me modal
+        <GeneralInformationModal/>,
+      {
+        isForm: true,
+        submitLabel: "Submit Again",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: "face-form",
+        },
+      },
+      ModalSize.LG
+    );
   }
 
   // Determine final data to display (API → fallback to profile → mock)
@@ -30,8 +55,6 @@ export const GeneralInformation = () => {
     ? aboutMe
     : MOCK_DATA;
 
-  // NOTE: FOR DEBUGING
-  console.log(aboutMe?.data);
   // Full name from profile (usually more reliable)
   const fullName = aboutMe?.data?.DisplayName 
     ? `${aboutMe.data.DisplayName} `
@@ -48,6 +71,7 @@ export const GeneralInformation = () => {
           content={<Edit className="text-secondary-1000" size="14" />}
           variant="light"
           isIconOnly
+          onPress={() => handleEditAboutMe()}
         />
       </div>
 

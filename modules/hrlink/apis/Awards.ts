@@ -31,24 +31,10 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       tags: ['Award'],
     }),
 
-    fetchAwards: createPaginatedQuery<any>(build, {
+    fetchAwards: createQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.award.getList,
       method: 'GET',
       tags: ['Award'],
-      // Add custom transformResponse to match  real API
-      transformResponse: (response: any) => {
-        const backendData = response.data;
-
-        return {
-          data: backendData.ViewList || [],
-          meta: {
-            page: (backendData.Page || 0) + 1,        // backend uses 0-based, but UI usually wants 1-based
-            pageSize: backendData.PageSize || 10,
-            total: (backendData.LastPage + 1) * backendData.PageSize, // approximate total items
-            totalPages: backendData.LastPage + 1,     // since Page: 0 → LastPage: 2 means 3 pages
-          },
-        };
-      },
     }),
 
     fetchAwardDetail: createQuery<any>(build, {
@@ -58,6 +44,7 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
 
   }),
 });
+
 
 export const {
   useFetchAwardsQuery,
