@@ -2,8 +2,10 @@ import { Add, Edit, Trash } from "iconsax-reactjs";
 import { AppButton } from "@hrbox/uikit/components";
 import Comprehensivereport from "@hrbox/modules/attendance/pages/attendanceCalender/Comprehensivereport";
 import React, { useRef, useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 
 const TrafficCalender = () => {
+  const [openpopup,setOpenpopup]=useState<string | null>()
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [menuStyle, setMenuStyle] = useState<{ top: string; left: string }>({
@@ -12,7 +14,8 @@ const TrafficCalender = () => {
   });
   const [IsReportHidden, setIsReportHidden] = useState<boolean>(false);
 
-  const toggleMenu = (rowindex: number, cellType: string) => {
+  const toggleMenu = (rowindex: number, cellType: string,e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
     const key = `${rowindex}-${cellType}`;
     if (openMenu === key) {
       setOpenMenu(null);
@@ -93,7 +96,7 @@ const TrafficCalender = () => {
                         if (el) cellRefs.current[`0-date`] = el;
                       }}
                       className="col-span-2 p-1 border-b-1 border-white dark:border-[#01101A] items-center text-start! relative cursor-pointer"
-                      onClick={() => toggleMenu(0, "date")}
+                      onContextMenu={(e) => toggleMenu(0, "date",e)}
                     >
                       <p>11/02/2025</p>
                       <p>Wednesday (Present)</p>
@@ -103,16 +106,49 @@ const TrafficCalender = () => {
                         if (el) cellRefs.current[`0-shift`] = el;
                       }}
                       className="col-span-1 px-2 py-3 border-b-1 border-white dark:border-[#01101A] items-center cursor-pointer"
-                      onClick={() => toggleMenu(0, "shift")}
+                      onContextMenu={(e) => toggleMenu(0, "shift",e)}
+                      onMouseEnter={() => setOpenpopup(`${1}-shift`)}
+                      onMouseLeave={() => setOpenpopup(null)}
                     >
+                      <Popover placement="top" showArrow={true} isOpen={openpopup===`${1}-shift`}>
+                        <PopoverTrigger>
                       <p>12354</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                     </div>
                     <div className="grid grid-cols-7 col-span-7 border-b-1 border-white dark:border-[#01101A] items-center">
-                      <div className="px-2 py-3">
+                      <div className="px-2 py-3"
+                      onMouseEnter={() => setOpenpopup(`${1}-checkin`)}
+                      onMouseLeave={() => setOpenpopup(null)}>
+                        <Popover placement="top" showArrow={true} isOpen={openpopup===`${1}-checkin`}>
+                        <PopoverTrigger>
                         <p>09:00</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       </div>
-                      <div className="px-2 py-3">
+                      <div className="px-2 py-3"
+                      onMouseEnter={() => setOpenpopup(`${1}-checkout`)}
+                      onMouseLeave={() => setOpenpopup(null)}>
+                        <Popover placement="top" showArrow={true} isOpen={openpopup===`${1}-checkout`}>
+                        <PopoverTrigger>
                         <p>17:00</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       </div>
                       <div className="px-2 py-3">
                         <p>08:00</p>
@@ -155,28 +191,28 @@ const TrafficCalender = () => {
                   <AppButton
                     content="Daily Leave"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm text-white bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:text-white dark:bg-[#01101A]!"
                     size=""
                     key="Daily_Leave"
                   />
                   <AppButton
                     content="Daily Mission"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     size=""
                     key="Daily_Mission"
                   />
                   <AppButton
                     content="Edit Traffic Entry"
                     startContent={<Edit size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     key="Edit_Traffic_Entry"
                     size=""
                   />
                   <AppButton
                     content="Delete Request"
                     startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     size=""
                     key="Delete_Request"
                   />
@@ -186,21 +222,21 @@ const TrafficCalender = () => {
                   <AppButton
                     content="Daily Leave"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     key="Daily_Leave"
                     size=""
                   />
                   <AppButton
                     content="Daily Mission"
                     startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     size=""
                     key="Daily_Mission"
                   />
                   <AppButton
                     content="Delete Request"
                     startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm bg-[#01101A]"
+                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
                     size=""
                     key="Delete_Request"
                   />

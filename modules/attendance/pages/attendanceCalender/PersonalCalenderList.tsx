@@ -1,15 +1,13 @@
 import { ReportPersonnal } from "@hrbox/modules/attendance/app/mock";
 
 import { AppButton } from "@hrbox/uikit/components";
-import {
-  Add,
-  Edit,
-  Trash,
-} from "iconsax-reactjs";
+import { Add, Edit, Trash } from "iconsax-reactjs";
 import React, { useMemo, useRef, useState } from "react";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 
 const PersonalCalenderList = () => {
+  const [openpopover,setOpenpopover]=useState<string | null>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [menuStyle, setMenuStyle] = useState<{ top: string; left: string }>({
@@ -17,7 +15,6 @@ const PersonalCalenderList = () => {
     left: "0px",
   });
 
-  // ============= Get Form Values =============
   const { values } = useFormContext();
 
   const month = values.month || "";
@@ -25,11 +22,9 @@ const PersonalCalenderList = () => {
   const person = values.person || "";
   const department = values.department || "";
 
-  // ============= Helper Function: Parse Persian Date =============
   const parsePersianDate = (
     dateString: string
   ): { month: string; year: string } => {
-    // "Saturday 11/2/2025" → match numbers → ["11", "2", "2025"]
     const parts = dateString.match(/\d+/g);
 
     if (!parts || parts.length < 3) {
@@ -37,24 +32,21 @@ const PersonalCalenderList = () => {
       return { month: "", year: "" };
     }
 
-    const parsedMonth = parts[1]; // "2"
-    const parsedYear = parts[2]; // "2025"
+    const parsedMonth = parts[1];
+    const parsedYear = parts[2];
 
-    // Convert to 2-digit month: "2" → "02"
     const monthPadded = String(parsedMonth).padStart(2, "0");
 
     return {
-      month: monthPadded, // "02"
-      year: parsedYear, // "2025"
+      month: monthPadded,
+      year: parsedYear,
     };
   };
 
-  // ============= Filter Data Based on Form Values =============
   const filteredData = useMemo(() => {
     console.log("🔄 Filtering with:", { month, year, person, department });
 
     const filtered = ReportPersonnal.filter((record) => {
-      // ✅ Parse Persian date
       const { month: recordMonth, year: recordYear } = parsePersianDate(
         record.date
       );
@@ -63,13 +55,14 @@ const PersonalCalenderList = () => {
         `📋 Record: ${record.date} → month: ${recordMonth}, year: ${recordYear}`
       );
 
-      // Apply all filters
       const matchMonth = !month || recordMonth === month;
       const matchYear = !year || recordYear === year;
       const matchPerson = !person || record.person === person;
       const matchDepartment = !department || record.department === department;
 
-      console.log(`   Match: month=${matchMonth}, year=${matchYear}, person=${matchPerson}, dept=${matchDepartment}`);
+      console.log(
+        `   Match: month=${matchMonth}, year=${matchYear}, person=${matchPerson}, dept=${matchDepartment}`
+      );
 
       return matchMonth && matchYear && matchPerson && matchDepartment;
     });
@@ -78,8 +71,12 @@ const PersonalCalenderList = () => {
     return filtered;
   }, [month, year, person, department]);
 
-  // ============= Toggle Menu =============
-  const toggleMenu = (rowindex: number, cellType: string) => {
+  const toggleMenu = (
+    rowindex: number,
+    cellType: string,
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
+    e.preventDefault();
     const key = `${rowindex}-${cellType}`;
     if (openMenu === key) {
       setOpenMenu(null);
@@ -151,14 +148,17 @@ const PersonalCalenderList = () => {
             {/* start row */}
             {filteredData && filteredData.length > 0 ? (
               filteredData.map((record, index) => (
-                <div className="rounded-md" key={`${record.date}-${record.person}-${index}`}>
+                <div
+                  className="rounded-md"
+                  key={`${record.date}-${record.person}-${index}`}
+                >
                   <div className="grid grid-cols-12 gap-2 w-full text-xs text-[#1E3363] dark:text-[#DEE1E8] items-center text-center hover:bg-[#DCF0F9] dark:hover:bg-[#04425C60] rounded-md ">
                     <div
                       ref={(el) => {
                         if (el) cellRefs.current[`${index}-date`] = el;
                       }}
                       className="col-span-2 p-1 border-b-1 border-white dark:border-[#01101A] items-center text-start! relative cursor-pointer"
-                      onClick={() => toggleMenu(index, "date")}
+                      onContextMenu={(e) => toggleMenu(index, "date", e)}
                     >
                       <p>{record.date}</p>
                       <p>Wednesday (Present)</p>
@@ -168,16 +168,51 @@ const PersonalCalenderList = () => {
                         if (el) cellRefs.current[`${index}-shift`] = el;
                       }}
                       className="col-span-1 px-2 py-3 border-b-1 border-white dark:border-[#01101A] items-center cursor-pointer"
-                      onClick={() => toggleMenu(index, "shift")}
+                      onContextMenu={(e) => toggleMenu(index, "shift", e)}
+                      onMouseEnter={() => setOpenpopover(`${index}-shift`)}
+                      onMouseLeave={() => setOpenpopover(null)}
                     >
+                      <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-shift`}>
+                        <PopoverTrigger>
                       <p>{record.shift}</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                     </div>
                     <div className="grid grid-cols-7 col-span-7 border-b-1 border-white dark:border-[#01101A] items-center">
-                      <div className="px-2 py-3">
+                      <div className="px-2 py-3" 
+                      onMouseEnter={() => setOpenpopover(`${index}-checkin`)}
+                      onMouseLeave={() => setOpenpopover(null)}
+                      >
+                        <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-checkin`}>
+                        <PopoverTrigger>
                         <p>{record.checkIn}</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       </div>
-                      <div className="px-2 py-3">
+                      <div className="px-2 py-3"
+                      onMouseEnter={() => setOpenpopover(`${index}-checkout`)}
+                      onMouseLeave={() => setOpenpopover(null)}
+                      >
+                        <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-checkout`}>
+                        <PopoverTrigger>
                         <p>{record.checkOut}</p>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div className=" h-auto ">
+                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       </div>
                       <div className="px-2 py-3">
                         <p>{record.presence}</p>
@@ -228,52 +263,52 @@ const PersonalCalenderList = () => {
                 <AppButton
                   content="Daily Leave"
                   startContent={<Add size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
                 />
                 <AppButton
                   content="Daily Mission"
                   startContent={<Add size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
                 />
                 <AppButton
                   content="Edit Traffic Entry"
                   startContent={<Edit size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Edit_Traffic_Entry"
                   size=""
                 />
                 <AppButton
                   content="Delete Request"
                   startContent={<Trash size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Delete_Request"
                 />
               </React.Fragment>
             ) : (
-              <React.Fragment key="date-menu">
+              <React.Fragment key="date-menu dark:bg-[#01101A]!">
                 <AppButton
                   content="Daily Leave"
                   startContent={<Add size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Daily_Leave"
                   size=""
                 />
                 <AppButton
                   content="Daily Mission"
                   startContent={<Add size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
                 />
                 <AppButton
                   content="Delete Request"
                   startContent={<Trash size={18} />}
-                  className="gap-1.5 text-sm"
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Delete_Request"
                 />

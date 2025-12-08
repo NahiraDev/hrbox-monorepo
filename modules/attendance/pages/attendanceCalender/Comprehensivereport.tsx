@@ -84,54 +84,53 @@ const Comprehensivereport = ({ isExpanded, onToggle }) => {
                     name={label}
                     size="lg"
                     radius="lg"
+                    formMode="view"
                     className="bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#DDEEFA_50%,var(--Surface-Main,#FFF)_95%)] dark:bg-[linear-gradient(90deg,var(--Primary-900,#022C3D)_5%,var(--Primary-700,#05587A)_50%,var(--Primary-900,#022C3D)_95%)] dark:border-[rgba(4,66,92,0.60)]"
-                    endContent={
-                      <Tooltip
-                        classNames={{
-                          base: "z-999 flex w-[200px] flex-col gap-2 rounded-lg",
-                          content: "border border-orange-400",
-                        }}
-                        content={
-                          <div className="gap-2 p-2 rounded-lg">
-                            <div className="flex w-full flex-row gap-1">
-                              <span>
-                                <InfoCircle color="#FD8F02" size={16} />
-                              </span>
-                              <p className="text-xs font-semibold">
-                                Total Number of All Attendance Days This Month
-                              </p>
-                            </div>
-                            <div className="flex flex-col">
-                              <div>
-                                <span className="text-xs! font-semibold! text-orange-400!">
-                                  Note1:{" "}
-                              </span>
-                              <p className="text-secondary-1000 font-normal text-xs! inline">
-                                Days without shifts are not included in this list.
-                                </p>
-                              </div>
-                                <div>
-                                  <span className="text-xs! font-semibold! text-orange-400!">
-                                  Note2:{" "}
-                                </span>
-                                <p className="text-secondary-1000 font-normal text-xs! inline">
-                                Monthly working hours refer to the total of
-                                attendance days + official holidays + Fridays +
-                                leaves + daily missions.
-                              </p>
-                                </div>
-                            </div>
-                          </div>
-                        }
-                        placement={"bottom-end"}
-                        offset={10}
-                      >
-                        <span className="cursor-pointer">
-                          <InfoCircle color="#FD8F02" size={18} />
-                        </span>
-                      </Tooltip>
-                    }
                   />
+                  <Tooltip
+                    classNames={{
+                      base: "z-999 flex w-[200px] flex-col gap-2 relative rounded-lg",
+                      content: "border border-orange-400",
+                    }}
+                    content={
+                      <div className="gap-2 p-2 rounded-lg">
+                        <div className="flex w-full flex-row gap-1">
+                          <span>
+                            <InfoCircle color="#FD8F02" size={16} />
+                          </span>
+                          <p className="text-xs font-semibold">
+                            Total Number of All Attendance Days This Month
+                          </p>
+                        </div>
+                        <div className="flex flex-col">
+                          <div>
+                            <span className="text-xs! font-semibold! text-orange-400!">
+                              Note1:{" "}
+                            </span>
+                            <p className="text-secondary-1000 font-normal text-xs! inline">
+                              Days without shifts are not included in this list.
+                            </p>
+                          </div>
+                          <div>
+                            <span className="text-xs! font-semibold! text-orange-400!">
+                              Note2:{" "}
+                            </span>
+                            <p className="text-secondary-1000 font-normal text-xs! inline">
+                              Monthly working hours refer to the total of
+                              attendance days + official holidays + Fridays +
+                              leaves + daily missions.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                    placement={"bottom-end"}
+                    offset={10}
+                  >
+                    <span className="cursor-pointer absolute right-2 bottom-[15px]">
+                      <InfoCircle color="#FD8F02" size={18} />
+                    </span>
+                  </Tooltip>
                 </div>
               ))}
             </div>
