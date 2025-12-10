@@ -46,6 +46,7 @@ const ENABLED_MODULES = (import.meta.env.VITE_ENABLED_MODULES || "")
   "chart-maker",
   "basic-info",
   "attendance",
+  "job-gradings",
   "project-management",
 ];
 
@@ -62,6 +63,7 @@ async function bootstrap() {
       "chart-maker": () => import("@hrbox/modules/chart-maker/plugin"),
       "basic-info": () => import("@hrbox/modules/basic-info/plugin"),
       attendance: () => import("@hrbox/modules/attendance/plugin"),
+      "job-gradings": () => import("@hrbox/modules/jobgradings/plugin"),
       "project-management": () =>
         import("@hrbox/modules/project-management/plugin"),
     };

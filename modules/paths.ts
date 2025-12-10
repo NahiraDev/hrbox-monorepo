@@ -91,4 +91,7 @@ export const Paths = {
   Payroll: {
     Dashboard: "/payroll",
   },
+  JobGradings:{
+    Dashboard:'/job-gradings/dashboard'
+  }
 };
