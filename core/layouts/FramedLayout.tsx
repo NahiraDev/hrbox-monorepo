@@ -50,7 +50,7 @@ export function FramedLayout({ children }: BaseLayoutProps) {
             </Suspense>
           )}
 
-          <main className="flex-1 flex flex-col overflow-hidden relative border border-primary rounded-xl">
+          <main className="flex-1 flex flex-col p-3 overflow-hidden relative border bg-[#DCF0F940] border-primary rounded-xl">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

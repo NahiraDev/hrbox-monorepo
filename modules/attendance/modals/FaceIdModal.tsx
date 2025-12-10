@@ -32,9 +32,9 @@ const FaceIdModal = () => {
           <div className="text-center">
             <p className='font-semibold! text-xl!'>Today is Monday, March 17, 2025.</p>
           </div>
-          <hr />
+          <hr className='border-black' />
           <div className='flex flex-row items-center justify-center'>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-20 h-20 '>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] dark:bg-[#04425C60] flex items-center justify-center w-20 h-20 '>
               <p className='text-[40px]! text-secondary-400 font-inter'>
                 00
               </p>
@@ -45,7 +45,7 @@ const FaceIdModal = () => {
                 <circle cx="1.92593" cy="11.4074" r="1.92593" fill="#1E3363"/>
               </svg>
             </div>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-20 h-20'>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] dark:bg-[#04425C60] flex items-center justify-center w-20 h-20'>
               <p className='text-[40px]! text-secondary-400 font-inter'>
                00
               </p>
@@ -56,9 +56,9 @@ const FaceIdModal = () => {
                 <circle cx="1.92593" cy="11.4074" r="1.92593" fill="#1E3363"/>
               </svg>
             </div>
-            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] flex items-center justify-center w-20 h-20 '>
+            <div className='shadow-[0_1px_6px_0_rgba(10,154,215,0.40)] rounded-xl bg-[#DCF0F9] dark:bg-[#04425C60] flex items-center justify-center w-20 h-20 '>
               <p className='text-[40px]! text-secondary-400 font-inter'>
-                00
+                 00
               </p>
             </div>
           </div>
