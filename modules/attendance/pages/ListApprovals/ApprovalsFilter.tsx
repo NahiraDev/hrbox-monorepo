@@ -41,14 +41,14 @@ const ApprovalsFilter = () => {
         validationSchema={{}}
         enableCache={false}
       >
-        <div className="flex flex-col w-[22%] h-full rounded-xl pr-2 pl-3 py-3 gap-10 border border-primary ">
+        <div className="flex flex-col w-[22%] h-full rounded-xl pr-2 pl-3 py-3 gap-10  border border-primary ">
           <div className="relative h-[600px] pr-3">
-            <button
-              onClick={scrollUp}
-              className="absolute top-0 right-0 left-64 w-6 h-6 flex items-center justify-center cursor-pointer"
-            >
-              <ArrowUp2 size={8} variant="Bold" color="black" />
-            </button>
+            <AppButton 
+              onPress={scrollUp}
+              className="absolute top-0 right-0 left-64 w-6 h-6 flex items-center justify-center cursor-pointer p-0 m-0 bg-transparent"
+              content={ <ArrowUp2 size={8} variant="Bold" color="black" />}
+            />
+             
             <div
               className="flex flex-col gap-4 pr-3 overflow-y-scroll max-h-[600px] custom-scroll-approvals"
               ref={scrollRef}
@@ -65,12 +65,11 @@ const ApprovalsFilter = () => {
                 );
               })}
             </div>
-            <button
-              onClick={scrollDown}
-              className="absolute bottom-0 right-0 w-6 h-6 flex items-center justify-center left-64 cursor-pointer"
-            >
-              <ArrowDown2 size={8} variant="Bold" color="black" />
-            </button>
+            <AppButton
+              onPress={scrollDown}
+              className="absolute bottom-0 right-0 w-6 h-6 flex items-center justify-center left-64 cursor-pointer p-0 m-0 bg-transparent"
+              content={<ArrowDown2 size={8} variant="Bold" color="black" />}
+            />
           </div>
 
           <div className="flex justify-end">

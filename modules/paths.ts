@@ -65,7 +65,7 @@ export const Paths = {
     EmployeeSatisfactionCalendar: "/basic-info/employee-satisfaction-calendar",
   },
   Attendance: {
-    Dashboard: "/attendance",
+    Dashboard: "/attendance/dashboard",
     EntryExitRegistration: "/attendance/entry-exit",
     AttendanceCalenders: "/attendance/attendance-calender",
     TrafficCalender: "/attendance/traffic-calender",
@@ -75,6 +75,8 @@ export const Paths = {
     FaceAllocation: "/attendance/face-allocation",
     IpAllocation: "/attendance/ip-allocation",
     LocationAllocation: "/attendance/location-allocation",
+    AllProject:"/attendance/all-projects",
+    ProjectTimeSheet:"/attendance/project-timeSheet"
   },
   ProcessMaker: {
     Dashboard: "/process-maker",

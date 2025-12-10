@@ -54,7 +54,7 @@ const Awards = () => {
     totalPages: 1
   };
 
-  // Handle deleting awards 
+  // Handle deleting awards
   const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
   // Track which award is currently being deleted
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
@@ -99,7 +99,7 @@ const Awards = () => {
           award
         }
         onSuccess={() => {
-          modal.close("edit-award"); 
+          modal.close("edit-award");
         }}
       />,
       {
