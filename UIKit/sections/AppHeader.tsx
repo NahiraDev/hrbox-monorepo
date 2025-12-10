@@ -8,7 +8,6 @@ import {
 import { Avatar, Divider, Badge } from "@heroui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useMatches, useNavigate } from "@tanstack/react-router";
-
 import { AppButton, AppTabs } from "@hrbox/uikit/components";
 import { AppBreadcrumb } from "@hrbox/uikit/sections";
 import { useTheme } from "@hrbox/core/hooks/useTheme";

@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
 const userApi = createModuleApi({
   reducerPath: 'userApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
   tagTypes: ['User'],
   requiresAuth: true,
   autoToast: true,
@@ -95,7 +95,7 @@ export const {
     useFetchUserQuery,
     useEditUserMutation,
     useAddUserMutation,
-    useFetchMilitaryStatusQuery,
+    // useFetchMilitaryStatusQuery,
     useFetchCityQuery,
     useDownloadResumeQuery,
     useFetchProfileAvatarQuery,

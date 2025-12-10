@@ -2,9 +2,11 @@ import { AppButton } from "@hrbox/uikit/components/AppButton";
 import { Edit } from "iconsax-reactjs";
 import { Avatar, Card } from "@heroui/react";
 import { useAppSelector } from "@hrbox/core/redux";
-import { InstagramIcon, LinkedinIcon, TelegramIcon } from "@hrbox/uikit/icons";
-import { useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
+import { InstagramIcon, LinkedinIcon, TelegramIcon, WhatsAppIcon } from "@hrbox/uikit/icons";
+import { useEditAboutMeMutation, useFetchProfileAvatarQuery, useFetchUserAboutMeQuery } from "@hrbox/modules/hrlink/apis";
 import { GeneralInformationModal } from "../modals/GeneralInformationModal";
+import { useModal } from "@hrbox/core/hooks";
+import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 
 // Realistic mock data (only used when API returns nothing or invalid data)
 const MOCK_DATA = {
@@ -17,8 +19,36 @@ const MOCK_DATA = {
 };
 
 export const GeneralInformation = () => {
-  const profileData: any = useAppSelector((state) => state.profile);
-  const { data: aboutMe, isLoading, isError } = useFetchUserAboutMeQuery();
+  const { data: aboutMe, isError } = useFetchUserAboutMeQuery();
+  const { data: profilePhoto, error: errorFetchProfile } = useFetchProfileAvatarQuery();
+  const [ editAboutMe, { error: errorEditingAboutMe }] = useEditAboutMeMutation();
+
+  // // NOTE: FOR DEBUGING 
+  if (errorFetchProfile){
+    console.log(`error fetching profile photo ${profilePhoto}`);
+  }
+  // if (!errorEditingAboutMe){
+  //   console.log(`error editing about me ${errorEditingAboutMe}`)
+  // }
+
+  const modal = useModal();
+  const handleEditAboutMe = () => {
+    modal.open(
+      ModalType.CREATE,
+      "face-allocation",
+      // IMPORTANT: Use the correct edit about me modal
+        <GeneralInformationModal/>,
+      {
+        isForm: true,
+        submitLabel: "Submit Again",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: "face-form",
+        },
+      },
+      ModalSize.LG
+    );
+  }
 
   // Determine final data to display (API → fallback to profile → mock)
   const displayData = aboutMe && !isError && Object.keys(aboutMe).length > 0
@@ -26,12 +56,12 @@ export const GeneralInformation = () => {
     : MOCK_DATA;
 
   // Full name from profile (usually more reliable)
-  const fullName = profileData?.profile?.name && profileData?.profile?.lastName
-    ? `${profileData.profile.name} ${profileData.profile.lastName}`
+  const fullName = aboutMe?.DisplayName 
+    ? `${aboutMe.DisplayName} `
     : "John Doe";
 
-  const company = displayData.company || profileData?.profile?.company || MOCK_DATA.company;
-  const biography = displayData.biography || profileData?.profile?.biography || MOCK_DATA.biography;
+  const industry = aboutMe?.Industry || MOCK_DATA.company;
+  const biography = aboutMe?.AboutMe  || MOCK_DATA.biography;
 
   return (
     <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
@@ -41,8 +71,10 @@ export const GeneralInformation = () => {
           content={<Edit className="text-secondary-1000" size="14" />}
           variant="light"
           isIconOnly
+          onPress={() => handleEditAboutMe()}
         />
       </div>
+
 
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-start">
@@ -50,34 +82,42 @@ export const GeneralInformation = () => {
 
           <Avatar
             className="w-[70px] h-[70px] ring-4 ring-white shadow-lg"
-            src={displayData.avatarUrl || MOCK_DATA.avatarUrl}
+            src={ profilePhoto?.data || MOCK_DATA.avatarUrl}
             alt="Profile"
             fallback="JD"
           />
 
           <div className="flex flex-col gap-2">
-            {displayData.telegram && (
+            {displayData?.Telegram && (
               <AppButton
                 content={<TelegramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.telegram!, "_blank")}
+                onPress={() => window.open(displayData?.Telegram!, "_blank")}
               />
             )}
-            {displayData.linkedin && (
+            {displayData?.Whatsapp && (
+              <AppButton
+                content={<WhatsAppIcon className="w-5 h-5" />}
+                isIconOnly
+                variant="light"
+                onPress={() => window.open(displayData?.Whatsapp!, "_blank")}
+              />
+            )}
+            {displayData?.Linkedin && (
               <AppButton
                 content={<LinkedinIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.linkedin!, "_blank")}
+                onPress={() => window.open(displayData?.Linkedin!, "_blank")}
               />
             )}
-            {displayData.instagram && (
+            {displayData?.Instagram && (
               <AppButton
                 content={<InstagramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData.instagram!, "_blank")}
+                onPress={() => window.open(displayData?.Instagram!, "_blank")}
               />
             )}
           </div>
@@ -89,7 +129,7 @@ export const GeneralInformation = () => {
               {fullName}
             </h2>
             <p className="text-xs font-medium text-secondary-600 dark:text-secondary-400 mt-1">
-              {company}
+              {industry}
             </p>
           </div>
 

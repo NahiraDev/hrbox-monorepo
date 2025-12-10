@@ -3,8 +3,11 @@ import {
   formValidationGeneralInformation, GeneralInformationForm, handleSubmitGeneralInformation,
   initialValuesGeneralInformation
 } from "@hrbox/modules/hrlink/forms/GeneralInformationForm";
+import { useEditGeneralSettingMutation } from '../apis/Setting';
 
 export const GeneralInformationModal = () =>{
+  const [ editGeneralInfo, { error: errorEditingGeneralInfo }] = useEditGeneralSettingMutation();
+
   return(
       <FormProvider
           formId="general-information-form"

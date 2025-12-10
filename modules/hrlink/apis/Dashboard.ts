@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from "@hrbox/modules/hrlink/app/endpoints";
 
 const DashboardApi = createModuleApi({
   reducerPath: "dashboardApi",
-  baseUrl: "/DesktopModules/Freelancer/api",
+  baseUrl: "https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api",
   tagTypes: ["Dashboard"],
   requiresAuth: true,
   autoToast: true,
@@ -12,7 +12,7 @@ const DashboardApi = createModuleApi({
 
 export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
   endpoints: (build: any) => ({
-    fetchViewResume: createQuery<any>(build, {
+    fetchViewResume: createQuery<any , {count: number}>(build, {
       url: HRLinkApiEndpoints.dashboard.getViewResume,
       tags: ["Dashboard"],
     }),

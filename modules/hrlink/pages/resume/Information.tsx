@@ -19,51 +19,24 @@ import { useFetchProfileQuery } from '@hrbox/modules/hrlink/apis/Setting';
 import { useNavigation } from '@hrbox/core/hooks/useNavigation';
 import { Paths } from '@hrbox/modules/paths';
 import { useEffect } from 'react';
-
-// TEMPORARY MOCK DATA — Remove this whole object when API works
-const MOCK_PROFILE = {
-  name: "علی",
-  lastName: "محمدی",
-  nationalCode: "0012345678",
-  birthDate: "1375/05/20",
-  gender: "مرد",
-  MaritalStatusName: "مجرد",
-  city: "قزوین",
-  Address: "قزوین، خیابان آزادی، کوچه بهار ۱۲، پلاک ۴۵",
-  jobGroupNames: "مهندسی نرم‌افزار، توسعه‌دهنده فول‌استک",
-  RequestedSalary: "۴۵,۰۰۰,۰۰۰ تومان",
-};
-
-const isProfileComplete = (profile?: any): boolean => {
-  if (!profile) return false;
-  return !!(
-    profile.name &&
-    profile.lastName &&
-    profile.nationalCode &&
-    profile.birthDate &&
-    profile.gender &&
-    profile.MaritalStatusName &&
-    profile.city &&
-    profile.Address
-  );
-};
+import { useFetchUserQuery } from '../../apis';
 
 const ResumeInfo = () => {
   const { push } = useNavigation();
-  const { data: profileData, isLoading, isError, error } = useFetchProfileQuery();
+  const { data: profileData, isLoading, isError } = useFetchUserQuery();
+  console.log(`user data \n${profileData?.data}`);
 
-  // USE MOCK DATA IF API FAILS OR IS LOADING
-  const profile = profileData?.profile || MOCK_PROFILE;
+  const profile = profileData?.data ;
 
   // Optional: Still redirect if real profile exists but is incomplete
-  useEffect(() => {
-    if (isLoading || isError) return;
+  // useEffect(() => {
+  //   if (isLoading || isError) return;
 
-    const realProfile = profileData?.profile;
-    if (realProfile && !isProfileComplete(realProfile)) {
-      push({ to: Paths.HRLink.ResumeInformation ?? '/hrlink/profile-form' });
-    }
-  }, [profileData, isLoading, isError, push]);
+  //   const realProfile = profileData?.profile;
+  //   if (realProfile && !isProfileComplete(realProfile)) {
+  //     push({ to: Paths.HRLink.ResumeInformation ?? '/hrlink/profile-form' });
+  //   }
+  // }, [profileData, isLoading, isError, push]);
 
   // Loading state
   if (isLoading) {
@@ -104,13 +77,13 @@ const ResumeInfo = () => {
             </div>
 
             <div className="flex flex-col gap-8">
-              <InfoRow icon={<Profile size="16" />} label="First Name" value={profile.name} />
-              <InfoRow icon={<Profile size="16" />} label="Last Name" value={profile.lastName} />
-              <InfoRow icon={<GpsSlash size="16" />} label="National Code" value={profile.nationalCode} />
-              <InfoRow icon={<Calendar size="16" />} label="Date Of Birth" value={profile.birthDate || '-'} />
-              <InfoRow icon={<Heart size="16" />} label="Marital Status" value={profile.MaritalStatusName || 'مجرد'} />
-              <InfoRow icon={<ProfileTick size="16" />} label="Gender" value={profile.gender || 'مرد'} />
-              <InfoRow icon={<Shield size="16" />} label="Military Service Status" value="معاف" />
+              <InfoRow icon={<Profile size="16" />} label="First Name" value={profile?.FirstName} />
+              <InfoRow icon={<Profile size="16" />} label="Last Name" value={profile?.LastName} />
+              <InfoRow icon={<GpsSlash size="16" />} label="National Code" value={profile?.NationCode} />
+              <InfoRow icon={<Calendar size="16" />} label="Date Of Birth" value={profile?.DateOfBirth || '-'} />
+              <InfoRow icon={<Heart size="16" />} label="Marital Status" value={profile?.MaritialStatus || 'مجرد'} />
+              <InfoRow icon={<ProfileTick size="16" />} label="Gender" value={profile?.Gender || 'مرد'} />
+              <InfoRow icon={<Shield size="16" />} label="Military Service Status" value= {profile?.MilitaryServiceStatus  || "معاف"} />
             </div>
           </Card>
 
@@ -123,12 +96,12 @@ const ResumeInfo = () => {
             </div>
 
             <div className="flex flex-col gap-8">
-              <InfoRow icon={<More2 size="16" />} label="Organizational category" value={profile.jobGroupNames} />
-              <InfoRow icon={<DollarCircle size="16" />} label="Minimum salary" value={profile.RequestedSalary} />
-              <InfoRow icon={<Menu size="16" />} label="Working Category" value={profile.jobGroupNames} />
+              <InfoRow icon={<More2 size="16" />} label="Organizational category" value={profile?.OrganizationCategory} />
+              <InfoRow icon={<DollarCircle size="16" />} label="Minimum salary" value={profile?.MinimumSalary} />
+              <InfoRow icon={<Menu size="16" />} label="Working Category" value={profile?.WorkingCategory} />
               <InfoRow icon={<Flag size="16" />} label="Nationality" value="Iranian" />
-              <InfoRow icon={<GlobalSearch size="16" />} label="City" value={profile.city} />
-              <InfoRow icon={<Location size="16" />} label="Address" value={profile.Address} />
+              <InfoRow icon={<GlobalSearch size="16" />} label="City" value={profile?.City} />
+              <InfoRow icon={<Location size="16" />} label="Address" value={profile?.Address} />
             </div>
           </div>
         </div>

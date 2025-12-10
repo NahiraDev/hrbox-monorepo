@@ -18,6 +18,8 @@ import {
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 import {
+  useFetchAwardDetailQuery,
+  useFetchAwardsQuery,
   useFetchCompaniesListQuery,
   useFetchJobOpportunitiesSentQuery,
   useFetchResumePercentQuery,
@@ -37,18 +39,18 @@ ChartJS.register(
 
 const Dashboard = () => {
   // 1. Fetch All Data
-  const { data: viewResumeData, isLoading: isChartLoading } = useFetchViewResumeQuery();
+  // NOTE: change the count dynamically
+  const { data: viewResumeData, isLoading: isChartLoading } = useFetchViewResumeQuery({count:12});
   const { data: resumePercent } = useFetchResumePercentQuery();
+  // this endpoint returns 500 error
   const { data: jobOpportunities } = useFetchJobOpportunitiesSentQuery();
 
-  // 2. Calculate Percentages (Normalization)
-  // API returns 100.0 -> We convert to 1.0 for the Slider
-  const rawPercent = resumePercent?.data || 0; // e.g., 100
+  const rawPercent = resumePercent || 0; // e.g., 100
   const sliderValue = rawPercent / 100;        // e.g., 1
 
   // 3. Transform Chart Data
   const DashboardChartData = useMemo(() => {
-    const apiData = viewResumeData?.data || [];
+    const apiData = viewResumeData|| [];
     
     // Helper to map data safely
     const mapData = (key: string) => apiData.map((item: any) => item[key] || 0);

@@ -4,8 +4,19 @@ import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { CupStarIcon } from "@hrbox/uikit/icons/CupStarIcon";
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
+import { AwardModal } from "@hrbox/modules/hrlink/modals/AwardModal";
+import {
+  useFetchAwardsQuery,
+  useDeleteAwardMutation,
+  useEditAwardMutation,
+  useLazyFetchAwardDetailQuery,
+} from "@hrbox/modules/hrlink/apis";
+import { useState } from "react";
+import { ModalSize } from "@hrbox/core/providers";
+import { ModalType } from "@hrbox/core/providers";
+import { useModal } from "@hrbox/core/hooks/useModal";
 
-// MOCK DATA — Exactly matches your real API structure
+// IMPORTANT: get rid of this and use real data
 const MOCK_RESPONSE = {
   data: {
     ViewList: [
@@ -29,31 +40,102 @@ const MOCK_RESPONSE = {
 };
 
 const Awards = () => {
-  // Replace real query with mock data
-  const response = MOCK_RESPONSE;
-  const awards = response.data.ViewList;
-  const pagination = {
-    currentPage: response.data.Page + 1, // UI usually starts from page 1
-    totalPages: response.data.LastPage,
+  // Handle getting the awrds and the state of the fetching data
+  const [page, setPage] = useState(0)
+  const { data: responseData, isLoading,isFetching, isError } = useFetchAwardsQuery({
+    page: page ?? 0,
+    pageSize: 10,
+  });
+
+  const [getAwards] = useLazyFetchAwardDetailQuery()
+
+  const meta = responseData?.meta || {
+    page: 1,
+    totalPages: 1
   };
+
+  // Handle deleting awards 
+  const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
+  // Track which award is currently being deleted
+  const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
+
+  // Handel edititng awards
+  const [editAward, {error: errorEditing , isLoading: loadingEdit, isSuccess: editedSuccessfully}] = useEditAwardMutation();
+  const [editingId, setEditingId] = useState(null);
+
+  const response = responseData || MOCK_RESPONSE;
+  const awards = response?.data.ViewList;
+  console.log(`here is the award response \n${responseData?.data}\n ${isLoading} \n ${isError}`);
+
+  const handleDelete = async (id: number) => {
+    if (!id) return;
+    setDeletingIds((prev) => new Set(prev).add(id));
+
+    // chagne this code and use the states provided automatically(errorDeleting, loadingDelete, deletedSeccessfully)
+    try {
+      await deleteAward(id).unwrap();
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("حذف با خطا مواجه شد");
+    } finally {
+      setDeletingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }
+  };
+
+  //edit awards modal
+  const modal = useModal();
+
+  const handleEdit = (award: any) => {
+
+    modal.open(
+      ModalType.EDIT,
+      "edit-award",
+      <AwardModal
+        award={
+          award
+        }
+        onSuccess={() => {
+          modal.close("edit-award"); 
+        }}
+      />,
+      {
+        title: "Edit Award",
+        isForm: true,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: "award-form",
+        },
+
+        onCancel: () => modal.close("edit-award"),
+      },
+      ModalSize.MD
+    );
+  };
+
+  const isDeleting = (id: number) => deletingIds.has(id);
 
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
-      {/* Main Content - Awards List */}
+      {/* Awards List */}
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((achievement) => (
+            {awards.map((award:any) => (
               <Card
-                key={achievement.Id}
+                key={award.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
               >
                 <CardHeader className="border-b border-neutral-100 pb-3">
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
-                      <CupStarIcon color="#04070e" size={20} />
+                      <CupStarIcon color="#04070e"/>
                       <h3 className="text-lg font-bold text-secondary-1000">
-                        {achievement.Title}
+                        {award.Title}
                       </h3>
                     </div>
 
@@ -64,13 +146,23 @@ const Awards = () => {
                         size="md"
                         radius="sm"
                         content={<Edit size="16" className="text-secondary-700" />}
+                        onPress={() => handleEdit(award)}
                       />
+
                       <AppButton
                         isIconOnly
                         color="white"
                         size="md"
                         radius="sm"
-                        content={<Trash size="16" className="text-red-600" />}
+                        isDisabled={isDeleting(award.Id)}
+                        content={
+                          isDeleting(award.Id) ? (
+                            <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <Trash size="16" className="text-red-600" />
+                          )
+                        }
+                        onPress={() => handleDelete(award.Id)}
                       />
                     </div>
                   </div>
@@ -79,29 +171,29 @@ const Awards = () => {
                 <CardBody className="text-sm space-y-3">
                   <div className="grid grid-cols-2 gap-3 text-secondary-900">
                     <div>
-                      <span className="font-light text-secondary-600">عنوان: </span>
-                      <span className="font-medium">{achievement.Title}</span>
+                      <span className="font-light text-secondary-600">Title: </span>
+                      <span className="font-medium">{award.Title}</span>
                     </div>
                     <div>
-                      <span className="font-light text-secondary-600">سال: </span>
-                      <span className="font-medium">{achievement.Date}</span>
+                      <span className="font-light text-secondary-600">Year: </span>
+                      <span className="font-medium">{award.Date}</span>
                     </div>
                   </div>
 
-                  {achievement.Place && achievement.Place !== "-" && (
+                  {award.Place && award.Place !== "-" && (
                     <div>
-                      <span className="font-light text-secondary-600">مکان: </span>
+                      <span className="font-light text-secondary-600">Location: </span>
                       <span className="font-medium">
-                        {achievement.Place.replace(/^[-–—]\s*/, "")}
+                        {award.Place.replace(/^[-–—]\s*/, "")}
                       </span>
                     </div>
                   )}
 
-                  {achievement.Description && achievement.Description.trim() && achievement.Description !== "description" && (
+                  {award.Description && award.Description.trim() && award.Description !== "description" && (
                     <div>
-                      <span className="font-light text-secondary-600">توضیحات: </span>
+                      <span className="font-light text-secondary-600">Description: </span>
                       <p className="font-medium text-secondary-800 mt-1">
-                        {achievement.Description}
+                        {award.Description}
                       </p>
                     </div>
                   )}
@@ -112,13 +204,13 @@ const Awards = () => {
 
           {/* Pagination */}
           <div className="flex justify-center mt-8">
-            <AppPagination
-              meta={{
-                page: pagination.currentPage,
-                totalPages: pagination.totalPages,
-                // onPageChange: (page) => console.log("Go to page", page),
-              }}
-            />
+          <AppPagination
+            meta={{
+              page: meta.page,
+              totalPages: meta.totalPages,
+            }}
+            onPageChange={setPage}  // This is the key!
+          />
           </div>
         </div>
       </div>

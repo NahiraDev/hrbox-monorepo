@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from '@hrbox/modules/hrlink/app/endpoints';
 
 const ResumeApi = createModuleApi({
   reducerPath: 'resumeApi',
-  baseUrl: '/DesktopModules/Freelancer/api',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
   tagTypes: ['Profile'],
   requiresAuth: true,
   autoToast: true,
