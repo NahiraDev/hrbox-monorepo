@@ -39,16 +39,18 @@ ChartJS.register(
 
 const Dashboard = () => {
   // 1. Fetch All Data
-  const { data: viewResumeData, isLoading: isChartLoading } = useFetchViewResumeQuery();
+  // NOTE: change the count dynamically
+  const { data: viewResumeData, isLoading: isChartLoading } = useFetchViewResumeQuery({count:12});
   const { data: resumePercent } = useFetchResumePercentQuery();
+  // this endpoint returns 500 error
   const { data: jobOpportunities } = useFetchJobOpportunitiesSentQuery();
 
-  const rawPercent = resumePercent?.data || 0; // e.g., 100
+  const rawPercent = resumePercent || 0; // e.g., 100
   const sliderValue = rawPercent / 100;        // e.g., 1
 
   // 3. Transform Chart Data
   const DashboardChartData = useMemo(() => {
-    const apiData = viewResumeData?.data || [];
+    const apiData = viewResumeData|| [];
     
     // Helper to map data safely
     const mapData = (key: string) => apiData.map((item: any) => item[key] || 0);

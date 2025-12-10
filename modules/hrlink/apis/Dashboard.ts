@@ -12,7 +12,7 @@ const DashboardApi = createModuleApi({
 
 export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
   endpoints: (build: any) => ({
-    fetchViewResume: createQuery<any>(build, {
+    fetchViewResume: createQuery<any , {count: number}>(build, {
       url: HRLinkApiEndpoints.dashboard.getViewResume,
       tags: ["Dashboard"],
     }),

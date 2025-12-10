@@ -1,6 +1,6 @@
 import {MapContainer, Marker, TileLayer} from 'react-leaflet';
 import {useEffect, useRef, useState} from 'react';
-import {Map as LeafletMap} from 'leaflet';
+import {latLng, Map as LeafletMap} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Add, Edit} from 'iconsax-reactjs';
 import {AppButton} from '@hrbox/uikit/components';
@@ -10,6 +10,7 @@ import {MarkerIcon} from "@hrbox/modules/hrlink/components/MarkerMap";
 import { MapModal } from "@hrbox/modules/hrlink/components/MapModal";
 import { useModal } from '@hrbox/core/hooks/useModal';
 import { useEditLocationMutation, useGetLocationQuery } from '../apis/Common';
+import { string } from 'yup';
 
 export const UserLocation = () => {
     const [ editLocation, { error: errorEditigLocation }] = useEditLocationMutation(); // use in modal to edit user location
@@ -20,6 +21,10 @@ export const UserLocation = () => {
     const [hasLocation, setHasLocation] = useState(false);
     const modal = useModal()
 
+    // use this ?
+    const handleEditLocation = (locatoin:string, lang: number, lat: number) => {
+        editLocation({location , lang, lat})
+    }
     
     const handleOpenMap = () => {
       modal.open(
@@ -31,7 +36,7 @@ export const UserLocation = () => {
                       lat: e.latLng.lat(),
                       lng: e.latLng.lng(),
                     })}
-              isEdit={true}   // or true when editing
+              isEdit={true}
             />,
         {
           isForm: true,

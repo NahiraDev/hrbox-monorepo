@@ -23,13 +23,13 @@ export const GeneralInformation = () => {
   const { data: profilePhoto, error: errorFetchProfile } = useFetchProfileAvatarQuery();
   const [ editAboutMe, { error: errorEditingAboutMe }] = useEditAboutMeMutation();
 
-  // NOTE: FOR DEBUGING 
-  if (!errorFetchProfile?.data){
-    console.log(`error fetching profile photo ${errorFetchProfile}`);
+  // // NOTE: FOR DEBUGING 
+  if (errorFetchProfile){
+    console.log(`error fetching profile photo ${profilePhoto}`);
   }
-  if (!errorEditingAboutMe){
-    console.log(`error editing about me ${errorEditingAboutMe}`)
-  }
+  // if (!errorEditingAboutMe){
+  //   console.log(`error editing about me ${errorEditingAboutMe}`)
+  // }
 
   const modal = useModal();
   const handleEditAboutMe = () => {
@@ -56,12 +56,12 @@ export const GeneralInformation = () => {
     : MOCK_DATA;
 
   // Full name from profile (usually more reliable)
-  const fullName = aboutMe?.data?.DisplayName 
-    ? `${aboutMe.data.DisplayName} `
+  const fullName = aboutMe?.DisplayName 
+    ? `${aboutMe.DisplayName} `
     : "John Doe";
 
-  const industry = aboutMe?.data?.Industry || MOCK_DATA.company;
-  const biography = aboutMe?.data?.AboutMe  || MOCK_DATA.biography;
+  const industry = aboutMe?.Industry || MOCK_DATA.company;
+  const biography = aboutMe?.AboutMe  || MOCK_DATA.biography;
 
   return (
     <Card className="relative shadow-shadow-light-tight/1 rounded-xl p-4 h-3/5 bg-white">
@@ -75,6 +75,7 @@ export const GeneralInformation = () => {
         />
       </div>
 
+
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-start">
           <div className="w-12" /> {/* Spacer for centering avatar */}
@@ -87,36 +88,36 @@ export const GeneralInformation = () => {
           />
 
           <div className="flex flex-col gap-2">
-            {displayData?.data?.Telegram && (
+            {displayData?.Telegram && (
               <AppButton
                 content={<TelegramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData?.data?.Telegram!, "_blank")}
+                onPress={() => window.open(displayData?.Telegram!, "_blank")}
               />
             )}
-            {displayData?.data?.Whatsapp && (
+            {displayData?.Whatsapp && (
               <AppButton
                 content={<WhatsAppIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData?.data?.Whatsapp!, "_blank")}
+                onPress={() => window.open(displayData?.Whatsapp!, "_blank")}
               />
             )}
-            {displayData?.data?.Linkedin && (
+            {displayData?.Linkedin && (
               <AppButton
                 content={<LinkedinIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData?.data?.Linkedin!, "_blank")}
+                onPress={() => window.open(displayData?.Linkedin!, "_blank")}
               />
             )}
-            {displayData?.data?.Instagram && (
+            {displayData?.Instagram && (
               <AppButton
                 content={<InstagramIcon className="w-5 h-5" />}
                 isIconOnly
                 variant="light"
-                onPress={() => window.open(displayData?.data?.Instagram!, "_blank")}
+                onPress={() => window.open(displayData?.Instagram!, "_blank")}
               />
             )}
           </div>

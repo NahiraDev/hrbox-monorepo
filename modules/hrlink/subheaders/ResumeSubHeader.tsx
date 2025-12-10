@@ -37,6 +37,7 @@ const ResumeSubHeader = (props: any) => {
         ModalSize.LG
         );
     }
+
     return (
         <div className="flex justify-between">
             <AppPageTitle
