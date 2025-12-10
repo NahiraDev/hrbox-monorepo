@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Profile, Briefcase, Building, PasswordCheck, Key, Chart } from "iconsax-reactjs";
+import { Profile, Briefcase, Building, PasswordCheck, Key, Chart, CalendarTick, ReceiveSquare, ReceiveSquare2, Setting3, Clock, Candle2, TaskSquare } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 import {
@@ -14,6 +14,7 @@ import {
   LocationAllocationSubheader,
   ShiftAllocationSubheader,
 } from "@hrbox/modules/attendance/subheaders/CreateAllocationSubHeaderWithHook";
+import ProjectTimesheets from "./pages/TimeSheet/ProjectTimesheets";
 
 // ============================================
 // Pages
@@ -49,6 +50,9 @@ const IpAllocation = lazyRouteComponent(
 const LocationAllocation = lazyRouteComponent(
   () => import("./pages/Allocation/LocationAllocation")
 );
+const AllProjects = lazyRouteComponent(
+  () => import("./pages/TimeSheet/AllProjects")
+);
 
 // ============================================
 // SubHeaders (Lazy Load)
@@ -63,6 +67,9 @@ const EntryExitSubHeader = lazy(
 const CalenderSubHeader = lazy(() => import("./subheaders/CalenderSubHeader"));
 const ApprovalsSubHeader = lazy(
   () => import("./subheaders/ApprovalsSubHeader")
+);
+const TimeSheetSubHeader = lazy(
+  () => import("./subheaders/TimeSheetSubHeader")
 );
 
 // ============================================
@@ -199,6 +206,36 @@ export const AttendancePlugin: ModulePlugin = {
       },
       subHeader: CalenderSubHeader,
     },
+    {
+      path: Paths.Attendance.AllProject,
+      component: AllProjects,
+      layout: "framed",
+      meta: {
+        title: "Project TimeSheets",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader:TimeSheetSubHeader ,
+      subHeaderProps:{
+        title:'All Projects',
+        icon:<Candle2 color="white" size={18}/>
+      }
+    },
+    {
+      path: Paths.Attendance.ProjectTimeSheet,
+      component: ProjectTimesheets,
+      layout: "framed",
+      meta: {
+        title: "Project TimeSheets",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader:TimeSheetSubHeader ,
+      subHeaderProps:{
+        title:'Project TimeSheets',
+        icon:<TaskSquare color="white" size={18}/>
+      }
+    },
   ],
 
   // ============================================
@@ -215,67 +252,37 @@ export const AttendancePlugin: ModulePlugin = {
       id: "entry-exit",
       label: "Entry Exit",
       path: "/attendance/entry-exit",
-      icon: <Profile size="24" />,
+      icon: <PasswordCheck size="24" />,
     },
     {
       id: "calender",
       label: "Attendance Calender",
       path: "/attendance/attendance-calender",
-      icon: <Briefcase size="24" />,
-    },
-    {
-      id: "export",
-      label: "Export",
-      path: "/attendance/export",
-      icon: <Building size="24" />,
-    },
-    {
+      icon: <CalendarTick size="24" />,
+    },{
       id: "traffic",
       label: "Traffic Calender",
-      path: "/attendance/traffic-calender",
-      icon: <Building size="24" />,
-    },
-    {
-      id: "shift",
-      label: "Shift Allocation",
-      path: "/attendance/shift-allocation",
-      icon: <Building size="24" />,
-    },
-    {
-      id: "approvals",
-      label: "List Of Approvals",
       path: "/attendance/list-of-approvals",
-      icon: <Building size="24" />,
+      icon: <Key size="24" />,
     },
     {
       id: "export",
       label: "Export",
       path: "/attendance/export",
-      icon: <Building size="24" />,
+      icon: <ReceiveSquare2 size="24" />,
     },
-    {
-      id: "face",
-      label: "Face Allocation",
-      path: "/attendance/face-allocation",
-      icon: <Building size="24" />,
-    },
+    
     {
       id: "shift",
       label: "Shift Allocation",
       path: "/attendance/shift-allocation",
-      icon: <Building size="24" />,
+      icon: <Setting3 size="24" />,
     },
     {
-      id: "ip",
-      label: "Ip Allocation",
-      path: "/attendance/ip-allocation",
-      icon: <Building size="24" />,
-    },
-    {
-      id: "location",
-      label: "Location Allocation",
-      path: "/attendance/location-allocation",
-      icon: <Building size="24" />,
+      id: "timesheet",
+      label: "Time Sheet",
+      path: "/attendance/all-projects",
+      icon: <Clock size="24" />,
     },
   ],
 

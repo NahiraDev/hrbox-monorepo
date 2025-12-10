@@ -670,12 +670,12 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             wrapper:
               variant === "attendance"
                 ? "h-full overflow-y-scroll custom-scroll bg-transparent w-full"
-                : "bg-transparent h-full",
+                : "bg-transparent h-full w-full!",
             table: "w-full h-full flex flex-col relative",
             tbody: "flex flex-col w-full",
-            td: "w-fit",
+            td: "",
             thead: "w-full absolute top-0",
-            tr: "rounded-6 w-full",
+            tr: "rounded-6 w-full!",
             th:
               variant === "attendance"
                 ? "w-full first:bg-[#999999] [&:nth-of-type(2)]:bg-[#999999] text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"

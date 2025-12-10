@@ -99,7 +99,7 @@ const FaceAllocationForm = () => {
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
-                formMode={currentType}
+                 formMode={currentType}
                 name="ChooseFace"
                 label={t("choose_face_recognition_assignment")}
                 component={AppAutoComplete}
