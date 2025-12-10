@@ -15,7 +15,9 @@ import {
     dashboardApiEndpoints,
     jobsApiEndpoints,
     userApiWithEndpoints,
-    commonApiWithEndpoints
+    commonApiWithEndpoints,
+    educationApiEndpoints,
+    experienceApiEndpoints,
 } from "@hrbox/modules/hrlink/apis";
 
 const persistConfig = {
@@ -28,23 +30,22 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
 
-  // ---------------------------------------------------------
-  // FIX: Add the API reducers inside this object
-  // ---------------------------------------------------------
   const rootReducer = (state: any = {}, action: any) => ({
     auth: authReducer(state.auth, action),
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
 
-    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state[dashboardApiEndpoints.reducerPath], action),
-    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
-    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
-    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state[resumeApiEndpoints.reducerPath], action),
-    [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(state[userApiWithEndpoints.reducerPath], action),
-    [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(state[jobsApiEndpoints.reducerPath], action),
-    [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(state[awardApiEndpoints.reducerPath], action),
-    [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(state[commonApiWithEndpoints.reducerPath], action),
+    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state?.[dashboardApiEndpoints.reducerPath], action),
+    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),
+    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state?.[settingApiWithEndpoints.reducerPath], action),
+    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state?.[resumeApiEndpoints.reducerPath], action),
+    [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(state?.[userApiWithEndpoints.reducerPath], action),
+    [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(state?.[jobsApiEndpoints.reducerPath], action),
+    [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(state?.[awardApiEndpoints.reducerPath], action),
+    [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(state?.[commonApiWithEndpoints.reducerPath], action),
+    [educationApiEndpoints.reducerPath]: educationApiEndpoints.reducer(state?.[educationApiEndpoints.reducerPath], action),
+    [experienceApiEndpoints.reducerPath]: experienceApiEndpoints.reducer(state?.[experienceApiEndpoints.reducerPath], action),
 
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
@@ -75,6 +76,8 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
           .concat(dashboardApiEndpoints.middleware)
           .concat(awardApiEndpoints.middleware)
           .concat(commonApiWithEndpoints.middleware)
+          .concat(experienceApiEndpoints.middleware)
+          .concat(educationApiEndpoints.middleware)
       ),
     devTools: import.meta.env.DEV,
   });

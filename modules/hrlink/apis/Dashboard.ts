@@ -1,5 +1,5 @@
 import { createModuleApi } from "@hrbox/core/apis/baseApi";
-import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@hrbox/modules/hrlink/app/endpoints";
 
 const DashboardApi = createModuleApi({
@@ -22,12 +22,12 @@ export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
       tags: ["Dashboard"],
     }),
 
-    fetchJobOpportunitiesSent: createQuery<any>(build, {
+    fetchJobOpportunitiesSent: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getJobOpportunitiesSent,
       tags: ["Dashboard"],
     }),
 
-    fetchCompaniesList: createQuery<any>(build, {
+    fetchCompaniesList: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getCompaniesList,
       tags: ["Dashboard"],
     }),

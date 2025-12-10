@@ -24,19 +24,9 @@ import { useFetchUserQuery } from '../../apis';
 const ResumeInfo = () => {
   const { push } = useNavigation();
   const { data: profileData, isLoading, isError } = useFetchUserQuery();
-  console.log(`user data \n${profileData?.data}`);
+  console.log(`user data \n${profileData}`);
 
-  const profile = profileData?.data ;
-
-  // Optional: Still redirect if real profile exists but is incomplete
-  // useEffect(() => {
-  //   if (isLoading || isError) return;
-
-  //   const realProfile = profileData?.profile;
-  //   if (realProfile && !isProfileComplete(realProfile)) {
-  //     push({ to: Paths.HRLink.ResumeInformation ?? '/hrlink/profile-form' });
-  //   }
-  // }, [profileData, isLoading, isError, push]);
+  const profile = profileData ;
 
   // Loading state
   if (isLoading) {
@@ -47,20 +37,6 @@ const ResumeInfo = () => {
     );
   }
 
-  // Optional: Show error only for real network errors (not 404)
-  // if (isError && !(error as any)?.status?.toString().startsWith('4')) {
-  //   return (
-  //     <div className="flex h-screen flex-col items-center justify-center gap-4">
-  //       <p className="text-red-600 text-lg">خطا در دریافت اطلاعات پروفایل</p>
-  //       <button
-  //         onClick={() => window.location.reload()}
-  //         className="px-6 py-2 bg-primary text-white rounded-lg"
-  //       >
-  //         تلاش مجدد
-  //       </button>
-  //     </div>
-  //   );
-  // }
 
   // MAIN UI — Now works with mock data
   return (
@@ -96,7 +72,7 @@ const ResumeInfo = () => {
             </div>
 
             <div className="flex flex-col gap-8">
-              <InfoRow icon={<More2 size="16" />} label="Organizational category" value={profile?.OrganizationCategory} />
+              <InfoRow icon={<More2 size="16" />} label="Organizational category" value={profile?.OrganizationCategory || "NA"} />
               <InfoRow icon={<DollarCircle size="16" />} label="Minimum salary" value={profile?.MinimumSalary} />
               <InfoRow icon={<Menu size="16" />} label="Working Category" value={profile?.WorkingCategory} />
               <InfoRow icon={<Flag size="16" />} label="Nationality" value="Iranian" />

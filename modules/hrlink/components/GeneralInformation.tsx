@@ -21,15 +21,8 @@ const MOCK_DATA = {
 export const GeneralInformation = () => {
   const { data: aboutMe, isError } = useFetchUserAboutMeQuery();
   const { data: profilePhoto, error: errorFetchProfile } = useFetchProfileAvatarQuery();
+  // edit mutations take a payload in object notation you should look at what the api needs
   const [ editAboutMe, { error: errorEditingAboutMe }] = useEditAboutMeMutation();
-
-  // // NOTE: FOR DEBUGING 
-  if (errorFetchProfile){
-    console.log(`error fetching profile photo ${profilePhoto}`);
-  }
-  // if (!errorEditingAboutMe){
-  //   console.log(`error editing about me ${errorEditingAboutMe}`)
-  // }
 
   const modal = useModal();
   const handleEditAboutMe = () => {
@@ -82,7 +75,7 @@ export const GeneralInformation = () => {
 
           <Avatar
             className="w-[70px] h-[70px] ring-4 ring-white shadow-lg"
-            src={ profilePhoto?.data || MOCK_DATA.avatarUrl}
+            src={ profilePhoto || MOCK_DATA.avatarUrl}
             alt="Profile"
             fallback="JD"
           />

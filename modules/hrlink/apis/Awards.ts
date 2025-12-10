@@ -31,7 +31,7 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       tags: ['Award'],
     }),
 
-    fetchAwards: createQuery<any>(build, {
+    fetchAwards: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.award.getList,
       method: 'GET',
       tags: ['Award'],
