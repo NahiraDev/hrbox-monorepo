@@ -1,10 +1,10 @@
+import React, { useMemo } from "react";
 import {
   Autocomplete,
   AutocompleteItem,
   AutocompleteProps,
 } from "@heroui/react";
 import clsx from "clsx";
-import React, { forwardRef, useMemo } from "react";
 import { FormMode } from "@hrbox/uikit/components/types";
 
 interface AppAutoCompleteProps
@@ -22,38 +22,12 @@ interface AppAutoCompleteProps
   onChange?: (value: string | number) => void;
   helperText?: string;
   containerClassName?: string;
-
-  //   // ADD THIS 👇
-  // options?: Array<{
-  //   id: string | number;
-  //   label: string;
-  //   value?: string | number;
-  //   [key: string]: any;
-  // }>;
+  errorClassName?: string;
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
 }
 
-const sizeClasses: Record<
-  string,
-  { wrapper: string; label: string; inputWrapper: string }
-> = {
-  sm: {
-    wrapper: "h-8 px-2 text-xs",
-    label: "text-xs font-medium",
-    inputWrapper: "text-xs",
-  },
-  md: {
-    wrapper: "h-10 px-3 text-sm",
-    label: "text-sm font-medium",
-    inputWrapper: "text-sm",
-  },
-  lg: {
-    wrapper: "h-12 px-4 text-base",
-    label: "text-base font-semibold",
-    inputWrapper: "text-base",
-  },
-};
-
-export const AppAutoComplete = forwardRef<
+const AppAutoCompleteComponent = React.forwardRef<
   HTMLInputElement,
   AppAutoCompleteProps
 >(
@@ -61,7 +35,7 @@ export const AppAutoComplete = forwardRef<
     {
       name,
       label,
-      required = false,
+      required = true,
       displayKey = "name",
       valueKey = "id",
       data = [],
@@ -72,6 +46,10 @@ export const AppAutoComplete = forwardRef<
       onChange,
       helperText,
       containerClassName,
+      errorClassName,
+      className,
+      startContent,
+      endContent,
       size = "md",
       isDisabled,
       ...rest
@@ -82,47 +60,71 @@ export const AppAutoComplete = forwardRef<
     const hasError = Boolean(error);
 
     const modeStyles = useMemo(() => {
-      const baseWrapper = sizeClasses[size]?.wrapper || sizeClasses.md.wrapper;
+      const baseInput = "text-sm font-medium transition-all duration-200 rounded-lg !bg-red-400";
+      const baseWrapper = "!h-10 !px-3 !py-2.5 ";
 
       switch (formMode) {
         case FormMode.VIEW:
           return {
-            inputWrapper: clsx(
+            wrapper: clsx(
               baseWrapper,
-              "bg-neutral-50 dark:bg-neutral-900",
-              "border border-neutral-200 dark:border-neutral-700",
-              "cursor-default"
+              "bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)]",
+              "border border-[#DCF0F9]",
+              "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
+            input: clsx(
+              baseInput,
+              "text-neutral-600 dark:text-neutral-300 cursor-default"
+            ),
+            isDisabled: true,
           };
+
         case FormMode.EDIT:
           return {
-            inputWrapper: clsx(
+            wrapper: clsx(
               baseWrapper,
-              "bg-panel-surface dark:bg-neutral-800",
-              "border-1.5 border-primary-200 dark:border-primary-700",
-              "focus-within:border-primary"
+              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
+              "border border-[#DCF0F9] dark:border-[#04425C]",
+              "hover:border-primary-300 dark:hover:border-primary-600",
+              "focus-within:border-primary focus-within:shadow-lg"
             ),
+            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            isDisabled: false,
           };
+          
         case FormMode.CREATE:
         default:
           return {
-            inputWrapper: clsx(
+            wrapper: clsx(
               baseWrapper,
-              "bg-none text-primary",
-              "",
-              "focus-within:border-primary"
+              "!bg-none dark:bg-neutral-800 border border-[#DCF0F9]",
+              "dark:border-[#04425C]",
+              "hover:border-primary-300 dark:hover:border-primary-600",
+              "focus-within:border-primary focus-within:shadow-lg"
             ),
+            input: clsx(baseInput, "text-secondary-900 dark:text-white !bg-red-400"),
+            isDisabled: false,
           };
       }
-    }, [formMode, size]);
+    }, [formMode]);
+
+    const wrapperClasses = clsx(
+      modeStyles.wrapper,
+      hasError &&
+        !isViewMode &&
+        "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
+      className
+    );
 
     return (
       <div className={clsx("flex flex-col gap-1.5", containerClassName)}>
         {label && (
           <label
+            htmlFor={name}
             className={clsx(
-              sizeClasses[size]?.label,
-              "text-secondary-900 dark:text-white"
+              "text-sm font-semibold leading-none",
+              "text-secondary-900 dark:text-white",
+              "transition-colors duration-200"
             )}
           >
             {label}
@@ -132,20 +134,25 @@ export const AppAutoComplete = forwardRef<
           </label>
         )}
 
+        {/* Autocomplete */}
         <Autocomplete
           ref={ref}
-          classNames={{
-            base: clsx("flex flex-col gap-1.5 ", containerClassName),
-            listboxWrapper: "z-50 max-h-64 ",
-            listbox: "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
-            popoverContent: "p-1",
-            selectorButton: clsx(
-              modeStyles.inputWrapper,
-              hasError && !isViewMode && "border-danger bg-danger-50 dark:bg-danger-900/20"
-            ),
-          }}
+          id={name}
+          name={name}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
+          classNames={{
+            base: clsx("flex flex-col gap-1.5 "),
+            selectorButton: wrapperClasses,
+            listboxWrapper: "z-50 max-h-64",
+            listbox: clsx(
+              "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
+              "border border-neutral-200 dark:border-neutral-700"
+            ),
+            popoverContent: "p-1",
+          }}
+          startContent={startContent}
+          endContent={endContent}
           onFocus={onFocus}
           onBlur={onBlur}
           onSelectionChange={(key) => {
@@ -157,14 +164,31 @@ export const AppAutoComplete = forwardRef<
           {data.map((item) => (
             <AutocompleteItem
               key={item[valueKey]}
-              className="text-secondary-900 dark:text-white"
+              className={clsx(
+                "text-secondary-900 dark:text-white",
+                "hover:bg-primary-100 dark:hover:bg-primary-900/30",
+                "data-[hover=true]:bg-primary-100 dark:data-[hover=true]:bg-primary-900/30"
+              )}
             >
               {item[displayKey]}
             </AutocompleteItem>
           ))}
         </Autocomplete>
 
-        {hasError && <span className="text-xs text-danger">{error}</span>}
+        {/* Error Message */}
+        {hasError && (
+          <span
+            className={clsx(
+              "text-xs font-medium",
+              "text-danger dark:text-danger-400",
+              errorClassName
+            )}
+          >
+            {error}
+          </span>
+        )}
+
+        {/* Helper Text */}
         {helperText && !hasError && (
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {helperText}
@@ -175,4 +199,6 @@ export const AppAutoComplete = forwardRef<
   }
 );
 
-AppAutoComplete.displayName = "AppAutoComplete";
+AppAutoCompleteComponent.displayName = "AppAutoComplete";
+
+export const AppAutoComplete = AppAutoCompleteComponent;

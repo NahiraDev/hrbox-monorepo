@@ -121,7 +121,7 @@ export interface AppTableProps<T = any> {
   currentPage?: number;
   onPageChange?: (page: number) => void;
 
-  variant?: "default" | "striped" | "bordered" | "minimal" | "attendance";
+  variant?: "default" | "striped" | "bordered" | "minimal" ;
   styles?: TableStyleConfig;
   density?: "sm" | "md" | "lg";
 
@@ -235,13 +235,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     // PAGINATION
     // ============================================
 
-    const shouldPaginate = variant === "attendance" ? false : hasPagination;
-
     const paginatedData = useMemo(() => {
-      if (!shouldPaginate) return data;
       const startIndex = (page - 1) * pageSize;
       return data.slice(startIndex, startIndex + pageSize);
-    }, [data, page, pageSize, shouldPaginate]);
+    }, [data, page, pageSize]);
 
     const totalPages = useMemo(() => {
       return Math.ceil((totalItems || data.length) / pageSize);
@@ -445,12 +442,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ";
       let statusClass = "";
 
-      if (variant === "attendance") {
-        const dateValue = row["Date"]?.toString() || "";
-        if (dateValue.includes("Absence")) {
-          statusClass = "bg-red-100";
-        }
-      }
 
       const customClass =
         typeof styles.rowClassName === "function"
@@ -480,18 +471,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           ? "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12"
           : "";
 
-      if (groupInfo && variant === "attendance") {
-        const { group, isFirst, isLast, isOnly } = groupInfo;
-        const roundedClass = isOnly
-          ? "rounded-xl"
-          : isFirst
-            ? "rounded-l-xl"
-            : isLast
-              ? "rounded-r-xl"
-              : "";
-        const spacingClass = !isLast ? "border-r-4 border-transparent" : "";
-        baseClass = `${spacingClass} ${group.headerClassName || ""} ${roundedClass}`;
-      }
 
       if (typeof col.headerClassName === "function") {
         return `${baseClass} ${col.headerClassName(col)}`;
@@ -663,23 +642,15 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         <Table
           aria-label="Data table"
           className={`${styles.tableClassName} h-full`}
-          isHeaderSticky={variant === "attendance" || sticky}
           classNames={{
-            base:
-              variant === "attendance" ? "w-full" : "!h-full bg-transparent",
-            wrapper:
-              variant === "attendance"
-                ? "h-full overflow-y-scroll custom-scroll bg-transparent w-full"
-                : "bg-transparent h-full w-full!",
-            table: "w-full h-full flex flex-col relative",
-            tbody: "flex flex-col w-full",
-            td: "",
-            thead: "w-full absolute top-0",
+            base:"!h-full w-full! bg-transparent",
+            wrapper:"bg-transparent h-full w-full!",
+            table: "w-full! h-full",
+            tbody: "w-full!",
+            td: "w-full!",
+            thead: "w-full!",
             tr: "rounded-6 w-full!",
-            th:
-              variant === "attendance"
-                ? "w-full first:bg-[#999999] [&:nth-of-type(2)]:bg-[#999999] text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"
-                : "bg-primary-400",
+            th:"bg-primary-400 w-full!",
           }}
         >
           <TableHeader className={styles.headerClassName}>

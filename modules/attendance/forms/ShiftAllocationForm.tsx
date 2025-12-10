@@ -108,6 +108,7 @@ const ShiftAllocationForm = () => {
               label={t("form_date")}
               component={AppAutoComplete}
               formMode={currentType}
+              variant="solid"
             />
           </div>
         </div>
