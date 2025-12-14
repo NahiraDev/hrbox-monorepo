@@ -6,9 +6,12 @@ import {
 } from "@heroui/react";
 import clsx from "clsx";
 import { FormMode } from "@hrbox/uikit/components/types";
+import "./index.css";
 
-interface AppAutoCompleteProps
-  extends Omit<AutocompleteProps<any>, "onChange" | "onBlur" | "onFocus"> {
+interface AppAutoCompleteProps extends Omit<
+  AutocompleteProps<any>,
+  "onChange" | "onBlur" | "onFocus"
+> {
   name: string;
   label?: string;
   required?: boolean;
@@ -60,17 +63,14 @@ const AppAutoCompleteComponent = React.forwardRef<
     const hasError = Boolean(error);
 
     const modeStyles = useMemo(() => {
-      const baseInput = "text-sm font-medium transition-all duration-200 rounded-lg !bg-red-400";
-      const baseWrapper = "!h-10 !px-3 !py-2.5 ";
+      const baseInput =
+        "text-sm font-medium transition-all duration-200 rounded-lg ";
 
       switch (formMode) {
         case FormMode.VIEW:
           return {
             wrapper: clsx(
-              baseWrapper,
-              "bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)]",
-              "border border-[#DCF0F9]",
-              "hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            "text-primary w-5 h-5 font-bold"
             ),
             input: clsx(
               baseInput,
@@ -82,27 +82,22 @@ const AppAutoCompleteComponent = React.forwardRef<
         case FormMode.EDIT:
           return {
             wrapper: clsx(
-              baseWrapper,
-              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
-              "border border-[#DCF0F9] dark:border-[#04425C]",
-              "hover:border-primary-300 dark:hover:border-primary-600",
-              "focus-within:border-primary focus-within:shadow-lg"
+              "text-primary w-5 h-5"
             ),
             input: clsx(baseInput, "text-secondary-900 dark:text-white"),
             isDisabled: false,
           };
-          
+
         case FormMode.CREATE:
         default:
           return {
             wrapper: clsx(
-              baseWrapper,
-              "!bg-none dark:bg-neutral-800 border border-[#DCF0F9]",
-              "dark:border-[#04425C]",
-              "hover:border-primary-300 dark:hover:border-primary-600",
-              "focus-within:border-primary focus-within:shadow-lg"
+              "text-primary  w-5 h-5",
             ),
-            input: clsx(baseInput, "text-secondary-900 dark:text-white !bg-red-400"),
+            input: clsx(
+              baseInput,
+              "text-secondary-900 dark:text-white  "
+            ),
             isDisabled: false,
           };
       }
@@ -142,7 +137,12 @@ const AppAutoCompleteComponent = React.forwardRef<
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
           classNames={{
-            base: clsx("flex flex-col gap-1.5 "),
+            base: clsx(
+              "flex flex-col gap-1.5 ",
+              formMode === FormMode.VIEW && "autocomplit-view",
+              formMode === FormMode.CREATE && "autocomplit-create",
+              formMode === FormMode.EDIT && "autocomplit-create"
+            ),
             selectorButton: wrapperClasses,
             listboxWrapper: "z-50 max-h-64",
             listbox: clsx(

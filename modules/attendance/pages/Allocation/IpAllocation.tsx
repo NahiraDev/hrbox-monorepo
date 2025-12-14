@@ -21,7 +21,7 @@ const IpAllocation=()=>{
           formId: "ip-form",
         }
       },
-      ModalSize.MD,
+      ModalSize['3XL'],
     );
   }
   return(

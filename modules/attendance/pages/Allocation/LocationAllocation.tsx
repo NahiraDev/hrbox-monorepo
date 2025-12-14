@@ -21,7 +21,7 @@ const LocationAllocation=()=>{
             formId: "location-form",
           }
         },
-        ModalSize.MD,
+        ModalSize['3XL'],
       );
     }
   return(

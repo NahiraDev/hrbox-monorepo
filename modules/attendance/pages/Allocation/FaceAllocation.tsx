@@ -20,7 +20,7 @@ const FaceAllocation = () => {
           formId: "face-form",
         },
       },
-      ModalSize.LG
+      ModalSize["3XL"]
     );
   };
   return (
