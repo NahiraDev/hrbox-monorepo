@@ -5,23 +5,26 @@ div.autocomplit-create [data-slot="input-wrapper"] {
   border: 1px solid #dcf0f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  div.autocomplit-create [data-slot="input-wrapper"] {
+
+.dark div.autocomplit-create [data-slot="input-wrapper"] {
     background-color:#01101a !important;
     opacity: 0.5;
     border: 1px solid #dcf0f9;
   }
-}
-/* div.autocomplit-view [data-slot="input-wrapper"] {
-  background-color: linear-gradient(
-    90deg,
-    #022c3d 5%,
-    #05587a 50%,
-    #022c3d 95%
-  ) !important;
-  border: 1px solid #dcf0f9;
-} */
+
 div.autocomplit-view [data-slot="input-wrapper"] {
   background: linear-gradient(90deg, #fff 5%, #eef9ff 48%, #fff 95%);
   border: 1px solid #dcf0f9;
+}
+.dark div.autocomplit-view [data-slot="input-wrapper"] {
+border: 1px solid #DCF0F9;
+background: linear-gradient(90deg, #022C3D 5%, #05587A 50%,  #022C3D 95%) !important;
+}
+.dark div.textarea-view{
+border: 1px solid #DEE1E8;
+background: linear-gradient(90deg, #022C3D 5%, #05587A 50%, #022C3D 95%);
+}
+.dark div.textarea-create{
+border: 1px solid #DEE1E8;
+background-color: #01101A;
 }

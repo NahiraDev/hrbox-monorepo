@@ -1,4 +1,5 @@
 import { CircularProgress } from "@heroui/react";
+import { useNavigate } from "@tanstack/react-router";
 import { ClipboardTick, Status, Timer1 } from "iconsax-reactjs";
 interface ProjectCardProps {
   title: string;
@@ -8,6 +9,7 @@ interface ProjectCardProps {
   progressValue: string | number;
 }
 const ProjectCard : React.FC<ProjectCardProps>= ({title,status,startDate,timeLeft,progressValue}) => {
+  const navigateCard=useNavigate<any>();
     return ( <>
      <div className="px-4 py-3.5 bg-[#DCEBF4] flex flex-col rounded-xl shadow-[0_1px_3px_0_rgba(8,14,28,0.30)]">
           <div className="flex flex-col gap-4 w-full">

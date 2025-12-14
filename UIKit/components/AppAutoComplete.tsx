@@ -70,7 +70,7 @@ const AppAutoCompleteComponent = React.forwardRef<
         case FormMode.VIEW:
           return {
             wrapper: clsx(
-            "text-primary w-5 h-5 font-bold"
+            "text-primary w-5 h-5 font-bold dark-complit"
             ),
             input: clsx(
               baseInput,
@@ -82,9 +82,9 @@ const AppAutoCompleteComponent = React.forwardRef<
         case FormMode.EDIT:
           return {
             wrapper: clsx(
-              "text-primary w-5 h-5"
+              "text-primary w-5 h-5 dark-complit"
             ),
-            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            input: clsx(baseInput, "text-secondary-900 dark:text-white "),
             isDisabled: false,
           };
 
@@ -92,7 +92,7 @@ const AppAutoCompleteComponent = React.forwardRef<
         default:
           return {
             wrapper: clsx(
-              "text-primary  w-5 h-5",
+              "text-primary  w-5 h-5 dark-complit",
             ),
             input: clsx(
               baseInput,

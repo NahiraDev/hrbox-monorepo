@@ -30,7 +30,7 @@ const IpAllocation=()=>{
       data={data}
       showStatus={true}
       hasPagination={true}
-      onRowClick={handleRowClick}
+      onRowClick={handleRowClick} 
     />
       </div>
     </>

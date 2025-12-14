@@ -135,7 +135,10 @@ export const AppTextArea = forwardRef<HTMLTextAreaElement, AppTextAreaProps>(
           classNames={{
             inputWrapper: clsx(
               modeStyles.wrapper,
-              hasError && !isViewMode && "border-danger  dark:bg-danger-900/20"
+              hasError && !isViewMode && "border-danger  dark:bg-danger-900/20",
+              formMode === FormMode.VIEW && "textarea-view",
+              formMode === FormMode.CREATE && "textarea-create",
+              formMode === FormMode.EDIT && "textarea-edit"
             ),
             input: clsx(
               modeStyles.input,
