@@ -115,7 +115,7 @@ export const HRLinkApiEndpoints = {
   },
 
   dashboard: {
-    getViewResume: `/Dashboard/ViewedResumes?count=12`,
+    getViewResume: `/Dashboard/ViewedResumes`,
     getResumePercent: `/Dashboard/GetResumePercent`,
     getJobOpportunitiesSent: '/Dashboard/GetJobOpportunitiesSent?page=0&pageSize=10',
     getCompaniesList: '/Company/GetCompaniesList?page=0&pageSize=12',

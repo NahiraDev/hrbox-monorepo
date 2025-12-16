@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 
 const skillsApi = createModuleApi({
   reducerPath: 'HRLinkApi',
-  baseUrl: '/DesktopModules/Freelancer/api',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
   tagTypes: ['Skills'],
   requiresAuth: true,
   autoToast: true,

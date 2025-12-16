@@ -175,7 +175,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             });
 
             proxy.on("proxyReq", (proxyReq, req, _res) => {
-              proxyReq.setHeader("Host", "hrlink.hrbox.me:50443");
+              proxyReq.setHeader("Host", "https://hrlink.hrbox.me:50443");
               proxyReq.setHeader("Origin", "https://front.hrbox.me");
             });
 

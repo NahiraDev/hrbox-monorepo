@@ -4,7 +4,7 @@ import { HRLinkApiEndpoints } from '@hrbox/modules/hrlink/app/endpoints';
 
 const commonApi = createModuleApi({
   reducerPath: 'commonApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443',
+  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
   tagTypes: ['Common'],
   requiresAuth: true,
   autoToast: true,
