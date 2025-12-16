@@ -1,4 +1,4 @@
-.custom-scroll::-webkit-scrollbar-thumb{
+/* .custom-scroll::-webkit-scrollbar-thumb{
   background-color: #0A9AD7;
   height: 15%;
   width: 4px;
@@ -15,17 +15,17 @@
 }
 .custom-scroll-table::-webkit-scrollbar-thumb{
   background-color: #0A9AD7;
-  height: 30%;
+  height: 15%;
   width: 4px;
-  padding-right: 8px;
-  margin-top: 2px;
+  margin-top: 62px ;
+  padding-right: 50px;
   margin-bottom: 54px;
 }
 .custom-scroll-table::-webkit-scrollbar-track {
   background-color: white;
-  margin-top: 2px;
   border-radius: 6px;
-  padding-right: 8px;
+  margin-top: 62px;
+  padding-right: 50px;
   margin-bottom: 54px;
 }
 .custom-scroll-approvals::-webkit-scrollbar-thumb{
@@ -37,4 +37,5 @@
   padding: 2px 1px;
   border-radius: 6px;
   box-shadow: 0 1px 3px 0 rgba(8,14,28,0.30);
-}
+} */
+

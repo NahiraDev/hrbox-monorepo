@@ -21,7 +21,7 @@ const ShiftAllocation = () => {
           formId: "shift-form",
         },
       },
-      ModalSize.MD,
+      ModalSize["3XL"],
     );
   };
 

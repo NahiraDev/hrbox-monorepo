@@ -1,0 +1,36 @@
+div.autocomplit-create [data-slot="input-wrapper"] {
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  opacity: 0.5;
+  border: 1px solid #dcf0f9;
+}
+
+div.autocomplit-create button[aria-label="Show suggestions"] svg {
+  stroke: #0A9AD7 !important;
+}
+.dark div.autocomplit-create button[aria-label="Show suggestions"] svg {
+  stroke: #DDBA69 !important;
+}
+
+.dark div.autocomplit-create [data-slot="input-wrapper"] {
+    background-color:#01101a !important;
+    opacity: 0.5;
+    border: 1px solid #dcf0f9;
+  }
+
+div.autocomplit-view [data-slot="input-wrapper"] {
+  background: linear-gradient(90deg, #fff 5%, #eef9ff 48%, #fff 95%);
+  border: 1px solid #dcf0f9;
+}
+.dark div.autocomplit-view [data-slot="input-wrapper"] {
+border: 1px solid #DCF0F9;
+background: linear-gradient(90deg, #022C3D 5%, #05587A 50%,  #022C3D 95%) !important;
+}
+.dark div.textarea-view{
+border: 1px solid #DEE1E8;
+background: linear-gradient(90deg, #022C3D 5%, #05587A 50%, #022C3D 95%);
+}
+.dark div.textarea-create{
+border: 1px solid #DEE1E8;
+background-color: #01101A;
+}

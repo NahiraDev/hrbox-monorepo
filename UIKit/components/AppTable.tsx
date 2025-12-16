@@ -1,6 +1,20 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@heroui/react";
-import { AppButton } from "@hrbox/uikit/components";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from "@heroui/react";
+import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
 
 export enum SortDirection {
@@ -58,13 +72,13 @@ export interface ExpandableConfig<T = any> {
   render: (
     row: T,
     index: number,
-    cellType?: "first" | "second",
+    cellType?: "first" | "second"
   ) => React.ReactNode;
   expandedRowClassName?: string;
   onExpand?: (
     row: T,
     index: number,
-    isExpanded: boolean,
+    isExpanded: boolean
   ) => void | Promise<void>;
   defaultExpanded?: boolean | ((row: T) => boolean);
   expandButtonPosition?: "start" | "end";
@@ -121,7 +135,7 @@ export interface AppTableProps<T = any> {
   currentPage?: number;
   onPageChange?: (page: number) => void;
 
-  variant?: "default" | "striped" | "bordered" | "minimal" | "attendance";
+  variant?: "default" | "striped" | "bordered" | "minimal";
   styles?: TableStyleConfig;
   density?: "sm" | "md" | "lg";
 
@@ -189,7 +203,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       onDelete,
       onView,
     },
-    ref,
+    ref
   ) => {
     // ============================================
     // STATES
@@ -235,13 +249,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     // PAGINATION
     // ============================================
 
-    const shouldPaginate = variant === "attendance" ? false : hasPagination;
-
     const paginatedData = useMemo(() => {
-      if (!shouldPaginate) return data;
       const startIndex = (page - 1) * pageSize;
       return data.slice(startIndex, startIndex + pageSize);
-    }, [data, page, pageSize, shouldPaginate]);
+    }, [data, page, pageSize]);
 
     const totalPages = useMemo(() => {
       return Math.ceil((totalItems || data.length) / pageSize);
@@ -255,7 +266,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           setCurrentPage(newPage);
         }
       },
-      [onPageChange],
+      [onPageChange]
     );
 
     // ============================================
@@ -275,7 +286,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         setSort(newSort);
         onSort?.(newSort);
       },
-      [sort, sortable, onSort],
+      [sort, sortable, onSort]
     );
 
     // ============================================
@@ -297,7 +308,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           .filter(Boolean);
         onSelectionChange?.(selectedItems, Array.from(newSelected));
       },
-      [selectedRows, paginatedData, onSelectionChange],
+      [selectedRows, paginatedData, onSelectionChange]
     );
 
     const handleSelectAll = useCallback(() => {
@@ -328,7 +339,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           setActionLoading(null);
         }
       },
-      [],
+      []
     );
 
     // ============================================
@@ -348,7 +359,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           // Calculate position
           setTimeout(() => {
             const rowElement = document.querySelector(
-              `[data-row-index="${index}"]`,
+              `[data-row-index="${index}"]`
             ) as HTMLTableRowElement;
             if (rowElement) {
               const rect = rowElement.getBoundingClientRect();
@@ -367,7 +378,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           await expandable.onExpand(paginatedData[index], index, !wasExpanded);
         }
       },
-      [expandedRows, paginatedData, expandable],
+      [expandedRows, paginatedData, expandable]
     );
 
     // ============================================
@@ -379,7 +390,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
       const updatePosition = () => {
         const rowElement = document.querySelector(
-          `[data-row-index="${expandedRowPosition.rowIndex}"]`,
+          `[data-row-index="${expandedRowPosition.rowIndex}"]`
         ) as HTMLTableRowElement;
 
         if (!rowElement) return;
@@ -393,7 +404,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                 left: rowRect.left + window.scrollX,
                 width: rowRect.width,
               }
-            : null,
+            : null
         );
       };
 
@@ -445,13 +456,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer ";
       let statusClass = "";
 
-      if (variant === "attendance") {
-        const dateValue = row["Date"]?.toString() || "";
-        if (dateValue.includes("Absence")) {
-          statusClass = "bg-red-100";
-        }
-      }
-
       const customClass =
         typeof styles.rowClassName === "function"
           ? styles.rowClassName(row, index, isSelected)
@@ -464,7 +468,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       col: ColumnConfig<any>,
       value: any,
       row: any,
-      index: number,
+      index: number
     ): string => {
       if (typeof col.cellClassName === "function") {
         return col.cellClassName(value, row, index);
@@ -480,19 +484,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           ? "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12"
           : "";
 
-      if (groupInfo && variant === "attendance") {
-        const { group, isFirst, isLast, isOnly } = groupInfo;
-        const roundedClass = isOnly
-          ? "rounded-xl"
-          : isFirst
-            ? "rounded-l-xl"
-            : isLast
-              ? "rounded-r-xl"
-              : "";
-        const spacingClass = !isLast ? "border-r-4 border-transparent" : "";
-        baseClass = `${spacingClass} ${group.headerClassName || ""} ${roundedClass}`;
-      }
-
       if (typeof col.headerClassName === "function") {
         return `${baseClass} ${col.headerClassName(col)}`;
       }
@@ -502,7 +493,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     const renderCellValue = (
       col: ColumnConfig<any>,
       row: any,
-      index: number,
+      index: number
     ) => {
       const value = row[col.key];
 
@@ -629,13 +620,13 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           }}
           onClick={() => sortable && handleSort(col.key)}
         >
-          <div className="flex items-center justify-center gap-1">
+          <div className="flex items-center justify-start gap-1">
             {col.headerRender ? col.headerRender() : col.label || col.key}
             {sortable && sort?.key === col.key && (
               <span>{sort.direction === SortDirection.ASC ? "↑" : "↓"}</span>
             )}
           </div>
-        </TableColumn>,
+        </TableColumn>
       );
     });
 
@@ -647,7 +638,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           className="bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]"
         >
           Actions
-        </TableColumn>,
+        </TableColumn>
       );
     }
 
@@ -663,23 +654,15 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         <Table
           aria-label="Data table"
           className={`${styles.tableClassName} h-full`}
-          isHeaderSticky={variant === "attendance" || sticky}
           classNames={{
-            base:
-              variant === "attendance" ? "w-full" : "!h-full bg-transparent",
-            wrapper:
-              variant === "attendance"
-                ? "h-full overflow-y-scroll custom-scroll bg-transparent w-full"
-                : "bg-transparent h-full w-full!",
-            table: "w-full h-full flex flex-col relative",
-            tbody: "flex flex-col w-full",
-            td: "",
-            thead: "w-full absolute top-0",
-            tr: "rounded-6 w-full!",
-            th:
-              variant === "attendance"
-                ? "w-full first:bg-[#999999] [&:nth-of-type(2)]:bg-[#999999] text-white [&:nth-of-type(3)]:bg-primary [&:nth-of-type(4)]:bg-primary [&:nth-of-type(5)]:bg-primary [&:nth-of-type(6)]:bg-primary [&:nth-of-type(7)]:bg-primary [&:nth-of-type(8)]:bg-primary [&:nth-of-type(9)]:bg-green-500"
-                : "bg-primary-400",
+            base: "!h-full !w-full bg-transparent",
+            wrapper: "bg-transparent h-full !w-full",
+            table: "!w-full",
+            tbody: "!w-full",
+            td: "py-3 px-2",
+            thead: "!w-full ",
+            tr: "rounded-6 !w-full",
+            th: "bg-primary-400",
           }}
         >
           <TableHeader className={styles.headerClassName}>
@@ -717,10 +700,10 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                       }
                     }}
                   >
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-start gap-2">
                       <span>{renderCellValue(col, row, index)}</span>
                     </div>
-                  </TableCell>,
+                  </TableCell>
                 );
               });
 
@@ -732,7 +715,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                     className="text-secondary-400 text-xs"
                   >
                     {renderRowActions(row, index)}
-                  </TableCell>,
+                  </TableCell>
                 );
               }
 
@@ -765,23 +748,25 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             >
               {expandable.render(
                 paginatedData[expandedRowPosition.rowIndex],
-                expandedRowPosition.rowIndex,
+                expandedRowPosition.rowIndex
               )}
             </div>,
-            document.body,
+            document.body
           )}
 
         {/* Pagination*/}
-        {/*{shouldPaginate && (*/}
-        {/*  <div className="mt-4 flex justify-end px-4">*/}
-        {/*    <AppPagination*/}
-        {/*      onChange={handlePageChange}*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*)}*/}
+        <div className="mt-4 flex justify-end px-4">
+          <AppPagination
+            meta={{
+              page: 1,
+              totalPages: 10,
+            }}
+            onPageChange={handlePageChange}
+          />
+        </div>
       </div>
     );
-  },
+  }
 );
 
 AppTable.displayName = "AppTable";
