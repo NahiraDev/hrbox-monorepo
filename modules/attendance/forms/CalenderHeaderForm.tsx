@@ -118,7 +118,7 @@ export const CalenderHeaderForm = () => {
     setFieldValue(fieldName, value);
   };
 
-    const getMonthLabel = (monthKey: string) => {
+  const getMonthLabel = (monthKey: string) => {
     return allMonths.find((m) => m.key === monthKey)?.label || "";
   };
   return (
@@ -149,35 +149,10 @@ export const CalenderHeaderForm = () => {
             />
           </div>
           <div className="flex flex-row gap-3">
-              <FormField
-              name="month"
-              component={AppDropDown}
-               title={
-                values.month
-                  ? `${getMonthLabel(values.month)}`
-                  : t("month")
-              }
-              items={allMonths}
-              valueKey="key"
-              labelKey="label"
-              onChange={(value: any) => handleFieldChange("month", value)}
-              size="md"
-              radius="lg"
-               onSelectionChange={(value: any) =>
-                handleFieldChange("month", value)
-              }
-              startIcon={<Calendar size={22} />}
-              endIcon={<ArrowDown2 size={20} />}
-            />
-
-           <FormField
+            <FormField
               name="year"
               component={AppDropDown}
-                title={
-                values.year
-                  ? `${values.year}`
-                  : t("year")
-              }
+              title={values.year ? `${values.year}` : t("year")}
               items={allYears}
               valueKey="key"
               labelKey="label"
@@ -187,7 +162,24 @@ export const CalenderHeaderForm = () => {
               startIcon={<Calendar size={22} />}
               endIcon={<ArrowDown2 size={20} />}
             />
-
+            <FormField
+              name="month"
+              component={AppDropDown}
+              title={
+                values.month ? `${getMonthLabel(values.month)}` : t("month")
+              }
+              items={allMonths}
+              valueKey="key"
+              labelKey="label"
+              onChange={(value: any) => handleFieldChange("month", value)}
+              size="md"
+              radius="lg"
+              onSelectionChange={(value: any) =>
+                handleFieldChange("month", value)
+              }
+              startIcon={<Calendar size={22} />}
+              endIcon={<ArrowDown2 size={20} />}
+            />
             <AppButton
               color="white"
               size="md"
@@ -220,25 +212,12 @@ export const CalenderHeaderForm = () => {
 
             <div className="flex flex-row gap-3">
               <FormField
-                name="person"
-                component={AppDropDown}
-                title={
-                  values.person?`${values.person}`:t("person")
-                }
-                items={uniquePersons}
-                className="border-1 border-primary px-3 py-2 gap-2 rounded-lg"
-                valueKey="key"
-                onChange={(value: any) =>
-                  handleFieldChange("person", value)
-                }
-                startIcon={<Profile size={22} />}
-                endIcon={<ArrowDown2 size={20} />}
-              />
-              <FormField
                 name="department"
                 component={AppDropDown}
                 title={
-                  values.department?`${values.department}`:t("department/unit")
+                  values.department
+                    ? `${values.department}`
+                    : t("department/unit")
                 }
                 items={uniqueDepartments}
                 valueKey="key"
@@ -247,6 +226,17 @@ export const CalenderHeaderForm = () => {
                 }
                 className="border-1 border-primary px-3 py-2 gap-2 rounded-lg"
                 startIcon={<Buildings2 size={22} />}
+                endIcon={<ArrowDown2 size={20} />}
+              />
+              <FormField
+                name="person"
+                component={AppDropDown}
+                title={values.person ? `${values.person}` : t("person")}
+                items={uniquePersons}
+                className="border-1 border-primary px-3 py-2 gap-2 rounded-lg"
+                valueKey="key"
+                onChange={(value: any) => handleFieldChange("person", value)}
+                startIcon={<Profile size={22} />}
                 endIcon={<ArrowDown2 size={20} />}
               />
             </div>

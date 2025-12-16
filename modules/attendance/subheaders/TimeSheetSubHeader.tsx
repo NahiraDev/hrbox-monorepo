@@ -2,10 +2,9 @@ import { AppButton, AppPageTitle, AppSearchInput } from "@hrbox/UIKit/components
 import { FormField } from "@hrbox/UIKit/components/FormField";
 import { Candle2, Setting, Setting2, Setting3, Setting4 } from "iconsax-reactjs";
 import { FormProvider } from "@hrbox/core/providers";
-import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useLocation } from "@tanstack/react-router";
 
 const TimeSheetHeader = (props:any) => {
-    const navigate = useNavigate<any>();
     const location=useLocation();
      const isAllProjects =
     location.pathname === "/attendance/all-projects";
@@ -25,7 +24,7 @@ const TimeSheetHeader = (props:any) => {
             />
             </FormProvider>
             {isAllProjects&&(
-            <AppButton content={<Setting4 size={24}/>} className="p-2 border border-primary "onPress={() =>navigate({ to: "/attendance/project-timeSheet" })} />
+            <AppButton content={<Setting4 size={24}/>} className="p-2 border border-primary " />
             )}
         </div>
     </div>
