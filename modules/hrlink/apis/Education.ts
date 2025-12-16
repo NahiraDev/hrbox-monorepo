@@ -1,17 +1,9 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-// Assuming you have types defined elsewhere; replace 'any' with actual types like Education, University, etc.
-const educationApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Education'],
-  requiresAuth: true,
-  autoToast: true,
-});
-
-export const educationApiEndpoints = educationApi.injectEndpoints({
+export const educationApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build: any) => ({
     // Paginated query for listing all educations
     fetchEducations: createPaginatedQuery<any>(build, {

@@ -1,22 +1,16 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const settingApi = createModuleApi({
-  reducerPath: 'settingApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Setting'],
-  requiresAuth: true,
-  autoToast: true,
-});
 
-export const settingApiWithEndpoints = settingApi.injectEndpoints({
+export const settingApiWithEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchProfile: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.profile.getInfo,
-      method: 'GET',
-      tags: ['Setting'],
-    }),
+    // fetchProfile: createQuery<any>(build, {
+    //   url: HRLinkApiEndpoints.profile.getInfo,
+    //   method: 'GET',
+    //   tags: ['Setting'],
+    // }),
 
     fetchGeneralSetting: createQuery<any>(build, {
       url: HRLinkApiEndpoints.profile.fetchSettings,
@@ -24,17 +18,17 @@ export const settingApiWithEndpoints = settingApi.injectEndpoints({
       tags: ['Setting'],
     }),
 
-    changePassword: createMutation<any, any>(build, {
-      url: HRLinkApiEndpoints.profile.changePassword,
-      method: 'POST',
-      tags: ['Setting'],
-    }),
+    // changePassword: createMutation<any, any>(build, {
+    //   url: HRLinkApiEndpoints.profile.changePassword,
+    //   method: 'POST',
+    //   tags: ['Setting'],
+    // }),
 
-    editProfile: createMutation<any, any>(build, {
-      url: HRLinkApiEndpoints.profile.edit,
-      method: 'POST',
-      tags: ['Setting'],
-    }),
+    // editProfile: createMutation<any, any>(build, {
+    //   url: HRLinkApiEndpoints.profile.edit,
+    //   method: 'POST',
+    //   tags: ['Setting'],
+    // }),
 
     editGeneralSetting: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.profile.editSettings,
@@ -45,9 +39,9 @@ export const settingApiWithEndpoints = settingApi.injectEndpoints({
 });
 
 export const {
-  useFetchProfileQuery,
+  // useFetchProfileQuery,
   useFetchGeneralSettingQuery,
-  useChangePasswordMutation,
-  useEditProfileMutation,
+  // useChangePasswordMutation,
+  // useEditProfileMutation,
   useEditGeneralSettingMutation,
 } = settingApiWithEndpoints;

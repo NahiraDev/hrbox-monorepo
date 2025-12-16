@@ -1,16 +1,10 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const courseApi = createModuleApi({
-  reducerPath: 'courseApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Course'],
-  requiresAuth: true,
-  autoToast: true,
-});
 
-export const courseApiWithEndpoints = courseApi.injectEndpoints({
+export const courseApiWithEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build) => ({
     createCourse: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.course.create,

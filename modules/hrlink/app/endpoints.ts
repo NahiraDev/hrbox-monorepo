@@ -9,7 +9,7 @@ export const HRLinkApiEndpoints = {
       edit: `/Award/Edit`,
       delete: `/Award/Delete`,
       getList: `/Award/GetList`,
-      getDetail: `/Award/Get`,
+      getDetail: `/Award/GetDetail`,
     },
 
     course: {

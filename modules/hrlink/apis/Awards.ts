@@ -1,16 +1,9 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const awardApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Award'],
-  requiresAuth: true,
-  autoToast: true,
-});
 
-export const awardApiEndpoints = awardApi.injectEndpoints({
+export const awardApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build:any) => ({
 
     createAward: createMutation<any , any>(build, {
@@ -25,7 +18,7 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       tags: ['Award'],
     }),
 
-    deleteAward: createMutation<any, any>(build, {
+    deleteAward: createMutation<any, { id: number }>(build, {
       url: HRLinkApiEndpoints.resume.award.delete,
       method: 'DELETE',
       tags: ['Award'],
@@ -37,7 +30,7 @@ export const awardApiEndpoints = awardApi.injectEndpoints({
       tags: ['Award'],
     }),
 
-    fetchAwardDetail: createQuery<any>(build, {
+    fetchAwardDetail: createQuery<any, { id: number }>(build, {
       url: HRLinkApiEndpoints.resume.award.getDetail,
       tags: ['Award'],
     }),

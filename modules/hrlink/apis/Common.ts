@@ -1,17 +1,11 @@
 import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from '@hrbox/modules/hrlink/app/endpoints';
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const commonApi = createModuleApi({
-  reducerPath: 'commonApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Common'],
-  requiresAuth: true,
-  autoToast: true,
-});
 
 // This endpoints corespond to Master/ path
-export const commonApiWithEndpoints = commonApi.injectEndpoints({
+export const commonApiWithEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build) => ({
     // GET: GetJobGroup
     fetchJobGroup: createQuery<any>(build, {
