@@ -2,7 +2,7 @@ import { ReportPersonnal } from "@hrbox/modules/attendance/app/mock";
 
 import { AppButton } from "@hrbox/uikit/components";
 import { Add, Edit, Trash } from "iconsax-reactjs";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 
@@ -14,8 +14,9 @@ const PersonalCalenderList = () => {
     top: "0px",
     left: "0px",
   });
-const menuRef=useRef<HTMLDivElement | null>(null);
+
   const { values } = useFormContext();
+
   const month = values.month || "";
   const year = values.year || "";
   const person = values.person || "";
@@ -41,20 +42,6 @@ const menuRef=useRef<HTMLDivElement | null>(null);
       year: parsedYear,
     };
   };
-
-  useEffect(()=>{
-    const handleClickOutSide=(event:MouseEvent)=>{
-      if(menuRef.current && !menuRef.current.contains(event.target as Node)){
-        setOpenMenu(null)
-      }
-    }
-    if(openMenu){
-      document.addEventListener("mousedown",handleClickOutSide);
-    }
-    return ()=>{
-      document.removeEventListener("mousedown",handleClickOutSide)
-    }
-  },[openMenu])
 
   const filteredData = useMemo(() => {
     console.log("🔄 Filtering with:", { month, year, person, department });
@@ -263,7 +250,6 @@ const menuRef=useRef<HTMLDivElement | null>(null);
       {/* start menu button */}
       {openMenu && (
         <div
-        ref={menuRef}
           className="fixed px-4 py-2 bg-white rounded-md z-50 shadow-lg"
           style={{
             top: menuStyle.top,
