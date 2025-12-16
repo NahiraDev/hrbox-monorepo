@@ -5,6 +5,12 @@ div.autocomplit-create [data-slot="input-wrapper"] {
   border: 1px solid #dcf0f9;
 }
 
+div.autocomplit-create button[aria-label="Show suggestions"] svg {
+  stroke: #0A9AD7 !important;
+}
+.dark div.autocomplit-create button[aria-label="Show suggestions"] svg {
+  stroke: #DDBA69 !important;
+}
 
 .dark div.autocomplit-create [data-slot="input-wrapper"] {
     background-color:#01101a !important;

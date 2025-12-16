@@ -15,7 +15,7 @@ const AllProjects = () => {
       },
       {
         title: "Payrol",
-        status: "Back log",
+        status: "Inprogress",
         startDate: "Start 2025/01/01",
         timeLeft: "11:40 Left",
         progressValue: "5%",
@@ -43,7 +43,7 @@ const AllProjects = () => {
       },
       {
         title: "Payrol",
-        status: "Back log",
+        status: "Done",
         startDate: "Start 2025/01/01",
         timeLeft: "11:40 Left",
         progressValue: "5%",
