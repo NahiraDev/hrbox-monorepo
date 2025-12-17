@@ -20,6 +20,7 @@ export const HRLinkApiEndpoints = {
       delete: `/Course/Delete`,
       getList: `/Course/GetCourseList`,
       getDetail: `/Course/Get`,
+      getCourses: 'Course/GetList',
     },
 
     education: {
@@ -29,6 +30,7 @@ export const HRLinkApiEndpoints = {
       getList: `/Education/GetList`,
       getDetail: `/Education/GetDetail`,
       getUniversity: `/Education/GetUniversity`,
+      getFieldOfStudy: 'Education/fieldOfEducation',
     },
 
     experience: {
@@ -61,6 +63,11 @@ export const HRLinkApiEndpoints = {
     getDetail: `/Company/GetDetail`,
     followOrUnfollow: `/Company/FollowAndUnFollowCompany`,
     reasyApply: 'Company/EasyApply',
+    lookingForJobSituations: 'Company/LookingForJobSituations',
+    getCompanyScore: 'Company/GetScore',
+    easyApply: 'Company/EasyApply',
+    orgOffer: 'Company/OrgOffers',
+    allCompany: 'Company/GetAllCompany',
   },
 
   job: {
@@ -110,8 +117,9 @@ export const HRLinkApiEndpoints = {
     addLocation: `/MasterService/AddLocation`,
     editLocation: `/MasterService/EditLocation`,
     getLocation: `/MasterService/GetLocation`,
-    saveTemplateFile: `/MasterService/SaveTempFile`,
-    deleteTemplateFile: '/MasterService/DeleteFile'
+    deleteLocation: `MasterService/DeleteLocation`,
+    saveTempFile: `/MasterService/SaveTempFile`,
+    deleteFile: '/MasterService/DeleteFile'
   },
 
   dashboard: {
@@ -119,6 +127,7 @@ export const HRLinkApiEndpoints = {
     getResumePercent: `/Dashboard/GetResumePercent`,
     getJobOpportunitiesSent: '/Dashboard/GetJobOpportunitiesSent',
     getCompaniesList: '/Company/GetCompaniesList',
+    // THIS MIGHT BE DEPRECATED
     getData: `/Dashboard/GetAllAdaptionByUserId`,
   },
 };

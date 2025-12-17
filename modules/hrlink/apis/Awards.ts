@@ -14,7 +14,7 @@ export const awardApiEndpoints = HRLinkApi.injectEndpoints({
 
     editAward: createMutation<any , any>(build, {
       url: HRLinkApiEndpoints.resume.award.edit,
-      method: 'POST',
+      method: 'PUT',
       tags: ['Award'],
     }),
 
@@ -32,6 +32,7 @@ export const awardApiEndpoints = HRLinkApi.injectEndpoints({
 
     fetchAwardDetail: createQuery<any, { id: number }>(build, {
       url: HRLinkApiEndpoints.resume.award.getDetail,
+      method: 'GET',
       tags: ['Award'],
     }),
 

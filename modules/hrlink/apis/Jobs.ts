@@ -1,21 +1,20 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
 export const jobsApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build:any) => ({
-    fetchJobOffers: createQuery<any>(build, {
+    fetchJobOffers: createQuery<any, {Jobid: number}>(build, {
       url: HRLinkApiEndpoints.job.getJobOfferDetail,
       tags: ['Jobs'],
     }),
 
-    fetchJobOpportunities: createQuery<any>(build, {
+    fetchJobOpportunities: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.job.opportunities,
       tags: ['Jobs'],
     }),
 
-    fetchJobOfferDetail: createQuery<any>(build, {
+    fetchJobOfferDetail: createQuery<any, {Jobid: number}>(build, {
       url: HRLinkApiEndpoints.job.getJobOfferDetail,
       tags: ['Jobs'],
     }),
@@ -26,7 +25,7 @@ export const jobsApiEndpoints = HRLinkApi.injectEndpoints({
       tags: ['Jobs'],
     }),
 
-    fetchJobOpportunitiesDetail: createQuery<any>(build, {
+    fetchJobOpportunitiesDetail: createQuery<any, {Jobid: number}>(build, {
       url: HRLinkApiEndpoints.job.useGetJobOpportunitiesDetail,
       tags: ['Jobs'],
     }),
@@ -36,17 +35,17 @@ export const jobsApiEndpoints = HRLinkApi.injectEndpoints({
       tags: ['Jobs'],
     }),
 
-    fetchAboutCompany: createQuery<any>(build, {
+    fetchAboutCompany: createQuery<any, {orgid: number}>(build, {
       url: HRLinkApiEndpoints.job.getAboutCompany,
       tags: ['Jobs'],
     }),
 
-    fetchJobOfferListDetail: createQuery<any>(build, {
+    fetchJobOfferListDetail: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.job.getJobOfferListDetail,
       tags: ['Jobs'],
     }),
 
-    fetchListJobOffer: createQuery<any>(build, {
+    fetchListJobOffer: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.job.getListJobOffer,
       tags: ['Jobs'],
     }),
