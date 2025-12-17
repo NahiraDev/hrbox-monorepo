@@ -278,14 +278,14 @@ const handelDelete = (row: any) => {
             {openMenu.includes("shift") ? (
               <React.Fragment key="shift-menu">
                 <AppButton
-                  content="Daily Leave"
+                  content="Hourly Leave"
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
                 />
                 <AppButton
-                  content="Daily Mission"
+                  content="Hourly Mission"
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -299,7 +299,7 @@ const handelDelete = (row: any) => {
                   size=""
                 />
                 <AppButton
-                  content="Delete Request"
+                  content="Delete Traffic Entry"
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""

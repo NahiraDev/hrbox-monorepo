@@ -1,7 +1,7 @@
 import { Add, Edit, Trash } from "iconsax-reactjs";
 import { AppButton } from "@hrbox/uikit/components";
 import Comprehensivereport from "@hrbox/modules/attendance/pages/attendanceCalender/Comprehensivereport";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 
 const TrafficCalender = () => {
@@ -13,7 +13,20 @@ const TrafficCalender = () => {
     left: "0px",
   });
   const [IsReportHidden, setIsReportHidden] = useState<boolean>(false);
-
+const menuRef=useRef<HTMLDivElement | null>(null);
+  useEffect(()=>{
+    const handleClickOutSide=(event:MouseEvent)=>{
+      if(menuRef.current && !menuRef.current.contains(event.target as Node)){
+        setOpenMenu(null)
+      }
+    }
+    if(openMenu){
+      document.addEventListener("mousedown",handleClickOutSide);
+    }
+    return ()=>{
+      document.removeEventListener("mousedown",handleClickOutSide)
+    }
+  },[openMenu])
   const toggleMenu = (rowindex: number, cellType: string,e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     const key = `${rowindex}-${cellType}`;
@@ -178,6 +191,7 @@ const TrafficCalender = () => {
         {/* start menu button */}
         {openMenu && (
           <div
+          ref={menuRef}
             className="fixed px-4 py-2 bg-white rounded-md z-50 shadow-lg"
             style={{
               top: menuStyle.top,
@@ -187,60 +201,60 @@ const TrafficCalender = () => {
           >
             <div className="flex flex-col items-start gap-1.5">
               {openMenu.includes("shift") ? (
-                <React.Fragment key="shift-menu">
-                  <AppButton
-                    content="Daily Leave"
-                    startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm dark:text-white dark:bg-[#01101A]!"
-                    size=""
-                    key="Daily_Leave"
-                  />
-                  <AppButton
-                    content="Daily Mission"
-                    startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    size=""
-                    key="Daily_Mission"
-                  />
-                  <AppButton
-                    content="Edit Traffic Entry"
-                    startContent={<Edit size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    key="Edit_Traffic_Entry"
-                    size=""
-                  />
-                  <AppButton
-                    content="Delete Request"
-                    startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    size=""
-                    key="Delete_Request"
-                  />
-                </React.Fragment>
+                    <React.Fragment key="shift-menu">
+                <AppButton
+                  content="Hourly Leave"
+                  startContent={<Add size={18} />}
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                  size=""
+                  key="Daily_Leave"
+                />
+                <AppButton
+                  content="Hourly Mission"
+                  startContent={<Add size={18} />}
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                  size=""
+                  key="Daily_Mission"
+                />
+                <AppButton
+                  content="Edit Traffic Entry"
+                  startContent={<Edit size={18} />}
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                  key="Edit_Traffic_Entry"
+                  size=""
+                />
+                <AppButton
+                  content="Delete Traffic Entry"
+                  startContent={<Trash size={18} />}
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                  size=""
+                  key="Delete_Request"
+                />
+              </React.Fragment>
               ) : (
-                <React.Fragment key="date-menu">
-                  <AppButton
-                    content="Daily Leave"
-                    startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    key="Daily_Leave"
-                    size=""
-                  />
-                  <AppButton
-                    content="Daily Mission"
-                    startContent={<Add size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    size=""
-                    key="Daily_Mission"
-                  />
-                  <AppButton
-                    content="Delete Request"
-                    startContent={<Trash size={18} />}
-                    className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                    size=""
-                    key="Delete_Request"
-                  />
-                </React.Fragment>
+        <React.Fragment key="date-menu dark:bg-[#01101A]!">
+                       <AppButton
+                         content="Daily Leave"
+                         startContent={<Add size={18} />}
+                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                         key="Daily_Leave"
+                         size=""
+                       />
+                       <AppButton
+                         content="Daily Mission"
+                         startContent={<Add size={18} />}
+                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                         size=""
+                         key="Daily_Mission"
+                       />
+                       <AppButton
+                         content="Delete Request"
+                         startContent={<Trash size={18} />}
+                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                         size=""
+                         key="Delete_Request"
+                       />
+                     </React.Fragment>
               )}
             </div>
           </div>
