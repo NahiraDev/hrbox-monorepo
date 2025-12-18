@@ -33,7 +33,7 @@ const Dashboard = () => {
         <div className="left flex flex-col  w-full gap-y-4 ">
           <div className="top  h-[60%]   flex gap-x-4">
             {/* progressBar */}
-            <div className="Progressbar  flex flex-col w-130 h-full bg-[#DCF0F9] border-primary border rounded-xl">
+            <div className="Progressbar  flex flex-col w-130 h-full bg-[#DCF0F9] dark:bg-[#04425C60] border-primary border rounded-xl">
               <div className=" w-full pt-4 pl-2.25 pr-3.75 pb-4   ">
                 <div className="w-full pb-2.5">
                   <p className="text-secondary-1000 font-sans text-[24px] font-semibold text-capitalize  ">
@@ -47,7 +47,7 @@ const Dashboard = () => {
           </div>
           <div className="flex button h-[40%] gap-4   ">
             <EmployeeStatus />
-            <div className="w-[60%] bg-[#DCF0F9] border-primary border rounded-xl">
+            <div className="w-[60%] bg-[#DCF0F9] dark:bg-[#04425C60] border-primary border rounded-xl">
               <div className=" w-full pt-4 pl-2.25 pr-3.75 pb-4   ">
                 <div className="w-full pb-2.5">
                   <p className="text-[#04070E] font-sans text-[24px] font-semibold text-capitalize  ">
@@ -56,7 +56,7 @@ const Dashboard = () => {
                 </div>
                 <hr className="w-full border-[#05587A]" />
               </div>
-              <div className="flex w-full bg-admin-primary-light px-3 ">
+              <div className="flex w-full  px-3 ">
                 <div className="left flex flex-col gap-3.5 w-[60%]">
                   <div className="flex flex-row w-fit gap-2 ">
                     {/* <Elipse2/> */}
@@ -84,7 +84,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="right flex flex-col border-primary bg-[#DCF0F9] rounded-xl w-88">
+        <div className="right flex flex-col dark:bg-[#04425C60] border-primary border bg-[#DCF0F9] rounded-xl w-100">
           <div className=" w-full flex flex-col  px-3 py-3   ">
             <div className="w-full flex flex-row justify-between pb-2.5">
               <p className="text-secondary-1000 font-sans text-2xl font-semibold text-capitalize  ">
@@ -94,9 +94,10 @@ const Dashboard = () => {
             </div>
             <hr className="w-full border-neutral-100" />
           </div>
-          <div className="w-full py-4 h-[20%]   flex flex-col items-center  ">
-            <div className="w-[90%] bg-white  h-full flex flex-col  shadow-light-tight-1 rounded-lg">
-              <div className=" w-full flex flex-col  px-3 py-3   ">
+          <div className="w-full min-h-[114px]  max-h-[116px]   flex flex-col gap-y-2 items-center  ">
+            <div className="w-[90%] py-4   bg-white h-full  flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
                 <div className="w-full flex flex-row items-center gap-1 pb-1  ">
                   <ArchiveBook className="w-5 h-5" />
                   <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
@@ -105,24 +106,196 @@ const Dashboard = () => {
                 </div>
                 <hr className="w-full border-neutral-100" />
               </div>
-              <div className=" w-full flex flex-row items-center  px-3 justify-between   ">
-                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
                   <Calendar className="w-5 h-5" />
                   <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
                     Number of employees:
                   </p>
                 </div>
-                <span className="text-secondary-1000 text-sm ">1595</span>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
               </div>
-              <div className=" w-full flex flex-row items-center  px-3 justify-between   ">
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
                 <div className="w-full flex flex-row items-center gap-1   ">
                   <Document className="w-5 h-5" />
                   <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
                     Status
                   </p>
                 </div>
-                <div className="px-2 leading-10  py-1 bg-[#FFCC00] rounded-lg">
-                  <span className="text-xs">Grade B</span>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] py-4   bg-white  h-full flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
+                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+                  <ArchiveBook className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Designer
+                  </p>
+                </div>
+                <hr className="w-full border-neutral-100" />
+              </div>
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Calendar className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Number of employees:
+                  </p>
+                </div>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
+              </div>
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Document className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Status
+                  </p>
+                </div>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] py-4   bg-white  h-full flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
+                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+                  <ArchiveBook className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Designer
+                  </p>
+                </div>
+                <hr className="w-full border-neutral-100" />
+              </div>
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Calendar className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Number of employees:
+                  </p>
+                </div>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
+              </div>
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Document className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Status
+                  </p>
+                </div>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] py-4    bg-white  h-full flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
+                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+                  <ArchiveBook className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Designer
+                  </p>
+                </div>
+                <hr className="w-full border-neutral-100" />
+              </div>
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Calendar className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Number of employees:
+                  </p>
+                </div>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
+              </div>
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Document className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Status
+                  </p>
+                </div>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] py-4   bg-white  h-full flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
+                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+                  <ArchiveBook className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Designer
+                  </p>
+                </div>
+                <hr className="w-full border-neutral-100" />
+              </div>
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Calendar className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Number of employees:
+                  </p>
+                </div>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
+              </div>
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Document className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Status
+                  </p>
+                </div>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] py-4   bg-white  h-full flex flex-col gap-3  shadow-light-tight-1 rounded-lg">
+              {/* Designer */}
+              <div className=" w-full flex flex-col  px-3    ">
+                <div className="w-full flex flex-row items-center gap-1 pb-1  ">
+                  <ArchiveBook className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Designer
+                  </p>
+                </div>
+                <hr className="w-full border-neutral-100" />
+              </div>
+              {/* Calender */}
+              <div className=" w-full flex flex-row items-center    px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Calendar className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Number of employees:
+                  </p>
+                </div>
+                <span className="text-secondary-1000 text-sm  ">1595</span>
+              </div>
+              {/* File & Status */}
+              <div className=" w-full flex flex-row items-center     px-3 justify-between   ">
+                <div className="w-full flex flex-row items-center gap-1   ">
+                  <Document className="w-5 h-5" />
+                  <p className="text-secondary-1000  font-sans text-md font-semibold text-capitalize  ">
+                    Status
+                  </p>
+                </div>
+                <div className="w-20 h-5   flex justify-center items-center    bg-[#FFCC00] rounded-lg">
+                  <span className="text-xs  text-secondary-1000">Grade B</span>
                 </div>
               </div>
             </div>

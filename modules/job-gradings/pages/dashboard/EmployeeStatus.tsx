@@ -1,45 +1,43 @@
 import { UserRemove } from "iconsax-reactjs";
 const EmployeeStatus = () => {
   return (
-    
-      <div className="h-inherit w-130 py-4 px-3   bg-[#DCF0F9] border-primary border rounded-xl">
-        <div className="w-full pb-2.5 ">
-          <p className="text-secondary-1000 font-sans text-2xl font-semibold text-capitalize  ">
-            Job-employee fit status
+    <div className="h-inherit w-130 py-4 px-3  dark:bg-[#04425C60]  bg-[#DCF0F9] border-primary border rounded-xl">
+      <div className="w-full pb-2.5 ">
+        <p className="text-secondary-1000 font-sans text-2xl font-semibold text-capitalize  ">
+          Job-employee fit status
+        </p>
+      </div>
+      <hr className="w-full border-[#05587A]" />
+      <div className="flex flex-row w-full px-9  py-9 items-center justify-between ">
+        <div className="flex w-fit flex-col items-center ">
+          <UserRemove color="#8A1B1B" className="w-10 h-10 " />
+          <span className="text-[32px] font-extrabold text-[#F23030]!  opacity-60">
+            14%
+          </span>
+          <p className="text-[#F23030]! text-[24px] font-extrabold font-sans ">
+            lower
           </p>
         </div>
-        <hr className="w-full border-[#05587A]" />
-        <div className="flex flex-row w-full px-9  py-9 items-center justify-between ">
-          <div className="flex w-fit flex-col items-center ">
-            <UserRemove color="#8A1B1B" className="w-10 h-10 " />
-            <span className="text-[32px] font-extrabold text-danger opacity-[0.6]">
-              14%
-            </span>
-            <p className="text-[#8A1B1B] text-[24px] font-extrabold font-sans ">
-              lower
-            </p>
-          </div>
-          <div className="flex w-fit flex-col items-center">
-            <UserRemove color="#136234" className="w-10 h-10 " />
-            <span className="text-[32px] font-extrabold text-[#136234] opacity-[0.6]">
-              53%
-            </span>
-            <p className="text-[#136234]  text-[24px] font-extrabold font-sans ">
-              proportional
-            </p>
-          </div>
-          <div className="flex w-fit flex-col items-center">
-            <UserRemove color="#05587A" className="w-10 h-10 " />
-            <span className="text-[32px] font-extrabold text-primary-700 opacity-[0.6]">
-              53%
-            </span>
-            <p className="text-primary-700 text-[24px] font-extrabold font-sans ">
-              beyond
-            </p>
-          </div>
+        <div className="flex w-fit flex-col items-center">
+          <UserRemove color="#136234" className="w-10 h-10 " />
+          <span className="text-[32px] font-extrabold text-success! opacity-[0.6]">
+            53%
+          </span>
+          <p className="text-success! text-[24px] font-extrabold font-sans ">
+            proportional
+          </p>
+        </div>
+        <div className="flex w-fit flex-col items-center">
+          <UserRemove color="#05587A" className="w-10 h-10 " />
+          <span className="text-[32px] font-extrabold text-primary-700! opacity-[0.6]">
+            53%
+          </span>
+          <p className="text-primary-700! text-[24px] font-extrabold font-sans ">
+            beyond
+          </p>
         </div>
       </div>
-    
+    </div>
   );
 };
 

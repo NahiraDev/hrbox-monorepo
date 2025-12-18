@@ -10,7 +10,7 @@ interface StateOrganizeProps {
 
 const StateOrganize = ({ organization }: StateOrganizeProps) => {
   return (
-    <div className="w-[60%]  flex flex-col border-primary border rounded-xl px-3 py-4 bg-[#DCF0F9]">
+    <div className="w-[60%]  flex flex-col dark:bg-[#04425C60] border-primary border rounded-xl px-3 py-4 bg-[#DCF0F9]">
       <div className="w-full pb-2.5">
         <p className="text-secondary-1000 font-sans text-[24px] font-semibold">
           The state of the organization
