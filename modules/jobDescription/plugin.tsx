@@ -5,16 +5,29 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Profile, Briefcase, Building, PasswordCheck, Key, Chart, CalendarTick, ReceiveSquare, ReceiveSquare2, Setting3, Clock, Candle2, TaskSquare } from "iconsax-reactjs";
+import {
+  Profile,
+  Briefcase,
+  Building,
+  PasswordCheck,
+  Key,
+  Chart,
+  CalendarTick,
+  ReceiveSquare,
+  ReceiveSquare2,
+  Setting3,
+  Clock,
+  Candle2,
+  TaskSquare,
+} from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
-import jobdescriptionHeader from "./subHeaders/jobdescriptionHeader";
 
 // ============================================
 // Pages
 // ============================================
 
-const jobDescription= lazyRouteComponent(
+const jobDescription = lazyRouteComponent(
   () => import("./pages/jobdescription/jobdescription")
 );
 
@@ -22,10 +35,7 @@ const jobDescription= lazyRouteComponent(
 // SubHeaders (Lazy Load)
 // ============================================
 
-const DashboardSubHeader = lazy(
-  () => import("./subHeaders/jobdescriptionHeader")
-);
-
+const JobHeader = lazy(() => import("./subHeaders/jobdescriptionHeader"));
 
 // ============================================
 // Plugin Definition
@@ -52,9 +62,8 @@ export const JobDescriptionPlugin: ModulePlugin = {
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
-      subHeader: jobdescriptionHeader,
+      subHeader: JobHeader,
     },
-
   ],
 
   // ============================================
@@ -78,7 +87,8 @@ export const JobDescriptionPlugin: ModulePlugin = {
       label: "Attendance Calender",
       path: "/attendance/attendance-calender",
       icon: <CalendarTick size="24" />,
-    },{
+    },
+    {
       id: "traffic",
       label: "Traffic Calender",
       path: "/attendance/list-of-approvals",
@@ -90,7 +100,7 @@ export const JobDescriptionPlugin: ModulePlugin = {
       path: "/attendance/export",
       icon: <ReceiveSquare2 size="24" />,
     },
-    
+
     {
       id: "shift",
       label: "Shift Allocation",

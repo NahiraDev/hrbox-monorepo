@@ -1,7 +1,9 @@
-const jobdescriptionHeader = () => {
+import {AppPageTitle} from "@hrbox/uikit/components"
+import { DocumentSketch } from "iconsax-reactjs";
+const JobdescriptionHeader = () => {
     return ( <>
-    <h1>jobdes</h1>
+    <AppPageTitle title="Job Description" icon={<DocumentSketch color="white" size={18}/>} />
     </> );
 }
  
-export default jobdescriptionHeader;
+export default JobdescriptionHeader;
