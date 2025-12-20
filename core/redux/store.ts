@@ -8,8 +8,6 @@ import authReducer from "@hrbox/core/redux/slices/authSlice";
 import themeReducer from "@hrbox/core/redux/slices/themeSlice";
 import languageReducer from "@hrbox/core/redux/slices/languageSlice";
 import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
-// import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
-// import {resumeApiEndpoints} from "@hrbox/modules/hrlink/apis/Resume";
 import {
     HRLinkApi
 } from "@hrbox/modules/hrlink/app/baseApi";
