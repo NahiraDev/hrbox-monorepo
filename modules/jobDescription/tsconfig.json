@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "../../",
+    "outDir": "../../dist/modules/jobDescription",
+    "declarationDir": "../../dist/types",
+  },
+  "include": ["." , "./*"]
+}
