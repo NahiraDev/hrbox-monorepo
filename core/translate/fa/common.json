@@ -242,5 +242,12 @@
   "SocialMessengers": "پیام رسان های اجتماعی",
   "Representative": "معرف",
   "EdTour": "تور‌ آموزشی",
-  "NatinalCode": "National Code (fa)"
+  "NatinalCode": "National Code (fa)",
+  "ProgressStatusOfProjects": "وضعیت پیشرفت پروژه",
+  "JobUnemployed": "تستی",
+  "Notifications": "اعلانات",
+  "TheStateOfTheOrganization":"وضعیت سازمان",
+  "Jobemployeefitstatus":"وضعیت تناسب شغلی کارمند",
+  "SeeMore": "مشاهده بیشتر"
+
 }

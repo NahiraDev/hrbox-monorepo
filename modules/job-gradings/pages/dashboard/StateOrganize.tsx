@@ -1,3 +1,5 @@
+import {useTranslation} from "react-i18next";
+
 interface OrganizationItem {
   id: string;
   title: string;
@@ -9,28 +11,29 @@ interface StateOrganizeProps {
 }
 
 const StateOrganize = ({ organization }: StateOrganizeProps) => {
-  return (
-    <div className="w-[60%]  flex flex-col dark:bg-[#04425C60] border-primary border rounded-xl px-3 py-4 bg-[#DCF0F9]">
-      <div className="w-full pb-2.5">
+    const { t } = useTranslation();
+    return (
+    <div className="flex flex-col overflow-auto   dark:bg-[#04425C60] border-primary border rounded-xl p-4 bg-[#DCF0F9]">
+      <div className=" pb-2 border-b border-[#05587A]">
         <p className="text-secondary-1000 font-sans text-[24px] font-semibold">
-          The state of the organization
+          {t("TheStateOfTheOrganization")}
         </p>
         
       </div>
 
-      <hr className="w-full border-[#05587A]" />
 
-      <div className="flex flex-col gap-3 pt-4 w-full items-center h-full">
+
+      <div className=" overflow-auto flex flex-col justify-around flex-1 gap-3 pt-2">
         {organization.map((element) => (
           <div
             key={element.id}
             className="bg-white py-3 px-3 flex flex-col rounded-xl w-full"
           >
             <div className="flex w-full justify-between items-center">
-              <p className="text-secondary-1000  text-xl font-semibold">
+              <p className="text-secondary-1000   text-xl font-semibold">
                 {element.title}
               </p>
-              <span className="text-[32px] text-[#1E3363] font-bold ">
+              <span className="text-[32px] text-[#1E3363] dark:text-[#DEE1E8] opacity-50  font-bold ">
                 {element.number}
               </span>
             </div>
