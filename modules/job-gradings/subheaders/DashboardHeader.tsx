@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { AppPageTitle } from "@hrbox/uikit/components/AppPageTitle";
 import {AppButton, AppSearchInput} from "@hrbox/uikit/components";
-import {Additem, ArrowLeft2} from "iconsax-reactjs";
+import {Add, Additem, ArrowLeft2} from "iconsax-reactjs";
 
 const DashboardHeader = (props: any) => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ const DashboardHeader = (props: any) => {
                 <AppPageTitle title={t(props.title)} icon={props.icon} />
             </div>
             <div className="flex flex-row gap-2.5">
-                <AppSearchInput />
+                <AppSearchInput   />
                 <AppButton
                     color= 'white'
                     size= 'md'

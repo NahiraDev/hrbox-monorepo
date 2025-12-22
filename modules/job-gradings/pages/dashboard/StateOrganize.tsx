@@ -1,16 +1,9 @@
 import {useTranslation} from "react-i18next";
+import { organization } from "../../app/mock";
 
-interface OrganizationItem {
-  id: string;
-  title: string;
-  number: string;
-}
 
-interface StateOrganizeProps {
-  organization: OrganizationItem[];
-}
 
-const StateOrganize = ({ organization }: StateOrganizeProps) => {
+const StateOrganize = () => {
     const { t } = useTranslation();
     return (
     <div className="flex flex-col overflow-auto   dark:bg-[#04425C60] border-primary border rounded-xl p-4 bg-[#DCF0F9]">

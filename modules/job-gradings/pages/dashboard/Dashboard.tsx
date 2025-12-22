@@ -4,15 +4,12 @@ import JDList from "./JDList";
 
 import { useTranslation } from "react-i18next";
 import DashboardNotification from "@hrbox/modules/job-gradings/pages/dashboard/Notification";
+import { organization } from "../../app/mock";
 
 const Dashboard = () => {
     const { t } = useTranslation();
 
-    const organization = [
-        { id: "1", title: "Number of jobs graded", number: "28" },
-        { id: "2", title: "Number of employees with grades", number: "53" },
-        { id: "3", title: "Ungraded jobs", number: "12" },
-        { id: "4", title: "Unemployed jobs", number: "3" } ]
+    
 
     return (
         <div className="w-full h-full grid grid-cols-[0.6fr_1fr_280px] grid-rows-[2fr_1.3fr] gap-4 p-4">
@@ -31,7 +28,7 @@ const Dashboard = () => {
             </div>
 
             {/* The State Of The Organization - Top Middle */}
-            <StateOrganize organization={organization} />
+            <StateOrganize/>
 
             {/* JD List - Right Side (spans 2 rows) */}
             <div className="row-span-2">

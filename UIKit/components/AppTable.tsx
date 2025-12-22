@@ -655,8 +655,8 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           aria-label="Data table"
           className={`${styles.tableClassName} h-full`}
           classNames={{
-            base: "!h-full !w-full bg-transparent",
-            wrapper: "bg-transparent h-full !w-full",
+            base: "!h-full !w-full ",
+            wrapper: " h-full !w-full bg-[#DCF0F940] dark:bg-[#04425C60] dark:border dark:border-primary",
             table: "!w-full",
             tbody: "!w-full",
             td: "py-3 px-2",

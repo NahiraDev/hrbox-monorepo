@@ -1,21 +1,10 @@
 import {ArchiveBook,  ArrowRight, Calendar, Document} from "iconsax-reactjs";
 import {AppButton} from "@hrbox/uikit/components";
 import {useTranslation} from "react-i18next";
+import { JD } from "../../app/mock";
 
 const JDList = () => {
-  const JD = [
-    { id: "1", title: "Designer", color: "#FFCC00", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "2", title: "Designer", color: "#FFCC00", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "3", title: "Administrative Assistant", color: "#FD1B51", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "2" },
-    { id: "4", title: "Developer", color: "#A212D2", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "5", title: "Designer", color: "", Grade: "-", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "6", title: "Designer", color: "#A212D2", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" }, { id: "1", title: "Designer", color: "#FFCC00", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "7", title: "Designer", color: "#FFCC00", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "8", title: "Administrative Assistant", color: "#FD1B51", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "2" },
-    { id: "9", title: "Developer", color: "#A212D2", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "10", title: "Designer", color: "", Grade: "-", title2: "Number of employees:", title3: "Status", number: "1595" },
-    { id: "11", title: "Designer", color: "#A212D2", Grade: "Grade B", title2: "Number of employees:", title3: "Status", number: "1595" },
-  ];
+  
   const { t } = useTranslation();
   return (
       <div className="h-full min-h-0 flex flex-col overflow-hidden dark:bg-[#04425C60]  bg-[#DCF0F9] border border-[#B8D4E3]  rounded-xl">
