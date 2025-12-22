@@ -19,6 +19,7 @@ import {
   Clock,
   Candle2,
   TaskSquare,
+  DocumentSketch,
 } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
@@ -30,12 +31,16 @@ import { Paths } from "@hrbox/modules/paths";
 const jobDescription = lazyRouteComponent(
   () => import("./pages/jobdescription/jobdescription")
 );
+const ObjectivesMission = lazyRouteComponent(
+  () => import("./pages/dnnSuperVisor/ObjectivesMission")
+);
 
 // ============================================
 // SubHeaders (Lazy Load)
 // ============================================
 
 const JobHeader = lazy(() => import("./subHeaders/jobdescriptionHeader"));
+const DnnSuperVisorHeader = lazy(() => import("./subHeaders/DnnSuperVisorSubHeader"));
 
 // ============================================
 // Plugin Definition
@@ -55,7 +60,7 @@ export const JobDescriptionPlugin: ModulePlugin = {
   routes: [
     {
       path: Paths.JobDescription.jobdescription,
-      component: jobDescription,
+      component:jobDescription ,
       layout: "framed",
       meta: {
         title: "JobDescription",
@@ -63,6 +68,21 @@ export const JobDescriptionPlugin: ModulePlugin = {
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: JobHeader,
+    },
+    {
+      path: Paths.JobDescription.ObjectivesMission,
+      component: ObjectivesMission,
+      layout: "base",
+      meta: {
+        title: "JobDescription",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: DnnSuperVisorHeader,
+      subHeaderProps:{
+        title:"DNN Supervisor",
+        icon:(<DocumentSketch size={18} color="white" />)
+      }
     },
   ],
 

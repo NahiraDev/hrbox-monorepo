@@ -1,3 +1,5 @@
+import { Briefcase, Health, LampCharge, Menu, MessageProgramming, ProfileAdd, ProfileTick, Radar2, Task, Verify } from "iconsax-reactjs";
+
 export const jobDescriptions = [
   {
     id: 1,
@@ -48,3 +50,78 @@ export const jobDescriptions = [
     positionCode: "654321",
   },
 ];
+export const tabs=[
+            {icon:(<Radar2 size={20} />),content:"Objectives and Mission"},
+            {icon:(<Menu size={20} />),content:"General Conditions"},
+            {icon:(<Verify size={20} />),content:"Eligibility Requirements"},
+            {icon:(<Task size={20} />),content:"List of Duties"},
+            {icon:(<Verify size={20} />),content:"Eligibility Requirements"},
+            {icon:(<ProfileTick size={20} />),content:"Competencies"},
+            {icon:(<LampCharge size={20} />),content:"Skills"},
+            {icon:(<ProfileAdd size={20} />),content:"Recruitment Process"},
+            {icon:(<Briefcase size={20} />),content:"Career Path"},
+            {icon:(<Health size={20} />),content:"Performance Indicators"},
+            {icon:(<MessageProgramming size={20} />),content:"Software Access"},
+];
+export const objectivesCard=[
+    {
+    id: 1,
+    title: "General",
+    description:
+      "The primary objective of this role is to manage and develop human resources strategies aimed at recruiting, retaining, and optimizing the organization's workforce.",
+  },
+  {
+    id: 2,
+    title: "Recruitment",
+    description:
+      "Responsible for planning and executing recruitment processes to attract qualified candidates aligned with organizational goals.",
+  },
+  {
+    id: 3,
+    title: "Training",
+    description:
+      "Designs and implements training programs to enhance employee skills, performance, and professional growth.",
+  },
+  {
+    id: 4,
+    title: "Performance",
+    description:
+      "Manages performance evaluation systems to ensure continuous improvement and accountability.",
+  },
+  {
+    id: 5,
+    title: "Compensation",
+    description:
+      "Oversees compensation and benefits structures to maintain fairness and competitiveness.",
+  },
+  {
+    id: 6,
+    title: "Engagement",
+    description:
+      "Develops initiatives to improve employee engagement, satisfaction, and retention.",
+  },
+  {
+    id: 7,
+    title: "Compliance",
+    description:
+      "Ensures HR policies and practices comply with labor laws and internal regulations.",
+  },
+  {
+    id: 8,
+    title: "Culture",
+    description:
+      "Promotes organizational culture and values across all levels of the company.",
+  },
+  {
+    id: 9,
+    title: "Analytics",
+    description:
+      "Uses HR analytics to support data-driven decision making and workforce planning.",
+  },
+  {
+    id: 10,
+    title: "Strategy",
+    description:
+      "Aligns human resources strategies with overall business objectives.",
+  },
+]

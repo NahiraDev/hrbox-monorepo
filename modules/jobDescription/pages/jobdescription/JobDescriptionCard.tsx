@@ -31,7 +31,7 @@ const JobDescriptionCard = ({
           "hover:border hover:border-primary",
           "active:border-primary! active:bg-[#D6F2FF]! dark:active:bg-[#04425C40]!" 
         )}
-        onClick={()=>navigate({to:"/attendance/dashboard"})}
+        onClick={()=>navigate({to:"/job-description/objectives-mission"})}
       >
         <div className="w-full flex justify-between items-center border-b-2 border-neutral-100 ">
           <div className="flex items-center gap-2">
