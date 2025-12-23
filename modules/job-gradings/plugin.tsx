@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import {  Chart, Setting2 } from "iconsax-reactjs";
+import {  Briefcase, Chart, Setting2 } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 
@@ -20,6 +20,9 @@ const Dashboard = lazyRouteComponent(
 const Setting = lazyRouteComponent(
   () => import("./pages/setting/Setting")
 );
+const JDPage = lazyRouteComponent(
+  () => import("./pages/jdpage/JDPage")
+);
 
 
 // ============================================
@@ -31,6 +34,9 @@ const DashboardSubHeader = lazy(
 );
 const SettingSubHeader = lazy(
   () => import("./subheaders/SettingHeader")
+);
+const JDHeader = lazy(
+  () => import("./subheaders/JDHeader")
 );
 
 // ============================================
@@ -79,6 +85,21 @@ export const JobGradingsPlugins: ModulePlugin = {
         icon:<Setting2/>
       }
     },
+    {
+      path: Paths.JobGradings.JDPage,
+      component: JDPage,
+      layout: "base",
+      meta: {
+        title: "JDPage",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: JDHeader,
+      subHeaderProps:{
+        title:"JD List",
+        icon:<Briefcase/>
+      }
+    },
   ],
   // ============================================
   // Menu
@@ -94,6 +115,12 @@ export const JobGradingsPlugins: ModulePlugin = {
       id: "setting",
       label: "Setting",
       path: "/job-gradings/setting",
+      icon: <Chart size="24" />,
+    },
+    {
+      id: "JDPage",
+      label: "JDPage",
+      path: "/job-gradings/jdpage",
       icon: <Chart size="24" />,
     },
   ],

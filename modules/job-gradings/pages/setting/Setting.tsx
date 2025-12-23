@@ -1,8 +1,8 @@
 import { AppTable } from "@hrbox/uikit/components";
 import { Indicators } from "../../app/mock";
-import FaceAllocationModal from "@hrbox/modules/attendance/modals/FaceAllocationModal";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
+import SettingModal from "../../modals/SettingModal";
 const Action = [];
 
 const Setting = () => {
@@ -10,8 +10,8 @@ const Setting = () => {
   const handleRowClick = () => {
     modal.open(
       ModalType.VIEW,
-      "face-allocation",
-      <FaceAllocationModal />,
+      "Setting",
+      <SettingModal/>,
       {
         isForm: true,
         submitLabel: "Submit Again",

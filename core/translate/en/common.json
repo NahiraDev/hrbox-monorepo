@@ -239,5 +239,10 @@
   "Notifications": "Notifications",
   "TheStateOfTheOrganization":"The state of the organization",
   "Jobemployeefitstatus": "Job-employee fit status",
-  "SeeMore": "See More"
+  "SeeMore": "See More",
+  "index_title":"index title",
+  "Select_Group":"select Group",
+  "Type":"Type",
+  "weight":"Weight"
+
 }
