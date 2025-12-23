@@ -25,7 +25,7 @@ interface User {
     
 }
 
-const initialState: {user: User| null } = { user: null};
+const initialState: {user: User | null } = { user: null};
 
 export const userSlice = createSlice({
     name: 'user',

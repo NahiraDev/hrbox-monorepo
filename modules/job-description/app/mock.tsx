@@ -1,4 +1,18 @@
-import { Briefcase, Health, LampCharge, Menu, MessageProgramming, ProfileAdd, ProfileTick, Radar2, Task, Verify } from "iconsax-reactjs";
+import {
+  Briefcase,
+  Health,
+  LampCharge,
+  Menu,
+  MessageProgramming,
+  ProfileAdd,
+  ProfileTick,
+  Radar2,
+  Task,
+  Verify,
+} from "iconsax-reactjs";
+import ObjectMissionCounter from "../pages/dnnSuperVisor/objectivesMossion/ObjectMissionCounter";
+import GeneralCounter from "../pages/dnnSuperVisor/generalConditions/GeneralCounter";
+
 
 export const jobDescriptions = [
   {
@@ -50,21 +64,67 @@ export const jobDescriptions = [
     positionCode: "654321",
   },
 ];
-export const tabs=[
-            {icon:(<Radar2 size={20} />),content:"Objectives and Mission"},
-            {icon:(<Menu size={20} />),content:"General Conditions"},
-            {icon:(<Verify size={20} />),content:"Eligibility Requirements"},
-            {icon:(<Task size={20} />),content:"List of Duties"},
-            {icon:(<Verify size={20} />),content:"Eligibility Requirements"},
-            {icon:(<ProfileTick size={20} />),content:"Competencies"},
-            {icon:(<LampCharge size={20} />),content:"Skills"},
-            {icon:(<ProfileAdd size={20} />),content:"Recruitment Process"},
-            {icon:(<Briefcase size={20} />),content:"Career Path"},
-            {icon:(<Health size={20} />),content:"Performance Indicators"},
-            {icon:(<MessageProgramming size={20} />),content:"Software Access"},
+export const tabs = [
+  {
+    id: 1,
+    icon: <Radar2 size={20} />,
+    content: "Objectives and Mission",
+    component: <ObjectMissionCounter />,
+  },
+  {
+    id: 2,
+    icon: <Menu size={20} />,
+    content: "General Conditions",
+    component: <GeneralCounter />,
+  },
+  {
+    id: 3,
+    icon: <Verify size={20} />,
+    content: "Eligibility Requirements",
+  },
+  {
+    id: 4,
+    icon: <Task size={20} />,
+    content: "List of Duties",
+  },
+  {
+    id: 5,
+    icon: <Verify size={20} />,
+    content: "Eligibility Requirements",
+  },
+  {
+    id: 6,
+    icon: <ProfileTick size={20} />,
+    content: "Competencies",
+  },
+  {
+    id: 7,
+    icon: <LampCharge size={20} />,
+    content: "Skills",
+  },
+  {
+    id: 8,
+    icon: <ProfileAdd size={20} />,
+    content: "Recruitment Process",
+  },
+  {
+    id: 9,
+    icon: <Briefcase size={20} />,
+    content: "Career Path",
+  },
+  {
+    id: 10,
+    icon: <Health size={20} />,
+    content: "Performance Indicators",
+  },
+  {
+    id: 11,
+    icon: <MessageProgramming size={20} />,
+    content: "Software Access",
+  },
 ];
-export const objectivesCard=[
-    {
+export const objectivesCard = [
+  {
     id: 1,
     title: "General",
     description:
@@ -124,4 +184,4 @@ export const objectivesCard=[
     description:
       "Aligns human resources strategies with overall business objectives.",
   },
-]
+];

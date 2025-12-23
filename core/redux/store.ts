@@ -1,27 +1,28 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {setupListeners} from "@reduxjs/toolkit/query";
-import {persistStore, persistReducer} from "redux-persist";
+import  dnnSupervisorEditReducer  from '@hrbox/core/redux/slices/dnnSupervisorEditSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import {moduleRegistry} from "@hrbox/modules/registry";
-import {ssoApiWithEndpoints} from "@hrbox/modules/sso/apis/Auth";
+import { moduleRegistry } from "@hrbox/modules/registry";
+import { ssoApiWithEndpoints } from "@hrbox/modules/sso/apis/Auth";
 import authReducer from "@hrbox/core/redux/slices/authSlice";
 import themeReducer from "@hrbox/core/redux/slices/themeSlice";
 import languageReducer from "@hrbox/core/redux/slices/languageSlice";
 import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
-import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
-import {resumeApiEndpoints} from "@hrbox/modules/hrlink/apis/Resume";
+import { settingApiWithEndpoints } from "@hrbox/modules/hrlink/apis/Setting";
+import { resumeApiEndpoints } from "@hrbox/modules/hrlink/apis/Resume";
 import {
-    awardApiEndpoints,
-    dashboardApiEndpoints,
-    jobsApiEndpoints,
-    userApiWithEndpoints,
-    commonApiWithEndpoints
+  awardApiEndpoints,
+  dashboardApiEndpoints,
+  jobsApiEndpoints,
+  userApiWithEndpoints,
+  commonApiWithEndpoints,
 } from "@hrbox/modules/hrlink/apis";
 
 const persistConfig = {
-    key: "hrbox-v3",
-    storage,
-    whitelist: ["auth", "theme", "language", "user"],
+  key: "hrbox-v3",
+  storage,
+  whitelist: ["auth", "theme", "language", "user"],
 };
 
 export function createStoreWithModules(ENABLED_MODULES: string[]) {
@@ -36,21 +37,49 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
+    dnnSupervisorEdit: dnnSupervisorEditReducer(
+      state.dnnSupervisorEdit,
+      action
+    ),
 
-    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state[dashboardApiEndpoints.reducerPath], action),
-    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
-    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
-    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state[resumeApiEndpoints.reducerPath], action),
-    [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(state[userApiWithEndpoints.reducerPath], action),
-    [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(state[jobsApiEndpoints.reducerPath], action),
-    [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(state[awardApiEndpoints.reducerPath], action),
-    [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(state[commonApiWithEndpoints.reducerPath], action),
+    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(
+      state[dashboardApiEndpoints.reducerPath],
+      action
+    ),
+    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(
+      state[ssoApiWithEndpoints.reducerPath],
+      action
+    ),
+    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(
+      state[settingApiWithEndpoints.reducerPath],
+      action
+    ),
+    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(
+      state[resumeApiEndpoints.reducerPath],
+      action
+    ),
+    [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(
+      state[userApiWithEndpoints.reducerPath],
+      action
+    ),
+    [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(
+      state[jobsApiEndpoints.reducerPath],
+      action
+    ),
+    [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(
+      state[awardApiEndpoints.reducerPath],
+      action
+    ),
+    [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(
+      state[commonApiWithEndpoints.reducerPath],
+      action
+    ),
 
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
         key,
         reducer(state[key], action),
-      ]),
+      ])
     ),
   });
 
@@ -86,8 +115,8 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
   return { store, persistor };
 }
 export type RootState = ReturnType<
-    ReturnType<typeof createStoreWithModules>["store"]["getState"]
+  ReturnType<typeof createStoreWithModules>["store"]["getState"]
 >;
 export type AppDispatch = ReturnType<
-    typeof createStoreWithModules
+  typeof createStoreWithModules
 >["store"]["dispatch"];

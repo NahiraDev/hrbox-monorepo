@@ -2,27 +2,21 @@
 // modules/hrlink/plugin.tsx
 // ============================================
 
-import { lazy } from "react";
-import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
+import { Paths } from "@hrbox/modules/paths";
+import type { ModulePlugin } from "@hrbox/modules/types";
+import { lazyRouteComponent } from "@tanstack/react-router";
 import {
-  Profile,
-  Briefcase,
-  Building,
-  PasswordCheck,
-  Key,
-  Chart,
   CalendarTick,
-  ReceiveSquare,
+  Chart,
+  Clock,
+  DocumentSketch,
+  Key,
+  PasswordCheck,
   ReceiveSquare2,
   Setting3,
-  Clock,
-  Candle2,
-  TaskSquare,
-  DocumentSketch,
 } from "iconsax-reactjs";
-import { lazyRouteComponent } from "@tanstack/react-router";
-import { Paths } from "@hrbox/modules/paths";
+import { lazy } from "react";
 
 // ============================================
 // Pages
@@ -31,8 +25,8 @@ import { Paths } from "@hrbox/modules/paths";
 const jobDescription = lazyRouteComponent(
   () => import("./pages/jobdescription/jobdescription")
 );
-const ObjectivesMission = lazyRouteComponent(
-  () => import("./pages/dnnSuperVisor/ObjectivesMission")
+const DnnSuperVisor = lazyRouteComponent(
+  () => import("./pages/dnnSuperVisor/DnnSuperVisor")
 );
 
 // ============================================
@@ -40,7 +34,9 @@ const ObjectivesMission = lazyRouteComponent(
 // ============================================
 
 const JobHeader = lazy(() => import("./subHeaders/jobdescriptionHeader"));
-const DnnSuperVisorHeader = lazy(() => import("./subHeaders/DnnSuperVisorSubHeader"));
+const DnnSuperVisorHeader = lazy(
+  () => import("./subHeaders/DnnSuperVisorSubHeader")
+);
 
 // ============================================
 // Plugin Definition
@@ -60,7 +56,7 @@ export const JobDescriptionPlugin: ModulePlugin = {
   routes: [
     {
       path: Paths.JobDescription.jobdescription,
-      component:jobDescription ,
+      component: jobDescription,
       layout: "framed",
       meta: {
         title: "JobDescription",
@@ -71,7 +67,7 @@ export const JobDescriptionPlugin: ModulePlugin = {
     },
     {
       path: Paths.JobDescription.ObjectivesMission,
-      component: ObjectivesMission,
+      component: DnnSuperVisor,
       layout: "base",
       meta: {
         title: "JobDescription",
@@ -79,10 +75,10 @@ export const JobDescriptionPlugin: ModulePlugin = {
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: DnnSuperVisorHeader,
-      subHeaderProps:{
-        title:"DNN Supervisor",
-        icon:(<DocumentSketch size={18} color="white" />)
-      }
+      subHeaderProps: {
+        title: "DNN Supervisor",
+        icon: <DocumentSketch size={18} color="white" />,
+      },
     },
   ],
 

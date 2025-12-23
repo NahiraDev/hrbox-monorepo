@@ -65,7 +65,7 @@ async function bootstrap() {
       "basic-info": () => import("@hrbox/modules/basic-info/plugin"),
       attendance: () => import("@hrbox/modules/attendance/plugin"),
       "job-gradings": () => import("@hrbox/modules/job-gradings/plugin"),
-      "job-description": () => import("@hrbox/modules/jobDescription/plugin"),
+      "job-description": () => import("@hrbox/modules/job-description/plugin"),
       "project-management": () =>
         import("@hrbox/modules/project-management/plugin"),
     };
