@@ -1,8 +1,6 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
-import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 import { HRLinkApi } from '@module/hrlink/app/baseApi';
-
 
 export const courseApiWithEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -14,17 +12,17 @@ export const courseApiWithEndpoints = HRLinkApi.injectEndpoints({
 
     editCourse: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.course.edit,
-      method: 'POST',
+      method: 'PUT',
       tags: ['Course'],
     }),
 
-    fetchCourseList: createQuery<any>(build, {
+    fetchCourseTypeList: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.course.getCourseList,
       method: 'GET',
       tags: ['Course'],
     }),
 
-    fetchInstituList: createQuery<any>(build, {
+    fetchInstituList: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.course.getInstituList,
       method: 'GET',
       tags: ['Course'],
@@ -36,7 +34,7 @@ export const courseApiWithEndpoints = HRLinkApi.injectEndpoints({
       tags: ['Course'],
     }),
 
-    fetchCourses: createQuery<any>(build, {
+    fetchCourseList: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.course.getList,
       method: 'GET',
       tags: ['Course'],
@@ -48,15 +46,22 @@ export const courseApiWithEndpoints = HRLinkApi.injectEndpoints({
       tags: ['Course'],
     }),
 
+    getCourselist: createPaginatedQuery<any> (build, {
+      url: HRLinkApiEndpoints.resume.course.getCourses,
+      method: 'GET',
+      tags: ['Course'],
+    })
+
   }),
 });
 
 export const {
-  useFetchCoursesQuery,
-  useFetchCourseDetailQuery,
   useFetchCourseListQuery,
+  useFetchCourseDetailQuery,
+  useFetchCourseTypeListQuery,
   useFetchInstituListQuery,
   useCreateCourseMutation,
   useEditCourseMutation,
   useDeleteCourseMutation,
+  useGetCourselistQuery,
 } = courseApiWithEndpoints;

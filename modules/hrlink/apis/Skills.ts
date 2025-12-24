@@ -1,8 +1,6 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
 import { HRLinkApi } from '@module/hrlink/app/baseApi';
-
 
 export const skillsApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build:any) => ({
@@ -34,12 +32,12 @@ export const skillsApiEndpoints = HRLinkApi.injectEndpoints({
       tags: ['Skills'],
     }),
 
-    fetchSoftSkills: createQuery<any>(build, {
+    fetchSoftSkills: createQuery<any, any>(build, {
       url: HRLinkApiEndpoints.resume.skill.getSoftSkill,
       tags: ['Skills'],
     }),
 
-    fetchHardSkills: createQuery<any>(build, {
+    fetchHardSkills: createQuery<any, any>(build, {
       url: HRLinkApiEndpoints.resume.skill.getHardSkill,
       tags: ['Skills'],
     }),

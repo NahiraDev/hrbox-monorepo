@@ -27,6 +27,7 @@ export const dashboardApiEndpoints = HRLinkApi.injectEndpoints({
       tags: ["Dashboard"],
     }),
 
+    // THIS MIGHT BE deprecated
     fetchDashboardData: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getData,
       tags: ["Dashboard"],

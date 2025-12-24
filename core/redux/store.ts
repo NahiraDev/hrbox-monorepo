@@ -8,8 +8,6 @@ import authReducer from "@hrbox/core/redux/slices/authSlice";
 import themeReducer from "@hrbox/core/redux/slices/themeSlice";
 import languageReducer from "@hrbox/core/redux/slices/languageSlice";
 import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
-// import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
-// import {resumeApiEndpoints} from "@hrbox/modules/hrlink/apis/Resume";
 import {
     HRLinkApi
 } from "@hrbox/modules/hrlink/app/baseApi";
@@ -35,18 +33,6 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),
     [HRLinkApi.reducerPath]: HRLinkApi.reducer(state?.[HRLinkApi.reducerPath], action),
 
-
-    // [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state?.[dashboardApiEndpoints.reducerPath], action),
-    // [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),
-    // [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state?.[settingApiWithEndpoints.reducerPath], action),
-    // [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state?.[resumeApiEndpoints.reducerPath], action),
-    // [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(state?.[userApiWithEndpoints.reducerPath], action),
-    // [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(state?.[jobsApiEndpoints.reducerPath], action),
-    // [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(state?.[awardApiEndpoints.reducerPath], action),
-    // [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(state?.[commonApiWithEndpoints.reducerPath], action),
-    // [educationApiEndpoints.reducerPath]: educationApiEndpoints.reducer(state?.[educationApiEndpoints.reducerPath], action),
-    // [experienceApiEndpoints.reducerPath]: experienceApiEndpoints.reducer(state?.[experienceApiEndpoints.reducerPath], action),
-
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
         key,
@@ -70,16 +56,6 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
           .map((api) => api.middleware)
           .concat(ssoApiWithEndpoints.middleware)
           .concat(HRLinkApi.middleware)
-          // .concat(ssoApiWithEndpoints.middleware)
-          // .concat(settingApiWithEndpoints.middleware)
-          // .concat(resumeApiEndpoints.middleware)
-          // .concat(userApiWithEndpoints.middleware)
-          // .concat(jobsApiEndpoints.middleware)
-          // .concat(dashboardApiEndpoints.middleware)
-          // .concat(awardApiEndpoints.middleware)
-          // .concat(commonApiWithEndpoints.middleware)
-          // .concat(experienceApiEndpoints.middleware)
-          // .concat(educationApiEndpoints.middleware)
       ),
     devTools: import.meta.env.DEV,
   });
