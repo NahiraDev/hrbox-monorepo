@@ -95,5 +95,9 @@ export const Paths = {
   },
   JobGradings:{
     Dashboard:'/job-gradings/dashboard'
+  },
+  JobDescription:{
+    jobdescription:"/job-description",
+    ObjectivesMission:"/job-description/objectives-mission"
   }
 };
