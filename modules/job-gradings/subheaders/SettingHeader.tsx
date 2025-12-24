@@ -1,21 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { AppPageTitle } from "@hrbox/uikit/components/AppPageTitle";
-import { Add, ArrowLeft2 } from "iconsax-reactjs";
+import { Add, ArrowLeft2, Setting } from "iconsax-reactjs";
 import { AppButton, AppSearchInput } from "@hrbox/uikit/components";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
 import SettingModal from "../modals/SettingModal";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 interface SettingSubheaderProps {
   title: string;
   icon: React.ReactNode;
 }
-const SettingHeader = ({
-  title,
-  icon
-  }: SettingSubheaderProps)  => {
+const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
   const { t } = useTranslation();
-  const modal=useModal();
-  const handlerOpenModal=()=>{
+  const modal = useModal();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const isTrafficCalender = location.pathname === "/job-gradings/setting/indicators"
+  const handlerOpenModal = () => {
     modal.open(
       ModalType.CREATE,
       title,
@@ -28,29 +29,41 @@ const SettingHeader = ({
           formId: "face-form",
         },
       },
-      ModalSize['2XL']
+      ModalSize["2XL"]
     );
-  }
+  };
   return (
     <>
-      <div className="w-full flex flex-row justify-between">
-        <div className="flex flex-row gap-3 items-center">
-          <span><ArrowLeft2/></span>
-          <AppPageTitle title={t(title)} icon={icon}/>
+      <div className="w-full flex flex-col">
+        <div className="w-full flex flex-row justify-between items-center">
+          <div className="flex flex-row gap-3">
+            <AppButton
+              color={isTrafficCalender ? "white" : "primary"}
+              size="md"
+              radius="lg"
+              startContent={<Setting size={18} />}
+              className={isTrafficCalender ? "text-black" : "text-white"}
+              onPress={() =>
+                navigate({ to: "/job-gradings/setting/indicators" })
+              }
+              content={t("indicators")}
+            />
+
+            <AppButton
+              color={isTrafficCalender ? "primary" : "white"}
+              size="md"
+              radius="lg"
+              className={isTrafficCalender ? "text-white" : "text-black"}
+              startContent={<Setting size={18} />}
+              onPress={() => navigate({ to: "/job-gradings/setting/General" })}
+              content={t("General")}
+            />
+          </div>
+          
         </div>
-        <div className="flex flex-row gap-2.5">
-          <AppSearchInput />
-          <AppButton
-              color= 'white'
-              size= 'md'
-              radius= 'lg'
-              startContent= {<Add size={22} />}
-              className= 'border-1 border-primary'
-              onPress={handlerOpenModal}
-                content={t('add_new_one')}
-            
-          />
-        </div>
+       
+    
+       
       </div>
     </>
   );

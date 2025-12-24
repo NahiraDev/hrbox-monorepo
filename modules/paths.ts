@@ -95,7 +95,7 @@ export const Paths = {
   },
   JobGradings:{
     Dashboard:'/job-gradings/dashboard',
-    Setting:'/job-gradings/setting',
+    Setting:'/job-gradings/setting/indicators',
     JDPage:'/job-gradings/JDPage'
   }
 };

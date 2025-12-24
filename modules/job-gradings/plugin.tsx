@@ -113,7 +113,7 @@ export const JobGradingsPlugins: ModulePlugin = {
     },
     {
       id: "setting",
-      label: "Setting",
+      label: "indicators",
       path: "/job-gradings/setting",
       icon: <Chart size="24" />,
     },

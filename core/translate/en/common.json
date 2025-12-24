@@ -243,6 +243,7 @@
   "index_title":"index title",
   "Select_Group":"select Group",
   "Type":"Type",
-  "weight":"Weight"
-
+  "weight":"Weight",
+  "indicators":"indicators",
+  "General":"General"
 }

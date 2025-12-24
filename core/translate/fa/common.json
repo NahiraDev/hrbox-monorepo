@@ -252,6 +252,8 @@
   "index_ title":"عنوان شاخص",
   "Select_Group":"انتخاب گروه",
   "Type":"نوع",
-  "weight":"وزن"
+  "weight":"وزن",
+  "indicators":"شاخص ها",
+  "General":"عمومی "
 
 }
