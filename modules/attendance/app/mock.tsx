@@ -625,7 +625,7 @@ export const ListApprovals = [
     </span>
     )},
 ];
-export const  Allocatio=[
+export const Allocatio=[
   {numer:1,ChooseShift:"Administrative",FromDate:"Employee",organization:"Zahra Pakniyat", Department:"2025/01/10",Employee:"2025/01/10",JobTitle:'momom',type:'Person'},
   {numer:1,ChooseShift:"Administrative",FromDate:"Employee",organization:"Zahra Pakniyat", Department:"2025/01/10",Employee:"2025/01/10",JobTitle:'momom',type:'Person'},
   {numer:1,ChooseShift:"Administrative",FromDate:"Employee",organization:"Zahra Pakniyat", Department:"2025/01/10",Employee:"2025/01/10",JobTitle:'momom',type:'Person'},
