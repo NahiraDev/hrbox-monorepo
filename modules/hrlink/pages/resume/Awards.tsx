@@ -9,7 +9,7 @@ import {
   useFetchAwardsQuery,
   useDeleteAwardMutation,
   useEditAwardMutation,
-  useLazyFetchAwardDetailQuery,
+  useFetchAwardDetailQuery,
 } from "@hrbox/modules/hrlink/apis";
 import { useState } from "react";
 import { ModalSize } from "@hrbox/core/providers";
@@ -18,8 +18,7 @@ import { useModal } from "@hrbox/core/hooks/useModal";
 
 // IMPORTANT: get rid of this and use real data
 const MOCK_RESPONSE = {
-  data: {
-    ViewList: [
+  data:  [
       { Id: 13998, Title: "new record", Description: "test", Date: 1399, Place: "-" },
       { Id: 14006, Title: "تستی", Description: "توضیحات", Date: 1400, Place: "-" },
       { Id: 14019, Title: "ش", Description: "description", Date: 1400, Place: "-" },
@@ -31,31 +30,39 @@ const MOCK_RESPONSE = {
       { Id: 14025, Title: "ش", Description: "description", Date: 1400, Place: "-" },
       { Id: 14026, Title: "ش", Description: "description", Date: 1400, Place: "-" },
     ],
-    LastPage: 2,
-    Page: 0,
-    PageSize: 10,
+  meta: {
+    Page: 0 ,
+    pageSize: 10,
+    total: 40,
+    totalPages: 4,
   },
   msg: null,
   IsSucces: true,
 };
 
 const Awards = () => {
-  // Handle getting the awrds and the state of the fetching data
   const [page, setPage] = useState(0)
-  const { data: responseData, isLoading,isFetching, isError } = useFetchAwardsQuery({
+  const { data: responseData,isLoading ,isFetching, isError } = useFetchAwardsQuery({
     page: page ?? 0,
     pageSize: 10,
   });
 
-  const [getAwards] = useLazyFetchAwardDetailQuery()
+  const [awardId, setAwardId] = useState()
+  const {data: awardDetail } = useFetchAwardDetailQuery({id:awardId || 13998})
 
   const meta = responseData?.meta || {
     page: 1,
-    totalPages: 1
+    pageSize: 10,
+    total: 40,
+    totalPages: 4,
   };
 
-  // Handle deleting awards
+  //DEBUG ONLY
+  console.log(`here is the award response \ndata: ${responseData?.data}\nLoading state ${isLoading} \nError state ${isError} \nMeta Data: ${responseData?.meta}`);
+
+  // Handle deleting awards 
   const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
+
   // Track which award is currently being deleted
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
 
@@ -64,8 +71,7 @@ const Awards = () => {
   const [editingId, setEditingId] = useState(null);
 
   const response = responseData || MOCK_RESPONSE;
-  const awards = response?.data.ViewList;
-  console.log(`here is the award response \n${responseData?.data}\n ${isLoading} \n ${isError}`);
+  const awards = response?.data;
 
   const handleDelete = async (id: number) => {
     if (!id) return;
@@ -73,7 +79,7 @@ const Awards = () => {
 
     // chagne this code and use the states provided automatically(errorDeleting, loadingDelete, deletedSeccessfully)
     try {
-      await deleteAward(id).unwrap();
+      await deleteAward({id:id}).unwrap();
     } catch (err) {
       console.error("Delete failed:", err);
       alert("حذف با خطا مواجه شد");
@@ -99,7 +105,7 @@ const Awards = () => {
           award
         }
         onSuccess={() => {
-          modal.close("edit-award");
+          modal.close("edit-award"); 
         }}
       />,
       {
@@ -120,12 +126,13 @@ const Awards = () => {
   const isDeleting = (id: number) => deletingIds.has(id);
 
   return (
+
     <div className="grid grid-cols-4 gap-3 h-full">
       {/* Awards List */}
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((award:any) => (
+            {awards?.map((award:any) => (
               <Card
                 key={award.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
@@ -206,8 +213,10 @@ const Awards = () => {
           <div className="flex justify-center mt-8">
           <AppPagination
             meta={{
-              page: meta.page,
-              totalPages: meta.totalPages,
+              page: meta?.page,
+              pageSize: meta?.pageSize,
+              total: meta?.total,
+              totalPages: meta?.totalPages,
             }}
             onPageChange={setPage}  // This is the key!
           />

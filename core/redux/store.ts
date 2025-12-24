@@ -8,15 +8,9 @@ import authReducer from "@hrbox/core/redux/slices/authSlice";
 import themeReducer from "@hrbox/core/redux/slices/themeSlice";
 import languageReducer from "@hrbox/core/redux/slices/languageSlice";
 import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
-import {settingApiWithEndpoints} from "@hrbox/modules/hrlink/apis/Setting";
-import {resumeApiEndpoints} from "@hrbox/modules/hrlink/apis/Resume";
 import {
-    awardApiEndpoints,
-    dashboardApiEndpoints,
-    jobsApiEndpoints,
-    userApiWithEndpoints,
-    commonApiWithEndpoints
-} from "@hrbox/modules/hrlink/apis";
+    HRLinkApi
+} from "@hrbox/modules/hrlink/app/baseApi";
 
 const persistConfig = {
     key: "hrbox-v3",
@@ -28,23 +22,16 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
 
-  // ---------------------------------------------------------
-  // FIX: Add the API reducers inside this object
-  // ---------------------------------------------------------
   const rootReducer = (state: any = {}, action: any) => ({
+    // Core RTK reducers
     auth: authReducer(state.auth, action),
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
 
-    [dashboardApiEndpoints.reducerPath]: dashboardApiEndpoints.reducer(state[dashboardApiEndpoints.reducerPath], action),
-    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state[ssoApiWithEndpoints.reducerPath], action),
-    [settingApiWithEndpoints.reducerPath]: settingApiWithEndpoints.reducer(state[settingApiWithEndpoints.reducerPath], action),
-    [resumeApiEndpoints.reducerPath]: resumeApiEndpoints.reducer(state[resumeApiEndpoints.reducerPath], action),
-    [userApiWithEndpoints.reducerPath]: userApiWithEndpoints.reducer(state[userApiWithEndpoints.reducerPath], action),
-    [jobsApiEndpoints.reducerPath]: jobsApiEndpoints.reducer(state[jobsApiEndpoints.reducerPath], action),
-    [awardApiEndpoints.reducerPath]: awardApiEndpoints.reducer(state[awardApiEndpoints.reducerPath], action),
-    [commonApiWithEndpoints.reducerPath]: commonApiWithEndpoints.reducer(state[commonApiWithEndpoints.reducerPath], action),
+    // RTK query reducers
+    [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),
+    [HRLinkApi.reducerPath]: HRLinkApi.reducer(state?.[HRLinkApi.reducerPath], action),
 
     ...Object.fromEntries(
       Object.entries(moduleReducers).map(([key, reducer]) => [
@@ -68,13 +55,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
           .filter((api) => api.middleware)
           .map((api) => api.middleware)
           .concat(ssoApiWithEndpoints.middleware)
-          .concat(settingApiWithEndpoints.middleware)
-          .concat(resumeApiEndpoints.middleware)
-          .concat(userApiWithEndpoints.middleware)
-          .concat(jobsApiEndpoints.middleware)
-          .concat(dashboardApiEndpoints.middleware)
-          .concat(awardApiEndpoints.middleware)
-          .concat(commonApiWithEndpoints.middleware)
+          .concat(HRLinkApi.middleware)
       ),
     devTools: import.meta.env.DEV,
   });

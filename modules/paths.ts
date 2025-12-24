@@ -97,5 +97,9 @@ export const Paths = {
     Dashboard:'/job-gradings/dashboard',
     Setting:'/job-gradings/setting/indicators',
     JDPage:'/job-gradings/JDPage'
-  }
+  },
+    JobDescription:{
+        jobdescription:"/job-description",
+        ObjectivesMission:"/job-description/objectives-mission"
+    }
 };

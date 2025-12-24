@@ -6,6 +6,7 @@ import {
 import { useEditGeneralSettingMutation } from '../apis/Setting';
 
 export const GeneralInformationModal = () =>{
+  // WARNING: this is not the correct endpoint
   const [ editGeneralInfo, { error: errorEditingGeneralInfo }] = useEditGeneralSettingMutation();
 
   return(

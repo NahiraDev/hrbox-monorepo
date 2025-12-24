@@ -9,7 +9,7 @@ export const HRLinkApiEndpoints = {
       edit: `/Award/Edit`,
       delete: `/Award/Delete`,
       getList: `/Award/GetList`,
-      getDetail: `/Award/Get`,
+      getDetail: `/Award/GetDetail`,
     },
 
     course: {
@@ -20,6 +20,7 @@ export const HRLinkApiEndpoints = {
       delete: `/Course/Delete`,
       getList: `/Course/GetCourseList`,
       getDetail: `/Course/Get`,
+      getCourses: 'Course/GetList',
     },
 
     education: {
@@ -29,6 +30,7 @@ export const HRLinkApiEndpoints = {
       getList: `/Education/GetList`,
       getDetail: `/Education/GetDetail`,
       getUniversity: `/Education/GetUniversity`,
+      getFieldOfStudy: 'Education/fieldOfEducation',
     },
 
     experience: {
@@ -61,6 +63,11 @@ export const HRLinkApiEndpoints = {
     getDetail: `/Company/GetDetail`,
     followOrUnfollow: `/Company/FollowAndUnFollowCompany`,
     reasyApply: 'Company/EasyApply',
+    lookingForJobSituations: 'Company/LookingForJobSituations',
+    getCompanyScore: 'Company/GetScore',
+    easyApply: 'Company/EasyApply',
+    orgOffer: 'Company/OrgOffers',
+    allCompany: 'Company/GetAllCompany',
   },
 
   job: {
@@ -110,15 +117,17 @@ export const HRLinkApiEndpoints = {
     addLocation: `/MasterService/AddLocation`,
     editLocation: `/MasterService/EditLocation`,
     getLocation: `/MasterService/GetLocation`,
-    saveTemplateFile: `/MasterService/SaveTempFile`,
-    deleteTemplateFile: '/MasterService/DeleteFile'
+    deleteLocation: `MasterService/DeleteLocation`,
+    saveTempFile: `/MasterService/SaveTempFile`,
+    deleteFile: '/MasterService/DeleteFile'
   },
 
   dashboard: {
     getViewResume: `/Dashboard/ViewedResumes`,
     getResumePercent: `/Dashboard/GetResumePercent`,
-    getJobOpportunitiesSent: '/Dashboard/GetJobOpportunitiesSent?page=0&pageSize=10',
-    getCompaniesList: '/Company/GetCompaniesList?page=0&pageSize=12',
+    getJobOpportunitiesSent: '/Dashboard/GetJobOpportunitiesSent',
+    getCompaniesList: '/Company/GetCompaniesList',
+    // THIS MIGHT BE DEPRECATED
     getData: `/Dashboard/GetAllAdaptionByUserId`,
   },
 };
