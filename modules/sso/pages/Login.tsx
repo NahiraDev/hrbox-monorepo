@@ -26,43 +26,25 @@ const Login = () => {
 
   const handleLogin = async (values: any) => {
     try {
-      const response = await login(values).unwrap();
+      // This will automatically:
+      // - Throw if IsSucces === false (with msg)
+      // - Return response.data on success
+      const loginData = await login(values).unwrap();
 
-      const { userId, displayName, Token, renewalToken } = response.data;
+      // Now loginData is directly the inner { userId, displayName, Token, renewalToken }
+      const { userId, displayName, Token, renewalToken } = loginData;
 
       const jwtPayload = decodeJWT(Token);
       const roleSlugsFromToken: string[] = jwtPayload.role || [];
 
       console.log('🔑 JWT Roles:', roleSlugsFromToken);
 
-      const fallbackRoles = [
-        {
-          id: '1',
-          name: 'سوپر ادمین',
-          slug: RoleSlug.SUPER_ADMIN,
-          permissions: ['*']
-        },
-        {
-          id: '2',
-          name: 'کارجو',
-          slug: RoleSlug.JOB_SEEKER,
-          permissions: ['view_jobs', 'apply_jobs']
-        },
-        {
-          id: '3',
-          name: 'سازمان',
-          slug: RoleSlug.ORGANIZATION,
-          permissions: ['manage_company', 'post_jobs']
-        },
-      ];
-
-      // ✅ تبدیل نقش‌های JWT به RoleSlug
       const mapTokenRoleToSlug = (tokenRole: string): RoleSlug => {
         const roleMap: Record<string, RoleSlug> = {
-          'Client': RoleSlug.ORGANIZATION,
-          'Freelancer': RoleSlug.JOB_SEEKER,
-          'SuperAdmin': RoleSlug.SUPER_ADMIN,
-          'Admin': RoleSlug.SUPER_ADMIN,
+          Client: RoleSlug.ORGANIZATION,
+          Freelancer: RoleSlug.JOB_SEEKER,
+          SuperAdmin: RoleSlug.SUPER_ADMIN,
+          Admin: RoleSlug.SUPER_ADMIN,
         };
         return roleMap[tokenRole] || RoleSlug.JOB_SEEKER;
       };
@@ -71,22 +53,48 @@ const Login = () => {
         const slug = mapTokenRoleToSlug(tokenRole);
         return {
           id: String(userId * 100 + index),
-          name: slug === RoleSlug.ORGANIZATION ? 'سازمان' :
-              slug === RoleSlug.JOB_SEEKER ? 'کارجو' : 'سوپر ادمین',
+          name:
+            slug === RoleSlug.ORGANIZATION
+              ? 'سازمان'
+              : slug === RoleSlug.JOB_SEEKER
+              ? 'کارجو'
+              : 'سوپر ادمین',
           slug,
           permissions: slug === RoleSlug.SUPER_ADMIN ? ['*'] : [],
         };
       });
 
+      // Fallback if no roles in token
       if (roles.length === 0) {
         console.warn('⚠️ No roles in token, using fallback roles');
-        roles = fallbackRoles;
+        roles = [
+          {
+            id: '1',
+            name: 'سوپر ادمین',
+            slug: RoleSlug.SUPER_ADMIN,
+            permissions: ['*'],
+          },
+          {
+            id: '2',
+            name: 'کارجو',
+            slug: RoleSlug.JOB_SEEKER,
+            permissions: ['view_jobs', 'apply_jobs'],
+          },
+          {
+            id: '3',
+            name: 'سازمان',
+            slug: RoleSlug.ORGANIZATION,
+            permissions: ['manage_company', 'post_jobs'],
+          },
+        ];
       }
 
       console.log('✅ Final roles:', roles);
 
+      // Save auth data
       loginSuccess(userId, displayName, Token, renewalToken, roles);
 
+      // Navigate based on roles
       if (roles.length > 1) {
         await push({ to: Paths.SSO.SelectRole });
       } else {
@@ -95,8 +103,6 @@ const Login = () => {
 
         switch (role.slug) {
           case RoleSlug.JOB_SEEKER:
-            dashboardPath = Paths.HRLink.Dashboard;
-            break;
           case RoleSlug.ORGANIZATION:
             dashboardPath = Paths.HRLink.Dashboard;
             break;
@@ -107,24 +113,31 @@ const Login = () => {
 
         await push({ to: dashboardPath });
       }
-
     } catch (error: any) {
       console.error('❌ خطا در لاگین:', error);
-      throw new Error(error?.data?.msg || 'خطا در ورود');
+
+      // error.message comes from our transformResponse throw new Error(msg)
+      const errorMessage =
+        error?.message ||
+        error?.data?.msg ||
+        error?.msg ||
+        'خطا در ورود به سیستم';
+
+      throw new Error(errorMessage);
     }
   };
 
   return (
-      <FormProvider
-          formId="login-form"
-          initialValues={initialValuesFormLogin}
-          validationSchema={formValidationErrorLogin}
-          enableCache={true}
-          clearCacheOnSubmit={true}
-          onSubmitAsync={handleLogin}
-      >
-        <LoginForm />
-      </FormProvider>
+    <FormProvider
+      formId="login-form"
+      initialValues={initialValuesFormLogin}
+      validationSchema={formValidationErrorLogin}
+      enableCache={true}
+      clearCacheOnSubmit={true}
+      onSubmitAsync={handleLogin}
+    >
+      <LoginForm />
+    </FormProvider>
   );
 };
 

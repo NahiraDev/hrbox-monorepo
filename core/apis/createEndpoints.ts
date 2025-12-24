@@ -2,11 +2,11 @@ import type { BaseQueryFn, EndpointBuilder } from '@reduxjs/toolkit/query';
 import type { PaginatedResponse, PaginationParams } from './types';
 
 interface EndpointConfig {
-  url: string;
+  url: string | ((arg: any) => string); // Allow function for dynamic URLs
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   tags?: readonly string[];
-  transformResponse?: (baseQueryResponse: any) => any; // Generic for any shape
-  isPaginated?: boolean; // New: false for non-paginated "list" endpoints
+  transformResponse?: (baseQueryResponse: any) => any;
+  isPaginated?: boolean;
 }
 
 export function createPaginatedQuery<TData>(
@@ -18,7 +18,7 @@ export function createPaginatedQuery<TData>(
     method = 'GET',
     tags = [],
     transformResponse,
-    isPaginated = true, // Default to paginated
+    isPaginated = true,
   } = config;
 
   return build.query<PaginatedResponse<TData>, PaginationParams>({
@@ -31,10 +31,10 @@ export function createPaginatedQuery<TData>(
         ...(search && { search }),
         ...(sortBy && { sortBy }),
         ...(sortOrder && { sortOrder }),
-        ...rest, // Includes extras like 'type=1' for GetUniversity
+        ...rest,
       };
       console.log('Built query params:', builtParams);
-      return { url, method, params: builtParams };
+      return { url: typeof url === 'function' ? url(params) : url, method, params: builtParams };
     },
 
     providesTags: (result, error, arg) => [
@@ -43,9 +43,7 @@ export function createPaginatedQuery<TData>(
     ],
 
     transformResponse: transformResponse ?? ((baseResponse: any): PaginatedResponse<TData> => {
-      console.log('Raw API response:', baseResponse);
       const payload = baseResponse?.data;
-      console.log('Extracted payload:', payload);
 
       if (!payload) {
         return {
@@ -55,7 +53,6 @@ export function createPaginatedQuery<TData>(
       }
 
       if (!isPaginated) {
-        // For non-paginated "lists" (e.g., GetUniversity returns full array)
         const list = payload.ViewList || payload.viewList || payload.items || payload.data || payload || [];
         return {
           data: Array.isArray(list) ? list : [list],
@@ -63,14 +60,14 @@ export function createPaginatedQuery<TData>(
         };
       }
 
-      // Paginated case (e.g., GetList)
       const list = payload.ViewList || payload.viewList || payload.items || payload.data || [];
       const currentPage = Number(payload.Page ?? payload.page ?? 0);
       const pageSize = Number(payload.PageSize ?? payload.pageSize ?? 10);
       const lastPage = payload.LastPage !== undefined ? Number(payload.LastPage) : Math.ceil(list.length / pageSize) - 1;
       const totalPages = lastPage >= 0 ? lastPage + 1 : 0;
-      const totalItems = payload.TotalCount ?? (totalPages * pageSize); // Use TotalCount if available, else estimate
+      const totalItems = payload.TotalCount ?? (totalPages * pageSize);
 
+      console.log(`CreatePaginated query returns this structure of data: \ndata: ${list}\nmeta:\n{page: ${currentPage}, pageSize: ${pageSize}, \ntotal: ${totalItems}, totalPages: ${totalPages}}`);
       return {
         data: list,
         meta: {
@@ -90,42 +87,60 @@ export function createQuery<TData, TParams = void>(
 ) {
   return build.query<TData, TParams>({
     query: (params) => ({
-      url,
+      url: typeof url === 'function' ? url(params) : url,
       method: 'GET',
       params: params || undefined,
     }),
     providesTags: tags,
-    // Optional custom transform for details (e.g., handle null data)
     transformResponse: transformResponse ?? ((baseResponse: any): TData => {
-      const payload = baseResponse?.data;
-      if (!payload && baseResponse?.IsSuccess === false) {
+      if (baseResponse?.IsSucces === false) {
         throw new Error(baseResponse?.msg || 'API Error');
       }
-      return payload || null; // Return null for "empty" success
+      const payload = baseResponse?.data;
+      console.log(`CreateQuery returns a payload like this \n${payload}`);
+      return payload || null;
     }),
   });
 }
 
-/**
- * Create a mutation endpoint (POST, PUT, PATCH, DELETE)
- */
 export function createMutation<TData, TArg>(
   build: EndpointBuilder<any, any, any>,
-  { url, method = 'POST', tags = [] }: {
+  config: {
     url: string | ((arg: TArg) => string);
     method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     tags?: string[];
+    transformResponse?: (baseQueryResponse: any) => TData;
   }
 ) {
+  const {
+    url,
+    method = 'POST',
+    tags = [],
+    transformResponse,
+  } = config;
+
   return build.mutation<TData, TArg>({
-    query: (arg) => ({
-      url: typeof url === 'function' ? url(arg) : url,
-      method,
-      body: arg, // Automatically JSON-stringified by RTK; send as { Address: "...", Long: 35.81, Lat: 51.38 }
-    }),
+    query: (arg) => {
+      const finalUrl = typeof url === 'function' ? url(arg) : url;
+      const upperMethod = method.toUpperCase();
+      const isBodyMethod = ['POST', 'PUT', 'PATCH'].includes(upperMethod);
+      console.log(`Mutation query: URL=${finalUrl}, Method=${upperMethod}, Arg=${JSON.stringify(arg)}`);
+      return {
+        url: finalUrl,
+        method: upperMethod,
+        ...(isBodyMethod ? { body: arg } : { params: arg }),
+      };
+    },
     invalidatesTags: (result, error, arg) => [
-      ...tags.map(tag => ({ type: tag, id: 'LIST' } as const)),
-      ...tags.map(tag => ({ type: tag } as const)),
+      ...tags.map(tag => ({ type: tag as string, id: 'LIST' })),
+      ...tags.map(tag => ({ type: tag as string })),
     ],
+    transformResponse: transformResponse ?? ((baseResponse: any): TData => {
+      console.log('Mutation raw response:', baseResponse);
+      if (baseResponse?.IsSucces === false) {
+        throw new Error(baseResponse?.msg || 'API Error');
+      }
+      return baseResponse?.data || null;
+    }),
   });
 }

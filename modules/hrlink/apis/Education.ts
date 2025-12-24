@@ -1,54 +1,44 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-// Assuming you have types defined elsewhere; replace 'any' with actual types like Education, University, etc.
-const educationApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Education'],
-  requiresAuth: true,
-  autoToast: true,
-});
-
-export const educationApiEndpoints = educationApi.injectEndpoints({
+export const educationApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build: any) => ({
-    // Paginated query for listing all educations
     fetchEducations: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.education.getList,
       tags: ['Education'],
     }),
-    // Non-paginated query for a single education detail (assumes params like { id })
+
     fetchEducationDetail: createQuery<any, { id: string | number }>(build, {
       url: HRLinkApiEndpoints.resume.education.getDetail,
       tags: ['Education'],
     }),
-    // Paginated query for universities (assumes it supports pagination/search params)
-    fetchUniversity: createPaginatedQuery<any>(build, {
+
+    fetchUniversity: createQuery<any, {type: number}>(build, {
       url: HRLinkApiEndpoints.resume.education.getUniversity,
       tags: ['Education'],
     }),
-    // Assuming this is for fields of study; replace URL if incorrect
-    fetchField: createPaginatedQuery<any>(build, {
-      url: '/Education/GetField', // Guessed; update to actual endpoint if different
+
+    fetchField: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.resume.education.getFieldOfStudy,
       tags: ['Education'],
     }),
-    // Mutation for creating a new education
+
     createEducation: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.education.create,
       method: 'POST',
       tags: ['Education'],
     }),
-    // Mutation for editing an existing education
+
     editEducation: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.resume.education.edit,
-      method: 'POST', // Or 'PUT' if your API uses PUT for updates
+      method: 'PUT', 
       tags: ['Education'],
     }),
-    // Mutation for deleting an education
+
     deleteEducation: createMutation<any, { id: string | number }>(build, {
       url: HRLinkApiEndpoints.resume.education.delete,
-      method: 'POST', // Or 'DELETE' if your API supports it
+      method: 'POST',
       tags: ['Education'],
     }),
   }),
