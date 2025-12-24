@@ -1,35 +1,36 @@
-import { AppButton, AppPageTitle, AppSearchInput } from "@hrbox/UIKit/components";
-import { FormField } from "@hrbox/UIKit/components/FormField";
-import { Candle2, Setting, Setting2, Setting3, Setting4 } from "iconsax-reactjs";
+import { AppButton, AppPageTitle, AppSearchInput } from "@hrbox/uikit/components";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { Setting4 } from "iconsax-reactjs";
 import { FormProvider } from "@hrbox/core/providers";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 
-const TimeSheetHeader = (props:any) => {
-    const navigate = useNavigate<any>();
-    const location=useLocation();
-     const isAllProjects =
+const TimeSheetHeader = (props: any) => {
+  const navigate = useNavigate<any>();
+  const location = useLocation();
+  const isAllProjects =
     location.pathname === "/attendance/all-projects";
-    return ( <>
+  return (<>
     <div className="flex justify-between">
-        <AppPageTitle title={props.title} icon={props.icon} />
-        <div className="flex flex-row gap-2">
-            <FormProvider
-              formId="calenderHeader"
-                  initialValues={{}}
-                  validationSchema={{}}
-                  enableCache={false} >
-            <FormField 
+      <AppPageTitle title={props.title} icon={props.icon} />
+      <div className="flex flex-row gap-2">
+        <FormProvider
+          formId="calenderHeader"
+          initialValues={{}}
+          validationSchema={{}}
+          enableCache={false}>
+          <FormField
             component={AppSearchInput}
             name="search"
             variant="bordered"
-            />
-            </FormProvider>
-            {isAllProjects&&(
-            <AppButton content={<Setting4 size={24}/>} className="p-2 border border-primary "onPress={() =>navigate({ to: "/attendance/project-timeSheet" })} />
-            )}
-        </div>
+          />
+        </FormProvider>
+        {isAllProjects && (
+          <AppButton content={<Setting4 size={24} />} className="p-2 border border-primary "
+                     onPress={() => navigate({ to: "/attendance/project-timeSheet" })} />
+        )}
+      </div>
     </div>
-    </> );
-}
- 
+  </>);
+};
+
 export default TimeSheetHeader;

@@ -1,9 +1,9 @@
-import { AppPagination } from "@hrbox/UIKit/components";
+import { AppPagination } from "@hrbox/uikit/components";
 import TimeSheetAccordion from "./TimeSheetAccordion";
 import { useState } from "react";
 
 const ProjectTimesheets = () => {
-    const [currentPage,setCurrentPage]=useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const paginatDate = {
     data: [
       {
@@ -14,7 +14,7 @@ const ProjectTimesheets = () => {
         taskName: "Task Name",
         name: "Alireza",
         idProject: 1,
-        timeProject: "2 hours and 5 minutes",
+        timeProject: "2 hours and 5 minutes"
       },
       {
         projectName: "Project Name",
@@ -24,7 +24,7 @@ const ProjectTimesheets = () => {
         taskName: "Task Name",
         name: "Alireza",
         idProject: 1,
-        timeProject: "2 hours and 5 minutes",
+        timeProject: "2 hours and 5 minutes"
       },
       {
         projectName: "Project Name",
@@ -34,19 +34,19 @@ const ProjectTimesheets = () => {
         taskName: "Task Name",
         name: "Alireza",
         idProject: 1,
-        timeProject: "2 hours and 5 minutes",
-      },
+        timeProject: "2 hours and 5 minutes"
+      }
     ],
-meta: {
+    meta: {
       page: currentPage,
       totalPages: 10,
       pageSize: 10,
-      total: 100,
-    },
+      total: 100
+    }
   };
-  const handlePage=(page:any)=>{
-    setCurrentPage(page)
-  }
+  const handlePage = (page: any) => {
+    setCurrentPage(page);
+  };
   return (
     <>
       <div className="flex flex-col justify-between h-full items-end">
@@ -66,19 +66,19 @@ meta: {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-          {paginatDate.data.map((item,index)=>(
+            {paginatDate.data.map((item, index) => (
               <TimeSheetAccordion
-              key={index}
-              projectName={item.projectName}
-              projectTime={item.projectTime}
-              time={item.time}
-              id={item.id}
-              taskName={item.taskName}
-              name={item.name}
-              idProject={item.idProject}
-              timeProject={item.timeProject}
-            />
-          ))}
+                key={index}
+                projectName={item.projectName}
+                projectTime={item.projectTime}
+                time={item.time}
+                id={item.id}
+                taskName={item.taskName}
+                name={item.name}
+                idProject={item.idProject}
+                timeProject={item.timeProject}
+              />
+            ))}
           </div>
         </div>
         <AppPagination onPageChange={handlePage} meta={paginatDate.meta} />

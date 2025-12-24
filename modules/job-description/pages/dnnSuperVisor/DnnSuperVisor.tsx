@@ -1,8 +1,7 @@
-import { AppButton } from "@hrbox/UIKit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import clsx from "clsx";
 import { useState } from "react";
 import { tabs } from "../../app/mock";
-import { moduleRegistry } from "@hrbox/modules/registry";
 
 const DnnSuperVisor = () => {
 
