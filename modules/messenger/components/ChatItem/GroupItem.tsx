@@ -28,7 +28,7 @@ export const GroupItem = ({
     {},
   );
 
-  // Setting profile in Redux
+  // Indicator profile in Redux
   const setProfile = () => {
     dispatch(
       setUserProfile({

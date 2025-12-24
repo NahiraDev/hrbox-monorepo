@@ -2,11 +2,11 @@ import { useDisclosure } from "@heroui/react";
 import { useState } from "react";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
 import PageHeader from "@/components/PageHeader.tsx";
-import PageTabs from "@/pages/Setting/Calculation/PageTabs.tsx";
+import PageTabs from "@/pages/Indicator/Calculation/PageTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
-import ModalCalculations from "@/pages/Setting/Calculation/ModalCalculations.tsx";
+import ModalCalculations from "@/pages/Indicator/Calculation/ModalCalculations.tsx";
 import SelectCalendarWithTime from "@/components/Calendar/SelectCalendarWithTime.tsx";
 import GeneralDetails from "@/components/GeneralDetails";
 

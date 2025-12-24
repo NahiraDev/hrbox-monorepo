@@ -16,8 +16,8 @@ import { AppInput } from "@/components/AppInput.tsx";
 import { AppAutoComplete } from "@/components/AppAutoComplete.tsx";
 import InputGrid from "@/components/InputGrid.tsx";
 import { AppTextArea } from "@/components/AppTextArea.tsx";
-import TaxTableInnerPopup from "@/pages/Setting/Tax/TaxTableInnerPopup.tsx";
-import TaxTableInnerPopupShowMode from "@/pages/Setting/Tax/TaxTableInnerPopupShowMode.tsx";
+import TaxTableInnerPopup from "@/pages/Indicator/Tax/TaxTableInnerPopup.tsx";
+import TaxTableInnerPopupShowMode from "@/pages/Indicator/Tax/TaxTableInnerPopupShowMode.tsx";
 
 export default function ModalTaxTable({
   isOpen,

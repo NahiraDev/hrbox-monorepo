@@ -15,7 +15,11 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
   const modal = useModal();
   const navigate = useNavigate()
   const location = useLocation()
-  const isTrafficCalender = location.pathname === "/job-gradings/setting/indicators"
+    const isGeneral =
+        location.pathname === "/job-gradings/setting/general";
+
+    const isIndicators =
+        location.pathname === "/job-gradings/setting/indicators";
   const handlerOpenModal = () => {
     modal.open(
       ModalType.CREATE,
@@ -37,27 +41,30 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row gap-3">
-            <AppButton
-              color={isTrafficCalender ? "white" : "primary"}
-              size="md"
-              radius="lg"
-              startContent={<Setting size={18} />}
-              className={isTrafficCalender ? "text-black" : "text-white"}
-              onPress={() =>
-                navigate({ to: "/job-gradings/setting/indicators" })
-              }
-              content={t("indicators")}
-            />
+              <AppButton
+                  color={isIndicators ? "primary" : "white"}
+                  size="md"
+                  radius="lg"
+                  startContent={<Setting size={18} />}
+                  className={isIndicators ? "text-black" : "text-white"}
+                  onPress={() =>
+                      navigate({ to: "/job-gradings/setting/indicators" })
+                  }
+                  content={t("indicators")}
+              />
 
-            <AppButton
-              color={isTrafficCalender ? "primary" : "white"}
-              size="md"
-              radius="lg"
-              className={isTrafficCalender ? "text-white" : "text-black"}
-              startContent={<Setting size={18} />}
-              onPress={() => navigate({ to: "/job-gradings/setting/General" })}
-              content={t("General")}
-            />
+              <AppButton
+                  color={isGeneral ? "primary" : "white"}
+                  size="md"
+                  radius="lg"
+                  startContent={<Setting size={18} />}
+                  className={isGeneral ? "text-black" : "text-white"}
+                  onPress={() =>
+                      navigate({ to: "/job-gradings/setting/general" })
+                  }
+                  content={t("General")}
+              />
+
           </div>
           
         </div>

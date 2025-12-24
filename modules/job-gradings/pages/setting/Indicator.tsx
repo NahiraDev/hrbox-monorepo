@@ -5,12 +5,12 @@ import { ModalSize, ModalType } from "@hrbox/core/providers";
 import SettingModal from "../../modals/SettingModal";
 const Action = [];
 
-const Setting = () => {
+const Indicator = () => {
   const modal = useModal();
   const handleRowClick = () => {
     modal.open(
       ModalType.VIEW,
-      "Setting",
+      "Indicator",
       <SettingModal/>,
       {
         isForm: true,
@@ -36,4 +36,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default Indicator;

@@ -34,7 +34,7 @@ const MenuItems = [
   { module: "Process Maker", icon: Hierarchy3, outline: false },
   { module: "basic-info", icon: Personalcard, outline: false },
   { module: "Job Grading", icon: Crown, outline: false },
-  { module: "All Setting", icon: Setting5, outline: false },
+  { module: "All Indicator", icon: Setting5, outline: false },
   { module: "Form Maker", icon: NoteFavorite, outline: false },
   { module: "Project Management", icon: MobileProgramming, outline: false },
   { module: "Contract Maker", icon: Edit2, outline: false },
@@ -80,7 +80,7 @@ export const AppDocs: React.FC = () => {
               {/* Additional Items */}
               <AppDocItem
                 icon={Setting2}
-                module="General Setting"
+                module="General Indicator"
                 outlined={true}
                 mouseX={null}
                 index={MenuItems.length}

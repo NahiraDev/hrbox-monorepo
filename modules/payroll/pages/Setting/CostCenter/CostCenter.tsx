@@ -2,14 +2,14 @@ import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageTabs from "@/pages/Setting/CostCenter/PageTabs.tsx";
-import PageIndexTabs from "@/pages/Setting/PageIndexTabs.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageTabs from "@/pages/Indicator/CostCenter/PageTabs.tsx";
+import PageIndexTabs from "@/pages/Indicator/PageIndexTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import SelectCalendarWithTime from "@/components/Calendar/SelectCalendarWithTime.tsx";
 import GeneralDetails from "@/components/GeneralDetails";
 import PageHeader from "@/components/PageHeader.tsx";
-import ModalCostCenter from "@/pages/Setting/CostCenter/ModalCostCenter.tsx";
+import ModalCostCenter from "@/pages/Indicator/CostCenter/ModalCostCenter.tsx";
 
 export default function CostCenter() {
   const DUMMY_EMPLOYEES = [

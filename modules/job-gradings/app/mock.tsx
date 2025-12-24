@@ -771,9 +771,6 @@ export const organization = [
 export const JD = [
   {
     id: "1",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FFCC00",
     title2: "Number of employees:",
     title3: "Status",
@@ -783,9 +780,6 @@ export const JD = [
   },
   {
     id: "2",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FFCC00",
     title2: "Number of employees:",
     title3: "Status",
@@ -795,9 +789,6 @@ export const JD = [
   },
   {
     id: "3",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FD1B51",
     title2: "Number of employees:",
     title3: "Status",
@@ -807,9 +798,6 @@ export const JD = [
   },
   {
     id: "4",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#A212D2",
     title2: "Number of employees:",
     title3: "Status",
@@ -819,9 +807,6 @@ export const JD = [
   },
   {
     id: "5",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "",
     title2: "Number of employees:",
     title3: "Status",
@@ -831,9 +816,6 @@ export const JD = [
   },
   {
     id: "6",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#A212D2",
     title2: "Number of employees:",
     title3: "Status",
@@ -843,9 +825,6 @@ export const JD = [
   },
   {
     id: "7",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FFCC00",
     title2: "Number of employees:",
     title3: "Status",
@@ -855,9 +834,6 @@ export const JD = [
   },
   {
     id: "8",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FFCC00",
     title2: "Number of employees:",
     title3: "Status",
@@ -867,9 +843,6 @@ export const JD = [
   },
   {
     id: "9",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#FD1B51",
     title2: "Number of employees:",
     title3: "Status",
@@ -879,9 +852,6 @@ export const JD = [
   },
   {
     id: "10",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#A212D2",
     title2: "Number of employees:",
     title3: "Status",
@@ -891,9 +861,6 @@ export const JD = [
   },
   {
     id: "11",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "",
     title2: "Number of employees:",
     title3: "Status",
@@ -903,9 +870,6 @@ export const JD = [
   },
   {
     id: "11",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
     color: "#A212D2",
     title2: "Number of employees:",
     title3: "Status",
@@ -914,6 +878,79 @@ export const JD = [
     title: "Designer",
   },
 ];
+export const ListTable=[
+    {
+    id: "1",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "2",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "3",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "4",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "5",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "6",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "7",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "8",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "9",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+},{
+    id: "10",
+    No:"1",
+    of_points:"Behavioral indicators",
+    Index_title:"organizational impact",
+    Grade: "Grade B",
+    Creation_date: "2022/19/10",
+}
+]
 export const Notification = [
   {
     id: "1",
