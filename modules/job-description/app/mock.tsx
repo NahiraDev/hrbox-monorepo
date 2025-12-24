@@ -1,5 +1,6 @@
 import {
   Briefcase,
+  Calendar,
   Health,
   LampCharge,
   Menu,
@@ -7,13 +8,13 @@ import {
   ProfileAdd,
   ProfileTick,
   Radar2,
+  Settings,
   Task,
   Verify,
 } from "iconsax-reactjs";
 import ObjectMissionCounter from "../pages/dnnSuperVisor/objectivesMossion/ObjectMissionCounter";
 import GeneralCounter from "../pages/dnnSuperVisor/generalConditions/GeneralCounter";
 import EligibilityRequirements from "../pages/dnnSuperVisor/Eligibility-Requirements/EligibilityRequirements";
-
 
 export const jobDescriptions = [
   {
@@ -186,4 +187,18 @@ export const objectivesCard = [
     description:
       "Aligns human resources strategies with overall business objectives.",
   },
+];
+export const Eligibility_Requirements=[
+  {id:1 , icon:Settings,title:"Age Limit",text:"26 to 30 years"},
+  {id:1 , icon:Calendar,title:"Minimum Degree",text:"Bachelor's"},
+  {id:1 , icon:Calendar,title:"Gender",text:"No preference"},
+  {id:1 , icon:Settings,title:"Maximum Salary",text:"16 million Toman"},
+  {id:1 , icon:Settings,title:"Marital Status",text:"No preference"},
+  {id:1 , icon:Settings,title:"Country",text:"Iran"},
+  {id:1 , icon:Settings,title:"Minimum Work Experience",text:"3 years"},
+  {id:1 , icon:Settings,title:"City",text:"Tehran"},
+  {id:1 , icon:Settings,title:"Military Service Status",text:"Not specified"},
+  {id:1 , icon:Settings,title:"Number of Successors",text:"0"},
+  {id:1 , icon:Settings,title:"Industry",text:"Not specified"},
+  {id:1 , icon:Settings,title:"Field of Study",text:"Not applicable"},
 ];
