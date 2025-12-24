@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { AppPageTitle } from "@hrbox/uikit/components/AppPageTitle";
 import { AppButton, AppSearchInput } from "@hrbox/uikit/components";
-import { Add, Additem, ArrowLeft2 } from "iconsax-reactjs";
+import { Add, ArrowLeft2 } from "iconsax-reactjs";
 
-const DashboardHeader = (props: any) => {
+const JDHeader = (props: any) => {
   const { t } = useTranslation();
   return (
     <>
@@ -27,4 +27,4 @@ const DashboardHeader = (props: any) => {
   );
 };
 
-export default DashboardHeader;
+export default JDHeader;

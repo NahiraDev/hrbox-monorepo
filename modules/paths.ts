@@ -94,10 +94,12 @@ export const Paths = {
     Dashboard: "/payroll",
   },
   JobGradings:{
-    Dashboard:'/job-gradings/dashboard'
+    Dashboard:'/job-gradings/dashboard',
+    Setting:'/job-gradings/setting/indicators',
+    JDPage:'/job-gradings/JDPage'
   },
-  JobDescription:{
-    jobdescription:"/job-description",
-    ObjectivesMission:"/job-description/objectives-mission"
-  }
+    JobDescription:{
+        jobdescription:"/job-description",
+        ObjectivesMission:"/job-description/objectives-mission"
+    }
 };
