@@ -31,9 +31,9 @@ const MOCK_RESPONSE = {
       { Id: 14026, Title: "ش", Description: "description", Date: 1400, Place: "-" },
     ],
   meta: {
-    Page: 0 , 
+    Page: 0 ,
     pageSize: 10,
-    total: 40, 
+    total: 40,
     totalPages: 4,
   },
   msg: null,
@@ -62,7 +62,7 @@ const Awards = () => {
 
   // Handle deleting awards 
   const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
-  
+
   // Track which award is currently being deleted
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
 

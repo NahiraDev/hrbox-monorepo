@@ -2,11 +2,7 @@ import { Avatar } from "@heroui/react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { Map as LeafletMap,LatLngExpression,icon   } from "leaflet";
 import { useRef, useState } from "react";
-import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import 'leaflet/dist/leaflet.css';
-import { AppButton, AppModal } from "@hrbox/uikit/components";
-import ActionsModal from "@hrbox/modules/attendance/modals/ActionsModal";
-import { MaskRight } from "iconsax-reactjs";
 const LocationMarker = ({ 
   position,
   setPosition 
@@ -53,7 +49,7 @@ const UserLocationModal = () => {
               <p className="text-sm! font-medium!">192.168.1.1</p>
             </div>
           </div>
-          <div className="p-3 bg-[#DCF0F940] rounded-lg flex flex-col w-full">
+          <div className="p-3 bg-[#DCF0F940] dark:bg-[#04425C60] rounded-lg flex flex-col w-full">
             <p className="font-semibold! text-sm!">
               Please note the following points:
             </p>

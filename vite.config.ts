@@ -91,6 +91,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           chartMaker: resolve(__dirname, "modules/chart-maker/plugin.tsx"),
           hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
           attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
+          jobGradings: resolve(__dirname, "./modules/job-gradings/plugin.tsx"),
           basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
           projectManagement: resolve(
             __dirname,
@@ -112,7 +113,9 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             if (chunkInfo.name === "attendance")
               return "modules/attendance/index.js";
             if (chunkInfo.name === "projectManagement")
-              return "modules/attendance/index.js";
+              return "modules/project-management/index.js";
+            if (chunkInfo.name === "jobGradings")
+              return "modules/job-gradings/index.js";
             return "[name].js";
           },
           chunkFileNames: "[name]-[hash].js",
