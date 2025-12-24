@@ -12,6 +12,7 @@ import {
 } from "iconsax-reactjs";
 import ObjectMissionCounter from "../pages/dnnSuperVisor/objectivesMossion/ObjectMissionCounter";
 import GeneralCounter from "../pages/dnnSuperVisor/generalConditions/GeneralCounter";
+import EligibilityRequirements from "../pages/dnnSuperVisor/Eligibility-Requirements/EligibilityRequirements";
 
 
 export const jobDescriptions = [
@@ -81,6 +82,7 @@ export const tabs = [
     id: 3,
     icon: <Verify size={20} />,
     content: "Eligibility Requirements",
+    component:<EligibilityRequirements/>
   },
   {
     id: 4,

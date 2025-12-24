@@ -8,8 +8,18 @@ import WorkConditions from "./WorkConditions";
 import WorkEnvironment from "./WorkEnvironment";
 import OrganizationalLevel from "./OrganizationalLevel";
 import JobGroup from "./JobGroup";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../core/redux";
+import { useEffect, useState } from "react";
 
 const GeneralCounter = () => {
+ const isEditMode = useSelector(
+    (state: RootState) => state.dnnSupervisorEdit.isEditMode
+  );
+  const [ediTable,setEdiTable]=useState<boolean>(false);
+  useEffect(()=>{
+    setEdiTable(isEditMode)
+  },[isEditMode])
   return (
     <>
       <div className="flex flex-col w-full h-full">
@@ -24,7 +34,7 @@ const GeneralCounter = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Job Title:
-                    <span className="font-bold"> HR Specialist</span>
+                    <span className="font-bold" contentEditable={ediTable}> HR Specialist</span>
                   </p>
                 </div>
               </div>
@@ -35,7 +45,7 @@ const GeneralCounter = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Supervisor:
-                    <span className="font-bold"> CEO</span>
+                    <span className="font-bold" contentEditable={ediTable}> CEO</span>
                   </p>
                 </div>
               </div>
@@ -48,7 +58,7 @@ const GeneralCounter = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Positions Needed:
-                    <span className="font-bold"> 1</span>
+                    <span className="font-bold" contentEditable={ediTable} > 1</span>
                   </p>
                 </div>
               </div>
