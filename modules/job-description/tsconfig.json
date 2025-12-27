@@ -6,5 +6,5 @@
     "outDir": "../../dist/modules/jobDescription",
     "declarationDir": "../../dist/types",
   },
-  "include": ["." , "./*","*"]
+  "include": ["." , "./*"]
 }

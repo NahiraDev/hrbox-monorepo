@@ -8,14 +8,15 @@ import {
   ProfileAdd,
   Radar2,
   Trash,
-  UserOctagon,
+  UserOctagon
 } from "iconsax-reactjs";
 import "../../../app/index.css";
 import { objectivesCard } from "../../../app/mock";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../../core/redux";
+import { RootState } from "@hrbox/core/redux";
 import { useEffect, useState } from "react";
-import { AppButton } from "@hrbox/UIKit/components";
+import { AppButton } from "@hrbox/uikit/components";
+
 const ObjectMissionCounter = () => {
   const isEditMode = useSelector(
     (state: RootState) => state.dnnSupervisorEdit.isEditMode
@@ -103,44 +104,46 @@ const ObjectMissionCounter = () => {
                 <p className="text-xl font-semibold">Objectives</p>
               </div>
               <div className="flex">
-               {isEditMode &&
-                <AppButton
-                  content={<Add size={16} />}
-                  variant="bordered"
-                  size="sm"
-                  className="p-1 border-primary"
-                />
+                {isEditMode &&
+                  <AppButton
+                    content={<Add size={16} />}
+                    variant="bordered"
+                    size="sm"
+                    className="p-1 border-primary"
+                  />
                 }
               </div>
             </div>
             {/*title */}
             {/* objective cards */}
-            <div className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px] custom-scroll-objectives">
+            <div
+              className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px] custom-scroll-objectives">
               {objectivesCard.map((card) => (
-                <div className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-[0_1px_3px_0_rgba(8,14,28,0.30)] dark:shadow-none">
-                   <div className="flex flex-row items-center justify-between border-b border-neutral-100">
-                  <div className="flex flex-row gap-1 w-full  ">
+                <div
+                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-[0_1px_3px_0_rgba(8,14,28,0.30)] dark:shadow-none">
+                  <div className="flex flex-row items-center justify-between border-b border-neutral-100">
+                    <div className="flex flex-row gap-1 w-full  ">
                     <span>
                       <ArchiveBook size={20} />
                     </span>
-                    <p className="text-[16px] font-semibold">{card.title}</p>
-                  </div>
-                  {isEditMode && 
-                  <div className="flex flex-row">
-                    <AppButton
-                    content={<Edit size={16} />}
-                    size="sm"
-                    variant=""
-                    className="p-1"   
-                      />
-                    <AppButton
-                    content={<Trash size={16} />}
-                    variant=""
-                    size="sm"
-                    className="p-1"
-                      />
+                      <p className="text-[16px] font-semibold">{card.title}</p>
                     </div>
-                  }
+                    {isEditMode &&
+                      <div className="flex flex-row">
+                        <AppButton
+                          content={<Edit size={16} />}
+                          size="sm"
+                          variant=""
+                          className="p-1"
+                        />
+                        <AppButton
+                          content={<Trash size={16} />}
+                          variant=""
+                          size="sm"
+                          className="p-1"
+                        />
+                      </div>
+                    }
                   </div>
                   <div className="w-full">
                     <p className="text-[12px]">{card.description}</p>
@@ -162,43 +165,49 @@ const ObjectMissionCounter = () => {
               </div>
               <div className="flex">
                 {isEditMode &&
-                <AppButton
-                  content={<Add size={16} />}
-                  variant="bordered"
-                  size="sm"
-                  className="p-1 border-primary"
-                />
+                  <AppButton
+                    content={<Add size={16} />}
+                    variant="bordered"
+                    size="sm"
+                    className="p-1 border-primary"
+                  />
                 }
               </div>
             </div>
             {/*title */}
             {/* mission cards */}
-            <div className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px]  custom-scroll-objectives">
+            <div
+              className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px]  custom-scroll-objectives">
               {objectivesCard.map((card) => (
+<<<<<<< HEAD
                 <div className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-light-tight-1">
+=======
+                <div
+                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-[0_1px_3px_0_rgba(8,14,28,0.30)]">
+>>>>>>> 4b27daedc0910a5cbcd5255358f43a9e8739b3e6
                   <div className="flex flex-row items-center justify-between border-b border-neutral-100">
-                  <div className="flex flex-row gap-1 w-full  ">
+                    <div className="flex flex-row gap-1 w-full  ">
                     <span>
                       <ArchiveBook size={20} />
                     </span>
-                    <p className="text-[16px] font-semibold">{card.title}</p>
-                  </div>
-                  {isEditMode && 
-                  <div className="flex flex-row">
-                    <AppButton
-                    content={<Edit size={16} />}
-                    size="sm"
-                    variant=""
-                    className="p-1"   
-                      />
-                    <AppButton
-                    content={<Trash size={16} />}
-                    variant=""
-                    size="sm"
-                    className="p-1"
-                      />
+                      <p className="text-[16px] font-semibold">{card.title}</p>
                     </div>
-                  }
+                    {isEditMode &&
+                      <div className="flex flex-row">
+                        <AppButton
+                          content={<Edit size={16} />}
+                          size="sm"
+                          variant=""
+                          className="p-1"
+                        />
+                        <AppButton
+                          content={<Trash size={16} />}
+                          variant=""
+                          size="sm"
+                          className="p-1"
+                        />
+                      </div>
+                    }
                   </div>
                   <div className="w-full">
                     <p className="text-[12px]">{card.description}</p>
