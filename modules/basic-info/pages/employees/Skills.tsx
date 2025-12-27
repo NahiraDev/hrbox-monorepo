@@ -4,7 +4,7 @@ import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
 import { LampCharge, Trash } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { AppDoubleLineProgress } from "@hrbox/uikit/sections";
-import { useState } from "react"; // Import useState
+import { useState } from "react";
 
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 
@@ -27,13 +27,9 @@ const Education = () => {
     );
   };
 
-  // Function to handle the actual deletion and update state
   const handleDeleteConfirm = (index: number) => {
     setCurrentSkills((prev) => {
       const newSkills = [...prev];
-      // Note: This splice works because the mockSkills array is duplicated in the layout,
-      // but in a real app, you would likely have two different state arrays or keys for
-      // 'Hard Skills' and 'Soft Skills' to manage them separately.
       newSkills.splice(index, 1);
       return newSkills;
     });
@@ -43,7 +39,7 @@ const Education = () => {
     <Card key={index} className="p-3 flex gap-1.5 shdow-theme-sm bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
         <div className="flex items-center gap-2">
-          <Avatar radius="sm" size="sm" />
+          <Avatar radius="sm" size="sm" color='primary' />
           <span className="text-lg">{skill.skill}</span>
         </div>
         <div>
@@ -52,7 +48,6 @@ const Education = () => {
               radius="sm"
               variant="light"
               isIconOnly={true}
-              // Call handleDeleteClick with the item's index
               onPress={() => handleDeleteClick(index)}
               content={
                 <Trash className="text-secondary-1000 group-hover:text-white" />
@@ -84,28 +79,24 @@ const Education = () => {
       <BasicInfoLayout
         content={
           <div className="flex p-7 gap-10">
-            {/* Hard Skills Section */}
             <div className="flex flex-col w-full gap-3  ">
               <div className="flex gap-1 items-center text-[20px] font-semibold">
                 <LampCharge />
                 <span className="text-secondary-1000">Hard Skills</span>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
-                {/* Use currentSkills state for mapping */}
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}
               </div>
             </div>
 
-            {/* Soft Skills Section (assuming it uses the same data for now) */}
             <div className="flex flex-col gap-3 w-full">
               <div className="flex gap-1 text-[20px] items-center font-semibold">
                 <LampCharge />
-                <span>Soft Skills</span> {/* Changed text for clarity */}
+                <span>Soft Skills</span>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
-                {/* Use currentSkills state for mapping */}
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}

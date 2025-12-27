@@ -3,11 +3,10 @@ import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@hrbox/modules/basic-info/modals/OrganizationDepartmentModal';
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { Category, TickCircle } from 'iconsax-reactjs';
 import { useModal } from "@HRBox/core/hooks";
 import { initialValuesTechnicalDepartment,  formValidationTechnicalDepartment } from "@HRBox/modules/basic-info/forms/TechnicalDepartmentForm";
 import {handleSubmitAward} from "@HRBox/modules/hrlink/forms/AwardForm"
-import translate from "@HRBox/core/translate";
+import { TickIcon } from "@HRBox/UIKit/icons";
 
 const TechnicalDepartments = () => {
   const { openModal } = useModalContext();
@@ -44,18 +43,18 @@ const TechnicalDepartments = () => {
       <div className="w-full grid grid-cols-9 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
+            isPressable
             key={index}
-            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
+            className="p-4 bg-white ro unded-2xl shadow-sm flex items-center justify-center gap-2 relative">
             <Avatar className="w-30 h-30 " color="primary" radius="lg"  />
-            <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
+            <TickIcon className="absolute top-2 right-3" size="22" color="gray" />
             <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton
-                className='h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary',
-                size='sm',
-                radius='sm',
-                onPress=() =>{handleOpenTechnicalDepartments},
-                content=<span>{user.job}</span>,
-
+                className='h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary'
+                size='sm'
+                radius='sm'
+                onPress={ () => {handleOpenTechnicalDepartments}}
+                content={<span>{user.job}</span>}
             />
           </Card>
         ))}

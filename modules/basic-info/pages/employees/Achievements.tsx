@@ -47,10 +47,10 @@ const Achievements = () => {
             ModalType.DELETE,
             "Delete Organization Departments",
             {
-                isForm: true,
-                title: "افزودن ",
-                submitLabel: "ذخیره",
-                cancelLabel: "لغو",
+              isForm: true,
+              title: "افزودن ",
+              submitLabel: "ذخیره",
+              cancelLabel: "لغو",
             },
             ModalSize.XL,
         );

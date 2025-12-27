@@ -9,16 +9,13 @@ import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 
 const Courses = () => {
   const { openModal } = useModalContext();
-  // 1. Initialize state with mock data
   const [courses, setCourses] = useState(dataWorker);
 
-  // 2. Function to open the delete confirmation modal
   const handleDeleteClick = (index: number) => {
     openModal(
       'delete',
       '',
       <AppDeleteModal
-        // Pass the confirmation function as the onConfirm prop
         onConfirm={() => handleDeleteConfirm(index)}
         onCancel={() => console.log('Deletion cancelled')}
       />,
@@ -29,14 +26,10 @@ const Courses = () => {
     );
   };
 
-  // 3. Function to handle the actual deletion and update state
   const handleDeleteConfirm = (index: number) => {
     setCourses(prev => {
-      // Create a copy of the previous array
       const newCourses = [...prev];
-      // Remove the item at the specified index
       newCourses.splice(index, 1);
-      // Return the new array to update the state
       return newCourses;
     });
   };
@@ -45,7 +38,6 @@ const Courses = () => {
     <BasicInfoLayout
       content={
         <div className="grid grid-cols-4 gap-4 w-full p-4">
-          {/* Map over the 'courses' state instead of the imported mock data */}
           {courses.map((user: any, index) => (
             <Card key={index} className="p-3 w-full h-full shadow-light-tight-1 bg-white ">
               <div className="flex flex-col gap-2 ">
@@ -61,7 +53,6 @@ const Courses = () => {
                         radius='sm'
                         variant='light'
                         isIconOnly={true}
-                          // Call the new handler with the current index
                           onPress={() => handleDeleteClick(index)}
                           content={<Trash className="text-secondary-1000 group-hover:text-white" />}
                           className='p-2 hover:!bg-red-500 transition-all duration-200'
