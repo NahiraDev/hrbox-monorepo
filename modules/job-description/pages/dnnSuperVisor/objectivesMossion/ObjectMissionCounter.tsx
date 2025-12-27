@@ -120,7 +120,7 @@ const ObjectMissionCounter = () => {
               className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px] custom-scroll-objectives">
               {objectivesCard.map((card) => (
                 <div
-                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-[0_1px_3px_0_rgba(8,14,28,0.30)] dark:shadow-none">
+                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-light-tight-1 dark:shadow-none">
                   <div className="flex flex-row items-center justify-between border-b border-neutral-100">
                     <div className="flex flex-row gap-1 w-full  ">
                     <span>
@@ -179,8 +179,9 @@ const ObjectMissionCounter = () => {
             <div
               className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px]  custom-scroll-objectives">
               {objectivesCard.map((card) => (
+             
                 <div
-                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-[0_1px_3px_0_rgba(8,14,28,0.30)]">
+                  className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-light-tight-1">
                   <div className="flex flex-row items-center justify-between border-b border-neutral-100">
                     <div className="flex flex-row gap-1 w-full  ">
                     <span>

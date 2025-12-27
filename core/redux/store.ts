@@ -8,6 +8,7 @@ import authReducer from "@hrbox/core/redux/slices/authSlice";
 import themeReducer from "@hrbox/core/redux/slices/themeSlice";
 import languageReducer from "@hrbox/core/redux/slices/languageSlice";
 import formCacheReducer from "@hrbox/core/redux/slices/formCacheSlice";
+import  dnnSupervisorEditSlice  from "@hrbox/core/redux/slices/dnnSupervisorEditSlice";
 import {
     HRLinkApi
 } from "@hrbox/modules/hrlink/app/baseApi";
@@ -28,6 +29,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     theme: themeReducer(state.theme, action),
     language: languageReducer(state.language, action),
     formCache: formCacheReducer(state.formCache, action),
+    dnnSupervisorEdit: dnnSupervisorEditSlice(state.dnnSupervisorEdit,action),
 
     // RTK query reducers
     [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),

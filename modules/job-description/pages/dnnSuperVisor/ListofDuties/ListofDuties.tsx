@@ -1,15 +1,23 @@
 import {
   Briefcase,
-  Calendar,
   ChartCircle,
   ProfileAdd,
   UserOctagon,
-  Verify,
 } from "iconsax-reactjs";
-import { Eligibility_Requirements } from "../../../app/mock";
-import EligibilityCriteriaCounter from "./EligibilityCriteriaCounter";
-import WeightofIndicatorsCounter from "./WeightofIndicatorsCounter";
-const EligibilityRequirements = () => {
+import { useSelector } from "react-redux";
+import { RootState } from "@hrbox/core/redux";
+import { useEffect, useState } from "react";
+import { AppTable } from "@hrbox/uikit/components";
+import { duties } from "../../../app/mock";
+
+const ListofDuties = () => {
+  const isEditMode = useSelector(
+    (state: RootState) => state.dnnSupervisorEdit.isEditMode
+  );
+  const [editTable, setEditTable] = useState<boolean>(false);
+  useEffect(() => {
+    setEditTable(isEditMode);
+  }, [isEditMode]);
   return (
     <>
       <div className="flex flex-col w-full h-full">
@@ -24,7 +32,10 @@ const EligibilityRequirements = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Job Title:
-                    <span className="font-bold"> HR Specialist</span>
+                    <span className="font-bold" contentEditable={editTable}>
+                      {" "}
+                      HR Specialist
+                    </span>
                   </p>
                 </div>
               </div>
@@ -35,7 +46,10 @@ const EligibilityRequirements = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Supervisor:
-                    <span className="font-bold"> CEO</span>
+                    <span className="font-bold" contentEditable={editTable}>
+                      {" "}
+                      CEO
+                    </span>
                   </p>
                 </div>
               </div>
@@ -48,7 +62,10 @@ const EligibilityRequirements = () => {
                   </span>
                   <p className="text-xl text-[#1E3363]">
                     Positions Needed:
-                    <span className="font-bold"> 1</span>
+                    <span className="font-bold" contentEditable={editTable}>
+                      {" "}
+                      1
+                    </span>
                   </p>
                 </div>
               </div>
@@ -67,17 +84,16 @@ const EligibilityRequirements = () => {
           </div>
         </div>
         {/* header content */}
-        {/*body counter*/}
-       <div className="flex flex-col w-full h-full!">
-        <div className="flex flex-row p-3 gap-3 h-[581px]">
-          <EligibilityCriteriaCounter/>
-          <WeightofIndicatorsCounter/>
-          </div>
-          </div>
-        {/*body counter*/}
+        <div className="w-full h-full overflow-y-scroll pr-3">
+            <div className="w-full h-full flex flex-col gap-4">
+                <AppTable 
+                data={duties}
+                />
+            </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default EligibilityRequirements;
+export default ListofDuties;

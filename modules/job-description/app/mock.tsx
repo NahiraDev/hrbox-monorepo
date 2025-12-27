@@ -1,19 +1,28 @@
 import {
   Briefcase,
+  Calendar,
+  DollarCircle,
+  Global,
   Health,
+  Heart,
   LampCharge,
+  Map,
   Menu,
   MessageProgramming,
   ProfileAdd,
   ProfileTick,
   Radar2,
+  Settings,
+  Shield,
   Task,
+  User,
+  UserOctagon,
   Verify,
 } from "iconsax-reactjs";
 import ObjectMissionCounter from "../pages/dnnSuperVisor/objectivesMossion/ObjectMissionCounter";
 import GeneralCounter from "../pages/dnnSuperVisor/generalConditions/GeneralCounter";
 import EligibilityRequirements from "../pages/dnnSuperVisor/Eligibility-Requirements/EligibilityRequirements";
-
+import ListofDuties from "../pages/dnnSuperVisor/ListofDuties/ListofDuties";
 
 export const jobDescriptions = [
   {
@@ -82,12 +91,13 @@ export const tabs = [
     id: 3,
     icon: <Verify size={20} />,
     content: "Eligibility Requirements",
-    component:<EligibilityRequirements/>
+    component: <EligibilityRequirements />,
   },
   {
     id: 4,
     icon: <Task size={20} />,
     content: "List of Duties",
+    component:<ListofDuties/>
   },
   {
     id: 5,
@@ -187,3 +197,47 @@ export const objectivesCard = [
       "Aligns human resources strategies with overall business objectives.",
   },
 ];
+export const Eligibility_Requirements = [
+  { id: 1, icon: Settings, title: "Age Limit", text: "26 to 30 years" },
+  { id: 2, icon: Calendar, title: "Minimum Degree", text: "Bachelor's" },
+  { id: 3, icon: Calendar, title: "Gender", text: "No preference" },
+  { id: 4, icon: Settings, title: "Maximum Salary", text: "16 million Toman" },
+  { id: 5, icon: Settings, title: "Marital Status", text: "No preference" },
+  { id: 6, icon: Settings, title: "Country", text: "Iran" },
+  { id: 7, icon: Settings, title: "Minimum Work Experience", text: "3 years" },
+  { id: 8, icon: Settings, title: "City", text: "Tehran" },
+  {
+    id: 9,
+    icon: Settings,
+    title: "Military Service Status",
+    text: "Not specified",
+  },
+  { id: 10, icon: Settings, title: "Number of Successors", text: "0" },
+  { id: 11, icon: Settings, title: "Industry", text: "Not specified" },
+  { id: 12, icon: Settings, title: "Field of Study", text: "Not applicable" },
+];
+export const Weight_of_Indicators=[
+      { id: 1, title: "Age", icon: Settings },
+      { id: 2, title: "Minimum Degree", icon: Calendar },
+      { id: 3, title: "Gender", icon: User },
+      { id: 4, title: "Industry", icon: Settings },
+      { id: 5, title: "Salary", icon: DollarCircle },
+      { id: 6, title: "Marital Status", icon: Heart },
+      { id: 7, title: "Nationality", icon:Global },
+      { id: 8, title: "Age", icon:UserOctagon },
+      { id: 9, title: "City", icon:Map },
+      { id: 10, title: "Military Service Status", icon:Shield },
+      { id: 11, title: "Job Experience", icon:Briefcase },
+]
+export const duties=[
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"}
+]
