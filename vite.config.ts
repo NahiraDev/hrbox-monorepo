@@ -227,7 +227,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     preview: {
       port: 443,
       host: "0.0.0.0",
-      allowedHosts: ["localhost", "front.hrbox.me", "react.hrbox.me"],
+      allowedHosts: ["localhost",  , "react.hrbox.me"],
       strictPort: true,
       open: envVars.VITE_OPEN !== "false",
       cors: true,

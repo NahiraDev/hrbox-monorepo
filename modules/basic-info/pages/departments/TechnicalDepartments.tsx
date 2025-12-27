@@ -41,10 +41,11 @@ const TechnicalDepartments = () => {
       <div className="w-full grid grid-cols-9 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
+            isPressable
             key={index}
-            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
-            <Avatar className="w-30 h-30 " color="primary" radius="lg"/>
-            <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
+            className="p-4 bg-white ro unded-2xl shadow-sm flex items-center justify-center gap-2 relative">
+            <Avatar className="w-30 h-30 " color="primary" radius="lg"  />
+            <TickIcon className="absolute top-2 right-3" size="22" color="gray" />
             <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton
                 size='sm'
