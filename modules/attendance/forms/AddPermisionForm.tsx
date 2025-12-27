@@ -1,24 +1,26 @@
 import { Form } from "@heroui/react";
 import { AppAutoComplete, AppInput } from "@hrbox/uikit/components";
-import { FormField } from "@hrbox/ui/components/FormField";
+import { FormField } from "@hrbox/uikit/components/FormField";
+import { useTranslation } from "react-i18next";
 
 const AddPermisionForm = () => {
+  const {t}=useTranslation();
   return (
     <>
       <Form className="gap-6">
         <div className="flex flex-row w-full gap-x-9 justify-between ">
           <div className="w-full">
-            <FormField name="title" label="From Time" type="text" />
+            <FormField name="title" label={t("from_time")} type="text" />
           </div>
           <div className="w-full">
-            <FormField name="title" label="To Time" type="text" />
+            <FormField name="title" label={t("to_Time")} type="text" />
           </div>
         </div>{" "}
         <div className="flex flex-row w-full justify-between gap-x-9 ">
           <div className="w-[48%]">
             <FormField
               name="title"
-              label="Choose Type"
+              label={t("choose_type")}
               component={AppAutoComplete}
               items={[
                 { id: 1, name: "فناوری اطلاعات" },
@@ -28,16 +30,6 @@ const AddPermisionForm = () => {
               displayKey="name"
               valueKey="id"
             />
-            {/* <AppAutoComplete
-              props={{
-                type: 'text',
-                label: 'Choose Type',
-                name: 'title',
-                size: 'md',
-                variant:"bordered",
-                className: '!w-ful ',
-              }}
-            /> */}
           </div>
         </div>
       </Form>

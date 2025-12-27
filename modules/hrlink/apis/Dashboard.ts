@@ -1,18 +1,13 @@
 import { createModuleApi } from "@hrbox/core/apis/baseApi";
-import { createMutation, createQuery } from "@hrbox/core/apis/createEndpoints";
+import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@hrbox/modules/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const DashboardApi = createModuleApi({
-  reducerPath: "dashboardApi",
-  baseUrl: "/DesktopModules/Freelancer/api",
-  tagTypes: ["Dashboard"],
-  requiresAuth: true,
-  autoToast: true,
-});
 
-export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
+
+export const dashboardApiEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build: any) => ({
-    fetchViewResume: createQuery<any>(build, {
+    fetchViewResume: createQuery<any , {count: number}>(build, {
       url: HRLinkApiEndpoints.dashboard.getViewResume,
       tags: ["Dashboard"],
     }),
@@ -22,16 +17,17 @@ export const dashboardApiEndpoints = DashboardApi.injectEndpoints({
       tags: ["Dashboard"],
     }),
 
-    fetchJobOpportunitiesSent: createQuery<any>(build, {
+    fetchJobOpportunitiesSent: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getJobOpportunitiesSent,
       tags: ["Dashboard"],
     }),
 
-    fetchCompaniesList: createQuery<any>(build, {
+    fetchCompaniesList: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getCompaniesList,
       tags: ["Dashboard"],
     }),
 
+    // THIS MIGHT BE deprecated
     fetchDashboardData: createQuery<any>(build, {
       url: HRLinkApiEndpoints.dashboard.getData,
       tags: ["Dashboard"],

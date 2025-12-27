@@ -1,9 +1,7 @@
-// @module/basic-info/pages/employees/modals/DynamicAddModal.tsx
-import AddNewJob from './AddNewJob';
-import AddNewEducation from './AddNewEducation';
-import AddNewSkill from './AddNewSkill';
-import AddNewCourse from './AddNewCourse';
-import AddNewAchievement from './AddNewAchievement';
+import JobModal from './JobModal';
+import EducationModal from './EducationModal';
+import Skills from './Skills';
+import AchievementsModal from './AchievementsModal';
 
 interface DynamicAddModalProps {
   tab: string;
@@ -14,23 +12,22 @@ export const DynamicAddModal = ({ tab, onClose }: DynamicAddModalProps) => {
   const renderModalContent = () => {
     switch (tab) {
       case 'jobs':
-        return <AddNewJob onClose={onClose} />;
+        return <JobModal />;
       case 'education':
-        return <AddNewEducation onClose={onClose} />;
+        return <Education />;
       case 'skills':
-        return <AddNewSkill onClose={onClose} />;
+        return <Skills />;
       case 'courses':
-        return <AddNewCourse onClose={onClose} />;
+        return <CourseModal />;
       case 'achievements':
-        return <AddNewAchievement onClose={onClose} />;
+        return <AchievementsModal />;
       default:
-        return <AddNewCourse onClose={onClose} />;
+        return <CourseModal />;
     }
   };
 
   return (
     <div className="p-6 max-w-md">
-      {/* ✅ عنوان حذف شد */}
       {renderModalContent()}
     </div>
   );

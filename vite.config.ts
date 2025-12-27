@@ -1,15 +1,15 @@
 import {
   type ConfigEnv,
   defineConfig,
+  loadEnv,
   PluginOption,
   type UserConfig,
 } from "vite";
-import { resolve, dirname } from "path";
+import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { readFileSync } from "fs";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { loadEnv } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import * as fs from "node:fs";
 import path from "node:path";
@@ -22,10 +22,8 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   const isProduction = mode;
   const isTest = mode === "test";
 
-  // Load environment variables
   const envVars = loadEnv(mode, process.cwd(), "");
 
-  // Package.json analysis for smart optimizations
   let packageJson: any = {};
   try {
     packageJson = JSON.parse(
@@ -46,11 +44,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         cert: fs.readFileSync(certPath),
         ca: fs.readFileSync(caPath),
       };
-      console.log("✅ SSL certificates loaded successfully");
-    } else {
-      console.warn(
-        "⚠️  SSL certificate files not found. Running without HTTPS.",
-      );
     }
   } catch (error) {
     console.error("❌ Error loading SSL certificates:", error);
@@ -64,8 +57,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
   return {
     plugins,
-
-    // Define global constants
     define: {
       __DEV__: isDevelopment,
       __PROD__: isProduction,
@@ -93,11 +84,19 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         input: {
           main: resolve(__dirname, "main.tsx"),
           sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
-          processMaker: resolve(__dirname, './modules/process-maker/plugin.tsx'),
-          chartMaker: resolve(__dirname, 'modules/chart-maker/plugin.tsx'),
+          processMaker: resolve(
+            __dirname,
+            "./modules/process-maker/plugin.tsx",
+          ),
+          chartMaker: resolve(__dirname, "modules/chart-maker/plugin.tsx"),
           hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
           attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
+          jobGradings: resolve(__dirname, "./modules/job-gradings/plugin.tsx"),
           basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
+          projectManagement: resolve(
+            __dirname,
+            "./modules/project-management/plugin.tsx",
+          ),
         },
         output: {
           entryFileNames: (chunkInfo) => {
@@ -113,6 +112,10 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
               return "modules/basic-info/index.js";
             if (chunkInfo.name === "attendance")
               return "modules/attendance/index.js";
+            if (chunkInfo.name === "projectManagement")
+              return "modules/project-management/index.js";
+            if (chunkInfo.name === "jobGradings")
+              return "modules/job-gradings/index.js";
             return "[name].js";
           },
           chunkFileNames: "[name]-[hash].js",
@@ -121,7 +124,6 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       },
     },
 
-    // ESBuild configuration
     esbuild: {
       drop: isProduction ? ["console", "debugger"] : [],
       legalComments: "none",
@@ -176,7 +178,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
             });
 
             proxy.on("proxyReq", (proxyReq, req, _res) => {
-              proxyReq.setHeader("Host", "hrlink.hrbox.me:50443");
+              proxyReq.setHeader("Host", "https://hrlink.hrbox.me:50443");
               proxyReq.setHeader("Origin", "https://front.hrbox.me");
             });
 

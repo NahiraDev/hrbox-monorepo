@@ -1,20 +1,24 @@
 import { Avatar, Card } from "@heroui/react";
 import { identityCard } from "@module/basic-info/app/mock";
-import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import {
-  Trash,
   ArrowRotateLeft,
-  User,
-  Status,
   Calendar,
+  Status,
+  Trash,
+  User,
 } from "iconsax-reactjs";
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import DocumentsModal from "../../modals/DocumentsModal";
-import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+import {
+  formValidationRelative,
+  initialValuesRelative,
+} from "@hrbox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import { useModal } from "@hrbox/core/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Document {
   name: string;
@@ -25,24 +29,22 @@ interface Document {
 }
 
 const Documents = () => {
-  const { openModal } = useModalContext();
+  const modal = useModal();
+  const { t } = useTranslation();
   const [documentsList, setDocumentsList] = useState<Document[]>(identityCard);
-
-  const closeAllModals = () => {};
-
   const handleDeleteClick = (index: number) => {
-    openModal(
-      "delete",
-      "",
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log("Cancelled")}
-      />,
-      undefined,
-      "sm",
-      "Do you want to remove it?",
-      <Trash className="text-white" />,
-    );
+    // modals.open(
+    //     ModalType.DELETE,
+    //     "",
+    //     < DocumentsModal />,
+    //     {
+    //         isForm: false,
+    //         title:t("Do you want to remove it?"),
+    //         submitLabel: "ذخیره",
+    //         cancelLabel: "لغو",
+    //     },
+    //     ModalSize.XL,
+    // );
   };
 
   const handleDeleteConfirm = (index: number) => {
@@ -65,7 +67,7 @@ const Documents = () => {
     modal.open(
       ModalType.CREATE,
       " Documents",
-      < DocumentsModal />,
+      <DocumentsModal />,
       {
         isForm: true,
         title: "افزودن ",
@@ -97,48 +99,46 @@ const Documents = () => {
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
                     <AppButton
-                        size="xs"
-                        radius="sm"
-                        variant="light"
-                        isIconOnly={true}
-                        onPress={handleOpenDocuments}
-                        content={
-                          <Avatar
-                            radius="sm"
-                            size="lg"
-                            src={user.avatarSrc || undefined}
-                          />
-                        }
+                      size="xs"
+                      radius="sm"
+                      variant="light"
+                      isIconOnly={true}
+                      onPress={handleOpenDocuments}
+                      content={
+                        <Avatar
+                          radius="sm"
+                          size="lg"
+                          src={user.avatarSrc || undefined}
+                        />
+                      }
                     />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
                     <div>
                       <AppButton
-                          size="xs"
-                          radius="sm"
-                          variant="light"
-                          isIconOnly={true}
-                          onPress={handleDeleteClick(index)}
-                          content={
-                            <Trash className="text-secondary-1000 group-hover:text-white" />
-                          }
-                          className=
-                            "p-2 hover:!bg-red-500 transition-all duration-200"
+                        size="xs"
+                        radius="sm"
+                        variant="light"
+                        isIconOnly={true}
+                        onPress={() => handleDeleteClick(index)}
+                        content={
+                          <Trash className="text-secondary-1000 group-hover:text-white" />
+                        }
+                        className="p-2 hover:!bg-red-500 transition-all duration-200"
                       />
                     </div>
                     <div>
                       <AppButton
-                          size="xs"
-                          radius="sm"
-                          variant="light"
-                          isIconOnly={true}
-                          onPress={handleOpenDocuments}
-                          content={
-                            <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
-                          }
-                          className=
-                            "p-2 hover:!bg-primary transition-all duration-200"
+                        size="xs"
+                        radius="sm"
+                        variant="light"
+                        isIconOnly={true}
+                        onPress={handleOpenDocuments}
+                        content={
+                          <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
+                        }
+                        className="p-2 hover:!bg-primary transition-all duration-200"
                       />
                     </div>
                   </div>

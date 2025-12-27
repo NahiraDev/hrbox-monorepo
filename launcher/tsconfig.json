@@ -1,9 +1,9 @@
 {
-  "extends": "@hrbox/core/config/typescript/tsconfig",
+  "extends": "../tsconfig",
   "compilerOptions": {
     "composite": true,
     "rootDir": "../",
-    "outDir": "../dist",
+    "outDir": "../dist/launcher",
     "declarationDir": "../dist/types"
   },
   "include": ["../main.tsx"]

@@ -1,4 +1,3 @@
-import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
@@ -6,6 +5,7 @@ import {
   useAddLocationMutation,
   useEditLocationMutation,
 } from "@hrbox/modules/hrlink/apis/Common";
+import { DraggableMarker } from "./MarkerMap";
 
 export const MapModal = ({
   position,
@@ -43,47 +43,19 @@ export const MapModal = ({
     }
   };
   return (
-    // <AppModal
-    //   icon={<Location className="text-white" size="22" />}
-    //   size="2xl"
-    //   title={isEdit ? "Edit Location" : "Add Location"}
-    // >
-    <>
-      <AppModal.Body>
-        <div className="h-[400px] w-full rounded-md overflow-hidden">
+      <div className="h-[400px] w-full rounded-md overflow-hidden">
           <MapContainer
-            center={currentPosition}
-            className="h-full w-full"
-            scrollWheelZoom={true}
-            zoom={13}
+              center={currentPosition}
+              className="h-full w-full"
+              scrollWheelZoom={true}
+              zoom={13}
           >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <DraggableMarker
-              position={currentPosition}
-              setPosition={setCurrentPosition}
-            />
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <DraggableMarker
+                  position={currentPosition}
+                  setPosition={setCurrentPosition}
+              />
           </MapContainer>
-        </div>
-      </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "md",
-            color: "secondary",
-            content: "Cancel",
-            onPress: () => closeModal("confirm", ""),
-          }}
-        />
-        <AppButton
-          props={{
-            size: "md",
-            color: "primary",
-            content: "Save",
-            onPress: () => handleSave(),
-          }}
-        />
-      </AppModal.Footer>
-    </>
-    // </AppModal>
+      </div>
   );
 };

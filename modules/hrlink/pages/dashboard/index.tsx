@@ -1,7 +1,7 @@
 import type { ChartOptions } from "chart.js";
-
+import { useMemo } from "react";
 import { Buildings2, DocumentForward } from "iconsax-reactjs";
-import { Button, Card, CardBody, CardHeader, cn, Slider } from "@heroui/react";
+import { Button, Card, CardBody, CardHeader, cn, Slider, Spinner } from "@heroui/react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -14,10 +14,12 @@ import {
   Legend,
   Filler,
 } from "chart.js";
-import { data } from "autoprefixer";
+
 import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInformation";
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 import {
+  useFetchAwardDetailQuery,
+  useFetchAwardsQuery,
   useFetchCompaniesListQuery,
   useFetchJobOpportunitiesSentQuery,
   useFetchResumePercentQuery,
@@ -36,56 +38,69 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const { data: viewResumeQuery } = useFetchViewResumeQuery();
+  // 1. Fetch All Data
+  // NOTE: change the count dynamically
+  const { data: viewResumeData, isLoading: isChartLoading } = useFetchViewResumeQuery({count:12});
   const { data: resumePercent } = useFetchResumePercentQuery();
-  const { data: getJobOpportunitiesSent } = useFetchJobOpportunitiesSentQuery();
-  const { data: getCompaniesList } = useFetchCompaniesListQuery();
-  const sampleData = [viewResumeQuery];
-  const DashboardChartData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-    datasets: [
-      {
-        label: "Rejected Resumes",
-        data: data || sampleData,
-        borderColor: "#FF3B30",
-        backgroundColor: "rgba(255, 59, 48, 0.1)",
-        tension: 0.4,
-        fill: true,
-      },
-      {
-        label: "Suggested",
-        data: data || sampleData,
-        borderColor: "#FF9500",
-        backgroundColor: "rgba(255, 149, 0, 0.1)",
-        tension: 0.4,
-        fill: true,
-      },
-      {
-        label: "Under Review",
-        data: data || sampleData,
-        borderColor: "#34C759",
-        backgroundColor: "rgba(52, 199, 89, 0.1)",
-        tension: 0.4,
-        fill: true,
-      },
-      {
-        label: "Interview Invitations",
-        data: data || sampleData,
-        borderColor: "#32ADE6",
-        backgroundColor: "rgba(50, 173, 230, 0.1)",
-        tension: 0.4,
-        fill: true,
-      },
-      {
-        label: "Employment",
-        data: data || sampleData,
-        borderColor: "#222B45",
-        backgroundColor: "rgba(34, 43, 69, 0.1)",
-        tension: 0.4,
-        fill: true,
-      },
-    ],
-  };
+  // this endpoint returns 500 error
+  const { data: jobOpportunities } = useFetchJobOpportunitiesSentQuery();
+
+  const rawPercent = resumePercent || 0; // e.g., 100
+  const sliderValue = rawPercent / 100;        // e.g., 1
+
+  // 3. Transform Chart Data
+  const DashboardChartData = useMemo(() => {
+    const apiData = viewResumeData|| [];
+    
+    // Helper to map data safely
+    const mapData = (key: string) => apiData.map((item: any) => item[key] || 0);
+
+    return {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [
+        {
+          label: "Rejected Resumes",
+          data: mapData("RejectResume"),
+          borderColor: "#FF3B30",
+          backgroundColor: "rgba(255, 59, 48, 0.1)",
+          tension: 0.4,
+          fill: true,
+        },
+        {
+          label: "Suggested",
+          data: mapData("Suggested"),
+          borderColor: "#FF9500",
+          backgroundColor: "rgba(255, 149, 0, 0.1)",
+          tension: 0.4,
+          fill: true,
+        },
+        {
+          label: "Under Review",
+          data: mapData("UnderReview"),
+          borderColor: "#34C759",
+          backgroundColor: "rgba(52, 199, 89, 0.1)",
+          tension: 0.4,
+          fill: true,
+        },
+        {
+          label: "Interview Invitations",
+          data: mapData("InvitationToInterview"),
+          borderColor: "#32ADE6",
+          backgroundColor: "rgba(50, 173, 230, 0.1)",
+          tension: 0.4,
+          fill: true,
+        },
+        {
+          label: "Employment",
+          data: mapData("Employment"),
+          borderColor: "#222B45",
+          backgroundColor: "rgba(34, 43, 69, 0.1)",
+          tension: 0.4,
+          fill: true,
+        },
+      ],
+    };
+  }, [viewResumeData]);
 
   const options: ChartOptions<"line"> = {
     responsive: true,
@@ -120,25 +135,21 @@ const Dashboard = () => {
     scales: {
       y: {
         beginAtZero: true,
-        max: 35,
-        ticks: {
-          stepSize: 5,
-        },
-        grid: {
-          color: "rgba(0, 0, 0, 0.1)",
-        },
+        ticks: { stepSize: 5 },
+        grid: { color: "rgba(0, 0, 0, 0.1)" },
       },
       x: {
-        grid: {
-          display: false,
-        },
+        grid: { display: false },
       },
     },
   };
+
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
       <div className="col-span-3 flex flex-col gap-3 h-full">
         <div className="flex flex-col gap-3 h-full">
+          
+          {/* CHART CARD */}
           <div className="h-3/5">
             <Card className="bg-white shdow-theme-sm p-3 rounded-xl h-full w-full">
               <CardHeader className="border-b-1 border-neutral-100 pb-1.5">
@@ -147,15 +158,24 @@ const Dashboard = () => {
                 </span>
               </CardHeader>
               <CardBody className="h-[calc(100%-2rem)] w-full">
-                <Line
-                  data={DashboardChartData}
-                  options={options}
-                  key={JSON.stringify(data)}
-                />
+                {isChartLoading ? (
+                  <div className="flex justify-center items-center h-full">
+                    <Spinner />
+                  </div>
+                ) : (
+                  <Line
+                    data={DashboardChartData}
+                    options={options}
+                    key={JSON.stringify(viewResumeData)} // Forces re-render when data updates
+                  />
+                )}
               </CardBody>
             </Card>
           </div>
+
           <div className="grid grid-cols-2 gap-3 h-2/5">
+            
+            {/* PERCENTAGE SLIDER CARD */}
             <Card className="bg-white p-3 rounded-xl shdow-theme-sm h-full">
               <CardHeader className="border-b-1 border-neutral-100 pb-1.5">
                 <span className="text-secondary-1000 font-semibold">
@@ -164,10 +184,9 @@ const Dashboard = () => {
               </CardHeader>
               <CardBody className="flex flex-col justify-between">
                 <p className="text-secondary-1000 text-sm font-normal pt-1.5">
-                  Currently, {50}% Of The Resumes Are Completed. We Encourage
-                  You To Take Action And Complete Your Resume To Enhance Your
-                  Opportunities. A Well-Prepared Resume Can Significantly
-                  Improve Your Chances Of Success In The Job Market.
+                  {/* We use rawPercent (100) for text display */}
+                  Currently, {rawPercent}% Of The Resumes Are Completed. We Encourage
+                  You To Take Action...
                 </p>
 
                 <div className="flex items-end justify-between gap-6">
@@ -177,38 +196,18 @@ const Dashboard = () => {
                         filler: "bg-tertiar-400",
                         track: "!h-1",
                       }}
-                      value={resumePercent && resumePercent?.data}
+                      // We use sliderValue (0 to 1) for the component
+                      value={sliderValue}
                       formatOptions={{ style: "percent" }}
                       label="Info’s"
                       marks={[
-                        {
-                          value: 0,
-                          label: "0%",
-                        },
-                        {
-                          value: 0.16,
-                          label: "16%",
-                        },
-                        {
-                          value: 0.33,
-                          label: "33%",
-                        },
-                        {
-                          value: 0.49,
-                          label: "50%",
-                        },
-                        {
-                          value: 0.66,
-                          label: "66%",
-                        },
-                        {
-                          value: 0.83,
-                          label: "83%",
-                        },
-                        {
-                          value: 1,
-                          label: "100%",
-                        },
+                        { value: 0, label: "0%" },
+                        { value: 0.16, label: "16%" },
+                        { value: 0.33, label: "33%" },
+                        { value: 0.50, label: "50%" },
+                        { value: 0.66, label: "66%" },
+                        { value: 0.83, label: "83%" },
+                        { value: 1, label: "100%" },
                       ]}
                       maxValue={1}
                       minValue={0}
@@ -225,25 +224,11 @@ const Dashboard = () => {
                         </div>
                       )}
                       showTooltip={true}
-                      step={0.0001}
-                      tooltipProps={{
-                        offset: 10,
-                        placement: "top",
-                        classNames: {
-                          base: ["before:bg-tertiar-400"],
-                          content: [
-                            "!py-1 !px-3 shadow-shadow-light-tight/1 w-14 !rounded-md",
-                            "text-secondary-1000 bg-white",
-                          ],
-                        },
-                      }}
-                      tooltipValueFormatOptions={{
-                        style: "percent",
-                        currency: "USD",
-                      }}
+                      step={0.01}
                     />
                   </div>
-                  {resumePercent && resumePercent?.data !== 100 && (
+                  {/* Check rawPercent < 100 to show button */}
+                  {rawPercent < 100 && (
                     <div className="w-1/2 text-end">
                       <Button className="bg-secondary-400 text-white font-semibold py-1 px-2 rounded-lg shadow-shadow-light-tight/1 !w-[144px] !min-w-fit h-[30px]">
                         Finalize Resume
@@ -253,15 +238,17 @@ const Dashboard = () => {
                 </div>
               </CardBody>
             </Card>
+
+            {/* JOBS LIST CARD */}
             <Card className="bg-white p-3 rounded-5 shadow-theme-sm h-full">
               <CardHeader className="pb-2 border-b-1 border-neutral-100">
                 <span className="text-base text-secondary-1000 font-semibold">
                   Job Opportunities Sent
                 </span>
               </CardHeader>
-              <CardBody>
-                {getJobOpportunitiesSent &&
-                  getJobOpportunitiesSent.map((job: any) => (
+              <CardBody className="overflow-y-auto">
+                {jobOpportunities && Array.isArray(jobOpportunities) ? (
+                  jobOpportunities.map((job: any) => (
                     <div
                       key={job.id}
                       className="flex justify-between items-center py-2 border-b border-gray-100"
@@ -281,7 +268,12 @@ const Dashboard = () => {
                         </div>
                       )}
                     </div>
-                  ))}
+                  ))
+                ) : (
+                  <div className="text-gray-400 text-xs">
+                    No job opportunities available.
+                  </div>
+                )}
               </CardBody>
             </Card>
           </div>

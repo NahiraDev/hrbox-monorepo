@@ -1,14 +1,12 @@
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { ArrowLeft2, ArrowRight2, Category } from 'iconsax-reactjs';
+import { ArrowLeft2, ArrowRight2 } from 'iconsax-reactjs';
 import { useEffect, useState } from 'react';
-import EmployeeSatisfactionCalendarModal from '../../modals/EmployeeSatisfactionCalendarModal';
+import EmployeeSatisfactionCalendarModal from '@hrbox/modules/basic-info/modals/EmployeeSatisfactionCalendarModal';
 import HowAreYouTodayModal from '@hrbox/modules/basic-info/modals/HowAreYouTodayModal';
-import { RelativesModal } from "@HRBox/modules/basic-info/modals/RelativesModal";
-import { formValidationRelative, initialValuesRelative } from "@HRBox/modules/basic-info/forms/RelativeForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
-import { useModal } from "@HRBox/core/hooks";
+import { formValidationRelative, initialValuesRelative } from "@hrbox/modules/basic-info/forms/RelativeForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import { useModal } from "@hrbox/core/hooks";
 
-// Pixel-based size and text size calculation
 const getCircleSizePx = (number: number): number => {
   const baseSizePx = 28;
   const maxSizePx = 224;
@@ -19,7 +17,7 @@ const getCircleSizePx = (number: number): number => {
 const getTextSizePx = (number: number): number => {
   const baseTextSizePx = 12;
   const maxTextSizePx = 48;
-  const textSizePx = baseTextSizePx + (number - 1) * 1;
+  const textSizePx = baseTextSizePx + (number - 1);
   return Math.min(maxTextSizePx, Math.max(baseTextSizePx, textSizePx));
 };
 

@@ -1,14 +1,8 @@
-import {
-  ArrowRight2,
-  ArrowLeft2,
-  Setting2,
-  Global,
-  LogoutCurve,
-} from "iconsax-reactjs";
-import React, { useState, useEffect, useMemo } from "react";
+import { ArrowLeft2, ArrowRight2, Global, LogoutCurve, Setting2 } from "iconsax-reactjs";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useMatchRoute } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { useMatchRoute, useNavigate } from "@tanstack/react-router";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useLanguage } from "@hrbox/core/hooks/useLanguage";
 import { useAuth } from "@hrbox/core/hooks/useAuth";
@@ -36,11 +30,10 @@ export const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    if (!currentPanel) return [];
-    return getModuleMenu(currentPanel);
+    // if (!currentPanel) return [];
+    return getModuleMenu("attendance");
   }, [currentPanel, getModuleMenu]);
 
-  // ✅ تشخیص Active Item
   const isActiveRoute = (path: string) => {
     return !!matchRoute({ to: path });
   };
@@ -75,6 +68,7 @@ export const AppSidebar = () => {
       navigate({ to: item.path });
     }
   };
+  
 
   return (
     <motion.div

@@ -1,6 +1,6 @@
 import { Card } from '@heroui/react';
 import { dataWorker } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
 import { useState } from 'react';
@@ -11,19 +11,21 @@ const Courses = () => {
   const { openModal } = useModalContext();
   const [courses, setCourses] = useState(dataWorker);
 
+  // 2. Function to open the delete confirmation modal
   const handleDeleteClick = (index: number) => {
-    openModal(
-      'delete',
-      '',
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log('Deletion cancelled')}
-      />,
-      undefined,
-      'sm',
-      'Do you want to remove it?',
-      <Trash className='text-white'/>
-    );
+    // openModal(
+    //   'delete',
+    //   '',
+    //   <AppDeleteModal
+    //     // Pass the confirmation function as the onConfirm prop
+    //     onConfirm={() => handleDeleteConfirm(index)}
+    //     onCancel={() => console.log('Deletion cancelled')}
+    //   />,
+    //   undefined,
+    //   'sm',
+    //   'Do you want to remove it?',
+    //   <Trash className='text-white'/>
+    // );
   };
 
   const handleDeleteConfirm = (index: number) => {

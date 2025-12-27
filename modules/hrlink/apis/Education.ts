@@ -1,56 +1,46 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const educationApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: '/DesktopModules/Freelancer/api',
-  tagTypes: ['Education'],
-  requiresAuth: true,
-  autoToast: true,
-});
-
-export const educationApiEndpoints = educationApi.injectEndpoints({
-  endpoints: (build:any) => ({
-    createEducation: createMutation<any , any>(build, {
-      url: HRLinkApiEndpoints.resume.education.create,
-      method: 'POST',
-      tags: ['Education'],
-    }),
-
-    editEducation: createMutation<any , any>(build, {
-      url: HRLinkApiEndpoints.resume.education.edit,
-      method: 'POST',
-      tags: ['Education'],
-    }),
-
-    deleteEducation: createMutation<any, any>(build, {
-      url: HRLinkApiEndpoints.resume.education.delete,
-      method: 'DELETE',
-      tags: ['Education'],
-    }),
-
+export const educationApiEndpoints = HRLinkApi.injectEndpoints({
+  endpoints: (build: any) => ({
     fetchEducations: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.resume.education.getList,
       tags: ['Education'],
     }),
 
-    fetchEducationDetail: createQuery<any>(build, {
+    fetchEducationDetail: createQuery<any, { id: string | number }>(build, {
       url: HRLinkApiEndpoints.resume.education.getDetail,
       tags: ['Education'],
     }),
 
-    fetchUniversity: createQuery<any>(build, {
+    fetchUniversity: createQuery<any, {type: number}>(build, {
       url: HRLinkApiEndpoints.resume.education.getUniversity,
       tags: ['Education'],
     }),
 
     fetchField: createQuery<any>(build, {
-      url: HRLinkApiEndpoints.resume.education.getField,
+      url: HRLinkApiEndpoints.resume.education.getFieldOfStudy,
       tags: ['Education'],
     }),
 
+    createEducation: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.education.create,
+      method: 'POST',
+      tags: ['Education'],
+    }),
 
+    editEducation: createMutation<any, any>(build, {
+      url: HRLinkApiEndpoints.resume.education.edit,
+      method: 'PUT', 
+      tags: ['Education'],
+    }),
+
+    deleteEducation: createMutation<any, { id: string | number }>(build, {
+      url: HRLinkApiEndpoints.resume.education.delete,
+      method: 'POST',
+      tags: ['Education'],
+    }),
   }),
 });
 

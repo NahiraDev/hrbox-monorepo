@@ -2,7 +2,7 @@
   "name": "hrbox-monorepo",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6",
   "description": "Next-generation HR management platform with micro-frontend architecture",
   "keywords": [
     "hr",
@@ -51,6 +51,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@eslint/compat": "^1.4.1",
     "@heroui/react": "^2.8.5",
     "@heroui/system": "^2.4.23",
@@ -137,6 +140,7 @@
     "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/react-router": "^1.135.0",
     "@tanstack/react-router-devtools": "^1.135.0",
+    "@tanstack/react-table": "^8.21.3",
     "@tanstack/router-plugin": "^1.135.0",
     "@tanstack/router-vite-plugin": "^1.135.0",
     "@types/compression": "^1.7.5",
@@ -170,6 +174,7 @@
     "i18next": "^25.6.1",
     "i18next-browser-languagedetector": "^8.2.0",
     "iconsax-reactjs": "^0.0.8",
+    "lodash": "^4.17.21",
     "moment-jalaali": "^0.10.4",
     "node-fetch": "^3.3.2",
     "patch-package": "^8.0.1",

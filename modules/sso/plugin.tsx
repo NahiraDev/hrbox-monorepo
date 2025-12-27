@@ -1,7 +1,7 @@
 import type { ModulePlugin } from '@hrbox/modules/types';
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { AuthApiEndpoints } from "@hrbox/modules/sso/apis/endpoints";
-import {Paths} from "@hrbox/modules/paths";
+import { Paths } from "@hrbox/modules/paths";
 
 const LoginPage = lazyRouteComponent(() => import('./pages/Login'));
 const LoginByOtpPage = lazyRouteComponent(() => import('./pages/LoginByOtp'));

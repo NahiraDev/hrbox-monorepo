@@ -1,0 +1,16 @@
+export const errorMessages = {
+  ADD_CHANNEL_FAILED: "Failed to add channel",
+  UPDATE_CHANNEL_FAILED: "Failed to update channel",
+  MARK_AS_SEEN_CHANNEL_MESSAGE_FAILED: "Failed to mark message as seen",
+  REMOVE_CHANNEL_FAILED: "Failed to remove channel",
+  FETCH_CHANNEL_FAILED: "Failed to fetch channels",
+  MUTE_CHANNEL_FAILED: "Failed to mute channel",
+  PIN_CHANNEL_MESSAGE_FAILED: "Failed to pin channel message",
+  UNPIN_CHANNEL_MESSAGE_FAILED: "Failed to unpin channel message",
+  PIN_CHANNEL_FAILED: "Failed to pin channels",
+  FETCH_CHANNEL_CHATS_FAILED: "Failed to fetch channel chats",
+  REMOVE_MESSAGE_CHANNEL_FAILED: "Failed to remove message",
+  ADD_TO_SAVE_MESSAGE_CHANNEL_FAILED: "Failed to save message",
+  REMOVE_USER_FROM_CHANNEL_FAILED: "Failed to remove user from channel",
+  CHANGE_ROLE_USER_CHANNEL_FAILED: "Failed to change user role",
+};

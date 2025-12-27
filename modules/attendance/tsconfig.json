@@ -1,12 +1,10 @@
 {
-  "extends": "../../core/config/typescript/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "baseUrl": ".",
     "rootDir": "../../",
     "outDir": "../../dist/modules/attendance",
     "declarationDir": "../../dist/types",
-    "types": ["node"]
   },
   "include": ["." , "./*"]
 }

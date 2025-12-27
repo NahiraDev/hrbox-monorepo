@@ -1,33 +1,26 @@
 import { testReport } from "@module/basic-info/app/mock";
-import {
-  TickSquare,
-  User,
-  ArrowDown,
-  DollarCircle,
-  Status,
-} from "iconsax-reactjs";
+import { ArrowDown, DollarCircle, Status, TickSquare, User } from "iconsax-reactjs";
 import { Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import { TestReportModal } from "@hrbox/modules/basic-info/modals/TestReportModal";
-import { useModal } from "@HRBox/core/hooks";
-import AddNewOnDutyHealthRecords from "@HRBox/modules/basic-info/modals/AddNewOnDutyHealthRecords";
+import { useModal } from "@hrbox/core/hooks";
 import {
   formValidationHealth,
   initialValuesHealth
-} from "@HRBox/modules/basic-info/forms/AddNewOnDutyHealthRecordsForm";
-import { handleSubmitAward } from "@HRBox/modules/hrlink/forms/AwardForm";
+} from "@hrbox-monorepo/modules/basic-info/forms/OnDutyHealthRecordsForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+
 const TestReport = () => {
   const { openModal } = useModalContext();
 
-  const modal = useModal()
+  const modal = useModal();
   const handleOpenTestReportModal = () => {
     modal.open(
       ModalType.CREATE,
       "Test Result",
-      < TestReportModal />,
+      <TestReportModal />,
       {
         isForm: true,
         title: "افزودن ",
@@ -74,20 +67,19 @@ const TestReport = () => {
                       {worker.titleJob}
                     </span>
                     <AppButton
-                        className=
-                          "bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]"
-                        size= "xs"
-                        radius= "lg"
-                        onPress={() => handleOpenTestReportModal}
-                        content= {<span>{worker.job}</span>}
+                      className="bg-[#DCF0F94]/40 border border-[#DCF0F9] p-0.5  text-[10px]"
+                      size="xs"
+                      radius="lg"
+                      onPress={() => handleOpenTestReportModal}
+                      content={<span>{worker.job}</span>}
                     />
                   </div>
                   <AppButton
-                      className= "bg-[#DCF0F94]/40 "
-                      size="xs"
-                      onPress={}
-                      content= { <ArrowDown />}
+                    className="bg-[#DCF0F94]/40 "
+                    size="xs"
+                    content={<ArrowDown />}
                   />
+                </div>
                 <div className="flex items-center justify-between p-1.5">
                   <div className="flex  gap-1">
                     <User size="16" />

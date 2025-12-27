@@ -1,28 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AppTable } from '@hrbox/uikit/components';
 import { useModalContext } from '@hrbox/core/providers/ModalProvider';
-import { useDeleteEducationMutation, useLazyFetchEducationQuery } from "@hrbox/modules/hrlink/apis";
+import { useDeleteEducationMutation, useFetchEducationsQuery } from "@hrbox/modules/hrlink/apis";
+import { GeneralInformation } from '../../components/GeneralInformation';
+import {UserLocation} from "@hrbox/modules/hrlink/components/UserLocation";
 
 const Education = () => {
   const { openModal } = useModalContext();
   const [deleteEducation] = useDeleteEducationMutation();
-  const [fetchEducation, { isLoading, data, isError }] = useLazyFetchEducationQuery();
 
-  useEffect(() => {
-    fetchEducation({});
-  }, [fetchEducation]);
+  const [page, setPage] = useState(0);
+
+  const {data:fetchEducation,isError, isFetching} = useFetchEducationsQuery({page: 0, pageSize: 10});
+  console.log(`education \n${fetchEducation}`)
 
   return (
     <div className="grid grid-cols-4 gap-6 h-full">
       <div className="col-span-3">
         <AppTable
-          data={data}
+          data={fetchEducation}
           error={isError ? 'Failed to load data' : undefined}
           hasPagination={true}
-          loading={isLoading}
+          // loading={isFetching}
           onDelete={(row) => deleteEducation(row)}
-          onEdit={(row) => handleEdit(row)}
+          // onEdit={(row) => handleEdit(row)}
         />
       </div>
       <div className="col-span-1 flex flex-col gap-3">

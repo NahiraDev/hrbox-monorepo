@@ -18,10 +18,10 @@ interface BaseQueryConfig {
 }
 
 export function createEnhancedBaseQuery({
-                                          baseUrl,
-                                          requiresAuth = true,
-                                          autoToast = true,
-                                        }: BaseQueryConfig): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> {
+  baseUrl,
+  requiresAuth = true,
+  autoToast = true,
+  }: BaseQueryConfig): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> {
 
   const rawBaseQuery = fetchBaseQuery({
     baseUrl,

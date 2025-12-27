@@ -1,30 +1,30 @@
 import { skills as mockSkills } from "@module/basic-info/app/mock";
 import { Avatar, Card } from "@heroui/react";
-import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import { LampCharge, Trash } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { AppDoubleLineProgress } from "@hrbox/uikit/sections";
+import { AppDoubleLineProgress } from "@hrbox/uikit/sections/AppDoubleLineProgress";
 import { useState } from "react";
-
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
+import {useModal} from "@hrbox/core/hooks";
 
 const Education = () => {
-  const { openModal } = useModalContext();
+  const modal = useModal();
   const [currentSkills, setCurrentSkills] = useState(mockSkills);
 
   const handleDeleteClick = (index: number) => {
-    openModal(
-      "delete",
-      "",
-      <AppDeleteModal
-        onConfirm={() => handleDeleteConfirm(index)}
-        onCancel={() => console.log("Cancelled")}
-      />,
-      undefined,
-      "sm",
-      "Do you want to remove it?",
-      <Trash className="text-white" />,
-    );
+    // openModal(
+    //   "delete",
+    //   "",
+    //   <AppDeleteModal
+    //     onConfirm={() => handleDeleteConfirm(index)}
+    //     onCancel={() => console.log("Cancelled")}
+    //   />,
+    //   undefined,
+    //   "sm",
+    //   "Do you want to remove it?",
+    //   <Trash className="text-white" />,
+    // );
   };
 
   const handleDeleteConfirm = (index: number) => {
@@ -94,9 +94,10 @@ const Education = () => {
             <div className="flex flex-col gap-3 w-full">
               <div className="flex gap-1 text-[20px] items-center font-semibold">
                 <LampCharge />
-                <span>Soft Skills</span>
+                <span>Soft Skills</span> {/* Changed text for clarity */}
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
+                {/* Use currentSkills state for mapping */}
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}

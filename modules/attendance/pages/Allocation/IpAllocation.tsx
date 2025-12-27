@@ -3,7 +3,7 @@ import { Allocatio } from '@hrbox/modules/attendance/app/mock';
 import { useState } from 'react';
 import { useModal } from '@hrbox/core/hooks';
 import { ModalSize, ModalType } from '@hrbox/core/providers';
-import IpAllocationShow from '@hrbox/modules/attendance/modals/IpAllocationShow';
+import IpAllocationModal from '@hrbox/modules/attendance/modals/IpAllocationModal';
 
 const IpAllocation=()=>{
   const [data,setData]=useState(Allocatio);
@@ -12,7 +12,7 @@ const IpAllocation=()=>{
       modal.open(
       ModalType.VIEW,
       "ip-allocation",
-      <IpAllocationShow/>,
+      <IpAllocationModal/>,
       {
         isForm: true,
         submitLabel: "Submit Again",
@@ -21,7 +21,7 @@ const IpAllocation=()=>{
           formId: "ip-form",
         }
       },
-      ModalSize.MD,
+      ModalSize['3XL'],
     );
   }
   return(
@@ -30,7 +30,7 @@ const IpAllocation=()=>{
       data={data}
       showStatus={true}
       hasPagination={true}
-      onRowClick={handleRowClick}
+      onRowClick={handleRowClick} 
     />
       </div>
     </>

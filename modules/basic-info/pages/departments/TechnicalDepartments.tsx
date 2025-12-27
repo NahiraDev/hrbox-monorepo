@@ -2,19 +2,17 @@ import { technicalDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@hrbox/modules/basic-info/modals/OrganizationDepartmentModal';
-import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { useModal } from "@HRBox/core/hooks";
-import { initialValuesTechnicalDepartment,  formValidationTechnicalDepartment } from "@HRBox/modules/basic-info/forms/TechnicalDepartmentForm";
-import {handleSubmitAward} from "@HRBox/modules/hrlink/forms/AwardForm"
-import { TickIcon } from "@HRBox/UIKit/icons";
+import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
+import { TickCircle } from 'iconsax-reactjs';
+import { useModal } from "@hrbox/core/hooks";
+import { initialValuesTechnicalDepartment,  formValidationTechnicalDepartment } from "@hrbox/modules/basic-info/forms/TechnicalDepartmentForm";
+import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm"
 
 const TechnicalDepartments = () => {
-  const { openModal } = useModalContext();
-
   const modal = useModal()
   const handleOpenTechnicalDepartments = () => {
     modal.open(
-      ModalType.CREATE,
+      ModalType.EDIT,
       "Organization Departments",
       <OrganizationDepartmentModal />,
       {
@@ -50,17 +48,17 @@ const TechnicalDepartments = () => {
             <TickIcon className="absolute top-2 right-3" size="22" color="gray" />
             <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
             <AppButton
-                className='h-5 text-xs bg-surface-50 text-[#0A9AD7] border-1 border-primary-50 text-primary'
                 size='sm'
                 radius='sm'
-                onPress={ () => {handleOpenTechnicalDepartments}}
+                variant="solid"
+                onPress={()=>handleOpenTechnicalDepartments}
                 content={<span>{user.job}</span>}
             />
           </Card>
         ))}
       </div>
       <div className="w-full flex items-center justify-end">
-       <span className="!text-[100px] !font-extrabold text-secondary-400/40">200</span>
+        <span className="!text-[100px] !font-extrabold text-secondary-400/40">200</span>
       </div>
     </div>
   );

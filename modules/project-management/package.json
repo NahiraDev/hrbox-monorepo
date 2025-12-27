@@ -1,0 +1,13 @@
+{
+  "name": "@module/project-management",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "../../dist/project-management/index.js",
+  "types": "../../dist/project-management/index.d.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.cache"
+  }
+}

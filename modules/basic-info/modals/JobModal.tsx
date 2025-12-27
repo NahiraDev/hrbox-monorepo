@@ -1,0 +1,190 @@
+import React from "react";
+import {
+  AppButton,
+  AppInput,
+  AppModal,
+  AppCheckBox,
+  AppSwitch,
+  AppTextArea,
+} from "@hrbox/uikit/components";
+import {useModal} from "@hrbox/core/hooks";
+import {FormField} from "@hrbox/uikit/components/FormField";
+
+export const JobModalProps = {
+        title:"",
+        department: "",
+        type: "",
+        startDate: "",
+        salary: "",
+        description: "",
+}
+
+export default function JobModal() {
+  const { close } = useModal();
+
+  return (
+    <div className="">
+      <AppModal.Body>
+        <div className="flex flex-col gap-y-6 overflow-y-scroll max-h-[70vh]">
+          <div className="grid grid-cols-2 gap-y-6 gap-x-10">
+            <FormField
+                label="Title"
+              size="lg"
+              color="primary"
+              radius="lg"
+              disabled: isSubmitted
+            />
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />{" "}
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Title",
+                placeholder: "Describe title",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />
+          </div>
+          <div className="bg-surface-50 flex items-center justify-between py-5 px-3 rounded-lg">
+            <span>I am still working at this company</span>
+            <div className="flex items-center justify-around w-[315px]">
+              <AppCheckBox
+                props={{ children: <span>Yes</span>, isDisabled: isSubmitted }}
+              />
+              <AppCheckBox
+                props={{ children: <span>No</span>, isDisabled: isSubmitted }}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-y-6 gap-x-10">
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Upload Work Sample",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Province",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                isDisabled: isSubmitted,
+              }}
+            />
+            <AppInput
+              props={{
+                className: "border border-[#DCF0F9] w-full",
+                label: "Job Group",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+              }}
+            />
+            <AppSwitch
+              props={{
+                size: "lg",
+                color: "danger",
+                label: "Full Time",
+                isDisabled: isSubmitted,
+              }}
+            />
+            <AppTextArea
+              props={{
+                className: "border border-[#DCF0F9] w-[635px]",
+                label: "Descriptions and Achievements",
+                placeholder: "Description",
+                size: "lg",
+                color: "primary",
+                radius: "lg",
+                value: formData.description,
+                onChange: (e: any) =>
+                  setFormData({ ...formData, description: e.target.value }),
+                isDisabled: isSubmitted,
+              }}
+            />
+          </div>
+        </div>
+      </AppModal.Body>
+      <AppModal.Footer>
+        {!isSaved &&
+          (!isSubmitted ? (
+            <div className="flex items-center justify-center gap-3 mt-5 ">
+              <AppButton
+                props={{
+                  size: "md",
+                  radius: "lg",
+                  onPress: handleCancel,
+                  content: "Cancel",
+                }}
+              />
+              <AppButton
+                props={{
+                  className: "bg-primary text-white",
+                  size: "md",
+                  radius: "lg",
+                  onPress: handleSubmit,
+                  content: "Submit",
+                }}
+              />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-3 mt-5 ">
+              <AppButton
+                props={{
+                  size: "md",
+                  radius: "lg",
+                  onPress: handleCancel,
+                  content: "Cancel",
+                }}
+              />
+              <AppButton
+                size="md"
+                radius="lg"
+                type="submit"
+                variant="solid"
+                content="Save Changes"
+              />
+            </div>
+          ))}
+      </AppModal.Footer>
+    </div>
+  );
+}

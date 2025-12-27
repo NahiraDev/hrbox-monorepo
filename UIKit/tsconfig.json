@@ -1,9 +1,13 @@
 {
-  "extends": "../core/config/typescript/tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "rootDir": "../",
-    "baseUrl": ".",
+    "rootDir": "../"
   },
-  "include": ["." , "./*"]
+  "include": [
+    ".",
+    "./*",
+    "../../UIKit/**/*"
+
+  ]
 }

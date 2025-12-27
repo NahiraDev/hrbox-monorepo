@@ -1,0 +1,13 @@
+{
+  "name": "@module/payroll",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "../../dist/sso/index.js",
+  "types": "../../dist/sso/index.d.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.cache"
+  }
+}

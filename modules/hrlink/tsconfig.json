@@ -1,12 +1,10 @@
 {
-  "extends": "../../core/config/typescript/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "baseUrl": ".",
     "rootDir": "../../",
     "outDir": "../../dist/modules/hrlink",
     "declarationDir": "../../dist/types",
-    "types": ["node"]
     },
-  "include": ["." , "./*", "../sso/apis/apihelper.ts"]
+  "include": ["." , "./*"]
 }

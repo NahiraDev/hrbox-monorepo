@@ -1,6 +1,3 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
-
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -11,14 +8,12 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import jsxA11Y from 'eslint-plugin-jsx-a11y';
 import prettier from 'eslint-plugin-prettier';
 import globals from 'globals';
-import js from '@eslint/js';
+import js, {configs} from '@eslint/js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default [// Global ignores
-// Base configuration
-// Main configuration for TypeScript and React files
+export default [
 {
   ignores: [
     '.now/**',
@@ -77,14 +72,13 @@ export default [// Global ignores
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
-          project: ['./tsconfig.json', './modules/*/tsconfig.json'],
+          project: ['../../tsconfig.json', '../../../modules/*/tsconfig.json' , '../../../tsconfig.json'],
         },
         alias: {
           map: [
-            ['@core', './core'],
-            ['@module', './modules'],
-            ['@root', './'],
-            ['@proxy-server', './proxy-server'],
+            ['@hrbox/core', '../../../core'],
+            ['@hrbox/modules/*', '../../../modules'],
+            ['@hrbox/uikit', '../../../uikit'],
           ],
           extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         },
@@ -306,4 +300,4 @@ export default [// Global ignores
         },
       ],
     },
-  }, ...storybook.configs["flat/recommended"]];
+  }, ...configs["flat/recommended"]];

@@ -1,7 +1,5 @@
-import { AppButton, AppModal } from "@hrbox/uikit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import { Avatar } from "@heroui/react";
-import FilterCalenderModal from "@hrbox/modules/basic-info/modals/FilterCalenderModal";
-import { Filter } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
 const sampleData = [
@@ -10,60 +8,60 @@ const sampleData = [
     name: "Jahan",
     role: "Mentor",
     avatar: "https://i.pravatar.cc/150?u=a04258114e29026302d",
-    badgeColor: "red",
+    badgeColor: "red"
   },
   {
     id: 2,
     name: "Ali",
     role: "Developer",
     avatar: "https://i.pravatar.cc/150?u=b04258114e29026302d",
-    badgeColor: "green",
+    badgeColor: "green"
   },
   {
     id: 3,
     name: "Sara",
     role: "Designer",
     avatar: "https://i.pravatar.cc/150?u=c04258114e29026302d",
-    badgeColor: "orange",
+    badgeColor: "orange"
   },
   {
     id: 4,
     name: "Reza",
     role: "Manager",
     avatar: "https://i.pravatar.cc/150?u=d04258114e29026302d",
-    badgeColor: "green",
+    badgeColor: "green"
   },
   {
     id: 5,
     name: "Nina",
     role: "Analyst",
     avatar: "https://i.pravatar.cc/150?u=e04258114e29026302d",
-    badgeColor: "red",
+    badgeColor: "red"
   },
   {
     id: 6,
     name: "Kamran",
     role: "Tester",
     avatar: "https://i.pravatar.cc/150?u=f04258114e29026302d",
-    badgeColor: "orange",
+    badgeColor: "orange"
   },
   {
     id: 7,
     name: "Fatemeh",
     role: "HR Specialist",
     avatar: "https://i.pravatar.cc/150?u=g04258114e29026302d",
-    badgeColor: "green",
+    badgeColor: "green"
   },
   {
     id: 8,
     name: "Hossein",
     role: "Engineer",
     avatar: "https://i.pravatar.cc/150?u=h04204258114e29026302d",
-    badgeColor: "red",
-  },
+    badgeColor: "red"
+  }
 ];
 
-const getBadgeGradient = (color) => {
+const getBadgeGradient = (color: any) => {
   switch (color) {
     case "green":
       return "bg-gradient-to-br from-green-400 to-green-700";
@@ -76,7 +74,7 @@ const getBadgeGradient = (color) => {
   }
 };
 
-const MentorCard = ({ name, role, avatar, badgeColor }) => {
+const MentorCard = ({ name, role, avatar, badgeColor }: any) => {
   return (
     <div className="flex flex-col gap-4 items-center justify-center px-5 py-6 relative">
       <div className="absolute z-100 top-1 right-2">
@@ -89,7 +87,8 @@ const MentorCard = ({ name, role, avatar, badgeColor }) => {
         <span className="!font-semibold text-xs text-secondary-1000">
           {name}
         </span>
-        <span className="flex items-center justify-center !text-xs rounded-full px-2 h-5 border border-primary-50 text-primary-panel bg-surface-50">
+        <span
+          className="flex items-center justify-center !text-xs rounded-full px-2 h-5 border border-primary-50 text-primary-panel bg-surface-50">
           {role}
         </span>
       </div>
@@ -98,43 +97,30 @@ const MentorCard = ({ name, role, avatar, badgeColor }) => {
 };
 
 const EmployeeSatisfactionCalendarModal = ({
-  data = sampleData,
-  onItemPress,
-}) => {
+                                             data = sampleData,
+                                             onItemPress
+                                           }) => {
   const { openModal } = useModalContext();
-  const handlePress = (item) => {
+  const handlePress = (item: any) => {
     if (onItemPress) onItemPress(item);
   };
 
+
   return (
-    <AppModal.Body>
-      <div className="grid grid-cols-4 gap-10 p-5">
-        {data.map((item) => (
-          <AppButton
-            key={item.id}
-            props={{
-              size: "xs",
-              radius: "sm",
-              color: "white",
-              variant: "solid",
-              isIconOnly: true,
-              onPress: () =>
-                openModal(
-                  "edit",
-                  "",
-                  <FilterCalenderModal />,
-                  undefined,
-                  "sm",
-                  "Filter",
-                  <Filter className="text-white" />,
-                ),
-              className: "shadow-sm rounded-2xl",
-              content: <MentorCard {...item} />,
-            }}
-          />
-        ))}
-      </div>
-    </AppModal.Body>
+    <div className="grid grid-cols-4 gap-10 p-5">
+      {data.map((item) => (
+        <AppButton
+          key={item.id}
+          size="xs"
+          radius="sm"
+          color="white"
+          variant="solid"
+          isIconOnly
+          className="shadow-sm rounded-2xl"
+          content={<MentorCard {...item} />}
+        />
+      ))}
+    </div>
   );
 };
 

@@ -1,0 +1,95 @@
+import {
+  Briefcase,
+  ChartCircle,
+  ProfileAdd,
+  UserOctagon,
+} from "iconsax-reactjs";
+import WorkConditions from "./WorkConditions";
+import WorkEnvironment from "./WorkEnvironment";
+import OrganizationalLevel from "./OrganizationalLevel";
+import JobGroup from "./JobGroup";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../core/redux";
+import { useEffect, useState } from "react";
+
+const GeneralCounter = () => {
+ const isEditMode = useSelector(
+    (state: RootState) => state.dnnSupervisorEdit.isEditMode
+  );
+  const [ediTable,setEdiTable]=useState<boolean>(false);
+  useEffect(()=>{
+    setEdiTable(isEditMode)
+  },[isEditMode])
+  return (
+    <>
+      <div className="flex flex-col w-full h-full">
+        {/* header content */}
+        <div className="flex pt-3 pr-[124px] pb-4 pl-6 bg-[#DCF0F9] dark:bg-[#04425C] rounded-t-xl">
+          <div className="flex flex-row gap-[114px]">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex flex-row p-2">
+                <div className="flex flex-row gap-1.5 dark:text-[#DEE1E8]!">
+                  <span>
+                    <Briefcase size={24} color="#1E3363" />
+                  </span>
+                  <p className="text-xl text-[#1E3363]">
+                    Job Title:
+                    <span className="font-bold" contentEditable={ediTable}> HR Specialist</span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-row p-2">
+                <div className="flex flex-row gap-1.5">
+                  <span>
+                    <UserOctagon size={24} color="#1E3363" />
+                  </span>
+                  <p className="text-xl text-[#1E3363]">
+                    Supervisor:
+                    <span className="font-bold" contentEditable={ediTable}> CEO</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex flex-row p-2">
+                <div className="flex flex-row gap-1.5">
+                  <span>
+                    <ProfileAdd size={24} color="#1E3363" />
+                  </span>
+                  <p className="text-xl text-[#1E3363]">
+                    Positions Needed:
+                    <span className="font-bold" contentEditable={ediTable} > 1</span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-row p-2">
+                <div className="flex flex-row gap-1.5">
+                  <span>
+                    <ChartCircle size={24} color="#1E3363" />
+                  </span>
+                  <p className="text-xl text-[#1E3363]">
+                    Recruitment Process Management:
+                    <span className="font-bold"> Active</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* header content */}
+        {/* body content */}
+        <div className="p-4 flex flex-row gap-3 w-full dark:dark">
+          <WorkConditions />
+          <div className="flex flex-col gap-3 w-full">
+          <WorkEnvironment/>
+          <OrganizationalLevel/>
+          <JobGroup/>
+          </div>
+        </div>
+        {/* body content */}
+      </div>
+    </>
+  );
+};
+
+export default GeneralCounter;

@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, useRef, useMemo } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  PropsWithChildren,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useFormik,
@@ -12,19 +20,16 @@ import {
   clearFormCache,
 } from '@hrbox/core/redux/slices/formCacheSlice';
 import type { RootState } from '@hrbox/core/redux';
-import { FormMode } from "@hrbox/uikit/components/types";
+import { FormMode } from '@hrbox/uikit/components/types';
 
-interface FormProviderProps<Values>
+interface FormProviderProps<Values extends FormikValues>
   extends Omit<FormikConfig<Values>, 'onSubmit'> {
   formId: string;
   onSubmitAsync?: (
     values: Values,
     formikHelpers: FormikHelpers<Values>
   ) => Promise<void>;
-  onSubmit?: (
-    values: Values,
-    formikHelpers: FormikHelpers<Values>
-  ) => void;
+  onSubmit?: (values: Values, formikHelpers: FormikHelpers<Values>) => void;
   enableCache?: boolean;
   clearCacheOnSubmit?: boolean;
   cacheExpiryMs?: number;
@@ -46,39 +51,33 @@ export interface FormContextValue<Values> extends FormikContextType<Values> {
 
 const FormContext = createContext<FormContextValue<any> | null>(null);
 
-export function useFormContext<Values = any>() {
+export const useFormContext = <Values = any>() => {
   const context = useContext(FormContext);
-
   if (!context) {
     throw new Error('useFormContext must be used within a FormProvider');
   }
-
   return context as FormContextValue<Values>;
-}
+};
 
 export function FormProvider<Values extends FormikValues>({
-                                                            formId,
-                                                            initialValues,
-                                                            validationSchema,
-                                                            onSubmitAsync,
-                                                            onSubmit,
-                                                            enableCache = true,
-                                                            clearCacheOnSubmit = true,
-                                                            cacheExpiryMs = 30 * 60 * 1000, // 30 minutes
-                                                            children,
-                                                          }: FormProviderProps<Values>) {
+  formId,
+  initialValues,
+  validationSchema,
+  onSubmitAsync,
+  onSubmit,
+  enableCache = true,
+  clearCacheOnSubmit = true,
+  cacheExpiryMs = 30 * 60 * 1000, // 30 minutes
+  children,
+}: FormProviderProps<Values>) {
   const dispatch = useDispatch();
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formMode, setFormMode] = useState<FormMode>(FormMode.CREATE);
   const isInitialMount = useRef(true);
 
-  // دریافت cached values
-  const cachedForm = useSelector(
-    (state: RootState) => state.formCache?.[formId]
-  );
+  const cachedForm = useSelector((state: RootState) => state.formCache?.[formId]);
 
-  // بررسی انقضای cache
   const isCacheValid = useMemo(() => {
     if (!cachedForm) return false;
     const age = Date.now() - cachedForm.timestamp;
@@ -86,13 +85,12 @@ export function FormProvider<Values extends FormikValues>({
   }, [cachedForm, cacheExpiryMs]);
 
   const mergedInitialValues = useMemo(() => {
-    if (!enableCache || !isCacheValid) {
+    if (!enableCache || !isCacheValid || !cachedForm) {
       return initialValues;
     }
     return { ...initialValues, ...cachedForm.values };
   }, [enableCache, isCacheValid, cachedForm, initialValues]);
 
-  // Formik setup
   const formik = useFormik<Values>({
     initialValues: mergedInitialValues,
     validationSchema,
@@ -100,21 +98,20 @@ export function FormProvider<Values extends FormikValues>({
     onSubmit: async (values, formikHelpers) => {
       setFormError(null);
       setIsSubmitting(true);
-
       try {
-        // اجرای async یا sync submit
         if (onSubmitAsync) {
           await onSubmitAsync(values, formikHelpers);
         } else if (onSubmit) {
           onSubmit(values, formikHelpers);
         }
 
-        // پاک کردن cache بعد از submit موفق
         if (enableCache && clearCacheOnSubmit) {
           dispatch(clearFormCache(formId));
         }
       } catch (error: any) {
-        setFormError(error?.message || 'خطای نامشخص رخ داد');
+        const message = error?.message || 'خطای نامشخص رخ داد';
+        setFormError(message);
+        // Optionally re-throw if you want calling code to handle it too
         throw error;
       } finally {
         setIsSubmitting(false);
@@ -122,21 +119,15 @@ export function FormProvider<Values extends FormikValues>({
     },
   });
 
-  // Cache form values on change
+  // Cache values on change (debounced)
   useEffect(() => {
-    if (!enableCache) return;
-
-    // Skip initial mount
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
+    if (!enableCache || isInitialMount.current) {
+      if (isInitialMount.current) isInitialMount.current = false;
       return;
     }
 
-    // Debounce cache updates
     const timeoutId = setTimeout(() => {
-      dispatch(
-        updateFormValues({ formId, values: formik.values })
-      );
+      dispatch(updateFormValues({ formId, values: formik.values }));
     }, 300);
 
     return () => clearTimeout(timeoutId);
@@ -171,5 +162,27 @@ export function FormProvider<Values extends FormikValues>({
     <FormContext.Provider value={contextValue}>
       {typeof children === 'function' ? children(contextValue) : children}
     </FormContext.Provider>
+  );
+}
+
+export function Form({ children, className = '', ...rest }: PropsWithChildren<{ className?: string }>) {
+  const { handleSubmit, isSubmitting, formError } = useFormContext();
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={className}
+      {...rest}
+    >
+      {children}
+
+      {/* Optional: Global form error */}
+      {formError && (
+        <div className="mt-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+          {formError}
+        </div>
+      )}
+    </form>
   );
 }
