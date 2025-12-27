@@ -6,6 +6,7 @@ import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
 import SettingModal from "../modals/SettingModal";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+import GeneralModal from "@hrbox/modules/job-gradings/modals/GeneralModal";
 interface SettingSubheaderProps {
   title: string;
   icon: React.ReactNode;
@@ -20,25 +21,46 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
 
     const isIndicators =
         location.pathname === "/job-gradings/setting/indicators";
-  const handlerOpenModal = () => {
-    modal.open(
-      ModalType.CREATE,
-      title,
-      <SettingModal />,
-      {
-        isForm: true,
-        submitLabel: "Submit Again",
-        cancelLabel: "Cancel",
-        formConfig: {
-          formId: "face-form",
-        },
-      },
-      ModalSize["2XL"]
-    );
-  };
-  return (
+    const handlerOpenModal = () => {
+        if (isIndicators) {
+            modal.open(
+                ModalType.CREATE,
+                t("indicators"),
+                <SettingModal />,
+                {
+                    isForm: true,
+                    submitLabel: "Submit",
+                    cancelLabel: "Cancel",
+                    formConfig: {
+                        formId: "indicators-form",
+                    },
+                },
+                ModalSize["2XL"]
+            );
+            return;
+        }
+
+        if (isGeneral) {
+            modal.open(
+                ModalType.CREATE,
+                t("general"),
+                <GeneralModal />,
+                {
+                    isForm: true,
+                    submitLabel: "Submit",
+                    cancelLabel: "Cancel",
+                    formConfig: {
+                        formId: "general-form",
+                    },
+                },
+                ModalSize["2XL"]
+            );
+        }
+    };
+
+    return (
     <>
-      <div className="w-full flex flex-col">
+      <div className="w-full flex  flex-row">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row gap-3">
               <AppButton
@@ -46,7 +68,7 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
                   size="md"
                   radius="lg"
                   startContent={<Setting size={18} />}
-                  className={isIndicators ? "text-black" : "text-white"}
+                  className={isIndicators ? "text-white" : "text-black"}
                   onPress={() =>
                       navigate({ to: "/job-gradings/setting/indicators" })
                   }
@@ -58,7 +80,7 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
                   size="md"
                   radius="lg"
                   startContent={<Setting size={18} />}
-                  className={isGeneral ? "text-black" : "text-white"}
+                  className={isGeneral ? "text-white" : "text-black"}
                   onPress={() =>
                       navigate({ to: "/job-gradings/setting/general" })
                   }
@@ -68,7 +90,18 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
           </div>
           
         </div>
-       
+          <div className="flex flex-row gap-2.5">
+              <AppSearchInput />
+              <AppButton
+                  onPress={handlerOpenModal}
+                  color="white"
+                  size="md"
+                  radius="lg"
+                  startContent={<Add size={22} />}
+                  className="border-1 border-primary"
+                  content={t("add_new_one")}
+              />
+          </div>
     
        
       </div>

@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import {Briefcase, Chart, Convertshape, Setting2} from "iconsax-reactjs";
+import {Briefcase, Chart, Convertshape, Document, DocumentSketch, Setting2} from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 
@@ -124,16 +124,16 @@ export const JobGradingsPlugins: ModulePlugin = {
     {
       path: Paths.JobGradings.Employee,
       component: JobEmployee,
-      layout: "base",
+      layout: "framed",
       meta: {
-        title: "JobEmployee",
+        title: "Employee-job fit",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: EmployeeHeader,
       subHeaderProps: {
         title: "Employee-job fit",
-        icon: <Convertshape />,
+        icon: <DocumentSketch color="#FFFFFF" />,
       },
     },
 
