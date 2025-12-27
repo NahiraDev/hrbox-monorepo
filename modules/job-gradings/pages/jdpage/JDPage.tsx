@@ -1,9 +1,9 @@
 import { AppTable } from "@hrbox/uikit/components";
-import {JD} from "../../app/mock"
+import { ListTable} from "../../app/mock"
 const JDPage = () => {
     return ( 
         <div className="w-full h-full ">
-            <AppTable data={JD} />
+            <AppTable data={ListTable} />
         </div>
     );
 }

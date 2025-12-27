@@ -1,7 +1,7 @@
 import {ArchiveBook,  ArrowRight, Calendar, Document} from "iconsax-reactjs";
 import {AppButton} from "@hrbox/uikit/components";
 import {useTranslation} from "react-i18next";
-import { JD } from "../../app/mock";
+import { JD_DATA } from "../../app/mock";
 
 const JDList = () => {
   
@@ -30,7 +30,7 @@ const JDList = () => {
 
 
         <div className="flex-1 min-h-0 overflow-y-auto px-2 pb-3 flex flex-col gap-y-2">
-          {JD.map((item) => (
+          {JD_DATA.map((item) => (
               <div
                   key={item.id}
                   className="w-full py-3 bg-white dark:bg-info-1000 shadow-sm  flex flex-col gap-2 rounded-lg"

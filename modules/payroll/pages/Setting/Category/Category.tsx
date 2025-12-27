@@ -2,14 +2,14 @@ import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageTabs from "@/pages/Setting/Category/PageTabs.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageTabs from "@/pages/Indicator/Category/PageTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import SelectCalendarWithTime from "@/components/Calendar/SelectCalendarWithTime.tsx";
 import GeneralDetails from "@/components/GeneralDetails";
 import PageHeader from "@/components/PageHeader.tsx";
-import PageIndexTabs from "@/pages/Setting/PageIndexTabs.tsx";
-import ModalCategory from "@/pages/Setting/Category/ModalCategory.tsx";
+import PageIndexTabs from "@/pages/Indicator/PageIndexTabs.tsx";
+import ModalCategory from "@/pages/Indicator/Category/ModalCategory.tsx";
 
 export default function Category() {
   const DUMMY_EMPLOYEES = [

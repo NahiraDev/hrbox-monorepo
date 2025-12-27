@@ -17,11 +17,11 @@ import { Calculator } from "iconsax-react";
 
 import { AppInput } from "@/components/AppInput.tsx";
 import { AppTextArea } from "@/components/AppTextArea.tsx";
-import ComputationalCoefficientsShowMode from "@/pages/Setting/Calculation/ComputationalCoefficientsShowMode.tsx";
+import ComputationalCoefficientsShowMode from "@/pages/Indicator/Calculation/ComputationalCoefficientsShowMode.tsx";
 import InputGrid from "@/components/InputGrid.tsx";
 import { AppAutoComplete } from "@/components/AppAutoComplete.tsx";
 import AppDatePicker from "@/components/DatePicker/DatePicker.tsx";
-import CalculationComputationalCoefficients from "@/pages/Setting/Calculation/CalculationComputationalCoefficients.tsx";
+import CalculationComputationalCoefficients from "@/pages/Indicator/Calculation/CalculationComputationalCoefficients.tsx";
 
 export default function ModalGroupOrder({
   isOpen,

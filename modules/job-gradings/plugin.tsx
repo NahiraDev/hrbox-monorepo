@@ -5,7 +5,7 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import {  Briefcase, Chart, Setting2 } from "iconsax-reactjs";
+import {Briefcase, Chart, Convertshape, Document, DocumentSketch, Setting2} from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 
@@ -17,11 +17,16 @@ import { Paths } from "@hrbox/modules/paths";
 const Dashboard = lazyRouteComponent(
   () => import("./pages/dashboard/Dashboard")
 );
-const Setting = lazyRouteComponent(
-  () => import("./pages/setting/Setting")
+const indicator = lazyRouteComponent(
+  () => import("./pages/setting/Indicator")
+);const general = lazyRouteComponent(
+  () => import("./pages/setting/General")
 );
 const JDPage = lazyRouteComponent(
   () => import("./pages/jdpage/JDPage")
+);
+const JobEmployee = lazyRouteComponent(
+  () => import("./pages/Job-Employee/JobEmployee")
 );
 
 
@@ -37,6 +42,8 @@ const SettingSubHeader = lazy(
 );
 const JDHeader = lazy(
   () => import("./subheaders/JDHeader")
+);const EmployeeHeader = lazy(
+  () => import("./subheaders/EmployeeHeader")
 );
 
 // ============================================
@@ -71,11 +78,25 @@ export const JobGradingsPlugins: ModulePlugin = {
       }
     },
     {
-      path: Paths.JobGradings.Setting,
-      component: Setting,
+      path: Paths.JobGradings.Indicators,
+      component:indicator ,
       layout: "base",
       meta: {
-        title: "Setting",
+        title: "Indicator",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: SettingSubHeader,
+      subHeaderProps:{
+        title:"Indicators",
+        icon:<Setting2/>
+      }
+    }, {
+      path: Paths.JobGradings.General,
+      component:general ,
+      layout: "base",
+      meta: {
+        title: "Indicator",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
@@ -95,11 +116,27 @@ export const JobGradingsPlugins: ModulePlugin = {
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
       subHeader: JDHeader,
-      subHeaderProps:{
-        title:"JD List",
-        icon:<Briefcase/>
-      }
+      subHeaderProps: {
+        title: "JD List",
+        icon: <Briefcase />,
+      },
     },
+    {
+      path: Paths.JobGradings.Employee,
+      component: JobEmployee,
+      layout: "framed",
+      meta: {
+        title: "Employee-job fit",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: EmployeeHeader,
+      subHeaderProps: {
+        title: "Employee-job fit",
+        icon: <DocumentSketch color="#FFFFFF" />,
+      },
+    },
+
   ],
   // ============================================
   // Menu
@@ -122,6 +159,11 @@ export const JobGradingsPlugins: ModulePlugin = {
       label: "JDPage",
       path: "/job-gradings/jdpage",
       icon: <Chart size="24" />,
+    },{
+      id: "Job-Employee",
+      label: "Employee-job fit",
+      path: "/job-gradings/job-employee",
+      icon: <Convertshape size="24" />,
     },
   ],
 

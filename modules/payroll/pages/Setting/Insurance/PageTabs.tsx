@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Search from "@/components/Search.tsx";
 import FilterModal from "@/components/FilterModal.tsx";
 import { Index as Icons } from "@/icons/Index.tsx";
-import ModalInsurance from "@/pages/Setting/Insurance/ModalInsurance.tsx";
+import ModalInsurance from "@/pages/Indicator/Insurance/ModalInsurance.tsx";
 
 export default function PageTabs({ props }: { props: any }) {
   const { data } = props;
