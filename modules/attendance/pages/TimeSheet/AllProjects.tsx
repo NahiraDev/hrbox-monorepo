@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { AppPagination } from "@hrbox//components";
+import { AppPagination } from "@hrbox/uikit/components";
 
 const AllProjects = () => {
   const [currentPage, setCurrentPage] = useState(1);

@@ -13,4 +13,5 @@ export * from "@hrbox/uikit/components/AppCheckBox";
 export * from "@hrbox/uikit/components/AppTabs";
 export * from "@hrbox/uikit/components/AppTable";
 export * from "@hrbox/uikit/components/FormModal";
-export * from "@hrbox/uikit/components/FormField"
+export * from "@hrbox/uikit/components/FormField";
+export * from "@hrbox/uikit/components/AppSlider"
