@@ -20,7 +20,7 @@ export function AppPagination({ meta, onPageChange }: PaginationProps) {
         size="lg"
         classNames={{
           cursor: "bg-primary text-white font-semibold",
-          item: "bg-white hover:bg-gray-100 transition-colors",
+          item: "bg-white cursor-pointer hover:bg-gray-100 transition-colors",
         }}
       />
     </div>

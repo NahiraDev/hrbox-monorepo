@@ -98,7 +98,8 @@ export const Paths = {
     Indicators:'/job-gradings/setting/indicators',
     General:'/job-gradings/setting/general',
     JDPage:'/job-gradings/JDPage',
-    Employee:'/job-gradings/Employee-job fit'
+    Employee:'/job-gradings/job-Employee',
+    EmployeeProfile:'/job-gradings/job-Employee/Employees-on-This-Job',
   },
     JobDescription:{
         jobdescription:"/job-description",

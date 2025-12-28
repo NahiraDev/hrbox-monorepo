@@ -254,6 +254,9 @@
   "Type":"نوع",
   "weight":"وزن",
   "indicators":"شاخص ها",
-  "General":"عمومی "
+  "General":"عمومی ",
+  "Grade_title":"عنوان سطح",
+  "of_points":"شروع امتیاز :",
+  "up_to_points":"پایان امتیاز :"
 
 }
