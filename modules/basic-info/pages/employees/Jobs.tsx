@@ -27,7 +27,7 @@ const Jobs = () => {
   };
 
   const handleDeleteConfirm = (index: number) => {
-    setJobs(prev => { // ✅ تغییر به setJobs
+    setJobs(prev => {
       const newJobs = [...prev];
       newJobs.splice(index, 1);
       return newJobs;
@@ -62,7 +62,7 @@ const Jobs = () => {
                 <div className="flex flex-col gap-2 p-2">
                   <div className="flex items-center justify-between p-1.5">
                     <div className="flex gap-2 ">
-                      <Buildings />
+                       <Buildings />
                       <span>Company</span>
                     </div>
                     <div>
