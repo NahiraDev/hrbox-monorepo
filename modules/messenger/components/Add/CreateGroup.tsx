@@ -1,12 +1,5 @@
-import {
-  Button,
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-} from "@nextui-org/react";
-import { Edit2, Refresh2, RowHorizontal, Trash } from "iconsax-react";
+import { Button, Image, Modal, ModalBody, ModalContent, ModalFooter } from "@heroui/react";
+import { Edit2, Refresh2, RowHorizontal, Trash } from "iconsax-reactjs";
 import { CreateGroupProps } from "./types";
 import "cropperjs/dist/cropper.css";
 import { useEffect, useRef } from "react";
@@ -23,7 +16,7 @@ export const CreateGroup: React.FC<CreateGroupProps> = ({ data }) => {
           aspectRatio: 0,
           viewMode: 0,
           autoCropArea: 0,
-          responsive: true,
+          responsive: true
         });
       }
     }, 100);

@@ -1,3 +1,3 @@
-export * from '@core/layouts/BaseLayout';
-export * from '@core/layouts/AuthLayout';
-export * from '@core/layouts/FramedLayout';
+export * from "@hrbox/core/layouts/BaseLayout";
+export * from "@hrbox/core/layouts/AuthLayout";
+export * from "@hrbox/core/layouts/FramedLayout";

@@ -1,23 +1,21 @@
-import { Card } from "@nextui-org/react";
-import { useDarkMode } from "../../context/DarkMode";
+import { Card } from "@heroui/react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import React, { useEffect, useState } from "react";
-import { Save2 } from "iconsax-react";
-import { SingleChatItemTypes } from "../../types";
+import { Save2 } from "iconsax-reactjs";
+import { SingleChatItemTypes } from "@hrbox/modules/messenger/types";
+import { RootState } from "@hrbox/core/redux";
 
 export const SaveMessageItem = ({
-  profile,
-  isSelected,
-  onSelect,
-  setShowAction,
-}: SingleChatItemTypes) => {
-  const { darkMode } = useDarkMode();
+                                  profile,
+                                  isSelected,
+                                  onSelect,
+                                  setShowAction
+                                }: SingleChatItemTypes) => {
   const saveMessages = useSelector(
-    (state: RootState) => state.saveMessage?.messages,
+    (state: RootState) => state.saveMessage?.messages
   );
   const [lastMessages, setLastMessages] = useState<{ [key: string]: string }>(
-    {},
+    {}
   );
 
   const handleSelect = () => {
@@ -48,10 +46,18 @@ export const SaveMessageItem = ({
     return isNaN(date.getTime()) ? "00:00" : date.toISOString().substr(11, 5);
   };
 
-  const cardClassNames = `relative flex flex-row items-center w-full px-6 py-3 gap-2 border-b-1 border-primary-0 border-opacity-40
-                          ${isSelected ? (darkMode ? "bg-primary-800" : "bg-primary-0") : darkMode ? "bg-info-1000" : "bg-white"}
-                          cursor-pointer transition-colors duration-300
-                          ${darkMode ? "hover:bg-primary-800 hover:bg-opacity-40" : "hover:bg-primary-0 hover:bg-opacity-40"}`;
+  const cardClassNames = `
+  relative flex flex-row items-center w-full px-6 py-3 gap-2
+  border-b-1 border-primary-0 border-opacity-40
+  cursor-pointer transition-colors duration-300
+
+  ${isSelected
+    ? "bg-primary-0 dark:bg-primary-800"
+    : "bg-white dark:bg-info-1000"}
+
+  hover:bg-primary-0 hover:bg-opacity-40
+  dark:hover:bg-primary-800 dark:hover:bg-opacity-40
+`;
 
   const time = getLastMessageTime(profile?.id || "");
 

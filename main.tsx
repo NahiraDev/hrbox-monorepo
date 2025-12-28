@@ -17,23 +17,16 @@ import "@hrbox/core/config/theme/index.css";
 
 import { GlobalModalRenderer } from "@hrbox/uikit/components/GlobalModalRenderer";
 
-// ============================================
-// QueryClient Setup
-// ============================================
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,
       retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
+      refetchOnWindowFocus: false
+    }
+  }
 });
 
-// ============================================
-// Enabled Modules
-// ============================================
 
 const ENABLED_MODULES = (import.meta.env.VITE_ENABLED_MODULES || "")
   .split(",")
@@ -48,7 +41,7 @@ const ENABLED_MODULES = (import.meta.env.VITE_ENABLED_MODULES || "")
   "attendance",
   "job-gradings",
   "job-description",
-  "project-management",
+  "project-management"
 ];
 
 // ============================================
@@ -60,6 +53,7 @@ async function bootstrap() {
     const moduleLoaders: Record<string, () => Promise<any>> = {
       sso: () => import("@hrbox/modules/sso/plugin"),
       hrlink: () => import("@hrbox/modules/hrlink/plugin"),
+      messenger: () => import("@hrbox/modules/messenger/plugin"),
       "process-maker": () => import("@hrbox/modules/process-maker/plugin"),
       "chart-maker": () => import("@hrbox/modules/chart-maker/plugin"),
       "basic-info": () => import("@hrbox/modules/basic-info/plugin"),
@@ -67,7 +61,7 @@ async function bootstrap() {
       "job-gradings": () => import("@hrbox/modules/job-gradings/plugin"),
       "job-description": () => import("@hrbox/modules/job-description/plugin"),
       "project-management": () =>
-        import("@hrbox/modules/project-management/plugin"),
+        import("@hrbox/modules/project-management/plugin")
     };
 
     await Promise.all(
@@ -76,7 +70,7 @@ async function bootstrap() {
           const { default: ModulePlugin } = await moduleLoaders[moduleName]();
           moduleRegistry.register(ModulePlugin);
         }
-      }),
+      })
     );
 
     await moduleRegistry.runPrefetch();
@@ -121,7 +115,7 @@ async function bootstrap() {
             </QueryClientProvider>
           </PersistGate>
         </ReduxProvider>
-      </StrictMode>,
+      </StrictMode>
     );
   } catch (error) {
     document.body.innerHTML = `
@@ -167,8 +161,8 @@ async function bootstrap() {
             🔄 تلاش مجدد
           </button>
           ${
-            import.meta.env.DEV
-              ? `
+      import.meta.env.DEV
+        ? `
             <details style="
               margin-top: 2rem;
               text-align: left;
@@ -189,8 +183,8 @@ async function bootstrap() {
               ">${error}</pre>
             </details>
           `
-              : ""
-          }
+        : ""
+    }
         </div>
       </div>
     `;
@@ -201,7 +195,8 @@ function LoadingScreen() {
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700">
       <div className="text-center text-white">
-        <div className="inline-block animate-spin h-16 w-16 border-4 border-white border-t-transparent rounded-full mb-6" />
+        <div
+          className="inline-block animate-spin h-16 w-16 border-4 border-white border-t-transparent rounded-full mb-6" />
         <h2 className="text-2xl font-bold mb-2">HRBox</h2>
         <p className="text-sm opacity-90">در حال بارگذاری...</p>
       </div>
