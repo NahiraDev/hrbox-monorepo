@@ -1,7 +1,7 @@
 import JobModal from './JobModal';
 import EducationModal from './EducationModal';
 import Skills from './Skills';
-import AchievementsModal from './AchievementsModal';
+// import AchievementsModal from './AchievementsModal';
 
 interface DynamicAddModalProps {
   tab: string;
