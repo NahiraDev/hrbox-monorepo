@@ -246,14 +246,14 @@
   "ProgressStatusOfProjects": "وضعیت پیشرفت پروژه",
   "JobUnemployed": "تستی",
   "Notifications": "اعلانات",
-  "TheStateOfTheOrganization":"وضعیت سازمان",
-  "Jobemployeefitstatus":"وضعیت تناسب شغلی کارمند",
+  "TheStateOfTheOrganization": "وضعیت سازمان",
+  "Jobemployeefitstatus": "وضعیت تناسب شغلی کارمند",
   "SeeMore": "مشاهده بیشتر",
-  "index_ title":"عنوان شاخص",
-  "Select_Group":"انتخاب گروه",
-  "Type":"نوع",
-  "weight":"وزن",
-  "indicators":"شاخص ها",
-  "General":"عمومی "
-
+  "index_ title": "عنوان شاخص",
+  "Select_Group": "انتخاب گروه",
+  "Type": "نوع",
+  "weight": "وزن",
+  "indicators": "شاخص ها",
+  "General": "عمومی ",
+  "index_title": "index title (fa)"
 }

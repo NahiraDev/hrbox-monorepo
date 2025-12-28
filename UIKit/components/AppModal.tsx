@@ -1,38 +1,32 @@
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useModalContext, ModalType, ModalSize } from "@hrbox/core/providers/ModalProvider";
+import { AnimatePresence, motion } from "framer-motion";
+import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { Button } from "@heroui/react";
 import React, { createContext, useContext } from "react";
 import clsx from "clsx";
 
-// ============================================
-// Close Icon Component
-// ============================================
 const Close: React.FC<{ size?: string; className?: string }> = ({
                                                                   size = "24",
                                                                   className = ""
                                                                 }) => {
   return (
-      <svg
-          width={size}
-          height={size}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={className}
-      >
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
   );
 };
 
-// ============================================
-// Size Classes
-// ============================================
 const sizeClasses: Record<ModalSize | string, string> = {
   sm: "max-w-sm",
   md: "max-w-md",
@@ -43,9 +37,6 @@ const sizeClasses: Record<ModalSize | string, string> = {
   full: "w-full h-full"
 };
 
-// ============================================
-// Internal Context
-// ============================================
 interface AppModalContextType {
   modalTitle?: string;
   modalIcon?: React.ReactNode;
@@ -65,7 +56,7 @@ interface AppModalContextType {
 }
 
 const ModalContextProvider = createContext<AppModalContextType | undefined>(
-    undefined
+  undefined
 );
 
 const useModalInternal = () => {
@@ -95,38 +86,38 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
   if (!shouldShowModal || (!modalTitle && !modalIcon && !children)) return null;
 
   return (
-      <motion.div
-          className={clsx(
-              "bg-gradient-to-r px-6 py-4 flex items-center justify-between",
-              getHeaderColor()
+    <motion.div
+      className={clsx(
+        "bg-gradient-to-r px-6 py-4 flex items-center justify-between",
+        getHeaderColor()
+      )}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1 }}
+    >
+      {children ? (
+        <div>{children}</div>
+      ) : (
+        <div className="flex items-center gap-3">
+          {modalIcon && (
+            <div className="text-2xl text-white">{modalIcon}</div>
           )}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-      >
-        {children ? (
-            <div>{children}</div>
-        ) : (
-            <div className="flex items-center gap-3">
-              {modalIcon && (
-                  <div className="text-2xl text-white">{modalIcon}</div>
-              )}
-              {modalTitle && (
-                  <h2 className="text-lg font-bold text-white">{modalTitle}</h2>
-              )}
-            </div>
-        )}
+          {modalTitle && (
+            <h2 className="text-lg font-bold text-white">{modalTitle}</h2>
+          )}
+        </div>
+      )}
 
-        <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={closeModal}
-            className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
-            aria-label="بستن"
-        >
-          <Close size="24" className="text-white" />
-        </motion.button>
-      </motion.div>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={closeModal}
+        className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+        aria-label="بستن"
+      >
+        <Close size="24" className="text-white" />
+      </motion.button>
+    </motion.div>
   );
 };
 
@@ -142,28 +133,28 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
   const { formError } = useModalInternal();
 
   return (
-      <motion.div
-          className={clsx("flex-1 overflow-y-auto p-6", className)}
-          initial={{ opacity: 0, y: 10 }}
+    <motion.div
+      className={clsx("flex-1 overflow-y-auto p-6", className)}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.15 }}
+    >
+      {/* Error Alert */}
+      {formError && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-      >
-        {/* Error Alert */}
-        {formError && (
-            <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-4 p-3 bg-danger-50 dark:bg-danger-900/20 rounded-lg"
-            >
-              <p className="text-sm text-danger dark:text-danger-300">
-                {formError}
-              </p>
-            </motion.div>
-        )}
+          className="mb-4 p-3 bg-danger-50 dark:bg-danger-900/20 rounded-lg"
+        >
+          <p className="text-sm text-danger dark:text-danger-300">
+            {formError}
+          </p>
+        </motion.div>
+      )}
 
-        {/* Main Content */}
-        {children}
-      </motion.div>
+      {/* Main Content */}
+      {children}
+    </motion.div>
   );
 };
 
@@ -180,8 +171,8 @@ interface AppModalFooterProps {
 const AppModalFooter: React.FC<AppModalFooterProps> = ({
                                                          children,
                                                          className,
-                                                         submitLabel = "ذخیره",
-                                                         cancelLabel = "لغو"
+                                                         submitLabel = "Submit",
+                                                         cancelLabel = "Cancel"
                                                        }) => {
   const {
     isDirty,
@@ -192,66 +183,55 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
     hideFooter,
     isContextMode
   } = useModalInternal();
-
-  // ✅ اگر isContextMode = false (standalone mode):
-  // showFooter = true (باید نمایش داده شود)
   const isFormMode = !isContextMode;
-  
+
   const showFooter =
-      !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
+    !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
 
   if (!showFooter) return null;
 
   const handleCancel = () => {
-    if (onCancel) {
-      onCancel();
-    } else {
-      closeModal();
-    }
+    closeModal();
   };
 
   return (
-      <motion.div
-          className={clsx(
-              "px-6 py-4 flex items-center justify-end gap-3",
-              className
+    <motion.div
+      className={clsx(
+        "px-6 py-4 flex items-center justify-end gap-3",
+        className
+      )}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+    >
+      {children ? (
+        children
+      ) : (
+        <>
+          <Button
+            color="default"
+            variant="light"
+            onPress={handleCancel}
+            isDisabled={isSubmitting}
+          >
+            {cancelLabel}
+          </Button>
+          {onSubmit && (
+            <Button
+              color="primary"
+              onPress={onSubmit}
+              isDisabled={isSubmitting}
+              isLoading={isSubmitting}
+            >
+              {submitLabel}
+            </Button>
           )}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-      >
-        {children ? (
-            children
-        ) : (
-            <>
-              <Button
-                  color="default"
-                  variant="light"
-                  onPress={handleCancel}
-                  isDisabled={isSubmitting}
-              >
-                {cancelLabel}
-              </Button>
-              {onSubmit && (
-                  <Button
-                      color="primary"
-                      onPress={onSubmit}
-                      // NIMAAAAAAAAAAAA 
-                      isDisabled={!isDirty || isSubmitting}
-                      isLoading={isSubmitting}
-                  >
-                    {submitLabel}
-                  </Button>
-              )}
-            </>
-        )}
-      </motion.div>
+        </>
+      )}
+    </motion.div>
   );
 };
 
-// ============================================
-// AppModal - Base Component
-// ============================================
 interface AppModalProps {
   title?: string;
   icon?: React.ReactNode;
@@ -288,8 +268,8 @@ const AppModalBase: React.FC<AppModalProps> & {
        formError = null,
        onSubmit,
        onCancel,
-       submitLabel = "ذخیره",
-       cancelLabel = "لغو",
+       submitLabel = "Submit",
+       cancelLabel = "Cancel",
        hideFooter = false,
        children,
        isOpen = true,
@@ -298,10 +278,8 @@ const AppModalBase: React.FC<AppModalProps> & {
   const { getOpenModal, isModalOpen, closeModal } = useModalContext();
   const modalData = getOpenModal();
 
-  // ✅ تشخیص mode
   const isContextMode = !!(type && name);
 
-  // ترکیب props و modalData
   const modalTitle = title || modalData?.title;
   const modalIcon = icon || modalData?.icon;
   const modalSize = (size || modalData?.size || "md") as ModalSize;
@@ -309,16 +287,14 @@ const AppModalBase: React.FC<AppModalProps> & {
   const modalName = name || modalData?.name;
   const modalComponent = component || modalData?.component;
 
-  // ✅ بررسی نمایش مودال
   const shouldShowModal = isContextMode
-      ? isModalOpen(modalType, modalName)
-      : isOpen;
+    ? isModalOpen(modalType, modalName)
+    : isOpen;
 
   if (isContextMode && !shouldShowModal) {
     return null;
   }
 
-  // Handlers
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       handleClose();
@@ -349,7 +325,6 @@ const AppModalBase: React.FC<AppModalProps> & {
     }
   };
 
-  // Context Value
   const contextValue: AppModalContextType = {
     modalTitle,
     modalIcon,
@@ -360,7 +335,6 @@ const AppModalBase: React.FC<AppModalProps> & {
     shouldShowModal,
     closeModal: handleClose,
     getHeaderColor,
-    // ✅ props رو مستقیم استفاده کنید
     isDirty,
     isSubmitting,
     formError,
@@ -371,58 +345,56 @@ const AppModalBase: React.FC<AppModalProps> & {
 
   // Modal Content
   const modalContent = (
-      <AnimatePresence mode="wait">
-        {shouldShowModal && (
-            <motion.div
-                key={`modal-${modalType}-${modalName}`}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                initial={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
-                onClick={handleBackdropClick}
-            >
-              <motion.div
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                  initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                  onClick={(e) => e.stopPropagation()}
-                  className={clsx(
-                      "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800",
-                      "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col",
-                      sizeClasses[modalSize] || "max-w-md"
-                  )}
-              >
-                <ModalContextProvider.Provider value={contextValue}>
-                  {/* Header */}
-                  {(modalTitle || modalIcon) && <AppModalHeader />}
+    <AnimatePresence mode="wait">
+      {shouldShowModal && (
+        <motion.div
+          key={`modal-${modalType}-${modalName}`}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          onClick={handleBackdropClick}
+        >
+          <motion.div
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+            className={clsx(
+              "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800",
+              "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col",
+              sizeClasses[modalSize] || "max-w-md"
+            )}
+          >
+            <ModalContextProvider.Provider value={contextValue}>
+              {/* Header */}
+              {(modalTitle || modalIcon) && <AppModalHeader />}
 
-                  {/* Content */}
-                  <AppModalBody>
-                    {children ?? modalComponent}
-                  </AppModalBody>
+              {/* Content */}
+              <AppModalBody>
+                {children ?? modalComponent}
+              </AppModalBody>
 
-                  {/* Footer */}
-                  {!hideFooter && (
-                      <AppModalFooter
-                          submitLabel={submitLabel}
-                          cancelLabel={cancelLabel}
-                      />
-                  )}
-                </ModalContextProvider.Provider>
-              </motion.div>
-            </motion.div>
-        )}
-      </AnimatePresence>
+              {/* Footer */}
+              {!hideFooter && (
+                <AppModalFooter
+                  submitLabel={submitLabel}
+                  cancelLabel={cancelLabel}
+                />
+              )}
+            </ModalContextProvider.Provider>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 
-  // Return portal for context mode, otherwise direct render
   return isContextMode
-      ? createPortal(modalContent, document.body)
-      : modalContent;
+    ? createPortal(modalContent, document.body)
+    : modalContent;
 };
 
-// Attach sub-components
 AppModalBase.Header = AppModalHeader;
 AppModalBase.Body = AppModalBody;
 AppModalBase.Footer = AppModalFooter;

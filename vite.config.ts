@@ -1,10 +1,4 @@
-import {
-  type ConfigEnv,
-  defineConfig,
-  loadEnv,
-  PluginOption,
-  type UserConfig,
-} from "vite";
+import { type ConfigEnv, defineConfig, loadEnv, PluginOption, type UserConfig } from "vite";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { readFileSync } from "fs";
@@ -27,11 +21,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   let packageJson: any = {};
   try {
     packageJson = JSON.parse(
-      readFileSync(resolve(__dirname, "package.json"), "utf-8"),
+      readFileSync(resolve(__dirname, "package.json"), "utf-8")
     );
-  } catch {}
+  } catch {
+  }
 
-  // SSL Configuration
   let httpsConfig = undefined;
   try {
     const keyPath = resolve(__dirname, "./certs/cert_hrbox.key");
@@ -42,7 +36,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       httpsConfig = {
         key: fs.readFileSync(keyPath),
         cert: fs.readFileSync(certPath),
-        ca: fs.readFileSync(caPath),
+        ca: fs.readFileSync(caPath)
       };
     }
   } catch (error) {
@@ -52,7 +46,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
   const plugins = [
     react() as PluginOption,
     tsconfigPaths() as PluginOption,
-    tailwindcss() as PluginOption,
+    tailwindcss() as PluginOption
   ];
 
   return {
@@ -66,12 +60,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       __FEATURE_SSO__: true,
       __FEATURE_CHARTS__: true,
       __FEATURE_REPORTS__: true,
-      "process.env.VITE_APP_ENV": JSON.stringify(mode),
+      "process.env.VITE_APP_ENV": JSON.stringify(mode)
     },
     css: {
-      postcss: "./core/config/tailwind/postcss.config.js",
+      postcss: "./core/config/tailwind/postcss.config.js"
     },
-    // Build configuration
     build: {
       target: "es2023",
       minify: "terser",
@@ -86,7 +79,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
           processMaker: resolve(
             __dirname,
-            "./modules/process-maker/plugin.tsx",
+            "./modules/process-maker/plugin.tsx"
           ),
           chartMaker: resolve(__dirname, "modules/chart-maker/plugin.tsx"),
           hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
@@ -95,11 +88,13 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
           projectManagement: resolve(
             __dirname,
-            "./modules/project-management/plugin.tsx",
+            "./modules/project-management/plugin.tsx"
           ),
+          messenger: resolve(__dirname, "./modules/messenger/plugin.tsx"),
+          jobDescription: resolve(__dirname, "./modules/job-description/plugin.tsx")
         },
         output: {
-          entryFileNames: (chunkInfo) => {
+          entryFileNames: (chunkInfo: { name: string; }) => {
             if (chunkInfo.name === "main") return "index.js";
             if (chunkInfo.name === "core") return "core/index.js";
             if (chunkInfo.name === "sso") return "modules/sso/index.js";
@@ -116,12 +111,14 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
               return "modules/project-management/index.js";
             if (chunkInfo.name === "jobGradings")
               return "modules/job-gradings/index.js";
+            if (chunkInfo.name === "jobDescription")
+              return "modules/job-description/index.js";
             return "[name].js";
           },
           chunkFileNames: "[name]-[hash].js",
-          assetFileNames: "assets/[name]-[ext]",
-        },
-      },
+          assetFileNames: "assets/[name]-[ext]"
+        }
+      }
     },
 
     esbuild: {
@@ -131,7 +128,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       minifyIdentifiers: true,
       minifySyntax: true,
       minifyWhitespace: true,
-      treeShaking: true,
+      treeShaking: true
     },
 
     root: resolve(__dirname, "."),
@@ -142,12 +139,11 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
         "@hrbox/core": resolve(__dirname, "core"),
         "@hrbox/modules": resolve(__dirname, "modules"),
         "@hrbox/routes": resolve(__dirname, "routes"),
-        "@hrbox/uikit": resolve(__dirname, "UIKit"),
-        "@proxy-server": resolve(__dirname, "proxy-server"),
+        "@hrbox/uikit": resolve(__dirname, "UIKit")
       },
       extensions: [".mjs", ".js", ".mts", ".ts", ".jsx", ".tsx", ".json"],
       conditions: isProduction ? ["production"] : ["development"],
-      mainFields: ["browser", "module", "main"],
+      mainFields: ["browser", "module", "main"]
     },
 
     assetsInclude: ["**/*.html"],
@@ -163,7 +159,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       hmr: {
         overlay: true,
         protocol: "wss",
-        port: 443,
+        port: 443
       },
 
       proxy: {
@@ -172,7 +168,13 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           changeOrigin: true,
           secure: false,
           ws: true,
-          configure: (proxy, options) => {
+          configure: (proxy: {
+            on: (arg0: string, arg1: {
+              (err: any, _req: any, _res: any): void;
+              (proxyReq: any, req: any, _res: any): void;
+              (proxyRes: any, req: any, _res: any): void;
+            }) => void;
+          }, options: any) => {
             proxy.on("error", (err, _req, _res) => {
               console.error("❌ Proxy error:", err.message);
             });
@@ -184,72 +186,73 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
             proxy.on("proxyRes", (proxyRes, req, _res) => {
               console.log(
-                `📥 [hrlink.hrbox.me → Vite] ${proxyRes.statusCode} ${req.url}`,
+                `📥 [hrlink.hrbox.me → Vite] ${proxyRes.statusCode} ${req.url}`
               );
             });
-          },
+          }
         },
 
-        // Proxy برای DesktopModules
         "/DesktopModules": {
           target: "https://hrlink.hrbox.me:50443",
           changeOrigin: true,
           secure: false,
           ws: true,
-          configure: (proxy, options) => {
+          configure: (proxy: {
+            on: (arg0: string, arg1: {
+              (err: any, _req: any, _res: any): void;
+              (proxyReq: any, req: any, _res: any): void;
+              (proxyRes: any, req: any, _res: any): void;
+            }) => void;
+          }, options: any) => {
             proxy.on("error", (err, _req, _res) => {
               console.error("❌ Proxy error (DesktopModules):", err.message);
             });
 
             proxy.on("proxyReq", (proxyReq, req, _res) => {
-              // ✅ تصحیح Host header: بدون protocol
               proxyReq.setHeader("Host", "hrlink.hrbox.me:50443");
-              // ✅ تغییر Origin به front.hrbox.me برای شناسایی به عنوان front.hrbox.me
               proxyReq.setHeader("Origin", "https://front.hrbox.me");
             });
 
             proxy.on("proxyRes", (proxyRes, req, _res) => {
               console.log(
-                `📥 [hrlink.hrbox.me → Vite (DesktopModules)] ${proxyRes.statusCode} ${req.url}`,
+                `📥 [hrlink.hrbox.me → Vite (DesktopModules)] ${proxyRes.statusCode} ${req.url}`
               );
             });
-          },
-        },
+          }
+        }
       },
 
       watch: {
         usePolling: true,
-        interval: parseInt(envVars.VITE_WATCH_INTERVAL || "100"),
-      },
+        interval: parseInt(envVars.VITE_WATCH_INTERVAL || "100")
+      }
     },
 
-    // Preview server
     preview: {
       port: 443,
       host: "0.0.0.0",
-      allowedHosts: ["localhost",  , "react.hrbox.me"],
+      allowedHosts: ["localhost", , "react.hrbox.me"],
       strictPort: true,
       open: envVars.VITE_OPEN !== "false",
       cors: true,
-      https: httpsConfig,
+      https: httpsConfig
     },
 
     appType: "spa",
 
     optimizeDeps: {
       include: ["react", "react-dom", "@emotion/react", "@emotion/styled"],
-      exclude: ["@vite/client", "@vite/env"],
+      exclude: ["@vite/client", "@vite/env"]
     },
 
-    // Worker configuration
     worker: {
       format: "es",
       plugins: () => [react()],
       rollupOptions: {
         output: {
-          entryFileNames: "assets/workers/[name]-[hash].js",
-        },
-      },
-    },
+          entryFileNames: "assets/workers/[name]-[hash].js"
+        }
+      }
+    }
   };
 });
