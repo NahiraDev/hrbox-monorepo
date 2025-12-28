@@ -1,27 +1,18 @@
-import {
-  Briefcase,
-  ChartCircle,
-  ProfileAdd,
-  UserOctagon,
-} from "iconsax-reactjs";
+import { Briefcase, ChartCircle, ProfileAdd, UserOctagon } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "@hrbox/core/redux";
+import { RootState } from "../../../../../core/redux";
 import { useEffect, useState } from "react";
-import { AppTable, FormField } from "@hrbox/uikit/components";
-import { duties } from "../../../app/mock";
-import FormDuties from "../../../forms/FormDuties";
+import Behavior from "./Behavior";
+import Knowledge from "./Knowledge";
 
-const ListofDuties = () => {
-  const isEditMode = useSelector(
-    (state: RootState) => state.dnnSupervisorEdit.isEditMode
-  );
-  const [editTable, setEditTable] = useState<boolean>(false);
-  useEffect(() => {
-    setEditTable(isEditMode);
-  }, [isEditMode]);
-  return (
-    <>
-      <div className="flex flex-col w-full h-full">
+const Competencies = () => {
+    const isEditMode=useSelector((state:RootState)=>state.dnnSupervisorEdit.isEditMode);
+    const [editTable,setEditTable]=useState<boolean>(false);
+    useEffect(()=>{
+        setEditTable(isEditMode);
+    },[isEditMode])
+    return ( <>
+     <div className="flex flex-col w-full h-full">
         {/* header content */}
         <div className="flex pt-3 pr-[124px] pb-4 pl-6 bg-[#DCF0F9] dark:bg-[#04425C] rounded-t-xl">
           <div className="flex flex-row gap-[114px]">
@@ -85,15 +76,13 @@ const ListofDuties = () => {
           </div>
         </div>
         {/* header content */}
-        <div className="w-full h-full pr-3 py-3 ">
-          <div className="w-full max-h-[561px] flex flex-col p-4 gap-4 overflow-y-auto custom-scroll-objectives">
-            {editTable && <FormDuties />}
-            <AppTable data={duties} hasPagination={false} variant="default" />
-          </div>
+        <div className="w-full h-full! flex flex-row gap-2 pt-4 pb-3">
+            <Behavior/>
+            <Knowledge/>
         </div>
+       
       </div>
-    </>
-  );
-};
-
-export default ListofDuties;
+    </> );
+}
+ 
+export default Competencies;
