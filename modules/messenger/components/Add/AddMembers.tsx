@@ -8,31 +8,32 @@ import { GroupAndChannelTypes, MemberTypes } from "../../types";
 import {
   handleAddGroupApi,
   handleFetchGroupsApi,
-  handleUpdateGroupApi,
+  handleUpdateGroupApi
 } from "../../services/Messenger/GroupChatService/apis";
 import {
   handleAddChannelApi,
   handleFetchChannelsApi,
-  handleUpdateChannelApi,
+  handleUpdateChannelApi
 } from "../../services/Messenger/ChannelChatService/apis";
+import { AppDispatch } from "@hrbox/core/redux";
 
 const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
   const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const users: MemberTypes[] = useSelector(
-    (state: RootState) => state.users?.users,
+    (state: RootState) => state.users?.users
   );
   const groupProfile: GroupAndChannelTypes = useSelector(
-    (state: RootState) => state?.profile?.profile,
+    (state: RootState) => state?.profile?.profile
   );
   const myProfile = JSON.parse(localStorage.getItem("profile") || "{}");
   const isEditGroupAndChannel = useSelector(
-    (state: RootState) => state?.messengerAction?.isEdit,
+    (state: RootState) => state?.messengerAction?.isEdit
   );
 
   const handleToggleActive = (index: number) => {
     setActiveIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
   const generateId = (): string => {
@@ -58,7 +59,7 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
       image: data.selectedImage || "",
       members: selectedMembers,
       messages: [],
-      original_image: data.orginalImage || "",
+      original_image: data.orginalImage || ""
     };
 
     if (!isEditGroupAndChannel) {
@@ -89,14 +90,14 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
         (acc: number[], user: MemberTypes, index) => {
           if (
             groupProfile.members.some(
-              (member: MemberTypes) => member.id === user?.id,
+              (member: MemberTypes) => member.id === user?.id
             )
           ) {
             acc.push(index);
           }
           return acc;
         },
-        [],
+        []
       );
       setActiveIndexes(indexes);
     }
@@ -138,7 +139,8 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
                   <Avatar radius="md" src={item.image} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
+                  <span
+                    className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
                     {item?.name}
                   </span>
                   <span

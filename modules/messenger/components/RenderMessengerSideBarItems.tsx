@@ -1,63 +1,60 @@
-import { Edit } from "iconsax-react";
-import { Button, Input, Modal, ModalContent } from "@nextui-org/react";
+import { Edit, SearchNormal1 } from "iconsax-reactjs";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { SearchIcon } from "@nextui-org/shared-icons";
-import { useLocation } from "react-router-dom";
-import AddGroup from "../Add";
-import MembersList from "../Add/MembersList";
-import { PrivateChatItem as SinglePrivateChat } from "../ChatItem/PrivateChatItem";
-import { GroupItem as SingleGroups } from "../ChatItem/GroupItem";
-import { ChannelItem as SingleChannels } from "../ChatItem/ChannelItem";
-import { SaveMessageItem as SingleSaveMessage } from "../ChatItem/SaveMessageItem";
-import { useDarkMode } from "../../context/DarkMode";
-import CloseIconSvg from "../../icons/CloseIcon";
-import { GroupAndChannelTypes, PrivateChatTypes } from "../../types";
+import { RootState } from "@hrbox/core/redux/store";
+import { useLocation } from "@tanstack/react-router";
+import AddGroup from "@hrbox/modules/messenger/components/Add/AddGroup";
+import MembersList from "@hrbox/modules/messenger/components/Add/MembersList";
+import { PrivateChatItem as SinglePrivateChat } from "@hrbox/modules/messenger/components/ChatItem/PrivateChatItem";
+import { GroupItem as SingleGroups } from "@hrbox/modules/messenger/components/ChatItem/GroupItem";
+import { ChannelItem as SingleChannels } from "@hrbox/modules/messenger/components/ChatItem/ChannelItem";
+import { SaveMessageItem as SingleSaveMessage } from "@hrbox/modules/messenger/components/ChatItem/SaveMessageItem";
+import { GroupAndChannelTypes, PrivateChatTypes } from "@hrbox/modules/messenger/types";
+import { CloseIcon } from "@hrbox/uikit/icons";
+import { Button, Input, Modal, ModalContent } from "@heroui/react";
 
 type CombinedItem =
   | { type: "chat"; data: PrivateChatTypes }
   | { type: "group"; data: GroupAndChannelTypes }
   | { type: "channel"; data: GroupAndChannelTypes }
   | { type: "savedMessage"; data: GroupAndChannelTypes | PrivateChatTypes };
-const SideChatItems = () => {
+export const RenderMessengerSideBarItems = () => {
   const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
   const location = useLocation();
   const chats: PrivateChatTypes[] = useSelector(
-    (state: RootState) => state.privateChat?.privateChats,
+    (state: RootState) => state.privateChat?.privateChats
   );
   const groups: GroupAndChannelTypes[] = useSelector(
-    (state: RootState) => state.groups?.groups,
+    (state: RootState) => state.groups?.groups
   );
   const channels: GroupAndChannelTypes[] = useSelector(
-    (state: RootState) => state.channels?.channels,
+    (state: RootState) => state.channels?.channels
   );
   const [activePopover, setActivePopover] = useState<string>("");
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const [active, setActive] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
-  const { darkMode } = useDarkMode();
   const saveMessage = [
     {
       id: recipient?.user_id,
-      name: "Saved Messages",
-    },
+      name: "Saved Messages"
+    }
   ];
 
   const [selectedId, setSelectedId] = useState<string>("");
   const pinnedChats = chats.filter((chat: PrivateChatTypes) => chat?.pinned);
   const regularChats = chats.filter((chat: PrivateChatTypes) => !chat?.pinned);
   const pinnedGroups = groups.filter(
-    (group: GroupAndChannelTypes) => group?.pinned,
+    (group: GroupAndChannelTypes) => group?.pinned
   );
   const regularGroups = groups.filter(
-    (group: GroupAndChannelTypes) => !group?.pinned,
+    (group: GroupAndChannelTypes) => !group?.pinned
   );
   const pinnedChannels = channels.filter(
-    (channel: GroupAndChannelTypes) => channel?.pinned,
+    (channel: GroupAndChannelTypes) => channel?.pinned
   );
   const regularChannels = channels.filter(
-    (channel: GroupAndChannelTypes) => !channel?.pinned,
+    (channel: GroupAndChannelTypes) => !channel?.pinned
   );
   const sortedChats = [...pinnedChats, ...regularChats];
   const sortedGroups = [...pinnedGroups, ...regularGroups];
@@ -114,7 +111,7 @@ const SideChatItems = () => {
 
   const renderSaveMessages = (
     data: GroupAndChannelTypes | PrivateChatTypes,
-    index: number,
+    index: number
   ) => (
     <SingleSaveMessage
       key={index}
@@ -131,17 +128,17 @@ const SideChatItems = () => {
   const combinedItems = [
     ...sortedChats.map((chat: PrivateChatTypes) => ({
       type: "chat",
-      data: chat,
+      data: chat
     })),
     ...sortedGroups.map((group: GroupAndChannelTypes) => ({
       type: "group",
-      data: group,
+      data: group
     })),
     ...sortedChannels.map((channel: GroupAndChannelTypes) => ({
       type: "channel",
-      data: channel,
+      data: channel
     })),
-    ...saveMessage.map((msg) => ({ type: "savedMessage", data: msg })),
+    ...saveMessage.map((msg) => ({ type: "savedMessage", data: msg }))
   ];
 
   const filteredCombinedItems = combinedItems.filter((item) => {
@@ -153,20 +150,20 @@ const SideChatItems = () => {
     (chat: PrivateChatTypes) => {
       const chatName = chat?.name.toLowerCase();
       return chatName.includes(searchText.toLowerCase());
-    },
+    }
   );
   const filteredGroupChatItems = sortedGroups.filter(
     (group: GroupAndChannelTypes) => {
       const chatName = group?.name.toLowerCase();
       return chatName.includes(searchText.toLowerCase());
-    },
+    }
   );
 
   const filteredChannelChatItems = sortedChannels.filter(
     (channel: GroupAndChannelTypes) => {
       const chatName = channel?.name.toLowerCase();
       return chatName.includes(searchText.toLowerCase());
-    },
+    }
   );
   const renderCombinedItems = (item: CombinedItem, index: number) => {
     switch (item.type) {
@@ -188,7 +185,8 @@ const SideChatItems = () => {
   }, [searchText]);
 
   return (
-    <div className="shadow-[0px_1px_3px_0px_rgba(8,14,28,0.25)] w-[388px] overflow-y-auto h-full !rounded-bl-5 !rounded-tl-5 relative z-50 scrollbar-hidden dark:bg-info-1000 bg-white">
+    <div
+      className="shadow-[0px_1px_3px_0px_rgba(8,14,28,0.25)] w-[388px] overflow-y-auto h-full !rounded-bl-5 !rounded-tl-5 relative z-50 scrollbar-hidden dark:bg-info-1000 bg-white">
       <div className="flex flex-col gap-5 px-6 sticky top-0 right-0 z-20 pt-9 pb-4 dark:bg-info-1000 bg-white">
         <div className="flex justify-between">
           <div className="flex items-center gap-6">
@@ -216,12 +214,12 @@ const SideChatItems = () => {
             onOpenChange={handleOpenAddGroupModal}
           >
             <ModalContent>
-              {(onClose) =>
+              {(onClose: any) =>
                 location.pathname === "/messenger/private_chats" ||
                 location.pathname === "/messenger/home" ? (
                   <MembersList data={{ isOpenAddModal, setIsOpenAddModal }} />
                 ) : location.pathname === "/messenger/group" ||
-                  location.pathname === "/messenger/channel" ? (
+                location.pathname === "/messenger/channel" ? (
                   <AddGroup
                     data={{ isOpenAddModal, setIsOpenAddModal, onClose }}
                   />
@@ -236,7 +234,7 @@ const SideChatItems = () => {
               type="text"
               variant="bordered"
               onFocus={() => setActive(true)}
-              onChange={(e) => handleSearch(e.target.value)}
+              onChange={(e: any) => handleSearch(e.target.value)}
               placeholder="Type Something..."
               value={searchText}
               className={`h-10 border-none sha relative dark:text-white text-netural-400`}
@@ -244,23 +242,24 @@ const SideChatItems = () => {
                 inputWrapper: [
                   "group-data-[focus=true]:border-!netural-100",
                   "!rounded-4 !shadow-none",
-                  darkMode
-                    ? "border-1 border-netural-700"
-                    : "border-1 border-netural-100",
+                  "border-1 border-netural-100 dark:border-netural-700"
                 ],
                 input: [
-                  darkMode
-                    ? "placeholder:text-white"
-                    : "placeholder:text-netural-400",
-                ],
+                  "placeholder:text-netural-400 dark:placeholder:text-white"
+                ]
               }}
               startContent={
                 active ? (
                   <div
-                    className={`flex justify-center ease-in-out absolute left-3 right-0 top-2 bottom-0 items-start w-5 h-5 ${darkMode ? "border-netural-250" : "border-netural-400"} border-l-[0.4px]`}
+                    className="
+    flex justify-center ease-in-out absolute left-3 right-0 top-2 bottom-0
+    items-start w-5 h-5
+    border-l-[0.4px]
+    border-netural-400 dark:border-netural-250
+  "
                   ></div>
                 ) : (
-                  <SearchIcon
+                  <SearchNormal1
                     className={`w-6 h-6 dark:text-white text-netural-400`}
                   />
                 )
@@ -274,7 +273,7 @@ const SideChatItems = () => {
                       setSearchText("");
                     }}
                   >
-                    <CloseIconSvg />
+                    <CloseIcon />
                   </div>
                 )
               }
@@ -298,5 +297,3 @@ const SideChatItems = () => {
     </div>
   );
 };
-
-export default SideChatItems;

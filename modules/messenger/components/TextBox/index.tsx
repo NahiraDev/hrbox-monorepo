@@ -1,28 +1,22 @@
-import { Avatar, Input, Button } from "@nextui-org/react";
-import { Send2, CloseCircle, Play, Folder, ArrowLeft2 } from "iconsax-react";
+import { Avatar, Button, Input } from "@heroui/react";
+import { ArrowLeft2, CloseCircle, Folder, Play, Send2 } from "iconsax-reactjs";
 import React, { useEffect, useRef, useState } from "react";
-import HappyEmoji from "../../icons/HappyEmoji";
 import { Emoji } from "./types";
 import ShowMedia from "./ShowMedia";
 import SelectFile from "./SelectFile";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import {
-  closeReplyMessageAction,
-  setIsTyping,
-} from "../../redux/reducers/messageAction";
-import {
-  closeEmojiPicker,
-  openEmojiPicker,
-} from "../../redux/reducers/messengerAction";
+import { closeReplyMessageAction, setIsTyping } from "@hrbox/modules/redux/reducers/messageAction";
+import { closeEmojiPicker, openEmojiPicker } from "../../redux/reducers/messengerAction";
 import { MessageTypes } from "../../types";
+import HappyEmoji from "@hrbox/uikit/icons/HappyEmoji";
+import { AppDispatch, RootState } from "@hrbox/core/redux";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
 
 const TextBox = () => {
   const isOpenMessageAction = useSelector(
-    (state: RootState) => state.messageAction.reply,
+    (state: RootState) => state.messageAction.reply
   );
   const [showEmojiPickerMessage, setShowEmojiPickerMessage] =
     useState<boolean>(false);
@@ -48,10 +42,10 @@ const TextBox = () => {
   const [imageDetails, setImageDetails] = useState({
     size: "",
     date: "",
-    time: "",
+    time: ""
   });
   const isOpenUserInfoSideBar = useSelector(
-    (state: RootState) => state?.messengerAction?.isOpen,
+    (state: RootState) => state?.messengerAction?.isOpen
   );
   const profile = JSON.parse(localStorage.getItem("profile")!);
   const { socket } = useWebSocket();
@@ -70,7 +64,7 @@ const TextBox = () => {
               ? "group"
               : recipient?.chat_type === "group"
                 ? "channel"
-                : "save",
+                : "save"
       });
       socket.send(message);
     }
@@ -85,7 +79,7 @@ const TextBox = () => {
         is_typing: status,
         sender_id: profile?.user_id,
         recipient_id: recipient?.user_id,
-        chat_id: recipient?.chat_id,
+        chat_id: recipient?.chat_id
       });
       socket.send(typingMessage);
     }
@@ -155,11 +149,11 @@ const TextBox = () => {
       const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
       const formattedDate = new Date().toLocaleString("default", {
         month: "short",
-        day: "numeric",
+        day: "numeric"
       });
       const time = new Date().toLocaleTimeString([], {
         hour: "2-digit",
-        minute: "2-digit",
+        minute: "2-digit"
       });
       const mimeType = file.type;
 
@@ -187,7 +181,7 @@ const TextBox = () => {
       file: File,
       type: string,
       name: string,
-      size: string,
+      size: string
     ) => {
       reader.onloadend = () => {
         const base64 = reader.result as string;
@@ -206,7 +200,7 @@ const TextBox = () => {
           reply_type: messageAction.reply_message_type,
           reply_file_name: messageAction.reply_message_file_name,
           reply_message_id: messageAction.reply_message_id,
-          [type]: base64,
+          [type]: base64
         };
 
         if (socket) {
@@ -232,7 +226,7 @@ const TextBox = () => {
         imageData,
         determineFileType(imageData),
         imageData.name,
-        imageDetails.size,
+        imageDetails.size
       );
       setImageData(null);
     } else if (audioData) {
@@ -240,7 +234,7 @@ const TextBox = () => {
         audioData,
         determineFileType(audioData),
         audioData.name,
-        imageDetails.size,
+        imageDetails.size
       );
       setAudioData(null);
     } else if (fileData) {
@@ -248,7 +242,7 @@ const TextBox = () => {
         fileData,
         determineFileType(fileData),
         fileData.name,
-        imageDetails.size,
+        imageDetails.size
       );
       setFileData(null);
     }
@@ -277,7 +271,7 @@ const TextBox = () => {
       reply_data: messageAction.reply_message_data,
       reply_type: messageAction.reply_message_type,
       reply_file_name: messageAction.reply_message_file_name,
-      reply_message_id: messageAction.reply_message_id,
+      reply_message_id: messageAction.reply_message_id
     };
 
     if (socket) {
@@ -417,7 +411,7 @@ const TextBox = () => {
               resetStates,
               handleFileChange,
               handleFileClick,
-              popoverRef,
+              popoverRef
             }}
           />
           <Input
@@ -425,7 +419,7 @@ const TextBox = () => {
             placeholder="Type something..."
             value={messageTextBox}
             classNames={{
-              inputWrapper: "!bg-transparent !shadow-none",
+              inputWrapper: "!bg-transparent !shadow-none"
             }}
             onKeyDown={handleKeyDown}
             onChange={(value) => handleTyping(value)}
@@ -451,7 +445,7 @@ const TextBox = () => {
                 handleSendMedia,
                 handleEmojiClickCaption,
                 isImageFile,
-                popoverRef,
+                popoverRef
               }}
             />
           )}
@@ -505,7 +499,7 @@ const TextBox = () => {
               skinTonePosition="none"
               navPosition="bottom"
               style={{
-                background: "#000 !important",
+                background: "#000 !important"
               }}
               onEmojiSelect={handleEmojiClickMessage}
             />

@@ -1,33 +1,26 @@
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalContent,
-  useDisclosure,
-} from "@heroui/react";
+import { Button, Listbox, ListboxItem, Modal, ModalContent, useDisclosure } from "@heroui/react";
 import { ActionList } from "./ActionList";
 import { useDispatch, useSelector } from "react-redux";
-import AddGroup from "../Add";
+import AddGroup from "../Add/AddGroup";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
   handleClearHistoryChatApi,
   handleMuteChatApi,
   handlePinUnpinChatApi,
-  handleRemoveChatApi,
+  handleRemoveChatApi
 } from "@hrbox/modules/project-management/services/Messenger/PrivateChatService/apis";
 import {
   handleClearHistoryGroupApi,
   handleMuteGroupApi,
   handlePinGroupApi,
-  handleRemoveGroupApi,
+  handleRemoveGroupApi
 } from "../../services/Messenger/GroupChatService/apis";
 import {
   handleClearHistoryChannelsApi,
   handleMutedChannelApi,
   handlePinChannelApi,
-  handleRemoveChannelApi,
+  handleRemoveChannelApi
 } from "../../services/Messenger/ChannelChatService/apis";
 
 export const Action = ({ setShowAction, profile }: any) => {
@@ -36,7 +29,7 @@ export const Action = ({ setShowAction, profile }: any) => {
   const [action, setAction] = useState<any>();
   const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
   const privateChats = useSelector(
-    (state: RootState) => state?.privateChat?.privateChats,
+    (state: RootState) => state?.privateChat?.privateChats
   );
   const recipient = useSelector((state: RootState) => state.profile.profile);
 
@@ -56,7 +49,7 @@ export const Action = ({ setShowAction, profile }: any) => {
         if (actionType === "pin") {
           privateChatPayload = {
             ...privateChatPayload,
-            pinned: !profile.pinned,
+            pinned: !profile.pinned
           };
         } else if (actionType === "mute") {
           privateChatPayload = { ...privateChatPayload, muted: !profile.muted };
@@ -89,8 +82,8 @@ export const Action = ({ setShowAction, profile }: any) => {
           ? privateChatPayload
           : type === "group"
             ? groupPayload
-            : channelPayload,
-      ),
+            : channelPayload
+      )
     );
   };
 
@@ -101,7 +94,7 @@ export const Action = ({ setShowAction, profile }: any) => {
         ? handleClearHistoryChatApi
         : profile?.type === "group"
           ? handleClearHistoryGroupApi
-          : handleClearHistoryChannelsApi,
+          : handleClearHistoryChannelsApi
     );
     dispatch(setUserProfile({}));
     toast.dismiss();
@@ -114,7 +107,7 @@ export const Action = ({ setShowAction, profile }: any) => {
         ? handleRemoveChatApi
         : profile?.type === "group"
           ? handleRemoveGroupApi
-          : handleRemoveChannelApi,
+          : handleRemoveChannelApi
     );
     dispatch(setUserProfile({}));
     toast.dismiss();
@@ -150,8 +143,8 @@ export const Action = ({ setShowAction, profile }: any) => {
         autoClose: false,
         closeOnClick: false,
         draggable: false,
-        position: "top-center",
-      },
+        position: "top-center"
+      }
     );
   };
 
@@ -163,7 +156,7 @@ export const Action = ({ setShowAction, profile }: any) => {
         ? handleMuteChatApi
         : profile?.type === "group"
           ? handleMuteGroupApi
-          : handleMutedChannelApi,
+          : handleMutedChannelApi
     );
   };
 
@@ -175,7 +168,7 @@ export const Action = ({ setShowAction, profile }: any) => {
         ? handlePinUnpinChatApi
         : profile?.type === "group"
           ? handlePinGroupApi
-          : handlePinChannelApi,
+          : handlePinChannelApi
     );
   };
 
@@ -210,8 +203,8 @@ export const Action = ({ setShowAction, profile }: any) => {
         autoClose: false,
         closeOnClick: false,
         draggable: false,
-        position: "top-center",
-      },
+        position: "top-center"
+      }
     );
   };
 
@@ -251,7 +244,8 @@ export const Action = ({ setShowAction, profile }: any) => {
           >
             <div className="flex gap-4 group-hover:text-primary-400 group-hover:dark:text-gold">
               {item.icon}
-              <span className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
+              <span
+                className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
                 {item.text}
               </span>
             </div>
@@ -266,7 +260,7 @@ export const Action = ({ setShowAction, profile }: any) => {
                 setIsOpenAddModal,
                 isOpenAddModal,
                 onClose,
-                profile,
+                profile
               }}
             />
           )}
