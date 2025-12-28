@@ -17,3 +17,6 @@
   backdrop-filter: blur(4px);
   border: none;
 }
+.custom-scroll-deuties::-webkit-scrollbar-thumb{
+  padding-left: 12px !important;
+}

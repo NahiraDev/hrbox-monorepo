@@ -16,6 +16,7 @@ import {
 } from "@heroui/react";
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
+import clsx from "clsx";
 
 export enum SortDirection {
   ASC = "asc",
@@ -138,7 +139,7 @@ export interface AppTableProps<T = any> {
   variant?: "default" | "striped" | "bordered" | "minimal";
   styles?: TableStyleConfig;
   density?: "sm" | "md" | "lg";
-
+  HeaderColor?:string;
   loading?: boolean;
   error?: string;
   emptyMessage?: string | React.ReactNode;
@@ -188,6 +189,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
       variant = "default",
       styles = {},
+      HeaderColor,
       density = "md",
 
       loading = false,
@@ -601,6 +603,17 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       );
     }
 
+    const getContainerVariantClassName = (): string => {
+      switch (variant) {
+        case "default":
+          return "!border-none  !shadow-none !rounded-none";
+        case "bordered":
+          "border-primary border dark:border-[#04425c66] shadow-light-tight/1 rounded-2xl";
+        default:
+          return "";
+      }
+    };
+
     // ============================================
     // HEADER COLUMNS BUILDING
     // ============================================
@@ -649,20 +662,27 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     return (
       <div
         ref={ref}
-        className={`w-full h-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}
+        className={`w-full h-full bg-surface-50! ${getContainerVariantClassName()}    ${styles.containerClassName || ""}`}
       >
         <Table
           aria-label="Data table"
           className={`${styles.tableClassName} h-full`}
           classNames={{
             base: "!h-full !w-full ",
-            wrapper: " h-full !w-full bg-[#DCF0F940] dark:bg-[#04425C60] dark:border dark:border-primary",
+            wrapper: clsx(
+              "h-full !w-full",
+              variant === "bordered"
+                ? "dark:border dark:bg-[#04425C60] bg-[#DCF0F940] dark:border-primary"
+                : variant === "default"
+                  ? "!border-none !bg-transparent dark:bg-transparent !dark:border-none !shadow-none !dark:shadow-none !rounded-none p-0 "
+                  : ""
+            ),
             table: "!w-full",
             tbody: "!w-full",
             td: "py-3 px-2",
-            thead: "!w-full ",
+            thead: "!w-full  ",
             tr: "rounded-6 !w-full",
-            th: "bg-primary-400",
+            th: HeaderColor || "bg-primary-400",
           }}
         >
           <TableHeader className={styles.headerClassName}>
@@ -755,15 +775,17 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           )}
 
         {/* Pagination*/}
-        <div className="mt-4 flex justify-end px-4">
-          <AppPagination
-            meta={{
-              page: 1,
-              totalPages: 10,
-            }}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        {hasPagination && (
+          <div className="mt-4 flex justify-end px-4">
+            <AppPagination
+              meta={{
+                page: 1,
+                totalPages: 10,
+              }}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
       </div>
     );
   }
