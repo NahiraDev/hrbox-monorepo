@@ -1,6 +1,8 @@
 # HRBox Monorepo
+
 [![CI Status](https://hrbox.ir/wp-content/uploads/2024/12/hrbox-typoW40x.webp)](https://github.com/your-org/hrbox-monorepo/actions)
-> A comprehensive Human Resources management system built with modern React technologies, Turborepo, and professional development practices
+> A comprehensive Human Resources management system built with modern React technologies, Turborepo, and professional
+> development practices
 
 [![CI Status](https://img.shields.io/badge/CI-passing-brightgreen)](https://github.com/your-org/hrbox-monorepo/actions)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue)](https://www.typescriptlang.org/)
@@ -31,13 +33,18 @@
 
 ## 🎯 Overview
 
-HRBox is a modern, scalable Human Resources management system designed to streamline HR operations. This monorepo contains modular packages for different HR functionalities, shared utilities, and configuration packages, all built with industry best practices and modern development workflows.
+HRBox is a modern, scalable Human Resources management system designed to streamline HR operations. This monorepo
+contains modular packages for different HR functionalities, shared utilities, and configuration packages, all built with
+industry best practices and modern development workflows.
 
 ### Why This Architecture?
 
-A properly managed monorepo offers atomic commits, centralized dependency management, enhanced visibility, and standardized tooling across projects. Monorepos can unlock significant productivity gains with proper infrastructure and disciplined workflows.
+A properly managed monorepo offers atomic commits, centralized dependency management, enhanced visibility, and
+standardized tooling across projects. Monorepos can unlock significant productivity gains with proper infrastructure and
+disciplined workflows.
 
 **Key Benefits:**
+
 - **🚀 High Performance**: Turborepo with smart caching and parallel execution
 - **📦 Modular Design**: Independent, reusable modules for different HR features
 - **🔄 Shared Dependencies**: Consistent versions and utilities across all applications
@@ -49,6 +56,7 @@ A properly managed monorepo offers atomic commits, centralized dependency manage
 ## ✨ Features
 
 ### 🏢 Core HR Modules
+
 - **👥 Employee Management** - Complete employee lifecycle management
 - **🔗 HR Link** - Company relationships and partnership management
 - **📊 Analytics Dashboard** - HR metrics and reporting
@@ -56,6 +64,7 @@ A properly managed monorepo offers atomic commits, centralized dependency manage
 - **💼 Recruitment** - Job postings and candidate management
 
 ### 🛠 Development Experience
+
 - **⚡ Lightning Fast Builds** - Turborepo with intelligent caching
 - **🔍 Comprehensive Testing** - Unit, integration, and visual testing
 - **📖 Living Documentation** - Storybook for component development
@@ -64,6 +73,7 @@ A properly managed monorepo offers atomic commits, centralized dependency manage
 - **🔄 CI/CD Ready** - GitHub Actions with automated workflows
 
 ### 🎨 UI/UX Features
+
 - **🌓 Dark/Light Mode** - Comprehensive theme support
 - **🌐 Internationalization** - Multi-language support with Persian calendar
 - **📱 Responsive Design** - Mobile-first approach with Tailwind CSS
@@ -108,7 +118,7 @@ hrbox-monorepo/
 │       │   ├── hooks/            # Module hooks
 │       │   ├── services/         # Module services
 │       │   ├── types/            # Module type definitions
-│       │   └── index.ts          # Module entry point
+│       │   └── index.tsx          # Module entry point
 │       ├── app/                  # Application configuration
 │       ├── dev/                  # Development environment
 │       │   ├── App.tsx           # Dev playground
@@ -141,10 +151,10 @@ hrbox-monorepo/
 
 ### Workspace Packages Overview
 
-| Package | Description | Type | Dependencies |
-|---------|-------------|------|--------------|
-| `core` | Core business logic, utilities, shared components, and services | Library | React, TypeScript |
-| `modules/hrlink` | HR Link Management - companies, offers, events, partnerships | Application | core, React Router |
+| Package          | Description                                                     | Type        | Dependencies       |
+|------------------|-----------------------------------------------------------------|-------------|--------------------|
+| `core`           | Core business logic, utilities, shared components, and services | Library     | React, TypeScript  |
+| `modules/hrlink` | HR Link Management - companies, offers, events, partnerships    | Application | core, React Router |
 
 ### Path Mapping & Aliases
 
@@ -163,12 +173,14 @@ import { api } from '@core/api/client'
 ```
 
 **Available Global Aliases:**
+
 - `@core/*` → `core/*` - Core utilities, components, and business logic
 - `@module/*` → `modules/*` - Feature modules and specialized components
 
 ## 🛠 Tech Stack
 
 ### 🎨 Frontend & UI
+
 - **React 18.3.1** - UI library with concurrent features, Suspense, and automatic batching
 - **TypeScript 5.9.2** - Type-safe JavaScript with latest language features
 - **Tailwind CSS 4.1.11** - Utility-first CSS framework with JIT compilation
@@ -177,12 +189,14 @@ import { api } from '@core/api/client'
 - **React Router DOM 7.8.0** - Declarative routing with modern data APIs
 
 ### 🗃 State Management & Data
+
 - **Redux Toolkit 2.8.2** - Modern Redux with RTK Query for data fetching
 - **React Redux 9.2.0** - Official React bindings for Redux
 - **Redux Persist 6.0.0** - State persistence across browser sessions
 - **React Query / TanStack Query** - Server state management and caching
 
 ### 📊 Data Visualization & Charts
+
 - **Chart.js 4.5.0** - Flexible charting library with extensive customization
 - **React ChartJS 2 5.3.0** - React wrapper for Chart.js with TypeScript support
 - **ApexCharts 5.3.2** - Modern charting library with animations and interactions
@@ -191,6 +205,7 @@ import { api } from '@core/api/client'
 - **React Circular Progressbar** - Customizable circular progress indicators
 
 ### 🛠 Development & Build Tools
+
 - **Turborepo 2.5.5** - High-performance build system for monorepos
 - **Vite 7.1.1** - Fast build tool and development server with HMR
 - **pnpm 10.14.0** - Fast, disk space efficient package manager
@@ -200,6 +215,7 @@ import { api } from '@core/api/client'
 - **lint-staged 16.1.5** - Run linters on staged files for faster commits
 
 ### 🧪 Testing & Quality
+
 - **Jest** - JavaScript testing framework with extensive mocking capabilities
 - **Testing Library** - Simple and complete testing utilities for React components
 - **Vitest** - Vite-native test runner (alternative to Jest)
@@ -208,17 +224,20 @@ import { api } from '@core/api/client'
 - **Chromatic** - Visual testing and review tool for Storybook
 
 ### 📝 Form Management & Validation
+
 - **Formik 2.4.6** - Build forms in React without tears
 - **Yup 1.7.0** - JavaScript schema builder for value parsing and validation
 - **React Hook Form** - Performant, flexible forms with easy validation
 
 ### 🌍 Internationalization & Localization
+
 - **react-i18next 15.6.1** - Internationalization framework for React
 - **i18next 25.3.2** - Internationalization framework with plugins
 - **date-fns 4.1.0** - Modern JavaScript date utility library
 - **moment-jalaali 0.10.4** - Persian calendar support for Iranian users
 
 ### 🎨 UI Enhancements & Interactions
+
 - **React Toastify 11.0.5** - Notification system with customizable toasts
 - **Lottie React 2.4.1** - Render After Effects animations natively
 - **Embla Carousel React 8.6.0** - Extensible carousel library
@@ -314,7 +333,8 @@ npm update -g pnpm
 
 ### Turborepo Commands
 
-Turborepo provides high-performance build capabilities with smart caching and is particularly effective when supported by proper tooling and workflow discipline.
+Turborepo provides high-performance build capabilities with smart caching and is particularly effective when supported
+by proper tooling and workflow discipline.
 
 ```bash
 # 🏃‍♂️ Run tasks across all packages
@@ -347,6 +367,7 @@ turbo prune                                # Clear Turborepo cache
 The monorepo uses TypeScript path mapping for clean imports. If experiencing import errors:
 
 #### 1. Root TypeScript Configuration
+
 ```json
 // tsconfig.json
 {
@@ -363,26 +384,28 @@ The monorepo uses TypeScript path mapping for clean imports. If experiencing imp
 ```
 
 #### 2. Vite Configuration
+
 ```typescript
 // vite.config.ts or module-specific vite config
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tsconfigPaths({ root: '../..' }) // Points to monorepo root
-  ],
-  resolve: {
-    alias: {
-      '@core': path.resolve(__dirname, './core'),
-      '@module': path.resolve(__dirname, './modules'),
+    plugins: [
+        react(),
+        tsconfigPaths({root: '../..'}) // Points to monorepo root
+    ],
+    resolve: {
+        alias: {
+            '@core': path.resolve(__dirname, './core'),
+            '@module': path.resolve(__dirname, './modules'),
+        },
     },
-  },
 });
 ```
 
 #### 3. IDE Configuration (VSCode)
+
 1. Press `Ctrl+Shift+P` → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
 2. Press `Ctrl+Shift+P` → "TypeScript: Restart TS Server"
 3. Ensure you're opening the root directory in VSCode, not a subdirectory
@@ -390,6 +413,7 @@ export default defineConfig({
 ### Development Workflow
 
 #### Starting Development
+
 ```bash
 # Full development environment
 pnpm dev                    # All modules with hot reloading
@@ -403,6 +427,7 @@ PORT=3001 pnpm dev:hrlink  # Custom port
 ```
 
 #### Code Quality Workflow
+
 ```bash
 # Before committing (runs automatically via Husky)
 pnpm lint:fix              # Fix linting issues
@@ -418,6 +443,7 @@ pnpm validate            # Full quality check pipeline
 ### Troubleshooting Development Issues
 
 #### Import/Path Resolution Errors
+
 ```bash
 # 1. Clear TypeScript cache
 rm -rf node_modules/.cache/typescript
@@ -431,6 +457,7 @@ pnpm type-check
 ```
 
 #### Build/Cache Issues
+
 ```bash
 # Clear all caches and rebuild
 pnpm clean                # Clean build artifacts
@@ -441,6 +468,7 @@ pnpm build              # Fresh build
 ```
 
 #### Development Server Issues
+
 ```bash
 # Port conflicts
 lsof -ti:3000 | xargs kill -9  # Kill processes on port 3000
@@ -455,6 +483,7 @@ pnpm install --frozen-lockfile # Ensure consistent dependencies
 The project maintains professional code quality through automated tools:
 
 #### ESLint Configuration
+
 - **TypeScript-first** - Strict type checking and modern JavaScript features
 - **React best practices** - Hooks rules, JSX optimization, accessibility
 - **Import organization** - Automatic sorting and grouping
@@ -463,12 +492,14 @@ The project maintains professional code quality through automated tools:
 - **Performance optimizations** - React performance anti-patterns detection
 
 #### Prettier Configuration
+
 - **Consistent formatting** - Unified style across all file types
 - **Team standards** - Configured for team collaboration
 - **IDE integration** - Works with all major editors
 - **File-specific rules** - Different rules for JSON, Markdown, CSS
 
 #### Pre-commit Quality Gates
+
 Every commit is automatically validated through Husky hooks:
 
 ```bash
@@ -485,17 +516,17 @@ Every commit is automatically validated through Husky hooks:
 
 ### Root Level Scripts
 
-| Script | Description | Turborepo Command | Use Case |
-|--------|-------------|-------------------|----------|
-| `pnpm dev` | Start development servers for all packages | `turbo run dev` | Full development |
-| `pnpm build` | Build all packages in dependency order | `turbo run build` | Production builds |
-| `pnpm lint` | Run ESLint across all packages | `turbo run lint` | Code quality check |
-| `pnpm lint:fix` | Fix linting issues automatically | `turbo run lint:fix` | Code cleanup |
-| `pnpm test` | Run tests across all packages | `turbo run test` | Quality assurance |
-| `pnpm test:coverage` | Run tests with coverage reports | `turbo run test:coverage` | Coverage analysis |
-| `pnpm type-check` | TypeScript type checking | `turbo run type-check` | Type validation |
-| `pnpm clean` | Clean build artifacts and caches | - | Fresh start |
-| `pnpm validate` | Full quality validation pipeline | - | CI/CD preparation |
+| Script               | Description                                | Turborepo Command         | Use Case           |
+|----------------------|--------------------------------------------|---------------------------|--------------------|
+| `pnpm dev`           | Start development servers for all packages | `turbo run dev`           | Full development   |
+| `pnpm build`         | Build all packages in dependency order     | `turbo run build`         | Production builds  |
+| `pnpm lint`          | Run ESLint across all packages             | `turbo run lint`          | Code quality check |
+| `pnpm lint:fix`      | Fix linting issues automatically           | `turbo run lint:fix`      | Code cleanup       |
+| `pnpm test`          | Run tests across all packages              | `turbo run test`          | Quality assurance  |
+| `pnpm test:coverage` | Run tests with coverage reports            | `turbo run test:coverage` | Coverage analysis  |
+| `pnpm type-check`    | TypeScript type checking                   | `turbo run type-check`    | Type validation    |
+| `pnpm clean`         | Clean build artifacts and caches           | -                         | Fresh start        |
+| `pnpm validate`      | Full quality validation pipeline           | -                         | CI/CD preparation  |
 
 ### Module-Specific Scripts
 
@@ -622,7 +653,7 @@ export default defineConfig({
   ...baseConfig,
   build: {
     lib: {
-      entry: 'src/index.ts',
+      entry: 'src/index.tsx',
       name: 'NewModule',
       formats: ['es']
     }
@@ -641,20 +672,20 @@ modules/your-module/
 │   │   │   ├── Button.tsx
 │   │   │   ├── Button.test.tsx
 │   │   │   ├── Button.stories.tsx
-│   │   │   └── index.ts
-│   │   └── index.ts               # Component exports
+│   │   │   └── index.tsx
+│   │   └── index.tsx               # Component exports
 │   ├── 📁 features/               # Feature-specific logic
 │   │   ├── 📁 feature-name/
 │   │   │   ├── 📁 components/     # Feature components
 │   │   │   ├── 📁 hooks/          # Feature-specific hooks
 │   │   │   ├── 📁 services/       # API services
 │   │   │   ├── 📁 types/          # TypeScript definitions
-│   │   │   └── index.ts           # Feature exports
+│   │   │   └── index.tsx           # Feature exports
 │   ├── 📁 hooks/                  # Shared module hooks
 │   ├── 📁 services/               # Module-level services
 │   ├── 📁 types/                  # TypeScript type definitions
 │   ├── 📁 utils/                  # Utility functions
-│   └── 📄 index.ts                # Main module export
+│   └── 📄 index.tsx                # Main module export
 ├── 📁 dev/                        # Development environment
 │   ├── 📄 App.tsx                 # Development playground
 │   ├── 📄 main.tsx                # Development entry point
@@ -675,6 +706,7 @@ modules/your-module/
 ### Module Development Workflow
 
 #### 1. Standalone Development
+
 Each module can be developed independently:
 
 ```bash
@@ -691,84 +723,101 @@ pnpm storybook             # Starts on http://localhost:6006
 ```
 
 #### 2. Development Environment Setup
+
 ```typescript
 // dev/App.tsx - Module playground
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { ThemeProvider } from '@core/providers';
-import { Layout } from '@hrbox/uikit/components';
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import {ThemeProvider} from '@core/providers';
+import {Layout} from '@hrbox/uikit/components';
 
 // Import your module components
 import HomePage from '../src/pages/HomePage';
 import FeaturePage from '../src/pages/your-feature/pages/FeaturePage';
 
 export default function App() {
-  return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Layout>
-          {/* Development navigation */}
-          <nav className="bg-gray-100 p-4 mb-8">
-            <div className="container mx-auto">
-              <h1 className="text-2xl font-bold mb-4">Your Module - Development</h1>
-              <div className="space-x-4">
-                <Link to="/" className="text-blue-600 hover:underline">Home</Link>
-                <Link to="/feature" className="text-blue-600 hover:underline">Feature</Link>
-              </div>
-            </div>
-          </nav>
+    return (
+        <ThemeProvider>
+            <BrowserRouter>
+                <Layout>
+                    {/* Development navigation */}
+        < nav
+    className = "bg-gray-100 p-4 mb-8" >
+    <div className = "container mx-auto" >
+    <h1 className = "text-2xl font-bold mb-4" > Your
+    Module - Development < /h1>
+    < div
+    className = "space-x-4" >
+    <Link to = "/"
+    className = "text-blue-600 hover:underline" > Home < /Link>
+        < Link
+    to = "/feature"
+    className = "text-blue-600 hover:underline" > Feature < /Link>
+        < /div>
+        < /div>
+        < /nav>
 
-          {/* Module routes */}
-          <main className="container mx-auto">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/feature" element={<FeaturePage />} />
-            </Routes>
-          </main>
-        </Layout>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+    {/* Module routes */
+    }
+    <main className = "container mx-auto" >
+    <Routes>
+        <Route path = "/"
+    element = { < HomePage / >
+}
+    />
+    < Route
+    path = "/feature"
+    element = { < FeaturePage / >
+}
+    />
+    < /Routes>
+    < /main>
+    < /Layout>
+    < /BrowserRouter>
+    < /ThemeProvider>
+)
+    ;
 }
 ```
 
 #### 3. Component Development with Storybook
+
 ```typescript
 // stories/Button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../src/components/Button';
+import type {Meta, StoryObj} from '@storybook/react';
+import {Button} from '../src/components/Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'YourModule/Button',
-  component: Button,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'danger'],
+    title: 'YourModule/Button',
+    component: Button,
+    parameters: {
+        layout: 'centered',
     },
-  },
+    tags: ['autodocs'],
+    argTypes: {
+        variant: {
+            control: {type: 'select'},
+            options: ['primary', 'secondary', 'danger'],
+        },
+    },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {
-    variant: 'primary',
-    children: 'Button',
-  },
+    args: {
+        variant: 'primary',
+        children: 'Button',
+    },
 };
 
 export const WithIcon: Story = {
-  args: {
-    variant: 'primary',
-    children: 'Click me',
-    icon: 'arrow-right',
-  },
+    args: {
+        variant: 'primary',
+        children: 'Click me',
+        icon: 'arrow-right',
+    },
 };
 ```
 
@@ -851,34 +900,39 @@ pnpm test:a11y                    # Accessibility test suite
 ### Writing Tests
 
 #### Component Testing Example
+
 ```typescript
 // src/components/Button/Button.test.tsx
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Button } from './Button';
+import {render, screen, fireEvent} from '@testing-library/react';
+import {Button} from './Button';
 
 describe('Button Component', () => {
-  it('renders with correct text', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
-  });
+    it('renders with correct text', () => {
+        render(<Button>Click
+        me < /Button>);
+        expect(screen.getByRole('button', {name: /click me/i})).toBeInTheDocument();
+    });
 
-  it('handles click events', () => {
-    const handleClick = jest.fn();
-    render(<Button onClick={handleClick}>Click me</Button>);
-    
-    fireEvent.click(screen.getByRole('button'));
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
+    it('handles click events', () => {
+        const handleClick = jest.fn();
+        render(<Button onClick = {handleClick} > Click
+        me < /Button>);
 
-  it('applies correct variant styles', () => {
-    render(<Button variant="primary">Primary Button</Button>);
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-blue-600');
-  });
+        fireEvent.click(screen.getByRole('button'));
+        expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('applies correct variant styles', () => {
+        render(<Button variant = "primary" > Primary
+        Button < /Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveClass('bg-blue-600');
+    });
 });
 ```
 
 #### Hook Testing Example
+
 ```typescript
 // src/hooks/useApi/useApi.test.ts
 import { renderHook, waitFor } from '@testing-library/react';
@@ -908,7 +962,7 @@ We maintain high code quality with coverage thresholds:
     "coverageThreshold": {
       "global": {
         "branches": 80,
-        "functions": 80, 
+        "functions": 80,
         "lines": 80,
         "statements": 80
       },
@@ -928,6 +982,7 @@ We maintain high code quality with coverage thresholds:
 Storybook serves as our living documentation system for UI components:
 
 #### Getting Started with Storybook
+
 ```bash
 # Start Storybook development server
 pnpm storybook                     # Runs on http://localhost:6006
@@ -940,51 +995,52 @@ pnpm chromatic                    # Deploy to Chromatic for review
 ```
 
 #### Creating Stories
+
 ```typescript
 // stories/YourComponent.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react';
-import { YourComponent } from '../src/components/YourComponent';
+import type {Meta, StoryObj} from '@storybook/react';
+import {YourComponent} from '../src/components/YourComponent';
 
 const meta: Meta<typeof YourComponent> = {
-  title: 'Components/YourComponent',
-  component: YourComponent,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'A versatile component for displaying content with various styles.',
-      },
+    title: 'Components/YourComponent',
+    component: YourComponent,
+    parameters: {
+        layout: 'centered',
+        docs: {
+            description: {
+                component: 'A versatile component for displaying content with various styles.',
+            },
+        },
     },
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary'],
-      description: 'Visual style variant',
+    tags: ['autodocs'],
+    argTypes: {
+        variant: {
+            control: 'select',
+            options: ['primary', 'secondary'],
+            description: 'Visual style variant',
+        },
     },
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    variant: 'primary',
-    children: 'Hello World',
-  },
+    args: {
+        variant: 'primary',
+        children: 'Hello World',
+    },
 };
 
 export const Interactive: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Click me!',
-    onClick: () => alert('Clicked!'),
-  },
-  play: async ({ canvasElement }) => {
-    // Interactive testing with Storybook interactions
-  },
+    args: {
+        variant: 'secondary',
+        children: 'Click me!',
+        onClick: () => alert('Clicked!'),
+    },
+    play: async ({canvasElement}) => {
+        // Interactive testing with Storybook interactions
+    },
 };
 ```
 
@@ -1014,6 +1070,7 @@ All components should include:
  *   Click me!
  * </Button>
  * ```
+
 */
 export interface ButtonProps {
 /** Visual style variant */
@@ -1025,6 +1082,7 @@ onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 /** Button content */
 children: ReactNode;
 }
+
 ```
 
 ## 🔧 Build System
@@ -1155,6 +1213,7 @@ CMD ["node", "dist/server.js"]
 ### Deployment Options
 
 #### Vercel Deployment
+
 ```bash
 # Install Vercel CLI
 pnpm add -D vercel
@@ -1164,6 +1223,7 @@ pnpm deploy:vercel
 ```
 
 #### AWS Deployment
+
 ```bash
 # Using AWS CDK
 pnpm add -D aws-cdk-lib constructs
@@ -1171,6 +1231,7 @@ pnpm deploy:aws
 ```
 
 #### Kubernetes Deployment
+
 ```yaml
 # k8s/deployment.yaml
 apiVersion: apps/v1
@@ -1201,6 +1262,7 @@ spec:
 Every code change goes through comprehensive quality checks:
 
 #### Pre-commit Hooks (via Husky)
+
 - ✅ **ESLint** - Code quality and consistency
 - ✅ **Prettier** - Code formatting
 - ✅ **Type checking** - TypeScript validation
@@ -1208,6 +1270,7 @@ Every code change goes through comprehensive quality checks:
 - ✅ **Commit message validation** - Conventional commit format
 
 #### Pre-push Hooks
+
 - ✅ **Full test suite** - Unit and integration tests
 - ✅ **Build verification** - Ensure all packages build successfully
 - ✅ **Type checking** - Complete TypeScript validation
@@ -1318,10 +1381,11 @@ We welcome contributions from the community! Please follow our contribution guid
    ```
 
 4. **Make your changes**
-  - Follow existing code style and patterns
-  - Add tests for new functionality
-  - Update documentation as needed
-  - Ensure TypeScript types are properly defined
+
+- Follow existing code style and patterns
+- Add tests for new functionality
+- Update documentation as needed
+- Ensure TypeScript types are properly defined
 
 5. **Test your changes**
    ```bash
@@ -1347,24 +1411,28 @@ We welcome contributions from the community! Please follow our contribution guid
 ### Code Style Guidelines
 
 #### TypeScript
+
 - Use strict type checking and proper type definitions
 - Prefer `interface` over `type` for object shapes
 - Use generic types where appropriate
 - Document complex types with JSDoc comments
 
 #### React
+
 - Use functional components with hooks
 - Implement proper prop typing with TypeScript
 - Follow React best practices (keys, state immutability, etc.)
 - Use custom hooks for reusable logic
 
 #### CSS/Styling
+
 - Use Tailwind CSS utility classes
 - Follow mobile-first responsive design
 - Maintain design system consistency
 - Document component variations in Storybook
 
 #### File Organization
+
 - Use clear, descriptive file and directory names
 - Group related functionality together
 - Follow established module structure
@@ -1386,6 +1454,7 @@ chore(deps): update dependencies to latest versions
 ```
 
 **Types:**
+
 - `feat` - New features
 - `fix` - Bug fixes
 - `docs` - Documentation changes
@@ -1399,6 +1468,7 @@ chore(deps): update dependencies to latest versions
 ### Pull Request Guidelines
 
 #### Before Submitting
+
 - [ ] All tests pass (`pnpm test`)
 - [ ] Code follows style guidelines (`pnpm lint`)
 - [ ] TypeScript types are correct (`pnpm type-check`)
@@ -1407,6 +1477,7 @@ chore(deps): update dependencies to latest versions
 - [ ] Storybook stories added for new components
 
 #### PR Template
+
 ```markdown
 ## Description
 Brief description of changes
@@ -1440,24 +1511,28 @@ Closes #123
 ## 🔮 Roadmap & Future Enhancements
 
 ### Current Development (Q1 2025)
+
 - [ ] **Comprehensive Test Suite** - Jest + Testing Library + Playwright
 - [ ] **Storybook Integration** - Component documentation and visual testing
 - [ ] **Docker Containerization** - Development and production containers
 - [ ] **CI/CD Pipeline** - GitHub Actions with automated testing and deployment
 
 ### Upcoming Features (Q2 2025)
+
 - [ ] **Design System** - Comprehensive component library with design tokens
 - [ ] **Micro-frontend Architecture** - Module federation for runtime composition
 - [ ] **Performance Monitoring** - Real-time performance metrics and optimization
 - [ ] **Advanced Analytics** - Data visualization and reporting enhancements
 
 ### Future Considerations (H2 2025)
+
 - [ ] **PWA Support** - Progressive Web App capabilities with offline functionality
 - [ ] **Mobile App** - React Native modules for mobile HR management
 - [ ] **AI Integration** - ML-powered HR insights and automation
 - [ ] **Advanced Security** - Enhanced authentication and data protection
 
 ### Technical Improvements
+
 - [ ] **Bundle Optimization** - Advanced code splitting and tree shaking
 - [ ] **Accessibility Enhancement** - WCAG 2.1 AAA compliance
 - [ ] **Internationalization** - Extended language support and RTL layouts
@@ -1466,6 +1541,7 @@ Closes #123
 ## 📚 Resources
 
 ### Documentation
+
 - [Turborepo Documentation](https://turbo.build/repo/docs) - Build system optimization
 - [pnpm Workspaces](https://pnpm.io/workspaces) - Package management
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/) - Language reference
@@ -1473,18 +1549,21 @@ Closes #123
 - [Tailwind CSS](https://tailwindcss.com/docs) - Styling framework
 
 ### Development Tools
+
 - [ESLint Rules](https://eslint.org/docs/rules/) - Code quality rules
 - [Prettier Configuration](https://prettier.io/docs/en/configuration.html) - Code formatting
 - [Jest Documentation](https://jestjs.io/docs/getting-started) - Testing framework
 - [Storybook Guides](https://storybook.js.org/docs/react/get-started/introduction) - Component development
 
 ### Community & Support
+
 - [GitHub Issues](https://github.com/your-org/hrbox-monorepo/issues) - Bug reports and feature requests
 - [GitHub Discussions](https://github.com/your-org/hrbox-monorepo/discussions) - Community discussions
 - [Contributing Guide](CONTRIBUTING.md) - Detailed contribution guidelines
 - [Code of Conduct](CODE_OF_CONDUCT.md) - Community standards
 
 ### Learning Resources
+
 - [Monorepo Best Practices](https://monorepo.tools/) - Comprehensive monorepo guide
 - [React Performance](https://react.dev/learn/render-and-commit) - React optimization techniques
 - [TypeScript Best Practices](https://typescript-eslint.io/docs/) - TypeScript guidelines
@@ -1495,6 +1574,7 @@ Closes #123
 ### Troubleshooting Common Issues
 
 #### 1. Installation Problems
+
 ```bash
 # Clear all caches and reinstall
 rm -rf node_modules pnpm-lock.yaml .turbo
@@ -1506,6 +1586,7 @@ npm install -g pnpm@10.14.0
 ```
 
 #### 2. Build Failures
+
 ```bash
 # Clear build caches
 pnpm clean
@@ -1516,6 +1597,7 @@ pnpm build --force
 ```
 
 #### 3. Import Resolution Issues
+
 ```bash
 # Restart TypeScript server in VS Code
 # Ctrl+Shift+P → "TypeScript: Restart TS Server"
@@ -1525,6 +1607,7 @@ pnpm build --force
 ```
 
 #### 4. Development Server Issues
+
 ```bash
 # Kill processes on conflicting ports
 lsof -ti:3000 | xargs kill -9
@@ -1539,6 +1622,7 @@ pnpm dev
 ### Performance Optimization Tips
 
 #### Bundle Size Optimization
+
 ```bash
 # Analyze bundle sizes
 pnpm analyze:bundle
@@ -1551,6 +1635,7 @@ const LazyComponent = lazy(() => import('./HeavyComponent'));
 ```
 
 #### Development Speed
+
 ```bash
 # Use Turbo's parallel execution
 turbo run dev --parallel
@@ -1584,11 +1669,13 @@ pnpm update --latest
 We track key performance metrics to ensure optimal user experience:
 
 #### Core Web Vitals
+
 - **Largest Contentful Paint (LCP)** - Loading performance
 - **First Input Delay (FID)** - Interactivity
 - **Cumulative Layout Shift (CLS)** - Visual stability
 
 #### Bundle Analysis
+
 ```bash
 # Generate bundle analysis
 pnpm build:analyze
@@ -1598,7 +1685,9 @@ pnpm build:analyze
 ```
 
 #### Performance Budget
+
 We maintain strict performance budgets:
+
 - **Initial Bundle Size**: < 250KB gzipped
 - **Module Bundle Size**: < 100KB gzipped
 - **Image Assets**: < 500KB optimized
@@ -1625,6 +1714,7 @@ Sentry.init({
 ## 🔐 Security Considerations
 
 ### Dependency Security
+
 ```bash
 # Regular security audits
 pnpm audit --audit-level moderate
@@ -1637,6 +1727,7 @@ npx license-checker --summary
 ```
 
 ### Code Security
+
 - **Input Validation** - All user inputs validated
 - **XSS Prevention** - Proper data sanitization
 - **CSRF Protection** - Token-based protection
@@ -1644,6 +1735,7 @@ npx license-checker --summary
 - **Authentication** - Secure authentication flows
 
 ### Environment Security
+
 ```bash
 # Example .env structure
 REACT_APP_API_URL=https://api.example.com
@@ -1656,12 +1748,14 @@ REACT_APP_ENV=production
 ## 📊 Metrics & KPIs
 
 ### Development Metrics
+
 - **Build Time** - Average build duration < 2 minutes
 - **Test Coverage** - Maintain >80% coverage
 - **Code Quality** - ESLint warnings < 10
 - **Bundle Size** - Stay within performance budget
 
 ### User Experience Metrics
+
 - **Loading Time** - Pages load < 3 seconds
 - **Time to Interactive** - Interactive < 5 seconds
 - **Accessibility Score** - Lighthouse a11y > 95
@@ -1670,6 +1764,7 @@ REACT_APP_ENV=production
 ## 🎯 Best Practices Summary
 
 ### Development Workflow
+
 1. **Branch Strategy** - Feature branches from develop
 2. **Code Review** - Required before merging
 3. **Automated Testing** - All code must have tests
@@ -1677,6 +1772,7 @@ REACT_APP_ENV=production
 5. **Performance** - Consider performance impact
 
 ### Code Organization
+
 1. **Single Responsibility** - Components have clear purpose
 2. **Reusability** - Build reusable components
 3. **Type Safety** - Comprehensive TypeScript usage
@@ -1684,6 +1780,7 @@ REACT_APP_ENV=production
 5. **Accessibility** - WCAG 2.1 compliance
 
 ### Performance Guidelines
+
 1. **Lazy Loading** - Dynamic imports for routes
 2. **Code Splitting** - Separate vendor bundles
 3. **Caching** - Implement proper caching strategies
@@ -1693,6 +1790,7 @@ REACT_APP_ENV=production
 ## 🚀 Quick Commands Reference
 
 ### Most Used Commands
+
 ```bash
 # Development
 pnpm dev                    # Start all development servers
@@ -1717,6 +1815,7 @@ pnpm audit                # Security audit
 ```
 
 ### Turborepo Commands
+
 ```bash
 # Selective execution
 turbo run build --filter=@module/hrlink
@@ -1736,6 +1835,7 @@ turbo run build --force   # Ignore cache
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ### License Summary
+
 - ✅ Commercial use allowed
 - ✅ Modification allowed
 - ✅ Distribution allowed
@@ -1749,18 +1849,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For questions, issues, or contributions:
 
 1. **🐛 Bug Reports**: [Create Issue](https://github.com/your-org/hrbox-monorepo/issues/new?template=bug_report.md)
-2. **💡 Feature Requests**: [Request Feature](https://github.com/your-org/hrbox-monorepo/issues/new?template=feature_request.md)
+2. **💡 Feature Requests
+   **: [Request Feature](https://github.com/your-org/hrbox-monorepo/issues/new?template=feature_request.md)
 3. **❓ Questions**: [GitHub Discussions](https://github.com/your-org/hrbox-monorepo/discussions)
 4. **📚 Documentation**: [Project Wiki](https://github.com/your-org/hrbox-monorepo/wiki)
 
 ### Response Times
+
 - **Critical Issues**: Within 24 hours
 - **Bug Reports**: 2-3 business days
 - **Feature Requests**: 1 week for initial response
 - **General Questions**: 2-3 business days
 
 ### Contributing
+
 We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
+
 - Development setup instructions
 - Coding standards and guidelines
 - Pull request process
@@ -1772,7 +1876,8 @@ We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
 
 **Built with ❤️ by the HRBox Team**
 
-**Powered by** [Turborepo](https://turbo.build) **•** [React](https://react.dev) **•** [TypeScript](https://typescriptlang.org) **•** [Tailwind CSS](https://tailwindcss.com)
+**Powered by** [Turborepo](https://turbo.build) **•** [React](https://react.dev) **•
+** [TypeScript](https://typescriptlang.org) **•** [Tailwind CSS](https://tailwindcss.com)
 
 *Making HR management modern, efficient, and delightful* ✨
 
@@ -1783,4 +1888,5 @@ We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
 
 ---
 
-*Last updated: December 2024 • Version 1.0.0 • Documentation maintained by [HRBox Team](https://github.com/orgs/your-org/teams/hrbox)*
+*Last updated: December 2024 • Version 1.0.0 • Documentation maintained
+by [HRBox Team](https://github.com/orgs/your-org/teams/hrbox)*

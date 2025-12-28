@@ -1,30 +1,73 @@
-import { ArrowRight2, ArrowLeft2 } from "iconsax-react";
 import { useEffect, useState } from "react";
-import { useDarkMode } from "../../context/DarkMode";
-import { sideBarMenu, bottomSideBarMenu } from "./menu";
-import { Button } from "@nextui-org/react";
 import i18n from "i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "../../redux/reducers/language";
-import { useNavigate, useLocation } from "react-router-dom";
-import { SideBarProps } from "./types";
-import { AppDispatch, RootState } from "../../redux/store";
-import { setUserProfile } from "../../redux/reducers/profile";
+import { setLanguage } from "@hrbox/core/redux/slices/languageSlice";
+import { useLocation, useNavigate } from "@tanstack/react-router";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import { setUser } from "@hrbox/core/redux/slices/userSlice";
+import {
+  Archive,
+  ArrowLeft2,
+  ArrowRight2,
+  Global,
+  Home,
+  LogoutCurve,
+  People,
+  Profile2User,
+  Setting2,
+  VolumeHigh
+} from "iconsax-reactjs";
+import { Paths } from "@hrbox/modules/paths";
+import { Button } from "@heroui/react";
 
-const MessengerSideBar = () => {
+export const sideBarMenu = [
+  {
+    icon: <Home size="24" />,
+    name: "Home",
+    route: Paths.Messenger.Home
+  },
+  {
+    icon: <Profile2User size="24" />,
+    name: "Private",
+    route: Paths.Messenger.Private
+  },
+  {
+    icon: <People size="24" />,
+    name: "Group",
+    route: Paths.Messenger.Group
+  },
+  {
+    icon: <VolumeHigh size="24" />,
+    name: "Channel",
+    route: Paths.Messenger.Channel
+  },
+  {
+    icon: <Archive size="24" />,
+    name: "Saved",
+    route: Paths.Messenger.SaveMessage
+  }
+];
+
+export const bottomSideBarMenu = [
+  { icon: <Setting2 size="24" />, name: "Setting", route: "/setting" },
+  { icon: <Global size="24" />, name: "English", route: "/" },
+  { icon: <LogoutCurve size="24" />, name: "Log out", route: "logout" }
+];
+
+
+export const MessengerSideBar = () => {
   const [fullWidth, setFullWidth] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string | undefined>("Home");
-  const { darkMode } = useDarkMode();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
   const lang = useSelector((state: RootState) => state.language.lang);
 
   const currentLang = useSelector(
-    (state: { language: { lang: string } }) => state.language.lang,
+    (state: { language: { lang: string } }) => state.language.lang
   );
 
-  const toggleLanguage = (language: string) => {
+  const toggleLanguage = (language: any) => {
     dispatch(setLanguage(language));
     i18n.changeLanguage(language);
 
@@ -42,11 +85,11 @@ const MessengerSideBar = () => {
     console.log("User logged out");
   };
 
-  const handleChangePageMessenger = (item: SideBarProps) => {
+  const handleChangePageMessenger = (item: any) => {
     setActiveTab(item.name);
     if (item.route) {
-      dispatch(setUserProfile({}));
-      navigate(item.route);
+      dispatch(setUser());
+      navigate({ to: item.route });
     }
   };
 
@@ -64,16 +107,16 @@ const MessengerSideBar = () => {
     >
       <div
         onClick={() => setFullWidth(!fullWidth)}
-        className="dark:bg-info-1000 bg-white cursor-pointer flex justify-center items-center absolute top-[50px] right-[-10px] w-6 h-6 rounded-full shadow-[0px_1px_2px_rgba(0,0,0,0.20)]"
+        className="bg-white dark:bg-info-1000 cursor-pointer flex justify-center items-center absolute top-[50px] right-[-10px] w-6 h-6 rounded-full shadow-[0px_1px_2px_rgba(0,0,0,0.20)]"
       >
         {fullWidth ? (
           <ArrowLeft2
-            className="cursor-pointer dark:text-white text-info-1000"
+            className="cursor-pointer text-info-1000 dark:text-white"
             size="12"
           />
         ) : (
           <ArrowRight2
-            className="cursor-pointer dark:text-white text-info-1000"
+            className="cursor-pointer text-info-1000 dark:text-white"
             size="12"
           />
         )}
@@ -83,7 +126,7 @@ const MessengerSideBar = () => {
           {sideBarMenu.map((item) => (
             <div
               key={item.name}
-              className={`${activeTab === item.name ? (darkMode ? "border-b border-gold" : "border-b border-primary-400") : "border-transparent"}`}
+              className={`${activeTab === item.name ? "border-b border-primary-400 dark:border-gold" : "border-transparent"}`}
             >
               <Button
                 isIconOnly
@@ -93,12 +136,8 @@ const MessengerSideBar = () => {
                 <div
                   className={`cursor-pointer ${
                     activeTab === item.name
-                      ? darkMode
-                        ? "text-gold"
-                        : "text-primary-400"
-                      : darkMode
-                        ? "text-white"
-                        : "text-secondary-1000"
+                      ? "text-primary-400 dark:text-gold"
+                      : "text-secondary-1000 dark:text-white"
                   }`}
                 >
                   {item?.icon}
@@ -107,12 +146,8 @@ const MessengerSideBar = () => {
                   <span
                     className={`cursor-pointer text-[12px] ${
                       activeTab === item.name
-                        ? darkMode
-                          ? "text-gold"
-                          : "text-primary-400"
-                        : darkMode
-                          ? "text-white"
-                          : "text-secondary-1000"
+                        ? "text-primary-400 dark:text-gold"
+                        : "text-secondary-1000 dark:text-white"
                     }`}
                   >
                     {item?.name}
@@ -126,7 +161,7 @@ const MessengerSideBar = () => {
           {bottomSideBarMenu.map((item) => (
             <div
               key={item.name}
-              className={`${activeTab === item.name ? (darkMode ? "border-b border-gold" : "border-b border-primary-400") : "border-transparent"}`}
+              className={`${activeTab === item.name ? "border-b border-primary-400 dark:border-gold" : "border-transparent"}`}
             >
               <Button
                 isIconOnly
@@ -144,12 +179,8 @@ const MessengerSideBar = () => {
                 <div
                   className={`cursor-pointer ${
                     activeTab === item.name
-                      ? darkMode
-                        ? "text-gold"
-                        : "text-primary-400"
-                      : darkMode
-                        ? "text-white"
-                        : "text-secondary-1000"
+                      ? "text-primary-400 dark:text-gold"
+                      : "text-secondary-1000 dark:text-white"
                   }`}
                 >
                   {item?.icon}
@@ -158,12 +189,8 @@ const MessengerSideBar = () => {
                   <span
                     className={`cursor-pointer text-xs font-normal ${
                       activeTab === item.name
-                        ? darkMode
-                          ? "text-gold"
-                          : "text-primary-400"
-                        : darkMode
-                          ? "text-white"
-                          : "text-secondary-1000"
+                        ? "text-primary-400 dark:text-gold"
+                        : "text-secondary-1000 dark:text-white"
                     }`}
                   >
                     {item?.name}
@@ -177,5 +204,3 @@ const MessengerSideBar = () => {
     </div>
   );
 };
-
-export default MessengerSideBar;

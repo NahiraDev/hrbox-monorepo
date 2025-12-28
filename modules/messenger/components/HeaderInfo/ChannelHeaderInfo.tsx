@@ -2,48 +2,39 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Button,
+  Listbox,
+  ListboxItem,
   Modal,
   ModalContent,
-  useDisclosure,
-  Image,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure
 } from "@nextui-org/react";
-import {
-  CloseCircle,
-  Grid9,
-  More,
-  Paperclip,
-  Save2,
-  SearchNormal1,
-} from "iconsax-react";
+import { CloseCircle, Grid9, More, Paperclip, SearchNormal1 } from "iconsax-react";
 import { useDarkMode } from "../../context/DarkMode";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleInfo } from "../../redux/reducers/messengerAction";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
 import {
   handleClearHistoryChannelsApi,
-  handleRemoveChannelApi,
   handleMutedChannelApi,
-  handleUnpinMessageChannelApi,
+  handleRemoveChannelApi
 } from "../../services/Messenger/ChannelChatService/apis";
 import Lottie from "lottie-react";
 import { AppDispatch } from "../../redux/store";
 import SearchBox from "../SearchBox";
-import ChannelInfo from "../Info/ChannelInfo";
 import { Actions } from "./Actions";
-import { useLocation } from "react-router-dom";
-import AddGroup from "../Add";
+import AddGroup from "../Add/AddGroup";
 import { useWebSocket } from "../../context/SignalRWebSocket";
 import isTypingGif from "../../lottie/isTyping.json";
 import { setUserProfile } from "../../redux/reducers/profile";
-import { setHighlightedMessageId } from "../../redux/reducers/messageAction";
-import { ElementTypes, GroupAndChannelTypes, MessageTypes } from "../../types";
+import { GroupAndChannelTypes, MessageTypes } from "../../types";
 
 // Reusable Avatar Component
 const ChannelAvatar = ({
-  channelProfile,
-  onClick,
-}: {
+                         channelProfile,
+                         onClick
+                       }: {
   channelProfile: any;
   onClick: () => void;
 }) => (
@@ -58,9 +49,9 @@ const ChannelAvatar = ({
 
 // Reusable Pinned Message Display Component
 const PinnedMessage = ({
-  pinnedMessage,
-  handleUnpin,
-}: {
+                         pinnedMessage,
+                         handleUnpin
+                       }: {
   pinnedMessage: MessageTypes;
   handleUnpin: () => void;
 }) => (
@@ -94,10 +85,10 @@ export const ChannelHeaderInfo = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { isOpen, onOpenChange } = useDisclosure();
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const channelProfile = useSelector(
-    (state: RootState) => state.profile.profile,
+    (state: RootState) => state.profile.profile
   );
   const channels = useSelector((state: RootState) => state?.channels?.channels);
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
@@ -118,17 +109,17 @@ export const ChannelHeaderInfo = () => {
   const handleSelect = () => setIsSelected((prev) => !prev);
   const handleToggleMuteChat = () =>
     dispatch(
-      handleMutedChannelApi({ channel_id: channelProfile?.chat_id || "" }),
+      handleMutedChannelApi({ channel_id: channelProfile?.chat_id || "" })
     );
   const handleClearChatHistory = () =>
     dispatch(
       handleClearHistoryChannelsApi({
-        channel_id: channelProfile?.chat_id || "",
-      }),
+        channel_id: channelProfile?.chat_id || ""
+      })
     );
   const handleDeleteChat = () => {
     dispatch(
-      handleRemoveChannelApi({ channel_id: channelProfile?.chat_id || "" }),
+      handleRemoveChannelApi({ channel_id: channelProfile?.chat_id || "" })
     );
     dispatch(setUserProfile({}));
   };
@@ -138,8 +129,8 @@ export const ChannelHeaderInfo = () => {
     dispatch(
       handleUnpinMessageChannel({
         message_id: pinnedMessage?.id,
-        channel_id: channelProfile?.chat_id,
-      }),
+        channel_id: channelProfile?.chat_id
+      })
     );
 
   const handleClickActions = (key: string) => {
@@ -169,7 +160,7 @@ export const ChannelHeaderInfo = () => {
           if (typingResetTimer.current) clearTimeout(typingResetTimer.current);
           typingResetTimer.current = setTimeout(
             () => setIsTyping(""),
-            typingResetDelay,
+            typingResetDelay
           );
         }
         if (
@@ -178,7 +169,7 @@ export const ChannelHeaderInfo = () => {
         ) {
           setMessages((prevMessages: MessageTypes[]) => [
             ...prevMessages,
-            message,
+            message
           ]);
         }
       };

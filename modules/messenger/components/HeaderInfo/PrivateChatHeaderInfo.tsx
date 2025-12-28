@@ -2,45 +2,36 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Button,
-  Modal,
-  ModalContent,
-  useDisclosure,
   Image,
   Input,
+  Listbox,
+  ListboxItem,
+  Modal,
+  ModalContent,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure
 } from "@nextui-org/react";
-import {
-  CloseCircle,
-  Folder,
-  More,
-  Paperclip,
-  Play,
-  SearchNormal1,
-} from "iconsax-react";
+import { CloseCircle, Folder, Grid9, More, Paperclip, Play, SearchNormal1 } from "iconsax-react";
 import { useDarkMode } from "../../context/DarkMode";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid9 } from "iconsax-react";
 import { toggleInfo } from "../../redux/reducers/messengerAction";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
 import {
   handleClearHistoryChatApi,
-  handleRemoveMessageApi,
   handleMuteChatApi,
-  handleUnpinMessageApi,
+  handleRemoveMessageApi,
+  handleUnpinMessageApi
 } from "../../services/Messenger/PrivateChatService/apis";
 import Lottie from "lottie-react";
-import { AppDispatch } from "../../redux/store";
 import ContactInfo from "../Info/PrivateChatInfo";
 import { Actions } from "./Actions";
 import CloseIconSvg from "../../icons/CloseIcon";
-import AddGroup from "../Add";
+import AddGroup from "../Add/AddGroup";
 import { useWebSocket } from "../../context/SignalRWebSocket";
 import isTypingGif from "../../lottie/isTyping.json";
-import {
-  setHighlightedMessageId,
-  updateFilteredMessages,
-} from "../../redux/reducers/messageAction";
+import { setHighlightedMessageId, updateFilteredMessages } from "../../redux/reducers/messageAction";
 import { toast } from "react-toastify";
 import { setUserProfile } from "../../redux/reducers/profile";
 import { SearchIcon } from "@nextui-org/shared-icons";
@@ -51,7 +42,7 @@ const ACTIONS = {
   CLEAR: "clear",
   EDIT: "edit",
   DELETE: "delete",
-  INFO: "info",
+  INFO: "info"
 };
 
 export const PrivateChatHeaderInfo = () => {
@@ -61,11 +52,11 @@ export const PrivateChatHeaderInfo = () => {
   const { isOpen, onOpenChange } = useDisclosure();
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
   const messages = useSelector(
-    (state: RootState) => state?.privateChat?.messages,
+    (state: RootState) => state?.privateChat?.messages
   );
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const messageList: any = useSelector(
-    (state: RootState) => state?.privateChat?.messages,
+    (state: RootState) => state?.privateChat?.messages
   );
   const typingResetTimer = useRef<NodeJS.Timeout | null>(null);
   const typingResetDelay = 1000;
@@ -74,10 +65,10 @@ export const PrivateChatHeaderInfo = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [isTyping, setIsTyping] = useState<string>("");
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const isOpenEmojipicker = useSelector(
-    (state: RootState) => state.messengerAction.isOpenEmojiPicker,
+    (state: RootState) => state.messengerAction.isOpenEmojiPicker
   );
 
   const pinnedMessage = messages?.find((msg: MessageTypes) => msg.pinned);
@@ -107,15 +98,15 @@ export const PrivateChatHeaderInfo = () => {
       dispatch(
         handleUnpinMessageApi({
           message_id: pinned?.id,
-          chat_id: recipient?.chat_id,
-        }),
+          chat_id: recipient?.chat_id
+        })
       );
     }
   };
 
   const handleSearch = (value: string) => {
     const filteredMessages = messages.filter((message: any) =>
-      message?.text.toLowerCase().includes(value.toLowerCase()),
+      message?.text.toLowerCase().includes(value.toLowerCase())
     );
     dispatch(updateFilteredMessages(filteredMessages));
     setSearchText(value);
@@ -128,7 +119,7 @@ export const PrivateChatHeaderInfo = () => {
   const showConfirmationToast = (action: string) => {
     const actionMap = {
       clear: "Are you sure you want to clear the chat history?",
-      delete: "Are you sure you want to delete the chat?",
+      delete: "Are you sure you want to delete the chat?"
     };
     toast(
       <>
@@ -158,8 +149,8 @@ export const PrivateChatHeaderInfo = () => {
         autoClose: false,
         closeOnClick: false,
         draggable: false,
-        position: "top-center",
-      },
+        position: "top-center"
+      }
     );
   };
 
@@ -252,7 +243,8 @@ export const PrivateChatHeaderInfo = () => {
                     </span>
                   </div>
                 ) : (
-                  <span className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
+                  <span
+                    className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
                     last seen recently
                   </span>
                 )}
@@ -274,13 +266,13 @@ export const PrivateChatHeaderInfo = () => {
                         "!rounded-4 !shadow-none",
                         darkMode
                           ? "border-1 border-netural-700"
-                          : "border-1 border-netural-100",
+                          : "border-1 border-netural-100"
                       ],
                       input: [
                         darkMode
                           ? "placeholder:text-white"
-                          : "placeholder:text-netural-400",
-                      ],
+                          : "placeholder:text-netural-400"
+                      ]
                     }}
                     startContent={
                       active ? (
@@ -358,7 +350,8 @@ export const PrivateChatHeaderInfo = () => {
                         >
                           <div className="flex gap-4 group-hover:text-primary-400 group-hover:dark:text-gold">
                             {item.icon}
-                            <span className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
+                            <span
+                              className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
                               {item.text}
                             </span>
                           </div>
@@ -379,7 +372,7 @@ export const PrivateChatHeaderInfo = () => {
                   const scrollOptions: ElementTypes = {
                     behavior: "smooth",
                     block: "center",
-                    inline: "nearest",
+                    inline: "nearest"
                   };
                   element.scrollIntoView(scrollOptions);
                   dispatch(setHighlightedMessageId(pinnedMessage?.id));
@@ -417,7 +410,8 @@ export const PrivateChatHeaderInfo = () => {
                       />
                     ) : pinnedMessage?.type === "file" ? (
                       <div className="flex items-center gap-2">
-                        <div className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
+                        <div
+                          className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
                           <Folder color="white" size="18" variant="Bold" />
                         </div>
                         <div className="flex flex-col gap-0.5">

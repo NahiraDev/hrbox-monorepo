@@ -1,20 +1,11 @@
-import {
-  Button,
-  RadioGroup,
-  Radio,
-  Input,
-  useDisclosure,
-  Switch,
-  cn,
-} from "@nextui-org/react";
-import { Image as IconImage } from "iconsax-react";
-import React, { useState, useRef, useEffect } from "react";
+import { Button, cn, Input, Radio, RadioGroup, Switch, useDisclosure } from "@heroui/react";
+import { Image as IconImage } from "iconsax-reactjs";
+import React, { useEffect, useRef, useState } from "react";
 import AddMembers from "./AddMembers";
 import { CreateGroup } from "./CreateGroup";
 import { AddGroupProps } from "./types";
-import { useDarkMode } from "../../context/DarkMode";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux";
 
 const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -25,11 +16,10 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedType, setSelectedType] = useState<string>("channel");
-  const { darkMode } = useDarkMode();
   const [isSelected, setIsSelected] = useState<boolean>(true);
   const recipient = useSelector((state: RootState) => state?.profile?.profile);
   const isEditGroupAndChannel = useSelector(
-    (state: RootState) => state?.messengerAction?.isEdit,
+    (state: RootState) => state?.messengerAction?.isEdit
   );
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,7 +119,8 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
               />
             </div>
           ) : (
-            <div className="bg-primary-400 dark:bg-surface-200 px-[14px] py-[14px] rounded-5 flex justify-center items-center cursor-pointer">
+            <div
+              className="bg-primary-400 dark:bg-surface-200 px-[14px] py-[14px] rounded-5 flex justify-center items-center cursor-pointer">
               <IconImage size="36" variant="Bold" className="text-white" />
               <Input
                 type="file"
@@ -171,7 +162,7 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
             placeholder={`Enter ${selectedType === "group" ? "group" : "channel"} name`}
             classNames={{
               inputWrapper:
-                "!rounded-4 border-1 !px-1.5 !py-1 !h-8 !border-surface-50 dark:!border-surface-100",
+                "!rounded-4 border-1 !px-1.5 !py-1 !h-8 !border-surface-50 dark:!border-surface-100"
             }}
           />
         </div>
@@ -190,30 +181,24 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
           placeholder="Enter description"
           classNames={{
             inputWrapper:
-              "!rounded-4 border-1 !px-1.5 !py-1 !h-8 !border-surface-50 dark:!border-surface-100",
+              "!rounded-4 border-1 !px-1.5 !py-1 !h-8 !border-surface-50 dark:!border-surface-100"
           }}
         />
       </div>
       <div className="pt-6 flex items-center">
         <Switch
-          {...(darkMode
-            ? {
-                classNames: {
-                  thumb: cn("bg-info-1000 shadow-lg !w-3 !h-3 transition-all"),
-                  wrapper: cn(
-                    "bg-neutral-100 text-info-1000 !w-[30px] !h-[18px] mr-2 rounded-full flex items-center justify-start transition-background", // اندازه و انیمیشن برای wrapper
-                    "group-data-[selected=true]:bg-surface-200",
-                  ),
-                },
-              }
-            : {
-                classNames: {
-                  thumb: cn("bg-white shadow-lg !w-3 !h-3 transition-all"),
-                  wrapper: cn(
-                    "!w-[30px] !h-[18px] mr-2 rounded-full flex items-center justify-start transition-background",
-                  ),
-                },
-              })}
+          classNames={{
+            thumb: cn(
+              "!w-3 !h-3 shadow-lg transition-all",
+              "bg-white dark:bg-info-1000"
+            ),
+            wrapper: cn(
+              "!w-[30px] !h-[18px] mr-2 rounded-full flex items-center justify-start transition-background",
+              "bg-transparent",
+              "dark:bg-neutral-100 dark:text-info-1000",
+              "group-data-[selected=true]:bg-surface-200"
+            )
+          }}
           isSelected={!isEditGroupAndChannel ? recipient?.muted : isSelected}
           onValueChange={handleChangeMuted}
           size="sm"
@@ -247,7 +232,7 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
           setSelectedImage,
           handleImageUpload,
           orginalImage,
-          setOrginalImage,
+          setOrginalImage
         }}
       />
       <AddMembers
@@ -263,7 +248,7 @@ const AddGroup: React.FC<AddGroupProps> = ({ data }) => {
           setOrginalImage,
           orginalImage,
           selectedImage,
-          isSelected,
+          isSelected
         }}
       />
     </div>

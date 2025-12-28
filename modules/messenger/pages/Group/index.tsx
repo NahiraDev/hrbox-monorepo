@@ -1,27 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AppDispatch, RootState } from "../../../redux/store";
-import TextBox from "../../../components/TextBox";
-import EmptyChat from "../../../components/EmptyChat";
-import TextMessage from "../../../components/Messages/TextMessage";
-import PhotoMessage from "../../../components/Messages/PhotoMessage";
-import FileMessage from "../../../components/Messages/FileMessage";
-import AudioMessage from "../../../components/Messages/AudioMessage";
-import LinkMessage from "../../../components/Messages/LinkMessage";
+import TextBox from "@module/messenger/components/TextBox";
+import EmptyChat from "@module/messenger/components/EmptyChat";
+import TextMessage from "@module/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@module/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@module/messenger/components/Messages/FileMessage";
+import AudioMessage from "@module/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@module/messenger/components/Messages/LinkMessage";
 import { useWebSocket } from "../../../context/SignalRWebSocket";
 import {
-  handleFetchGroupsApi,
   handleFetchGroupChatsApi,
-} from "../../../services/Messenger/GroupChatService/apis";
-import { handleMarkMessageAsSeenGroupChatApi } from "../../../services/Messenger/GroupChatService/apis";
+  handleFetchGroupsApi,
+  handleMarkMessageAsSeenGroupChatApi
+} from "@module/messenger/services/Messenger/GroupChatService/apis";
 import { debounce } from "lodash";
 import { MessageTypes } from "../../../types";
+import { AppDispatch, RootState } from "@hrbox/core/redux";
 
 export default function GroupPage() {
   const { messages } = useWebSocket();
   const [messageList, setMessageList] = useState<MessageTypes[]>([]);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const groupProfile = useSelector((state: RootState) => state.profile.profile);
   const profile = JSON.parse(localStorage.getItem("profile")!);
@@ -32,11 +32,11 @@ export default function GroupPage() {
   const pinnedMessage: MessageTypes | undefined =
     messageList &&
     messageList.find(
-      (message: MessageTypes) => message.pinned === true && message,
+      (message: MessageTypes) => message.pinned === true && message
     );
   const reply = useSelector((state: RootState) => state.messageAction.reply);
   const filteredMessages = useSelector(
-    (state: RootState) => state.messageAction.filteredMessages,
+    (state: RootState) => state.messageAction.filteredMessages
   );
   const dispatch = useDispatch<AppDispatch>();
   const loadMoreMessages = () =>
@@ -48,7 +48,7 @@ export default function GroupPage() {
 
       const unseenMessages = messageList.filter(
         (msg: MessageTypes) =>
-          msg.status === "delivered" && msg.sender_id !== profile.user_id,
+          msg.status === "delivered" && msg.sender_id !== profile.user_id
       );
 
       if (unseenMessages.length > 0) {
@@ -57,8 +57,8 @@ export default function GroupPage() {
           await dispatch(
             handleMarkMessageAsSeenGroupChatApi({
               message_id: unseenMessages[unseenMessages.length - 1]?.id,
-              group_id: groupProfile?.chat_id,
-            }),
+              group_id: groupProfile?.chat_id
+            })
           ).unwrap();
         } catch (error) {
           console.error("Failed to mark messages as seen", error);
@@ -66,13 +66,13 @@ export default function GroupPage() {
         setIsMarkingSeen(false);
       }
     }, 1000),
-    [messageList],
+    [messageList]
   );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries[0].isIntersecting && loadMoreMessages(),
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (chatContainerRef.current) {
@@ -92,20 +92,20 @@ export default function GroupPage() {
     setMessageList(filteredMessages);
     if (groupProfile?.user_id) {
       dispatch(
-        handleFetchGroupChatsApi({ group_id: groupProfile.chat_id || "" }),
+        handleFetchGroupChatsApi({ group_id: groupProfile.chat_id || "" })
       );
     }
 
     setMessageList((prevMessages: MessageTypes[]) => [
       ...prevMessages,
       ...messages.filter(
-        (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id),
-      ),
+        (msg: any) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id)
+      )
     ]);
 
     const observer = new IntersectionObserver(
       (entries) => entries[0].isIntersecting && !isMarkingSeen && handleSeen(),
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (messageEndRef.current) observer.observe(messageEndRef.current);
