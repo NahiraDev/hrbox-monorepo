@@ -26,7 +26,7 @@ const Jobs = () => {
     // );
   };
 
-  const handleDeleteConfirm = (index: number) => {
+  const handleDeleteConfirm = (index: number)  => {
     setJobs(prev => {
       const newJobs = [...prev];
       newJobs.splice(index, 1);
