@@ -163,32 +163,11 @@ export interface MessageActionState {
   filteredMessages: [];
 }
 
-export const initialStateMessageAction: MessageActionState = {
-  message_id: "",
-  chat_id: "",
-  reply: false,
-  message_data: "",
-  reply_message_data: "",
-  reply_message_type: "",
-  reply_message_file_name: "",
-  reply_message_id: "",
-  file_name: "",
-  is_typing: false,
-  highlighted_message_id: "",
-  filteredMessages: [],
-};
-
 export interface MessengerAction {
   isOpen: boolean;
   isEdit: boolean;
   isOpenEmojiPicker: boolean;
 }
-
-export const initialStateMessengerAction: MessengerAction = {
-  isOpen: false,
-  isEdit: false,
-  isOpenEmojiPicker: false,
-};
 
 export interface Profile {
   name?: string;
@@ -212,7 +191,7 @@ export interface UserProfileState {
 }
 
 export const initialStateProfile: UserProfileState = {
-  profile: {},
+  profile: {}
 };
 
 export interface UsersStateTypes {
@@ -233,33 +212,35 @@ export const InitialStateUsers: UsersStateTypes = {
   users: [],
   profile: null,
   loading: false,
-  error: null,
+  error: null
 };
 
 export const InitialStatePrivateChat: PrivateChatStateTypes = {
   messages: [],
   privateChats: [],
   loading: false,
-  error: null,
+  error: null
 };
 
 export const InitialStateGroup: GroupStateTypes = {
   messages: [],
   groups: [],
   loading: false,
-  error: null,
+  error: null
 };
 
 export const InitialStateChannel: ChannelStateTypes = {
   channels: [],
   messages: [],
   loading: false,
-  error: null,
+  error: null
 };
 
 export const InitialStateSaveMessage: SaveMessageStateTypes = {
   saveMessages: [],
   messages: [],
   loading: false,
-  error: null,
+  error: null
 };
+
+

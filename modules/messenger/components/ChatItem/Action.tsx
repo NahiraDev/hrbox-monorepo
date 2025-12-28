@@ -15,7 +15,7 @@ import {
   handleMuteGroupApi,
   handlePinGroupApi,
   handleRemoveGroupApi
-} from "../../services/Messenger/GroupChatService/apis";
+} from "@hrbox/modules/messenger/services";
 import {
   handleClearHistoryChannelsApi,
   handleMutedChannelApi,
