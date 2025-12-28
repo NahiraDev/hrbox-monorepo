@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turborepo.build/schema.json",
+  "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
     "build": {
@@ -20,13 +20,16 @@
       ],
       "persistent": false,
       "cache": false,
-      "env": ["VITE_ENABLED_MODULES"]
+      "env": [
+        "VITE_ENABLED_MODULES"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"],
-      "env": ["VITE_ENABLED_MODULES"]
+      "dependsOn": [
+        "^dev"
+      ]
     },
     "lint": {
       "inputs": [

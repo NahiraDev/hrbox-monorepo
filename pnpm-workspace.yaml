@@ -5,7 +5,6 @@ packages:
   - routes
   - UIKit
   - launcher
-  - proxy-server
 
 ignoredBuiltDependencies:
   - '@heroui/shared-utils'

@@ -1,7 +1,3 @@
-// ============================================
-// modules/hrlink/plugin.tsx
-// ============================================
-
 import { RoleSlug } from "@hrbox/core/config/theme";
 import { Paths } from "@hrbox/modules/paths";
 import type { ModulePlugin } from "@hrbox/modules/types";
@@ -14,7 +10,7 @@ import {
   Key,
   PasswordCheck,
   ReceiveSquare2,
-  Setting3,
+  Setting3
 } from "iconsax-reactjs";
 import { lazy } from "react";
 
@@ -23,7 +19,7 @@ import { lazy } from "react";
 // ============================================
 
 const jobDescription = lazyRouteComponent(
-  () => import("./pages/jobdescription/jobdescription")
+  () => import("./pages/jobdescription/Jobdescription")
 );
 const DnnSuperVisor = lazyRouteComponent(
   () => import("./pages/dnnSuperVisor/DnnSuperVisor")
@@ -33,7 +29,7 @@ const DnnSuperVisor = lazyRouteComponent(
 // SubHeaders (Lazy Load)
 // ============================================
 
-const JobHeader = lazy(() => import("./subHeaders/jobdescriptionHeader"));
+const JobHeader = lazy(() => import("./subHeaders/JobdescriptionHeader"));
 const DnnSuperVisorHeader = lazy(
   () => import("./subHeaders/DnnSuperVisorSubHeader")
 );
@@ -61,9 +57,9 @@ export const JobDescriptionPlugin: ModulePlugin = {
       meta: {
         title: "JobDescription",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION],
+        requiredRoles: [RoleSlug.ORGANIZATION]
       },
-      subHeader: JobHeader,
+      subHeader: JobHeader
     },
     {
       path: Paths.JobDescription.ObjectivesMission,
@@ -72,14 +68,14 @@ export const JobDescriptionPlugin: ModulePlugin = {
       meta: {
         title: "JobDescription",
         requireAuth: false,
-        requiredRoles: [RoleSlug.ORGANIZATION],
+        requiredRoles: [RoleSlug.ORGANIZATION]
       },
       subHeader: DnnSuperVisorHeader,
       subHeaderProps: {
         title: "DNN Supervisor",
-        icon: <DocumentSketch size={18} color="white" />,
-      },
-    },
+        icon: <DocumentSketch size={18} color="white" />
+      }
+    }
   ],
 
   // ============================================
@@ -90,45 +86,45 @@ export const JobDescriptionPlugin: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/attendance/dashboard",
-      icon: <Chart size="24" />,
+      icon: <Chart size="24" />
     },
     {
       id: "entry-exit",
       label: "Entry Exit",
       path: "/attendance/entry-exit",
-      icon: <PasswordCheck size="24" />,
+      icon: <PasswordCheck size="24" />
     },
     {
       id: "calender",
       label: "Attendance Calender",
       path: "/attendance/attendance-calender",
-      icon: <CalendarTick size="24" />,
+      icon: <CalendarTick size="24" />
     },
     {
       id: "traffic",
       label: "Traffic Calender",
       path: "/attendance/list-of-approvals",
-      icon: <Key size="24" />,
+      icon: <Key size="24" />
     },
     {
       id: "export",
       label: "Export",
       path: "/attendance/export",
-      icon: <ReceiveSquare2 size="24" />,
+      icon: <ReceiveSquare2 size="24" />
     },
 
     {
       id: "shift",
       label: "Shift Allocation",
       path: "/attendance/shift-allocation",
-      icon: <Setting3 size="24" />,
+      icon: <Setting3 size="24" />
     },
     {
       id: "timesheet",
       label: "Time Sheet",
       path: "/attendance/all-projects",
-      icon: <Clock size="24" />,
-    },
+      icon: <Clock size="24" />
+    }
   ],
 
   requiredRoles: [RoleSlug.ORGANIZATION],
@@ -144,7 +140,7 @@ export const JobDescriptionPlugin: ModulePlugin = {
 
   onModuleUnload: () => {
     console.log("HRLink module unloaded");
-  },
+  }
 };
 
 export default JobDescriptionPlugin;
