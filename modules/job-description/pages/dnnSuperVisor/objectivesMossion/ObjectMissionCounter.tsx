@@ -29,8 +29,8 @@ const ObjectMissionCounter = () => {
     <>
       <div className="flex flex-col w-full h-full">
         {/* header content */}
-        <div className="flex pt-3 pr-[124px] pb-4 pl-6 bg-[#DCF0F9] dark:bg-[#04425C] rounded-t-xl">
-          <div className="flex flex-row gap-[114px]">
+        <div className="flex pt-3 pr-31 pb-4 pl-6 bg-[#DCF0F9] dark:bg-[#04425C] rounded-t-xl">
+          <div className="flex flex-row gap-28.5">
             <div className="flex flex-col gap-1.5">
               <div className="flex flex-row p-2">
                 <div className="flex flex-row gap-1.5 dark:text-[#DEE1E8]!">
@@ -179,7 +179,6 @@ const ObjectMissionCounter = () => {
             <div
               className="flex flex-row flex-wrap gap-3 gap-y-3 overflow-y-scroll max-h-[506px]  custom-scroll-objectives">
               {objectivesCard.map((card) => (
-             
                 <div
                   className="px-4 py-3 rounded-xl flex flex-col bg-white gap-3 w-[216px] shadow-light-tight-1">
                   <div className="flex flex-row items-center justify-between border-b border-neutral-100">
