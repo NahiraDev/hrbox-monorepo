@@ -1,16 +1,12 @@
-import DoubleCheck from "../../icons/DoubleCheck";
-import { Avatar, Image, Link as NextLink } from "@nextui-org/react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import DoubleCheck from "@hrbox/uikit/icons/DoubleCheck";
+import { Avatar, Image, Link as NextLink, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { useEffect, useRef, useState } from "react";
 import Reaction from "./Reaction";
-import {
-  setHighlightedMessageId,
-  setMessageId,
-} from "../../redux/reducers/messageAction";
-import { AppDispatch, RootState } from "../../redux/store";
+import { setHighlightedMessageId, setMessageId } from "@hrbox/core/redux/slices/messageAction";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Folder, Play } from "iconsax-react";
-import Check from "../../icons/Check";
+import { Folder, Play } from "iconsax-reactjs";
+import { Check } from "@hrbox/uikit/icons/Check";
 import { MessageTypes } from "../../types";
 
 interface LinkMessageProps {
@@ -25,7 +21,7 @@ const LinkMessage: React.FC<LinkMessageProps> = ({ message, isSent }) => {
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const profile = useSelector((state: RootState) => state.profile.profile);
   const highlightedMessageId = useSelector(
-    (state: RootState) => state.messageAction.highlighted_message_id,
+    (state: RootState) => state.messageAction.highlighted_message_id
   );
 
   const date = new Date(message.created_at || "");
@@ -65,7 +61,7 @@ const LinkMessage: React.FC<LinkMessageProps> = ({ message, isSent }) => {
             element.scrollIntoView({
               behavior: "smooth",
               block: "center",
-              inline: "nearest",
+              inline: "nearest"
             });
             dispatch(setHighlightedMessageId(message.reply_message_id || ""));
             setTimeout(() => dispatch(setHighlightedMessageId("")), 3000);
@@ -151,7 +147,8 @@ const LinkMessage: React.FC<LinkMessageProps> = ({ message, isSent }) => {
                       {profile?.name}
                     </span>
                   )}
-                  <span className="dark:text-white font-light text-xs text-secondary-1000">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
+                  <span
+                    className="dark:text-white font-light text-xs text-secondary-1000">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
                 </div>
 
                 {renderReplyPreview()}

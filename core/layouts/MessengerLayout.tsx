@@ -15,7 +15,7 @@ interface BaseLayoutProps {
   children: ReactNode;
 }
 
-export function BaseLayout({ children }: BaseLayoutProps) {
+export function MessengerLayout({ children }: BaseLayoutProps) {
   const matches = useMatches();
   const { panelBackground } = useDynamicBackground();
   const dispatch = useDispatch<AppDispatch>();

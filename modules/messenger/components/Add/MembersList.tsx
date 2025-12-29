@@ -1,15 +1,15 @@
-import { Avatar } from "@nextui-org/react";
-import { useEffect } from "react";
+import { Avatar } from "@heroui/react";
 import SearchBox from "../SearchBox";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { handleGetContactsApi } from "../../services/Messenger/UserService/apis";
-import { handleCreateChatServiceApi } from "../../services/Messenger/PrivateChatService/apis";
+import { useSelector } from "react-redux";
+import { RootState } from "@hrbox/core/redux/store";
 import { MemberListProps } from "./types";
 import { MemberTypes, PrivateChatTypes } from "../../types";
+import { useCreateChatMutation } from "@hrbox/modules/messenger/apis/Private";
+import { useGetContactsQuery } from "@hrbox/modules/messenger/apis/User";
 
 const MembersList = ({ data }: MemberListProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const [createChat] = useCreateChatMutation();
+  const { data: contacts } = useGetContactsQuery();
   const users = useSelector((state: RootState) => state.users?.users);
   const profileUser = JSON.parse(localStorage.getItem("profile") || "{}");
 
@@ -24,16 +24,11 @@ const MembersList = ({ data }: MemberListProps) => {
       user_name: user?.user_name,
       muted: false,
       messages: [],
-      create_at: new Date().toString(),
+      create_at: new Date().toString()
     };
-
-    dispatch(handleCreateChatServiceApi(newChat));
+    createChat({ newChat });
     data.setIsOpenAddModal(false);
   };
-
-  useEffect(() => {
-    dispatch(handleGetContactsApi());
-  }, [dispatch]);
 
   return (
     <div className="flex flex-col px-4 py-9 rounded-3 bg-white dark:bg-info-1000">
@@ -55,7 +50,8 @@ const MembersList = ({ data }: MemberListProps) => {
                 <span className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
                   {item?.name}
                 </span>
-                <span className="font-light text-[10px] font-open-sans leading-normal text-secondary-800 dark:text-neutral-50">
+                <span
+                  className="font-light text-[10px] font-open-sans leading-normal text-secondary-800 dark:text-neutral-50">
                   {item?.description}
                 </span>
               </div>

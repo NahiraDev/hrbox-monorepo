@@ -1,39 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
-import EmptyChat from "../../../components/EmptyChat";
+import { useSelector } from "react-redux";
+import { RootState } from "@hrbox/core/redux/store";
+import EmptyChat from "@hrbox/modules/messenger/components/EmptyChat";
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  handleFetchSaveMessages,
-  handleFetchSaveMessagesApi,
-} from "../../../services/Messenger/SaveMessageService/apis";
-import { useWebSocket } from "../../../context/SignalRWebSocket";
-import TextMessage from "../../../components/Messages/TextMessage";
-import PhotoMessage from "../../../components/Messages/PhotoMessage";
-import FileMessage from "../../../components/Messages/FileMessage";
-import AudioMessage from "../../../components/Messages/AudioMessage";
-import LinkMessage from "../../../components/Messages/LinkMessage";
-import TextBox from "../../../components/TextBox";
+import { useFetchSaveMessagesQuery } from "@hrbox/modules/messenger/apis/SaveMessage";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import TextMessage from "@hrbox/modules/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@hrbox/modules/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@hrbox/modules/messenger/components/Messages/FileMessage";
+import AudioMessage from "@hrbox/modules/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@hrbox/modules/messenger/components/Messages/LinkMessage";
+import TextBox from "@hrbox/modules/messenger/components/TextBox";
 import { debounce } from "lodash";
 import {
-  handleFetchChatMessageApi,
-  handleFetchUserChatsApi,
-  handleMarkMessageAsSeenPrivateChatApi,
-} from "../../../services/Messenger/PrivateChatService/apis";
+  useFetchChatMessagesQuery,
+  useFetchUserChatsQuery,
+  useMarkMessageAsSeenMutation as useMarkMessageAsSeenPrivateChatMutation
+} from "@hrbox/modules/messenger/apis/Private";
+import { useFetchGroupsQuery, useMarkMessageAsSeenGroupChatMutation } from "@hrbox/modules/messenger/apis/Group";
 import {
-  handleFetchGroupsApi,
-  handleMarkMessageAsSeenGroupChatApi,
-} from "../../../services/Messenger/GroupChatService/apis";
-import {
-  handleFetchChannelsApi,
-  handleMarkMessageAsSeenChannelChatApi,
-} from "../../../services/Messenger/ChannelChatService/apis";
-import { MessageTypes } from "../../../types";
+  useFetchChannelsQuery,
+  useMarkMessageAsSeenMutation as useMarkMessageAsSeenChannelMutation
+} from "@hrbox/modules/messenger/apis/Channel";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
-export default function HomePage() {
+const HomePage = () => {
   const { messages } = useWebSocket();
   const [messageList, setMessageList] = useState<MessageTypes[]>([]);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const userProfile = useSelector((state: RootState) => state.profile.profile);
   const myProfile = JSON.parse(localStorage.getItem("profile")!);
@@ -41,25 +35,33 @@ export default function HomePage() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isMarkingSeen, setIsMarkingSeen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
-
-  const allChats: MessageTypes[] | any = useSelector(
-    (state: RootState) => state.privateChat.messages,
+  const { data: allChats } = useFetchChatMessagesQuery();
+  useFetchGroupsQuery();
+  useFetchChannelsQuery();
+  useFetchSaveMessagesQuery();
+  useFetchUserChatsQuery(
+    { chat_id: userProfile?.chat_id || "" },
+    { skip: !userProfile?.user_id }
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const [markMessageAsSeenPrivateChat] = useMarkMessageAsSeenPrivateChatMutation();
+  const [markMessageAsSeenGroupChat] = useMarkMessageAsSeenGroupChatMutation();
+  const [markMessageAsSeenChannel] = useMarkMessageAsSeenChannelMutation();
 
   const loadMessages = async () => {
     setMessageList(allChats);
   };
+
   const loadMoreMessages = async () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
   const handleSeen = useCallback(
     debounce(async () => {
       if (isMarkingSeen) return;
 
       const unseenMessages = messageList.filter(
         (msg: MessageTypes) =>
-          msg.status === "delivered" && msg.sender_id !== myProfile.user_id,
+          msg.status === "delivered" && msg.sender_id !== myProfile.user_id
       );
 
       if (userProfile?.chat_type === "private") {
@@ -67,12 +69,10 @@ export default function HomePage() {
           const latestMessageId = unseenMessages[unseenMessages.length - 1]?.id;
           setIsMarkingSeen(true);
           try {
-            await dispatch(
-              handleMarkMessageAsSeenPrivateChatApi({
-                message_id: latestMessageId,
-                chat_id: userProfile?.chat_id,
-              }),
-            ).unwrap();
+            await markMessageAsSeenPrivateChat({
+              message_id: latestMessageId,
+              chat_id: userProfile?.chat_id
+            }).unwrap();
           } catch (error) {
             console.error("Failed to mark messages as seen", error);
           }
@@ -83,12 +83,10 @@ export default function HomePage() {
           const latestMessageId = unseenMessages[unseenMessages.length - 1]?.id;
           setIsMarkingSeen(true);
           try {
-            await dispatch(
-              handleMarkMessageAsSeenGroupChatApi({
-                message_id: latestMessageId,
-                group_id: userProfile?.chat_id,
-              }),
-            ).unwrap();
+            await markMessageAsSeenGroupChat({
+              message_id: latestMessageId,
+              group_id: userProfile?.chat_id
+            }).unwrap();
           } catch (error) {
             console.error("Failed to mark messages as seen", error);
           }
@@ -99,12 +97,10 @@ export default function HomePage() {
           const latestMessageId = unseenMessages[unseenMessages.length - 1]?.id;
           setIsMarkingSeen(true);
           try {
-            await dispatch(
-              handleMarkMessageAsSeenChannelChatApi({
-                message_id: latestMessageId,
-                channel_id: userProfile?.chat_id,
-              }),
-            ).unwrap();
+            await markMessageAsSeenChannel({
+              message_id: latestMessageId,
+              channel_id: userProfile?.chat_id
+            }).unwrap();
           } catch (error) {
             console.error("Failed to mark messages as seen", error);
           }
@@ -112,8 +108,9 @@ export default function HomePage() {
         }
       }
     }, 1000),
-    [messageList],
+    [messageList]
   );
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -121,7 +118,7 @@ export default function HomePage() {
           loadMoreMessages();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (chatContainerRef.current) {
@@ -138,28 +135,12 @@ export default function HomePage() {
   useEffect(() => {
     loadMessages();
   }, [allChats, userProfile]);
-  useEffect(() => {
-    dispatch(handleFetchChatMessageApi());
-    dispatch(handleFetchGroupsApi());
-    dispatch(handleFetchChannelsApi());
-    dispatch(handleFetchSaveMessagesApi());
-  }, []);
-
-  useEffect(() => {
-    if (userProfile?.user_id) {
-      dispatch(
-        handleFetchUserChats({
-          chat_id: userProfile.chat_id || "",
-        }),
-      );
-    }
-  }, [userProfile?.user_id]);
 
   useEffect(() => {
     setMessageList((prevMessages: MessageTypes[]) => {
       const uniqueMessages = messages.filter(
         (msg: MessageTypes) =>
-          !prevMessages.some((prevMsg: MessageTypes) => prevMsg.id === msg.id),
+          !prevMessages.some((prevMsg: MessageTypes) => prevMsg.id === msg.id)
       );
       return [...prevMessages, ...uniqueMessages];
     });
@@ -172,7 +153,7 @@ export default function HomePage() {
           handleSeen();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (messageEndRef.current) {
@@ -234,4 +215,6 @@ export default function HomePage() {
       )}
     </div>
   );
-}
+};
+
+export default HomePage;

@@ -5,18 +5,11 @@ import type { ModulePlugin, ModuleRoute } from "@hrbox/modules/types";
 import { Panel, RoleSlug } from "@hrbox/core/config/theme/roles";
 import { Spinner } from "@heroui/react";
 import { moduleRegistry } from "@hrbox/modules/registry";
-
-// ============================================
-// Import Layouts
-// ============================================
 import { BaseLayout } from "@hrbox/core/layouts/BaseLayout";
 import { AuthLayout } from "@hrbox/core/layouts/AuthLayout";
 import { EmptyLayout } from "@hrbox/core/layouts/EmptyLayout";
 import { FramedLayout } from "@hrbox/core/layouts/FramedLayout";
-
-// ============================================
-// Types
-// ============================================
+import { MessengerLayout } from "@hrbox/core/layouts";
 
 interface RouteContext {
   auth?: {
@@ -28,18 +21,14 @@ interface RouteContext {
   };
 }
 
-// ============================================
-// Helper: Extract Panel from Path
-// ============================================
-
 function extractPanelFromPath(path: string): Panel | null {
-  const segments = path.split('/').filter(Boolean);
+  const segments = path.split("/").filter(Boolean);
   const panelSegment = segments[0];
 
   const panelMap: Record<any, Panel> = {
-    hrlink: 'hrlink',
-    hrbox: 'hrbox',
-    'super-admin': 'super-admin',
+    hrlink: "HRLINK",
+    hrbox: "hrbox",
+    "super-admin": "super-admin"
   };
 
   return panelMap[panelSegment] || null;
@@ -49,15 +38,17 @@ function extractPanelFromPath(path: string): Panel | null {
 // Helper: Get Layout Component
 // ============================================
 
-function getLayoutComponent(layoutType?: 'base' | 'auth' | 'empty' | 'framed') {
+function getLayoutComponent(layoutType?: "base" | "auth" | "empty" | "framed" | "messenger") {
   switch (layoutType) {
-    case 'auth':
+    case "auth":
       return AuthLayout;
-    case 'empty':
+    case "empty":
       return EmptyLayout;
-    case 'framed':
+    case "framed":
       return FramedLayout;
-    case 'base':
+    case "messenger":
+      return MessengerLayout;
+    case "base":
     default:
       return BaseLayout;
   }
@@ -75,7 +66,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
     const requiredRoles = meta.requiredRoles || [];
     const requiredPermissions = meta.requiredPermissions || [];
 
-    const layoutType = route.layout || module.layout || 'base';
+    const layoutType = route.layout || module.layout || "base";
     const LayoutComponent = getLayoutComponent(layoutType);
 
     const Component = route.component;
@@ -104,7 +95,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
             breadcrumb: meta.title,
             subHeader: SubHeaderComponent,
             subHeaderProps,
-            layout: layoutType,
+            layout: layoutType
           };
         }
 
@@ -121,7 +112,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         // }
 
         if (requiredPanel && context.auth?.currentPanel !== requiredPanel) {
-          throw redirect({ to: '/403' });
+          throw redirect({ to: "/403" });
         }
 
         if (requiredRoles.length > 0) {
@@ -129,7 +120,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           const hasRole = requiredRoles.includes(userRole as RoleSlug);
 
           if (!hasRole) {
-            throw redirect({ to: '/403' });
+            throw redirect({ to: "/403" });
           }
         }
 
@@ -140,7 +131,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           );
 
           if (!hasPermission) {
-            throw redirect({ to: '/403' });
+            throw redirect({ to: "/403" });
           }
         }
 
@@ -149,7 +140,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           breadcrumb: meta.title,
           subHeader: SubHeaderComponent,
           subHeaderProps,
-          layout: layoutType,
+          layout: layoutType
         };
       },
 
@@ -157,7 +148,7 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         <LayoutComponent>
           <Suspense
             fallback={
-              <div className="flex h-screen items-center justify-center">
+              <div className="flex h-full items-center justify-center">
                 <Spinner size="lg" color="primary" />
               </div>
             }
@@ -165,13 +156,10 @@ const generateModuleRoutes = (module: ModulePlugin) => {
             <Component />
           </Suspense>
         </LayoutComponent>
-      ),
+      )
     });
   });
-}
-// ============================================
-// Generate All Routes from Registry
-// ============================================
+};
 
 export function generateAllModuleRoutes() {
   const allModules = moduleRegistry.getAllModules();
@@ -187,7 +175,7 @@ export function generateAllModuleRoutes() {
     }
   });
 
-  console.log('📊 Total generated routes:', routes.length);
+  console.log("📊 Total generated routes:", routes.length);
   return routes;
 }
 
@@ -195,52 +183,48 @@ export function createRouteTree() {
   const moduleRoutes = generateAllModuleRoutes();
   const forbiddenRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '/403',
-    component: ForbiddenPage,
+    path: "/403",
+    component: ForbiddenPage
   });
 
   const notFoundRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '*',
-    component: NotFoundPage,
+    path: "*",
+    component: NotFoundPage
   });
 
   const indexRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '/',
+    path: "/",
     beforeLoad: async ({ context }: { context: RouteContext }) => {
       if (!context.auth?.isAuthenticated) {
-        throw redirect({ to: '/sso/login' });
+        throw redirect({ to: "/sso/login" });
       }
       if (context.auth?.needsRoleSelection) {
-        throw redirect({ to: '/sso/select-role' });
+        throw redirect({ to: "/sso/select-role" });
       }
       const defaultRoutes: Record<Panel, string> = {
-        hrlink: '/hrlink/dashboard',
-        hrbox: '/hrbox/dashboard',
-        'super-admin': '/super-admin/dashboard',
+        hrlink: "/hrlink/dashboard",
+        hrbox: "/hrbox/dashboard",
+        "super-admin": "/super-admin/dashboard"
       };
       const currentPanel = context.auth?.currentPanel;
-      const targetRoute = currentPanel ? defaultRoutes[currentPanel] : '/sso/welcome';
+      const targetRoute = currentPanel ? defaultRoutes[currentPanel] : "/sso/welcome";
       throw redirect({ to: targetRoute });
-    },
+    }
   });
 
   const allRoutes = [
     indexRoute,
     ...moduleRoutes,
     forbiddenRoute,
-    notFoundRoute,
+    notFoundRoute
   ];
 
-  console.log('📊 Total routes in tree:', allRoutes.length);
+  console.log("📊 Total routes in tree:", allRoutes.length);
 
   return rootRoute.addChildren(allRoutes);
 }
-
-// ============================================
-// Error Pages
-// ============================================
 
 function ForbiddenPage() {
   return (
@@ -278,7 +262,7 @@ function ForbiddenPage() {
             بازگشت
           </button>
           <button
-            onClick={() => (window.location.href = '/')}
+            onClick={() => (window.location.href = "/")}
             className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
           >
             صفحه اصلی
@@ -302,7 +286,7 @@ function NotFoundPage() {
         </p>
 
         <button
-          onClick={() => (window.location.href = '/')}
+          onClick={() => (window.location.href = "/")}
           className="px-6 py-2.5 bg-primary text-white rounded-lg hover:opacity-90 transition-all font-medium shadow-md"
         >
           بازگشت به صفحه اصلی

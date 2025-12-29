@@ -5,112 +5,108 @@ import AddGroup from "../Add/AddGroup";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
-  handleClearHistoryChatApi,
-  handleMuteChatApi,
-  handlePinUnpinChatApi,
-  handleRemoveChatApi
-} from "@hrbox/modules/project-management/services/Messenger/PrivateChatService/apis";
+  useClearChatHistoryMutation,
+  useMuteChatMutation,
+  usePinUnpinChatMutation,
+  useRemoveChatMutation
+} from "@hrbox/modules/messenger/apis/Private";
 import {
-  handleClearHistoryGroupApi,
-  handleMuteGroupApi,
-  handlePinGroupApi,
-  handleRemoveGroupApi
-} from "../../services/Messenger/GroupChatService/apis";
+  useClearHistoryGroupMutation,
+  useMuteGroupMutation,
+  usePinGroupMutation,
+  useRemoveGroupMutation
+} from "@hrbox/modules/messenger/apis/Group";
 import {
-  handleClearHistoryChannelsApi,
-  handleMutedChannelApi,
-  handlePinChannelApi,
-  handleRemoveChannelApi
-} from "../../services/Messenger/ChannelChatService/apis";
+  useClearChannelHistoryMutation,
+  useDeleteChannelMutation,
+  useMuteChannelMutation,
+  usePinChannelMutation
+} from "@hrbox/modules/messenger/apis/Channel";
+import { RootState, setIsEdit, setUserProfile } from "@hrbox/core/redux";
 
 export const Action = ({ setShowAction, profile }: any) => {
   const { isOpen, onOpenChange } = useDisclosure();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const [action, setAction] = useState<any>();
   const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
   const privateChats = useSelector(
     (state: RootState) => state?.privateChat?.privateChats
   );
   const recipient = useSelector((state: RootState) => state.profile.profile);
+  const currentUser = JSON.parse(localStorage.getItem("profile") || "{}");
 
-  const handleAction = (actionType: string, actionService: Function) => {
-    if (!profile) {
-      return toast.error("Profile is not available");
+  const [clearChannelHistory] = useClearChannelHistoryMutation();
+  const [muteChannel] = useMuteChannelMutation();
+  const [pinChannel] = usePinChannelMutation();
+  const [deleteChannel] = useDeleteChannelMutation();
+
+  const [clearChatHistory] = useClearChatHistoryMutation();
+  const [muteChat] = useMuteChatMutation();
+  const [pinUnpinChat] = usePinUnpinChatMutation();
+  const [removeChat] = useRemoveChatMutation();
+
+  const [clearHistoryGroup] = useClearHistoryGroupMutation();
+  const [muteGroup] = useMuteGroupMutation();
+  const [pinGroup] = usePinGroupMutation();
+  const [removeGroup] = useRemoveGroupMutation();
+
+  const handleClearChatHistory = async () => {
+    if (profile?.type === "channel") {
+      try {
+        await clearChannelHistory({ channel_id: profile.id }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to clear channel history:", error);
+      }
+    } else if (profile?.type === "private") {
+      try {
+        await clearChatHistory({ chat_id: profile.id }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to clear chat history:", error);
+      }
+    } else {
+      try {
+        await clearHistoryGroup({ group_id: profile.id }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to clear group history:", error);
+      }
     }
-
-    const id = profile.id || "";
-    const type = profile.type;
-    let privateChatPayload = { chat_id: id }; // Default payload for "private"
-    let groupPayload = { group_id: id };
-    let channelPayload = { channel_id: id };
-
-    switch (type) {
-      case "private":
-        if (actionType === "pin") {
-          privateChatPayload = {
-            ...privateChatPayload,
-            pinned: !profile.pinned
-          };
-        } else if (actionType === "mute") {
-          privateChatPayload = { ...privateChatPayload, muted: !profile.muted };
-        }
-        break;
-
-      case "group":
-        if (actionType === "pin") {
-          groupPayload = { ...groupPayload, pinned: !profile.pinned };
-        } else if (actionType === "mute") {
-          groupPayload = { ...groupPayload, muted: !profile.muted };
-        }
-        break;
-
-      case "channel":
-        if (actionType === "pin") {
-          channelPayload = { ...channelPayload, pinned: !profile.pinned };
-        } else if (actionType === "mute") {
-          channelPayload = { ...channelPayload, muted: !profile.muted };
-        }
-        break;
-
-      default:
-        return toast.error("Invalid profile type");
-    }
-
-    return dispatch(
-      actionService(
-        type === "private"
-          ? privateChatPayload
-          : type === "group"
-            ? groupPayload
-            : channelPayload
-      )
-    );
   };
 
-  const handleClearChatHistory = () => {
-    handleAction(
-      "clear",
-      profile?.type === "private"
-        ? handleClearHistoryChatApi
-        : profile?.type === "group"
-          ? handleClearHistoryGroupApi
-          : handleClearHistoryChannelsApi
-    );
-    dispatch(setUserProfile({}));
-    toast.dismiss();
-  };
-
-  const handleDeleteChat = () => {
-    handleAction(
-      "delete",
-      profile?.type === "private"
-        ? handleRemoveChatApi
-        : profile?.type === "group"
-          ? handleRemoveGroupApi
-          : handleRemoveChannelApi
-    );
-    dispatch(setUserProfile({}));
-    toast.dismiss();
+  const handleDeleteChat = async () => {
+    if (profile?.type === "channel") {
+      try {
+        await deleteChannel({
+          channel_id: profile.id,
+          user_id: currentUser.user_id
+        }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to delete channel:", error);
+      }
+    } else if (profile?.type === "private") {
+      try {
+        await removeChat({ chat_id: profile.id }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to remove chat:", error);
+      }
+    } else {
+      try {
+        await removeGroup({ group_id: profile.id }).unwrap();
+        dispatch(setUserProfile({}));
+        toast.dismiss();
+      } catch (error) {
+        console.error("Failed to remove group:", error);
+      }
+    }
   };
 
   const handleConfirmClearHistory = () => {
@@ -125,14 +121,14 @@ export const Action = ({ setShowAction, profile }: any) => {
             <Button
               variant="flat"
               color="success"
-              onClick={handleClearChatHistory}
+              onPress={handleClearChatHistory}
             >
               Yes
             </Button>
             <Button
               variant="flat"
               color="danger"
-              onClick={() => toast.dismiss()}
+              onPress={() => toast.dismiss()}
             >
               No
             </Button>
@@ -148,28 +144,59 @@ export const Action = ({ setShowAction, profile }: any) => {
     );
   };
 
-  const handleToggleMuteChat = () => {
+  const handleToggleMuteChat = async () => {
     setShowAction(false);
-    handleAction(
-      "mute",
-      profile?.type === "private"
-        ? handleMuteChatApi
-        : profile?.type === "group"
-          ? handleMuteGroupApi
-          : handleMutedChannelApi
-    );
+    if (profile?.type === "channel") {
+      try {
+        await muteChannel({ channel_id: profile.id }).unwrap();
+      } catch (error) {
+        console.error("Failed to mute channel:", error);
+      }
+    } else if (profile?.type === "private") {
+      try {
+        await muteChat({
+          chat_id: profile.id,
+          muted: !profile.muted
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to mute chat:", error);
+      }
+    } else {
+      try {
+        await muteGroup({
+          group_id: profile.id,
+          muted: !profile.muted
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to mute group:", error);
+      }
+    }
   };
 
-  const handleTogglePinChat = () => {
+  const handleTogglePinChat = async () => {
     setShowAction(false);
-    handleAction(
-      "pin",
-      profile?.type === "private"
-        ? handlePinUnpinChatApi
-        : profile?.type === "group"
-          ? handlePinGroupApi
-          : handlePinChannelApi
-    );
+    if (profile?.type === "channel") {
+      try {
+        await pinChannel({ channel_id: profile.id }).unwrap();
+      } catch (error) {
+        console.error("Failed to pin channel:", error);
+      }
+    } else if (profile?.type === "private") {
+      try {
+        await pinUnpinChat({
+          chat_id: profile.id,
+          pinned: !profile.pinned
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to pin chat:", error);
+      }
+    } else {
+      try {
+        await pinGroup({ group_id: profile.id }).unwrap();
+      } catch (error) {
+        console.error("Failed to pin group:", error);
+      }
+    }
   };
 
   const handleEditGroupOrChannel = () => {

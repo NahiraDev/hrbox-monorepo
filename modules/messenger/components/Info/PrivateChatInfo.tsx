@@ -1,5 +1,5 @@
-import { Avatar } from "@nextui-org/react";
-import { RootState } from "../../redux/store";
+import { Avatar } from "@heroui/react";
+import { RootState } from "@hrbox/core/redux/store";
 import { useSelector } from "react-redux";
 import InfoTabs from "./InfoTabs";
 import InfoLayout from ".";

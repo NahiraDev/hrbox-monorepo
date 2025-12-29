@@ -1,49 +1,37 @@
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalContent,
-} from "@nextui-org/react";
+import { Button, Listbox, ListboxItem, Modal, ModalContent } from "@heroui/react";
 import { ReactionList } from "./ReactionList";
-import { AppDispatch, RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  openReplyMessageAction,
-  setMessageData,
-} from "../../redux/reducers/messageAction";
+import { openReplyMessageAction, setMessageData } from "@hrbox/core/redux/slices/messageAction";
 import React, { useState } from "react";
 import ForwardMessage from "../Add/ForwardMessage";
 import { toast } from "react-toastify";
 import {
-  handleAddToSaveMessageApi,
-  handlePinMessageApi,
-  handlePinUnpinMessageApi,
-  handleRemoveMessageApi,
-  handleUnpinMessageApi,
-} from "../../services/Messenger/PrivateChatService/apis";
+  useAddToSaveMessageGroupMutation,
+  usePinMessageGroupMutation,
+  useRemoveMessageGroupMutation
+} from "@hrbox/modules/messenger/apis/Group";
 import {
-  handleAddToSaveMessageGroupApi,
-  handlePinMessageGroupApi,
-  handleRemoveMessageGroupApi,
-} from "../../services/Messenger/GroupChatService/apis";
+  usePinMessageSaveMessageMutation,
+  useRemoveMessageSaveMessageMutation
+} from "@hrbox/modules/messenger/apis/SaveMessage";
 import {
-  handleAddToSaveMessageChannelApi,
-  handlePinMessageChannelApi,
-  handleRemoveMessageChannelApi,
-} from "../../services/Messenger/ChannelChatService/apis";
+  usePinMessageMutation as useChannelPinMessageMutation,
+  useRemoveMessageMutation as useChannelRemoveMessageMutation,
+  useSaveMessageMutation as useChannelSaveMessageMutation
+} from "@hrbox/modules/messenger/apis/Channel";
 import {
-  handlePinMessageSaveMessageApi,
-  handleRemoveMessageSaveMessageApi,
-} from "../../services/Messenger/SaveMessageService/apis";
+  usePinMessageMutation as usePrivateChatPinMessageMutation,
+  useRemoveMessageMutation as usePrivateChatRemoveMessageMutation,
+  useSaveMessageMutation as usePrivateChatSaveMessageMutation
+} from "@hrbox/modules/messenger/apis/Private";
 import { ReactMessageProps } from "./types";
 
-// Action types constants
 const MessageTypes = {
   private: "private",
   group: "group",
   channel: "channel",
-  save: "save",
+  save: "save"
 };
 
 const ReactionKeys = {
@@ -51,81 +39,127 @@ const ReactionKeys = {
   pin: "pin",
   save: "save",
   delete: "delete",
-  forward: "forward",
+  forward: "forward"
 };
 
 const Reaction: React.FC<ReactMessageProps> = ({
-  setIsOpenMessengerAction,
-  message,
-}) => {
-  const dispatch = useDispatch<AppDispatch>();
+                                                 setIsOpenMessengerAction,
+                                                 message
+                                               }) => {
+  const dispatch = useDispatch();
   const messageId = useSelector(
-    (state: RootState) => state.messageAction.message_id,
+    (state: RootState) => state.messageAction.message_id
   );
   const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
   const recipient = useSelector((state: RootState) => state?.profile?.profile);
 
-  // Toggle Modal
+  const [saveChannelMessage] = useChannelSaveMessageMutation();
+  const [removeChannelMessage] = useChannelRemoveMessageMutation();
+  const [pinChannelMessage] = useChannelPinMessageMutation();
+
+  const [savePrivateChatMessage] = usePrivateChatSaveMessageMutation();
+  const [removePrivateChatMessage] = usePrivateChatRemoveMessageMutation();
+  const [pinPrivateChatMessage] = usePrivateChatPinMessageMutation();
+
+  const [addToSaveMessageGroup] = useAddToSaveMessageGroupMutation();
+  const [removeMessageGroup] = useRemoveMessageGroupMutation();
+  const [pinMessageGroup] = usePinMessageGroupMutation();
+
+  const [pinMessageSaveMessage] = usePinMessageSaveMessageMutation();
+  const [removeMessageSaveMessage] = useRemoveMessageSaveMessageMutation();
+
   const handleOpenAddGroupModal = () => setIsOpenAddModal((prev) => !prev);
 
-  // Action mapping
-  const actionMap = {
-    [MessageTypes.private]: {
-      save: handleAddToSaveMessageApi,
-      remove: handleRemoveMessageApi,
-      pin: handlePinMessageApi,
-    },
-    [MessageTypes.group]: {
-      save: handleAddToSaveMessageGroupApi,
-      remove: handleRemoveMessageGroupApi,
-      pin: handlePinMessageGroupApi,
-    },
-    [MessageTypes.channel]: {
-      save: handleAddToSaveMessageChannelApi,
-      remove: handleRemoveMessageChannelApi,
-      pin: handlePinMessageChannelApi,
-    },
-    [MessageTypes.save]: {
-      save: handlePinMessageSaveMessageApi,
-      remove: handleRemoveMessageSaveMessageApi,
-      pin: handlePinMessageSaveMessageApi,
-    },
-  };
-
-  // Action executor
-  const executeAction = (action: string) => {
+  const executeAction = async (action: string) => {
     const messageType = message?.chat_type as keyof typeof MessageTypes;
-    const actionFunction = actionMap[messageType]?.[action];
+
     if (action === "remove") {
       toast.dismiss();
     }
-    if (actionFunction) {
-      if (messageType === "private") {
-        dispatch(
-          actionFunction({
+
+    if (messageType === "channel") {
+      try {
+        if (action === "save") {
+          await saveChannelMessage({
             message_id: messageId,
-            chat_id: recipient?.chat_id || "",
-          }),
-        );
-      } else if (messageType === "group") {
-        dispatch(
-          actionFunction({
-            message_id: messageId,
-            group_id: recipient?.chat_id || "",
-          }),
-        );
-      } else {
-        dispatch(
-          actionFunction({
+            channel_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "remove") {
+          await removeChannelMessage({
             message_id: messageId,
             channel_id: recipient?.chat_id || "",
-          }),
-        );
+            user_id: JSON.parse(localStorage.getItem("profile") || "{}").user_id
+          }).unwrap();
+        } else if (action === "pin") {
+          await pinChannelMessage({
+            message_id: messageId,
+            channel_id: recipient?.chat_id || ""
+          }).unwrap();
+        }
+      } catch (error) {
+        console.error(`Failed to ${action} channel message:`, error);
+      }
+    } else if (messageType === "private") {
+      try {
+        if (action === "save") {
+          await savePrivateChatMessage({
+            message_id: messageId,
+            chat_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "remove") {
+          await removePrivateChatMessage({
+            message_id: messageId,
+            chat_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "pin") {
+          await pinPrivateChatMessage({
+            message_id: messageId,
+            chat_id: recipient?.chat_id || ""
+          }).unwrap();
+        }
+      } catch (error) {
+        console.error(`Failed to ${action} private chat message:`, error);
+      }
+    } else if (messageType === "group") {
+      try {
+        if (action === "save") {
+          await addToSaveMessageGroup({
+            message_id: messageId,
+            group_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "remove") {
+          await removeMessageGroup({
+            message_id: messageId,
+            group_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "pin") {
+          await pinMessageGroup({
+            message_id: messageId,
+            group_id: recipient?.chat_id || ""
+          }).unwrap();
+        }
+      } catch (error) {
+        console.error(`Failed to ${action} group message:`, error);
+      }
+    } else if (messageType === "save") {
+      try {
+        if (action === "save" || action === "pin") {
+          await pinMessageSaveMessage({
+            message_id: messageId,
+            save_message_id: recipient?.chat_id || ""
+          }).unwrap();
+        } else if (action === "remove") {
+          await removeMessageSaveMessage({
+            message_id: messageId,
+            save_message_id: recipient?.chat_id || ""
+          }).unwrap();
+        }
+      } catch (error) {
+        console.error(`Failed to ${action} save message:`, error);
       }
     }
   };
 
-  // Handle confirm delete message
   const handleConfirmDeleteMessage = () => {
     toast(
       <>
@@ -155,17 +189,15 @@ const Reaction: React.FC<ReactMessageProps> = ({
         autoClose: false,
         closeOnClick: false,
         draggable: false,
-        position: "top-center",
-      },
+        position: "top-center"
+      }
     );
   };
 
-  // Handle forward action
   const handleForward = () => {
     handleOpenAddGroupModal();
   };
 
-  // Handle reply action
   const handleReplyMessage = () => {
     setIsOpenMessengerAction(false);
     dispatch(openReplyMessageAction());
@@ -193,20 +225,19 @@ const Reaction: React.FC<ReactMessageProps> = ({
       reply_message_type: message.type,
       reply_message_file_name: message.file_name,
       file_name: message.file_name,
-      reply_message_id: message.id,
+      reply_message_id: message.id
     };
 
     dispatch(setMessageData(replyData));
   };
 
-  // Reaction handler
   const handleReaction = (key: keyof typeof ReactionKeys) => {
     const actionMap = {
       [ReactionKeys.reply]: handleReplyMessage,
       [ReactionKeys.pin]: () => executeAction("pin"),
       [ReactionKeys.save]: () => executeAction("save"),
       [ReactionKeys.delete]: handleConfirmDeleteMessage,
-      [ReactionKeys.forward]: handleForward,
+      [ReactionKeys.forward]: handleForward
     };
 
     const action = actionMap[key];
@@ -227,7 +258,8 @@ const Reaction: React.FC<ReactMessageProps> = ({
           >
             <div className="flex gap-4 group-hover:text-primary-400 group-hover:dark:text-gold">
               {item.icon}
-              <span className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
+              <span
+                className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
                 {item.text}
               </span>
             </div>
@@ -239,8 +271,7 @@ const Reaction: React.FC<ReactMessageProps> = ({
         <ModalContent>
           <ForwardMessage
             data={{
-              // setIsOpenMessengerAction,
-              message,
+              message
             }}
           />
         </ModalContent>

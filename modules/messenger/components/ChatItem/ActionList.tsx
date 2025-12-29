@@ -1,20 +1,13 @@
-import {
-  Edit2,
-  VolumeSlash,
-  Paperclip,
-  Broom,
-  Trash,
-  VolumeHigh,
-} from "iconsax-react";
+import { Broom, Edit2, Paperclip, Trash, VolumeHigh, VolumeSlash } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { PrivateChatTypes } from "../../types";
+import { RootState } from "@hrbox/core/redux/store";
+import { PrivateChatTypes } from "@hrbox/core/types";
 
 export const ActionList = () => {
   const allChats = useSelector(
-    (state: RootState) => state?.privateChat?.privateChats,
+    (state: RootState) => state?.privateChat?.privateChats
   );
-  const actionItems = [
+  return [
     {
       icon: allChats.some((chat: PrivateChatTypes) => chat?.muted === false) ? (
         <VolumeSlash
@@ -30,7 +23,7 @@ export const ActionList = () => {
       text: allChats.some((chat: PrivateChatTypes) => chat?.muted === false)
         ? "Muted Notifications"
         : "Unmute Notifications",
-      key: "mute",
+      key: "mute"
     },
     {
       icon: (
@@ -40,7 +33,7 @@ export const ActionList = () => {
         />
       ),
       text: "Pin",
-      key: "pin",
+      key: "pin"
     },
     {
       icon: (
@@ -50,7 +43,7 @@ export const ActionList = () => {
         />
       ),
       text: "Clear History",
-      key: "clear",
+      key: "clear"
     },
     {
       icon: (
@@ -60,7 +53,7 @@ export const ActionList = () => {
         />
       ),
       text: "Edit",
-      key: "edit",
+      key: "edit"
     },
     {
       icon: (
@@ -70,9 +63,7 @@ export const ActionList = () => {
         />
       ),
       text: "Delete",
-      key: "delete",
-    },
+      key: "delete"
+    }
   ];
-
-  return actionItems;
 };

@@ -4,3 +4,7 @@ export * from "@hrbox/core/redux/slices/authSlice";
 export * from "@hrbox/core/redux/slices/userSlice";
 export * from "@hrbox/core/redux/slices/themeSlice";
 export * from "@hrbox/core/redux/slices/dnnSupervisorEditSlice";
+export * from "@hrbox/core/redux/slices/loading";
+export * from "@hrbox/core/redux/slices/profile";
+export * from "@hrbox/core/redux/slices/messageAction";
+export * from "@hrbox/core/redux/slices/messengerAction";

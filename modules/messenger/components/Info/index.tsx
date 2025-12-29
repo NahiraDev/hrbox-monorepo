@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 
 const InfoLayout = ({ children }: { children: React.ReactNode }) => {
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
 
   return (

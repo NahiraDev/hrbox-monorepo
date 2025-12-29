@@ -1,15 +1,29 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
-import { AppDispatch, RootState } from "@hrbox/core/redux";
+import { RootState } from "@hrbox/core/redux";
 import ChannelFooter from "@hrbox/modules/messenger/components/ChannelFooter";
 import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import TextMessage from "@hrbox/modules/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@hrbox/modules/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@hrbox/modules/messenger/components/Messages/FileMessage";
+import AudioMessage from "@hrbox/modules/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@hrbox/modules/messenger/components/Messages/LinkMessage";
+import TextBox from "@hrbox/modules/messenger/components/TextBox";
+import EmptyChat from "@hrbox/modules/messenger/components/EmptyChat";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
+import { MessageProps } from "@hrbox/modules/messenger/components/Messages";
+import {
+  useFetchChannelChatsQuery,
+  useFetchChannelsQuery,
+  useMarkMessageAsSeenMutation
+} from "@hrbox/modules/messenger/apis/Channel";
 
 export default function ChannelPage() {
   const { messages } = useWebSocket();
   const [messageList, setMessageList] = useState<MessageTypes[]>([]);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const userProfile = useSelector((state: RootState) => state.profile.profile);
   const myProfile = JSON.parse(localStorage.getItem("profile")!);
@@ -18,13 +32,17 @@ export default function ChannelPage() {
   const [isMarkingSeen, setIsMarkingSeen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  const allChats: MessageTypes[] | any = useSelector(
-    (state: RootState) => state.channels?.channels,
+  const { data: channelsData } = useFetchChannelsQuery();
+  const { data: channelChatsData } = useFetchChannelChatsQuery(
+    { channel_id: userProfile?.chat_id || "" },
+    { skip: !userProfile?.chat_id }
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const [markMessageAsSeen] = useMarkMessageAsSeenMutation();
 
   const loadMessages = async () => {
-    setMessageList(allChats);
+    if (channelChatsData?.messages) {
+      setMessageList(channelChatsData.messages);
+    }
   };
 
   const loadMoreMessages = async () => {
@@ -37,27 +55,26 @@ export default function ChannelPage() {
 
       const unseenMessages = messageList.filter(
         (msg: MessageTypes) =>
-          msg.status === "delivered" && msg.sender_id !== myProfile.sender_id,
+          msg.status === "delivered" && msg.sender_id !== myProfile.sender_id
       );
 
       if (unseenMessages.length > 0) {
         const latestMessageId = unseenMessages[unseenMessages.length - 1]?.id;
         setIsMarkingSeen(true);
         try {
-          await dispatch(
-            handleMarkMessageAsSeenChannelChatApi({
-              message_id: latestMessageId,
-              channel_id: userProfile?.chat_id,
-            }),
-          ).unwrap();
+          await markMessageAsSeen({
+            message_id: latestMessageId,
+            channel_id: userProfile?.chat_id
+          }).unwrap();
         } catch (error) {
           console.error("Failed to mark messages as seen", error);
         }
         setIsMarkingSeen(false);
       }
     }, 1000),
-    [messageList],
+    [messageList, isMarkingSeen, myProfile.sender_id, userProfile?.chat_id, markMessageAsSeen]
   );
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -65,7 +82,7 @@ export default function ChannelPage() {
           loadMoreMessages();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (chatContainerRef.current) {
@@ -80,28 +97,14 @@ export default function ChannelPage() {
   }, [chatContainerRef]);
 
   useEffect(() => {
-    await loadMessages();
-  }, [allChats, userProfile]);
-
-  useEffect(() => {
-    dispatch(handleFetchChannelsApi());
-  }, []);
-
-  useEffect(() => {
-    if (userProfile?.chat_id) {
-      dispatch(
-        handleFetchChannelChatsApi({
-          channel_id: userProfile.chat_id || "",
-        }),
-      );
-    }
-  }, [userProfile?.chat_id]);
+    loadMessages();
+  }, [channelChatsData, userProfile]);
 
   useEffect(() => {
     setMessageList((prevMessages: MessageTypes[]) => {
       const uniqueMessages = messages.filter(
         (msg: MessageTypes) =>
-          !prevMessages.some((prevMsg: MessageTypes) => prevMsg.id === msg.id),
+          !prevMessages.some((prevMsg: MessageTypes) => prevMsg.id === msg.id)
       );
       return [...prevMessages, ...uniqueMessages];
     });
@@ -114,7 +117,7 @@ export default function ChannelPage() {
           handleSeen();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (messageEndRef.current) {
@@ -137,40 +140,33 @@ export default function ChannelPage() {
             {messageList &&
               messageList.length > 0 &&
               messageList.map((message: MessageProps & any, index: number) => (
-                <div>
-                  <div key={index}>
-                    {message.type === "text" ? (
-                      <TextMessage
-                        key={index}
-                        message={message}
-                        isSent={message.sender_id === myProfile.user_id}
-                      />
-                    ) : message.type === "image" ? (
-                      <PhotoMessage
-                        key={index}
-                        message={message}
-                        isSent={message.sender_id === myProfile.user_id}
-                      />
-                    ) : message.type === "file" ? (
-                      <FileMessage
-                        key={index}
-                        message={message}
-                        isSent={message.sender_id === myProfile.user_id}
-                      />
-                    ) : message.type === "audio" ? (
-                      <AudioMessage
-                        key={index}
-                        message={message}
-                        isSent={message.sender_id === myProfile.user_id}
-                      />
-                    ) : (
-                      <LinkMessage
-                        key={index}
-                        message={message}
-                        isSent={message.sender_id === myProfile.user_id}
-                      />
-                    )}
-                  </div>
+                <div key={message.id || index}>
+                  {message.type === "text" ? (
+                    <TextMessage
+                      message={message}
+                      isSent={message.sender_id === myProfile.user_id}
+                    />
+                  ) : message.type === "image" ? (
+                    <PhotoMessage
+                      message={message}
+                      isSent={message.sender_id === myProfile.user_id}
+                    />
+                  ) : message.type === "file" ? (
+                    <FileMessage
+                      message={message}
+                      isSent={message.sender_id === myProfile.user_id}
+                    />
+                  ) : message.type === "audio" ? (
+                    <AudioMessage
+                      message={message}
+                      isSent={message.sender_id === myProfile.user_id}
+                    />
+                  ) : (
+                    <LinkMessage
+                      message={message}
+                      isSent={message.sender_id === myProfile.user_id}
+                    />
+                  )}
                 </div>
               ))}
             <div ref={messageEndRef} />

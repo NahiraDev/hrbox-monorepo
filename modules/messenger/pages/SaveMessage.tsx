@@ -1,22 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { AppDispatch, RootState } from "../../../redux/store";
-import TextBox from "../../../components/TextBox";
-import EmptyChat from "../../../components/EmptyChat";
-import { useWebSocket } from "../../../context/SignalRWebSocket";
-import TextMessage from "../../../components/Messages/TextMessage";
-import PhotoMessage from "../../../components/Messages/PhotoMessage";
-import FileMessage from "../../../components/Messages/FileMessage";
-import AudioMessage from "../../../components/Messages/AudioMessage";
-import LinkMessage from "../../../components/Messages/LinkMessage";
-import { handleFetchSaveMessagesApi } from "../../../services/Messenger/SaveMessageService/apis";
-import { MessageTypes } from "../../../types";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import TextBox from "@hrbox/modules/messenger/components/TextBox";
+import EmptyChat from "@hrbox/modules/messenger/components/EmptyChat";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import TextMessage from "@hrbox/modules/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@hrbox/modules/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@hrbox/modules/messenger/components/Messages/FileMessage";
+import AudioMessage from "@hrbox/modules/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@hrbox/modules/messenger/components/Messages/LinkMessage";
+import { handleFetchSaveMessagesApi } from "@hrbox/modules/messenger/services/Messenger/SaveMessageService/apis";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
 export default function SaveMessagePage() {
   const { messages } = useWebSocket();
   const [messageList, setMessageList] = useState<MessageTypes[]>([]);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const dispatch = useDispatch<AppDispatch>();
   const userProfile = useSelector((state: RootState) => state.profile.profile);
@@ -24,7 +24,7 @@ export default function SaveMessagePage() {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const saveMessage = useSelector(
-    (state: RootState) => state.saveMessage.messages,
+    (state: RootState) => state.saveMessage.messages
   );
 
   const renderMessage = (message: MessageTypes) => {
@@ -71,8 +71,8 @@ export default function SaveMessagePage() {
         const uniqueMessages = messages.filter(
           (msg: MessageTypes) =>
             !prevMessages.some(
-              (prevMsg: MessageTypes) => prevMsg.id === msg.id,
-            ),
+              (prevMsg: MessageTypes) => prevMsg.id === msg.id
+            )
         );
         return [...prevMessages, ...uniqueMessages];
       });
