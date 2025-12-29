@@ -32,6 +32,7 @@ const FaceAllocation = () => {
           hasPagination={true}
           pageSize={8}
           onRowClick={handleRowClick}
+          variant="bordered"
         />
       </div>
     </>
