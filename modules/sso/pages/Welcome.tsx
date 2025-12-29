@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import { Button } from "@heroui/react";
-import { useAppSelector } from "@hrbox/core/redux/hooks";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
@@ -34,15 +32,12 @@ export const Welcome = () => {
             case RoleSlug.ORGANIZATION:
               dashboardPath = Paths.HRLink.Dashboard;
               break;
-            case RoleSlug.SUPER_ADMIN:
-              dashboardPath = "/super-admin/dashboard";
-              break;
           }
 
           if (!isComplete) {
             push({
               to:
-                Paths.HRLink.ResumeInformation || "/hrlink/resume/inforamtion",
+                Paths.HRLink.ResumeInformation || "/hrlink/resume/inforamtion"
             });
           } else {
             push({ to: dashboardPath });

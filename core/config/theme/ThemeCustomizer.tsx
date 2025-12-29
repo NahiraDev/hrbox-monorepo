@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useTheme } from '@hrbox/core/hooks/useTheme';
+import { useState } from "react";
+import { useTheme } from "@hrbox/core/hooks/useTheme";
 
 export default function ThemeCustomizer() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('colors');
+  const [activeTab, setActiveTab] = useState("colors");
 
   const {
     panel,
@@ -25,7 +25,7 @@ export default function ThemeCustomizer() {
     reset,
     undo,
     redo,
-    config,
+    config
   } = useTheme();
 
   // ============================================
@@ -34,15 +34,15 @@ export default function ThemeCustomizer() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'colors':
+      case "colors":
         return <ColorsTab getColor={getColor} setColor={setColor} />;
-      case 'typography':
+      case "typography":
         return <TypographyTab getFont={getFont} setFont={setFont} />;
-      case 'spacing':
+      case "spacing":
         return <SpacingTab getSpacing={getSpacing} setSpacing={setSpacing} />;
-      case 'radius':
+      case "radius":
         return <RadiusTab getRadius={getRadius} setRadius={setRadius} />;
-      case 'custom':
+      case "custom":
         return <CustomCSSTab config={config} setCustomCSS={setCustomCSS} />;
       default:
         return null;
@@ -114,7 +114,7 @@ export default function ThemeCustomizer() {
                   onClick={toggleMode}
                   className="flex items-center gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 px-4 py-2 text-sm font-medium transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700"
                 >
-                  {isDark ? '🌙 Dark' : '☀️ Light'}
+                  {isDark ? "🌙 Dark" : "☀️ Light"}
                 </button>
               </div>
 
@@ -124,17 +124,17 @@ export default function ThemeCustomizer() {
                   Panel
                 </span>
                 <div className="grid grid-cols-3 gap-2">
-                  {['hrlink', 'hrbox', 'super-admin'].map((p) => (
+                  {["hrlink", "hrbox"].map((p) => (
                     <button
                       key={p}
                       onClick={() => setPanel(p as any)}
                       className={`rounded-lg px-3 py-2 text-xs font-medium transition-all ${
                         panel === p
-                          ? 'bg-primary-500 text-white'
-                          : 'bg-neutral-100 dark:bg-neutral-800 text-secondary-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                          ? "bg-primary-500 text-white"
+                          : "bg-neutral-100 dark:bg-neutral-800 text-secondary-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700"
                       }`}
                     >
-                      {p.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                      {p.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
                     </button>
                   ))}
                 </div>
@@ -168,19 +168,19 @@ export default function ThemeCustomizer() {
             {/* Tabs */}
             <div className="flex border-b border-neutral-200 dark:border-neutral-700 overflow-x-auto">
               {[
-                { id: 'colors', label: '🎨 Colors' },
-                { id: 'typography', label: '📝 Fonts' },
-                { id: 'spacing', label: '📏 Spacing' },
-                { id: 'radius', label: '⭕ Radius' },
-                { id: 'custom', label: '💻 CSS' },
+                { id: "colors", label: "🎨 Colors" },
+                { id: "typography", label: "📝 Fonts" },
+                { id: "spacing", label: "📏 Spacing" },
+                { id: "radius", label: "⭕ Radius" },
+                { id: "custom", label: "💻 CSS" }
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-shrink-0 px-4 py-3 text-sm font-medium transition-all ${
                     activeTab === tab.id
-                      ? 'border-b-2 border-primary-500 text-primary-500'
-                      : 'text-neutral-600 dark:text-neutral-400 hover:text-secondary-900 dark:hover:text-white'
+                      ? "border-b-2 border-primary-500 text-primary-500"
+                      : "text-neutral-600 dark:text-neutral-400 hover:text-secondary-900 dark:hover:text-white"
                   }`}
                 >
                   {tab.label}
@@ -205,10 +205,10 @@ export default function ThemeCustomizer() {
 
 function ColorsTab({ getColor, setColor }: any) {
   const colorGroups = [
-    { name: 'Primary', key: 'primary', shades: [500, 600, 700] },
-    { name: 'Secondary', key: 'secondary', shades: [500, 600, 700] },
-    { name: 'Success', key: 'success', shades: [50, 100, 900] },
-    { name: 'Danger', key: 'danger', shades: [50, 100, 900] },
+    { name: "Primary", key: "primary", shades: [500, 600, 700] },
+    { name: "Secondary", key: "secondary", shades: [500, 600, 700] },
+    { name: "Success", key: "success", shades: [50, 100, 900] },
+    { name: "Danger", key: "danger", shades: [50, 100, 900] }
   ];
 
   return (
@@ -221,7 +221,7 @@ function ColorsTab({ getColor, setColor }: any) {
           <div className="space-y-2">
             {group.shades.map((shade) => {
               const path = `${group.key}.${shade}`;
-              const color = getColor(path) || '#000000';
+              const color = getColor(path) || "#000000";
               return (
                 <div key={shade} className="flex items-center gap-3">
                   <span className="w-12 text-xs text-neutral-600 dark:text-neutral-400">
@@ -252,23 +252,23 @@ function ColorsTab({ getColor, setColor }: any) {
 
 function TypographyTab({ getFont, setFont }: any) {
   const fonts = [
-    'Inter',
-    'Roboto',
-    'Open Sans',
-    'Yekan Bakh',
-    'Vazir',
-    'Fira Code',
+    "Inter",
+    "Roboto",
+    "Open Sans",
+    "Yekan Bakh",
+    "Vazir",
+    "Fira Code"
   ];
 
   return (
     <div className="space-y-4">
-      {['display', 'body', 'mono'].map((type) => (
+      {["display", "body", "mono"].map((type) => (
         <div key={type}>
           <label className="mb-2 block text-sm font-medium text-secondary-900 dark:text-white">
             {type.charAt(0).toUpperCase() + type.slice(1)} Font
           </label>
           <select
-            value={getFont(type)?.replace(/['"]/g, '') || ''}
+            value={getFont(type)?.replace(/['"]/g, "") || ""}
             onChange={(e) => setFont(type as any, `'${e.target.value}'`)}
             className="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm"
           >
@@ -289,7 +289,7 @@ function TypographyTab({ getFont, setFont }: any) {
 // ============================================
 
 function SpacingTab({ getSpacing, setSpacing }: any) {
-  const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  const sizes = ["xs", "sm", "md", "lg", "xl", "2xl"];
 
   return (
     <div className="space-y-3">
@@ -300,7 +300,7 @@ function SpacingTab({ getSpacing, setSpacing }: any) {
           </label>
           <input
             type="text"
-            value={getSpacing(size) || ''}
+            value={getSpacing(size) || ""}
             onChange={(e) => setSpacing(size, e.target.value)}
             className="flex-1 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-2 text-sm"
             placeholder="e.g., 16px"
@@ -316,7 +316,7 @@ function SpacingTab({ getSpacing, setSpacing }: any) {
 // ============================================
 
 function RadiusTab({ getRadius, setRadius }: any) {
-  const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'];
+  const sizes = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "full"];
 
   return (
     <div className="space-y-3">
@@ -327,7 +327,7 @@ function RadiusTab({ getRadius, setRadius }: any) {
           </label>
           <input
             type="text"
-            value={getRadius(size) || ''}
+            value={getRadius(size) || ""}
             onChange={(e) => setRadius(size, e.target.value)}
             className="flex-1 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-2 text-sm"
             placeholder="e.g., 8px"
@@ -343,7 +343,7 @@ function RadiusTab({ getRadius, setRadius }: any) {
 // ============================================
 
 function CustomCSSTab({ config, setCustomCSS }: any) {
-  const [css, setCss] = useState(config?.customCSS || '');
+  const [css, setCss] = useState(config?.customCSS || "");
 
   const handleApply = () => {
     setCustomCSS(css);

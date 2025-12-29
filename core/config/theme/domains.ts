@@ -5,7 +5,7 @@
 import { Panel } from "./roles";
 import * as process from "node:process";
 
-export type Domain = "front.hrbox.me" | "react.hrbox.me" | "super-admin";
+export type Domain = "front.hrbox.me" | "react.hrbox.me";
 
 export interface DomainConfig {
   domain: string;
@@ -18,7 +18,7 @@ export interface DomainConfig {
 
   title: string;
   description: string;
-
+  loader: string;
   loginBg: {
     light: string;
     dark: string;
@@ -43,10 +43,6 @@ export interface DomainConfig {
   };
 }
 
-// ============================================
-// Domain Configurations
-// ============================================
-
 export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
   hrlink: {
     domain: "hrlink",
@@ -56,38 +52,38 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
       "www.hrlink.ir",
       "hrlink.me",
       "front.hrbox.me",
-      "localhost",
+      "localhost"
     ],
 
     logo: "/images/hrlink/logo.svg",
     logoMobile: "/images/hrlink/logo.svg",
     favicon: "/images/hrlink/favicon.ico",
-
+    loader: "/images/hrlink/loader.gif",
     title: "HRLink - استخدام و کاریابی",
     description: "پلتفرم جامع استخدام و کاریابی",
 
     loginBg: {
       light: "/images/hrlink/login-bg-light.webp",
-      dark: "/images/hrlink/login-bg-dark.webp",
+      dark: "/images/hrlink/login-bg-dark.webp"
     },
     panelBg: {
       light: "/images/hrlink/panel-bg-light.webp",
-      dark: "/images/hrlink/panel-bg-dark.webp",
+      dark: "/images/hrlink/panel-bg-dark.webp"
     },
     theme: {
       light: {
         primary: "#1E3363",
         secondary: "#0A9AD7",
         background: "#F5FBFE",
-        surface: "#FFFFFF",
+        surface: "#FFFFFF"
       },
       dark: {
         primary: "#DDBA69",
         secondary: "#FFFFFF",
         background: "#04070E",
-        surface: "#01101A",
-      },
-    },
+        surface: "#01101A"
+      }
+    }
   },
 
   hrbox: {
@@ -98,17 +94,17 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
     logo: "/images/hrbox/logo.svg",
     logoMobile: "/images/hrbox/logo.svg",
     favicon: "/images/hrbox/favicon.ico",
-
+    loader: "/images/hrlink/loader.gif",
     title: "HRBox - مدیریت منابع انسانی",
     description: "سیستم جامع مدیریت منابع انسانی",
 
     loginBg: {
       light: "/images/hrbox/login-bg-light.webp",
-      dark: "/images/hrbox/login-bg-dark.webp",
+      dark: "/images/hrbox/login-bg-dark.webp"
     },
     panelBg: {
       light: "/images/hrbox/panel-bg-light.webp",
-      dark: "/images/hrbox/panel-bg-dark.webp",
+      dark: "/images/hrbox/panel-bg-dark.webp"
     },
 
     theme: {
@@ -116,16 +112,16 @@ export const DOMAIN_CONFIGS: Record<Panel, DomainConfig> = {
         primary: "#0A9AD7",
         secondary: "#1E293B",
         background: "#F8FAFC",
-        surface: "#FFFFFF",
+        surface: "#FFFFFF"
       },
       dark: {
         primary: "#044566",
         secondary: "#FFFFFF",
         background: "#0F172A",
-        surface: "#1E293B",
-      },
-    },
-  },
+        surface: "#1E293B"
+      }
+    }
+  }
 };
 
 export function getCurrentDomain(): Panel {
@@ -192,7 +188,7 @@ export function applyPageTitle(panel: Panel, pageTitle?: string) {
 export function applyMetaTags(panel: Panel) {
   const config = getDomainConfig(panel);
   let metaDesc = document.querySelector<HTMLMetaElement>(
-    'meta[name="description"]',
+    "meta[name=\"description\"]"
   );
   if (!metaDesc) {
     metaDesc = document.createElement("meta");
@@ -224,7 +220,7 @@ export function applyDomainTheme(panel: Panel, mode: "light" | "dark") {
 
 export function getLoginBackground(
   panel: Panel,
-  mode: "light" | "dark",
+  mode: "light" | "dark"
 ): string {
   const config = getDomainConfig(panel);
   return config.loginBg[mode];
@@ -232,7 +228,7 @@ export function getLoginBackground(
 
 export function getPanelBackground(
   panel: Panel,
-  mode: "light" | "dark",
+  mode: "light" | "dark"
 ): string {
   const config = getDomainConfig(panel);
   return config.panelBg[mode];
