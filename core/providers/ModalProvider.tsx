@@ -93,9 +93,6 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return () => document.removeEventListener("keydown", handleEscKey);
   }, [modals]);
 
-  // ============================================
-  // باز کردن مودال
-  // ============================================
   const openModal = useCallback(
     (
       type: ModalType | string,
