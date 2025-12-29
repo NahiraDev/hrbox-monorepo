@@ -1,4 +1,4 @@
-export type ThemeMode = "light" | "dark" | undefined;
+export type ThemeMode = "light" | "dark";
 export type Panel = "hrlink" | "hrbox";
 
 export interface ColorPalette {

@@ -1,16 +1,17 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@hrbox/core/redux/hooks';
-import { initTheme } from '@hrbox/core/redux/slices/themeSlice';
-import { setDomainTheme, setCurrentPanel } from '@hrbox/core/redux/slices/authSlice';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@hrbox/core/redux/hooks";
+import { initTheme } from "@hrbox/core/redux/slices/themeSlice";
+import { setCurrentPanel, setDomainTheme } from "@hrbox/core/redux/slices/authSlice";
 
 import {
+  applyDomainTheme,
+  applyFavicon,
+  applyMetaTags,
+  applyPageTitle,
   getCurrentDomain,
   getDomainConfig,
-  applyFavicon,
-  applyPageTitle,
-  applyMetaTags,
-  applyDomainTheme, getDomainTheme,
-} from '@hrbox/core/config/theme/domains';
+  getDomainTheme
+} from "@hrbox/core/config/theme/domains";
 import { Panel } from "@hrbox/core/config/theme";
 
 export function useDomainInit() {
@@ -31,40 +32,38 @@ export function useDomainInit() {
     applyFavicon(detectedDomain);
     applyPageTitle(detectedDomain);
     applyMetaTags(detectedDomain);
-    getDomainTheme()
+    getDomainTheme();
   }, []);
 
   useEffect(() => {
     if (domainTheme && themeMode) {
       dispatch(initTheme());
       applyDomainTheme(domainTheme, themeMode);
-      setCurrentPanel(currentPanel)
+      setCurrentPanel(currentPanel);
     }
   }, [domainTheme, themeMode]);
 
   useEffect(() => {
     if (!isAuthenticated || !selectedRole || !currentPanel) return;
 
-    // if (currentPanel !== domainTheme) {
-    //   redirectToCorrectDomain(currentPanel);
-    // } else {
-    //   console.log('✅ User has access to this domain');
-    // }
+    if (currentPanel !== domainTheme) {
+      redirectToCorrectDomain(currentPanel);
+    } else {
+      console.log("✅ User has access to this domain");
+    }
   }, [isAuthenticated, selectedRole, currentPanel, domainTheme]);
 }
 
-//TODO: Pack Nashe
-// function redirectToCorrectDomain(panel: Panel) {
-//   const domainMap: Record<Panel, string> = {
-//     [Panel.HRLINK]: 'https://front.hrbox.me',
-//     [Panel.HRBOX]: 'https://react.hrbox.me',
-//     [Panel.SUPER_ADMIN]: 'https://admin.hrbox.me',
-//   };
+function redirectToCorrectDomain(panel: Panel) {
+  const domainMap: Record<Panel, string> = {
+    [Panel.HRLINK]: "https://front.hrbox.me",
+    [Panel.HRBOX]: "https://react.hrbox.me"
+  };
 
-//   const targetDomain = domainMap[panel];
+  const targetDomain = domainMap[panel];
 
-//   if (targetDomain && !window.location.href.includes(targetDomain)) {
-//     console.log('🔄 Redirecting to correct domain:', targetDomain);
-//     window.location.href = targetDomain;
-//   }
-// }
+  if (targetDomain && !window.location.href.includes(targetDomain)) {
+    console.log("🔄 Redirecting to correct domain:", targetDomain);
+    window.location.href = targetDomain;
+  }
+}

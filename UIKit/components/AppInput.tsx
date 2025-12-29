@@ -50,7 +50,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)] ",
+              "bg-[linear-gradient(90deg,#FFF)_5%,#EEF9FF_48%,(#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)] ",
               "border border-[#DCF0F9]",
               "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
@@ -75,10 +75,10 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-white dark:bg-neutral-800 border border-[#DCF0F9]  ",
-              "dark:border-[#DCF0F9]",
+              "bg-white dark:bg-secondary-1000 border border-[#DCF0F9]",
+              "dark:border-[#04425C]",
               "hover:border-primary-300 dark:hover:border-primary-600",
-              "focus-within:border-primary focus-within:shadow-lg"
+              "focus-within:shadow-lg"
             ),
             input: clsx(baseInput, "text-secondary-900 dark:text-white"),
             isDisabled: false

@@ -1,13 +1,11 @@
 export enum RoleSlug {
-  JOB_SEEKER = 'job-seeker',
-  ORGANIZATION = 'organization',
-  SUPER_ADMIN = 'super-admin',
+  JOB_SEEKER = "job-seeker",
+  ORGANIZATION = "organization"
 }
 
 export enum Panel {
-  HRLINK = 'hrlink',
-  HRBOX = 'hrbox',
-  SUPER_ADMIN = 'super-admin',
+  HRLINK = "hrlink",
+  HRBOX = "hrbox"
 }
 
 export interface RoleConfig {
@@ -24,34 +22,24 @@ export interface RoleConfig {
 export const ROLE_CONFIGS: Record<RoleSlug, RoleConfig> = {
   [RoleSlug.JOB_SEEKER]: {
     slug: RoleSlug.JOB_SEEKER,
-    nameFA: 'کارجو',
-    nameEN: 'Job Seeker',
+    nameFA: "کارجو",
+    nameEN: "Job Seeker",
     panel: Panel.HRLINK,
-    icon: '👤',
-    defaultRoute: '/hrlink/dashboard',
-    color: '#0A9AD7',
-    description: 'دسترسی به پنل کارجویی',
+    icon: "👤",
+    defaultRoute: "/hrlink/dashboard",
+    color: "#0A9AD7",
+    description: "دسترسی به پنل کارجویی"
   },
   [RoleSlug.ORGANIZATION]: {
     slug: RoleSlug.ORGANIZATION,
-    nameFA: 'سازمانی',
-    nameEN: 'Organization',
+    nameFA: "سازمانی",
+    nameEN: "Organization",
     panel: Panel.HRBOX,
-    icon: '🏢',
-    defaultRoute: '/hrbox/dashboard',
-    color: '#0A9AD7',
-    description: 'دسترسی به پنل مدیریت سازمانی',
-  },
-  [RoleSlug.SUPER_ADMIN]: {
-    slug: RoleSlug.SUPER_ADMIN,
-    nameFA: 'مدیر کل',
-    nameEN: 'Super Admin',
-    panel: Panel.SUPER_ADMIN,
-    icon: '👑',
-    defaultRoute: '/super-admin/dashboard',
-    color: '#EF4444',
-    description: 'دسترسی کامل به تمام سیستم',
-  },
+    icon: "🏢",
+    defaultRoute: "/hrbox/dashboard",
+    color: "#0A9AD7",
+    description: "دسترسی به پنل مدیریت سازمانی"
+  }
 };
 
 export function getRoleConfig(slug: RoleSlug): RoleConfig {
