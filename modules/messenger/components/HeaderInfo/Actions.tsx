@@ -1,4 +1,4 @@
-import { Broom, Edit2, Grid9, Trash, VolumeSlash } from "iconsax-react";
+import { Broom, Edit2, Grid9, Trash, VolumeSlash } from "iconsax-reactjs";
 
 export const Actions = [
   {
@@ -9,7 +9,7 @@ export const Actions = [
       />
     ),
     key: "mute",
-    text: "Mute Notifications",
+    text: "Mute Notifications"
   },
   {
     icon: (
@@ -19,7 +19,7 @@ export const Actions = [
       />
     ),
     key: "clear",
-    text: "Clear History",
+    text: "Clear History"
   },
   {
     icon: (
@@ -29,7 +29,7 @@ export const Actions = [
       />
     ),
     key: "info",
-    text: "Informations",
+    text: "Informations"
   },
   {
     icon: (
@@ -39,7 +39,7 @@ export const Actions = [
       />
     ),
     text: "Edit",
-    key: "edit",
+    key: "edit"
   },
   {
     icon: (
@@ -49,6 +49,6 @@ export const Actions = [
       />
     ),
     key: "delete",
-    text: "Delete Chat",
-  },
+    text: "Delete Chat"
+  }
 ];

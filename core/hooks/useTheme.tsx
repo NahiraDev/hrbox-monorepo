@@ -1,30 +1,26 @@
-import { useCallback, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '@hrbox/core/redux/hooks';
+import { useCallback, useMemo } from "react";
+import { useAppDispatch, useAppSelector } from "@hrbox/core/redux/hooks";
 import {
-  toggleThemeMode,
-  setThemeMode,
-  changePanel,
   applyFullTheme,
-  updateColor,
-  updateFont,
-  updateSpacing,
-  updateRadius,
-  resetToDefault,
+  changePanel,
   clearHistory,
+  resetToDefault,
+  selectCanRedo,
+  selectCanUndo,
+  selectIsThemeCustomized,
+  selectIsThemeInitialized,
+  selectThemeConfig,
   selectThemeMode,
   selectThemePanel,
-  selectThemeConfig,
-  selectIsThemeInitialized,
-  selectIsThemeCustomized,
-  selectCanUndo,
-  selectCanRedo,
-} from '@hrbox/core/redux/slices/themeSlice';
-import type { Panel } from '@hrbox/core/config/theme';
+  setThemeMode,
+  toggleThemeMode,
+  updateColor,
+  updateFont,
+  updateRadius,
+  updateSpacing
+} from "@hrbox/core/redux/slices/themeSlice";
+import type { Panel } from "@hrbox/core/config/theme";
 import { ThemeConfig, ThemeMode } from "@hrbox/core/config/theme/types";
-
-// ============================================
-// Hook Interface
-// ============================================
 
 interface UseAdvancedThemeReturn {
   mode: ThemeMode;
@@ -35,55 +31,30 @@ interface UseAdvancedThemeReturn {
   isDark: boolean;
   canUndo: boolean;
   canRedo: boolean;
-
-  // Theme Mode
   toggleMode: () => void;
   setMode: (mode: ThemeMode) => void;
-
-  // Panel
   setPanel: (panel: Panel) => void;
-
-  // Full Theme
   applyTheme: (theme: Partial<ThemeConfig>) => void;
-
-  // Colors
   setColor: (path: string, value: string) => void;
   getColor: (path: string) => string | undefined;
-
-  // Typography
-  setFont: (type: 'display' | 'body' | 'mono', value: string) => void;
-  getFont: (type: 'display' | 'body' | 'mono') => string | undefined;
-
-  // Spacing
+  setFont: (type: "display" | "body" | "mono", value: string) => void;
+  getFont: (type: "display" | "body" | "mono") => string | undefined;
   setSpacing: (key: string, value: string) => void;
   getSpacing: (key: string) => string | undefined;
-
-  // Border Radius
   setRadius: (key: string, value: string) => void;
   getRadius: (key: string) => string | undefined;
-
-  // Custom CSS
   setCustomCSS: (css: string) => void;
-
-  // Reset & History
   reset: () => void;
   undo: () => void;
   redo: () => void;
   clearThemeHistory: () => void;
-
-  // Import/Export
   exportTheme: () => string;
   importThemeFromJSON: (json: string) => void;
 }
 
-// ============================================
-// Main Hook
-// ============================================
-
 export function useTheme(): UseAdvancedThemeReturn {
   const dispatch = useAppDispatch();
 
-  // Selectors
   const mode = useAppSelector(selectThemeMode);
   const panel = useAppSelector(selectThemePanel);
   const config = useAppSelector(selectThemeConfig);
@@ -92,7 +63,7 @@ export function useTheme(): UseAdvancedThemeReturn {
   const canUndo = useAppSelector(selectCanUndo);
   const canRedo = useAppSelector(selectCanRedo);
 
-  const isDark = useMemo(() => mode === 'dark', [mode]);
+  const isDark = useMemo(() => mode === "dark", [mode]);
 
   // ============================================
   // Theme Mode
@@ -146,11 +117,11 @@ export function useTheme(): UseAdvancedThemeReturn {
     (path: string): string | undefined => {
       if (!config) return undefined;
 
-      const parts = path.split('.');
+      const parts = path.split(".");
       let current: any = config.colors;
 
       for (const part of parts) {
-        if (current && typeof current === 'object' && part in current) {
+        if (current && typeof current === "object" && part in current) {
           current = current[part];
         } else {
           return undefined;
@@ -167,14 +138,14 @@ export function useTheme(): UseAdvancedThemeReturn {
   // ============================================
 
   const setFont = useCallback(
-    (type: 'display' | 'body' | 'mono', value: string) => {
+    (type: "display" | "body" | "mono", value: string) => {
       dispatch(updateFont({ type, value }));
     },
     [dispatch]
   );
 
   const getFont = useCallback(
-    (type: 'display' | 'body' | 'mono'): string | undefined => {
+    (type: "display" | "body" | "mono"): string | undefined => {
       return config?.typography.fontFamily[type];
     },
     [config]
@@ -275,6 +246,6 @@ export function useTheme(): UseAdvancedThemeReturn {
 
     // Reset & History
     reset,
-    clearThemeHistory,
+    clearThemeHistory
   };
 }

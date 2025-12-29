@@ -10,6 +10,7 @@ export type GroupServiceTypes = {
   group_id?: string;
   message_id?: string;
   user_id?: string;
+  muted?: string
 };
 
 export type PrivateChatServiceTypes = {

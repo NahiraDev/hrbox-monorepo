@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
-import { Save2, SearchNormal1 } from "iconsax-react";
-import { useDarkMode } from "../../context/DarkMode";
-import { RootState } from "../../redux/store";
+import { Button } from "@heroui/react";
+import { Grid9, Save2, SearchNormal1 } from "iconsax-reactjs";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid9 } from "iconsax-react";
-import { toggleInfo } from "../../redux/reducers/messengerAction";
-import { AppDispatch } from "../../redux/store";
+import { toggleInfo } from "@hrbox/core/redux/slices/messengerAction";
 import SearchBox from "../SearchBox";
 import SaveMessageInfo from "../Info/SaveMessageInfo";
 
@@ -15,12 +12,11 @@ export const SaveMessageHeaderInfo = () => {
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const isOpenEmojipicker = useSelector(
-    (state: RootState) => state.messengerAction.isOpenEmojiPicker,
+    (state: RootState) => state.messengerAction.isOpenEmojiPicker
   );
-  const { darkMode } = useDarkMode();
 
   const handleSelect = () => {
     setIsSelected((prev) => !prev);
@@ -39,10 +35,23 @@ export const SaveMessageHeaderInfo = () => {
       <React.Fragment>
         <div className="flex relative">
           <div
-            className={`absolute left-0 top-0 flex flex-row items-center px-8 py-4 gap-6 !backdrop-blur-[6px] h-[72px] z-30 ${!darkMode ? "!bg-gradient-to-r !from-[#ffffffcc] !to-white" : "!bg-gradient-to-r !from-[#01101ab3] !to-[#01101A]"} !rounded-tr-5 ${isOpenMessengerInfo || isOpenEmojipicker ? "w-[calc(100%-256px)]" : "w-full"}
-              ${isSelected && (darkMode ? "bg-primary-800" : "bg-primary-0")} 
-              cursor-pointer transition-colors duration-300
-            hover:bg-primary-0 dark:hover:bg-primary-800`}
+            className={`
+  absolute left-0 top-0 z-30 h-[72px]
+  flex flex-row items-center px-8 py-4 gap-6
+  !backdrop-blur-[6px] !rounded-tr-5
+  cursor-pointer transition-colors duration-300
+
+  !bg-gradient-to-r !from-[#ffffffcc] !to-white
+  dark:!from-[#01101ab3] dark:!to-[#01101A]
+
+  ${
+              isOpenMessengerInfo || isOpenEmojipicker ? "w-[calc(100%-256px)]" : "w-full"
+            }
+
+  ${isSelected ? "bg-primary-0 dark:bg-primary-800" : ""}
+
+  hover:bg-primary-0 dark:hover:bg-primary-800
+`}
             onClick={handleSelect}
           >
             <div
@@ -62,7 +71,7 @@ export const SaveMessageHeaderInfo = () => {
               {showSearchBox && <SearchBox />}
               <Button
                 isIconOnly
-                onClick={handleShowSearchBox}
+                onPress={handleShowSearchBox}
                 variant="light"
                 className="p-1.5"
               >

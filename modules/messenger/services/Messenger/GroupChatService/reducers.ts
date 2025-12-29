@@ -1,85 +1,69 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import {
-  GroupAndChannelTypes,
-  MemberTypes,
-  MessageTypes,
-} from "../../../types";
-import { setLoadingFalse } from "../../../utils/general";
+import { GroupAndChannelTypes, MemberTypes, MessageTypes } from "../../../types";
 
 // Utility function to find group by ID
-const findGroupById = (groups, groupId) =>
+const findGroupById = (groups: any, groupId: any) =>
   groups.findIndex((group: GroupAndChannelTypes) => group.id === groupId);
 
 // Utility function to find message by ID
-const findMessageById = (messages, messageId) =>
+const findMessageById = (messages: any, messageId: any) =>
   messages.findIndex((message: MessageTypes) => message.id === messageId);
 
 export const groupReducers = {
-  handleAddGroup(state, action: PayloadAction<GroupAndChannelTypes>) {
-    setLoadingFalse(state);
+  handleAddGroup(state: any, action: PayloadAction<GroupAndChannelTypes>) {
     state.groups = [...state.groups, action.payload];
   },
 
-  handleUpdateGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
-    console.log(action.payload);
+  handleUpdateGroup(state: any, action: PayloadAction<any>) {
     state.groups = [...state.groups, ...action.payload];
   },
 
-  handleMarkMessageAsSeen(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleMarkMessageAsSeen(state: any, action: PayloadAction<any>) {
     const msgIndex = findMessageById(state.messages, action.payload.message_id);
     if (msgIndex !== -1) {
       state.messages[msgIndex].status = "seen";
     }
   },
 
-  handleRemoveGroup(state, action: PayloadAction<any>) {
+  handleRemoveGroup(state: any, action: PayloadAction<any>) {
     const { group_id, user_id, creator_id } = action.payload;
     const groupIndex = findGroupById(state.groups, group_id);
 
     if (user_id === creator_id) {
       state.groups = state.groups.filter(
-        (group: GroupAndChannelTypes) => group.id !== group_id,
+        (group: GroupAndChannelTypes) => group.id !== group_id
       );
     } else if (groupIndex !== -1) {
       state.groups[groupIndex].members = state.groups[
         groupIndex
-      ].members.filter((member: MemberTypes) => member.id !== user_id);
+        ].members.filter((member: MemberTypes) => member.id !== user_id);
     }
-    setLoadingFalse(state);
   },
 
-  handleFetchGroups(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleFetchGroups(state: any, action: PayloadAction<any>) {
     state.groups = action.payload.groups;
   },
 
-  handleMuteGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleMuteGroup(state: any, action: PayloadAction<any>) {
     state.groups = action.payload.groups;
   },
 
-  handlePinMessage(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handlePinMessage(state: any, action: PayloadAction<any>) {
     state.messages = action.payload.messages;
   },
 
-  handleUnpinMessage(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleUnpinMessage(state: any, action: PayloadAction<any>) {
     state.messages = action.payload.messages;
   },
 
-  handlePinGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handlePinGroup(state: any, action: PayloadAction<any>) {
     const groupIndex = findGroupById(state.groups, action.payload);
     if (groupIndex !== -1) {
       state.groups[groupIndex].pinned = true;
     }
   },
 
-  handleFetchGroupChats(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleFetchGroupChats(state: any, action: PayloadAction<any>) {
     const { group_id, messages } = action.payload;
     const groupIndex = findGroupById(state.groups, group_id);
 
@@ -89,20 +73,18 @@ export const groupReducers = {
     }
   },
 
-  handleRemoveMessageFromGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleRemoveMessageFromGroup(state: any, action: PayloadAction<any>) {
     const { group_id, message_id } = action.payload;
     const groupIndex = findGroupById(state.groups, group_id);
 
     if (groupIndex !== -1) {
       state.groups[groupIndex].messages = state.groups[
         groupIndex
-      ].messages.filter((message: MessageTypes) => message.id !== message_id);
+        ].messages.filter((message: MessageTypes) => message.id !== message_id);
     }
   },
 
-  handleAddToSaveMessage(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleAddToSaveMessage(state: any, action: PayloadAction<any>) {
     const { message, group_id } = action.payload;
     const groupIndex = findGroupById(state.groups, group_id);
 
@@ -113,36 +95,34 @@ export const groupReducers = {
     }
   },
 
-  handleRemoveUserFromGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleRemoveUserFromGroup(state: any, action: PayloadAction<any>) {
     const { group_id, member_id } = action.payload;
     const groupIndex = findGroupById(state.groups, group_id);
 
     if (groupIndex !== -1) {
       state.groups[groupIndex].members = state.groups[
         groupIndex
-      ].members.filter((member: MemberTypes) => member.user_id !== member_id);
+        ].members.filter((member: MemberTypes) => member.user_id !== member_id);
     }
   },
 
-  handleChangeRoleUserInGroup(state, action: PayloadAction<any>) {
-    setLoadingFalse(state);
+  handleChangeRoleUserInGroup(state: any, action: PayloadAction<any>) {
     const { group_id, member_id } = action.payload;
 
     const memberToUpdate = state.groups
       .flatMap((group: GroupAndChannelTypes) =>
         group.members.map((member: MemberTypes) => ({
           ...member,
-          group_id: group.id,
-        })),
+          group_id: group.id
+        }))
       )
       .find(
         (member: any) =>
-          member.user_id === member_id && member.group_id === group_id,
+          member.user_id === member_id && member.group_id === group_id
       );
 
     if (memberToUpdate) {
       memberToUpdate.role = "admin";
     }
-  },
+  }
 };

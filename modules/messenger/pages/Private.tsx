@@ -1,52 +1,50 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AppDispatch, RootState } from "../../../redux/store";
-import TextBox from "../../../components/TextBox";
-import EmptyChat from "../../../components/EmptyChat";
-import TextMessage from "../../../components/Messages/TextMessage";
-import PhotoMessage from "../../../components/Messages/PhotoMessage";
-import FileMessage from "../../../components/Messages/FileMessage";
-import AudioMessage from "../../../components/Messages/AudioMessage";
-import LinkMessage from "../../../components/Messages/LinkMessage";
-import { useWebSocket } from "../../../context/SignalRWebSocket";
+import { RootState } from "@hrbox/core/redux/store";
+import TextBox from "@hrbox/modules/messenger/components/TextBox";
+import EmptyChat from "@hrbox/modules/messenger/components/EmptyChat";
+import TextMessage from "@hrbox/modules/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@hrbox/modules/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@hrbox/modules/messenger/components/Messages/FileMessage";
+import AudioMessage from "@hrbox/modules/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@hrbox/modules/messenger/components/Messages/LinkMessage";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
 import {
-  handleFetchChatMessageApi,
-  handleFetchUserChatsApi,
-  handleMarkMessageAsSeenPrivateChatApi,
-} from "../../../services/Messenger/PrivateChatService/apis";
+  useFetchChatMessagesQuery,
+  useFetchUserChatsQuery,
+  useMarkMessageAsSeenMutation
+} from "@hrbox/modules/messenger/apis/Private";
 import { debounce } from "lodash";
-import { MessageTypes } from "../../../types";
-import { addMessages } from "../../../services/Messenger/PrivateChatService/slices.ts";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
-export default function PrivateChatPage() {
-  const dispatch = useDispatch<AppDispatch>();
+const PrivateChatPage = () => {
+  const dispatch = useDispatch();
   const { messages } = useWebSocket();
 
-  // State management
   const [isMarkingSeen, setIsMarkingSeen] = useState(false);
 
-  // Selectors
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const privateChatProfile = useSelector(
-    (state: RootState) => state.profile.profile,
-  );
-  const privateChatMessages = useSelector(
-    (state: RootState) => state.privateChat.messages,
+    (state: RootState) => state.profile.profile
   );
 
   const reply = useSelector((state: RootState) => state.messageAction.reply);
 
-  // Refs
   const messageEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Profile
   const myProfile = JSON.parse(localStorage.getItem("profile")!);
 
-  // Pinned Message
-  const pinnedMessage = privateChatMessages.find((message) => message.pinned);
+
+  const [markMessageAsSeen] = useMarkMessageAsSeenMutation();
+  const { data: privateChatMessages, refetch: refetchChatMessages } = useFetchChatMessagesQuery();
+  const { refetch: refetchUserChats } = useFetchUserChatsQuery(
+    { chat_id: privateChatProfile?.chat_id || "" },
+    { skip: !privateChatProfile?.user_id }
+  );
+  const pinnedMessage = privateChatMessages.find((message: { pinned: any; }) => message.pinned);
 
   const handleSeen = useCallback(
     debounce(async () => {
@@ -54,43 +52,37 @@ export default function PrivateChatPage() {
 
       const unseenMessages = privateChatMessages.filter(
         (msg) =>
-          msg.status === "delivered" && msg.sender_id !== myProfile.user_id,
+          msg.status === "delivered" && msg.sender_id !== myProfile.user_id
       );
 
       if (unseenMessages.length > 0) {
         setIsMarkingSeen(true);
         try {
-          await dispatch(
-            handleMarkMessageAsSeenPrivateChatApi({
-              message_id: unseenMessages[unseenMessages.length - 1]?.id,
-              chat_id: privateChatProfile?.chat_id,
-            }),
-          ).unwrap();
+          await markMessageAsSeen({
+            message_id: unseenMessages[unseenMessages.length - 1]?.id,
+            chat_id: privateChatProfile?.chat_id
+          }).unwrap();
         } catch (error) {
           console.error("Failed to mark messages as seen", error);
         }
         setIsMarkingSeen(false);
       }
     }, 1000),
-    [privateChatMessages],
+    [privateChatMessages]
   );
 
   useEffect(() => {
     if (messages.length > 0) {
       const uniqueMessages = messages.filter(
-        (msg) => !privateChatMessages.some((prevMsg) => prevMsg.id === msg.id),
+        (msg) => !privateChatMessages.some((prevMsg: { id: any; }) => prevMsg.id === msg.id)
       );
-
-      if (uniqueMessages.length > 0) {
-        dispatch(addMessages(uniqueMessages));
-      }
     }
   }, [messages, privateChatMessages, dispatch]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries[0].isIntersecting,
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (chatContainerRef.current) observer.observe(chatContainerRef.current);
@@ -102,17 +94,16 @@ export default function PrivateChatPage() {
   }, [chatContainerRef]);
 
   useEffect(() => {
-    dispatch(handleFetchChatMessageApi());
+    refetchChatMessages();
     if (privateChatProfile?.user_id) {
-      dispatch(
-        handleFetchUserChatsApi({ chat_id: privateChatProfile.chat_id || "" }),
-      );
+      refetchUserChats();
     }
   }, [privateChatProfile]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries[0].isIntersecting && !isMarkingSeen && handleSeen(),
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (messageEndRef.current) observer.observe(messageEndRef.current);
@@ -151,7 +142,7 @@ export default function PrivateChatPage() {
           return null;
       }
     },
-    [myProfile.user_id],
+    [myProfile.user_id]
   );
 
   return (
@@ -175,4 +166,6 @@ export default function PrivateChatPage() {
       )}
     </div>
   );
-}
+};
+
+export default PrivateChatPage;

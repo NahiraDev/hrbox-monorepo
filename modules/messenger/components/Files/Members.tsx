@@ -1,23 +1,17 @@
-import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@nextui-org/react";
-import { Profile } from "iconsax-react";
+import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Profile } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 import MemberAction from "./Action";
 import { useState } from "react";
-import { GroupAndChannelTypes, MemberTypes } from "../../types";
+import { GroupAndChannelTypes, MemberTypes } from "@hrbox/modules/messenger/types";
 
-// Reusable Member component to display each member's profile and actions
 const MemberItem = ({
-  member,
-  index,
-  isOpen,
-  setOpenMemberId,
-}: {
+                      member,
+                      index,
+                      isOpen,
+                      setOpenMemberId
+                    }: {
   member: MemberTypes;
   index: number;
   isOpen: boolean;
@@ -60,23 +54,23 @@ const GroupMembers = ({ type }: { type: string }) => {
 
   const profileGroup = useSelector((state: RootState) => state.profile.profile);
   const channels: GroupAndChannelTypes[] = useSelector(
-    (state: RootState) => state?.channels?.channels,
+    (state: RootState) => state?.channels?.channels
   );
   const groups: GroupAndChannelTypes[] = useSelector(
-    (state: RootState) => state?.groups?.groups,
+    (state: RootState) => state?.groups?.groups
   );
   const myProfile = JSON.parse(localStorage.getItem("profile") || "{}");
 
   const channelAndGroupData =
     type === "channel"
       ? channels.find(
-          (channel: GroupAndChannelTypes) =>
-            channel.id === profileGroup?.chat_id && channel,
-        )
+        (channel: GroupAndChannelTypes) =>
+          channel.id === profileGroup?.chat_id && channel
+      )
       : groups.find(
-          (group: GroupAndChannelTypes) =>
-            group.id === profileGroup?.chat_id && groups,
-        );
+        (group: GroupAndChannelTypes) =>
+          group.id === profileGroup?.chat_id && groups
+      );
 
   return (
     <div className="flex flex-col gap-3">
@@ -109,7 +103,7 @@ const GroupMembers = ({ type }: { type: string }) => {
               isOpen={openMemberId === index}
               setOpenMemberId={setOpenMemberId}
             />
-          ),
+          )
         )}
     </div>
   );

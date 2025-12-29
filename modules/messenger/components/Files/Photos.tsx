@@ -1,11 +1,10 @@
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { useWebSocket } from "../../context/SignalRWebSocket";
+import { RootState } from "@hrbox/core/redux/store";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
 import { useEffect, useState } from "react";
-import { MessageTypes } from "../../types";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
-// Reusable component to display a single image message
 const PhotoItem = ({ src, alt }: { src: string; alt: string }) => (
   <Image
     className="!rounded-2 object-cover"
@@ -22,13 +21,12 @@ const Photos = () => {
 
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const userMessages: MessageTypes[] | any = useSelector(
-    (state: RootState) => state.privateChat?.messages || [],
+    (state: RootState) => state.privateChat?.messages || []
   );
 
-  // Load messages when recipient or chat state changes
   const loadMessages = async () => {
     if (isOpen) {
       setMessageList(userMessages);
@@ -41,15 +39,14 @@ const Photos = () => {
     }
   }, [messages, isOpen]);
 
-  // Update message list with unique messages
   useEffect(() => {
     if (messages.length > 0) {
       setMessageList((prevMessages: MessageTypes[]) => {
         const uniqueMessages = messages.filter(
           (msg) =>
             !prevMessages.some(
-              (prevMsg: MessageTypes) => prevMsg.id === msg.id,
-            ),
+              (prevMsg: MessageTypes) => prevMsg.id === msg.id
+            )
         );
         return [...prevMessages, ...uniqueMessages];
       });

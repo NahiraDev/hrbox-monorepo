@@ -6,5 +6,8 @@
     "outDir": "../../dist/modules/messenger",
     "declarationDir": "../../dist/types"
   },
-  "include": [".", "./*"]
+  "include": [
+    ".",
+    "./*"
+  ]
 }

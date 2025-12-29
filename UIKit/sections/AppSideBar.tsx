@@ -30,7 +30,6 @@ export const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    // if (!currentPanel) return [];
     return getModuleMenu("attendance");
   }, [currentPanel, getModuleMenu]);
 
@@ -38,7 +37,6 @@ export const AppSidebar = () => {
     return !!matchRoute({ to: path });
   };
 
-  // ✅ Bottom Menu
   const bottomMenu = useMemo(
     () => [
       {
@@ -75,20 +73,17 @@ export const AppSidebar = () => {
       initial={false}
       animate={{ width: isExpanded ? 220 : 100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="relative flex flex-col h-full rounded-lg py-4 px-4 bg-panel-surface shadow-theme-md dark:shadow-theme-lg"
+      className="relative flex flex-col h-full rounded-lg py-4 px-4 bg-white dark:bg-surface-200 shadow-theme-md dark:shadow-theme-lg"
     >
-      {/* Toggle Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary-400 shadow-theme-sm hover:scale-110 transition-transform"
+        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary shadow-theme-sm hover:scale-110 transition-transform"
         aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
       >
         {isExpanded ? <ArrowLeft2 size="12" /> : <ArrowRight2 size="12" />}
       </button>
 
-      {/* Menu Items Container */}
       <div className="flex flex-col items-center justify-between w-full h-full">
-        {/* Top Menu */}
         <nav
           className={`flex flex-col w-full pb-3 gap-2 ${
             isExpanded ? "items-start" : "items-center"
@@ -114,15 +109,15 @@ export const AppSidebar = () => {
                       relative flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all
                       ${
                       isActive
-                        ? "bg-transparent text-primary"
-                        : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-1000 dark:text-neutral-400"
+                        ? "bg-transparent"
+                        : "hover:bg-neutral-100 dark:hover:bg-neutral-800"
                     }
                       ${!isExpanded && "justify-center"}
                     `}
                     aria-current={isActive ? "page" : undefined}
                   >
                     <span
-                      className={`shrink-0 ${isActive ? "text-primary" : ""}`}
+                      className={`shrink-0 ${isActive ? "text-primary" : "text-secondary-1000 dark:text-neutral-400"}`}
                     >
                       {item.icon}
                     </span>
@@ -137,10 +132,12 @@ export const AppSidebar = () => {
                           className={`text-sm font-normal whitespace-nowrap overflow-hidden ${
                             isActive
                               ? "text-primary"
-                              : "text-secondary-1000"
+                              : "text-secondary-1000 dark:text-neutral-400"
                           }`}
                         >
-                          {item.label}
+                          <div>
+                            {item.label}
+                          </div>
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -148,7 +145,7 @@ export const AppSidebar = () => {
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute bottom-0 w-full left-0 h-0.5 bg-primary"
+                        className="absolute bottom-0 w-full left-0 h-0.5 bg-primary text-primary"
                         transition={{
                           type: "spring",
                           stiffness: 300,
@@ -179,7 +176,6 @@ export const AppSidebar = () => {
               `}
               aria-label={item.label}
             >
-              {/* Icon */}
               <span className="flex-shrink-0">{item.icon}</span>
 
               <AnimatePresence>

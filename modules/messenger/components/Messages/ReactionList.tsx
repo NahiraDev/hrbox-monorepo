@@ -1,10 +1,4 @@
-import {
-  ArrowCircleLeft,
-  Paperclip,
-  Trash,
-  Archive,
-  Back,
-} from "iconsax-react";
+import { Archive, ArrowCircleLeft, Back, Paperclip, Trash } from "iconsax-reactjs";
 
 export const ReactionList = [
   {
@@ -15,7 +9,7 @@ export const ReactionList = [
       />
     ),
     key: "reply",
-    text: "Reply",
+    text: "Reply"
   },
   {
     icon: (
@@ -25,7 +19,7 @@ export const ReactionList = [
       />
     ),
     key: "pin",
-    text: "Pin",
+    text: "Pin"
   },
   {
     icon: (
@@ -35,7 +29,7 @@ export const ReactionList = [
       />
     ),
     key: "forward",
-    text: "Forward",
+    text: "Forward"
   },
   {
     icon: (
@@ -45,7 +39,7 @@ export const ReactionList = [
       />
     ),
     key: "save",
-    text: "Save",
+    text: "Save"
   },
   {
     icon: (
@@ -55,6 +49,6 @@ export const ReactionList = [
       />
     ),
     key: "delete",
-    text: "Delete",
-  },
+    text: "Delete"
+  }
 ];

@@ -12,28 +12,35 @@ import { SaveMessageItem as SingleSaveMessage } from "@hrbox/modules/messenger/c
 import { GroupAndChannelTypes, PrivateChatTypes } from "@hrbox/modules/messenger/types";
 import { CloseIcon } from "@hrbox/uikit/icons";
 import { Button, Input, Modal, ModalContent } from "@heroui/react";
+import { useFetchChatMessagesQuery } from "@hrbox/modules/messenger/apis/Private";
+import { useFetchChannelsQuery } from "@hrbox/modules/messenger/apis/Channel";
 
 type CombinedItem =
   | { type: "chat"; data: PrivateChatTypes }
   | { type: "group"; data: GroupAndChannelTypes }
   | { type: "channel"; data: GroupAndChannelTypes }
   | { type: "savedMessage"; data: GroupAndChannelTypes | PrivateChatTypes };
+
 export const RenderMessengerSideBarItems = () => {
   const [isOpenAddModal, setIsOpenAddModal] = useState<boolean>(false);
   const location = useLocation();
   const chats: PrivateChatTypes[] = useSelector(
     (state: RootState) => state.privateChat?.privateChats
-  );
+  ) || [];
   const groups: GroupAndChannelTypes[] = useSelector(
     (state: RootState) => state.groups?.groups
-  );
+  ) || [];
   const channels: GroupAndChannelTypes[] = useSelector(
     (state: RootState) => state.channels?.channels
-  );
+  ) || [];
   const [activePopover, setActivePopover] = useState<string>("");
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const [active, setActive] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
+
+  useFetchChatMessagesQuery();
+  useFetchChannelsQuery();
+
   const saveMessage = [
     {
       id: recipient?.user_id,
@@ -42,20 +49,20 @@ export const RenderMessengerSideBarItems = () => {
   ];
 
   const [selectedId, setSelectedId] = useState<string>("");
-  const pinnedChats = chats.filter((chat: PrivateChatTypes) => chat?.pinned);
-  const regularChats = chats.filter((chat: PrivateChatTypes) => !chat?.pinned);
-  const pinnedGroups = groups.filter(
+  const pinnedChats = chats?.filter((chat: PrivateChatTypes) => chat?.pinned) || [];
+  const regularChats = chats?.filter((chat: PrivateChatTypes) => !chat?.pinned) || [];
+  const pinnedGroups = groups?.filter(
     (group: GroupAndChannelTypes) => group?.pinned
-  );
-  const regularGroups = groups.filter(
+  ) || [];
+  const regularGroups = groups?.filter(
     (group: GroupAndChannelTypes) => !group?.pinned
-  );
-  const pinnedChannels = channels.filter(
+  ) || [];
+  const pinnedChannels = channels?.filter(
     (channel: GroupAndChannelTypes) => channel?.pinned
-  );
-  const regularChannels = channels.filter(
+  ) || [];
+  const regularChannels = channels?.filter(
     (channel: GroupAndChannelTypes) => !channel?.pinned
-  );
+  ) || [];
   const sortedChats = [...pinnedChats, ...regularChats];
   const sortedGroups = [...pinnedGroups, ...regularGroups];
   const sortedChannels = [...pinnedChannels, ...regularChannels];
@@ -143,26 +150,26 @@ export const RenderMessengerSideBarItems = () => {
 
   const filteredCombinedItems = combinedItems.filter((item) => {
     const name = item?.data?.name?.toLowerCase();
-    return name.includes(searchText?.toLowerCase());
+    return name?.includes(searchText?.toLowerCase());
   });
 
   const filteredPrivateChatItems = sortedChats.filter(
     (chat: PrivateChatTypes) => {
-      const chatName = chat?.name.toLowerCase();
-      return chatName.includes(searchText.toLowerCase());
+      const chatName = chat?.name?.toLowerCase();
+      return chatName?.includes(searchText.toLowerCase());
     }
   );
   const filteredGroupChatItems = sortedGroups.filter(
     (group: GroupAndChannelTypes) => {
-      const chatName = group?.name.toLowerCase();
-      return chatName.includes(searchText.toLowerCase());
+      const chatName = group?.name?.toLowerCase();
+      return chatName?.includes(searchText.toLowerCase());
     }
   );
 
   const filteredChannelChatItems = sortedChannels.filter(
     (channel: GroupAndChannelTypes) => {
-      const chatName = channel?.name.toLowerCase();
-      return chatName.includes(searchText.toLowerCase());
+      const chatName = channel?.name?.toLowerCase();
+      return chatName?.includes(searchText.toLowerCase());
     }
   );
   const renderCombinedItems = (item: CombinedItem, index: number) => {

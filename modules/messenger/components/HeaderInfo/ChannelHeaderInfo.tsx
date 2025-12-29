@@ -10,27 +10,24 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure
-} from "@nextui-org/react";
-import { CloseCircle, Grid9, More, Paperclip, SearchNormal1 } from "iconsax-react";
-import { useDarkMode } from "../../context/DarkMode";
+} from "@heroui/react";
+import { CloseCircle, Grid9, More, Paperclip, SearchNormal1 } from "iconsax-reactjs";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleInfo } from "../../redux/reducers/messengerAction";
+import { toggleInfo } from "@hrbox/core/redux/slices/messengerAction";
 import {
-  handleClearHistoryChannelsApi,
-  handleMutedChannelApi,
-  handleRemoveChannelApi
-} from "../../services/Messenger/ChannelChatService/apis";
-import Lottie from "lottie-react";
-import { AppDispatch } from "../../redux/store";
-import SearchBox from "../SearchBox";
+  useClearChannelHistoryMutation,
+  useDeleteChannelMutation,
+  useMuteChannelMutation,
+  useUnpinMessageMutation
+} from "@hrbox/modules/messenger/apis/Channel";
+import { AppDispatch } from "@hrbox/core/redux/store";
+import SearchBox from "@hrbox/modules/messenger/components/SearchBox";
 import { Actions } from "./Actions";
 import AddGroup from "../Add/AddGroup";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import isTypingGif from "../../lottie/isTyping.json";
-import { setUserProfile } from "../../redux/reducers/profile";
-import { GroupAndChannelTypes, MessageTypes } from "../../types";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { setUserProfile } from "@hrbox/core/redux/slices/profile";
+import { GroupAndChannelTypes, MessageTypes } from "@hrbox/modules/messenger/types";
 
-// Reusable Avatar Component
 const ChannelAvatar = ({
                          channelProfile,
                          onClick
@@ -47,7 +44,6 @@ const ChannelAvatar = ({
   />
 );
 
-// Reusable Pinned Message Display Component
 const PinnedMessage = ({
                          pinnedMessage,
                          handleUnpin
@@ -78,25 +74,29 @@ const PinnedMessage = ({
   </div>
 );
 
-// Main ChannelHeaderInfo Component
 export const ChannelHeaderInfo = () => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [showSearchBox, setShowSearchBox] = useState<boolean>(false);
+  const [isTyping, setIsTyping] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const { isOpen, onOpenChange } = useDisclosure();
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen
+    (state: any) => state.messengerAction.isOpen
   );
   const channelProfile = useSelector(
-    (state: RootState) => state.profile.profile
+    (state: any) => state.profile.profile
   );
-  const channels = useSelector((state: RootState) => state?.channels?.channels);
+  const channels = useSelector((state: any) => state?.channels?.channels);
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
   const [messageList, setMessageList] = useState<MessageTypes[]>([]);
   const { socket, setMessages } = useWebSocket();
-  const { darkMode } = useDarkMode();
   const typingResetTimer = useRef<NodeJS.Timeout | null>(null);
   const typingResetDelay = 1000;
+
+  const [muteChannel] = useMuteChannelMutation();
+  const [clearChannelHistory] = useClearChannelHistoryMutation();
+  const [deleteChannel] = useDeleteChannelMutation();
+  const [unpinMessage] = useUnpinMessageMutation();
 
   useEffect(() => {
     channels.find((item: GroupAndChannelTypes) => {
@@ -107,31 +107,48 @@ export const ChannelHeaderInfo = () => {
   const pinnedMessage = messageList.find((msg: MessageTypes) => msg.pinned);
 
   const handleSelect = () => setIsSelected((prev) => !prev);
-  const handleToggleMuteChat = () =>
-    dispatch(
-      handleMutedChannelApi({ channel_id: channelProfile?.chat_id || "" })
-    );
-  const handleClearChatHistory = () =>
-    dispatch(
-      handleClearHistoryChannelsApi({
-        channel_id: channelProfile?.chat_id || ""
-      })
-    );
-  const handleDeleteChat = () => {
-    dispatch(
-      handleRemoveChannelApi({ channel_id: channelProfile?.chat_id || "" })
-    );
-    dispatch(setUserProfile({}));
+
+  const handleToggleMuteChat = async () => {
+    try {
+      await muteChannel({ channel_id: channelProfile?.chat_id || "" }).unwrap();
+    } catch (error) {
+      console.error("Failed to mute channel:", error);
+    }
   };
+
+  const handleClearChatHistory = async () => {
+    try {
+      await clearChannelHistory({ channel_id: channelProfile?.chat_id || "" }).unwrap();
+    } catch (error) {
+      console.error("Failed to clear history:", error);
+    }
+  };
+
+  const handleDeleteChat = async () => {
+    try {
+      await deleteChannel({
+        channel_id: channelProfile?.chat_id || "",
+        user_id: profile?.user_id || ""
+      }).unwrap();
+      dispatch(setUserProfile({}));
+    } catch (error) {
+      console.error("Failed to delete channel:", error);
+    }
+  };
+
   const handleOpenInformation = () => dispatch(toggleInfo());
   const handleShowSearchBox = () => setShowSearchBox(!showSearchBox);
-  const handleUnpin = () =>
-    dispatch(
-      handleUnpinMessageChannel({
+
+  const handleUnpin = async () => {
+    try {
+      await unpinMessage({
         message_id: pinnedMessage?.id,
         channel_id: channelProfile?.chat_id
-      })
-    );
+      }).unwrap();
+    } catch (error) {
+      console.error("Failed to unpin message:", error);
+    }
+  };
 
   const handleClickActions = (key: string) => {
     switch (key) {
@@ -181,7 +198,7 @@ export const ChannelHeaderInfo = () => {
       {channelProfile && (
         <>
           <div
-            className={`flex relative ${isSelected && (darkMode ? "bg-primary-800" : "bg-primary-0")}`}
+            className={`flex relative ${isSelected && "bg-primary-800 dark:bg-primary-0"}`}
           >
             <ChannelAvatar
               channelProfile={channelProfile}
@@ -192,7 +209,7 @@ export const ChannelHeaderInfo = () => {
               <span>{channelProfile?.name}</span>
               {isTyping && (
                 <div className="flex items-center gap-0.5">
-                  <Lottie animationData={isTypingGif} loop={true} />
+                  typing
                   <span>{isTyping}</span>
                 </div>
               )}
@@ -203,13 +220,13 @@ export const ChannelHeaderInfo = () => {
 
             <div className="flex gap-4">
               {showSearchBox && <SearchBox />}
-              <Button isIconOnly onClick={handleShowSearchBox}>
+              <Button isIconOnly onPress={handleShowSearchBox}>
                 <SearchNormal1 size="20" />
               </Button>
               <Button
                 isIconOnly
                 variant="light"
-                onClick={handleOpenInformation}
+                onPress={handleOpenInformation}
               >
                 <Grid9 size="20" />
               </Button>

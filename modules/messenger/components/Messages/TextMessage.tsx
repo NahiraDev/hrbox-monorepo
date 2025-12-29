@@ -1,23 +1,18 @@
-import DoubleCheck from "../../icons/DoubleCheck";
-import { Avatar, Image, Link } from "@nextui-org/react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import DoubleCheck from "@hrbox/uikit/icons/DoubleCheck";
+import { Avatar, Image, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { useEffect, useRef, useState } from "react";
 import Reaction from "./Reaction";
-import {
-  closeReplyMessageAction,
-  setHighlightedMessageId,
-  setMessageId,
-} from "../../redux/reducers/messageAction";
+import { closeReplyMessageAction, setHighlightedMessageId, setMessageId } from "@hrbox/core/redux/slices/messageAction";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { Folder, Play } from "iconsax-react";
-import Check from "../../icons/Check";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import { Folder, Play } from "iconsax-reactjs";
+import { Check } from "@hrbox/uikit/icons/Check";
 import { MessageTypes } from "../../types";
 
 const TextMessage = ({
-  message,
-  isSent,
-}: {
+                       message,
+                       isSent
+                     }: {
   message: MessageTypes;
   isSent: boolean;
 }) => {
@@ -31,7 +26,7 @@ const TextMessage = ({
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
   const highlightedMessageId = useSelector(
-    (state: RootState) => state.messageAction.highlighted_message_id,
+    (state: RootState) => state.messageAction.highlighted_message_id
   );
 
   const handleOpenReactPopover = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -64,13 +59,13 @@ const TextMessage = ({
       <div
         onClick={() => {
           const element = document.getElementById(
-            message?.reply_message_id || "",
+            message?.reply_message_id || ""
           );
           if (element) {
             element.scrollIntoView({
               behavior: "smooth",
               block: "center",
-              inline: "nearest",
+              inline: "nearest"
             });
             dispatch(setHighlightedMessageId(message?.reply_message_id || ""));
             setTimeout(() => dispatch(setHighlightedMessageId("")), 3000);
@@ -150,7 +145,8 @@ const TextMessage = ({
                       {profile?.name}
                     </span>
                   )}
-                  <span className="dark:text-white font-light text-xs text-secondary-1000">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
+                  <span
+                    className="dark:text-white font-light text-xs text-secondary-1000">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
                 </div>
 
                 {renderReplyPreview()}

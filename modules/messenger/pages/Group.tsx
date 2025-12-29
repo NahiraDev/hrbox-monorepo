@@ -1,21 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
-import TextBox from "@module/messenger/components/TextBox";
-import EmptyChat from "@module/messenger/components/EmptyChat";
-import TextMessage from "@module/messenger/components/Messages/TextMessage";
-import PhotoMessage from "@module/messenger/components/Messages/PhotoMessage";
-import FileMessage from "@module/messenger/components/Messages/FileMessage";
-import AudioMessage from "@module/messenger/components/Messages/AudioMessage";
-import LinkMessage from "@module/messenger/components/Messages/LinkMessage";
-import { useWebSocket } from "../../../context/SignalRWebSocket";
+import TextBox from "@hrbox/modules/messenger/components/TextBox";
+import EmptyChat from "@hrbox/modules/messenger/components/EmptyChat";
+import TextMessage from "@hrbox/modules/messenger/components/Messages/TextMessage";
+import PhotoMessage from "@hrbox/modules/messenger/components/Messages/PhotoMessage";
+import FileMessage from "@hrbox/modules/messenger/components/Messages/FileMessage";
+import AudioMessage from "@hrbox/modules/messenger/components/Messages/AudioMessage";
+import LinkMessage from "@hrbox/modules/messenger/components/Messages/LinkMessage";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
 import {
-  handleFetchGroupChatsApi,
-  handleFetchGroupsApi,
-  handleMarkMessageAsSeenGroupChatApi
-} from "@module/messenger/services/Messenger/GroupChatService/apis";
+  useFetchGroupChatsQuery,
+  useFetchGroupsQuery,
+  useMarkMessageAsSeenGroupChatMutation
+} from "@module/messenger/apis/Group";
 import { debounce } from "lodash";
-import { MessageTypes } from "../../../types";
-import { AppDispatch, RootState } from "@hrbox/core/redux";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
+import { RootState } from "@hrbox/core/redux";
 
 export default function GroupPage() {
   const { messages } = useWebSocket();
@@ -38,7 +38,14 @@ export default function GroupPage() {
   const filteredMessages = useSelector(
     (state: RootState) => state.messageAction.filteredMessages
   );
-  const dispatch = useDispatch<AppDispatch>();
+
+  useFetchGroupsQuery();
+  const { data: groupChatsData } = useFetchGroupChatsQuery(
+    { group_id: groupProfile?.chat_id || "" },
+    { skip: !groupProfile?.user_id }
+  );
+  const [markMessageAsSeen] = useMarkMessageAsSeenGroupChatMutation();
+
   const loadMoreMessages = () =>
     setCurrentPage((prevPage: number) => prevPage + 1);
 
@@ -54,12 +61,10 @@ export default function GroupPage() {
       if (unseenMessages.length > 0) {
         setIsMarkingSeen(true);
         try {
-          await dispatch(
-            handleMarkMessageAsSeenGroupChatApi({
-              message_id: unseenMessages[unseenMessages.length - 1]?.id,
-              group_id: groupProfile?.chat_id
-            })
-          ).unwrap();
+          await markMessageAsSeen({
+            message_id: unseenMessages[unseenMessages.length - 1]?.id,
+            group_id: groupProfile?.chat_id
+          }).unwrap();
         } catch (error) {
           console.error("Failed to mark messages as seen", error);
         }
@@ -87,14 +92,7 @@ export default function GroupPage() {
   }, [chatContainerRef]);
 
   useEffect(() => {
-    dispatch(handleFetchGroupsApi());
-
     setMessageList(filteredMessages);
-    if (groupProfile?.user_id) {
-      dispatch(
-        handleFetchGroupChatsApi({ group_id: groupProfile.chat_id || "" })
-      );
-    }
 
     setMessageList((prevMessages: MessageTypes[]) => [
       ...prevMessages,

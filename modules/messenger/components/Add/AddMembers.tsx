@@ -3,23 +3,22 @@ import React, { useEffect, useState } from "react";
 import SearchBox from "../SearchBox";
 import { useDispatch, useSelector } from "react-redux";
 import { AddMembersProps } from "./types";
-import { handleGetContactsApi } from "../../services/Messenger/UserService/apis";
 import { GroupAndChannelTypes, MemberTypes } from "../../types";
 import {
-  handleAddGroupApi,
-  handleFetchGroupsApi,
-  handleUpdateGroupApi
-} from "../../services/Messenger/GroupChatService/apis";
+  useCreateChannelMutation,
+  useFetchChannelsQuery,
+  useUpdateChannelMutation
+} from "@hrbox/modules/messenger/apis/Channel";
 import {
-  handleAddChannelApi,
-  handleFetchChannelsApi,
-  handleUpdateChannelApi
-} from "../../services/Messenger/ChannelChatService/apis";
-import { AppDispatch } from "@hrbox/core/redux";
+  useCreateChatMutation,
+  useFetchChatMessagesQuery,
+  useFetchUserChatsQuery
+} from "@hrbox/modules/messenger/apis/Private";
+import { RootState } from "@hrbox/core/redux";
 
 const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
   const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const users: MemberTypes[] = useSelector(
     (state: RootState) => state.users?.users
   );
@@ -31,11 +30,20 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
     (state: RootState) => state?.messengerAction?.isEdit
   );
 
+  const [createChannel] = useCreateChannelMutation();
+  const [updateChannel] = useUpdateChannelMutation();
+  const { data: fetchUserChat } = useFetchUserChatsQuery();
+  const { refetch: refetchChannels } = useFetchChannelsQuery();
+
+  const [createChat] = useCreateChatMutation();
+  const { refetch: refetchChatMessages } = useFetchChatMessagesQuery();
+
   const handleToggleActive = (index: number) => {
     setActiveIndexes((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
+
   const generateId = (): string => {
     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
@@ -45,6 +53,7 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
     }
     return result;
   };
+
   const handleCreateGroup = async () => {
     const selectedMembers = activeIndexes.map((index) => users[index]);
 
@@ -62,26 +71,33 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
       original_image: data.orginalImage || ""
     };
 
-    if (!isEditGroupAndChannel) {
-      if (data.selectedType === "group") {
-        dispatch(handleAddGroupApi(groupData));
-        dispatch(handleFetchGroupsApi());
+    try {
+      if (!isEditGroupAndChannel) {
+        if (data.selectedType === "group") {
+          dispatch(handleAddGroupApi(groupData));
+          dispatch(handleFetchGroupsApi());
+        } else if (data.selectedType === "channel") {
+          await createChannel(groupData).unwrap();
+          refetchChannels();
+        } else if (data.selectedType === "private") {
+          await createChat(groupData).unwrap();
+          refetchChatMessages();
+        }
       } else {
-        dispatch(handleAddChannelApi(groupData));
-        dispatch(handleFetchChannelsApi());
+        if (data.selectedType === "group") {
+          dispatch(handleUpdateGroupApi({ groupData }));
+          dispatch(handleFetchGroupsApi());
+        } else if (data.selectedType === "channel") {
+          await updateChannel(groupData).unwrap();
+          refetchChannels();
+        }
       }
-    } else {
-      if (data.selectedType === "group") {
-        dispatch(handleUpdateGroupApi({ groupData }));
-        dispatch(handleFetchGroupsApi());
-      } else {
-        dispatch(handleUpdateChannelApi(groupData));
-        dispatch(handleFetchChannelsApi());
-      }
-    }
 
-    data.setOpenMemberModal(false);
-    data?.setIsOpenAddModal?.(false);
+      data.setOpenMemberModal(false);
+      data?.setIsOpenAddModal?.(false);
+    } catch (error) {
+      console.error(`Failed to create/update ${data.selectedType}:`, error);
+    }
   };
 
   useEffect(() => {
@@ -102,11 +118,6 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
       setActiveIndexes(indexes);
     }
   }, [groupProfile, users]);
-
-  useEffect(() => {
-    dispatch(handleGetContactsApi());
-  }, [dispatch]);
-
   return (
     <Modal
       size="sm"

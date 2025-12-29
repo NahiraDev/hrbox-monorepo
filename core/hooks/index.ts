@@ -10,3 +10,5 @@ export * from "@hrbox/core/hooks/useNavigation";
 export * from "@hrbox/core/hooks/usePageTitle";
 export * from "@hrbox/core/hooks/useRoleAccess";
 export * from "@hrbox/core/hooks/useTheme";
+export * from "@hrbox/core/hooks/useLogout";
+export * from "@hrbox/core/hooks/useAuth";

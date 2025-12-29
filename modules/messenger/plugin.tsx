@@ -4,13 +4,17 @@ import { Briefcase, Building, Profile } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 
-const Home = lazyRouteComponent(() => import("./pages/Home"));
+const Home = lazyRouteComponent(() => import("@hrbox/modules/messenger/pages/Home"));
+const Private = lazyRouteComponent(() => import("@hrbox/modules/messenger/pages/Private"));
+const Group = lazyRouteComponent(() => import("@hrbox/modules/messenger/pages/Group"));
+const Channel = lazyRouteComponent(() => import("@hrbox/modules/messenger/pages/Channel"));
+const SaveMessage = lazyRouteComponent(() => import("@hrbox/modules/messenger/pages/SaveMessage"));
 
 export const MessengerPlugin: ModulePlugin = {
   name: "messenger",
   version: "1.0.0",
   basePath: "/messenger",
-  layout: "base",
+  layout: "messenger",
   description: "Job Seeker Portal",
   author: "HRBox Team",
 
@@ -18,13 +22,53 @@ export const MessengerPlugin: ModulePlugin = {
     {
       path: Paths.Messenger.Home,
       component: Home,
-      layout: "base",
+      layout: "messenger",
       meta: {
-        title: "Dashboard",
+        title: "Home",
         requireAuth: false,
-        requiredRoles: [RoleSlug.JOB_SEEKER],
-      },
+        requiredRoles: [RoleSlug.JOB_SEEKER, RoleSlug.ORGANIZATION]
+      }
     },
+    {
+      path: Paths.Messenger.Private,
+      component: Private,
+      layout: "messenger",
+      meta: {
+        title: "Private",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.JOB_SEEKER, RoleSlug.ORGANIZATION]
+      }
+    },
+    {
+      path: Paths.Messenger.Group,
+      component: Group,
+      layout: "messenger",
+      meta: {
+        title: "Group",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.JOB_SEEKER, RoleSlug.ORGANIZATION]
+      }
+    },
+    {
+      path: Paths.Messenger.SaveMessage,
+      component: SaveMessage,
+      layout: "messenger",
+      meta: {
+        title: "SaveMessage",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.JOB_SEEKER, RoleSlug.ORGANIZATION]
+      }
+    },
+    {
+      path: Paths.Messenger.Channel,
+      component: Channel,
+      layout: "messenger",
+      meta: {
+        title: "Channel",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.JOB_SEEKER, RoleSlug.ORGANIZATION]
+      }
+    }
   ],
 
   // ============================================
@@ -35,26 +79,26 @@ export const MessengerPlugin: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/hrlink/dashboard",
-      icon: <Profile size="24" />,
+      icon: <Profile size="24" />
     },
     {
       id: "resume",
       label: "Resume",
       path: "/hrlink/resume",
-      icon: <Profile size="24" />,
+      icon: <Profile size="24" />
     },
     {
       id: "jobs",
       label: "Jobs",
       path: "/hrlink/jobs",
-      icon: <Briefcase size="24" />,
+      icon: <Briefcase size="24" />
     },
     {
       id: "company",
       label: "Company",
       path: "/hrlink/company",
-      icon: <Building size="24" />,
-    },
+      icon: <Building size="24" />
+    }
   ],
 
   requiredRoles: [RoleSlug.JOB_SEEKER],
@@ -70,7 +114,7 @@ export const MessengerPlugin: ModulePlugin = {
 
   onModuleUnload: () => {
     console.log("Messenger module unloaded");
-  },
+  }
 };
 
 export default MessengerPlugin;

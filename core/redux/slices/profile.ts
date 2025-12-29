@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialStateProfile } from "../../types";
+import { initialStateProfile, Profile } from "@hrbox/modules/messenger/types";
 
 const ProfileReducer = createSlice({
   name: "user",
@@ -7,8 +7,8 @@ const ProfileReducer = createSlice({
   reducers: {
     setUserProfile(state, action: PayloadAction<Profile>) {
       state.profile = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { setUserProfile } = ProfileReducer.actions;
