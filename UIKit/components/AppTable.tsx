@@ -189,7 +189,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
       variant = "default",
       styles = {},
-      HeaderColor,
       density = "md",
 
       loading = false,
