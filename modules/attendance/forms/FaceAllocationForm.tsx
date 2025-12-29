@@ -59,8 +59,8 @@ const FaceAllocationForm = () => {
   const currentType = getOpenModal()?.type;
   return (
     <>
-    <FormProvider formId="face-allocation-form" initialValues={initialValuesAction} onSubmit={handleSubmitAction} >
-      <Form id="face-allocation-form" onSubmit={handleSubmit}>
+    <FormProvider formId="face-form" initialValues={initialValuesAction} onSubmit={handleSubmitAction} >
+      <Form id="face-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup
             name="type"
@@ -98,7 +98,7 @@ const FaceAllocationForm = () => {
                 name="ChooseFace"
                 label={t("choose_face_recognition_assignment")}
                 component={AppAutoComplete}
-                data={[
+                items={[
                   {id:1,name:"night"},
                   {id:2,name:"morning"}
                 ]}
@@ -110,7 +110,7 @@ const FaceAllocationForm = () => {
                 name="FromDate"
                 label={t("_date")}
                 component={AppAutoComplete}
-                data={[
+                items={[
                   {id:1,name:"monday"}
                 ]}
               />
@@ -123,7 +123,7 @@ const FaceAllocationForm = () => {
                 name="organization"
                 label={t("organizations")}
                 component={AppAutoComplete}
-                data={[
+                items={[
                   {id:1,name:"true"}
                 ]}
               />
@@ -147,7 +147,7 @@ const FaceAllocationForm = () => {
                   name="JobTitle"
                   label={t("job_title")}
                   component={AppAutoComplete}
-                   data={[
+                   items={[
                     {id:1,name:"programmer"}
                   ]}
                 />
@@ -162,7 +162,7 @@ const FaceAllocationForm = () => {
                   name="Employee"
                   label={t("employee")}
                   component={AppAutoComplete}
-                  data={[
+                  items={[
                     {id:1,name:"momomo"}
                   ]}
                 />
