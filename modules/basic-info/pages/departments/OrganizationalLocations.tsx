@@ -143,7 +143,7 @@ const OrganizationalLocations = () => {
                                         <Location size="15"/>
                                         <span className="!text-xs">Is it visible?</span>
                                     </div>
-                                    <p className="!text-xs !font-bold">
+                                    <p className="!text-xs !font-bol d">
                                       <span className={`px-2 py-1 rounded-full !text-xs ${
                                           detail.visible === 'Yes' ? '' : ''
                                       }`}>
