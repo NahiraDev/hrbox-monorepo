@@ -1,48 +1,49 @@
-import { useAppSelector, useAppDispatch } from '@hrbox/core/redux/hooks';
+import { useAppDispatch, useAppSelector } from "@hrbox/core/redux/hooks";
+import { shallowEqual } from "react-redux";
 import {
-  loginSuccess,
-  roleSelected,
-  switchRole,
-  logout,
-  updateToken,
   initAuth,
-  setLoading,
+  loginSuccess,
+  logout,
+  roleSelected,
   setError,
-  type UserRole, setDomainTheme,
-} from '@hrbox/core/redux/slices/authSlice';
-import { Domain } from "@hrbox/core/config/theme/domains";
+  setLoading,
+  switchRole,
+  updateToken,
+  type UserRole
+} from "@hrbox/core/redux/slices/authSlice";
+
+// ✅ تعریف یک آرایه خالی ثابت خارج از component
+const EMPTY_ARRAY: UserRole[] = [];
 
 export function useAuth() {
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector((state:any) => state.auth.isAuthenticated);
-  const user = useAppSelector((state:any) => state.auth.user);
-  // const roles = useAppSelector((state:any) => state.auth.roles);
-  const roles = useAppSelector((state: any) => state.auth.user?.roles || []);
-  const selectedRole = useAppSelector((state:any) => state.auth.selectedRole);
-  const needsRoleSelection = useAppSelector((state:any) => state.auth.needsRoleSelection);
-  const currentPanel = useAppSelector((state:any) => state.auth.currentPanel);
-  const currentDomain = useAppSelector((state:any) => state.auth.currentDomain);
-  const loading = useAppSelector((state:any) => state.auth.loading);
-  const error = useAppSelector((state:any) => state.auth.error);
+
+  // ✅ استفاده از یک useSelector با shallowEqual
+  const authState = useAppSelector(
+    (state: any) => ({
+      isAuthenticated: state.auth.isAuthenticated,
+      user: state.auth.user,
+      roles: state.auth.user?.roles || EMPTY_ARRAY, // ✅ استفاده از constant
+      selectedRole: state.auth.selectedRole,
+      needsRoleSelection: state.auth.needsRoleSelection,
+      currentPanel: state.auth.currentPanel,
+      currentDomain: state.auth.currentDomain,
+      loading: state.auth.loading,
+      error: state.auth.error
+    }),
+    shallowEqual // ✅ این خیلی مهمه!
+  );
 
   return {
-    isAuthenticated,
-    user,
-    roles,
-    selectedRole,
-    needsRoleSelection,
-    currentPanel,
-    currentDomain,
-    loading,
-    error,
+    ...authState, // ✅ spread کردن authState
 
     loginSuccess: (
-  userId: number,
-  displayName: string,
-  Token: string,
-  renewalToken: string,
-  roles?: UserRole[]
-) => dispatch(loginSuccess({ userId, displayName, Token, renewalToken, roles })),
+      userId: number,
+      displayName: string,
+      Token: string,
+      renewalToken: string,
+      roles?: UserRole[]
+    ) => dispatch(loginSuccess({ userId, displayName, Token, renewalToken, roles })),
 
     roleSelected: (role: UserRole, accessToken: string) =>
       dispatch(roleSelected({ role, accessToken })),
@@ -57,6 +58,6 @@ export function useAuth() {
 
     setLoading: (loading: boolean) => dispatch(setLoading(loading)),
 
-    setError: (error: string | null) => dispatch(setError(error)),
+    setError: (error: string | null) => dispatch(setError(error))
   };
 }

@@ -1,10 +1,10 @@
 import { Form } from "@heroui/react";
-import { AppAutoComplete, AppInput } from "@hrbox/uikit/components";
+import { AppAutoComplete } from "@hrbox/uikit/components";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { useTranslation } from "react-i18next";
 
 const AddPermisionForm = () => {
-  const {t}=useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <Form className="gap-6">
@@ -15,7 +15,8 @@ const AddPermisionForm = () => {
           <div className="w-full">
             <FormField name="title" label={t("to_Time")} type="text" />
           </div>
-        </div>{" "}
+        </div>
+        {" "}
         <div className="flex flex-row w-full justify-between gap-x-9 ">
           <div className="w-[48%]">
             <FormField
@@ -25,7 +26,7 @@ const AddPermisionForm = () => {
               items={[
                 { id: 1, name: "فناوری اطلاعات" },
                 { id: 2, name: "منابع انسانی" },
-                { id: 3, name: "مالی" },
+                { id: 3, name: "مالی" }
               ]}
               displayKey="name"
               valueKey="id"

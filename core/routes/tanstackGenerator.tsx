@@ -3,13 +3,14 @@ import { rootRoute } from "@hrbox/routes/__root";
 import { Suspense } from "react";
 import type { ModulePlugin, ModuleRoute } from "@hrbox/modules/types";
 import { Panel, RoleSlug } from "@hrbox/core/config/theme/roles";
-import { Spinner } from "@heroui/react";
 import { moduleRegistry } from "@hrbox/modules/registry";
 import { BaseLayout } from "@hrbox/core/layouts/BaseLayout";
 import { AuthLayout } from "@hrbox/core/layouts/AuthLayout";
 import { EmptyLayout } from "@hrbox/core/layouts/EmptyLayout";
 import { FramedLayout } from "@hrbox/core/layouts/FramedLayout";
 import { MessengerLayout } from "@hrbox/core/layouts";
+import { getStore } from "@hrbox/core/redux/store";
+import { getDomainConfig } from "@hrbox/core/config/theme";
 
 interface RouteContext {
   auth?: {
@@ -27,16 +28,11 @@ function extractPanelFromPath(path: string): Panel | null {
 
   const panelMap: Record<any, Panel> = {
     hrlink: "HRLINK",
-    hrbox: "hrbox",
-    "super-admin": "super-admin"
+    hrbox: "hrbox"
   };
 
   return panelMap[panelSegment] || null;
 }
-
-// ============================================
-// Helper: Get Layout Component
-// ============================================
 
 function getLayoutComponent(layoutType?: "base" | "auth" | "empty" | "framed" | "messenger") {
   switch (layoutType) {
@@ -99,15 +95,15 @@ const generateModuleRoutes = (module: ModulePlugin) => {
           };
         }
 
-        // if (!context.auth?.isAuthenticated) {
+        if (!context.auth?.isAuthenticated) {
+          throw redirect({
+            to: "/sso/login"
+          });
+        }
+
+        // if (context.auth?.needsRoleSelection && location.pathname !== "/sso/select-role") {
         //   throw redirect({
-        //     to:'/sso/login',
-        //   });
-        // }
-        //
-        // if (context.auth?.needsRoleSelection && location.pathname !== '/sso/select-role') {
-        //   throw redirect({
-        //     to: '/sso/select-role',
+        //     to: "/sso/select-role"
         //   });
         // }
 
@@ -144,19 +140,26 @@ const generateModuleRoutes = (module: ModulePlugin) => {
         };
       },
 
-      component: () => (
-        <LayoutComponent>
-          <Suspense
-            fallback={
-              <div className="flex h-full items-center justify-center">
-                <Spinner size="lg" color="primary" />
-              </div>
-            }
-          >
-            <Component />
-          </Suspense>
-        </LayoutComponent>
-      )
+      component: () => {
+        const store = getStore();
+        const state = store.getState();
+        const currentPanel = state.auth.currentPanel;
+        const config = getDomainConfig(currentPanel);
+
+        return (
+          <LayoutComponent>
+            <Suspense
+              fallback={
+                <div className="flex h-full items-center justify-center">
+                  <img src={config?.loader} alt={config?.title} />
+                </div>
+              }
+            >
+              <Component />
+            </Suspense>
+          </LayoutComponent>
+        );
+      }
     });
   });
 };
@@ -205,8 +208,7 @@ export function createRouteTree() {
       }
       const defaultRoutes: Record<Panel, string> = {
         hrlink: "/hrlink/dashboard",
-        hrbox: "/hrbox/dashboard",
-        "super-admin": "/super-admin/dashboard"
+        hrbox: "/hrbox/dashboard"
       };
       const currentPanel = context.auth?.currentPanel;
       const targetRoute = currentPanel ? defaultRoutes[currentPanel] : "/sso/welcome";

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 import {
   Building,
   Chart2,
@@ -7,12 +7,13 @@ import {
   Heart,
   LampCharge,
   Personalcard,
-  UserOctagon,
-} from 'iconsax-reactjs';
-import {AcademyIcon} from "@hrbox/uikit/icons/AcademyIcon";
+  UserOctagon
+} from "iconsax-reactjs";
+import { AcademyIcon } from "@hrbox/uikit/icons/AcademyIcon";
+import { CupStarIcon, JobOpportunitiesIcon } from "@hrbox/uikit/icons";
 
 const DashboardIcons = {
-  dashboard: Chart2,
+  dashboard: Chart2
 };
 
 const ResumeIcons = {
@@ -22,12 +23,12 @@ const ResumeIcons = {
   hardskills: LampCharge,
   softskills: LampCharge,
   awards: CupStarIcon,
-  courses: AcademyIcon,
+  courses: AcademyIcon
 };
 
 const JobIcons = {
   offers: JobOffersIcon,
-  opportunities: JobOpportunitiesIcon,
+  opportunities: JobOpportunitiesIcon
 };
 
 const CompanyIcons = {
@@ -35,21 +36,21 @@ const CompanyIcons = {
   requested: DeviceMessage,
   favorites: Heart,
   offers: DeviceMessage,
-  companyinfo: Building,
+  companyinfo: Building
 };
 
 const iconGroups: Record<string, Record<string, any>> = {
   dashboard: DashboardIcons,
   resume: ResumeIcons,
   job: JobIcons,
-  company: CompanyIcons,
+  company: CompanyIcons
 };
 
 export const HRLinkMenu = (): { label: string; path: string; icon?: ReactNode }[] => {
-  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
-  const moduleName = 'hrlink';
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const moduleName = "hrlink";
 
-  const parts = pathname.split('/').filter(Boolean);
+  const parts = pathname.split("/").filter(Boolean);
   const section = parts[1] as keyof typeof iconGroups;
 
   const groupIcons = iconGroups[section] ?? DashboardIcons;
@@ -59,7 +60,7 @@ export const HRLinkMenu = (): { label: string; path: string; icon?: ReactNode }[
     return {
       label: key.charAt(0).toUpperCase() + key.slice(1),
       path: `/${moduleName}/${section}/${key.toLowerCase()}`,
-      icon: IconComponent ? <IconComponent /> : null,
+      icon: IconComponent ? <IconComponent /> : null
     };
   });
 };
