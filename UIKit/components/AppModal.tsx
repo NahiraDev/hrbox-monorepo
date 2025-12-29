@@ -187,7 +187,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
   return (
     <motion.div
       className={clsx(
-        "px-6 py-4 flex items-center justify-end gap-3 m-12",
+        "px-6 py-4 flex items-center justify-end gap-3",
         className
       )}
       initial={{ opacity: 0, y: 10 }}
@@ -352,8 +352,8 @@ const AppModalBase: React.FC<AppModalProps> & {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
             className={clsx(
-              "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800",
-              "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col",
+              "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
+              "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative",
               sizeClasses[modalSize] || "max-w-md"
             )}
           >
