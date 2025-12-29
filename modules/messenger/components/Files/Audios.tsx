@@ -1,16 +1,16 @@
-import { Button } from "@nextui-org/react";
-import { Play, Repeat, ImportCurve } from "iconsax-react";
+import { Button } from "@heroui/react";
+import { ImportCurve, Play, Repeat } from "iconsax-reactjs";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import { MessageTypes } from "../../types";
+import { RootState } from "@hrbox/core/redux/store";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
 const AudioButton = ({
-  isDownloading,
-  handleDownload,
-  audioUrl,
-}: {
+                       isDownloading,
+                       handleDownload,
+                       audioUrl
+                     }: {
   isDownloading: boolean;
   handleDownload: (fileUrl: string) => void;
   audioUrl: string;
@@ -27,7 +27,7 @@ const AudioButton = ({
     <Button
       isIconOnly
       color="primary"
-      onClick={() => handleDownload(audioUrl)}
+      onPress={() => handleDownload(audioUrl)}
       className={`dark:bg-surface-200 dark:hover:bg-primary hover:bg-secondary-400 hover:!opacity-100 shadow-medium absolute top-[1.7rem] left-[1.8rem] min-w-4 w-4 h-4 !rounded-2 p-0.5 ${isDownloading ? "hidden" : ""}`}
     >
       <ImportCurve color="white" size="10" />
@@ -36,7 +36,7 @@ const AudioButton = ({
       <Button
         isIconOnly
         color="primary"
-        onClick={() => handleDownload(audioUrl)}
+        onPress={() => handleDownload(audioUrl)}
         className="dark:bg-surface-200 dark:hover:bg-primary bg-primary-400 hover:bg-secondary-400 absolute hover:!opacity-100 top-[1.7rem] left-[1.8rem] min-w-4 w-4 h-4 !rounded-2 p-0.5"
       >
         <Repeat color="white" size="10" />
@@ -46,9 +46,9 @@ const AudioButton = ({
 );
 
 const AudioFileInfo = ({
-  fileName,
-  fileSize,
-}: {
+                         fileName,
+                         fileSize
+                       }: {
   fileName: string;
   fileSize: string;
 }) => (
@@ -69,10 +69,10 @@ const Audios: React.FC = () => {
 
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const userMessages: MessageTypes[] = useSelector(
-    (state: RootState) => state.privateChat.messages || [],
+    (state: RootState) => state.privateChat.messages || []
   );
 
   const loadMessages = () => {
@@ -102,7 +102,7 @@ const Audios: React.FC = () => {
     if (messages.length > 0) {
       setMessageList((prevMessages) => {
         const uniqueMessages = messages.filter(
-          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id),
+          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id)
         );
         return [...prevMessages, ...uniqueMessages];
       });

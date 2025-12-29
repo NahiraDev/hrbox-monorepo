@@ -1,43 +1,35 @@
 import { useEffect, useRef, useState } from "react";
-import { Avatar, Button, useDisclosure, Image, Input } from "@nextui-org/react";
 import {
-  CloseCircle,
-  Folder,
-  More,
-  Paperclip,
-  Play,
-  Save2,
-  SearchNormal1,
-} from "iconsax-react";
-import { useDarkMode } from "../../context/DarkMode";
-import { RootState } from "../../redux/store";
+  Avatar,
+  Button,
+  Image,
+  Input,
+  Listbox,
+  ListboxItem,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure
+} from "@heroui/react";
+import { CloseCircle, Folder, Grid9, More, Paperclip, Play, Save2, SearchNormal1 } from "iconsax-reactjs";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid9 } from "iconsax-react";
-import { toggleInfo } from "../../redux/reducers/messengerAction";
-import { Listbox, ListboxItem } from "@nextui-org/react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+import { toggleInfo } from "@hrbox/core/redux/slices/messengerAction";
 
 import {
-  handleClearHistoryGroupApi,
-  handleRemoveGroupApi,
-  handleMuteGroupApi,
-  handleUnpinMessageGroupApi,
-} from "../../services/Messenger/GroupChatService/apis";
-import Lottie from "lottie-react";
-import { AppDispatch } from "../../redux/store";
+  useClearHistoryGroupMutation,
+  useMuteGroupMutation,
+  useRemoveGroupMutation,
+  useUnpinMessageGroupMutation
+} from "@hrbox/modules/messenger/apis/Group";
 import GroupInfo from "../Info/GroupInfo";
 import { Actions } from "./Actions";
-import { useLocation } from "react-router-dom";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import isTypingGif from "../../lottie/isTyping.json";
-import { setUserProfile } from "../../redux/reducers/profile";
-import {
-  setHighlightedMessageId,
-  updateFilteredMessages,
-} from "../../redux/reducers/messageAction";
-import { SearchIcon } from "@nextui-org/shared-icons";
-import CloseIconSvg from "../../icons/CloseIcon";
-import { ElementTypes, GroupAndChannelTypes, MessageTypes } from "../../types";
+import { useLocation } from "@tanstack/react-router";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { setUserProfile } from "@hrbox/core/redux/slices/profile";
+import { setHighlightedMessageId, updateFilteredMessages } from "@hrbox/core/redux/slices/messageAction";
+import { ElementTypes, GroupAndChannelTypes, MessageTypes } from "@hrbox/modules/messenger/types";
+import { CloseIcon } from "@hrbox/uikit/icons";
 
 export const GroupHeaderInfo = () => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -47,11 +39,17 @@ export const GroupHeaderInfo = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { isOpen, onOpenChange } = useDisclosure();
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const groupProfile = useSelector((state: RootState) => state.profile.profile);
   const groups = useSelector((state: RootState) => state?.groups?.groups);
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
+
+  const [clearHistoryGroup] = useClearHistoryGroupMutation();
+  const [muteGroup] = useMuteGroupMutation();
+  const [removeGroup] = useRemoveGroupMutation();
+  const [unpinMessageGroup] = useUnpinMessageGroupMutation();
+
   useEffect(() => {
     groups.find((item: GroupAndChannelTypes) => {
       item?.id === groupProfile?.chat_id && setMessageList(item.messages);
@@ -59,17 +57,16 @@ export const GroupHeaderInfo = () => {
   }, [groupProfile]);
 
   const pinnedMessage: any = messageList.find(
-    (msg: MessageTypes) => msg.pinned,
+    (msg: MessageTypes) => msg.pinned
   );
   const [active, setActive] = useState<boolean>(false);
   const isOpenEmojipicker = useSelector(
-    (state: RootState) => state.messengerAction.isOpenEmojiPicker,
+    (state: RootState) => state.messengerAction.isOpenEmojiPicker
   );
   const [isTyping, setIsTyping] = useState("");
   const { socket, setMessages } = useWebSocket();
   const [searchText, setSearchText] = useState<string>("");
   const location = useLocation();
-  const { darkMode } = useDarkMode();
   const typingResetTimer = useRef<NodeJS.Timeout | null>(null);
   const typingResetDelay = 1000;
 
@@ -77,29 +74,36 @@ export const GroupHeaderInfo = () => {
     setIsSelected((prev) => !prev);
   };
 
-  const handleToggleMuteChat = () => {
-    dispatch(
-      handleMuteGroupApi({
+  const handleToggleMuteChat = async () => {
+    try {
+      await muteGroup({
         group_id: groupProfile?.chat_id || "",
-      }),
-    );
+        muted: !groupProfile?.muted
+      }).unwrap();
+    } catch (error) {
+      console.error("Failed to mute group:", error);
+    }
   };
 
-  const handleClearChatHistory = () => {
-    dispatch(
-      handleClearHistoryGroupApi({
-        group_id: groupProfile?.chat_id || "",
-      }),
-    );
+  const handleClearChatHistory = async () => {
+    try {
+      await clearHistoryGroup({
+        group_id: groupProfile?.chat_id || ""
+      }).unwrap();
+    } catch (error) {
+      console.error("Failed to clear group history:", error);
+    }
   };
 
-  const handleDeleteChat = () => {
-    dispatch(
-      handleRemoveGroupApi({
-        group_id: groupProfile?.chat_id || "",
-      }),
-    );
-    dispatch(setUserProfile({}));
+  const handleDeleteChat = async () => {
+    try {
+      await removeGroup({
+        group_id: groupProfile?.chat_id || ""
+      }).unwrap();
+      dispatch(setUserProfile({}));
+    } catch (error) {
+      console.error("Failed to remove group:", error);
+    }
   };
 
   const handleOpenInformation = () => {
@@ -114,28 +118,31 @@ export const GroupHeaderInfo = () => {
     setShowSearchBox(!showSearchBox);
   };
 
-  const handleUnpin = () => {
-    messageList.find(
-      (message: MessageTypes) =>
-        message.pinned === true &&
-        dispatch(
-          handleUnpinMessageGroup({
-            message_id: message?.id,
-            group_id: groupProfile?.chat_id,
-          }),
-        ),
-    );
+  const handleUnpin = async () => {
+    const message = messageList.find((message: MessageTypes) => message.pinned === true);
+    if (message) {
+      try {
+        await unpinMessageGroup({
+          message_id: message?.id,
+          group_id: groupProfile?.chat_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to unpin message:", error);
+      }
+    }
   };
+
   const messages: MessageTypes[] = useSelector(
-    (state: RootState) => state?.profile?.profile?.messages,
+    (state: RootState) => state?.profile?.profile?.messages
   );
+
   useEffect(() => {
     dispatch(updateFilteredMessages(messages));
   }, [messages]);
 
   const handleSearch = (value: string) => {
     const filteredMessages = messages.filter((message: MessageTypes) =>
-      message?.text.toLowerCase().includes(searchText.toLowerCase()),
+      message?.text.toLowerCase().includes(searchText.toLowerCase())
     );
     dispatch(updateFilteredMessages(filteredMessages));
     setSearchText(value);
@@ -181,22 +188,36 @@ export const GroupHeaderInfo = () => {
         ) {
           setMessages((prevMessages: MessageTypes[]): MessageTypes[] => [
             ...prevMessages,
-            message,
+            message
           ]);
         }
       };
     }
   }, [socket, profile?.user_id]);
+
   return (
     <div className="relative">
       {groupProfile && (
         <>
           <div className="flex relative">
             <div
-              className={`absolute left-0 top-0 flex flex-row items-center px-8 py-4 gap-6 !backdrop-blur-[6px] h-[72px] z-30 ${!darkMode ? "!bg-gradient-to-r !from-[#ffffffcc] !to-white" : "!bg-gradient-to-r !from-[#01101ab3] !to-[#01101A]"} !rounded-tr-5 ${isOpenMessengerInfo || isOpenEmojipicker ? "w-[calc(100%-256px)]" : "w-full"}
-              ${isSelected && (darkMode ? "bg-primary-800" : "bg-primary-0")} 
-              cursor-pointer transition-colors duration-300
-            hover:bg-primary-0 dark:hover:bg-primary-800`}
+              className={`
+  absolute left-0 top-0 z-30 h-[72px]
+  flex flex-row items-center px-8 py-4 gap-6
+  !backdrop-blur-[6px] !rounded-tr-5
+
+  !bg-gradient-to-r !from-[#ffffffcc] !to-white
+  dark:!from-[#01101ab3] dark:!to-[#01101A]
+
+  ${isOpenMessengerInfo || isOpenEmojipicker
+                ? "w-[calc(100%-256px)]"
+                : "w-full"}
+
+  ${isSelected ? "bg-primary-0 dark:bg-primary-800" : ""}
+
+  cursor-pointer transition-colors duration-300
+  hover:bg-primary-0 dark:hover:bg-primary-800
+`}
               onClick={handleSelect}
             >
               {location?.pathname === "/messenger/save" ? (
@@ -219,18 +240,20 @@ export const GroupHeaderInfo = () => {
                   </span>
                 ) : (
                   <>
-                    <span className="text-secondary-1000 dark:text-white font-open-sans text-sm font-normal leading-normal">
+                    <span
+                      className="text-secondary-1000 dark:text-white font-open-sans text-sm font-normal leading-normal">
                       {groupProfile?.name}
                     </span>
                     {isTyping ? (
                       <div className="flex items-center gap-0.5">
-                        <Lottie animationData={isTypingGif} loop={true} />
+                        typing
                         <span className="text-xs text-secondary-1000 dark:text-white font-light">
                           {isTyping}
                         </span>
                       </div>
                     ) : (
-                      <span className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
+                      <span
+                        className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
                         {groupProfile?.members?.length}
                         Members
                       </span>
@@ -253,15 +276,11 @@ export const GroupHeaderInfo = () => {
                       inputWrapper: [
                         "group-data-[focus=true]:border-!netural-100",
                         "!rounded-4 !shadow-none",
-                        darkMode
-                          ? "border-1 border-netural-700"
-                          : "border-1 border-netural-100",
+                        "border-1 border-netural-100 dark:border-netural-700"
                       ],
                       input: [
-                        darkMode
-                          ? "placeholder:text-white"
-                          : "placeholder:text-netural-400",
-                      ],
+                        "placeholder:text-netural-400 dark:placeholder:text-white"
+                      ]
                     }}
                     startContent={
                       active ? (
@@ -269,7 +288,7 @@ export const GroupHeaderInfo = () => {
                           className={`flex justify-center ease-in-out absolute left-3 right-0 top-2 bottom-0 items-start w-5 h-5 ${darkMode ? "border-netural-250" : "border-netural-400"} border-l-[0.4px]`}
                         ></div>
                       ) : (
-                        <SearchIcon
+                        <SearchNormal1
                           className={`w-6 h-6 dark:text-white text-netural-400`}
                         />
                       )
@@ -283,7 +302,7 @@ export const GroupHeaderInfo = () => {
                             setSearchText("");
                           }}
                         >
-                          <CloseIconSvg />
+                          <CloseIcon />
                         </div>
                       )
                     }
@@ -358,7 +377,7 @@ export const GroupHeaderInfo = () => {
                   const scrollOptions: ElementTypes = {
                     behavior: "smooth",
                     block: "center",
-                    inline: "nearest",
+                    inline: "nearest"
                   };
                   element.scrollIntoView(scrollOptions);
                   dispatch(setHighlightedMessageId(pinnedMessage?.id));
@@ -396,7 +415,8 @@ export const GroupHeaderInfo = () => {
                       />
                     ) : pinnedMessage?.type === "file" ? (
                       <div className="flex items-center gap-2">
-                        <div className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
+                        <div
+                          className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
                           <Folder color="white" size="18" variant="Bold" />
                         </div>
                         <div className="flex flex-col gap-0.5">

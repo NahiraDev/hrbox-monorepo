@@ -1,11 +1,5 @@
-import {
-  Input,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Button,
-} from "@nextui-org/react";
-import { Paperclip2, Folder2, Gallery } from "iconsax-react";
+import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Folder2, Gallery, Paperclip2 } from "iconsax-reactjs";
 import { SelectFileProps } from "./types";
 
 const SelectFile = ({ data }: SelectFileProps) => {
@@ -40,7 +34,8 @@ const SelectFile = ({ data }: SelectFileProps) => {
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="z-10 flex-col items-start gap-3 py-2 px-4 !rounded-md bg-white border border-neutral-200 dark:bg-info-1000 dark:border-info-1000">
+      <PopoverContent
+        className="z-10 flex-col items-start gap-3 py-2 px-4 !rounded-md bg-white border border-neutral-200 dark:bg-info-1000 dark:border-info-1000">
         <div
           className="cursor-pointer flex items-center text-secondary-1000 hover:text-primary dark:text-white dark:hover:text-gold group"
           onClick={handlePhotoClick}

@@ -1,23 +1,12 @@
-import {
-  Avatar,
-  Button,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Image,
-  Link as NextLink,
-} from "@nextui-org/react";
-import { Folder, ImportCurve, Play, Repeat } from "iconsax-react";
-import DoubleCheck from "../../icons/DoubleCheck";
-import { useState, useRef, useEffect } from "react";
+import { Avatar, Button, Image, Link as NextLink, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Folder, ImportCurve, Play, Repeat } from "iconsax-reactjs";
+import DoubleCheck from "@hrbox/uikit/icons/DoubleCheck";
+import { useEffect, useRef, useState } from "react";
 import Reaction from "./Reaction";
-import {
-  setHighlightedMessageId,
-  setMessageId,
-} from "../../redux/reducers/messageAction";
+import { setHighlightedMessageId, setMessageId } from "@hrbox/core/redux/slices/messageAction";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import Check from "../../icons/Check";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import { Check } from "@hrbox/uikit/icons/Check";
 import { ElementTypes, MessageTypes } from "../../types";
 
 interface FileMessageProps {
@@ -41,7 +30,7 @@ const FileMessage: React.FC<FileMessageProps> = ({ message, isSent }) => {
   const minutes = date.getUTCMinutes();
 
   const highlightedMessageId = useSelector(
-    (state: RootState) => state.messageAction.highlighted_message_id,
+    (state: RootState) => state.messageAction.highlighted_message_id
   );
 
   const handleIsDownloading = (status: boolean) => {
@@ -154,13 +143,13 @@ const FileMessage: React.FC<FileMessageProps> = ({ message, isSent }) => {
       <div
         onClick={() => {
           const element = document.getElementById(
-            message?.reply_message_id || "",
+            message?.reply_message_id || ""
           );
           if (element) {
             const scrollOptions: ElementTypes = {
               behavior: "smooth",
               block: "center",
-              inline: "nearest",
+              inline: "nearest"
             };
             element.scrollIntoView(scrollOptions);
             dispatch(setHighlightedMessageId(message?.reply_message_id || ""));

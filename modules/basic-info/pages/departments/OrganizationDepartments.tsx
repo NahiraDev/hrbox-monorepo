@@ -4,7 +4,7 @@ import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import {Paths} from "@hrbox/modules/paths";
-import { AppPagination } from "@HRBox/UIKit/components";
+import {AppPagination} from "@hrbox/uikit/components";
 
 const borderColors = ['#000000', '#A61111', '#F4D082', '#05856F', '#DB5918', '#2F80ED', '#0ED2F7'];
 
@@ -44,7 +44,7 @@ const OrganizationDepartments = () => {
         {organizationDepartment.map((user, index) => renderOrganizationDepartments(user, index))}
       </div>
       <div className="flex justify-end p-2">
-          <AppPagination total={5} />
+          {/*<AppPagination total={5} />*/}
       </div>
     </div>
   );

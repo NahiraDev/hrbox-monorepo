@@ -1,12 +1,6 @@
-import {
-  Moon,
-  Sun1,
-  Notification,
-  SmsNotification,
-  Play,
-} from "iconsax-reactjs";
-import { Avatar, Divider, Badge } from "@heroui/react";
-import React, { useEffect, useMemo, useState } from "react";
+import { Moon, Notification, Play, SmsNotification, Sun1 } from "iconsax-reactjs";
+import { Avatar } from "@heroui/react";
+import React, { useMemo, useState } from "react";
 import { useMatches, useNavigate } from "@tanstack/react-router";
 import { AppButton, AppTabs } from "@hrbox/uikit/components";
 import { AppBreadcrumb } from "@hrbox/uikit/sections";
@@ -35,8 +29,8 @@ export const AppHeader = () => {
     return [
       "Home",
       ...segments.map((seg) =>
-        seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-      ),
+        seg.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
+      )
     ];
   }, [currentRoute?.pathname]);
   const handleTabChange = (key: string | number) => {
@@ -55,23 +49,23 @@ export const AppHeader = () => {
     {
       key: "dashboard",
       title: "Dashboard",
-      href: getHRLinkPath("/dashboard"),
+      href: getHRLinkPath("/dashboard")
     },
     {
       key: "resume",
       title: "Resume",
-      href: getHRLinkPath("/resume/information    "),
+      href: getHRLinkPath("/resume/information    ")
     },
     {
       key: "jobs",
       title: "Jobs",
-      href: getHRLinkPath("/job/offers"),
+      href: getHRLinkPath("/job/offers")
     },
     {
       key: "company",
       title: "Company",
-      href: getHRLinkPath("/company/all"),
-    },
+      href: getHRLinkPath("/company/all")
+    }
   ];
   return (
     <div className="flex items-center justify-between gap-6">
@@ -83,7 +77,7 @@ export const AppHeader = () => {
           <div className="flex flex-col gap-2 flex-1">
             {domainTheme === "hrbox" ? (
               <>
-                <h1 className="text-2xl font-bold text-black dark:text-white">
+                <h1 className="text-2xl font-semibold text-black dark:text-white">
                   {pageTitle}
                 </h1>
                 <AppBreadcrumb pages={breadcrumbPages} />
@@ -95,7 +89,7 @@ export const AppHeader = () => {
                   tabList: "gap-4",
                   tabContent:
                     "group-data-[selected=true]:text-secondary-400 group-data-[selected=true]:font-bold text-sm",
-                  cursor: "bg-secondary-400 h-[2px]",
+                  cursor: "bg-secondary-400 h-[2px]"
                 }}
                 color="secondary"
                 radius="md"
@@ -114,7 +108,7 @@ export const AppHeader = () => {
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
                 size="md"
                 radius="md"
-                className="w-fit! h-fit! p-2! shadow-md"
+                className="w-fit! h-full! p-2! shadow-md"
                 content={<Play size="24" />}
               />
               <AppButton
@@ -122,7 +116,7 @@ export const AppHeader = () => {
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
                 size="md"
                 radius="md"
-                className="shadow-md"
+                className="h-full! shadow-md"
                 content={t("ed_tour")}
               />
               <AppButton
@@ -130,7 +124,7 @@ export const AppHeader = () => {
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
                 radius="md"
                 size="md"
-                className="shadow-md"
+                className="h-full! shadow-md"
                 content={t("upgrade")}
               />
             </div>
@@ -169,9 +163,8 @@ export const AppHeader = () => {
                   />
                 }
               />
-              {/* Messages */}
               <AppButton
-                onPress={() => navigate({ to: "/messages" })}
+                onPress={() => navigate({ to: "/messenger" })}
                 content={
                   <SmsNotification
                     size="20"

@@ -7,8 +7,9 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "@hrbox/core/redux";
 import { useEffect, useState } from "react";
-import { AppTable } from "@hrbox/uikit/components";
+import { AppTable, FormField } from "@hrbox/uikit/components";
 import { duties } from "../../../app/mock";
+import FormDuties from "../../../forms/FormDuties";
 
 const ListofDuties = () => {
   const isEditMode = useSelector(
@@ -84,12 +85,11 @@ const ListofDuties = () => {
           </div>
         </div>
         {/* header content */}
-        <div className="w-full h-full overflow-y-scroll pr-3">
-            <div className="w-full h-full flex flex-col gap-4">
-                <AppTable 
-                data={duties}
-                />
-            </div>
+        <div className="w-full h-full pr-3 py-3 ">
+          <div className="w-full max-h-[561px] flex flex-col p-4 gap-4 overflow-y-auto custom-scroll-objectives">
+            {editTable && <FormDuties />}
+            <AppTable data={duties} hasPagination={false} variant="default" />
+          </div>
         </div>
       </div>
     </>

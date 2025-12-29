@@ -1,36 +1,34 @@
-import { Avatar, Card } from "@nextui-org/react";
+import { Avatar, Card, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import UiBadge from "../Badge";
-import { useDarkMode } from "../../context/DarkMode";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { setUserProfile } from "../../redux/reducers/profile";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import { setUserProfile } from "@hrbox/core/redux/slices/profile";
 import React, { useEffect, useState } from "react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Action } from "./Action";
-import { Paperclip } from "iconsax-react";
-import { closeInfo } from "../../redux/reducers/messengerAction";
-import {
-  GroupAndChannelTypes,
-  MessageTypes,
-  SingleChatItemTypes,
-} from "../../types";
-import { handleFetchChannelChatsApi } from "../../services/Messenger/ChannelChatService/apis.ts";
+import { Paperclip } from "iconsax-reactjs";
+import { closeInfo } from "@hrbox/core/redux/slices/messengerAction";
+import { useFetchChannelChatsQuery } from "@hrbox/modules/messenger/apis/Channel";
+import { GroupAndChannelTypes, MessageTypes, SingleChatItemTypes } from "@hrbox/modules/messenger/types";
 
 export const ChannelItem = ({
-  profile,
-  isSelected,
-  onSelect,
-  showAction,
-  setShowAction,
-}: SingleChatItemTypes) => {
-  const { darkMode } = useDarkMode();
+                              profile,
+                              isSelected,
+                              onSelect,
+                              showAction,
+                              setShowAction
+                            }: SingleChatItemTypes) => {
   const dispatch = useDispatch<AppDispatch>();
   const channels = useSelector((state: RootState) => state.channels.channels);
   const [lastMessages, setLastMessages] = useState<{ [key: string]: string }>(
-    {},
+    {}
+  );
+  const [selectedChannelId, setSelectedChannelId] = useState<string>("");
+
+  const { data: channelChatsData } = useFetchChannelChatsQuery(
+    { channel_id: selectedChannelId },
+    { skip: !selectedChannelId }
   );
 
-  // Set profile and fetch channel chats
   const setProfile = () => {
     const channelProfile: GroupAndChannelTypes = {
       name: profile?.name || "",
@@ -44,13 +42,12 @@ export const ChannelItem = ({
       type: profile?.type || "",
       muted: profile?.muted || false,
       pinned: false,
-      chat_type: "channel",
+      chat_type: "channel"
     };
     dispatch(setUserProfile(channelProfile));
-    dispatch(handleFetchChannelChatsApi({ channel_id: profile?.id || "" }));
+    setSelectedChannelId(profile?.id || "");
   };
 
-  // Handle selection and context menu
   const handleSelect = () => {
     onSelect();
     setProfile();
@@ -63,7 +60,6 @@ export const ChannelItem = ({
     setShowAction((prev) => !prev);
   };
 
-  // Update last messages based on channels
   useEffect(() => {
     const newLastMessages = channels.reduce(
       (acc, channel) => {
@@ -72,25 +68,23 @@ export const ChannelItem = ({
           acc[channel.id || ""] = lastMessage.created_at;
         return acc;
       },
-      {} as { [key: string]: string },
+      {} as { [key: string]: string }
     );
 
     setLastMessages(newLastMessages);
   }, [channels]);
 
-  // Get last message time in HH:mm format
   const getLastMessageTime = (channelId: string) => {
     const timestamp = lastMessages[channelId];
     if (!timestamp) return "00:00";
     const date = new Date(timestamp);
-    return isNaN(date.getTime()) ? "00:00" : date.toISOString().substr(11, 5); // HH:mm
+    return isNaN(date.getTime()) ? "00:00" : date.toISOString().substr(11, 5);
   };
 
-  // Filter delivered messages
   const deliveredMessages = channels.flatMap((channel: GroupAndChannelTypes) =>
     channel.messages.filter(
-      (message: MessageTypes) => message?.status === "delivered",
-    ),
+      (message: MessageTypes) => message?.status === "delivered"
+    )
   );
 
   return (
@@ -99,7 +93,7 @@ export const ChannelItem = ({
         <Card
           radius="none"
           shadow="none"
-          className={`relative flex flex-row items-center w-full px-6 py-3 gap-2 border-b-1 ${darkMode ? "bg-primary-800" : "bg-white"} cursor-pointer transition-colors duration-300 ${isSelected ? (darkMode ? "bg-primary-800" : "bg-primary-0") : ""}`}
+          className={`relative flex flex-row items-center w-full px-6 py-3 gap-2 border-b-1 bg-white dark:bg-primary-800 cursor-pointer transition-colors duration-300 ${isSelected ? "bg-primary-0 dark:bg-primary-800" : ""}`}
           isPressable
           onPress={handleSelect}
           onContextMenu={handleRightClick}

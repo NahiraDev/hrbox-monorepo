@@ -1,10 +1,11 @@
-import { Button, Image, Input } from "@nextui-org/react";
+import { Button, Image, Input } from "@heroui/react";
 import { ShowMediaProps } from "./types";
-import HappyEmoji from "../../icons/HappyEmoji";
+import HappyEmoji from "@hrbox/uikit/icons/HappyEmoji";
 import EmojiPicker from "emoji-picker-react";
-import { Folder } from "iconsax-react";
+import { Folder } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
+
 const ShowMedia = ({ data }: ShowMediaProps) => {
   const date = new Date();
   const hours = date.getUTCHours();
@@ -89,7 +90,7 @@ const ShowMedia = ({ data }: ShowMediaProps) => {
               onChange={(e) => data.handleSetCaption(e.target.value)}
               className="border-none outline-none rounded-lg"
               classNames={{
-                inputWrapper: "!bg-transparent",
+                inputWrapper: "!bg-transparent"
               }}
             />
             <div
@@ -102,7 +103,8 @@ const ShowMedia = ({ data }: ShowMediaProps) => {
             </div>
 
             {data.showEmojiPickerCaption && (
-              <div className="bg-white !rounded-4 dark:bg-info-1000 !shadow-sm absolute z-10 bottom-[100px] left-[285px]">
+              <div
+                className="bg-white !rounded-4 dark:bg-info-1000 !shadow-sm absolute z-10 bottom-[100px] left-[285px]">
                 <div className="text-box-emoji-picker ">
                   <EmojiPicker
                     width="256px"
@@ -110,7 +112,7 @@ const ShowMedia = ({ data }: ShowMediaProps) => {
                     lazyLoadEmojis={true}
                     skinTonesDisabled={true}
                     previewConfig={{
-                      showPreview: false,
+                      showPreview: false
                     }}
                     onEmojiClick={data.handleEmojiClickCaption}
                   />
@@ -123,13 +125,13 @@ const ShowMedia = ({ data }: ShowMediaProps) => {
             <Button
               variant="light"
               className="!px-2 !py-1 text-secondary-1000 dark:text-white !rounded-4 text-sm font-normal !min-w-0 !w-[50px] !h-auto"
-              onClick={handleCancelClick}
+              onPress={handleCancelClick}
             >
               Cancel
             </Button>
             <Button
               className="!rounded-4 bg-primary-400 dark:bg-surface-100 text-white !px-2 !py-1 text-sm font-normal !min-w-0 !w-[50px] !h-auto"
-              onClick={data.handleSendMedia}
+              onPress={data.handleSendMedia}
             >
               Send
             </Button>

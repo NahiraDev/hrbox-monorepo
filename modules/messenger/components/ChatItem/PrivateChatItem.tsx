@@ -1,38 +1,37 @@
-import { Avatar, Card } from "@nextui-org/react";
+import { Avatar, Card, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import UiBadge from "../Badge";
-import { useDarkMode } from "../../context/DarkMode";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { setUserProfile } from "../../redux/reducers/profile";
+import { RootState } from "@hrbox/core/redux/store";
+import { setUserProfile } from "@hrbox/core/redux/slices/profile";
 import React, { useEffect, useRef, useState } from "react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
-import { Paperclip } from "iconsax-react";
-import { closeInfo } from "../../redux/reducers/messengerAction";
-import { SingleChatItemTypes } from "../../types";
-import { Action } from "./Action.tsx";
-import { handleFetchUserChatsApi } from "../../services/Messenger/PrivateChatService/apis.ts";
+import { Paperclip } from "iconsax-reactjs";
+import { closeInfo } from "@hrbox/core/redux/slices/messengerAction";
+import { MessageTypes, SingleChatItemTypes } from "@hrbox/modules/messenger/types";
+import { Action } from "@hrbox/modules/messenger/components/ChatItem/Action";
+import { useLazyFetchUserChatsQuery } from "@hrbox/modules/messenger/apis/Private";
 
 export const PrivateChatItem = ({
-  profile,
-  isSelected,
-  onSelect,
-  showAction,
-  setShowAction,
-}: SingleChatItemTypes) => {
-  const { darkMode } = useDarkMode();
-  const dispatch = useDispatch<AppDispatch>();
+                                  profile,
+                                  isSelected,
+                                  onSelect,
+                                  showAction,
+                                  setShowAction
+                                }: SingleChatItemTypes) => {
+  const dispatch = useDispatch();
   const profileUser = JSON.parse(localStorage.getItem("profile") || "{}");
   const privateChatProfile = useSelector(
-    (state: RootState) => state.profile.profile,
+    (state: RootState) => state.profile.profile
   );
   const privateChats = useSelector(
-    (state: RootState) => state.privateChat?.privateChats,
+    (state: RootState) => state.privateChat?.privateChats
   );
 
   const [lastMessages, setLastMessages] = useState<{ [key: string]: string }>(
-    {},
+    {}
   );
   const popoverRef = useRef<HTMLDivElement | null>(null);
+
+  const [fetchUserChats] = useLazyFetchUserChatsQuery();
 
   const setProfile = () => {
     const userId =
@@ -48,10 +47,10 @@ export const PrivateChatItem = ({
       user_name: profile?.user_name || "",
       muted: profile?.muted,
       pinned: false,
-      chat_type: "private",
+      chat_type: "private"
     };
     dispatch(setUserProfile(userProfile));
-    dispatch(handleFetchUserChatsApi({ chat_id: profile.id }));
+    fetchUserChats({ chat_id: profile.id });
   };
 
   const handleSelect = () => {
@@ -103,10 +102,21 @@ export const PrivateChatItem = ({
   const deliveredMessages = privateChats.flatMap(
     (chat: any) =>
       chat?.messages?.filter(
-        (message: MessageTypes) => message?.status === "delivered",
-      ) || [],
+        (message: MessageTypes) => message?.status === "delivered"
+      ) || []
   );
-  const cardClassNames = `relative flex flex-row items-center w-full px-6 py-3 gap-2 border-b-1 ${isSelected ? (darkMode ? "bg-primary-800" : "bg-primary-0") : darkMode ? "bg-info-1000" : "bg-white"} cursor-pointer transition-colors duration-300 ${darkMode ? "hover:bg-primary-800 hover:bg-opacity-40" : "hover:bg-primary-0 hover:bg-opacity-40"}`;
+  const cardClassNames = `
+  relative flex flex-row items-center w-full px-6 py-3 gap-2
+  border-b-1
+  cursor-pointer transition-colors duration-300
+
+  ${isSelected
+    ? "bg-primary-0 dark:bg-primary-800"
+    : "bg-white dark:bg-info-1000"}
+
+  hover:bg-primary-0 hover:bg-opacity-40
+  dark:hover:bg-primary-800 dark:hover:bg-opacity-40
+`;
   const renderChatItem = (isRecipient: boolean) => (
     <Popover isOpen={showAction} isDismissable={!showAction} ref={popoverRef}>
       <PopoverTrigger>
