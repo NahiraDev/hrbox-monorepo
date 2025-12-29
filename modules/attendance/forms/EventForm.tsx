@@ -1,4 +1,4 @@
-import { useFormContext, useModalContext } from '@hrbox/core/providers';
+import { FormProvider, useFormContext, useModalContext } from '@hrbox/core/providers';
 import * as Yup from 'yup';
 import { Form } from '@heroui/react';
 import { FormField } from '@hrbox/uikit/components/FormField';
@@ -14,6 +14,8 @@ export const formValidationEvent = Yup.object().shape({
 });
 
 export const handleSubmitEvent = (values: any) => {
+  console.log(values);
+  
   return {
     title: values.title,
   };
@@ -26,10 +28,12 @@ export const EventForm = () => {
 
 
   return (
+    <FormProvider formId='event-form' initialValues={initialValuesEvent} onSubmit={handleSubmitEvent} >
     <Form id='event-form'>
       <div className='w-full'>
       <FormField name='title' label={t('please_enter_the_time')} type='text' formMode={currentType} component={AppInput}  />
       </div>
     </Form>
+    </FormProvider>
   );
 };

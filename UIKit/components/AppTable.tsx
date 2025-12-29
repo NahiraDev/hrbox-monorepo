@@ -671,7 +671,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             wrapper: clsx(
               "h-full !w-full",
               variant === "bordered"
-                ? "dark:border dark:bg-[#04425C60] bg-[#DCF0F940] dark:border-primary"
+                ? "!dark:border !dark:bg-[#04425C60] !bg-[#DCF0F940] !dark:border-primary !border !border-primary"
                 : variant === "default"
                   ? "!border-none !bg-transparent dark:bg-transparent !dark:border-none !shadow-none !dark:shadow-none !rounded-none p-0 "
                   : ""
@@ -679,9 +679,9 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             table: "!w-full",
             tbody: "!w-full",
             td: "py-3 px-2",
-            thead: "!w-full  ",
-            tr: "rounded-6 !w-full",
-            th: HeaderColor || "bg-primary-400",
+            thead: "!w-full ",
+            tr: "rounded-6 !w-full ",
+            th: HeaderColor || "bg-primary-400 text-white",
           }}
         >
           <TableHeader className={styles.headerClassName}>
