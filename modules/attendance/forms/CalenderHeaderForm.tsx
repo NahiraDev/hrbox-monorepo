@@ -90,7 +90,7 @@ export const CalenderHeaderForm = () => {
 
   const handleOpenEventModal = () => {
     modal.open(
-      ModalType.VIEW,
+      ModalType.CREATE,
       "event-form",
       <EventModal />,
       {
