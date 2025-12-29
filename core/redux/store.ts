@@ -21,6 +21,9 @@ const persistConfig = {
   whitelist: ["auth", "theme", "language", "user", "messageAction", "messengerAction"]
 };
 
+let _store: any = null;
+let _persistor: any = null;
+
 export function createStoreWithModules(ENABLED_MODULES: string[]) {
   const moduleReducers = moduleRegistry.getAllReducers();
   const moduleApis = moduleRegistry.getAllApis();
@@ -71,12 +74,25 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
 
   const persistor = persistStore(store);
 
+  _store = store;
+  _persistor = persistor;
+
   return { store, persistor };
 }
 
-export type RootState = ReturnType<
-  ReturnType<typeof createStoreWithModules>["store"]["getState"]
->;
-export type AppDispatch = ReturnType<
-  typeof createStoreWithModules
->["store"]["dispatch"];
+export function getStore() {
+  if (!_store) {
+    throw new Error("Store not initialized! Call createStoreWithModules() first");
+  }
+  return _store;
+}
+
+export function getPersistor() {
+  if (!_persistor) {
+    throw new Error("Persistor not initialized! Call createStoreWithModules() first");
+  }
+  return _persistor;
+}
+
+export type RootState = ReturnType<typeof createStoreWithModules>["store"]["getState"];
+export type AppDispatch = ReturnType<typeof createStoreWithModules>["store"]["dispatch"];
