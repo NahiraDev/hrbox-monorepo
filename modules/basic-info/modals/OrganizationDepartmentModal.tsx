@@ -88,6 +88,7 @@ export const OrganizationDepartmentModal = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
       <div className="grid grid-cols-2 gap-4">
+
         <FormField
           name="department_title"
           label="Department Title"
@@ -120,11 +121,13 @@ export const OrganizationDepartmentModal = () => {
         </div>
       </div>
       <FormField
+        formMode={currentType}
         name="description"
         label="Description"
-        formMode={currentType}
         component={AppTextArea}
+        helperText={touched.Descriptions && errors.Descriptions}
       />
+
     </form>
   );
 };

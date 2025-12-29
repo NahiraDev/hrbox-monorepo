@@ -5,12 +5,12 @@ import {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
 import {AppButton,AppDeleteModal} from '@hrbox/uikit/components';
 import {useModal} from "@hrbox/core/hooks";
-import {AwardModal} from "@hrbox/modules/hrlink/modals/AwardModal";
 import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
 import {
     formValidationOrganizationLocation,
     initialValuesOrganizationLocation
 } from "@hrbox/modules/basic-info/forms/OrganizationLocationForm";
+import { OrganizationLocationModal } from "@hrbox/modules/basic-info/modals/OrganizationLocationModal";
 
 const OrganizationalLocations = () => {
     const {openModal} = useModalContext();
@@ -56,47 +56,52 @@ const OrganizationalLocations = () => {
 
     const filteredLocations = useMemo(() => locations, [locations]);
 
-    const modal = useModal()
-    const handleOpenOrganizationLocation = () => {
-        modal.open(
-            ModalType.CREATE,
-            "award-form",
-            <AwardModal/>,
-            {
-                isForm: true,
-                title: "افزودن ",
-                submitLabel: "ذخیره",
-                cancelLabel: "لغو",
-                formConfig: {
-                    initialValues: initialValuesOrganizationLocation,
-                    validationSchema: formValidationOrganizationLocation,
-                    formId: "award-form",
-                    enableCache: true,
-                    clearCacheOnSubmit: true,
-                    onSubmitAsync: async (values: any) => {
-                        handleSubmitAward(values);
-                        modal.close(ModalType.CREATE, "award-form");
-                    },
-                },
-            },
-            ModalSize.XL,
-        );
-    };
+  const modal = useModal()
 
-    return (
+  const handleOpenOrganizationLocation = () => {
+    modal.open(
+      ModalType.VIEW,
+      "OrganizationLocationModal",
+      <OrganizationLocationModal/>,
+      {
+        isForm: true,
+        title: "Organizational Locations ",
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "OrganizationLocationModal",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "OrganizationLocationModal");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
+
+  return (
         <>
             <div className="flex flex-col justify-between w-full h-full p-4 relative">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full h-full">
+                <div className="grid grid-cols-5  gap-4 w-full h-full">
                     {filteredLocations.map((detail, index) => (
                         <div key={`${detail.title}-${index}`} className="relative group">
                             <Card
+                              isPressable
                               onPress={handleOpenOrganizationLocation}
-                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary  relative z-0"
+                              className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary  relative z-0"
+
                             >
                                 <Avatar
                                     className="w-full h-32 sm:h-40"
                                     radius="sm"
-                                    src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+                                    src=""
+                                    color="primary"
                                 />
                                 <div className="w-full">
                                     <span className="!font-bold text-left">{detail.title}</span>
