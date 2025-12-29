@@ -67,9 +67,6 @@ const useModalInternal = () => {
   return ctx;
 };
 
-// ============================================
-// AppModal.Header
-// ============================================
 interface AppModalHeaderProps {
   children?: React.ReactNode;
 }
@@ -88,7 +85,7 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
   return (
     <motion.div
       className={clsx(
-        "bg-gradient-to-r px-6 py-4 flex items-center justify-between",
+        "px-6 py-4 flex items-center justify-between",
         getHeaderColor()
       )}
       initial={{ opacity: 0 }}
@@ -98,7 +95,7 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
       {children ? (
         <div>{children}</div>
       ) : (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 g-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]">
           {modalIcon && (
             <div className="text-2xl text-white">{modalIcon}</div>
           )}
@@ -113,7 +110,7 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
         whileTap={{ scale: 0.95 }}
         onClick={closeModal}
         className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
-        aria-label="بستن"
+        aria-label="Close"
       >
         <Close size="24" className="text-white" />
       </motion.button>
@@ -121,9 +118,6 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
   );
 };
 
-// ============================================
-// AppModal.Body
-// ============================================
 interface AppModalBodyProps {
   children: React.ReactNode;
   className?: string;
@@ -139,7 +133,6 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 }}
     >
-      {/* Error Alert */}
       {formError && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -158,9 +151,6 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
   );
 };
 
-// ============================================
-// AppModal.Footer
-// ============================================
 interface AppModalFooterProps {
   children?: React.ReactNode;
   className?: string;
@@ -197,7 +187,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
   return (
     <motion.div
       className={clsx(
-        "px-6 py-4 flex items-center justify-end gap-3",
+        "px-6 py-4 flex items-center justify-end gap-3 m-12",
         className
       )}
       initial={{ opacity: 0, y: 10 }}
@@ -314,14 +304,14 @@ const AppModalBase: React.FC<AppModalProps> & {
   const getHeaderColor = () => {
     switch (modalType) {
       case ModalType.DELETE:
-        return "from-danger to-danger-600";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.EDIT:
-        return "from-primary to-primary-600";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.VIEW:
-        return "from-secondary-400 to-secondary-600";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.CREATE:
       default:
-        return "from-primary to-primary-600";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
     }
   };
 

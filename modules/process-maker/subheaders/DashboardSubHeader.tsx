@@ -1,49 +1,41 @@
-import { AppButton } from '@hrbox/uikit/components';
-import { Add, Chart, SearchNormal, Setting4 } from 'iconsax-reactjs';
+import { AppButton, AppPageTitle } from "@hrbox/uikit/components";
+import { Add, Chart, SearchNormal, Setting4 } from "iconsax-reactjs";
 
 const DashboardSubHeader = () => {
   return (
-    <div className="flex flex-row-reverse justify-between ">
+    <div className="flex flex-row-reverse justify-between">
       <div className="flex flex-row-reverse gap-2">
         <AppButton
-          props={{
-            color: 'white',
-            size: 'md',
-            radius: 'lg',
-            content: 'Add new One',
-            className: 'border-1 border-primary',
-            startContent: <Add />,
-          }}
+          color="primary"
+          size="md"
+          radius="lg"
+          variant="bordered"
+          content="Add new One"
+          className={"p-2.5!"}
+          startContent={<Add />}
         />
+
         <AppButton
-          props={{
-            color: 'white',
-            size: 'md',
-            radius: 'lg',
-            className: 'border-1 border-primary',
-            content: <Setting4 />,
-          }}
+          color="primary"
+          size="md"
+          variant="bordered"
+          radius="lg"
+          className={"p-2.5!"}
+          content={<Setting4 />}
         />
+
         <AppButton
-          props={{
-            color: 'white',
-            size: 'md',
-            radius: 'lg',
-            className: 'border-1 border-primary',
-            content: <SearchNormal />,
-          }}
+          color="primary"
+          size="md"
+          radius="lg"
+          variant="bordered"
+          className={"p-2.5!"}
+          content={<SearchNormal />}
         />
       </div>
+
       <div className="flex">
-        <AppButton
-          props={{
-            color: 'primary',
-            size: 'md',
-            radius: 'lg',
-            content: 'Dashboard',
-            startContent: <Chart />,
-          }}
-        />
+        <AppPageTitle title="Dashboard" icon={<Chart color="#fff" size={18} />} />
       </div>
     </div>
   );
