@@ -29,11 +29,6 @@ export function filterRoutesByRole(
   });
 }
 
-/**
- * ============================================
- * 4️⃣ فیلتر مسیر بر اساس مجوز
- * ============================================
- */
 export function filterRoutesByPermission(
   routes: ModuleRoute[],
   userPermissions: string[]
@@ -82,7 +77,6 @@ export function filterMenuRecursively(
 ): any[] {
   return menu
     .filter((item) => {
-      // بررسی نقش
       if (item.requiredRoles && item.requiredRoles.length > 0) {
         const hasRole = item.requiredRoles.some((role: string) =>
           userRoles.includes(role)
@@ -90,7 +84,6 @@ export function filterMenuRecursively(
         if (!hasRole) return false;
       }
 
-      // بررسی مجوز
       if (item.requiredPermissions && item.requiredPermissions.length > 0) {
         const hasPermission = item.requiredPermissions.some((perm: string) =>
           userPermissions.includes(perm)
@@ -108,7 +101,7 @@ export function filterMenuRecursively(
             item.children,
             userRoles,
             userPermissions
-          ),
+          )
         };
       }
       return item;
@@ -167,8 +160,8 @@ export function authMiddleware(
 }
 
 export function useSidebarMenu(moduleName: string) {
-  const { selectedRole } = useAuth(); // کاربر فعلی
-  const userRoles = [selectedRole?.slug || ''];
+  const { selectedRole } = useAuth();
+  const userRoles = [selectedRole?.slug || ""];
   const userPermissions = selectedRole?.permissions || [];
 
   return filterMenuByAccess(
