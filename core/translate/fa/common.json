@@ -257,6 +257,13 @@
   "General":"عمومی ",
   "Grade_title":"عنوان سطح",
   "of_points":"شروع امتیاز :",
-  "up_to_points":"پایان امتیاز :"
+  "up_to_points":"پایان امتیاز :",
+  "index_ title": "عنوان شاخص",
+  "Select_Group": "انتخاب گروه",
+  "Type": "نوع",
+  "weight": "وزن",
+  "indicators": "شاخص ها",
+  "General": "عمومی ",
+  "index_title": "index title (fa)"
 
 }

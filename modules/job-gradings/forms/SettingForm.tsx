@@ -54,7 +54,7 @@ const SettingForm = () => {
   const currentType = getOpenModal()?.type;
   return (
     <>
-      <Form id="face-allocation-form" onSubmit={handleSubmit}>
+      <Form id="setting-Form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
