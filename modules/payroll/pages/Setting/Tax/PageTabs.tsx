@@ -7,8 +7,8 @@ import FilterModal from "@/components/FilterModal.tsx";
 import { Index as Icons } from "@/icons/Index.tsx";
 import PageHeaderTab from "@/components/PageHeaderTab.tsx";
 import { routeUrls } from "@/routes";
-import ModalTaxTable from "@/pages/Setting/Tax/ModalTaxTable.tsx";
-import ModalTaxOffice from "@/pages/Setting/Tax/ModalTaxOffice.tsx";
+import ModalTaxTable from "@/pages/Indicator/Tax/ModalTaxTable.tsx";
+import ModalTaxOffice from "@/pages/Indicator/Tax/ModalTaxOffice.tsx";
 
 export default function PageTabs({ props }: { props: any }) {
   const { data } = props;

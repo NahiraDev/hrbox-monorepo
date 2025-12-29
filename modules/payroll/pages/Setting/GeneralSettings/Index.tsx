@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Accordion, AccordionItem } from "@heroui/react";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageIndexTabs from "@/pages/Setting/PageIndexTabs.tsx";
-import InitialSettings from "@/pages/Setting/GeneralSettings/InitialSettings.tsx";
-import EidSettings from "@/pages/Setting/GeneralSettings/EidSettings.tsx";
-import GeneralCompensationSettings from "@/pages/Setting/GeneralSettings/GeneralCompensationSettings.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageIndexTabs from "@/pages/Indicator/PageIndexTabs.tsx";
+import InitialSettings from "@/pages/Indicator/GeneralSettings/InitialSettings.tsx";
+import EidSettings from "@/pages/Indicator/GeneralSettings/EidSettings.tsx";
+import GeneralCompensationSettings from "@/pages/Indicator/GeneralSettings/GeneralCompensationSettings.tsx";
 import { AppSwitch } from "@/components/AppSwitch.tsx";
 import { AppInput } from "@/components/AppInput.tsx";
-import PageTabs from "@/pages/Setting/GeneralSettings/PageTabs.tsx";
+import PageTabs from "@/pages/Indicator/GeneralSettings/PageTabs.tsx";
 import PageHeader from "@/components/PageHeader.tsx";
 
 export default function Index() {

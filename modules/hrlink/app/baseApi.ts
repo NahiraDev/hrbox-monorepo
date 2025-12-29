@@ -1,9 +1,21 @@
 import { createModuleApi } from "@hrbox/core/apis/baseApi";
 
 export const HRLinkApi = createModuleApi({
-  reducerPath: 'HRLinkApi',
-  baseUrl: '/DesktopModules/Freelancer/api', // Adjust base URL as needed
-  tagTypes: ['Company' , 'Award'],
+  reducerPath: "HRLinkApi",
+  baseUrl: "https://hrlink.hrbox.me/DesktopModules/Freelancer/api",
+  tagTypes: [
+    "Award",
+    "Course",
+    "Education",
+    "Experience",
+    "Skill",
+    "Job",
+    "Company",
+    "Profile",
+    "User",
+    "Dashboard",
+    "Common"
+  ],
   requiresAuth: true,
-  autoToast: true,
+  autoToast: true
 });

@@ -1,5 +1,5 @@
-export type ThemeMode = 'light' | 'dark' | undefined;
-export type Panel = 'hrlink' | 'hrbox' | 'super-admin';
+export type ThemeMode = "light" | "dark";
+export type Panel = "hrlink" | "hrbox";
 
 export interface ColorPalette {
   primary: string;
@@ -35,7 +35,7 @@ export interface SpacingConfig {
   md: string;
   lg: string;
   xl: string;
-  '2xl': string;
+  "2xl": string;
 }
 
 export interface RadiusConfig {
@@ -45,8 +45,8 @@ export interface RadiusConfig {
   md: string;
   lg: string;
   xl: string;
-  '2xl': string;
-  '3xl': string;
+  "2xl": string;
+  "3xl": string;
   full: string;
 }
 
@@ -55,7 +55,7 @@ export interface ShadowConfig {
   md: string;
   lg: string;
   xl: string;
-  '2xl': string;
+  "2xl": string;
 }
 
 export interface ThemeConfig {

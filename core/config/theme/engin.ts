@@ -2,8 +2,10 @@ import {
   Panel,
   RadiusConfig,
   ShadowConfig,
-  SpacingConfig, ThemeColors,
-  ThemeConfig, ThemeMode,
+  SpacingConfig,
+  ThemeColors,
+  ThemeConfig,
+  ThemeMode,
   TypographyConfig
 } from "@hrbox/core/config/theme/types";
 import {
@@ -11,7 +13,8 @@ import {
   DEFAULT_RADIUS,
   DEFAULT_SHADOWS,
   DEFAULT_SPACING,
-  DEFAULT_TYPOGRAPHY, PANEL_PRESETS
+  DEFAULT_TYPOGRAPHY,
+  PANEL_PRESETS
 } from "@hrbox/core/config/theme/presets";
 
 export class ThemeEngine {
@@ -23,11 +26,11 @@ export class ThemeEngine {
   }
 
   applyTheme(theme: Partial<ThemeConfig>): void {
-    const fullTheme = this.mergeWithDefaults(theme);
+    const fullTheme: any = this.mergeWithDefaults(theme);
     this.currentTheme = fullTheme;
 
     this.root.className = this.root.className
-      .replace(/\b(hrlink|hrbox|super-admin|dark|light)\b/g, '')
+      .replace(/\b(hrlink|hrbox|dark|light)\b/g, "")
       .trim();
 
     this.root.classList.add(fullTheme.panel, fullTheme.mode);
@@ -37,16 +40,12 @@ export class ThemeEngine {
 
     this.applyTypography(fullTheme.typography);
 
-    // اعمال Spacing
     this.applySpacing(fullTheme.spacing);
 
-    // اعمال Radius
     this.applyRadius(fullTheme.radius);
 
-    // اعمال Shadows
     this.applyShadows(fullTheme.shadows);
 
-    // اعمال CSS سفارشی
     if (fullTheme.customCSS) {
       this.applyCustomCSS(fullTheme.customCSS);
     }
@@ -57,10 +56,10 @@ export class ThemeEngine {
   private applyColors(theme: ThemeConfig): void {
     const panelColors = PANEL_PRESETS[theme.panel][theme.mode];
 
-    this.setVariable('--color-primary', panelColors.primary);
-    this.setVariable('--color-secondary', panelColors.secondary);
-    this.setVariable('--color-background', panelColors.background);
-    this.setVariable('--color-surface', panelColors.surface);
+    this.setVariable("--color-primary", panelColors.primary);
+    this.setVariable("--color-secondary", panelColors.secondary);
+    this.setVariable("--color-background", panelColors.background);
+    this.setVariable("--color-surface", panelColors.surface);
 
     Object.entries(theme.colors.primary).forEach(([key, value]) => {
       this.setVariable(`--color-primary-${key}`, value);
@@ -74,8 +73,7 @@ export class ThemeEngine {
       this.setVariable(`--color-neutral-${key}`, value);
     });
 
-    // رنگ‌های Semantic
-    ['success', 'warning', 'danger', 'info'].forEach((type) => {
+    ["success", "warning", "danger", "info"].forEach((type) => {
       const colors = theme.colors[type as keyof ThemeColors] as Record<number, string>;
       Object.entries(colors).forEach(([key, value]) => {
         this.setVariable(`--color-${type}-${key}`, value);
@@ -89,7 +87,6 @@ export class ThemeEngine {
       this.setVariable(`--font-${key}`, value);
     });
 
-    // Font Sizes
     Object.entries(typography.fontSize).forEach(([key, value]) => {
       this.setVariable(`--text-${key}`, value);
     });
@@ -114,11 +111,11 @@ export class ThemeEngine {
   }
 
   private applyCustomCSS(css: string): void {
-    let styleElement = document.getElementById('custom-theme-css');
+    let styleElement = document.getElementById("custom-theme-css");
 
     if (!styleElement) {
-      styleElement = document.createElement('style');
-      styleElement.id = 'custom-theme-css';
+      styleElement = document.createElement("style");
+      styleElement.id = "custom-theme-css";
       document.head.appendChild(styleElement);
     }
 
@@ -140,35 +137,35 @@ export class ThemeEngine {
         success: { ...DEFAULT_COLORS.success, ...theme.colors?.success },
         warning: { ...DEFAULT_COLORS.warning, ...theme.colors?.warning },
         danger: { ...DEFAULT_COLORS.danger, ...theme.colors?.danger },
-        info: { ...DEFAULT_COLORS.info, ...theme.colors?.info },
+        info: { ...DEFAULT_COLORS.info, ...theme.colors?.info }
       },
       typography: theme.typography || DEFAULT_TYPOGRAPHY,
       spacing: theme.spacing || DEFAULT_SPACING,
       radius: theme.radius || DEFAULT_RADIUS,
       shadows: theme.shadows || DEFAULT_SHADOWS,
-      customCSS: theme.customCSS,
+      customCSS: theme.customCSS
     };
   }
 
   private saveTheme(theme: ThemeConfig): void {
     try {
-      localStorage.setItem('app-theme', JSON.stringify(theme));
+      localStorage.setItem("app-theme", JSON.stringify(theme));
     } catch (error) {
-      console.error('Failed to save theme:', error);
+      console.error("Failed to save theme:", error);
     }
   }
 
 
   loadTheme(): ThemeConfig | null {
     try {
-      const saved = localStorage.getItem('app-theme');
+      const saved = localStorage.getItem("app-theme");
       if (saved) {
         const theme = JSON.parse(saved);
         this.applyTheme(theme);
         return theme;
       }
     } catch (error) {
-      console.error('Failed to load theme:', error);
+      console.error("Failed to load theme:", error);
     }
     return null;
   }
@@ -185,7 +182,7 @@ export class ThemeEngine {
       typography: DEFAULT_TYPOGRAPHY,
       spacing: DEFAULT_SPACING,
       radius: DEFAULT_RADIUS,
-      shadows: DEFAULT_SHADOWS,
+      shadows: DEFAULT_SHADOWS
     };
 
     this.applyTheme(defaultTheme);
@@ -194,7 +191,7 @@ export class ThemeEngine {
   toggleMode(): void {
     if (!this.currentTheme) return;
 
-    const newMode = this.currentTheme.mode === 'light' ? 'dark' : 'light';
+    const newMode = this.currentTheme.mode === "light" ? "dark" : "light";
     this.applyTheme({ ...this.currentTheme, mode: newMode });
   }
 
@@ -207,7 +204,7 @@ export class ThemeEngine {
   updateColor(path: string, value: string): void {
     if (!this.currentTheme) return;
 
-    const parts = path.split('.');
+    const parts = path.split(".");
     const colorType = parts[0] as keyof ThemeColors;
     const shade = parts[1];
 
@@ -217,11 +214,12 @@ export class ThemeEngine {
     }
   }
 
-  updateFont(type: keyof TypographyConfig['fontFamily'], value: string): void {
+  updateFont(type: keyof TypographyConfig["fontFamily"], value: string): void {
     if (!this.currentTheme) return;
 
     this.currentTheme.typography.fontFamily[type] = value;
     this.applyTheme(this.currentTheme);
   }
 }
+
 export const themeEngine = new ThemeEngine();

@@ -1,45 +1,65 @@
-import { createModuleApi } from '@hrbox/core/apis/baseApi';
 import { createMutation, createPaginatedQuery, createQuery } from "@hrbox/core/apis/createEndpoints";
 import { HRLinkApiEndpoints } from "@module/hrlink/app/endpoints";
+import { HRLinkApi } from '@module/hrlink/app/baseApi';
 
-const companyApi = createModuleApi({
-  reducerPath: 'companyApi',
-  baseUrl: 'https://hrlink.hrbox.me:50443/DesktopModules/Freelancer/api',
-  tagTypes: ['Company'],
-  requiresAuth: true,
-  autoToast: true,
-});
-
-export const companyApiWithEndpoints = companyApi.injectEndpoints({
+export const companyApiWithEndpoints = HRLinkApi.injectEndpoints({
   endpoints: (build) => ({
-    fetchCompany: createQuery<any>(build, {
+    fetchCompany: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getList,
       tags: ['Company'],
     }),
 
-    // GET: Company Events (Paginated)
     fetchEvents: createPaginatedQuery<any>(build, {
       url: HRLinkApiEndpoints.company.getEvents,
       tags: ['Company'],
     }),
 
-    // GET: Company Detail
     fetchCompanyDetail: createQuery<any, { id: string }>(build, {
       url: HRLinkApiEndpoints.company.getDetail,
       tags: ['Company'],
     }),
 
-    // POST: Send Request to Company
     sendRequest: createMutation<any, any>(build, {
       url: HRLinkApiEndpoints.company.sendRequest,
       method: 'POST',
       tags: ['Company'],
     }),
 
-    // POST: Follow or Unfollow Company
-    followAndUnfollow: createMutation<any, any>(build, {
+    followAndUnfollow: createMutation<any, {Orgid: number}>(build, {
       url: HRLinkApiEndpoints.company.followOrUnfollow,
       method: 'POST',
+      tags: ['Company'],
+    }),
+
+    lookingForJobSituations: createPaginatedQuery<any>(build,{
+      url: HRLinkApiEndpoints.company.lookingForJobSituations,
+      method: 'GET',
+      tags: ['Company'],
+    }),
+
+    getCompanyScore: createQuery<any, {orgid: number}> (build, {
+      url: HRLinkApiEndpoints.company.getCompanyScore,
+      method: 'GET',
+      tags: ['Company'],
+    }),
+
+    // i dont know why teh endpoint is like this
+    getEasyApply: createQuery<any, {orgid: number}>(build, {
+      url: HRLinkApiEndpoints.company.easyApply,
+      method: 'GET',
+      tags: ['Company'],
+    }),
+
+    getOrgOffer: createPaginatedQuery<any>(build, {
+      url: HRLinkApiEndpoints.company.orgOffer,
+      method: 'GET',
+      tags: ['Company'],
+    }),
+
+    // DO NOT USE THIS ENDPOINT IT RETURNS ALL OF THE COMPANIES
+    getAllCompanies: createQuery<any>(build, {
+      url: HRLinkApiEndpoints.company.allCompany,
+      method: 'GET',
       tags: ['Company'],
     }),
   }),
@@ -51,4 +71,8 @@ export const {
   useFetchCompanyDetailQuery,
   useSendRequestMutation,
   useFollowAndUnfollowMutation,
+  useLookingForJobSituationsQuery,
+  useGetCompanyScoreQuery,
+  useGetEasyApplyQuery,
+  useGetOrgOfferQuery,
 } = companyApiWithEndpoints;

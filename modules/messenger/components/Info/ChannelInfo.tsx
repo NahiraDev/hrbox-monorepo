@@ -1,13 +1,13 @@
-import { Avatar } from "@nextui-org/react";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { Avatar } from "@heroui/react";
+import { RootState } from "@hrbox/core/redux/store";
 import InfoTabs from "./InfoTabs";
 import InfoLayout from ".";
 import { CopyId } from "../CopyID";
 import Notification from "../Notifications";
+import { useAppSelector } from "@hrbox/core/redux";
 
 export default function ChannelInfo() {
-  const info = useSelector((state: RootState) => state.profile.profile);
+  const info = useAppSelector((state: RootState) => state.profile.profile);
   return (
     <InfoLayout>
       <div className="space-y-6 mb-7">

@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageTabs from "@/pages/Setting/Tax/PageTabs.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageTabs from "@/pages/Indicator/Tax/PageTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import SelectCalendarWithTime from "@/components/Calendar/SelectCalendarWithTime.tsx";
 import GeneralDetails from "@/components/GeneralDetails";
 import PageHeader from "@/components/PageHeader.tsx";
-import ModalTaxOffice from "@/pages/Setting/Tax/ModalTaxOffice.tsx";
+import ModalTaxOffice from "@/pages/Indicator/Tax/ModalTaxOffice.tsx";
 
 export default function TaxOffice() {
   const DUMMY_EMPLOYEES = [

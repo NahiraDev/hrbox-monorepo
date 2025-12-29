@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageTabs from "@/pages/Setting/Parameters/PageTabs.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageTabs from "@/pages/Indicator/Parameters/PageTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import PageHeader from "@/components/PageHeader.tsx";
-import ModalLegalParameters from "@/pages/Setting/Parameters/ModalLegalParameters.tsx";
+import ModalLegalParameters from "@/pages/Indicator/Parameters/ModalLegalParameters.tsx";
 
 export default function LegalParameters() {
   const DUMMY_EMPLOYEES = [

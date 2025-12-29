@@ -1,12 +1,11 @@
-import { Button, Link } from "@nextui-org/react";
-import { Link2 } from "iconsax-react";
+import { Button, Link } from "@heroui/react";
+import { Link2 } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 import { useEffect, useState } from "react";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import { MessageTypes } from "../../types";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
-// Reusable component for displaying link and associated button
 const LinkMessage = ({ link }: { link: string }) => (
   <div className="flex justify-start gap-3 items-center">
     <div className="flex justify-center items-center">
@@ -40,12 +39,12 @@ const Links: React.FC = () => {
 
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
 
   // Fetch user messages from Redux store
   const userMessages: MessageTypes[] = useSelector(
-    (state: RootState) => state.privateChat?.messages || [],
+    (state: RootState) => state.privateChat?.messages || []
   );
 
   // Load messages when recipient or chat state changes
@@ -66,7 +65,7 @@ const Links: React.FC = () => {
     if (messages.length > 0) {
       setMessageList((prevMessages) => {
         const uniqueMessages = messages.filter(
-          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id),
+          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id)
         );
         return [...prevMessages, ...uniqueMessages];
       });

@@ -3,38 +3,47 @@ import React, { useEffect, useState } from "react";
 import SearchBox from "../SearchBox";
 import { useDispatch, useSelector } from "react-redux";
 import { AddMembersProps } from "./types";
-import { handleGetContactsApi } from "../../services/Messenger/UserService/apis";
 import { GroupAndChannelTypes, MemberTypes } from "../../types";
 import {
-  handleAddGroupApi,
-  handleFetchGroupsApi,
-  handleUpdateGroupApi,
-} from "../../services/Messenger/GroupChatService/apis";
+  useCreateChannelMutation,
+  useFetchChannelsQuery,
+  useUpdateChannelMutation
+} from "@hrbox/modules/messenger/apis/Channel";
 import {
-  handleAddChannelApi,
-  handleFetchChannelsApi,
-  handleUpdateChannelApi,
-} from "../../services/Messenger/ChannelChatService/apis";
+  useCreateChatMutation,
+  useFetchChatMessagesQuery,
+  useFetchUserChatsQuery
+} from "@hrbox/modules/messenger/apis/Private";
+import { RootState } from "@hrbox/core/redux";
 
 const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
   const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const users: MemberTypes[] = useSelector(
-    (state: RootState) => state.users?.users,
+    (state: RootState) => state.users?.users
   );
   const groupProfile: GroupAndChannelTypes = useSelector(
-    (state: RootState) => state?.profile?.profile,
+    (state: RootState) => state?.profile?.profile
   );
   const myProfile = JSON.parse(localStorage.getItem("profile") || "{}");
   const isEditGroupAndChannel = useSelector(
-    (state: RootState) => state?.messengerAction?.isEdit,
+    (state: RootState) => state?.messengerAction?.isEdit
   );
+
+  const [createChannel] = useCreateChannelMutation();
+  const [updateChannel] = useUpdateChannelMutation();
+  const { data: fetchUserChat } = useFetchUserChatsQuery();
+  const { refetch: refetchChannels } = useFetchChannelsQuery();
+
+  const [createChat] = useCreateChatMutation();
+  const { refetch: refetchChatMessages } = useFetchChatMessagesQuery();
 
   const handleToggleActive = (index: number) => {
     setActiveIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
+
   const generateId = (): string => {
     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
@@ -44,6 +53,7 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
     }
     return result;
   };
+
   const handleCreateGroup = async () => {
     const selectedMembers = activeIndexes.map((index) => users[index]);
 
@@ -58,29 +68,36 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
       image: data.selectedImage || "",
       members: selectedMembers,
       messages: [],
-      original_image: data.orginalImage || "",
+      original_image: data.orginalImage || ""
     };
 
-    if (!isEditGroupAndChannel) {
-      if (data.selectedType === "group") {
-        dispatch(handleAddGroupApi(groupData));
-        dispatch(handleFetchGroupsApi());
+    try {
+      if (!isEditGroupAndChannel) {
+        if (data.selectedType === "group") {
+          dispatch(handleAddGroupApi(groupData));
+          dispatch(handleFetchGroupsApi());
+        } else if (data.selectedType === "channel") {
+          await createChannel(groupData).unwrap();
+          refetchChannels();
+        } else if (data.selectedType === "private") {
+          await createChat(groupData).unwrap();
+          refetchChatMessages();
+        }
       } else {
-        dispatch(handleAddChannelApi(groupData));
-        dispatch(handleFetchChannelsApi());
+        if (data.selectedType === "group") {
+          dispatch(handleUpdateGroupApi({ groupData }));
+          dispatch(handleFetchGroupsApi());
+        } else if (data.selectedType === "channel") {
+          await updateChannel(groupData).unwrap();
+          refetchChannels();
+        }
       }
-    } else {
-      if (data.selectedType === "group") {
-        dispatch(handleUpdateGroupApi({ groupData }));
-        dispatch(handleFetchGroupsApi());
-      } else {
-        dispatch(handleUpdateChannelApi(groupData));
-        dispatch(handleFetchChannelsApi());
-      }
-    }
 
-    data.setOpenMemberModal(false);
-    data?.setIsOpenAddModal?.(false);
+      data.setOpenMemberModal(false);
+      data?.setIsOpenAddModal?.(false);
+    } catch (error) {
+      console.error(`Failed to create/update ${data.selectedType}:`, error);
+    }
   };
 
   useEffect(() => {
@@ -89,23 +106,18 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
         (acc: number[], user: MemberTypes, index) => {
           if (
             groupProfile.members.some(
-              (member: MemberTypes) => member.id === user?.id,
+              (member: MemberTypes) => member.id === user?.id
             )
           ) {
             acc.push(index);
           }
           return acc;
         },
-        [],
+        []
       );
       setActiveIndexes(indexes);
     }
   }, [groupProfile, users]);
-
-  useEffect(() => {
-    dispatch(handleGetContactsApi());
-  }, [dispatch]);
-
   return (
     <Modal
       size="sm"
@@ -138,7 +150,8 @@ const AddMembers: React.FC<AddMembersProps> = ({ data }) => {
                   <Avatar radius="md" src={item.image} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
+                  <span
+                    className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
                     {item?.name}
                   </span>
                   <span

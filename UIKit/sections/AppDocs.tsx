@@ -17,10 +17,10 @@ import {
   Setting2,
   Setting5,
   SmsTracking,
-  StatusUp,
+  StatusUp
 } from "iconsax-reactjs";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import AppDocItem from "./AppDocItems";
 
@@ -34,14 +34,14 @@ const MenuItems = [
   { module: "Process Maker", icon: Hierarchy3, outline: false },
   { module: "basic-info", icon: Personalcard, outline: false },
   { module: "Job Grading", icon: Crown, outline: false },
-  { module: "All Setting", icon: Setting5, outline: false },
+  { module: "All Indicator", icon: Setting5, outline: false },
   { module: "Form Maker", icon: NoteFavorite, outline: false },
   { module: "Project Management", icon: MobileProgramming, outline: false },
   { module: "Contract Maker", icon: Edit2, outline: false },
   { module: "Performance", icon: StatusUp, outline: false },
   { module: "Messenger", icon: SmsTracking, outline: false },
   { module: "Dashboard", icon: Chart2, outline: false },
-  { module: "All Report", icon: PresentionChart, outline: false },
+  { module: "All Report", icon: PresentionChart, outline: false }
 ];
 
 export const AppDocs: React.FC = () => {
@@ -51,17 +51,33 @@ export const AppDocs: React.FC = () => {
     <AnimatePresence mode="wait">
       {closeDocs ? (
         <div
-          className="flex justify-center z-50 h-36 relative bg-white w-fit! rounded-xl shadow-lg "
+          className="flex justify-center z-50 h-36 relative w-fit! rounded-xl shadow-lg dark:bg-[#044566] bg-[#F5FBFE]"
           style={{ zoom: 0.8 }}
         >
           <motion.div
             key="dock-open"
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center bg-surface rounded-xl w-fit shadow-light-tight-2 px-8 py-2"
+            className="flex flex-col items-center rounded-xl w-fit shadow-light-tight-2 px-8 py-2"
             exit={{ opacity: 0, y: 100 }}
             initial={{ opacity: 0, y: 100 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
+            <motion.div
+              key="dock-closed"
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center justify-center py-2"
+              exit={{ opacity: 0, y: -50 }}
+              initial={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <motion.button
+                className="bg-[#ccc] dark:bg-[#ccc] backdrop-blur-sm rounded-full w-32 h-2 hover:bg-neutral-300 transition-colors"
+                onClick={() => setCloseDocs(false)}
+                whileHover={{ scale: 1.05, width: 140 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.1 }}
+              />
+            </motion.div>
             <div className="flex items-center gap-3 h-full overflow-x-auto scrollbar-hide">
               {MenuItems.map((item, index) => (
                 <AppDocItem
@@ -80,7 +96,7 @@ export const AppDocs: React.FC = () => {
               {/* Additional Items */}
               <AppDocItem
                 icon={Setting2}
-                module="General Setting"
+                module="General Indicator"
                 outlined={true}
                 mouseX={null}
                 index={MenuItems.length}
@@ -112,7 +128,7 @@ export const AppDocs: React.FC = () => {
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
           <motion.button
-            className="bg-gray-300 dark:bg-gray-700/80 backdrop-blur-sm rounded-full w-32 h-1.5 hover:bg-gray-400/80 dark:hover:bg-gray-600/80 transition-colors shadow-sm"
+            className="bg-[#ccc] dark:bg-[#ccc] backdrop-blur-sm rounded-full w-32 h-2 hover:bg-neutral-300 transition-colors"
             onClick={() => setCloseDocs(true)}
             whileHover={{ scale: 1.05, width: 140 }}
             whileTap={{ scale: 0.95 }}

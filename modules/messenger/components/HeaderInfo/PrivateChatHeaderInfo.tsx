@@ -2,70 +2,57 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Button,
-  Modal,
-  ModalContent,
-  useDisclosure,
   Image,
   Input,
-} from "@nextui-org/react";
-import {
-  CloseCircle,
-  Folder,
-  More,
-  Paperclip,
-  Play,
-  SearchNormal1,
-} from "iconsax-react";
-import { useDarkMode } from "../../context/DarkMode";
-import { RootState } from "../../redux/store";
+  Listbox,
+  ListboxItem,
+  Modal,
+  ModalContent,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure
+} from "@heroui/react";
+import { CloseCircle, Folder, Grid9, More, Paperclip, Play, SearchNormal1 } from "iconsax-reactjs";
+import { RootState } from "@hrbox/core/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid9 } from "iconsax-react";
-import { toggleInfo } from "../../redux/reducers/messengerAction";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
+import { toggleInfo } from "@hrbox/core/redux/slices/messengerAction";
 import {
-  handleClearHistoryChatApi,
-  handleRemoveMessageApi,
-  handleMuteChatApi,
-  handleUnpinMessageApi,
-} from "../../services/Messenger/PrivateChatService/apis";
-import Lottie from "lottie-react";
-import { AppDispatch } from "../../redux/store";
-import ContactInfo from "../Info/PrivateChatInfo";
+  useClearChatHistoryMutation,
+  useMuteChatMutation,
+  useRemoveMessageMutation,
+  useUnpinMessageMutation
+} from "@hrbox/modules/messenger/apis/Private";
+import ContactInfo from "@hrbox/modules/messenger/components/Info/PrivateChatInfo";
 import { Actions } from "./Actions";
-import CloseIconSvg from "../../icons/CloseIcon";
-import AddGroup from "../Add";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import isTypingGif from "../../lottie/isTyping.json";
-import {
-  setHighlightedMessageId,
-  updateFilteredMessages,
-} from "../../redux/reducers/messageAction";
+import AddGroup from "../Add/AddGroup";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { setHighlightedMessageId, updateFilteredMessages } from "@hrbox/core/redux/slices/messageAction";
 import { toast } from "react-toastify";
-import { setUserProfile } from "../../redux/reducers/profile";
-import { SearchIcon } from "@nextui-org/shared-icons";
-import { ElementTypes, MessageTypes } from "../../types";
+import { setUserProfile } from "@hrbox/core/redux/slices/profile";
+import { ElementTypes, MessageTypes } from "@hrbox/modules/messenger/types";
+import { CloseIcon } from "@hrbox/uikit/icons";
 
 const ACTIONS = {
   MUTE: "mute",
   CLEAR: "clear",
   EDIT: "edit",
   DELETE: "delete",
-  INFO: "info",
+  INFO: "info"
 };
 
 export const PrivateChatHeaderInfo = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const { socket, setMessages } = useWebSocket();
-  const { darkMode } = useDarkMode();
   const { isOpen, onOpenChange } = useDisclosure();
+  const { active, setActive } = useState(false);
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
   const messages = useSelector(
-    (state: RootState) => state?.privateChat?.messages,
+    (state: RootState) => state?.privateChat?.messages
   );
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const messageList: any = useSelector(
-    (state: RootState) => state?.privateChat?.messages,
+    (state: RootState) => state?.privateChat?.messages
   );
   const typingResetTimer = useRef<NodeJS.Timeout | null>(null);
   const typingResetDelay = 1000;
@@ -74,61 +61,81 @@ export const PrivateChatHeaderInfo = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [isTyping, setIsTyping] = useState<string>("");
   const isOpenMessengerInfo = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
   const isOpenEmojipicker = useSelector(
-    (state: RootState) => state.messengerAction.isOpenEmojiPicker,
+    (state: RootState) => state.messengerAction.isOpenEmojiPicker
   );
 
   const pinnedMessage = messages?.find((msg: MessageTypes) => msg.pinned);
 
-  // Handle State Changes
+  const [muteChat] = useMuteChatMutation();
+  const [clearChatHistory] = useClearChatHistoryMutation();
+  const [removeMessage] = useRemoveMessageMutation();
+  const [unpinMessage] = useUnpinMessageMutation();
+
   const handleSelect = () => setIsSelected((prev) => !prev);
   const handleShowSearchBox = () => setShowSearchBox((prev) => !prev);
 
-  const handleToggleMuteChat = () => {
-    dispatch(handleMuteChatApi({ chat_id: recipient?.chat_id || "" }));
+  const handleToggleMuteChat = async () => {
+    try {
+      await muteChat({
+        chat_id: recipient?.chat_id || "",
+        muted: !recipient?.muted
+      }).unwrap();
+    } catch (error) {
+      console.error("Failed to mute chat:", error);
+    }
   };
 
-  const handleClearChatHistory = () => {
-    dispatch(handleClearHistoryChatApi({ chat_id: recipient?.chat_id || "" }));
-    toast.dismiss();
+  const handleClearChatHistory = async () => {
+    try {
+      await clearChatHistory({ chat_id: recipient?.chat_id || "" }).unwrap();
+      toast.dismiss();
+    } catch (error) {
+      console.error("Failed to clear chat history:", error);
+    }
   };
 
-  const handleDeleteChat = () => {
-    dispatch(handleRemoveMessageApi({ chat_id: recipient?.chat_id || "" }));
-    toast.dismiss();
-    dispatch(setUserProfile({}));
+  const handleDeleteChat = async () => {
+    try {
+      await removeMessage({ chat_id: recipient?.chat_id || "" }).unwrap();
+      toast.dismiss();
+      dispatch(setUserProfile({}));
+    } catch (error) {
+      console.error("Failed to delete chat:", error);
+    }
   };
 
-  const handleUnpin = () => {
+  const handleUnpin = async () => {
     const pinned = messageList.find((message: any) => message.pinned === true);
     if (pinned) {
-      dispatch(
-        handleUnpinMessageApi({
+      try {
+        await unpinMessage({
           message_id: pinned?.id,
-          chat_id: recipient?.chat_id,
-        }),
-      );
+          chat_id: recipient?.chat_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to unpin message:", error);
+      }
     }
   };
 
   const handleSearch = (value: string) => {
     const filteredMessages = messages.filter((message: any) =>
-      message?.text.toLowerCase().includes(value.toLowerCase()),
+      message?.text.toLowerCase().includes(value.toLowerCase())
     );
     dispatch(updateFilteredMessages(filteredMessages));
     setSearchText(value);
   };
 
-  // Toast Handlers
   const handleConfirmClearHistory = () => showConfirmationToast("clear");
   const handleConfirmDeleteChat = () => showConfirmationToast("delete");
 
   const showConfirmationToast = (action: string) => {
     const actionMap = {
       clear: "Are you sure you want to clear the chat history?",
-      delete: "Are you sure you want to delete the chat?",
+      delete: "Are you sure you want to delete the chat?"
     };
     toast(
       <>
@@ -158,12 +165,11 @@ export const PrivateChatHeaderInfo = () => {
         autoClose: false,
         closeOnClick: false,
         draggable: false,
-        position: "top-center",
-      },
+        position: "top-center"
+      }
     );
   };
 
-  // WebSocket Logic
   useEffect(() => {
     if (socket) {
       socket.onmessage = (event) => {
@@ -191,10 +197,11 @@ export const PrivateChatHeaderInfo = () => {
       };
     }
   }, [socket, profile?.user_id]);
+
   const handleOpenInformation = () => {
     dispatch(toggleInfo());
   };
-  // Handle action based on key
+
   const handleClickActions = (key: string) => {
     switch (key) {
       case ACTIONS.MUTE:
@@ -221,10 +228,23 @@ export const PrivateChatHeaderInfo = () => {
         <React.Fragment>
           <div className="flex relative">
             <div
-              className={`absolute left-0 top-0 flex flex-row items-center px-8 py-4 gap-6 !backdrop-blur-[6px] h-[72px] z-30 ${!darkMode ? "!bg-gradient-to-r !from-[#ffffffcc] !to-white" : "!bg-gradient-to-r !from-[#01101ab3] !to-[#01101A]"} !rounded-tr-5 ${isOpenMessengerInfo || isOpenEmojipicker ? "w-[calc(100%-256px)]" : "w-full"}
-              ${isSelected && (darkMode ? "bg-primary-800" : "bg-primary-0")} 
-              cursor-pointer transition-colors duration-300
-            hover:bg-primary-0 dark:hover:bg-primary-800`}
+              className={`
+    absolute left-0 top-0 z-30 h-[72px]
+    flex flex-row items-center px-8 py-4 gap-6
+    !backdrop-blur-[6px] !rounded-tr-5
+    cursor-pointer transition-colors duration-300
+
+    !bg-gradient-to-r !from-[#ffffffcc] !to-white
+    dark:!from-[#01101ab3] dark:!to-[#01101A]
+
+    ${isOpenMessengerInfo || isOpenEmojipicker
+                ? "w-[calc(100%-256px)]"
+                : "w-full"}
+
+    ${isSelected ? "bg-primary-50 dark:bg-primary-800" : ""}
+
+    hover:bg-primary-0 dark:hover:bg-primary-800
+  `}
               onClick={handleSelect}
             >
               <Avatar
@@ -246,13 +266,14 @@ export const PrivateChatHeaderInfo = () => {
                 </span>
                 {isTyping ? (
                   <div className="flex items-center gap-0.5">
-                    <Lottie animationData={isTypingGif} loop={true} />
+                    typing
                     <span className="text-xs text-secondary-1000 dark:text-white font-light">
                       {isTyping}
                     </span>
                   </div>
                 ) : (
-                  <span className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
+                  <span
+                    className="text-secondary-1000 dark:text-white font-open-sans text-[12px] font-light leading-normal">
                     last seen recently
                   </span>
                 )}
@@ -272,15 +293,11 @@ export const PrivateChatHeaderInfo = () => {
                       inputWrapper: [
                         "group-data-[focus=true]:border-!netural-100",
                         "!rounded-4 !shadow-none",
-                        darkMode
-                          ? "border-1 border-netural-700"
-                          : "border-1 border-netural-100",
+                        "border-1 border-netural-100 dark:border-netural-700"
                       ],
                       input: [
-                        darkMode
-                          ? "placeholder:text-white"
-                          : "placeholder:text-netural-400",
-                      ],
+                        "placeholder:text-netural-400 dark:placeholder:text-white"
+                      ]
                     }}
                     startContent={
                       active ? (
@@ -288,7 +305,7 @@ export const PrivateChatHeaderInfo = () => {
                           className={`flex justify-center ease-in-out absolute left-3 right-0 top-2 bottom-0 items-start w-5 h-5 ${darkMode ? "border-netural-250" : "border-netural-400"} border-l-[0.4px]`}
                         ></div>
                       ) : (
-                        <SearchIcon
+                        <SearchNormal1
                           className={`w-6 h-6 dark:text-white text-netural-400`}
                         />
                       )
@@ -298,11 +315,11 @@ export const PrivateChatHeaderInfo = () => {
                         <div
                           className="cursor-pointer transition-transform"
                           onClick={() => {
-                            setActive((prev) => !prev);
+                            setActive((prev: any) => !prev);
                             setSearchText("");
                           }}
                         >
-                          <CloseIconSvg />
+                          <CloseIcon />
                         </div>
                       )
                     }
@@ -310,7 +327,7 @@ export const PrivateChatHeaderInfo = () => {
                 )}
                 <Button
                   isIconOnly
-                  onClick={handleShowSearchBox}
+                  onPress={handleShowSearchBox}
                   variant="light"
                   className="p-1.5"
                 >
@@ -322,7 +339,7 @@ export const PrivateChatHeaderInfo = () => {
                 <Button
                   isIconOnly
                   variant="light"
-                  onClick={handleOpenInformation}
+                  onPress={handleOpenInformation}
                 >
                   <Grid9
                     size="20"
@@ -358,7 +375,8 @@ export const PrivateChatHeaderInfo = () => {
                         >
                           <div className="flex gap-4 group-hover:text-primary-400 group-hover:dark:text-gold">
                             {item.icon}
-                            <span className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
+                            <span
+                              className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
                               {item.text}
                             </span>
                           </div>
@@ -379,7 +397,7 @@ export const PrivateChatHeaderInfo = () => {
                   const scrollOptions: ElementTypes = {
                     behavior: "smooth",
                     block: "center",
-                    inline: "nearest",
+                    inline: "nearest"
                   };
                   element.scrollIntoView(scrollOptions);
                   dispatch(setHighlightedMessageId(pinnedMessage?.id));
@@ -417,7 +435,8 @@ export const PrivateChatHeaderInfo = () => {
                       />
                     ) : pinnedMessage?.type === "file" ? (
                       <div className="flex items-center gap-2">
-                        <div className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
+                        <div
+                          className="rounded-lg w-8 h-8 flex items-center justify-center bg-primary-400 dark:hover:bg-surface-200">
                           <Folder color="white" size="18" variant="Bold" />
                         </div>
                         <div className="flex flex-col gap-0.5">
@@ -440,7 +459,7 @@ export const PrivateChatHeaderInfo = () => {
                 </div>
               </div>
               <Button
-                onClick={handleUnpin}
+                onPress={handleUnpin}
                 isIconOnly
                 variant="light"
                 className="!p-0"

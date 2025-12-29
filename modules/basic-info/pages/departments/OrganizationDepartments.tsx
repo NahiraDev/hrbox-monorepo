@@ -4,6 +4,7 @@ import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import {Paths} from "@hrbox/modules/paths";
+import {AppPagination} from "@hrbox/uikit/components";
 
 const borderColors = ['#000000', '#A61111', '#F4D082', '#05856F', '#DB5918', '#2F80ED', '#0ED2F7'];
 
@@ -13,6 +14,7 @@ const OrganizationDepartments = () => {
 
   const renderOrganizationDepartments = (user: any, index: number) => (
     <Card
+      isPressable
       key={index}
       className="rounded-xl border-l-2 py-2 px-3 shadow-light-tight-1 flex flex-col gap-2 hover:bg-[#D6F2FF] hover:cursor-pointer"
       style={{ borderLeftColor: borderColors[index % borderColors.length] }}

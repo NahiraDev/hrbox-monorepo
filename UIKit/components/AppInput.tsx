@@ -1,11 +1,10 @@
-import React, {useEffect, useMemo} from 'react';
-import { Input } from '@heroui/react';
-import { clsx } from 'clsx';
-import type { InputProps } from '@heroui/react';
+import React, { useMemo } from "react";
+import type { InputProps } from "@heroui/react";
+import { Input } from "@heroui/react";
+import { clsx } from "clsx";
 import { FormMode } from "@hrbox/uikit/components/types";
-import {useModal} from "@hrbox/core/hooks";
 
-interface AppInputProps extends Omit<InputProps, 'onChange' | 'onBlur' | 'onFocus'> {
+interface AppInputProps extends Omit<InputProps, "onChange" | "onBlur" | "onFocus"> {
   label?: string;
   required?: boolean;
   error?: string | boolean;
@@ -43,32 +42,32 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
     ref
   ) => {
     const modeStyles = useMemo(() => {
-      const baseInput = 'text-sm font-medium transition-all duration-200 rounded-lg';
-      const baseWrapper = '!h-10 !px-3 !py-2.5';
+      const baseInput = "text-sm font-medium transition-all duration-200 rounded-lg";
+      const baseWrapper = "!h-10 !px-3 !py-2.5";
 
       switch (formMode) {
         case FormMode.VIEW:
           return {
             wrapper: clsx(
               baseWrapper,
-              'bg-[linear-gradient(90deg,var(--Surface-Main,#FFF)_5%,#EEF9FF_48%,var(--Surface-Main,#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)] ',
-              'border border-[#DCF0F9]',
-              'hover:bg-neutral-100 dark:hover:bg-neutral-800'
+              "bg-[linear-gradient(90deg,#FFF)_5%,#EEF9FF_48%,(#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)] ",
+              "border border-[#DCF0F9]",
+              "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
-            input: clsx(baseInput, 'text-neutral-600 dark:text-neutral-300 cursor-default '),
-            isDisabled: true,
+            input: clsx(baseInput, "text-neutral-600 dark:text-neutral-300 cursor-default "),
+            isDisabled: true
           };
 
         case FormMode.EDIT:
           return {
             wrapper: clsx(
               baseWrapper,
-              'bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]',
-              'hover:border-primary-300 dark:hover:border-primary-600',
-              'focus-within:border-primary focus-within:shadow-lg'
+              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
+              "hover:border-primary-300 dark:hover:border-primary-600",
+              "focus-within:border-primary focus-within:shadow-lg"
             ),
-            input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
-            isDisabled: false,
+            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            isDisabled: false
           };
 
         case FormMode.CREATE:
@@ -76,13 +75,13 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           return {
             wrapper: clsx(
               baseWrapper,
-              'bg-white dark:bg-neutral-800 border border-[#DCF0F9]  ',
-              'dark:border-[#DCF0F9]',
-              'hover:border-primary-300 dark:hover:border-primary-600',
-              'focus-within:border-primary focus-within:shadow-lg'
+              "bg-white dark:bg-secondary-1000 border border-[#DCF0F9]",
+              "dark:border-[#04425C]",
+              "hover:border-primary-300 dark:hover:border-primary-600",
+              "focus-within:shadow-lg"
             ),
-            input: clsx(baseInput, 'text-secondary-900 dark:text-white'),
-            isDisabled: false,
+            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            isDisabled: false
           };
       }
     }, [formMode]);
@@ -94,24 +93,24 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
       modeStyles.wrapper,
       hasError &&
       !isViewMode &&
-      'border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg',
+      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
       className
     );
 
     const inputClasses = clsx(
       modeStyles.input,
-      hasError && !isViewMode && 'text-danger dark:text-danger-400',
-      'placeholder:text-neutral-400 dark:placeholder:text-neutral-500 border-[#DCF0F9]'
+      hasError && !isViewMode && "text-danger dark:text-danger-400",
+      "placeholder:text-neutral-400 dark:placeholder:text-neutral-500 border-[#DCF0F9]"
     );
     return (
-      <div className={clsx('flex flex-col gap-1.5', containerClassName)}>
+      <div className={clsx("flex flex-col gap-1.5", containerClassName)}>
         {label && (
           <label
             htmlFor={name}
             className={clsx(
-              'text-sm font-semibold leading-none',
-              'text-secondary-900 dark:text-white',
-              'transition-colors duration-200'
+              "text-sm font-semibold leading-none",
+              "text-secondary-900 dark:text-white",
+              "transition-colors duration-200"
             )}
           >
             {label}
@@ -132,21 +131,20 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
             inputWrapper: wrapperClasses,
             input: inputClasses,
             errorMessage: clsx(
-              'text-xs font-medium',
-              'text-danger dark:text-danger-400',
+              "text-xs font-medium",
+              "text-danger dark:text-danger-400",
               errorClassName
-            ),
+            )
           }}
           startContent={startContent}
           endContent={endContent}
-          errorMessage={hasError ? error : ''}
+          errorMessage={hasError ? error : ""}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}
           {...rest}
         />
 
-        {/* Helper Text */}
         {helperText && !hasError && (
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {helperText}
@@ -157,6 +155,6 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
   }
 );
 
-AppInputComponent.displayName = 'AppInput';
+AppInputComponent.displayName = "AppInput";
 
 export const AppInput = AppInputComponent;

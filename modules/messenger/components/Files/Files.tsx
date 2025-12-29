@@ -1,18 +1,17 @@
-import { Button } from "@nextui-org/react";
-import { Folder, ImportCurve, Repeat } from "iconsax-react";
+import { Button } from "@heroui/react";
+import { Folder, ImportCurve, Repeat } from "iconsax-reactjs";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 import { useEffect, useState } from "react";
-import { useWebSocket } from "../../context/SignalRWebSocket";
-import { MessageTypes } from "../../types";
+import { useWebSocket } from "@hrbox/core/providers/SignalRWebSocket";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
-// Reusable component for the download button with different states
 const DownloadButton = ({
-  isDownloading,
-  handleDownload,
-  handleCancelDownload,
-  fileUrl,
-}: {
+                          isDownloading,
+                          handleDownload,
+                          handleCancelDownload,
+                          fileUrl
+                        }: {
   isDownloading: boolean;
   handleDownload: (fileUrl: string) => void;
   handleCancelDownload: () => void;
@@ -34,12 +33,11 @@ const DownloadButton = ({
   </Button>
 );
 
-// Reusable component for displaying file name and size
 const FileInfo = ({
-  fileName,
-  fileSize,
-  createdAt,
-}: {
+                    fileName,
+                    fileSize,
+                    createdAt
+                  }: {
   fileName: string;
   fileSize: string;
   createdAt: string;
@@ -61,12 +59,12 @@ const Files: React.FC = () => {
 
   const recipient = useSelector((state: RootState) => state.profile.profile);
   const isOpen = useSelector(
-    (state: RootState) => state.messengerAction.isOpen,
+    (state: RootState) => state.messengerAction.isOpen
   );
 
   // Fetch user messages from Redux store
   const userMessages: MessageTypes[] = useSelector(
-    (state: RootState) => state.privateChat?.messages || [],
+    (state: RootState) => state.privateChat?.messages || []
   );
 
   // Handle file download
@@ -104,7 +102,7 @@ const Files: React.FC = () => {
     if (messages.length > 0) {
       setMessageList((prevMessages) => {
         const uniqueMessages = messages.filter(
-          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id),
+          (msg) => !prevMessages.some((prevMsg) => prevMsg.id === msg.id)
         );
         return [...prevMessages, ...uniqueMessages];
       });
@@ -128,7 +126,8 @@ const Files: React.FC = () => {
             return (
               <div key={index} className="flex justify-start gap-3 items-start">
                 <div className="flex justify-center items-start relative">
-                  <div className="rounded-lg w-[38px] h-[38px] flex justify-center items-center bg-primary-400 hover:bg-surface-200">
+                  <div
+                    className="rounded-lg w-[38px] h-[38px] flex justify-center items-center bg-primary-400 hover:bg-surface-200">
                     <Folder color="white" variant="Bold" />
                   </div>
                   <DownloadButton

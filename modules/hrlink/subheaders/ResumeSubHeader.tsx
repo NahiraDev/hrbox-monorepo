@@ -19,6 +19,8 @@ import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 const ResumeSubHeader = (props: any) => {
 
     const {data: downloadResume} = useDownloadResumeQuery()
+    // where is the endpoint for editing general information
+    // const [editGeneralInfo, {error: errorEditingInfo}] = 
 
     const modal = useModal();
     const handleGeneralInfoEdit = () => {

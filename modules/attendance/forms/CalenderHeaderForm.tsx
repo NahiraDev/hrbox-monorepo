@@ -34,8 +34,7 @@ export const CalenderHeaderForm = () => {
   const { t } = useTranslation();
   const { handleSubmit, values, setFieldValue } = useFormContext();
 
-  const isTrafficCalender =
-    location.pathname === "/attendance/traffic-calender";
+  const isTrafficCalender = location.pathname === "/attendance/traffic-calender";
 
   // ============= STATIC: تمام 12 ماه =============
   const allMonths = [

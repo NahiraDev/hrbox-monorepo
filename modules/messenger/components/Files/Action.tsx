@@ -1,16 +1,10 @@
-import { Button, Listbox, ListboxItem } from "@nextui-org/react";
-import { Profile, Trash } from "iconsax-react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { Button, Listbox, ListboxItem } from "@heroui/react";
+import { Profile, Trash } from "iconsax-reactjs";
+import { useSelector } from "react-redux";
+import { RootState } from "@hrbox/core/redux/store";
 import { toast } from "react-toastify";
-import {
-  handleChangeRoleUserGroupApi,
-  handleRemoveUserFromGroupApi,
-} from "../../services/Messenger/GroupChatService/apis";
-import {
-  handleChangeRoleUserChannelApi,
-  handleRemoveUserFromChannelApi,
-} from "../../services/Messenger/ChannelChatService/apis";
+import { useChangeRoleUserGroupMutation, useRemoveUserFromGroupMutation } from "@hrbox/modules/messenger/apis/Group";
+import { useChangeUserRoleMutation, useRemoveUserFromChannelMutation } from "@hrbox/modules/messenger/apis/Channel";
 import React from "react";
 
 type GroupAndChannelTypes = "group" | "channel";
@@ -20,13 +14,13 @@ const ACTIONS_LIST = [
   {
     icon: <Profile size="20" className="icon-style" />,
     key: "role" as const,
-    text: "Change role to Admin",
+    text: "Change role to Admin"
   },
   {
     icon: <Trash size="20" className="icon-style" />,
     key: "delete" as const,
-    text: "Delete",
-  },
+    text: "Delete"
+  }
 ];
 
 interface MemberActionProps {
@@ -35,18 +29,23 @@ interface MemberActionProps {
 }
 
 const MemberAction: React.FC<MemberActionProps> = ({
-  memberId,
-  setOpenMemberId,
-}) => {
+                                                     memberId,
+                                                     setOpenMemberId
+                                                   }) => {
   const profile = useSelector((state: RootState) => state.profile.profile);
-  const dispatch = useDispatch<AppDispatch>();
+  const currentUser = JSON.parse(localStorage.getItem("profile") || "{}");
+
+  const [removeUserFromChannel] = useRemoveUserFromChannelMutation();
+  const [changeUserRole] = useChangeUserRoleMutation();
+  const [removeUserFromGroup] = useRemoveUserFromGroupMutation();
+  const [changeRoleUserGroup] = useChangeRoleUserGroupMutation();
 
   const showToast = (content: React.ReactNode) => {
     toast(content, {
       autoClose: false,
       closeOnClick: false,
       draggable: false,
-      position: "top-center",
+      position: "top-center"
     });
   };
 
@@ -58,21 +57,29 @@ const MemberAction: React.FC<MemberActionProps> = ({
     }
   };
 
-  const handleChangeRoleToAdmin = () => {
-    const actionMap: Record<
-      GroupAndChannelTypes,
-      (payload: { chat_id: string | undefined; member_id: string }) => any
-    > = {
-      group: handleChangeRoleUserGroupApi,
-      channel: handleChangeRoleUserChannelApi,
-    };
-
+  const handleChangeRoleToAdmin = async () => {
     const chatType = profile?.chat_type as GroupAndChannelTypes;
 
-    if (actionMap[chatType]) {
-      dispatch(
-        actionMap[chatType]({ chat_id: profile.chat_id, member_id: memberId }),
-      );
+    if (chatType === "channel") {
+      try {
+        await changeUserRole({
+          channel_id: profile.chat_id,
+          member_id: memberId,
+          user_id: currentUser.user_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to change user role:", error);
+      }
+    } else if (chatType === "group") {
+      try {
+        await changeRoleUserGroup({
+          group_id: profile.chat_id,
+          member_id: memberId,
+          user_id: currentUser.user_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to change user role:", error);
+      }
     }
     setOpenMemberId(null);
   };
@@ -97,25 +104,33 @@ const MemberAction: React.FC<MemberActionProps> = ({
             </Button>
           </div>
         </div>
-      </>,
+      </>
     );
   };
 
-  const handleRemoveUser = () => {
-    const actionMap: Record<
-      GroupAndChannelTypes,
-      (payload: { chat_id: string | undefined; member_id: string }) => any
-    > = {
-      group: handleRemoveUserFromGroupApi,
-      channel: handleRemoveUserFromChannelApi,
-    };
-
+  const handleRemoveUser = async () => {
     const chatType = profile?.chat_type as GroupAndChannelTypes;
 
-    if (actionMap[chatType]) {
-      dispatch(
-        actionMap[chatType]({ chat_id: profile.chat_id, member_id: memberId }),
-      );
+    if (chatType === "channel") {
+      try {
+        await removeUserFromChannel({
+          channel_id: profile.chat_id,
+          member_id: memberId,
+          user_id: currentUser.user_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to remove user from channel:", error);
+      }
+    } else if (chatType === "group") {
+      try {
+        await removeUserFromGroup({
+          group_id: profile.chat_id,
+          member_id: memberId,
+          user_id: currentUser.user_id
+        }).unwrap();
+      } catch (error) {
+        console.error("Failed to remove user from group:", error);
+      }
     }
 
     toast.dismiss();
@@ -135,7 +150,8 @@ const MemberAction: React.FC<MemberActionProps> = ({
         >
           <div className="flex gap-4 group-hover:text-primary-400 group-hover:dark:text-gold">
             {icon}
-            <span className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
+            <span
+              className="text-sm font-normal text-secondary-1000 dark:text-white group-hover:text-primary-400 group-hover:dark:text-gold transition-all">
               {text}
             </span>
           </div>

@@ -3,38 +3,21 @@ import { Avatar, Card } from '@heroui/react';
 import { AppButton } from '@hrbox/uikit/components';
 import { OrganizationDepartmentModal } from '@hrbox/modules/basic-info/modals/OrganizationDepartmentModal';
 import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
-import { TickCircle } from 'iconsax-reactjs';
 import { useModal } from "@hrbox/core/hooks";
-import { initialValuesTechnicalDepartment,  formValidationTechnicalDepartment } from "@hrbox/modules/basic-info/forms/TechnicalDepartmentForm";
-import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm"
+import {
+  initialValuesTechnicalDepartment,
+  formValidationTechnicalDepartment
+} from "@hrbox/modules/basic-info/forms/TechnicalDepartmentForm";
+import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import { TickIcon } from "@hrbox/uikit/icons";
+import { useNavigation } from "@hrbox/core/hooks/useNavigation";
+import { Paths } from "@hrbox/modules/paths";
 
 const TechnicalDepartments = () => {
-  const modal = useModal()
-  const handleOpenTechnicalDepartments = () => {
-    modal.open(
-      ModalType.EDIT,
-      "Organization Departments",
-      <OrganizationDepartmentModal />,
-      {
-        isForm: true,
-        title: "افزودن ",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
-        formConfig: {
-          initialValues: initialValuesTechnicalDepartment,
-          validationSchema: formValidationTechnicalDepartment,
-          formId: "award-form",
-          enableCache: true,
-          clearCacheOnSubmit: true,
-          onSubmitAsync: async (values: any) => {
-            handleSubmitAward(values);
-            modal.close(ModalType.CREATE, "award-form");
-          },
-        },
-      },
-      ModalSize.XL,
-    );
-  };
+
+  const { push } = useNavigation();
+
+
 
   return (
     <div className="flex flex-col items-center justify-between p-4">
@@ -42,22 +25,41 @@ const TechnicalDepartments = () => {
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
-            className="p-4 bg-white rounded-2xl shadow-sm flex items-center justify-center gap-2 relative">
-            <Avatar className="w-30 h-30 " color="primary" radius="lg"/>
-            <TickCircle className="absolute top-2 right-3" size="22" color="gray" />
-            <span className="!text-sm !font-semibold text-secondary-1000">{user.name}</span>
+            isPressable
+            className="p-4 bg-white rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2 relative  hover:!bg-[#D6F2FF]"
+            onPress={() => push({ to: Paths.BasicInfo.PersonalInformation })}
+          >
+            <Avatar
+              className="w-30 h-30"
+              color="primary"
+              radius="lg"
+            />
+
+            <TickIcon
+              className="absolute top-2 right-3"
+              width={22}
+              height={22}
+            />
+
+
+            <span className="text-sm font-semibold text-secondary-1000">
+              {user.name}
+            </span>
+
             <AppButton
-                size='sm'
-                radius='sm'
-                variant="solid"
-                onPress={()=>handleOpenTechnicalDepartments}
-                content={<span>{user.job}</span>}
+              className="bg-primary-50 border border-primary-100 text-primary-400 text-xs"
+              size="sm"
+              radius="xl"
+              variant="solid"
+              content={<span>{user.job}</span>}
             />
           </Card>
         ))}
       </div>
       <div className="w-full flex items-center justify-end">
-        <span className="!text-[100px] !font-extrabold text-secondary-400/40">200</span>
+        <span className="text-[100px] font-black text-[#1E3363]/20">
+          200
+        </span>
       </div>
     </div>
   );

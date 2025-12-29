@@ -35,3 +35,8 @@ export * from "@hrbox/uikit/icons/TelegramIcon";
 export * from "@hrbox/uikit/icons/TickIcon";
 export * from "@hrbox/uikit/icons/WhatsAppIcon";
 export * from "@hrbox/uikit/icons/statusIcon";
+export * from "@hrbox/uikit/icons/Elipse2";
+export * from "@hrbox/uikit/icons/Forward";
+export * from "@hrbox/uikit/icons/DoubleCheck";
+export * from "@hrbox/uikit/icons/HappyEmoji";
+export * from "@hrbox/uikit/icons/MessengerIcon";

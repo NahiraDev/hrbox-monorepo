@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Search from "@/components/Search.tsx";
 import FilterModal from "@/components/FilterModal.tsx";
 import { Index as Icons } from "@/icons/Index.tsx";
-import ModalCategory from "@/pages/Setting/Category/ModalCategory.tsx";
+import ModalCategory from "@/pages/Indicator/Category/ModalCategory.tsx";
 
 export default function PageTabs({ props }: { props: any }) {
   const { data } = props;

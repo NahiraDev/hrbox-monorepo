@@ -1,4 +1,4 @@
-import { Suspense, ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { useMatches } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -21,7 +21,6 @@ export function BaseLayout({ children }: BaseLayoutProps) {
 
   const SubHeader = routeContext?.subHeader;
   const subHeaderProps = routeContext?.subHeaderProps || {};
-
   return (
     <div
       className="h-full flex flex-col gap-6 xl:pr-16 pr-4 xl:pl-8 pl-4 xl:pb-8 pb-4 xl:pt-6 pt-4 bg-no-repeat bg-cover"
@@ -29,7 +28,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         backgroundImage: panelBackground && `url(${panelBackground})`,
         backgroundColor: !panelBackground
           ? "var(--color-panel-background)"
-          : undefined,
+          : undefined
       }}
     >
       <header className="shrink-0 z-20">

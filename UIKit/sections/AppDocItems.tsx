@@ -10,10 +10,10 @@ interface AppDocItemProps {
 }
 
 const AppDocItem: React.FC<AppDocItemProps> = ({
-  icon: Icon,
-  module,
-  outlined = false,
-}) => {
+                                                 icon: Icon,
+                                                 module,
+                                                 outlined = false
+                                               }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const currentPath = location.pathname.split("/")[1] || "";
@@ -32,12 +32,12 @@ const AppDocItem: React.FC<AppDocItemProps> = ({
             flex items-center justify-center rounded-xl transition-all duration-200 relative overflow-hidden
             w-16 h-16
             ${
-              outlined
-                ? "border border-dashed dark:border-white bg-transparent dark:text-white"
-                : isActive
-                  ? "bg-linear-to-b from-[#1E3363] to-[#3D68C9] text-white dark:bg-linear-to-t dark:from-[#064368] dark:to-[#BAD9EC] dark:text-white"
-                  : "bg-linear-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-linear-to-b hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white shadow-md"
-            }
+            outlined
+              ? "border border-dashed dark:border-white bg-transparent dark:text-white"
+              : isActive
+                ? "bg-linear-to-b from-[#1E3363] to-[#3D68C9] shadow-md text-white dark:bg-linear-to-t dark:from-[#1E3363] dark:to-[#3D68C9] dark:text-white"
+                : "bg-linear-to-t from-[#DCE0E3] to-white dark:to-[rgba(4,66,92,0.4)] dark:text-white hover:bg-linear-to-b dark:from-[#044566] dark:to-[rgba(4, 66, 92, 0.40)] hover:from-[#1E3363] hover:to-[#3D68C9] hover:text-white shadow-lg"
+          }
           `}
         >
           <div className="absolute rounded-xl" />
@@ -54,10 +54,10 @@ const AppDocItem: React.FC<AppDocItemProps> = ({
           className={`
             whitespace-nowrap text-xs font-semibold mt-1 transition-all duration-200
             ${
-              isActive
-                ? "opacity-100 text-[#1E3363] dark:text-white"
-                : "opacity-0 group-hover:opacity-100 dark:text-gray-300"
-            }
+            isActive
+              ? "opacity-100 text-[#1E3363] dark:text-white"
+              : "opacity-0 group-hover:opacity-100 dark:text-gray-300"
+          }
           `}
         >
           {module}

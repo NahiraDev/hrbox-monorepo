@@ -1,30 +1,18 @@
-import {
-  Avatar,
-  Button,
-  Image,
-  Link,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@nextui-org/react";
-import DoubleCheck from "../../icons/DoubleCheck";
+import { Avatar, Button, Image, Link, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import DoubleCheck from "@hrbox/uikit/icons/DoubleCheck";
 import { useEffect, useRef, useState } from "react";
-import { Folder, ImportCurve, Play, Repeat } from "iconsax-react";
+import { Folder, ImportCurve, Play, Repeat } from "iconsax-reactjs";
 import Reaction from "./Reaction";
-import {
-  closeReplyMessageAction,
-  setHighlightedMessageId,
-  setMessageId,
-} from "../../redux/reducers/messageAction";
+import { closeReplyMessageAction, setHighlightedMessageId, setMessageId } from "@hrbox/core/redux/slices/messageAction";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import Check from "../../icons/Check";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
+import { Check } from "@hrbox/uikit/icons/Check";
 import { ElementTypes, MessageTypes } from "../../types";
 
 const AudioMessage = ({
-  message,
-  isSent,
-}: {
+                        message,
+                        isSent
+                      }: {
   message: MessageTypes;
   isSent: boolean;
 }) => {
@@ -39,7 +27,7 @@ const AudioMessage = ({
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
   const highlightedMessageId = useSelector(
-    (state: RootState) => state.messageAction.highlighted_message_id,
+    (state: RootState) => state.messageAction.highlighted_message_id
   );
 
   const handleIsDownloading = (status: boolean) => {
@@ -117,25 +105,26 @@ const AudioMessage = ({
                       className="!w-8 !h-8 !rounded-2"
                     />
                   </div>
-                  <span className="text-secondary-1000 dark:text-white text-xs font-light">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
+                  <span
+                    className="text-secondary-1000 dark:text-white text-xs font-light">{`${hours}:${minutes < 10 ? "0" + minutes : minutes}`}</span>
                 </div>
                 {message.reply_data && (
                   <div
                     onClick={() => {
                       const element = document.getElementById(
-                        message?.reply_message_id || "",
+                        message?.reply_message_id || ""
                       );
                       if (element) {
                         const scrollOptions: ElementTypes = {
                           behavior: "smooth",
                           block: "center",
-                          inline: "nearest",
+                          inline: "nearest"
                         };
                         element.scrollIntoView(scrollOptions);
                         dispatch(
                           setHighlightedMessageId(
-                            message?.reply_message_id || "",
-                          ),
+                            message?.reply_message_id || ""
+                          )
                         );
                       }
                       setTimeout(() => {

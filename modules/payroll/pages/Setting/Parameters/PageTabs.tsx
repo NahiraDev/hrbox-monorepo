@@ -7,8 +7,8 @@ import FilterModal from "@/components/FilterModal.tsx";
 import { Index as Icons } from "@/icons/Index.tsx";
 import PageHeaderTab from "@/components/PageHeaderTab.tsx";
 import { routeUrls } from "@/routes";
-import ModalLegalParameters from "@/pages/Setting/Parameters/ModalLegalParameters.tsx";
-import ModalProprietaryParameters from "@/pages/Setting/Parameters/ModalProprietaryParameters.tsx";
+import ModalLegalParameters from "@/pages/Indicator/Parameters/ModalLegalParameters.tsx";
+import ModalProprietaryParameters from "@/pages/Indicator/Parameters/ModalProprietaryParameters.tsx";
 
 export default function PageTabs({ props }: { props: any }) {
   const { data } = props;

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 import { useTranslation } from "react-i18next";
 
-import { SettingLayout } from "@/pages/Setting/Layout.tsx";
-import PageTabs from "@/pages/Setting/Insurance/PageTabs.tsx";
+import { SettingLayout } from "@/pages/Indicator/Layout.tsx";
+import PageTabs from "@/pages/Indicator/Insurance/PageTabs.tsx";
 import AppTable from "@/components/AppTable.tsx";
 import PageHeader from "@/components/PageHeader.tsx";
-import ModalInsurance from "@/pages/Setting/Insurance/ModalInsurance.tsx";
-import PageIndexTabs from "@/pages/Setting/PageIndexTabs.tsx";
+import ModalInsurance from "@/pages/Indicator/Insurance/ModalInsurance.tsx";
+import PageIndexTabs from "@/pages/Indicator/PageIndexTabs.tsx";
 
 export default function Insurance() {
   const { t } = useTranslation();

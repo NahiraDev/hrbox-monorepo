@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { RootState } from "../redux/store";
+import { RootState } from "@hrbox/core/redux/store";
 import { useSelector } from "react-redux";
-import { MessageTypes } from "../types";
+import { MessageTypes } from "@hrbox/modules/messenger/types";
 
 interface WebSocketContextType {
   messages: MessageTypes[];
@@ -15,8 +15,8 @@ interface WebSocketContextType {
 const WebSocketContext = createContext<WebSocketContextType | null>(null);
 
 export const SignalRContextProvider = ({
-  children,
-}: {
+                                         children
+                                       }: {
   children: React.ReactNode;
 }) => {
   const socketRef = useRef<WebSocket | null>(null);
@@ -24,7 +24,7 @@ export const SignalRContextProvider = ({
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [typingStatus, setTypingStatus] = useState<string>("");
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const baseUrl = import.meta.env.VITE_HRBOX_URL;
   const profile = useSelector((state: RootState) => state?.profile?.profile);
 
   const typingResetTimer = useRef<NodeJS.Timeout | null>(null);
@@ -52,8 +52,8 @@ export const SignalRContextProvider = ({
     const messageData: MessageTypes = JSON.parse(event.data);
 
     if (
-      messageData.type === "isTyping" &&
-      messageData.sender_id !== profile?.user_id
+      messageData?.type === "isTyping" &&
+      messageData?.sender_id !== profile?.user_id
     ) {
       handleTypingStatus();
     }
@@ -85,7 +85,7 @@ export const SignalRContextProvider = ({
   const generateId = (): string => {
     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from({ length: 4 }, () =>
-      characters.charAt(Math.floor(Math.random() * characters.length)),
+      characters.charAt(Math.floor(Math.random() * characters.length))
     ).join("");
   };
 
@@ -120,20 +120,20 @@ export const SignalRContextProvider = ({
     ...(message.type === "file" && {
       file: message.file,
       file_name: message.file_name,
-      file_size: message.file_size,
+      file_size: message.file_size
     }),
     ...(message.type === "audio" && {
       audio: message.audio,
       file_name: message.file_name,
-      file_size: message.file_size,
+      file_size: message.file_size
     }),
     ...(message.reply_type && {
       reply_type: message.reply_type,
       reply_data: message.reply_data,
       reply_file_name: message.reply_file_name,
-      reply_message_id: message.reply_message_id,
+      reply_message_id: message.reply_message_id
     }),
-    ...(message.caption && { caption: message.caption }),
+    ...(message.caption && { caption: message.caption })
   });
 
   // Update the server with the new message
@@ -144,11 +144,11 @@ export const SignalRContextProvider = ({
       private: `/chats/${profile?.chat_id}`,
       group: `/groups/${profile?.chat_id}`,
       channel: `/channels/${profile?.chat_id}`,
-      save: `/saveMessages/${profile?.chat_id}`,
+      save: `/saveMessages/${profile?.chat_id}`
     };
 
     const chatResponse = await fetch(
-      `${baseUrl}${baseUrlMap[newMessage.chat_type as ChatType]}`,
+      `${baseUrl}${baseUrlMap[newMessage.chat_type as ChatType]}`
     );
 
     if (!chatResponse.ok) throw new Error("Failed to fetch existing chats");
@@ -164,7 +164,7 @@ export const SignalRContextProvider = ({
       await fetch(`${baseUrl}${baseUrlMap[newMessage.chat_type as ChatType]}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: currentMessages }),
+        body: JSON.stringify({ messages: currentMessages })
       });
     } else {
       throw new Error("Chat not found");
@@ -179,7 +179,7 @@ export const SignalRContextProvider = ({
         socket: socketRef.current,
         sendMessage,
         setMessages,
-        typingStatus,
+        typingStatus
       }}
     >
       {children}
@@ -192,7 +192,7 @@ export const useWebSocket = () => {
 
   if (!context) {
     throw new Error(
-      "useWebSocket must be used within a SignalRContextProvider",
+      "useWebSocket must be used within a SignalRContextProvider"
     );
   }
 

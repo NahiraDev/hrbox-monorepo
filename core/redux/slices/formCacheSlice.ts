@@ -38,9 +38,6 @@ export const formCacheSlice = createSlice({
       state[formId].timestamp = Date.now();
     },
 
-    /**
-     * بروزرسانی تمام values
-     */
     updateFormValues(
         state,
         action: PayloadAction<{

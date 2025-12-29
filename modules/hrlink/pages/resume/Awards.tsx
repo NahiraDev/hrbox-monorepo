@@ -6,74 +6,78 @@ import { GeneralInformation } from "@hrbox/modules/hrlink/components/GeneralInfo
 import { UserLocation } from "@hrbox/modules/hrlink/components/UserLocation";
 import { AwardModal } from "@hrbox/modules/hrlink/modals/AwardModal";
 import {
-  useFetchAwardsQuery,
   useDeleteAwardMutation,
   useEditAwardMutation,
-  useLazyFetchAwardDetailQuery,
+  useFetchAwardDetailQuery,
+  useFetchAwardsQuery
 } from "@hrbox/modules/hrlink/apis";
 import { useState } from "react";
-import { ModalSize } from "@hrbox/core/providers";
-import { ModalType } from "@hrbox/core/providers";
+import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks/useModal";
 
-// IMPORTANT: get rid of this and use real data
 const MOCK_RESPONSE = {
-  data: {
-    ViewList: [
-      { Id: 13998, Title: "new record", Description: "test", Date: 1399, Place: "-" },
-      { Id: 14006, Title: "تستی", Description: "توضیحات", Date: 1400, Place: "-" },
-      { Id: 14019, Title: "ش", Description: "description", Date: 1400, Place: "-" },
-      { Id: 14020, Title: "ش", Description: "description", Date: 1400, Place: "-نسیم شهر" },
-      { Id: 14021, Title: "ش", Description: "description", Date: 1400, Place: "-آذرشهر" },
-      { Id: 14022, Title: "ش", Description: "description", Date: 1400, Place: "-آذرشهر" },
-      { Id: 14023, Title: "جدیدش", Description: "description", Date: 1400, Place: "-آذرشهر" },
-      { Id: 14024, Title: "تست جدید", Description: "description", Date: 1400, Place: "ایران-آذرشهر" },
-      { Id: 14025, Title: "ش", Description: "description", Date: 1400, Place: "-" },
-      { Id: 14026, Title: "ش", Description: "description", Date: 1400, Place: "-" },
-    ],
-    LastPage: 2,
+  data: [
+    { Id: 13998, Title: "new record", Description: "test", Date: 1399, Place: "-" },
+    { Id: 14006, Title: "تستی", Description: "توضیحات", Date: 1400, Place: "-" },
+    { Id: 14019, Title: "ش", Description: "description", Date: 1400, Place: "-" },
+    { Id: 14020, Title: "ش", Description: "description", Date: 1400, Place: "-نسیم شهر" },
+    { Id: 14021, Title: "ش", Description: "description", Date: 1400, Place: "-آذرشهر" },
+    { Id: 14022, Title: "ش", Description: "description", Date: 1400, Place: "-آذرشهر" },
+    { Id: 14023, Title: "جدیدش", Description: "description", Date: 1400, Place: "-آذرشهر" },
+    { Id: 14024, Title: "تست جدید", Description: "description", Date: 1400, Place: "ایران-آذرشهر" },
+    { Id: 14025, Title: "ش", Description: "description", Date: 1400, Place: "-" },
+    { Id: 14026, Title: "ش", Description: "description", Date: 1400, Place: "-" }
+  ],
+  meta: {
     Page: 0,
-    PageSize: 10,
+    pageSize: 10,
+    total: 40,
+    totalPages: 4
   },
   msg: null,
-  IsSucces: true,
+  IsSucces: true
 };
 
 const Awards = () => {
-  // Handle getting the awrds and the state of the fetching data
-  const [page, setPage] = useState(0)
-  const { data: responseData, isLoading,isFetching, isError } = useFetchAwardsQuery({
+  const [page, setPage] = useState(0);
+  const { data: responseData, isLoading, isFetching, isError } = useFetchAwardsQuery({
     page: page ?? 0,
-    pageSize: 10,
+    pageSize: 10
   });
 
-  const [getAwards] = useLazyFetchAwardDetailQuery()
+  const [awardId, setAwardId] = useState();
+  const { data: awardDetail } = useFetchAwardDetailQuery({ id: awardId || 13998 });
 
   const meta = responseData?.meta || {
     page: 1,
-    totalPages: 1
+    pageSize: 10,
+    total: 40,
+    totalPages: 4
   };
 
-  // Handle deleting awards
-  const [deleteAward, {error: errorDeleting, isLoading: loadingDelete, isSuccess: deletedSuccessfully}] = useDeleteAwardMutation();
-  // Track which award is currently being deleted
+  const [deleteAward, {
+    error: errorDeleting,
+    isLoading: loadingDelete,
+    isSuccess: deletedSuccessfully
+  }] = useDeleteAwardMutation();
+
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
 
-  // Handel edititng awards
-  const [editAward, {error: errorEditing , isLoading: loadingEdit, isSuccess: editedSuccessfully}] = useEditAwardMutation();
+  const [editAward, {
+    error: errorEditing,
+    isLoading: loadingEdit,
+    isSuccess: editedSuccessfully
+  }] = useEditAwardMutation();
   const [editingId, setEditingId] = useState(null);
 
   const response = responseData || MOCK_RESPONSE;
-  const awards = response?.data.ViewList;
-  console.log(`here is the award response \n${responseData?.data}\n ${isLoading} \n ${isError}`);
+  const awards = response?.data;
 
   const handleDelete = async (id: number) => {
     if (!id) return;
     setDeletingIds((prev) => new Set(prev).add(id));
-
-    // chagne this code and use the states provided automatically(errorDeleting, loadingDelete, deletedSeccessfully)
     try {
-      await deleteAward(id).unwrap();
+      await deleteAward({ id: id }).unwrap();
     } catch (err) {
       console.error("Delete failed:", err);
       alert("حذف با خطا مواجه شد");
@@ -86,18 +90,13 @@ const Awards = () => {
     }
   };
 
-  //edit awards modal
   const modal = useModal();
 
   const handleEdit = (award: any) => {
-
     modal.open(
       ModalType.EDIT,
       "edit-award",
       <AwardModal
-        award={
-          award
-        }
         onSuccess={() => {
           modal.close("edit-award");
         }}
@@ -107,11 +106,11 @@ const Awards = () => {
         isForm: true,
         submitLabel: "Save Changes",
         cancelLabel: "Cancel",
+        modalData: award,
         formConfig: {
-          formId: "award-form",
+          formId: "award-form"
         },
-
-        onCancel: () => modal.close("edit-award"),
+        onCancel: () => modal.close("edit-award")
       },
       ModalSize.MD
     );
@@ -121,11 +120,10 @@ const Awards = () => {
 
   return (
     <div className="grid grid-cols-4 gap-3 h-full">
-      {/* Awards List */}
       <div className="col-span-3">
         <div className="flex flex-col h-full justify-between">
           <div className="grid grid-cols-2 gap-4">
-            {awards.map((award:any) => (
+            {awards?.map((award: any) => (
               <Card
                 key={award.Id}
                 className="rounded-2xl shadow-theme-sm p-5 bg-white flex flex-col gap-3 hover:shadow-lg transition-shadow"
@@ -133,7 +131,7 @@ const Awards = () => {
                 <CardHeader className="border-b border-neutral-100 pb-3">
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
-                      <CupStarIcon color="#04070e"/>
+                      <CupStarIcon color="#04070e" />
                       <h3 className="text-lg font-bold text-secondary-1000">
                         {award.Title}
                       </h3>
@@ -157,7 +155,8 @@ const Awards = () => {
                         isDisabled={isDeleting(award.Id)}
                         content={
                           isDeleting(award.Id) ? (
-                            <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                            <div
+                              className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
                           ) : (
                             <Trash size="16" className="text-red-600" />
                           )
@@ -204,13 +203,15 @@ const Awards = () => {
 
           {/* Pagination */}
           <div className="flex justify-center mt-8">
-          <AppPagination
-            meta={{
-              page: meta.page,
-              totalPages: meta.totalPages,
-            }}
-            onPageChange={setPage}  // This is the key!
-          />
+            <AppPagination
+              meta={{
+                page: meta?.page,
+                pageSize: meta?.pageSize,
+                total: meta?.total,
+                totalPages: meta?.totalPages
+              }}
+              onPageChange={setPage}  // This is the key!
+            />
           </div>
         </div>
       </div>

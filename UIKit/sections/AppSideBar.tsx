@@ -30,7 +30,6 @@ export const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    // if (!currentPanel) return [];
     return getModuleMenu("attendance");
   }, [currentPanel, getModuleMenu]);
 
@@ -38,29 +37,28 @@ export const AppSidebar = () => {
     return !!matchRoute({ to: path });
   };
 
-  // ✅ Bottom Menu
   const bottomMenu = useMemo(
     () => [
       {
         id: "settings",
         icon: <Setting2 size="20" />,
         label: t("generalSetting", "Settings"),
-        action: () => navigate({ to: "/settings" }),
+        action: () => navigate({ to: "/settings" })
       },
       {
         id: "language",
         icon: <Global size="20" />,
         label: lang === "fa" ? t("persian", "فارسی") : t("english", "English"),
-        action: toggleLanguage,
+        action: toggleLanguage
       },
       {
         id: "logout",
         icon: <LogoutCurve size="20" />,
         label: t("logout", "Logout"),
-        action: handleLogout,
-      },
+        action: handleLogout
+      }
     ],
-    [lang, t, navigate, toggleLanguage, handleLogout],
+    [lang, t, navigate, toggleLanguage, handleLogout]
   );
 
   const handleNavigate = (item: MenuItem) => {
@@ -68,27 +66,24 @@ export const AppSidebar = () => {
       navigate({ to: item.path });
     }
   };
-  
+
 
   return (
     <motion.div
       initial={false}
       animate={{ width: isExpanded ? 220 : 100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="relative flex flex-col h-full rounded-lg py-4 px-4 bg-panel-surface shadow-theme-md dark:shadow-theme-lg"
+      className="relative flex flex-col h-full rounded-lg py-4 px-4 bg-white dark:bg-surface-200 shadow-theme-md dark:shadow-theme-lg"
     >
-      {/* Toggle Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-panel-primary text-white shadow-theme-sm hover:scale-110 transition-transform"
+        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary shadow-theme-sm hover:scale-110 transition-transform"
         aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
       >
         {isExpanded ? <ArrowLeft2 size="12" /> : <ArrowRight2 size="12" />}
       </button>
 
-      {/* Menu Items Container */}
       <div className="flex flex-col items-center justify-between w-full h-full">
-        {/* Top Menu */}
         <nav
           className={`flex flex-col w-full pb-3 gap-2 ${
             isExpanded ? "items-start" : "items-center"
@@ -113,22 +108,20 @@ export const AppSidebar = () => {
                     className={`
                       relative flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all
                       ${
-                        isActive
-                          ? "bg-primary-50 dark:bg-primary-900/20 text-primary"
-                          : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-600 dark:text-neutral-400"
-                      }
+                      isActive
+                        ? "bg-transparent"
+                        : "hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    }
                       ${!isExpanded && "justify-center"}
                     `}
                     aria-current={isActive ? "page" : undefined}
                   >
-                    {/* Icon */}
                     <span
-                      className={`shrink-0 ${isActive ? "text-primary" : ""}`}
+                      className={`shrink-0 ${isActive ? "text-primary" : "text-secondary-1000 dark:text-neutral-400"}`}
                     >
                       {item.icon}
                     </span>
 
-                    {/* Label (visible when expanded) */}
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.span
@@ -136,37 +129,27 @@ export const AppSidebar = () => {
                           animate={{ opacity: 1, width: "auto" }}
                           exit={{ opacity: 0, width: 0 }}
                           transition={{ duration: 0.2 }}
-                          className={`text-sm font-medium whitespace-nowrap overflow-hidden ${
+                          className={`text-sm font-normal whitespace-nowrap overflow-hidden ${
                             isActive
                               ? "text-primary"
-                              : "text-secondary-600 dark:text-neutral-400"
+                              : "text-secondary-1000 dark:text-neutral-400"
                           }`}
                         >
-                          {item.label}
+                          <div>
+                            {item.label}
+                          </div>
                         </motion.span>
                       )}
                     </AnimatePresence>
 
-                    {/* Badge */}
-                    {item.badge && isExpanded && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="ml-auto flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-danger text-white text-xs font-semibold"
-                      >
-                        {item.badge}
-                      </motion.span>
-                    )}
-
-                    {/* Active Indicator */}
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full"
+                        className="absolute bottom-0 w-full left-0 h-0.5 bg-primary text-primary"
                         transition={{
                           type: "spring",
                           stiffness: 300,
-                          damping: 30,
+                          damping: 30
                         }}
                       />
                     )}
@@ -177,7 +160,6 @@ export const AppSidebar = () => {
           </AnimatePresence>
         </nav>
 
-        {/* Bottom Menu */}
         <div
           className={`flex flex-col w-full gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-700 ${
             isExpanded ? "items-start" : "items-center"
@@ -189,15 +171,13 @@ export const AppSidebar = () => {
               onClick={item.action}
               className={`
                 flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-all
-                hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-600 dark:text-neutral-400
+                hover:bg-neutral-100 dark:hover:bg-neutral-800 text-secondary-1000 dark:text-neutral-400
                 ${!isExpanded && "justify-center"}
               `}
               aria-label={item.label}
             >
-              {/* Icon */}
               <span className="flex-shrink-0">{item.icon}</span>
 
-              {/* Label (visible when expanded) */}
               <AnimatePresence>
                 {isExpanded && (
                   <motion.span
@@ -205,7 +185,7 @@ export const AppSidebar = () => {
                     animate={{ opacity: 1, width: "auto" }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                    className="text-sm font-medium whitespace-nowrap overflow-hidden text-secondary-1000"
                   >
                     {item.label}
                   </motion.span>

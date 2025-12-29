@@ -1,33 +1,25 @@
-import { Avatar } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Avatar } from "@heroui/react";
 import SearchBox from "../SearchBox";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { handleGetContactsApi } from "../../services/Messenger/UserService/apis";
+import { AppDispatch, RootState } from "@hrbox/core/redux/store";
 import { MemberListProps } from "./types";
-import { handleForwardMessageApi } from "../../services/Messenger/PrivateChatService/apis";
-import { MemberTypes, PrivateChatTypes } from "../../types";
+import { MemberTypes } from "../../types";
 
 const ForwardMessage = ({ data }: MemberListProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const privateChats = useSelector(
-    (state: RootState) => state.privateChat.privateChats,
+    (state: RootState) => state.privateChat.privateChats
   );
   const groups = useSelector((state: RootState) => state?.groups?.groups);
   const channels = useSelector((state: RootState) => state?.channels?.channels);
   const saveMessages = useSelector(
-    (state: RootState) => state?.saveMessage?.messages,
+    (state: RootState) => state?.saveMessage?.messages
   );
   const profileUser = JSON.parse(localStorage.getItem("profile") || "{}");
   const allChats = [...privateChats, ...groups, ...channels, saveMessages];
 
   const handleForward = (item: MemberTypes) => {
-    dispatch(
-      handleForwardMessageApi({
-        forward_message: data?.message,
-        chat_id: item?.id,
-      }),
-    );
+
     // data.setIsOpenAddModal(false);
   };
 
@@ -50,10 +42,12 @@ const ForwardMessage = ({ data }: MemberListProps) => {
                     <Avatar radius="sm" src={item?.image} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
+                    <span
+                      className="font-normal text-xs font-open-sans leading-normal text-secondary-1000 dark:text-white">
                       {item?.name}
                     </span>
-                    <span className="font-light text-[10px] font-open-sans leading-normal text-secondary-800 dark:text-neutral-50">
+                    <span
+                      className="font-light text-[10px] font-open-sans leading-normal text-secondary-800 dark:text-neutral-50">
                       {item?.description}
                     </span>
                   </div>

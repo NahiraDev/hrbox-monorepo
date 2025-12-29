@@ -1,9 +1,9 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
-import {Location, MoreSquare, Trash} from 'iconsax-reactjs';
+import {Location, More, Trash} from 'iconsax-reactjs';
 import {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
-import {AppButton, AppDeleteModal} from '@hrbox/uikit/components';
+import {AppButton,AppDeleteModal} from '@hrbox/uikit/components';
 import {useModal} from "@hrbox/core/hooks";
 import {AwardModal} from "@hrbox/modules/hrlink/modals/AwardModal";
 import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
@@ -31,18 +31,18 @@ const OrganizationalLocations = () => {
         setActiveButton(null);
         setSelectedLocationIndex(index);
 
-        openModal(
-            'delete',
-            '',
-            <AppDeleteModal
-                onConfirm={() => handleDeleteConfirm(index)}
-                onCancel={() => console.log('Cancelled')}
-            />,
-            undefined,
-            'sm',
-            'Do you want to remove it?',
-            <Trash className='text-white'/>
-        );
+        // openModal(
+        //     'delete',
+        //     '',
+        //     <AppDeleteModal
+        //         onConfirm={() => handleDeleteConfirm(index)}
+        //         onCancel={() => console.log('Cancelled')}
+        //     />,
+        //     undefined,
+        //     'sm',
+        //     'Do you want to remove it?',
+        //     <Trash className='text-white'/>
+        // );
     };
 
     const handleDeleteConfirm = (index: number) => {
@@ -90,7 +90,8 @@ const OrganizationalLocations = () => {
                     {filteredLocations.map((detail, index) => (
                         <div key={`${detail.title}-${index}`} className="relative group">
                             <Card
-                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border border-primary transition-all duration-200 relative z-0"
+                              onPress={handleOpenOrganizationLocation}
+                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary  relative z-0"
                             >
                                 <Avatar
                                     className="w-full h-32 sm:h-40"
@@ -148,16 +149,24 @@ const OrganizationalLocations = () => {
                             </Card>
 
                             <div className="absolute top-2 right-2 z-10">
-                                <AppButton
-                                    size='xl'
-                                    radius='sm'
-                                    variant='light'
-                                    onPress={() => handleMoreClick(index, detail)}
-                                    content={<MoreSquare/>}
-                                    className={`text-black p-2 bg-white text-lg rounded-lg border-2 border-primary-panel shadow-md transition-all duration-200 ${
-                                        activeButton === index ? 'scale-105 ring-2 ring-primary' : 'hover:scale-105'
-                                    }`}
-                                />
+                              <AppButton
+                                size="xl"
+                                radius="sm"
+                                variant="light"
+                                onPress={() => handleMoreClick(index, detail)}
+                                  className={`group text-black p-1.5 bg-white hover:!bg-primary-400 text-lg rounded-lg border border-primary-400 shadow-md transition-all duration-200 ${
+                                  activeButton === index
+                                    ? "scale-105 ring-2 ring-primary"
+                                    : "hover:scale-105"
+                                }`}
+                                content={
+                                  <More
+                                    size={20}
+                                    className="text-black transition-colors duration-200 hover:!text-white"
+                                  />
+                                }
+                              />
+
                             </div>
 
                             {activeButton === index && (

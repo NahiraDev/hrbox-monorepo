@@ -2,9 +2,9 @@ import { skills as mockSkills } from "@module/basic-info/app/mock";
 import { Avatar, Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { LampCharge, Trash } from "iconsax-reactjs";
-import { AppDoubleLineProgress } from "@hrbox/uikit/components/AppDoubleLineProgress";
+import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { AppDoubleLineProgress } from "@hrbox/uikit/sections/AppDoubleLineProgress";
 import { useState } from "react";
-
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import {useModal} from "@hrbox/core/hooks";
 
@@ -27,7 +27,6 @@ const Education = () => {
     // );
   };
 
-  // Function to handle the actual deletion and update state
   const handleDeleteConfirm = (index: number) => {
     setCurrentSkills((prev) => {
       const newSkills = [...prev];
@@ -40,7 +39,7 @@ const Education = () => {
     <Card key={index} className="p-3 flex gap-1.5 shdow-theme-sm bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
         <div className="flex items-center gap-2">
-          <Avatar radius="sm" size="sm" />
+          <Avatar radius="sm" size="sm" color='primary' />
           <span className="text-lg">{skill.skill}</span>
         </div>
         <div>
@@ -86,7 +85,6 @@ const Education = () => {
                 <span className="text-secondary-1000">Hard Skills</span>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
-                {/* Use currentSkills state for mapping */}
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}
@@ -96,9 +94,10 @@ const Education = () => {
             <div className="flex flex-col gap-3 w-full">
               <div className="flex gap-1 text-[20px] items-center font-semibold">
                 <LampCharge />
-                <span>Soft Skills</span>
+                <span>Soft Skills</span> {/* Changed text for clarity */}
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
+                {/* Use currentSkills state for mapping */}
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}
