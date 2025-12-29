@@ -28,7 +28,7 @@ const ShiftAllocation = () => {
   return (
     <>
       <div className="h-full w-full flex flex-col ">
-        <AppTable data={data} onRowClick={handleRowClick} />
+        <AppTable data={data} onRowClick={handleRowClick} variant="bordered" />
       </div>
     </>
   );

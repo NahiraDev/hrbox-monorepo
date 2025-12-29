@@ -26,7 +26,7 @@ const EntryExit = () => {
   return (
     <>
       <div className="w-full h-full flex ">
-        <AppTable data={EntryExitData} onRowClick={(row)=>handlerRowClick(row)} />
+        <AppTable data={EntryExitData} onRowClick={(row)=>handlerRowClick(row)} variant="bordered" />
       </div>
     </>
   );

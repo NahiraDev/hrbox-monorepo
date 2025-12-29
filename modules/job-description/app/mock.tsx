@@ -23,6 +23,8 @@ import ObjectMissionCounter from "../pages/dnnSuperVisor/objectivesMossion/Objec
 import GeneralCounter from "../pages/dnnSuperVisor/generalConditions/GeneralCounter";
 import EligibilityRequirements from "../pages/dnnSuperVisor/Eligibility-Requirements/EligibilityRequirements";
 import ListofDuties from "../pages/dnnSuperVisor/ListofDuties/ListofDuties";
+import Competencies from "../pages/dnnSuperVisor/Competencies/Competencies";
+import Skills from "../pages/dnnSuperVisor/Skills/Skills";
 
 export const jobDescriptions = [
   {
@@ -101,36 +103,33 @@ export const tabs = [
   },
   {
     id: 5,
-    icon: <Verify size={20} />,
-    content: "Eligibility Requirements",
+    icon: <ProfileTick size={20} />,
+    content: "Competencies",
+     component:<Competencies/>
   },
   {
     id: 6,
-    icon: <ProfileTick size={20} />,
-    content: "Competencies",
+    icon: <LampCharge size={20} />,
+    content: "Skills",
+    component:<Skills/>
   },
   {
     id: 7,
-    icon: <LampCharge size={20} />,
-    content: "Skills",
-  },
-  {
-    id: 8,
     icon: <ProfileAdd size={20} />,
     content: "Recruitment Process",
   },
   {
-    id: 9,
+    id: 8,
     icon: <Briefcase size={20} />,
     content: "Career Path",
   },
   {
-    id: 10,
+    id: 9,
     icon: <Health size={20} />,
     content: "Performance Indicators",
   },
   {
-    id: 11,
+    id: 10,
     icon: <MessageProgramming size={20} />,
     content: "Software Access",
   },
@@ -239,5 +238,44 @@ export const duties=[
   {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
   {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
   {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
+  {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"},
   {"No.":1,Description:"Administrative","Level of Importance":"Employee","Completion Period":"Zahra Pakniyat", Competency:"2025/01/10"}
+]
+export const BehaviorData=[
+  {"No.":1,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":2,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":3,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":4,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":5,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":6,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":7,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":8,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":9,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":10,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":11,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":12,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":13,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":14,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":15,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":16,Title:"Change Creator","Evaluation Method":"Review of Previous"},
+  {"No.":17,Title:"Change Creator","Evaluation Method":"Review of Previous"},
 ]

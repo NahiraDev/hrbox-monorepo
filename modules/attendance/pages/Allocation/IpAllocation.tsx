@@ -18,10 +18,10 @@ const IpAllocation = () => {
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "ip-form"
-        }
+          formId: "ip-form",
+        },
       },
-      ModalSize["5XL"]
+      ModalSize["3XL"]
     );
   };
   return (
@@ -32,6 +32,7 @@ const IpAllocation = () => {
           showStatus={true}
           hasPagination={true}
           onRowClick={handleRowClick}
+          variant="bordered"
         />
       </div>
     </>
