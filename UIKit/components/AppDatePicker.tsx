@@ -6,7 +6,7 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import gregorian_en from "react-date-object/locales/gregorian_en";
 import gregorian from "react-date-object/calendars/gregorian";
 import clsx from "clsx";
-import { forwardRef, MouseEventHandler } from "react";
+import { forwardRef, MouseEventHandler, useMemo } from "react";
 import { FormMode } from "@hrbox/uikit/components/types";
 
 interface AppDatePickerProps {
@@ -20,14 +20,12 @@ interface AppDatePickerProps {
   onBlur?: () => void;
   disabled?: boolean;
   containerClassName?: string;
+  errorClassName?: string;
 }
 
 const persianHolidays = ["1403/01/01", "1403/01/12", "1403/03/14"];
 const gregorianHolidays = ["2025/03/21", "2025/04/01", "2025/06/04"];
 
-/**
- * ✅ AppDatePicker - Fixed version
- */
 export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
   (
     {
@@ -41,29 +39,60 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
       onBlur,
       disabled,
       containerClassName,
+      errorClassName
     },
-    ref,
+    ref
   ) => {
     const lang = useSelector((state: any) => state.language.lang);
     const calendar = lang === "fa" ? persian : gregorian;
     const locale = lang === "fa" ? persian_fa : gregorian_en;
     const holidays = lang === "fa" ? persianHolidays : gregorianHolidays;
 
-    // ✅ FIX 1: درست کردن لاجیک isViewMode
-    const isViewMode = formMode === FormMode.VIEW;
-    const hasError = Boolean(error);
-
-    const getModeClass = () => {
+    const modeStyles = useMemo(() => {
       switch (formMode) {
         case FormMode.VIEW:
-          return "bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700 cursor-default";
+          return clsx(
+            "flex items-center w-full h-10 px-3 py-2.5 gap-2",
+            "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)]",
+            "border border-[#DCF0F9] dark:border-primary-800",
+            "hover:bg-neutral-100 dark:hover:bg-neutral-800",
+            "text-sm font-medium transition-all duration-200 rounded-lg",
+            "text-neutral-600 dark:text-neutral-300 cursor-default"
+          );
+
         case FormMode.EDIT:
-          return "bg-panel-surface dark:bg-neutral-800 border-primary-200 dark:border-primary-700 focus-within:border-primary";
+          return clsx(
+            "flex items-center w-full h-10 px-3 py-2.5 gap-2",
+            "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
+            "border border-[#DCF0F9]",
+            "hover:border-primary-300 dark:hover:border-primary-600",
+            "focus-within:border-primary",
+            "text-sm font-medium transition-all duration-200 rounded-lg",
+            "text-secondary-900 dark:text-white"
+          );
+
         case FormMode.CREATE:
         default:
-          return "bg-white dark:bg-neutral-800 border-neutral-300 dark:border-neutral-600 focus-within:border-primary";
+          return clsx(
+            "flex items-center w-full h-10 px-3 py-2.5 gap-2",
+            "bg-white dark:bg-secondary-1000 border border-[#DCF0F9]",
+            "dark:border-[#04425C]",
+            "dark:focus-within:border-surface",
+            "text-sm font-medium transition-all duration-200 rounded-lg",
+            "text-secondary-900 dark:text-white"
+          );
       }
-    };
+    }, [formMode]);
+
+    const hasError = Boolean(error);
+    const isViewMode = formMode === FormMode.VIEW;
+
+    const buttonClasses = clsx(
+      modeStyles,
+      hasError &&
+      !isViewMode &&
+      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 text-danger dark:text-danger-400"
+    );
 
     return (
       <div
@@ -71,9 +100,16 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
         className={clsx("flex flex-col gap-1.5", containerClassName)}
       >
         {label && (
-          <label className="text-sm font-semibold text-secondary-900 dark:text-white">
+          <label
+            htmlFor={name}
+            className={clsx(
+              "text-sm font-semibold leading-none",
+              "text-secondary-900 dark:text-white",
+              "transition-colors duration-200"
+            )}
+          >
             {label}
-            {required && formMode !== FormMode.VIEW && (
+            {required && !isViewMode && (
               <span className="text-danger ml-1">*</span>
             )}
           </label>
@@ -83,9 +119,9 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
           calendar={calendar}
           calendarPosition="bottom-right"
           locale={locale}
-          // ✅ FIX 2: اضافه کردن value
           value={value}
           disabled={isViewMode || disabled}
+          className="shadow-[0_0_0_0_rgba(0,0,0,0)]"
           mapDays={({ date }: any) => {
             const isHoliday = holidays.includes(date.format("YYYY/MM/DD"));
             const isFriday =
@@ -95,40 +131,35 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
               return {
                 style: {
                   backgroundColor: "#ffe3e3",
-                  color: "#d8000c",
+                  color: "#d8000c"
                 },
                 className: "holiday-day",
-                title: isFriday ? "جمعه" : "تعطیل رسمی",
+                title: isFriday ? "جمعه" : "تعطیل رسمی"
               };
             }
           }}
           render={(
             val: any,
-            openCalendar: MouseEventHandler<HTMLButtonElement> | undefined,
+            openCalendar: MouseEventHandler<HTMLButtonElement> | undefined
           ) => (
             <button
               type="button"
-              className={clsx(
-                "flex items-center justify-between w-full px-3 py-2",
-                "rounded-lg border transition-all duration-200",
-                "text-sm font-medium text-secondary-900 dark:text-white",
-                "hover:border-primary-300 focus-within:border-primary",
-                getModeClass(),
-                hasError &&
-                  !isViewMode &&
-                  "border-danger bg-danger-50 dark:bg-danger-900/20",
-                isViewMode && "pointer-events-none opacity-70",
-              )}
+              className={buttonClasses}
               onClick={openCalendar}
               disabled={isViewMode || disabled}
             >
-              <span>{val || "انتخاب تاریخ"}</span>
               <Calendar
                 size="20"
                 className={
-                  hasError && !isViewMode ? "text-danger" : "text-secondary-600"
+                  hasError && !isViewMode
+                    ? "text-danger text-neutral-250"
+                    : isViewMode
+                      ? "text-neutral-500 dark:text-neutral-400"
+                      : "text-[#999]"
                 }
               />
+              <span
+                className="text-[#999] font-medium text-sm">{val || (lang === "fa" ? "انتخاب تاریخ" : "Select date")}</span>
             </button>
           )}
           onChange={(dateObj: any) => {
@@ -140,11 +171,19 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
         />
 
         {hasError && typeof error === "string" && (
-          <span className="text-xs text-danger">{error}</span>
+          <span
+            className={clsx(
+              "text-xs font-medium",
+              "text-danger dark:text-danger-400",
+              errorClassName
+            )}
+          >
+            {error}
+          </span>
         )}
       </div>
     );
-  },
+  }
 );
 
 AppDatePicker.displayName = "AppDatePicker";

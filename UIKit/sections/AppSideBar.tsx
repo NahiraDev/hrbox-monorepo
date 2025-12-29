@@ -1,13 +1,13 @@
 import { ArrowLeft2, ArrowRight2, Global, LogoutCurve, Setting2 } from "iconsax-reactjs";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useMatchRoute, useNavigate } from "@tanstack/react-router";
+import { useLocation, useMatchRoute, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useLanguage } from "@hrbox/core/hooks/useLanguage";
 import { useAuth } from "@hrbox/core/hooks/useAuth";
 import { useLogout } from "@hrbox/core/hooks/useLogout";
-import { useModuleAccess } from "@hrbox/core/hooks/useModuleAccess";
+import { moduleRegistry } from "@hrbox/modules/registry";
 
 interface MenuItem {
   id: string;
@@ -21,17 +21,19 @@ interface MenuItem {
 export const AppSidebar = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const matchRoute = useMatchRoute();
+  const moduleMenu = moduleRegistry.getModuleByPath(location.pathname);
   const { lang, toggleLanguage } = useLanguage();
   const { currentPanel } = useAuth();
   const { handleLogout } = useLogout();
-  const { getModuleMenu } = useModuleAccess();
 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    return getModuleMenu("attendance");
-  }, [currentPanel, getModuleMenu]);
+    console.log(moduleMenu);
+    return moduleMenu?.menu;
+  }, [currentPanel]);
 
   const isActiveRoute = (path: string) => {
     return !!matchRoute({ to: path });
@@ -80,7 +82,7 @@ export const AppSidebar = () => {
         className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary shadow-theme-sm hover:scale-110 transition-transform"
         aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
       >
-        {isExpanded ? <ArrowLeft2 size="12" /> : <ArrowRight2 size="12" />}
+        {isExpanded ? <ArrowLeft2 size="12" color="#1E3363" /> : <ArrowRight2 size="12" color="#1E3363" />}
       </button>
 
       <div className="flex flex-col items-center justify-between w-full h-full">
