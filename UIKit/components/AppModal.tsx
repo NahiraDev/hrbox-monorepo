@@ -366,7 +366,7 @@ const AppModalBase: React.FC<AppModalProps> & {
                 {children ?? modalComponent}
               </AppModalBody>
 
-              {modalType === "view" && (
+              {modalType !== "view" && (
                 <AppModalFooter
                   submitLabel={submitLabel}
                   cancelLabel={cancelLabel}
