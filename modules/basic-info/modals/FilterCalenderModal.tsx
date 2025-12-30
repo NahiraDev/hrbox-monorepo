@@ -1,73 +1,53 @@
-import { AppButton, AppInput, AppModal } from "@hrbox/uikit/components";
+import { AppAutoComplete, AppButton, AppInput, AppModal, FormField } from "@hrbox/uikit/components";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import { useFormContext } from "@hrbox/core/providers";
 
-const FilterCalenderModal = () => {
+export const FilterCalenderModal = () => {
+
+
   const { openModal } = useModalContext();
+
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
+
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
+
   return (
-    <>
       <AppModal.Body>
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Educational Institution",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
-        />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Educational Institution",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
-        />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Educational Institution",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
-        />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Educational Institution",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
-        />
+
+          <FormField
+            formMode={currentType}
+            label="Select Unit "
+            name="select"
+            component={AppAutoComplete}
+            helperText={touched.select && errors.select}
+          />
+         <FormField
+            formMode={currentType}
+            label="Search by Name or Position"
+            name="Search"
+            component={AppInput}
+            helperText={touched.Search && errors.Search}
+          />
+         <FormField
+            formMode={currentType}
+            label=" Personnel Code"
+            name="Personnel"
+            component={AppInput}
+            helperText={touched.Personnel && errors.Personnel}
+          />
+         <FormField
+            formMode={currentType}
+            label="National Code"
+            name="National"
+            component={AppInput}
+            helperText={touched.National && errors.National}
+          />
+
       </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            // onPress: () => openModal('delete', undefined),
-            content: <span>Cancel</span>,
-            className:
-              "text-white py-1.5 px-3 text-xl rounded-lg !bg-red-500 hover:text-white transition-all duration-200",
-          }}
-        />
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => console.log("a"),
-            content: <span>Submit</span>,
-            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg ",
-          }}
-        />
-      </AppModal.Footer>
-    </>
   );
 };
 
-export default FilterCalenderModal;
+

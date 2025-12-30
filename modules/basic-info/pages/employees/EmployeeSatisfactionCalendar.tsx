@@ -276,7 +276,7 @@ const EmployeeSatisfactionCalendar = () => {
   const modal = useModal()
   const handleOpenEmployeeSatisfactionCalendarModal = () => {
     modal.open(
-      ModalType.CREATE,
+      ModalType.VIEW,
       " Organizational Locations",
       < EmployeeSatisfactionCalendarModal />,
       {
@@ -299,6 +299,7 @@ const EmployeeSatisfactionCalendar = () => {
       ModalSize.XL,
     );
   };
+
 
   return (
     <div className="w-screen h-screen flex items-center justify-center p-3">
@@ -326,12 +327,9 @@ const EmployeeSatisfactionCalendar = () => {
           </div>
           <span className="!font-bold text-sm">Time: {currentTime}</span>
         </div>
-
-        {/* Calendar */}
         <div className="flex-1 overflow-auto bg-white">
           <div className="w-full h-full p-3">
             <div className="grid grid-cols-7 gap-2 h-full">
-              {/* Header Days */}
               {days.map((day, idx) => (
                 <div
                   key={day}
@@ -342,8 +340,6 @@ const EmployeeSatisfactionCalendar = () => {
                   {day}
                 </div>
               ))}
-
-              {/* Calendar Days */}
               {weeks.map((week, weekIndex) => (
                 week.map((date, idx) => (
                   <div key={`${weekIndex}-${idx}`} className="min-h-[90px]">
@@ -353,11 +349,22 @@ const EmployeeSatisfactionCalendar = () => {
                         isCurrentMonth={date.isCurrentMonth}
                         isSaturday={idx === 6}
                         idx={idx}
-                        topCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).topCircles : []}
-                        bottomCircles={isTodayOrPast(date.day, date.isCurrentMonth) ? getCircleData(date.day, date.isCurrentMonth).bottomCircles : []}
-                        onPress={() => {if (isTodayOrPast(date.day, date.isCurrentMonth)) {handleOpenEmployeeSatisfactionCalendarModal}
-                        }}
+                        topCircles={
+                          isTodayOrPast(date.day, date.isCurrentMonth)
+                            ? getCircleData(date.day, date.isCurrentMonth).topCircles
+                            : []
+                        }
+                        bottomCircles={
+                          isTodayOrPast(date.day, date.isCurrentMonth)
+                            ? getCircleData(date.day, date.isCurrentMonth).bottomCircles
+                            : []
+                        }
+                        onPress={() =>
+                          isTodayOrPast(date.day, date.isCurrentMonth) &&
+                          handleOpenEmployeeSatisfactionCalendarModal()
+                        }
                       />
+
                     )}
                   </div>
                 ))
