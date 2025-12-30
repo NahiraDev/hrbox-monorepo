@@ -21,12 +21,12 @@ const TechnicalDepartments = () => {
 
   return (
     <div className="flex flex-col items-center justify-between p-4">
-      <div className="w-full grid grid-cols-9 gap-4">
+      <div className="w-full grid grid-cols-8 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
             isPressable
-            className="p-4 bg-white rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2 relative  hover:!bg-[#D6F2FF]"
+            className="p-4 bg-white rounded-2xl shadow-sm flex flex-col items-center justify-center gap-3 relative  hover:!bg-[#D6F2FF]"
             onPress={() => push({ to: Paths.BasicInfo.PersonalInformation })}
           >
             <Avatar
@@ -42,7 +42,7 @@ const TechnicalDepartments = () => {
             />
 
 
-            <span className="text-sm font-semibold text-secondary-1000">
+            <span className="text-xs font-semibold text-secondary-1000">
               {user.name}
             </span>
 

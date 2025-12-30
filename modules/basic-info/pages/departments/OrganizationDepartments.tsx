@@ -16,7 +16,7 @@ const OrganizationDepartments = () => {
     <Card
       isPressable
       key={index}
-      className="rounded-xl border-l-2 py-2 px-3 shadow-light-tight-1 flex flex-col gap-2 hover:bg-[#D6F2FF] hover:cursor-pointer"
+      className="rounded-xl border-l-2 py-2 px-3 shadow-sm flex flex-col gap-2 hover:bg-[#D6F2FF] hover:cursor-pointer"
       style={{ borderLeftColor: borderColors[index % borderColors.length] }}
       onPress={() => push({to:Paths.BasicInfo.TechnicalDepartment})}
     >

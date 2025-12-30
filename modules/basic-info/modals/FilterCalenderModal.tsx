@@ -4,15 +4,11 @@ import { useFormContext } from "@hrbox/core/providers";
 
 export const FilterCalenderModal = () => {
 
-
-  const { openModal } = useModalContext();
-
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormContext();
 
   const { getOpenModal } = useModalContext();
   const currentType = getOpenModal()?.type;
-
 
   return (
       <AppModal.Body>

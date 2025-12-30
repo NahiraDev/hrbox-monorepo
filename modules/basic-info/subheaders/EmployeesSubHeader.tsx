@@ -35,7 +35,7 @@ const EmployeesSubHeader = (props: any) => {
           },
         },
       },
-      ModalSize.XL,
+      ModalSize.LG,
     );
   };
 

@@ -1,6 +1,6 @@
 import { Card } from '@heroui/react';
 import { achivements } from '@module/basic-info/app/mock';
-import { AppButton, AppDeleteModal } from '@hrbox/uikit/components';
+import { AppButton } from '@hrbox/uikit/components';
 import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
 import {ModalSize, ModalType, useModalContext} from '@hrbox/core/providers/ModalProvider';
 
@@ -112,7 +112,6 @@ const Achievements = () => {
             </Card>
           ))}
           <CoursesModal/>
-          <AppDeleteModal />
         </div>
       }
     />

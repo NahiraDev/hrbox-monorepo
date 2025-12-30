@@ -281,9 +281,9 @@ const EmployeeSatisfactionCalendar = () => {
       < EmployeeSatisfactionCalendarModal />,
       {
         isForm: true,
-        title: "افزودن ",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
+        title: "employees status ",
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesRelative,
           validationSchema: formValidationRelative,

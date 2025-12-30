@@ -1,12 +1,12 @@
 import type { Key, ReactNode } from "react";
 import { DynamicAddModal } from "@hrbox/modules/basic-info/modals/DynamicAddModal";
-import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import {
   Add,
   Category,
   FolderCross,
-  MessageEdit,
-  Trash,
+  MessageEdit, SearchNormal1,
+  Trash
 } from "iconsax-reactjs";
 import { Listbox, ListboxItem } from "@heroui/react";
 import { useEffect, useState, useRef } from "react";
@@ -150,48 +150,40 @@ const AddButton = ({ tab, openModal }: { tab: string; openModal: any }) => {
     return `Add New ${titleMap[tab as keyof typeof titleMap] || "Item"}`;
   };
 
+  const handleOpenAddNewOneModals = () => {
+
+  }
+
   return (
     <AppButton
-      props={{
-        className: "bg-white",
-        size: "md",
-        radius: "sm",
-        onPress: () =>
-          openModal(
-            "edit",
-            "",
-            <DynamicAddModal tab={tab} onClose={() => {}} />,
-            undefined,
-            "3xl",
-            getModalTitle(),
-            <Category className="text-white" />,
-          ),
-        content: (
-          <>
-            <Add size={22} />
-            <span>Add New One</span>
-          </>
-        ),
-      }}
-    />
+        className= "bg-white"
+        size= "md"
+        radius= "sm"
+        onPress={handleOpenAddNewOneModals}
+        content= {
+              <>
+                <Add size={22} />
+                <span>Add New One</span>
+              </>
+        }
+      />
   );
 };
 
 const EndWorkButton = () => (
   <AppButton
-    props={{
-      size: "md",
-      radius: "lg",
-      color: "danger",
-      content: (
-        <>
-          <FolderCross size={22} />
-          <span>End of Work Relationship</span>
-        </>
-      ),
-    }}
+    size="md"
+    radius="lg"
+    color="danger"
+    content={
+      <>
+        <FolderCross size={22} />
+        <span>End of Work Relationship</span>
+      </>
+    }
   />
 );
+
 
 // ==================== MAIN COMPONENT ====================
 export const BasicInfoLayout = ({ content }: { content: ReactNode }) => {

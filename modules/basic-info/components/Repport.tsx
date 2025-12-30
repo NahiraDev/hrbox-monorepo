@@ -1,5 +1,5 @@
 import { Listbox, ListboxItem, Avatar } from "@heroui/react";
-import { AppButton, AppDeleteModal, AppInput } from "@hrbox/uikit/components";
+import { AppButton, AppInput } from "@hrbox/uikit/components";
 import { MessageEdit, Trash } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 
@@ -86,28 +86,28 @@ const OrganizationalChart = () => {
                 ),
               }}
             />
-            <AppButton
-              props={{
-                size: "xs",
-                radius: "sm",
-                variant: "light",
-                isIconOnly: true,
-                onPress: () =>
-                  openModal(
-                    "delete",
-                    "",
-                    <AppDeleteModal />,
-                    undefined,
-                    "lg",
-                    "Do you want to remove it?",
-                    <Trash className="text-white" />,
-                  ),
-                content: (
-                  <Trash className="text-secondary-1000 group-hover:text-white" />
-                ),
-                className: "p-2 hover:!bg-red-500 transition-all duration-200",
-              }}
-            />
+            {/*<AppButton*/}
+            {/*  props={{*/}
+            {/*    size: "xs",*/}
+            {/*    radius: "sm",*/}
+            {/*    variant: "light",*/}
+            {/*    isIconOnly: true,*/}
+            {/*    onPress: () =>*/}
+            {/*      openModal(*/}
+            {/*        "delete",*/}
+            {/*        "",*/}
+            {/*        <AppDeleteModal />,*/}
+            {/*        undefined,*/}
+            {/*        "lg",*/}
+            {/*        "Do you want to remove it?",*/}
+            {/*        <Trash className="text-white" />,*/}
+            {/*      ),*/}
+            {/*    content: (*/}
+            {/*      <Trash className="text-secondary-1000 group-hover:text-white" />*/}
+            {/*    ),*/}
+            {/*    className: "p-2 hover:!bg-red-500 transition-all duration-200",*/}
+            {/*  }}*/}
+            {/*/>*/}
           </div>
         </div>
         <div>

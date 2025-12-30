@@ -1,6 +1,6 @@
 import { Card } from "@heroui/react";
 import { dataWorker2, dataWorker, Spouse } from "@module/basic-info/app/mock";
-import { AppButton, AppDeleteModal } from "@hrbox/uikit/components";
+import { AppButton } from "@hrbox/uikit/components";
 import {
   Settings,
   Trash,

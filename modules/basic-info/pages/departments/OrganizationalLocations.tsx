@@ -3,7 +3,7 @@ import {Avatar, Card} from '@heroui/react';
 import {Location, More, Trash} from 'iconsax-reactjs';
 import {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
-import {AppButton,AppDeleteModal} from '@hrbox/uikit/components';
+import {AppButton} from '@hrbox/uikit/components';
 import {useModal} from "@hrbox/core/hooks";
 import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
 import {
