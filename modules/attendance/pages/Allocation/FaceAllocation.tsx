@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
 import FaceAllocationModal from "@hrbox/modules/attendance/modals/FaceAllocationModal";
+
 const FaceAllocation = () => {
   const modal = useModal();
   const [data, setData] = useState(Allocatio);
@@ -17,8 +18,8 @@ const FaceAllocation = () => {
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "face-form",
-        },
+          formId: "face-form"
+        }
       },
       ModalSize["3XL"]
     );
@@ -32,6 +33,7 @@ const FaceAllocation = () => {
           hasPagination={true}
           pageSize={8}
           onRowClick={handleRowClick}
+          variant="bordered"
         />
       </div>
     </>

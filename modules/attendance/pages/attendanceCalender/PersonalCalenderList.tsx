@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 const PersonalCalenderList = () => {
   const [openpopover,setOpenpopover]=useState<string | null>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [data,setData]=useState(ReportPersonnal); 
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [menuStyle, setMenuStyle] = useState<{ top: string; left: string }>({
     top: "0px",
@@ -57,15 +58,9 @@ const menuRef=useRef<HTMLDivElement | null>(null);
   },[openMenu])
 
   const filteredData = useMemo(() => {
-    console.log("🔄 Filtering with:", { month, year, person, department });
-
-    const filtered = ReportPersonnal.filter((record) => {
+    const filtered = data.filter((record) => {
       const { month: recordMonth, year: recordYear } = parsePersianDate(
         record.date
-      );
-
-      console.log(
-        `📋 Record: ${record.date} → month: ${recordMonth}, year: ${recordYear}`
       );
 
       const matchMonth = !month || recordMonth === month;
@@ -73,16 +68,11 @@ const menuRef=useRef<HTMLDivElement | null>(null);
       const matchPerson = !person || record.person === person;
       const matchDepartment = !department || record.department === department;
 
-      console.log(
-        `   Match: month=${matchMonth}, year=${matchYear}, person=${matchPerson}, dept=${matchDepartment}`
-      );
-
       return matchMonth && matchYear && matchPerson && matchDepartment;
     });
 
-    console.log("✅ Filtered results:", filtered.length, "records");
     return filtered;
-  }, [month, year, person, department]);
+  }, [month, year, person, department,data]);
 
   const toggleMenu = (
     rowindex: number,
@@ -116,6 +106,19 @@ const menuRef=useRef<HTMLDivElement | null>(null);
       }
     }
   };
+
+  const selectedRowIndex=openMenu?parseInt(openMenu.split("-")[0]):null;
+  const selectedRow=selectedRowIndex!==null?filteredData[selectedRowIndex]:null;
+const handelDelete = (row: any) => {
+  setData((prev) =>
+    prev.map((item) =>
+      item === row 
+        ? { ...item, request: "" } 
+        : item
+    )
+  );
+  setOpenMenu(null);
+};
 
   return (
     <>
@@ -275,14 +278,14 @@ const menuRef=useRef<HTMLDivElement | null>(null);
             {openMenu.includes("shift") ? (
               <React.Fragment key="shift-menu">
                 <AppButton
-                  content="Daily Leave"
+                  content="Hourly Leave"
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
                 />
                 <AppButton
-                  content="Daily Mission"
+                  content="Hourly Mission"
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -296,10 +299,11 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                   size=""
                 />
                 <AppButton
-                  content="Delete Request"
+                  content="Delete Traffic Entry"
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
+                  onPress={()=> handelDelete(selectedRow) }
                   key="Delete_Request"
                 />
               </React.Fragment>
@@ -325,6 +329,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Delete_Request"
+                  onPress={()=> handelDelete(selectedRow)}
                 />
               </React.Fragment>
             )}

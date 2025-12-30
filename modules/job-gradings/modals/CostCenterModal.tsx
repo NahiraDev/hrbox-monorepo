@@ -8,7 +8,7 @@ type CostCenterModalProps = {
 
 const CostCenterModal = ({ profile }: CostCenterModalProps) => {
   return (
-    <div className="w-full flex flex-col gap-6 p-6">
+    <div className="w-full flex flex-col gap-6  ">
       {/* Header */}
       <div className="flex flex-row items-center gap-4">
         <img
@@ -29,7 +29,7 @@ const CostCenterModal = ({ profile }: CostCenterModalProps) => {
       </div>
 
       {/* Table */}
-      <AppTable data={CostEmployee}  hasPagination={false} />
+      <AppTable data={CostEmployee}   hasPagination={false} />
 
       {/* Divider */}
       <div className="gradient-divider my-2" />

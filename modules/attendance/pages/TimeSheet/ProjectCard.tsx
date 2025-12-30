@@ -20,7 +20,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <>
       <div
-        className={`group px-4 py-3.5 bg-white flex flex-col rounded-xl shadow-[0_1px_3px_0_rgba(8,14,28,0.30)] ${status === "Back log" ? "hover:bg-[#DCEBF4]! dark:hover:bg-[#01101A]! " : status === "Inprogress" ? "hover:bg-orange-50! dark:hover:bg-[#241400]!" : "hover:bg-[#DFF3E7]! dark:hover:bg-[#04180D]! hover:border hover:border-[#22AD5C]"} `}
+        className={`group px-4 py-3.5 bg-white flex flex-col rounded-xl shadow-[0_1px_3px_0_rgba(8,14,28,0.30)] cursor-pointer ${status === "Back log" ? "hover:bg-[#DCEBF4]! dark:hover:bg-[#01101A]! " : status === "Inprogress" ? "hover:bg-orange-50! dark:hover:bg-[#241400]!" : "hover:bg-[#DFF3E7]! dark:hover:bg-[#04180D]! hover:border hover:border-[#22AD5C]"} `}
+        onClick={()=>navigateCard({to:"/attendance/project-timeSheet"})}
       >
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-2.5 ">

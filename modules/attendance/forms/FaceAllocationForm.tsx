@@ -2,7 +2,7 @@ import { Form, Radio, RadioGroup } from "@heroui/react";
 import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
 import { Scan } from "iconsax-reactjs";
 import * as Yup from "yup";
-import { useFormContext } from "@hrbox/core/providers/FormProvider";
+import { FormProvider, useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { useModalContext } from "@hrbox/core/providers";
 import { useTranslation } from "react-i18next";
@@ -30,13 +30,7 @@ export const formValidationAction = Yup.object().shape({
   Description: Yup.string().required(),
 });
 export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
+  console.log(values);
   return {
     title: values.title,
     type: values.type,
@@ -65,6 +59,7 @@ const FaceAllocationForm = () => {
   const currentType = getOpenModal()?.type;
   return (
     <>
+    <FormProvider formId="face-allocation-form" initialValues={initialValuesAction} onSubmit={handleSubmitAction} >
       <Form id="face-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup
@@ -103,6 +98,10 @@ const FaceAllocationForm = () => {
                 name="ChooseFace"
                 label={t("choose_face_recognition_assignment")}
                 component={AppAutoComplete}
+                data={[
+                  {id:1,name:"night"},
+                  {id:2,name:"morning"}
+                ]}
               />
             </div>
             <div className="w-full">
@@ -111,6 +110,9 @@ const FaceAllocationForm = () => {
                 name="FromDate"
                 label={t("_date")}
                 component={AppAutoComplete}
+                data={[
+                  {id:1,name:"monday"}
+                ]}
               />
             </div>
           </div>
@@ -121,6 +123,9 @@ const FaceAllocationForm = () => {
                 name="organization"
                 label={t("organizations")}
                 component={AppAutoComplete}
+                data={[
+                  {id:1,name:"true"}
+                ]}
               />
             </div>
             {values?.type === t("person") || values?.type === t("group") ? (
@@ -130,6 +135,9 @@ const FaceAllocationForm = () => {
                   name="Department"
                   label={t("department")}
                   component={AppAutoComplete}
+                  data={[
+                    {id:1,name:"hrbox"}
+                  ]}
                 />
               </div>
             ) : (
@@ -139,6 +147,9 @@ const FaceAllocationForm = () => {
                   name="JobTitle"
                   label={t("job_title")}
                   component={AppAutoComplete}
+                   data={[
+                    {id:1,name:"programmer"}
+                  ]}
                 />
               </div>
             )}
@@ -151,6 +162,9 @@ const FaceAllocationForm = () => {
                   name="Employee"
                   label={t("employee")}
                   component={AppAutoComplete}
+                  data={[
+                    {id:1,name:"momomo"}
+                  ]}
                 />
               </div>
               <div className="w-full"></div>
@@ -168,6 +182,7 @@ const FaceAllocationForm = () => {
         </div>
         <Scan color="gray" size={90} className="absolute bottom-2 left-0" />
       </Form>
+      </FormProvider>
     </>
   );
 };

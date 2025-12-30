@@ -16,7 +16,7 @@ export const CreateGroup: React.FC<CreateGroupProps> = ({ data }) => {
           viewMode: 0,
           autoCropArea: 0,
           responsive: true
-        });
+        } as any);
       }
     }, 100);
 
