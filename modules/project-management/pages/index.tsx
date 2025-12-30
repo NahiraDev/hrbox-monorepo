@@ -1,5 +1,5 @@
-import { lazyLoad } from 'core';
+import { lazyLoad } from "core";
 
-export const Dashboard = lazyLoad(() => import('./Dashboard'));
+export const Dashboard = lazyLoad(() => import("./Dashboard/Dashboard"));
 
 export default Dashboard;

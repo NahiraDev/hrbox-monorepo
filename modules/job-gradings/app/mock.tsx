@@ -1,4 +1,4 @@
-import { number } from "framer-motion";
+import { color, number } from "framer-motion";
 import { CloseCircle, Global, Location, TickCircle, Verify } from "iconsax-reactjs";
 
 export const EntryExitData = [
@@ -1731,3 +1731,23 @@ export const ProfileEmployee = [
     info:true
   },
 ];
+export const CostEmployee=[
+  {
+    index:"Highly Contextualized Domain-Specific Expert-Level Theoretical and Practical Knowledge",
+    Points_Required:"Grade 5",
+    Person:<span className="text-danger">"Grade 2"</span>,
+    color:"#8A1B1B"
+  },
+  {
+    index:"Decision Making",
+    Points_Required:"Grade 4",
+    Person:"Grade 4",
+    color:"#136234"
+  },
+  {
+    index:"Leadership Experience",
+    Points_Required:"Grade 2",
+    Person:"Grade 5",
+    color:"#05587A"
+  },
+]

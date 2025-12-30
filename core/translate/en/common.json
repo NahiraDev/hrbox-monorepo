@@ -248,5 +248,7 @@
   "General":"General",
   "of_points":"of_points",
   "Grade_title":"Grade title",
-  "up_to_points":"up to point"
+  "up_to_points":"up to point",
+  "task list":"Task List",
+  "progressStatusOfTasks": "Progress Status Of Tasks"
 }

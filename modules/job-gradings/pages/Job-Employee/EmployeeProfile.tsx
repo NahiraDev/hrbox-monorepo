@@ -2,7 +2,9 @@ import { AppPagination } from "@hrbox/uikit/components";
 import { ProfileEmployee } from "../../app/mock";
 import { useState } from "react";
 import { Verify } from "iconsax-reactjs";
-
+import { ModalSize, ModalType } from "@hrbox/core/providers";
+import CostCenterModal from "../../modals/CostCenterModal";
+import { useModal } from "@hrbox/core/hooks";
 const EmployeeProfile = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 27; 
@@ -19,6 +21,20 @@ const EmployeeProfile = () => {
     pageSize,
     total: totalItems,
   };
+  const modal = useModal();
+  const clickHandler = (profile: any) => {
+  modal.open(
+    ModalType.VIEW,
+    "CostCenterModal",
+    <CostCenterModal profile={profile} />,
+    {
+      isForm: false,
+      cancelLabel: "Close",
+    },
+    ModalSize["3XL"]
+  );
+};
+
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -36,10 +52,12 @@ const EmployeeProfile = () => {
       >
         {paginatedData?.map((profile) => (
           <section
+          onClick={()=>clickHandler(profile)}
             key={profile.id}
             className="
               bg-white
               h-45
+              cursor-pointer
               relative
               py-3
               flex

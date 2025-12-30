@@ -3,7 +3,7 @@ import { ArrowRight } from "iconsax-reactjs";
 
 export const AppCoWorks = () => {
   return (
-    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 h-full">
+    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-lg h-full">
       <div className="flex flex-col gap-2">
         <div className="flex w-full justify-between border-b-1 border-primary-700 pb-1 items-center">
           <span className="text-secondary-900">Co-Workers</span>

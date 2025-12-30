@@ -1,9 +1,11 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const AppTaskProgressChart = () => {
+  const { t } = useTranslation();
   const data = {
     labels: ['Backlog', 'Progress', 'Overdue', 'Done'],
     datasets: [
@@ -25,10 +27,10 @@ export const AppTaskProgressChart = () => {
   };
 
   return (
-    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 h-full">
+    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-lg h-full">
       <div className="pb-2 border-b-1 border-neutral-100">
         <span className="text-base font-semibold text-secondary-1000">
-          Progress Status Of Tasks
+          {t("progressStatusOfTasks")}
         </span>
       </div>
       <span className="text-base mt-2.5 text-secondary-1000 font-semibold">
@@ -42,7 +44,7 @@ export const AppTaskProgressChart = () => {
           <span className="w-4 h-4 bg-secondary-400 rounded-full" /> Backlog
         </div>
         <div className="flex items-center gap-1">
-          <span className="w-4 h-4 bg-tertiar-400 rounded-full" /> Progress
+          <span className="w-4 h-4 bg-danger rounded-full" /> Progress
         </div>
         <div className="flex items-center gap-1">
           <span className="w-4 h-4 bg-warning-400 rounded-full" /> Overdue
