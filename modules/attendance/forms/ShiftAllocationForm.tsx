@@ -23,12 +23,13 @@ const ShiftAllocationForm = () => {
   } = useFormContext();
 
   useEffect(() => {
-  console.log("Errors:", errors);
-  console.log("Values:", values);
+  console.log("Errors-shift:", errors);
+  console.log("Values-shift:", values);
 }, [errors, values]);
 
   const { getOpenModal } = useModalContext();
   const currentType = getOpenModal()?.type;
+  
   return (
     <form id="shift-allocation" onSubmit={handleSubmit}>
       <div className="flex flex-col w-full gap-7">
@@ -39,6 +40,7 @@ const ShiftAllocationForm = () => {
             wrapper: "w-full flex justify-between",
           }}
           value={values?.type}
+          isDisabled={currentType==="view"?true:false}
           orientation="horizontal"
           onValueChange={(value) => setFieldValue("type", value)}
         >

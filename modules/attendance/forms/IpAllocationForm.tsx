@@ -71,24 +71,25 @@ const IpAllocationForm = () => {
               base: "w-full flex justify-between",
               wrapper: "w-full flex justify-between",
             }}
-            defaultValue={t("person")}
+            isDisabled={currentType==="view"?true:false}
+            value="person"
             orientation="horizontal"
             onValueChange={(value) => setFieldValue("type", value)}
           >
             <Radio
-              value={t("person")}
+              value="person"
               classNames={{ wrapper: "border-2 border-primary" }}
             >
               {t("person")}
             </Radio>
             <Radio
-              value={t("group")}
+              value="group"
               classNames={{ wrapper: "border-2 border-primary" }}
             >
               {t("group")}
             </Radio>
             <Radio
-              value={t("job_title")}
+              value="jobtitle"
               classNames={{ wrapper: "border-2 border-primary" }}
             >
               {t("job_title")}
@@ -101,6 +102,8 @@ const IpAllocationForm = () => {
                 label={t("choose_ip")}
                 formMode={currentType}
                 component={AppAutoComplete}
+                variant="solid"
+                
               />
             </div>
             <div className="w-full">

@@ -12,8 +12,6 @@ const [data, setData] = useState(getAllAllocations());
     setData(getAllAllocations());
   };
   const handleRowClick = (row:any) => {
-    console.log(row,"rowclick");
-    
     modal.open(
       ModalType.VIEW,
       "shift-allocation",
