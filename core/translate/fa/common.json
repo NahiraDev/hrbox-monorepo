@@ -255,5 +255,10 @@
   "weight": "وزن",
   "indicators": "شاخص ها",
   "General": "عمومی ",
-  "index_title": "index title (fa)"
+  "Grade_title": "عنوان سطح",
+  "of_points": "شروع امتیاز :",
+  "up_to_points": "پایان امتیاز :",
+  "index_title": "index title (fa)",
+  "task list": "لیست وظایف",
+  "progressStatusOfTasks": "وضعیت پیشرفت وظایف"
 }

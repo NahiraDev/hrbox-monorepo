@@ -1,5 +1,5 @@
-import { number } from "framer-motion";
-import { CloseCircle, Global, Location, TickCircle } from "iconsax-reactjs";
+import { color, number } from "framer-motion";
+import { CloseCircle, Global, Location, TickCircle, Verify } from "iconsax-reactjs";
 
 export const EntryExitData = [
   {
@@ -606,277 +606,278 @@ export const organization = [
   { id: "3", title: "Ungraded jobs", number: "12" },
   { id: "4", title: "Unemployed jobs", number: "3" },
 ];
-export const JD_DATA  = [
-    {
-      id: "1",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "2",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "3",
-      color: "#FD1B51",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "2",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "4",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "5",
-      color: "",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "-",
-      title: "Designer",
-    },
-    {
-      id: "6",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "7",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "8",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "9",
-      color: "#FD1B51",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "2",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "10",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "11",
-      color: "",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "-",
-      title: "Designer",
-    },
-    {
-      id: "12",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "13",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "14",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "15",
-      color: "#FD1B51",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "2",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "16",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "17",
-      color: "",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "-",
-      title: "Designer",
-    },
-    {
-      id: "18",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "19",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "20",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "21",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "22",
-      color: "#FD1B51",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "2",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "23",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "24",
-      color: "",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "-",
-      title: "Designer",
-    },
-    {
-      id: "25",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "26",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "27",
-      color: "#FFCC00",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "28",
-      color: "#0B76B7",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Designer",
-    },
-    {
-      id: "29",
-      color: "#FD1B51",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "2",
-      Grade: "Grade B",
-      title: "Developer",
-    },
-    {
-      id: "30",
-      color: "#A212D2",
-      title2: "Number of employees:",
-      title3: "Status",
-      number: "1595",
-      Grade: "Grade B",
-      title: "Developer",
-    }, {
+export const JD_DATA = [
+  {
+    id: "1",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "2",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "3",
+    color: "#FD1B51",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "2",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "4",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "5",
+    color: "",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "-",
+    title: "Designer",
+  },
+  {
+    id: "6",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "7",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "8",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "9",
+    color: "#FD1B51",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "2",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "10",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "11",
+    color: "",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "-",
+    title: "Designer",
+  },
+  {
+    id: "12",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "13",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "14",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "15",
+    color: "#FD1B51",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "2",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "16",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "17",
+    color: "",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "-",
+    title: "Designer",
+  },
+  {
+    id: "18",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "19",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "20",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "21",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "22",
+    color: "#FD1B51",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "2",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "23",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "24",
+    color: "",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "-",
+    title: "Designer",
+  },
+  {
+    id: "25",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "26",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "27",
+    color: "#FFCC00",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "28",
+    color: "#0B76B7",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Designer",
+  },
+  {
+    id: "29",
+    color: "#FD1B51",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "2",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
+    id: "30",
+    color: "#A212D2",
+    title2: "Number of employees:",
+    title3: "Status",
+    number: "1595",
+    Grade: "Grade B",
+    title: "Developer",
+  },
+  {
     id: "31",
     color: "#FFCC00",
     title2: "Number of employees:",
@@ -1146,80 +1147,89 @@ export const JD_DATA  = [
     Grade: "Grade B",
     title: "Manager",
   },
-  ]
-export const ListTable=[
-    {
+];
+export const ListTable = [
+  {
     id: "1",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "2",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "3",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "4",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "5",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "6",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "7",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "8",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "9",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-},{
+  },
+  {
     id: "10",
-    No:"1",
-    of_points:"Behavioral indicators",
-    Index_title:"organizational impact",
+    No: "1",
+    of_points: "Behavioral indicators",
+    Index_title: "organizational impact",
     Grade: "Grade B",
     Creation_date: "2022/19/10",
-}
-]
+  },
+];
 export const Notification = [
   {
     id: "1",
@@ -1380,52 +1390,364 @@ export const Indicators = [
 ];
 export const GeneralMock = [
   {
-    NO:"1",
+    NO: "1",
     Index_title: "organizational impact",
     Grouping: "Behavioral indicators",
-    Grade:"Grade B",
+    Grade: "Grade B",
     Creation_data: "2022/19/10",
+  },
+  {
+    NO: "2",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade A",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "3",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade C",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "4",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade D",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "5",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade A",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "6",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade B",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "7",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade A",
+    Creation_data: "2022/19/10",
+  },
+  {
+    NO: "1",
+    Index_title: "organizational impact",
+    Grouping: "Behavioral indicators",
+    Grade: "Grade B",
+    Creation_data: "2022/19/10",
+  },
+];
+export const GRADE_COLORS = [
+  { value: "#F43F5E", label: "Pink" },
+  { value: "#A855F7", label: "Purple" },
+  { value: "#64748B", label: "Gray" },
+  { value: "#38BDF8", label: "Blue" },
+  { value: "#22C55E", label: "Green" },
+  { value: "#EF4444", label: "Red" },
+  { value: "#FB923C", label: "Orange" },
+  { value: "#FACC15", label: "Yellow" },
+];
+export const ProfileEmployee = [
+  {
+    id: "1",
+    image:
+      "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
+    Name: "jahan hatami",
+    category: "Mentor",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "2",
+    image:
+      "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
+    Name: "ali maleki",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "3",
+    image:
+      "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
+    Name: "sara asadi",
+    category: "Front-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "4",
+    image:
+      "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
+    Name: "mahsa omidi",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "5",
+    image:
+      "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
+    Name: "asal hatami",
+    category: "Designer",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "6",
+    image:
+      "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
+    Name: "Hosein fahmideh",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "7",
+    image:
+      "https://img.freepik.com/free-photo/young-woman-blue-sweater-autumn-park_1303-11368.jpg?semt=ais_hybrid&w=740&q=80",
+    Name: "Nasim Moradi",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "8",
+    image:
+      "https://img.freepik.com/free-photo/smiling-beautiful-young-woman-standing-posing_171337-11412.jpg?semt=ais_hybrid&w=740&q=80",
+    Name: "Maryam Mohammadi ",
+    category: "Ceo",
+    icon:Verify,
+    info:false
+  },
+  {
+    id: "9",
+    image:
+      "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?cs=srgb&dl=pexels-italo-melo-881954-2379004.jpg&fm=jpg",
+    Name: "Mohsen Mosalman ",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "10",
+    image:
+      "https://i.pinimg.com/236x/c2/88/0a/c2880a8f427b543079d893068ccae83f.jpg",
+    Name: "Bradd Pitt ",
+    category: "Ceo",
+    icon:Verify,
+    info:true
   },{
-    NO:"2",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade A",
-    Creation_data: "2022/19/10",
+    id: "11",
+    image:
+      "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
+    Name: "asal hatami",
+    category: "Designer",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "12",
+    image:
+      "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
+    Name: "Hosein fahmideh",
+    category: "back-end",
+    icon:Verify,
+    info:false
+  }, {
+    id: "13",
+    image:
+      "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
+    Name: "ali maleki",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "14",
+    image:
+      "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
+    Name: "sara asadi",
+    category: "Front-end",
+    icon:Verify,
+    info:true
   },{
-    NO:"3",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade C",
-    Creation_data: "2022/19/10",
+    id: "15",
+    image:
+      "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
+    Name: "jahan hatami",
+    category: "Mentor",
+    icon:Verify,
+    info:false
+  },
+  {
+    id: "16",
+    image:
+      "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
+    Name: "ali maleki",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "17",
+    image:
+      "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
+    Name: "sara asadi",
+    category: "Front-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "18",
+    image:
+      "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
+    Name: "mahsa omidi",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "19",
+    image:
+      "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
+    Name: "asal hatami",
+    category: "Designer",
+    icon:Verify,
+    info:false
+  },
+  {
+    id: "20",
+    image:
+      "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
+    Name: "Hosein fahmideh",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "21",
+    image:
+      "https://m.media-amazon.com/images/M/MV5BMTQzMTI2NDQ5NV5BMl5BanBnXkFtZTgwMjM3Mjc1MjE@._V1_.jpg",
+    Name: "Peyman maadi",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "22",
+    image:
+      "https://i.pinimg.com/originals/6a/94/03/6a9403a53cbe94f633dc0446baa0ea4e.jpg",
+    Name: "mahak ashouri",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "23",
+    image:
+      "https://static.vecteezy.com/system/resources/previews/036/297/773/non_2x/ai-generated-business-woman-showing-thumbs-up-on-a-transparent-background-free-png.png",
+    Name: "sara morsali",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "24",
+    image:
+      "https://cdn.pinno.app/api/internal/cdb/contents/saqarnorouzi@instagram_photo_HIGH/0/238519",
+    Name: "Saqar norouzi",
+    category: "Front-end",
+    icon:Verify,
+    info:true
   },{
-    NO:"4",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade D",
-    Creation_data: "2022/19/10",
+    id: "25",
+    image:
+      "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
+    Name: "mahsa omidi",
+    category: "back-end",
+    icon:Verify,
+    info:false
+  },
+  {
+    id: "26",
+    image:
+      "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
+    Name: "asal hatami",
+    category: "Designer",
+    icon:Verify,
+    info:true
+  }, {
+    id: "27",
+    image:
+      "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
+    Name: "sara asadi",
+    category: "Front-end",
+    icon:Verify,
+    info:true
   },{
-    NO:"5",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade A",
-    Creation_data: "2022/19/10",
-  },{
-    NO:"6",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade B",
-    Creation_data: "2022/19/10",
-  },{
-    NO:"7",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade A",
-    Creation_data: "2022/19/10",
-  },{
-    NO:"1",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade:"Grade B",
-    Creation_data: "2022/19/10",
+    id: "28",
+    image:
+      "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
+    Name: "jahan hatami",
+    category: "Mentor",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "29",
+    image:
+      "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
+    Name: "ali maleki",
+    category: "Ceo",
+    icon:Verify,
+    info:true
+  },
+  {
+    id: "30",
+    image:
+      "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
+    Name: "sara asadi",
+    category: "Front-end",
+    icon:Verify,
+    info:false
+  },
+  {
+    id: "31",
+    image:
+      "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
+    Name: "mahsa omidi",
+    category: "back-end",
+    icon:Verify,
+    info:true
+  },
+];
+export const CostEmployee=[
+  {
+    index:"Highly Contextualized Domain-Specific Expert-Level Theoretical and Practical Knowledge",
+    Points_Required:"Grade 5",
+    Person:<span className="text-danger">"Grade 2"</span>,
+    color:"#8A1B1B"
+  },
+  {
+    index:"Decision Making",
+    Points_Required:"Grade 4",
+    Person:"Grade 4",
+    color:"#136234"
+  },
+  {
+    index:"Leadership Experience",
+    Points_Required:"Grade 2",
+    Person:"Grade 5",
+    color:"#05587A"
   },
 ]

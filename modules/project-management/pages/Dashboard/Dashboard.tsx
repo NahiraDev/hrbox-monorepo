@@ -2,8 +2,10 @@ import AppTasksList from "@hrbox/modules/project-management/components/AppTaskLi
 import { AppDashboardChart } from "@hrbox/modules/project-management/components/AppDashboardChart";
 import { AppTaskProgressChart } from "@hrbox/modules/project-management/components/AppTaskProgressChart";
 import { AppCoWorks } from "@hrbox/modules/project-management/components/AppCoWorks";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   return (
     <div className="w-full h-full flex gap-3">
       <div className="w-[40%]">

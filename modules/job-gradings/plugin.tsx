@@ -29,6 +29,9 @@ const JDPage = lazyRouteComponent(
 const JobEmployee = lazyRouteComponent(
   () => import("./pages/Job-Employee/JobEmployee")
 );
+const EmployeeProfile = lazyRouteComponent(
+  () => import("./pages/Job-Employee/EmployeeProfile")
+);
 
 
 // ============================================
@@ -46,6 +49,9 @@ const JDHeader = lazy(
 );
 const EmployeeHeader = lazy(
   () => import("./subheaders/EmployeeHeader")
+);
+const EmployeeProfileHeader = lazy(
+  () => import("./subheaders/EmployeeProfileHeader")
 );
 
 // ============================================
@@ -135,10 +141,25 @@ export const JobGradingsPlugins: ModulePlugin = {
       subHeader: EmployeeHeader,
       subHeaderProps: {
         title: "Employee-job fit",
-        icon: <DocumentSketch color="#FFFFFF" />
-      }
-    }
 
+        icon: <DocumentSketch color="#FFFFFF" />,
+      },
+    },
+    {
+      path: Paths.JobGradings.EmployeeProfile,
+      component: EmployeeProfile,
+      layout: "framed",
+      meta: {
+        title: "Employees-on-This-Job",
+        requireAuth: false,
+        requiredRoles: [RoleSlug.ORGANIZATION],
+      },
+      subHeader: EmployeeProfileHeader,
+      subHeaderProps: {
+        title: "Employees-on-This-Job",
+        icon: <Convertshape color="#FFFFFF" />,
+      },
+    },
   ],
   // ============================================
   // Menu

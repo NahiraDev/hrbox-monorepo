@@ -3,46 +3,44 @@ import { FormProvider } from "@hrbox/core/providers";
 import * as Yup from "yup";
 
 const SettingModal = () => {
-  const initialValuesAction = {
-    index_title: null,
-    Select_Group: null,
-    type: null,
-    weight: null,
-    creation_date: null,
-    Department: null,
-    Employee: null,
-    Description: null
+  const initialValues = {
+    index_title: "",
+    select_group: "",
+    type: "",
+    weight: "",
+    description: ""
   };
-  const formValidationAction = Yup.object().shape({
-    index_title: Yup.string().required(),
-    Select_Group: Yup.string().required(),
-    type: Yup.string().required(),
-    weight: Yup.string().required(),
-    creation_date: Yup.string().required(),
 
-    Description: Yup.string().required()
+  const validationSchema = Yup.object({
+    index_title: Yup.string().required("Required"),
+    select_group: Yup.string().required("Required"),
+    type: Yup.string().required("Required"),
+    weight: Yup.string().required("Required"),
+    description: Yup.string().required("Required")
   });
-  const handleSubmitAction = (values: any) => {
-    console.log(values.title);
-    console.log(values.type);
-    console.log(values.Description);
+
+  const handleSubmit = (values: any) => {
+    console.log("SUBMIT VALUES 👉", values);
+
     return {
       index_title: values.index_title,
-      Select_Group: values.Group,
+      select_group: values.select_group,
       type: values.type,
       weight: values.weight,
-      Description: values.Description
+      description: values.description
     };
   };
+
   return (
     <FormProvider
-      formId="setting-modal"
-      initialValues={initialValuesAction}
-      validationSchema={formValidationAction}
-      onSubmit={handleSubmitAction}
+      formId="setting-form"
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     >
       <SettingForm />
     </FormProvider>
   );
 };
+
 export default SettingModal;

@@ -130,7 +130,7 @@ export const CalenderHeaderForm = () => {
               size="md"
               radius="lg"
               startContent={<Profile size={18} />}
-              className={isTrafficCalender ? "text-black" : "text-white"}
+              className={isTrafficCalender ? "text-black" : "text-white"}E
               onPress={() =>
                 navigate({ to: "/attendance/attendance-calender" })
               }
