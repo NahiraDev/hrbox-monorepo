@@ -16,11 +16,13 @@ interface AllocationSubheaderProps {
   modalComponent: React.ComponentType;
   title: string;
   icon: React.ReactNode;
+  id:string;
 }
 const AllocationSubheader = ({
   modalComponent: ModalComponent,
   title,
   icon,
+  id,
 }: AllocationSubheaderProps) => {
   const { t } = useTranslation();
   const modal = useModal();
@@ -34,7 +36,7 @@ const AllocationSubheader = ({
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "face-form",
+          formId: id,
         },
       },
       ModalSize["2XL"]

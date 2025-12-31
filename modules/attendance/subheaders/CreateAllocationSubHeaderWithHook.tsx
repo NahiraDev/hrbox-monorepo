@@ -6,22 +6,23 @@ import IpAllocationModal from '@hrbox/modules/attendance/modals/IpAllocationModa
 import FaceAllocationModal from '@hrbox/modules/attendance/modals/FaceAllocationModal';
 import React from 'react';
 
-function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.ComponentType,icon:React.ReactNode) {
+function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.ComponentType,icon:React.ReactNode,id:string) {
   const Wrapper = (props:any) => {
     return <AllocationSubheader
       {...props}
       modalComponent={modalComponent}
       title={title}
       icon={icon}
+      id={id}
     />;
   };
   Wrapper.displayName=title;
   return Wrapper;
 }
 
-export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('shiftallocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/>);
-export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('locationallocation',LocationAllocationModal,<LocationAdd color='white' size={18}/>);
-export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('ipallocation',IpAllocationModal,<GlobalEdit color='white' size={18} />);
-export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('faceallocation',FaceAllocationModal,<Scan color='white' size={18}/>);
+export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('shiftallocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/> , "shift-allocation");
+export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('locationallocation',LocationAllocationModal,<LocationAdd color='white' size={18}/> , "location-allocation");
+export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('ipallocation',IpAllocationModal,<GlobalEdit color='white' size={18} />,"ip-allocation");
+export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('faceallocation',FaceAllocationModal,<Scan color='white' size={18}/> , "face-allocation");
 
 

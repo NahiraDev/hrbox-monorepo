@@ -18,7 +18,7 @@ const FaceAllocation = () => {
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "face-form"
+          formId: "face-allocation"
         }
       },
       ModalSize["3XL"]

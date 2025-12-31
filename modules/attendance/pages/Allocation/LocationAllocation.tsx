@@ -18,7 +18,7 @@ const LocationAllocation = () => {
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "location-form",
+          formId: "location-allocation",
         },
       },
       ModalSize["3XL"]

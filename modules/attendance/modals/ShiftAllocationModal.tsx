@@ -1,13 +1,75 @@
 import { AppButton, AppModal } from "@hrbox/uikit/components";
 import { FormProvider } from "@hrbox/core/providers/FormProvider";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import ShiftAllocationForm, {
-  formValidationAction,
-  handleSubmitAction,
-} from "@hrbox/modules/attendance/forms/ShiftAllocationForm";
-
-const ShiftAllocationModal = () => {
+import ShiftAllocationForm from "@hrbox/modules/attendance/forms/ShiftAllocationForm";
+import * as Yup from "yup";
+import { addAllocation } from "../app/mock";
+interface ShiftAllocationModalProps {
+  onSuccess?: () => void;
+}
+const ShiftAllocationModal = ({ onSuccess }: ShiftAllocationModalProps) => {
   const { closeModal } = useModalContext();
-  return <ShiftAllocationForm />;
+  const { getOpenModal } = useModalContext();
+  const modalData = getOpenModal()?.data;
+  const dataRow = modalData?.data;
+
+  console.log("=== MODAL DEBUG ===");
+  console.log("modalData:", modalData);
+  console.log("dataRow:", dataRow);
+
+  const initialValues = {
+    type: dataRow?.type?.toLowerCase() || "person",
+    ChooseShift: dataRow?.ChooseShift || null,
+    FromDate: dataRow?.FromDate || null,
+    organization: dataRow?.organization || null,
+    Department: dataRow?.Department || null,
+    JobTitle: dataRow?.JobTitle || null,
+    Employee: dataRow?.Employee || null,
+    Description: dataRow?.Description || null,
+  };
+ console.log("initialValues:", initialValues); 
+
+  const formValidation = Yup.object().shape({
+    type: Yup.string().required(),
+    ChooseShift: Yup.string().required(),
+    FromDate: Yup.string().required(),
+    organization: Yup.string().required(),
+    Department: Yup.string(),
+    JobTitle: Yup.string(),
+    Employee: Yup.string(),
+    Description: Yup.string().required(),
+  });
+  const handleSubmitAction = async (values: any) => {
+    try {
+      const newItem = addAllocation({
+        type: values.type,
+        ChooseShift: values.ChooseShift,
+        FromDate: values.FromDate,
+        organization: values.organization,
+        Department: values.Department,
+        JobTitle: values.JobTitle,
+        Employee: values.Employee,
+        Description: values.Description,
+      });
+      console.log("✅ Added successfully:", newItem);
+      onSuccess?.();
+      closeModal();
+    } catch (error) {
+      console.error("❌ Error:", error);
+      throw error;
+    }
+  };
+  return (
+    <FormProvider
+      formId="shift-allocation"
+      initialValues={initialValues}
+      validationSchema={formValidation}
+      onSubmitAsync={handleSubmitAction}
+      enableReinitialize={true}
+      enableCache={false}
+    >
+      <ShiftAllocationForm />
+    </FormProvider>
+  );
 };
 export default ShiftAllocationModal;

@@ -1,24 +1,30 @@
 import { AppTable } from "@hrbox/uikit/components";
-import { Allocatio } from "@hrbox/modules/attendance/app/mock";
+import { Allocatio, getAllAllocations } from "@hrbox/modules/attendance/app/mock";
 import { useState } from "react";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import ShiftAllocationModal from "@hrbox/modules/attendance/modals/ShiftAllocationModal";
 
 const ShiftAllocation = () => {
-  const [data, setData] = useState(Allocatio);
+const [data, setData] = useState(getAllAllocations()); 
   const modal = useModal();
-  const handleRowClick = () => {
+   const refreshData = () => {
+    setData(getAllAllocations());
+  };
+  const handleRowClick = (row:any) => {
+    console.log(row,"rowclick");
+    
     modal.open(
       ModalType.VIEW,
       "shift-allocation",
-      <ShiftAllocationModal />,
+      <ShiftAllocationModal  onSuccess={refreshData} />,
       {
+        data:row,
         isForm: true,
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "shift-form",
+          formId: "shift-allocation",
         },
       },
       ModalSize["3XL"],
@@ -28,7 +34,7 @@ const ShiftAllocation = () => {
   return (
     <>
       <div className="h-full w-full flex flex-col ">
-        <AppTable data={data} onRowClick={handleRowClick} variant="bordered" />
+        <AppTable data={data} onRowClick={(row)=>handleRowClick(row)} variant="bordered" />
       </div>
     </>
   );

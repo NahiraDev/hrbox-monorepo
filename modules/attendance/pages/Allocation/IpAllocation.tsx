@@ -18,7 +18,7 @@ const IpAllocation = () => {
         submitLabel: "Submit Again",
         cancelLabel: "Cancel",
         formConfig: {
-          formId: "ip-form",
+          formId: "ip-allocation",
         },
       },
       ModalSize["3XL"]
