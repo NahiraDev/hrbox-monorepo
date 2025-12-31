@@ -85,7 +85,7 @@ const Documents = () => {
           },
         },
       },
-      ModalSize.XL,
+      ModalSize.SM,
     );
   };
 

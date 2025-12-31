@@ -75,7 +75,8 @@ const Jobs = () => {
               <Card
                 isPressable
                 onPress={handleOpenJobModal}
-                key={index} className="py-2 px-3  hover:bg-[#D6F2FF] hover:cursor-pointer shadow-sm">
+                key={index}
+                className="py-2 px-3  hover:bg-[#D6F2FF] hover:cursor-pointer shadow-sm">
                 <div className="flex items-center justify-between border-b-2 border-neutral-100">
                   <div className="flex items-center gap-2">
                     <div className='rounded-full w-2 h-2 bg-green-600'></div>
@@ -98,7 +99,7 @@ const Jobs = () => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col mt-2">
                   <div className="flex items-center justify-between px-2  py-1.5">
                     <div className="flex gap-1.5 items-center">
                        <Buildings size={16} />

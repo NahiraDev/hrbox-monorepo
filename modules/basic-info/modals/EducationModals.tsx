@@ -1,138 +1,106 @@
 import {
-  AppButton,
+  AppAutoComplete,
+  AppButton, AppDatePicker,
   AppInput,
   AppModal,
-  AppTextArea,
+  AppTextArea, FormField
 } from "@hrbox/uikit/components";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
+import React from "react";
+import { useFormContext } from "@hrbox/core/providers";
 
 const EducationModals = () => {
+
   const { openModal } = useModalContext();
 
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
+
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
+
+
   return (
-    <>
       <AppModal.Body>
         <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Degree Level",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Degree Level"
+              name="Degree"
+              component={AppAutoComplete}
+              helperText={touched.Degree && errors.Degree}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Educational Institution",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Educational Institution"
+              name="Educational"
+              component={AppAutoComplete}
+              helperText={touched.Educational && errors.Educational}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "University Type",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="University Type"
+              name="University"
+              component={AppAutoComplete}
+              helperText={touched.University && errors.University}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Field of Study",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Field of Study"
+              name="Field"
+              component={AppAutoComplete}
+              helperText={touched.Field && errors.Field}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Thesis Title",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Thesis Title"
+              name="Thesis"
+              component={AppAutoComplete}
+              helperText={touched.Thesis && errors.Thesis}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "GPA",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+
+            <FormField
+              formMode={currentType}
+              label="GPA"
+              name="GPA"
+              component={AppInput}
+              helperText={touched.GPA && errors.GPA}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "From Year",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="From Year"
+              name="From"
+              component={AppDatePicker}
+              helperText={touched.From && errors.From}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "To Year",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="To Year"
+              name="To"
+              component={AppDatePicker}
+              helperText={touched.To && errors.To}
             />
-            <AppInput
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Province",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+           <FormField
+              formMode={currentType}
+              label="Province"
+              name="Province"
+              component={AppAutoComplete}
+              helperText={touched.Province && errors.Province}
             />
           </div>
           <div>
-            <AppTextArea
-              props={{
-                className: " border border-[#DCF0F9]",
-                label: "Descriptions*",
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Descriptions*"
+              name="Descriptions"
+              component={AppTextArea}
+              helperText={touched.Descriptions && errors.Descriptions}
             />
           </div>
         </div>
       </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => openModal("delete", undefined),
-            content: <span>Cancle</span>,
-            className:
-              "text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200",
-          }}
-        />
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => console.log("a"),
-            content: <span>Submit</span>,
-            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg ",
-          }}
-        />
-      </AppModal.Footer>
-    </>
   );
 };
 
