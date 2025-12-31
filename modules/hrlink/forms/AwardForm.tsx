@@ -4,22 +4,6 @@ import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import * as Yup from "yup";
 import { FormField } from "@hrbox/uikit/components/FormField";
 
-export const initialValuesAward = {
-  Title: null,
-  Date: null,
-  Description: "",
-  FileId: null
-};
-
-
-export const defaultInitialValues =
-  {
-    Title: "",
-    Date: null,
-    Description: "",
-    FileId: null
-  };
-
 // export const formValidationAward = Yup.object().shape({
 //     Title: Yup.string().required(),
 //     Date: Yup.string().required(),

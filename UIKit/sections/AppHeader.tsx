@@ -107,24 +107,24 @@ export const AppHeader = () => {
                 color={domainTheme === "hrbox" ? "primary" : "default"}
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
                 size="md"
-                radius="md"
-                className="w-fit! h-full! p-2! shadow-md"
+                radius="lg"
+                className="w-fit! h-full! p-2!"
                 content={<Play size="24" />}
               />
               <AppButton
                 color={domainTheme === "hrbox" ? "primary" : "default"}
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
                 size="md"
-                radius="md"
-                className="h-full! shadow-md"
+                radius="lg"
+                className="h-full!"
                 content={t("ed_tour")}
               />
               <AppButton
                 color={domainTheme === "hrbox" ? "primary" : "default"}
                 variant={domainTheme === "hrbox" ? "bordered" : "solid"}
-                radius="md"
+                radius="lg"
                 size="md"
-                className="h-full! shadow-md"
+                className="h-full!"
                 content={t("upgrade")}
               />
             </div>

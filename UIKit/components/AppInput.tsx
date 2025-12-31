@@ -50,11 +50,11 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-[linear-gradient(90deg,#FFF)_5%,#EEF9FF_48%,(#FFF)_95%)] shadow-sm dark:bg-[linear-gradient(90deg,var(--Surface-Main,#01101A)_5%,var(--Primary-900,#022C3D)_50%,var(--Surface-Main,#01101A)_95%)] ",
-              "border border-[#DCF0F9]",
+              "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] ",
+              "border border-[#DCF0F9] dark:border-primary-800",
               "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
-            input: clsx(baseInput, "text-neutral-600 dark:text-neutral-300 cursor-default "),
+            input: clsx(baseInput, "text-neutral-600 dark:text-neutral-300 cursor-default"),
             isDisabled: true
           };
 
@@ -64,7 +64,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
               baseWrapper,
               "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
               "hover:border-primary-300 dark:hover:border-primary-600",
-              "focus-within:border-primary focus-within:shadow-lg"
+              "focus-within:border-primary"
             ),
             input: clsx(baseInput, "text-secondary-900 dark:text-white"),
             isDisabled: false
@@ -77,8 +77,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
               baseWrapper,
               "bg-white dark:bg-secondary-1000 border border-[#DCF0F9]",
               "dark:border-[#04425C]",
-              "hover:border-primary-300 dark:hover:border-primary-600",
-              "focus-within:shadow-lg"
+              "dark:focus-within:border-surface"
             ),
             input: clsx(baseInput, "text-secondary-900 dark:text-white"),
             isDisabled: false
@@ -93,7 +92,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
       modeStyles.wrapper,
       hasError &&
       !isViewMode &&
-      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
+      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20",
       className
     );
 
@@ -120,7 +119,6 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
           </label>
         )}
 
-        {/* Input */}
         <Input
           ref={ref}
           id={name}
@@ -136,6 +134,7 @@ const AppInputComponent = React.forwardRef<HTMLInputElement, AppInputProps>(
               errorClassName
             )
           }}
+          className="shadow-[0_0_0_0_rgba(0,0,0,0)]"
           startContent={startContent}
           endContent={endContent}
           errorMessage={hasError ? error : ""}

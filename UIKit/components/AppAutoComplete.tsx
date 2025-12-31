@@ -1,12 +1,8 @@
 import React, { useMemo } from "react";
-import {
-  Autocomplete,
-  AutocompleteItem,
-  AutocompleteProps,
-} from "@heroui/react";
+import { useSelector } from "react-redux";
+import { Autocomplete, AutocompleteItem, AutocompleteProps } from "@heroui/react";
 import clsx from "clsx";
 import { FormMode } from "@hrbox/uikit/components/types";
-import "./index.css";
 
 interface AppAutoCompleteProps extends Omit<
   AutocompleteProps<any>,
@@ -20,6 +16,7 @@ interface AppAutoCompleteProps extends Omit<
   data?: any[];
   formMode?: FormMode;
   error?: string | boolean;
+  isDisabled?: boolean;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (value: string | number) => void;
@@ -44,6 +41,7 @@ const AppAutoCompleteComponent = React.forwardRef<
       data = [],
       formMode = FormMode.CREATE,
       error,
+      isDisabled = false,
       onBlur,
       onFocus,
       onChange,
@@ -53,62 +51,71 @@ const AppAutoCompleteComponent = React.forwardRef<
       className,
       startContent,
       endContent,
-      size = "md",
-      isDisabled,
       ...rest
     },
     ref
   ) => {
-    const isViewMode = formMode === FormMode.VIEW;
-    const hasError = Boolean(error);
+    const lang = useSelector((state: any) => state.language.lang);
 
     const modeStyles = useMemo(() => {
-      const baseInput =
-        "text-sm font-medium transition-all duration-200 rounded-lg ";
+      const baseInput = "text-sm font-medium transition-all duration-200 rounded-lg";
+      const baseWrapper = "!h-10 !px-3 !py-2.5";
 
       switch (formMode) {
         case FormMode.VIEW:
           return {
             wrapper: clsx(
-            "text-primary w-5 h-5 font-bold dark-complit"
+              baseWrapper,
+              "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] bg-white!",
+              "border border-[#DCF0F9] dark:border-primary-800",
+              "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
-            input: clsx(
-              baseInput,
-              "text-neutral-600 dark:text-neutral-300 cursor-default"
-            ),
-            isDisabled: true,
+            input: clsx(baseInput, "text-neutral-600 dark:text-neutral-300 cursor-default"),
+            isDisabled: true
           };
 
         case FormMode.EDIT:
           return {
             wrapper: clsx(
-              "text-primary w-5 h-5 dark-complit"
+              baseWrapper,
+              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60] bg-white!",
+              "hover:border-primary-300 dark:hover:border-primary-600",
+              "focus-within:border-primary"
             ),
-            input: clsx(baseInput, "text-secondary-900 dark:text-white "),
-            isDisabled: false,
+            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            isDisabled: false
           };
 
         case FormMode.CREATE:
         default:
           return {
             wrapper: clsx(
-              "text-primary  w-5 h-5 dark-complit",
+              baseWrapper,
+              "bg-white dark:bg-secondary-1000 border border-[#DCF0F9] bg-white!",
+              "dark:border-[#04425C]",
+              "dark:focus-within:border-surface"
             ),
-            input: clsx(
-              baseInput,
-              "text-secondary-900 dark:text-white  "
-            ),
-            isDisabled: false,
+            input: clsx(baseInput, "text-secondary-900 dark:text-white"),
+            isDisabled: false
           };
       }
     }, [formMode]);
 
+    const hasError = Boolean(error);
+    const isViewMode = formMode === FormMode.VIEW;
+
     const wrapperClasses = clsx(
       modeStyles.wrapper,
       hasError &&
-        !isViewMode &&
-        "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
+      !isViewMode &&
+      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
       className
+    );
+
+    const inputClasses = clsx(
+      modeStyles.input,
+      hasError && !isViewMode && "text-danger dark:text-danger-400",
+      "placeholder:text-neutral-400 dark:placeholder:text-neutral-500 border-[#DCF0F9]"
     );
 
     return (
@@ -129,7 +136,6 @@ const AppAutoCompleteComponent = React.forwardRef<
           </label>
         )}
 
-        {/* Autocomplete */}
         <Autocomplete
           ref={ref}
           id={name}
@@ -137,58 +143,36 @@ const AppAutoCompleteComponent = React.forwardRef<
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
           classNames={{
-            base: clsx(
-              "flex flex-col gap-1.5 ",
-              formMode === FormMode.VIEW && "autocomplit-view",
-              formMode === FormMode.CREATE && "autocomplit-create",
-              formMode === FormMode.EDIT && "autocomplit-create"
-            ),
-            selectorButton: wrapperClasses,
-            listboxWrapper: "z-50 max-h-64",
-            listbox: clsx(
-              "bg-white dark:bg-neutral-900 rounded-md shadow-lg",
-              "border border-neutral-200 dark:border-neutral-700"
-            ),
-            popoverContent: "p-1",
+            inputWrapper: wrapperClasses,
+            input: inputClasses,
+            errorMessage: clsx(
+              "text-xs font-medium",
+              "text-danger dark:text-danger-400",
+              errorClassName
+            )
           }}
           startContent={startContent}
           endContent={endContent}
+          errorMessage={hasError ? error : ""}
           onFocus={onFocus}
           onBlur={onBlur}
           onSelectionChange={(key) => {
             if (onChange && key) onChange(key as string);
           }}
-          placeholder={`انتخاب ${label || "گزینه"}...`}
+          placeholder={
+            lang === "fa"
+              ? `انتخاب ${label || "گزینه"}...`
+              : `Select ${label || "option"}...`
+          }
           {...rest}
         >
           {data.map((item) => (
-            <AutocompleteItem
-              key={item[valueKey]}
-              className={clsx(
-                "text-secondary-900 dark:text-white",
-                "hover:bg-primary-100 dark:hover:bg-primary-900/30",
-                "data-[hover=true]:bg-primary-100 dark:data-[hover=true]:bg-primary-900/30"
-              )}
-            >
+            <AutocompleteItem key={item[valueKey]}>
               {item[displayKey]}
             </AutocompleteItem>
           ))}
         </Autocomplete>
 
-        {/* Error Message */}
-        {hasError && (
-          <span
-            className={clsx(
-              "text-xs font-medium",
-              "text-danger dark:text-danger-400",
-              errorClassName
-            )}
-          >
-            {error}
-          </span>
-        )}
-
-        {/* Helper Text */}
         {helperText && !hasError && (
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {helperText}

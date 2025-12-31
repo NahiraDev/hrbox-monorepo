@@ -39,9 +39,9 @@ const DnnSuperVisorHeader = lazy(
 // ============================================
 
 export const JobDescriptionPlugin: ModulePlugin = {
-  name: "jobdescription",
+  name: "job-description",
   version: "1.0.0",
-  basePath: "/jobdescription",
+  basePath: "/job-description",
   layout: "base",
   description: "",
   author: "HRBox Team",
