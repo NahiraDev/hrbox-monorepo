@@ -34,6 +34,8 @@ const sizeClasses: Record<ModalSize | string, string> = {
   xl: "max-w-xl",
   "2xl": "max-w-2xl",
   "3xl": "max-w-3xl",
+  "4xl": "max-w-4xl",
+  "5xl": "max-w-5xl",
   full: "w-full h-full"
 };
 
@@ -85,7 +87,7 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
   return (
     <motion.div
       className={clsx(
-        "px-6 py-4 flex items-center justify-between",
+        "px-3 py-1.5 flex items-center justify-between rounded-lg",
         getHeaderColor()
       )}
       initial={{ opacity: 0 }}
@@ -95,12 +97,12 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
       {children ? (
         <div>{children}</div>
       ) : (
-        <div className="flex items-center gap-3 g-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]">
+        <div className="flex items-center gap-3">
           {modalIcon && (
-            <div className="text-2xl text-white">{modalIcon}</div>
+            <div className="text-lg text-white">{modalIcon}</div>
           )}
           {modalTitle && (
-            <h2 className="text-lg font-bold text-white">{modalTitle}</h2>
+            <h2 className="text-xl font-medium text-white">{modalTitle}</h2>
           )}
         </div>
       )}
@@ -112,7 +114,7 @@ const AppModalHeader: React.FC<AppModalHeaderProps> = ({ children }) => {
         className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
         aria-label="Close"
       >
-        <Close size="24" className="text-white" />
+        <Close size="24" className="text-[#0F1729]" />
       </motion.button>
     </motion.div>
   );
@@ -128,7 +130,7 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
 
   return (
     <motion.div
-      className={clsx("flex-1 overflow-y-auto p-6", className)}
+      className={clsx("flex-1", className)}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 }}
@@ -187,7 +189,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
   return (
     <motion.div
       className={clsx(
-        "px-6 py-4 flex items-center justify-end gap-3",
+        "flex items-center justify-end gap-3",
         className
       )}
       initial={{ opacity: 0, y: 10 }}
@@ -342,7 +344,7 @@ const AppModalBase: React.FC<AppModalProps> & {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
           onClick={handleBackdropClick}
         >
           <motion.div
@@ -352,22 +354,19 @@ const AppModalBase: React.FC<AppModalProps> & {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
             className={clsx(
-              "w-full rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
-              "shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative",
+              "rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
+              "shadow-2xl overflow-hidden max-h-[90vh] p-12 gap-6  flex flex-col relative",
               sizeClasses[modalSize] || "max-w-md"
             )}
           >
             <ModalContextProvider.Provider value={contextValue}>
-              {/* Header */}
               {(modalTitle || modalIcon) && <AppModalHeader />}
 
-              {/* Content */}
               <AppModalBody>
                 {children ?? modalComponent}
               </AppModalBody>
 
-              {/* Footer */}
-              {!hideFooter && (
+              {modalType !== "view" && (
                 <AppModalFooter
                   submitLabel={submitLabel}
                   cancelLabel={cancelLabel}
