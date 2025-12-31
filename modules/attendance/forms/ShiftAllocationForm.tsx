@@ -94,7 +94,7 @@ const ShiftAllocationForm = () => {
               label={t("choose_shift")}
               component={AppAutoComplete}
               formMode={currentType}
-              data={[
+              items={[
                 {
                   id: 1,
                   name: "test",

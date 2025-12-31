@@ -22,9 +22,8 @@ const FaceIdModal = () => {
             <div className="w-full h-full absolute bg-[#00000080] rounded-lg flex items-center justify-center ">
               <AppButton
                   color= 'none'
-                  className= 'shadow-none w-[488px] h-[303px]'
-                  content= {<Repeat color="white" size={56} variant='Bold' />}
-              
+                  className= 'shadow-none w-122 h-75.75'
+                  content= {<Repeat color="white" size={56} variant='Bold' />}           
               />
             </div>
             <CameraView />
