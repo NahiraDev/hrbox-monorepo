@@ -29,6 +29,7 @@ const Indicator = () => {
         data={Indicators}
         onRowClick={handleRowClick}
         showStatus={true}
+        variant="bordered"
         rowActions={[]}
         hasPagination={true}
       />

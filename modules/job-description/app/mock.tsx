@@ -279,3 +279,21 @@ export const BehaviorData=[
   {"No.":16,Title:"Change Creator","Evaluation Method":"Review of Previous"},
   {"No.":17,Title:"Change Creator","Evaluation Method":"Review of Previous"},
 ]
+export const HardSkillsData=[
+  {id:1,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:2,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:3,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:4,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:5,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:6,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:7,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"}
+]
+export const SoftSkillData=[
+  {id:1,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:2,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:3,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:4,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:5,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:6,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"},
+  {id:7,title:"Adobe PS",level:1,grad:"80%",date:2023,description:"Adobe PhotoShop"}
+]

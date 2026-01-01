@@ -6,6 +6,9 @@ import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { useModalContext } from "@hrbox/core/providers";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import ColorPicker from "@hrbox/uikit/components/ColorPicker";
+import { GRADE_COLORS } from "../app/mock";
 
 export const initialValuesAction = {
   index_title: null,
@@ -41,6 +44,7 @@ export const handleSubmitAction = (values: any) => {
 
 const GeneralForm = () => {
   const { t } = useTranslation();
+   const [color, setColor] = useState<string>("");
   const {
     values,
     errors,
@@ -60,8 +64,8 @@ const GeneralForm = () => {
             <div className="w-full">
               <FormField
                 formMode={currentType}
-                name="index_title"
-                label={t("index_title")}
+                name="Grade title"
+                label={t("Grade_title")}
                 component={AppAutoComplete}
               />
             </div>
@@ -78,22 +82,27 @@ const GeneralForm = () => {
             <div className="w-full">
               <FormField
                 formMode={currentType}
-                name="Type"
-                label={t("Type")}
+                name="of points"
+                label={t("of_points")}
                 component={AppAutoComplete}
               />
             </div>
-          
+
             <div className="w-full">
               <FormField
                 formMode={currentType}
-                name="weight"
-                label={t("weight")}
+                name="up_to_points"
+                label={t("up_to_points")}
                 component={AppAutoComplete}
               />
             </div>
-          
           </div>
+          {/* PALETTE */}
+          <ColorPicker
+            colors={GRADE_COLORS}
+            value={color}
+            onChange={setColor}
+          />
 
           <div className="w-full ">
             <FormField

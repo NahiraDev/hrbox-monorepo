@@ -98,7 +98,7 @@ export const AppDashboardChart = () => {
   };
 
   return (
-    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 w-full h-full">
+    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 rounded-xl w-full h-full">
       <Bar data={data} options={options} />
     </div>
   );
