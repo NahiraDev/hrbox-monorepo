@@ -9,6 +9,7 @@ import { useModal } from "@hrbox/core/hooks";
 import CoursesModal from "@hrbox/modules/basic-info/modals/CoursesModal";
 import { formValidationRelative, initialValuesRelative } from "@hrbox/modules/basic-info/forms/RelativeForm";
 import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import AchivementsModals from "@hrbox/modules/basic-info/modals/AchivementsModals";
 
 const Achievements = () => {
 
@@ -89,13 +90,13 @@ const Achievements = () => {
                     <span className='text-xs text-secondary-1000 font-semibold'>{user.date}</span>
                   </div>
                 </div>
-                <div className="flex  flex-col gap-2 items-start w-full border border-[#DCF0F9]/40 rounded-lg  px-2 py-1.5">
+                <div className="flex  flex-col gap-2  w-full border border-[#DCF0F9]/40 rounded-lg  px-2 py-1.5">
                   <div className="flex gap-1.5 items-center">
                     <TextalignJustifyleft size={16} />
                     <span className='text-xs text-secondary-1000'>Description</span>
                   </div>
-                  <div className="font-semibold">
-                    <span className='text-xs text-secondary-1000 font-semibold'>{user.description}</span>
+                  <div className='text-left' >
+                    <span className='text-xs text-secondary-1000 font-semibold '>{user.description}</span>
                   </div>
                 </div>
               </div>

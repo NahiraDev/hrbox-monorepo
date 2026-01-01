@@ -77,6 +77,22 @@ const CoursesModal = () => {
             <div className="flex items-center justify-between">
               {/*<AppRadio name={} options={}/>*/}
             </div>
+          <div className="flex items-center gap-[52px]">
+            <FormField
+              formMode={currentType}
+              label="From Number"
+              name="From"
+              component={AppAutoComplete}
+              helperText={touched.From && errors.From}
+            />
+            <FormField
+              formMode={currentType}
+              label="To Number"
+              name="To"
+              component={AppAutoComplete}
+              helperText={touched.To && errors.To}
+            />
+          </div>
         </div>
         <div>
           <FormField

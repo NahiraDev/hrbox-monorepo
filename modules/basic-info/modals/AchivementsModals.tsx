@@ -63,3 +63,5 @@ const AchivementsModals = () => {
   );
 };
 
+export default AchivementsModals;
+

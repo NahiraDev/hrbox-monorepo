@@ -27,6 +27,8 @@
   import EducationModals from "@hrbox/modules/basic-info/modals/EducationModals";
   import Skills from "@hrbox/modules/basic-info/modals/Skills";
   import CoursesModal from "@hrbox/modules/basic-info/modals/CoursesModal";
+  import AchivementsModals from "@hrbox/modules/basic-info/modals/AchivementsModals";
+  import { formValidationRelative, initialValuesRelative } from "@hrbox/modules/basic-info/forms/RelativeForm";
 
   interface TabItem {
     key: string;
@@ -138,10 +140,6 @@
   export const AddButton = ({ tab }: AddButtonProps) => {
     const modal = useModal();
 
-    /* =========================
-       Modal Open Helpers
-       ========================= */
-
     const handleModalJob = (title: string) => {
       modal.open(
       ModalType.CREATE,
@@ -242,9 +240,34 @@
         ModalSize.XL,
       );
     };
+    const  handleOpenAchivementsModals = () => {
+      modal.open(
+        ModalType.CREATE,
+        " Documents",
+        <AchivementsModals />,
+        {
+          isForm: true,
+          title: "افزودن ",
+          submitLabel: "ذخیره",
+          cancelLabel: "لغو",
+          formConfig: {
+            initialValues: initialValuesRelative,
+            validationSchema: formValidationRelative,
+            formId: "award-form",
+            enableCache: true,
+            clearCacheOnSubmit: true,
+            onSubmitAsync: async (values: any) => {
+              handleSubmitAward(values);
+              modal.close(ModalType.CREATE, "award-form");
+            },
+          },
+        },
+        ModalSize.XL,
+      );
+    };
 
     const openAddAchievement = () => {
-      // openBaseModal("Add New Achievement");
+      handleOpenAchivementsModals("Add New Achievement");
     };
 
     const openAddSkill = () => {

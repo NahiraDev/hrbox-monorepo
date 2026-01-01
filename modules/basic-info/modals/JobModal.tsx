@@ -36,7 +36,7 @@ export default function JobModal() {
   return (
     <div className="">
       <AppModal.Body>
-        <div className="flex flex-col gap-y-6 overflow-y-scroll max-h-[70vh]">
+        <div className="flex flex-col gap-y-6">
           <div className="grid grid-cols-2 gap-y-6 gap-x-10">
             <FormField
               formMode={currentType}
