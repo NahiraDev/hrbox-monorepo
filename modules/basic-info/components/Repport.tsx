@@ -69,56 +69,41 @@ const OrganizationalChart = () => {
       <div className="flex flex-col gap-1 ">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-semibold text-secondary-1000">
+            <span className="text-xs font-medium text-secondary-1000">
               Sign
             </span>
           </div>
           <div className="flex gap-1">
             <AppButton
-              props={{
-                size: "xs",
-                radius: "sm",
-                color: "white",
-                variant: "solid",
-                className: "p-2 hover:!bg-primary transition-all duration-200",
-                content: (
-                  <MessageEdit className="text-secondary-1000 group-hover:text-white" />
-                ),
-              }}
+                size= "xs"
+                radius= "sm"
+                color= "white"
+                variant= "solid"
+                className= "p-2 hover:!bg-primary transition-all duration-200"
+                content= {
+                  <MessageEdit className="text-secondary-1000 group-hover:text-white"size={16} />
+                }
+
             />
-            {/*<AppButton*/}
-            {/*  props={{*/}
-            {/*    size: "xs",*/}
-            {/*    radius: "sm",*/}
-            {/*    variant: "light",*/}
-            {/*    isIconOnly: true,*/}
-            {/*    onPress: () =>*/}
-            {/*      openModal(*/}
-            {/*        "delete",*/}
-            {/*        "",*/}
-            {/*        <AppDeleteModal />,*/}
-            {/*        undefined,*/}
-            {/*        "lg",*/}
-            {/*        "Do you want to remove it?",*/}
-            {/*        <Trash className="text-white" />,*/}
-            {/*      ),*/}
-            {/*    content: (*/}
-            {/*      <Trash className="text-secondary-1000 group-hover:text-white" />*/}
-            {/*    ),*/}
-            {/*    className: "p-2 hover:!bg-red-500 transition-all duration-200",*/}
-            {/*  }}*/}
-            {/*/>*/}
+            <AppButton
+                className= "p-2 hover:!bg-red-500 transition-all duration-200"
+                size= "xs"
+                radius= "sm"
+                variant= "light"
+                content= {
+              <Trash className="text-secondary-1000 group-hover:text-white" size={16} />
+            }
+            />
           </div>
         </div>
         <div>
           <AppInput
-            props={{
-              className: "border border-surface ",
-              label: "",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+              className= "border border-surface "
+              label= ""
+              name=""
+              size= "lg"
+              color= "primary"
+              radius= "lg"
           />
         </div>
       </div>
@@ -146,15 +131,11 @@ const OrganizationalChart = () => {
                     {item.name}
                   </span>
                   <AppButton
-                    props={{
-                      className:
-                        "border border-[#DCF0F9] bg-surface h-5 text-primary",
-                      variant: "bordered",
-                      radius: "full",
-                      content: (
-                        <span className="!text-[10px]  ">{item.role}</span>
-                      ),
-                    }}
+                      className=
+                        "border border-[#DCF0F9] bg-surface h-5 text-primary"
+                      variant= "bordered"
+                      radius= "full"
+                      content={ <span className="!text-[10px]">{item.role}</span>}
                   />
                 </div>
               </div>
@@ -185,15 +166,11 @@ const OrganizationalChart = () => {
                     {item.name}
                   </span>
                   <AppButton
-                    props={{
-                      className:
-                        "border border-[#DCF0F9] bg-surface h-5 text-primary",
-                      variant: "bordered",
-                      radius: "full",
-                      content: (
-                        <span className="!text-[10px]  ">{item.role}</span>
-                      ),
-                    }}
+                    className=
+                      "border border-[#DCF0F9] bg-surface h-5 text-primary"
+                    variant= "bordered"
+                    radius= "full"
+                    content={ <span className="!text-[10px]">{item.role}</span>}
                   />
                 </div>
               </div>
@@ -224,15 +201,11 @@ const OrganizationalChart = () => {
                     {item.name}
                   </span>
                   <AppButton
-                    props={{
-                      className:
-                        "border border-[#DCF0F9] bg-surface h-5 text-primary",
-                      variant: "bordered",
-                      radius: "full",
-                      content: (
-                        <span className="!text-[10px]  ">{item.role}</span>
-                      ),
-                    }}
+                    className=
+                      "border border-[#DCF0F9] bg-surface h-5 text-primary"
+                    variant= "bordered"
+                    radius= "full"
+                    content={ <span className="!text-[10px]">{item.role}</span>}
                   />
                 </div>
               </div>
@@ -263,15 +236,11 @@ const OrganizationalChart = () => {
                     {item.name}
                   </span>
                   <AppButton
-                    props={{
-                      className:
-                        "border border-[#DCF0F9] bg-surface h-5 text-primary",
-                      variant: "bordered",
-                      radius: "full",
-                      content: (
-                        <span className="!text-[10px]  ">{item.role}</span>
-                      ),
-                    }}
+                    className=
+                      "border border-[#DCF0F9] bg-surface h-5 text-primary"
+                    variant= "bordered"
+                    radius= "full"
+                    content={ <span className="!text-[10px]">{item.role}</span>}
                   />
                 </div>
               </div>

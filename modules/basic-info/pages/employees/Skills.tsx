@@ -3,10 +3,10 @@ import { Avatar, Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { LampCharge, Trash } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-// import { AppDoubleLineProgress } from "@hrbox/uikit/sections/AppDoubleLineProgress";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import {useModal} from "@hrbox/core/hooks";
+import { AppDoubleLineProgress } from "@hrbox/uikit/components/AppDoubleLineProgress";
 
 const Education = () => {
   const modal = useModal();
@@ -71,7 +71,7 @@ const Education = () => {
           </div>
         </div>
         <div>
-          {/*<AppDoubleLineProgress value={80} />*/}
+          <AppDoubleLineProgress value={80} />
         </div>
       </div>
     </Card>

@@ -1,6 +1,9 @@
 import { Card, Button, Avatar } from '@heroui/react';
 import { workersData } from '@module/basic-info/app/mock';
 import { TickIcon } from "@hrbox/uikit/icons";
+import { AppPagination } from "@hrbox/uikit/components";
+import { meta } from "@eslint/js";
+import React from "react";
 
 
 const Employees = () => {
@@ -32,7 +35,7 @@ const Employees = () => {
         })}
       </div>
       <div className="flex justify-end">
-
+        <AppPagination meta={meta}  />
       </div>
 
     </div>

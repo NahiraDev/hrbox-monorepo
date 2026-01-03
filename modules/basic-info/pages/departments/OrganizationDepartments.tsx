@@ -2,15 +2,18 @@ import { User } from 'iconsax-reactjs';
 import { organizationDepartment } from '@module/basic-info/app/mock';
 import { Avatar, Card, CardBody, CardHeader } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import {Paths} from "@hrbox/modules/paths";
 import {AppPagination} from "@hrbox/uikit/components";
+import { useNavigation } from "@hrbox/core/hooks";
+import React from "react";
+import { meta } from "@eslint/js";
 
 const borderColors = ['#000000', '#A61111', '#F4D082', '#05856F', '#DB5918', '#2F80ED', '#0ED2F7'];
 
 const OrganizationDepartments = () => {
   const { t } = useTranslation();
   const {push} = useNavigation();
+
 
   const renderOrganizationDepartments = (user: any, index: number) => (
     <Card
@@ -39,12 +42,12 @@ const OrganizationDepartments = () => {
   );
 
   return (
-    <div className="flex flex-col justify-between p-4">
+    <div className="flex flex-col">
       <div className="grid grid-cols-4 gap-4 ">
         {organizationDepartment.map((user, index) => renderOrganizationDepartments(user, index))}
       </div>
-      <div className="flex justify-end p-2">
-          {/*<AppPagination total={5} />*/}
+      <div className="flex justify-end">
+        <AppPagination meta={meta}  />
       </div>
     </div>
   );

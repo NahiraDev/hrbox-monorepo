@@ -78,7 +78,7 @@ const Courses = () => {
               isPressable
               onPress={handleOpenCoursesModal}
               key={index}
-              className="p-3 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white ">
+              className="p-3 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white">
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between border-b border-neutral-100 p-1">
                   <div className="flex items-center gap-2">

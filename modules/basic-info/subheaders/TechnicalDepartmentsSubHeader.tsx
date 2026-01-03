@@ -21,9 +21,9 @@ const TechnicalDepartmentsSubHeader = (props: any) => {
       <OrganizationDepartmentModal />,
       {
         isForm: true,
-        title: "افزودن",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
+        title: "Organization Departments",
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesTechnicalDepartment,
           validationSchema: formValidationTechnicalDepartment,

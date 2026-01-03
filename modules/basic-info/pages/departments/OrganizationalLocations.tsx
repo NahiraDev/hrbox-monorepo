@@ -1,9 +1,9 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
 import {Location, More, Trash} from 'iconsax-reactjs';
-import {useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
-import {AppButton} from '@hrbox/uikit/components';
+import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import {useModal} from "@hrbox/core/hooks";
 import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
 import {
@@ -11,6 +11,7 @@ import {
     initialValuesOrganizationLocation
 } from "@hrbox/modules/basic-info/forms/OrganizationLocationForm";
 import { OrganizationLocationModal } from "@hrbox/modules/basic-info/modals/OrganizationLocationModal";
+import { meta } from "@eslint/js";
 
 const OrganizationalLocations = () => {
     const {openModal} = useModalContext();
@@ -87,14 +88,14 @@ const OrganizationalLocations = () => {
 
   return (
         <>
-            <div className="flex flex-col justify-between w-full h-full p-4 relative">
-                <div className="grid grid-cols-5  gap-4 w-full h-full">
+            <div className="flex flex-col justify-between w-full h-full relative">
+                <div className="grid grid-cols-5  gap-4 w-full  ">
                     {filteredLocations.map((detail, index) => (
                         <div key={`${detail.title}-${index}`} className="relative group">
                             <Card
                               isPressable
                               onPress={handleOpenOrganizationLocation}
-                              className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary  relative z-0"
+                              className="w-full bg-white shadow-sm rounded-xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary relative z-0"
 
                             >
                                 <Avatar
@@ -108,7 +109,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Address</span>
@@ -117,7 +118,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Email</span>
@@ -126,7 +127,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Website</span>
@@ -138,7 +139,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Is it visible?</span>
@@ -203,7 +204,7 @@ const OrganizationalLocations = () => {
                 </div>
 
                 <div className="flex justify-end p-2 mt-4">
-                    {/*<AppPagination/>*/}
+                  <AppPagination meta={meta}  />
                 </div>
             </div>
         </>

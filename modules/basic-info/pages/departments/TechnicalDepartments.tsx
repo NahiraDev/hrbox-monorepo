@@ -20,8 +20,8 @@ const TechnicalDepartments = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-between p-4">
-      <div className="w-full grid grid-cols-8 gap-4">
+    <div className="flex flex-col items-center justify-between">
+      <div className="w-full grid grid-cols-12 gap-4">
         {technicalDepartment.map((user, index) => (
           <Card
             key={index}
