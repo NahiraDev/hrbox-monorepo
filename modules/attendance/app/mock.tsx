@@ -4,7 +4,7 @@ export interface AllocationItem {
   id: number;
   "No."?:number;
   ChooseShift: string;
-  FromDate: string;
+  FormDate: string;
   organization: string;
   Department: string | null;
   Employee: string | null;
@@ -767,7 +767,7 @@ export let Allocatio:AllocationItem[] = [
     id: 1,
     "No.":1,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "It",
     Employee: "Ali Rezaei",
@@ -778,7 +778,7 @@ export let Allocatio:AllocationItem[] = [
     id: 2,
     "No.":2,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "technical",
     Employee: "Moho",
@@ -789,7 +789,7 @@ export let Allocatio:AllocationItem[] = [
     id: 3,
     "No.":3,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "It",
     Employee: "Ali Rezaei",
@@ -800,7 +800,7 @@ export let Allocatio:AllocationItem[] = [
     id: 4,
     "No.":4,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "technical",
     Employee: "Moho",
@@ -811,7 +811,7 @@ export let Allocatio:AllocationItem[] = [
     id: 5,
     "No.":5,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "It",
     Employee: "Ali Rezaei",
@@ -822,7 +822,7 @@ export let Allocatio:AllocationItem[] = [
     id: 6,
     "No.":6,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "technical",
     Employee: "Moho",
@@ -833,7 +833,7 @@ export let Allocatio:AllocationItem[] = [
     id: 7,
     "No.":7,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "It",
     Employee: "Ali Rezaei",
@@ -844,7 +844,7 @@ export let Allocatio:AllocationItem[] = [
     id: 8,
     "No.":8,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "technical",
     Employee: "Moho",
@@ -855,7 +855,7 @@ export let Allocatio:AllocationItem[] = [
     id: 9,
     "No.":9,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "It",
     Employee: "Ali Rezaei",
@@ -866,7 +866,7 @@ export let Allocatio:AllocationItem[] = [
     id: 10,
     "No.":10,
     ChooseShift: "Administrative",
-    FromDate: "2025/01/10",
+    FormDate: "2025/01/10",
     organization: "Zahra Pakniyat",
     Department: "technical",
     Employee: "Moho",

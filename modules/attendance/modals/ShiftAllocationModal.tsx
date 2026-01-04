@@ -8,8 +8,7 @@ interface ShiftAllocationModalProps {
   onSuccess?: () => void;
 }
 const ShiftAllocationModal = ({ onSuccess }: ShiftAllocationModalProps) => {
-  const { closeModal } = useModalContext();
-  const { getOpenModal } = useModalContext();
+  const { getOpenModal , closeModal } = useModalContext();
   const modalData = getOpenModal()?.data;
   const dataRow = modalData?.data;
 
@@ -20,19 +19,18 @@ const ShiftAllocationModal = ({ onSuccess }: ShiftAllocationModalProps) => {
   const initialValues = {
     type: dataRow?.type?.toLowerCase() || "person",
     ChooseShift: dataRow?.ChooseShift || null,
-    FromDate: dataRow?.FromDate || null,
+    FormDate: dataRow?.FormDate || null,
     organization: dataRow?.organization || null,
     Department: dataRow?.Department || null,
     JobTitle: dataRow?.JobTitle || null,
     Employee: dataRow?.Employee || null,
     Description: dataRow?.Description || null,
   };
- console.log("initialValues:", initialValues); 
 
   const formValidation = Yup.object().shape({
     type: Yup.string().required(),
     ChooseShift: Yup.string().required(),
-    FromDate: Yup.string().required(),
+    FormDate: Yup.string().required(),
     organization: Yup.string().required(),
     Department: Yup.string(),
     JobTitle: Yup.string(),
@@ -44,7 +42,7 @@ const ShiftAllocationModal = ({ onSuccess }: ShiftAllocationModalProps) => {
       const newItem = addAllocation({
         type: values.type,
         ChooseShift: values.ChooseShift,
-        FromDate: values.FromDate,
+        FormDate: values.FormDate,
         organization: values.organization,
         Department: values.Department,
         JobTitle: values.JobTitle,

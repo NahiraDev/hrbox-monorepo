@@ -65,18 +65,18 @@ const LocationAllocationForm = () => {
               component={AppAutoComplete}
               formMode={currentType}
               variant="solid"
-              aria-label={t("choose_shift")} 
+              aria-label="ChooseShift" 
               data={[{ id: "Administrative" , name: "Administrative" }]}
             />
           </div>
           <div className="w-full">
             <FormField
-              name="FromDate"
+              name="FormDate"
               label={t("form_date")}
               component={AppAutoComplete}
               formMode={currentType}
               variant="solid"
-              aria-label={t("form_date")} 
+              aria-label="FormDate"
              data={[{ id: "2025/01/10", name: "2025/01/10" }]}
             />
           </div>
@@ -89,7 +89,7 @@ const LocationAllocationForm = () => {
               component={AppAutoComplete}
               formMode={currentType}
               variant="solid"
-              aria-label={t("organization")} 
+              aria-label="organization" 
              data={[{ id: "Zahra Pakniyat", name: "Zahra Pakniyat" }]}
             />
           </div>
@@ -102,7 +102,7 @@ const LocationAllocationForm = () => {
                 component={AppAutoComplete}
                 formMode={currentType}
                 variant="solid"
-                aria-label={t("department")} 
+                aria-label="Department"
                 data={[
                   { id: "It", name: "It" },
                   { id: "technical", name: "technical" }
@@ -117,7 +117,7 @@ const LocationAllocationForm = () => {
                 component={AppAutoComplete}
                 formMode={currentType}
                 variant="solid"
-                aria-label={t("job_title")} 
+                aria-label="JobTitle"
              data={[{ id: "Developer", name: "Developer" }]}
               />
             </div>
@@ -132,7 +132,7 @@ const LocationAllocationForm = () => {
                 component={AppAutoComplete}
                 formMode={currentType}
                 variant="solid"
-                aria-label={t("employee")} 
+                aria-label="Employee"
                  data={[
                   { id: "Ali Rezaei", name: "Ali Rezaei" },
                   { id: "Moho", name: "Moho" }
@@ -151,7 +151,7 @@ const LocationAllocationForm = () => {
             component={AppTextArea}
             formMode={currentType}
             variant="solid"
-            aria-label={t("description")} 
+            aria-label="Description"
           />
         </div>
       </div>

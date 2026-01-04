@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import ShiftAllocationModal from "@hrbox/modules/attendance/modals/ShiftAllocationModal";
+import { Hierarchy3 } from "iconsax-reactjs";
 
 const ShiftAllocation = () => {
 const [data, setData] = useState(getAllAllocations()); 
@@ -19,8 +20,8 @@ const [data, setData] = useState(getAllAllocations());
       {
         data:row,
         isForm: true,
-        submitLabel: "Submit Again",
-        cancelLabel: "Cancel",
+        title:"Shift Allocation",
+        icon:<Hierarchy3 size={18} />,
         formConfig: {
           formId: "shift-allocation",
         },

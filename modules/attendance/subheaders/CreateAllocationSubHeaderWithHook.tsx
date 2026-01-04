@@ -22,7 +22,7 @@ function CreateAllocationSubHeaderWithHook(title:string,modalComponent:React.Com
 
 export const ShiftAllocationSubheader = CreateAllocationSubHeaderWithHook('shiftallocation',ShiftAllocationModal,<Refresh2 color='white' size={18}/> , "shift-allocation");
 export const LocationAllocationSubheader=CreateAllocationSubHeaderWithHook('locationallocation',LocationAllocationModal,<LocationAdd color='white' size={18}/> , "location-allocation");
-export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('ipallocation',IpAllocationModal,<GlobalEdit color='white' size={18} />,"ip-allocation");
-export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('faceallocation',FaceAllocationModal,<Scan color='white' size={18}/> , "face-allocation");
+export const IpAllocationSubheader=CreateAllocationSubHeaderWithHook('ipallocation',IpAllocationModal,<GlobalEdit color='white' size={18} />,"ip-allocation-form");
+export const FaceRecognitionAssignment=CreateAllocationSubHeaderWithHook('faceallocation',FaceAllocationModal,<Scan color='white' size={18}/> , "face-allocation-form");
 
 

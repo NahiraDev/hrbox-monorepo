@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import LocationAllocationModal from "@hrbox/modules/attendance/modals/LocationAllocationModal";
+import { Hierarchy3 } from "iconsax-reactjs";
 
 const LocationAllocation = () => {
   const [data, setData] = useState(Allocatio);
@@ -19,8 +20,8 @@ const LocationAllocation = () => {
       {
         data:row,
         isForm: true,
-        submitLabel: "Submit",
-        cancelLabel: "Cancel",
+        title:"Location Allocation",
+        icon:<Hierarchy3 size={18} />,
         formConfig: {
           formId: "location-allocation",
         },
