@@ -31,7 +31,7 @@ const AllocationSubheader = ({
       <ModalComponent />,
       {
         isForm: true,
-        submitLabel: "Submit Again",
+        submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
           formId: "face-form",
