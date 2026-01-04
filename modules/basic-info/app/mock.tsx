@@ -308,8 +308,8 @@ export const workersData = [
   {
     imgWorker: '',
     tick: '',
-    nameWorker: 'Parisa Babayee',
-    job: 'CEO',
+    nameWorker: 'Parisa Babayee inanloo mehr',
+    job: 'BackEnd Developer laravel',
     isActive: true,
   },
   {
@@ -833,6 +833,51 @@ export const identityCard = [
     Publication: 'Publication',
     Edit: 'Edit',
     UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  }, {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
+  },  {
+    name: 'User',
+    Publication: 'Publication',
+    Edit: 'Edit',
+    UploadStatus: 'Upload Status',
   },
   {
     name: 'User',
@@ -879,6 +924,41 @@ export const identityCard = [
 ];
 export const Jobss = [
   {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },
+  {
+    job: 'Desinger',
+    company: 'Digital Solution',
+    date: '2024/09/01',
+    location: 'Tehran',
+  },  {
     job: 'Desinger',
     company: 'Digital Solution',
     date: '2024/09/01',

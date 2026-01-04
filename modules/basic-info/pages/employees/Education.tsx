@@ -1,10 +1,10 @@
 import { Card } from '@heroui/react';
 import { education } from '@module/basic-info/app/mock';
 import { AppButton } from '@hrbox/uikit/components';
-import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
+import { Buildings, Calendar, Category, Designtools, Edit, Location, Teacher, Trash } from "iconsax-reactjs";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TickIcon } from "@hrbox/uikit/icons";
 import EducationModals from "@hrbox/modules/basic-info/modals/EducationModals";
 import {
@@ -51,7 +51,7 @@ const Education = () => {
       <EducationModals />,
       {
         isForm: true,
-        title: "Education ",
+        title:<div className="flex items-center gap-2"> <Teacher size={20}/>  Education Details</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -68,7 +68,32 @@ const Education = () => {
       },
       ModalSize.XL,
     );
+  };  const handleModalEducationEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      "DynamicAddModal",
+      <EducationModals />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Teacher size={20}/> Edit Education</div>,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "DynamicAddModal",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.VIEW, "DynamicAddModal");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
   };
+  const [activeIndex, setActiveIndex] = useState(null);
 
   return (
     <>
@@ -79,8 +104,17 @@ const Education = () => {
               <Card
                 isPressable
                 onPress={handleModalEducation}
+                onClick={() => setActiveIndex(index)}
                 key={index}
-                className="py-2 px-3 hover:bg-[#D6F2FF] hover:cursor-pointer shadow-sm">
+                className={`
+                py-2 px-3  hover:cursor-pointer shadow-sm
+                  transition-all duration-200
+                hover:!bg-[#D6F2FF]
+                ${activeIndex === index
+                  ? "bg-[#D6F2FF] border border-primary-400"
+                  : "border border-transparent"
+                }
+                `}>
                 <div className="flex items-center justify-between border-b-2 border-neutral-100">
                   <div className="flex items-center gap-2">
                     <div className='rounded-full w-2 h-2 bg-green-600'></div>
@@ -92,6 +126,16 @@ const Education = () => {
                       width={16}
                       height={16}
                     />
+                    <div className="flex items-center">
+                    <AppButton
+                      size= 'xs'
+                      radius= 'sm'
+                      variant= 'light'
+                      isIconOnly= {true}
+                      onPress= {handleModalEducationEdit}
+                      content= {<Edit className="text-secondary-1000 group-hover:text-white" size={16} />}
+                      className= 'p-2 hover:!bg-primary-400 transition-all duration-200'
+                    />
                     <AppButton
                       size= 'xs'
                       radius= 'sm'
@@ -101,6 +145,7 @@ const Education = () => {
                       content= {<Trash className="text-secondary-1000 group-hover:text-white" size={16} />}
                       className= 'p-2 hover:!bg-red-500 transition-all duration-200'
                     />
+                  </div>
                   </div>
                 </div>
                 <div className="flex flex-col mt-2">

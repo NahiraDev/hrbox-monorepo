@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const TickIcon = ({
-                           color = "#CCC",
+                           color = "#0B76B7",
                            ...props
                          }: React.SVGProps<SVGSVGElement>) => {
   return (

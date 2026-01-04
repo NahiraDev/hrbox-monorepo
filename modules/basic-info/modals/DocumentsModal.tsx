@@ -3,105 +3,43 @@ import {Avatar} from "@heroui/react";
 import {useRef, useState} from "react";
 
 const DocumentsModal = ({onClose, onSubmit, onCloseAll, initialImage}: any) => {
-    const fileInputRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
-
-    const handleButtonClick = () => {
-        if (fileInputRef?.current) {
-            fileInputRef.current?.click();
-        }
-    };
-
-    const handleFileChange = (event: { target: { files: any[]; }; }) => {
-        const file = event.target.files[0];
-        if (file) {
-            console.log("فایل انتخاب شده:", file);
-            setSelectedImage(URL.createObjectURL(file));
-        }
-    };
-
-    const handleSubmit = () => {
-        if (selectedImage) {
-            onSubmit(selectedImage);
-        }
-        onCloseAll();
-    };
-
-    const handleCancel = () => {
-        if (selectedImage) {
-            URL.revokeObjectURL(selectedImage);
-        }
-        setSelectedImage(null);
-        onCloseAll();
-    };
 
     return (
         <AppModal.Body>
-            <div className="flex flex-col gap-2">
-                <div className="flex gap-1">
-                    <Avatar
-                        radius="sm"
-                        size="lg"
-                        src={selectedImage || initialImage || undefined}
-                    />
-                    <div className="flex flex-col gap-1">
-                        <span>Ali Asadi</span>
-                        <span>Identity Card</span>
-                    </div>
-                </div>
-                <div className="flex items-center justify-center rounded-lg">
-                    {selectedImage ? (
-                        <img
-                            src={selectedImage}
-                            alt="Uploaded"
-                            className="max-w-full max-h-64 object-contain rounded-lg border-2 border-primary"
-                        />
-                    ) : initialImage ? (
-                        <img
-                            src={initialImage}
-                            alt="Previously Uploaded"
-                            className="max-w-full max-h-64 object-contain rounded-lg border-2 border-primary"
-                        />
-                    ) : (
-                        <span className="p-28 bg-surface-50 rounded-xl">No Data</span>
-                    )}
-                </div>
-                <AppModal.Footer>
-                    {selectedImage ? (
-                        <div className="flex gap-2">
-                            <AppButton
-                                props={{
-                                    size: "xs",
-                                    radius: "sm",
-                                    onPress: handleCancel,
-                                    content: <span>Cancel</span>,
-                                    className:
-                                        "text-black py-1.5 px-3 text-xl rounded-lg hover:bg-red",
-                                }}
-                            />
-                            <AppButton
-                                props={{
-                                    size: "xs",
-                                    radius: "sm",
-                                    color: "primary",
-                                    onPress: handleSubmit,
-                                    content: <span>Submit</span>,
-                                    className: "text-white py-1.5 px-3 text-xl rounded-lg",
-                                }}
-                            />
-                        </div>
-                    ) : (
-                        <AppButton
-                            size="xs"
-                            radius="sm"
-                            color="primary"
-                            onPress={handleButtonClick}
-                            content={<span>Upload File</span>}
-                            className="text-white py-1.5 px-3 text-xl rounded-lg "
-                        />
-                    )}
-                </AppModal.Footer>
+          <div className="flex flex-col  gap-9">
+            <div className="flex gap-3">
+              <Avatar
+                radius="sm"
+                size="lg"
+                color="primary"
+                src={selectedImage || initialImage || undefined}
+              />
+              <div className="flex flex-col gap-3">
+                <span className="text-sm font-medium text-secondary-1000">Ali Asadi</span>
+                <span  className="text-sm font-medium text-secondary-1000">Identity Card</span>
+              </div>
             </div>
+            <div className="flex items-center justify-center rounded-lg">
+              {selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt="Uploaded"
+                  className="max-w-full max-h-64 object-contain rounded-lg border-2 border-primary"
+                />
+              ) : initialImage ? (
+                <img
+                  src={initialImage}
+                  alt="Previously Uploaded"
+                  className="max-w-full max-h-64 object-contain rounded-lg border-2 border-primary"
+                />
+              ) : (
+                <span className="p-28 bg-primary-50 rounded-xl">No Data</span>
+              )}
+            </div>
+
+          </div>
+
         </AppModal.Body>
     );
 };

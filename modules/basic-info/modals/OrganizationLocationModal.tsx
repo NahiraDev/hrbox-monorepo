@@ -90,7 +90,7 @@ export const OrganizationLocationModal = () => {
             helperText={touched.HRManager && errors.HRManager}
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-6 mt-6">
           <FormField
              formMode={currentType}
             label="Address"

@@ -75,7 +75,7 @@ export default function JobModal() {
             />
           </div>
           <div className="bg-surface-50 flex items-center justify-between py-5 px-3 rounded-lg">
-            <span>I am still working at this company</span>
+            <span className="font-semibold text-secondary-1000">I am still working at this company</span>
             <div className="flex items-center justify-around w-[315px]">
               <AppCheckBox
               />

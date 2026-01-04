@@ -1,11 +1,11 @@
-import type { Key, ReactNode } from "react";
+import React, { Key, ReactNode } from "react";
 import { DynamicAddModal } from "@hrbox/modules/basic-info/modals/DynamicAddModal";
 import { AppButton } from "@hrbox/uikit/components";
 import {
   Add,
   Category,
   FolderCross,
-  MessageEdit, SearchNormal1,
+  MessageEdit, SearchNormal1, Teacher,
   Trash
 } from "iconsax-reactjs";
 import { Listbox, ListboxItem } from "@heroui/react";
@@ -116,7 +116,7 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <JobModal />,
       {
         isForm: true,
-        title,
+        title:<div className="flex items-center gap-2"> <Category size={18}/> Software Management Details</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -142,7 +142,7 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <EducationModals />,
       {
         isForm: true,
-        title,
+        title:<div className="flex items-center gap-2"> <Teacher size={20}/>Add New Education </div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
