@@ -1390,72 +1390,59 @@ export const Indicators = [
 ];
 export const GeneralMock = [
   {
-    NO: "1",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade B",
-    Creation_data: "2022/19/10",
-  },
-  {
-    NO: "2",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
     Grade: "Grade A",
-    Creation_data: "2022/19/10",
+    gradeColor: "#22C55E",
+    Grouping: "Behavioral indicators",
+    fromPoints: 0,
+    toPoints: 60,
+    Description: "High performance",
   },
   {
-    NO: "3",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade C",
-    Creation_data: "2022/19/10",
-  },
-  {
-    NO: "4",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade D",
-    Creation_data: "2022/19/10",
-  },
-  {
-    NO: "5",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade A",
-    Creation_data: "2022/19/10",
-  },
-  {
-    NO: "6",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
     Grade: "Grade B",
-    Creation_data: "2022/19/10",
+    gradeColor: "#3B82F6",
+    Grouping: "Technical indicators",
+    fromPoints: 20,
+    toPoints: 80,
+    Description: "Good performance",
   },
-  {
-    NO: "7",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade A",
-    Creation_data: "2022/19/10",
-  },
-  {
-    NO: "1",
-    Index_title: "organizational impact",
-    Grouping: "Behavioral indicators",
-    Grade: "Grade B",
-    Creation_data: "2022/19/10",
-  },
+]
+export const GRADE_OPTIONS = [
+  { id: "Grade A", name: "Grade A" },
+  { id: "Grade B", name: "Grade B" },
+  { id: "Grade C", name: "Grade C" },
+  { id: "Grade D", name: "Grade D" },
 ];
+
+export const GROUP_OPTIONS = [
+  { id: "Behavioral indicators", name: "Behavioral indicators" },
+  { id: "Technical indicators", name: "Technical indicators" },
+];
+
+export const FROM_POINTS_OPTIONS = [
+  { id: "0", name: "0" },
+  { id: "20", name: "20" },
+  { id: "40", name: "40" },
+];
+
+export const TO_POINTS_OPTIONS = [
+  { id: "60", name: "60" },
+  { id: "80", name: "80" },
+  { id: "100", name: "100" },
+];
+
+// ✅ مطابق تایپ ColorItem (value/label)
 export const GRADE_COLORS = [
-  { value: "#F43F5E", label: "Pink" },
-  { value: "#A855F7", label: "Purple" },
-  { value: "#64748B", label: "Gray" },
-  { value: "#38BDF8", label: "Blue" },
   { value: "#22C55E", label: "Green" },
+  { value: "#3B82F6", label: "Blue" },
+  { value: "#F97316", label: "Orange" },
   { value: "#EF4444", label: "Red" },
-  { value: "#FB923C", label: "Orange" },
-  { value: "#FACC15", label: "Yellow" },
 ];
+
+
+
+
+
+
 export const ProfileEmployee = [
   {
     id: "1",

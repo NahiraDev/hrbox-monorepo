@@ -3,109 +3,109 @@ import { Checkbox, Table, TableBody, TableCell, TableColumn, TableHeader, TableR
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
 
-export enum SortDirection {
-  ASC = "asc",
-  DESC = "desc",
-}
+  export enum SortDirection {
+    ASC = "asc",
+    DESC = "desc",
+  }
 
-export interface ColumnConfig<T = any> {
-  key: string;
-  label?: string;
-  width?: string | number;
-  minWidth?: string | number;
-  maxWidth?: string | number;
-  align?: "left" | "center" | "right" | "start" | "end";
-  sortable?: boolean;
-  filterable?: boolean;
-  render?: (value: any, row: T, index: number) => React.ReactNode;
-  headerRender?: () => React.ReactNode;
-  headerClassName?: string | ((col: ColumnConfig<T>) => string);
-  cellClassName?: string | ((value: any, row: T, index: number) => string);
-  visible?: boolean | ((row: T) => boolean);
-  format?: (value: any) => string;
-  type?: "text" | "number" | "date" | "boolean" | "email" | "phone" | "custom";
-}
+  export interface ColumnConfig<T = any> {
+    key: string;
+    label?: string;
+    width?: string | number;
+    minWidth?: string | number;
+    maxWidth?: string | number;
+    align?: "left" | "center" | "right" | "start" | "end";
+    sortable?: boolean;
+    filterable?: boolean;
+    render?: (value: any, row: T, index: number) => React.ReactNode;
+    headerRender?: () => React.ReactNode;
+    headerClassName?: string | ((col: ColumnConfig<T>) => string);
+    cellClassName?: string | ((value: any, row: T, index: number) => string);
+    visible?: boolean | ((row: T) => boolean);
+    format?: (value: any) => string;
+    type?: "text" | "number" | "date" | "boolean" | "email" | "phone" | "custom";
+  }
 
-export interface ColumnGroup {
-  label: string;
-  startKey: string;
-  endKey: string;
-  headerClassName?: string;
-}
+  export interface ColumnGroup {
+    label: string;
+    startKey: string;
+    endKey: string;
+    headerClassName?: string;
+  }
 
-export interface RowAction<T = any> {
-  id: string;
-  label: string;
-  icon?: React.ReactNode;
-  onClick: (row: T, index: number) => void | Promise<void>;
-  visible?: (row: T, index: number) => boolean;
-  color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
-  confirmMessage?: string;
-  disabled?: (row: T) => boolean;
-}
+  export interface RowAction<T = any> {
+    id: string;
+    label: string;
+    icon?: React.ReactNode;
+    onClick: (row: T, index: number) => void | Promise<void>;
+    visible?: (row: T, index: number) => boolean;
+    color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+    confirmMessage?: string;
+    disabled?: (row: T) => boolean;
+  }
 
-export interface ExpandableConfig<T = any> {
-  render: (row: T, index: number, cellType?: "first" | "second") => React.ReactNode;
-  expandedRowClassName?: string;
-  onExpand?: (row: T, index: number, isExpanded: boolean) => void | Promise<void>;
-  defaultExpanded?: boolean | ((row: T) => boolean);
-  expandButtonPosition?: "start" | "end";
-}
+  export interface ExpandableConfig<T = any> {
+    render: (row: T, index: number, cellType?: "first" | "second") => React.ReactNode;
+    expandedRowClassName?: string;
+    onExpand?: (row: T, index: number, isExpanded: boolean) => void | Promise<void>;
+    defaultExpanded?: boolean | ((row: T) => boolean);
+    expandButtonPosition?: "start" | "end";
+  }
 
-export interface SortConfig {
-  key: string;
-  direction: SortDirection;
-}
+  export interface SortConfig {
+    key: string;
+    direction: SortDirection;
+  }
 
-export interface FilterConfig {
-  [key: string]: any;
-}
+  export interface FilterConfig {
+    [key: string]: any;
+  }
 
-export interface TableStyleConfig {
-  containerClassName?: string;
-  tableClassName?: string;
-  headerClassName?: string;
-  bodyClassName?: string;
-  rowClassName?: string | ((row: any, index: number, isSelected?: boolean) => string);
-  cellClassName?: string;
-  emptyClassName?: string;
-  loadingClassName?: string;
-}
+  export interface TableStyleConfig {
+    containerClassName?: string;
+    tableClassName?: string;
+    headerClassName?: string;
+    bodyClassName?: string;
+    rowClassName?: string | ((row: any, index: number, isSelected?: boolean) => string);
+    cellClassName?: string;
+    emptyClassName?: string;
+    loadingClassName?: string;
+  }
 
-export interface AppTableProps<T = any> {
-  data: T[];
-  columns?: ColumnConfig<T>[];
-  columnGroups?: ColumnGroup[];
-  rowKey?: string | ((row: T, index: number) => string | number);
-  selectable?: boolean;
-  onSelectionChange?: (selectedRows: T[], selectedIndices: number[]) => void;
-  onRowClick?: (row: T, index: number) => void;
-  rowActions?: RowAction<T>[];
-  expandable?: ExpandableConfig<T>;
-  sortable?: boolean;
-  onSort?: (sort: SortConfig) => void;
-  defaultSort?: SortConfig;
-  filterable?: boolean;
-  onFilter?: (filters: FilterConfig) => void;
-  hasPagination?: boolean;
-  pageSize?: number;
-  totalItems?: number;
-  currentPage?: number;
-  onPageChange?: (page: number) => void;
-  variant?: "default" | "striped" | "bordered" | "minimal";
-  styles?: TableStyleConfig;
-  density?: "sm" | "md" | "lg";
-  loading?: boolean;
-  error?: string;
-  emptyMessage?: string | React.ReactNode;
-  showCheckbox?: boolean;
-  showRowNumber?: boolean;
-  showStatus?: boolean;
-  sticky?: boolean;
-  onEdit?: (row: T, index: number) => void;
-  onDelete?: (row: T, index: number) => void;
-  onView?: (row: T, index: number) => void;
-}
+  export interface AppTableProps<T = any> {
+    data: T[];
+    columns?: ColumnConfig<T>[];
+    columnGroups?: ColumnGroup[];
+    rowKey?: string | ((row: T, index: number) => string | number);
+    selectable?: boolean;
+    onSelectionChange?: (selectedRows: T[], selectedIndices: number[]) => void;
+    onRowClick?: (row: T, index: number) => void;
+    rowActions?: RowAction<T>[];
+    expandable?: ExpandableConfig<T>;
+    sortable?: boolean;
+    onSort?: (sort: SortConfig) => void;
+    defaultSort?: SortConfig;
+    filterable?: boolean;
+    onFilter?: (filters: FilterConfig) => void;
+    hasPagination?: boolean;
+    pageSize?: number;
+    totalItems?: number;
+    currentPage?: number;
+    onPageChange?: (page: number) => void;
+    variant?: "default" | "striped" | "bordered" | "minimal";
+    styles?: TableStyleConfig;
+    density?: "sm" | "md" | "lg";
+    loading?: boolean;
+    error?: string;
+    emptyMessage?: string | React.ReactNode;
+    showCheckbox?: boolean;
+    showRowNumber?: boolean;
+    showStatus?: boolean;
+    sticky?: boolean;
+    onEdit?: (row: T, index: number) => void;
+    onDelete?: (row: T, index: number) => void;
+    onView?: (row: T, index: number) => void;
+  }
 
 export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
   (

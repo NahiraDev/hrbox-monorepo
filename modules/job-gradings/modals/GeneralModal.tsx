@@ -1,12 +1,21 @@
-import GeneralForm from "@hrbox/modules/job-gradings/forms/GeneralForm";
-
+import GeneralForm, {
+  initialValuesAction,
+  formValidationAction,
+  handleSubmitAction,
+} from "../forms/GeneralForm";
+import { FormProvider } from "@hrbox/core/providers";
 
 const GeneralModal = () => {
-  
   return (
-    <>
-      <GeneralForm/>
-    </>
+    <FormProvider
+      formId="general-form"
+      initialValues={initialValuesAction}
+      validationSchema={formValidationAction}
+      onSubmit={handleSubmitAction}
+    >
+      <GeneralForm />
+    </FormProvider>
   );
 };
+
 export default GeneralModal;
