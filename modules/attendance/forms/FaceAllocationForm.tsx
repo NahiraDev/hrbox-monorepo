@@ -59,8 +59,8 @@ const FaceAllocationForm = () => {
   const currentType = getOpenModal()?.type;
   return (
     <>
-    <FormProvider formId="face-form" initialValues={initialValuesAction} onSubmit={handleSubmitAction} >
-      <Form id="face-form" onSubmit={handleSubmit}>
+    <FormProvider formId="face-allocation-form" initialValues={initialValuesAction} onSubmit={handleSubmitAction} >
+      <Form id="face-allocation-form" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
           <RadioGroup
             name="type"

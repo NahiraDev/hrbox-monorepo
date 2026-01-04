@@ -1,46 +1,49 @@
-import { AppInput, AppModal } from "@hrbox/uikit/components";
+import { AppAutoComplete, AppInput, AppModal, FormField } from "@hrbox/uikit/components";
 import { TickSquare } from "iconsax-reactjs";
+import React from "react";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
 
 export const TestReportModal = () => {
+
+  const {  errors, touched } =
+    useFormContext();
+
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
+
   return (
     <AppModal.Body>
       <div className="grid grid-cols-2 gap-10">
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Title",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
+        <FormField
+          formMode={currentType}
+          label="Title"
+          name="Title"
+          component={AppInput}
+          helperText={touched.Title && errors.Title}
         />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Type",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
+        <FormField
+          formMode={currentType}
+          label="Type"
+          name="Type"
+          component={AppAutoComplete}
+          helperText={touched.Type && errors.Type}
         />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Full name",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
+        <FormField
+          formMode={currentType}
+          label="Full name"
+          name="name"
+          component={AppInput}
+          helperText={touched.name && errors.name}
         />
-        <AppInput
-          props={{
-            className: " border border-[#DCF0F9]",
-            label: "Test Grad",
-            size: "lg",
-            color: "primary",
-            radius: "lg",
-          }}
+        <FormField
+          formMode={currentType}
+          label="Test Grad"
+          name="Test"
+          component={AppAutoComplete}
+          helperText={touched.Test && errors.Test}
         />
+
       </div>
     </AppModal.Body>
   );
