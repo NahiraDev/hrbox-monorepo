@@ -21,78 +21,6 @@ export const organizationDepartment = [
     job: 'Nahira Digital Accelerator',
     icon: 'people',
     people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
-  },  {
-    img: '',
-    name: 'Nahira',
-    job: 'Nahira Digital Accelerator',
-    icon: 'people',
-    people: 24,
   },
   {
     img: '',
@@ -100,15 +28,13 @@ export const organizationDepartment = [
     job: 'Nahira Digital Accelerator',
     icon: 'people',
     people: 24,
-  },
-  {
+  },  {
     img: '',
     name: 'Nahira',
     job: 'Nahira Digital Accelerator',
     icon: 'people',
     people: 24,
-  },
-  {
+  },  {
     img: '',
     name: 'Nahira',
     job: 'Nahira Digital Accelerator',
@@ -219,8 +145,8 @@ export const technicalDepartment = [
   {
     img: '',
     diactive: ' ',
-    name: ' parisa',
-    job: ' CEO',
+    name: 'mohammad hossein safdari',
+    job: 'React js / Next js developer',
   },  {
     img: '',
     diactive: ' ',

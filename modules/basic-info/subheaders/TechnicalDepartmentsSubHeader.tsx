@@ -1,5 +1,5 @@
 import { AppButton } from "@hrbox/uikit/components";
-import { ArrowLeft2, Edit, Hierarchy3 } from "iconsax-reactjs";
+import { ArrowLeft2, Category, Edit, Hierarchy3 } from "iconsax-reactjs";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { Paths } from "@hrbox/modules/paths";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
@@ -21,7 +21,7 @@ const TechnicalDepartmentsSubHeader = (props: any) => {
       <OrganizationDepartmentModal />,
       {
         isForm: true,
-        title: "Organization Departments",
+        title:<div className="flex items-center gap-2"> <Category size={18}/> Organization Departments</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {

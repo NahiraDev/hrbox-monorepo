@@ -42,7 +42,7 @@ const OrganizationDepartments = () => {
   );
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-between gap-100">
       <div className="grid grid-cols-4 gap-4 ">
         {organizationDepartment.map((user, index) => renderOrganizationDepartments(user, index))}
       </div>

@@ -1,5 +1,5 @@
 import { AppButton } from "@hrbox/uikit/components";
-import { SearchNormal1, Add } from "iconsax-reactjs";
+import { SearchNormal1, Add, Location } from "iconsax-reactjs";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { OrganizationLocationModal } from "@hrbox/modules/basic-info/modals/OrganizationLocationModal";
@@ -8,6 +8,7 @@ import {
   initialValuesOrganizationLocation
 } from "@hrbox/modules/basic-info/forms/OrganizationLocationForm";
 import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import React from "react";
 
 
 const OrganizationLocationSubHeader = (props: any) => {
@@ -21,7 +22,7 @@ const OrganizationLocationSubHeader = (props: any) => {
       <OrganizationLocationModal/>,
       {
         isForm: true,
-        title: "Organizational Locations ",
+        title:<div className="flex items-center gap-2"> <Location size={18}/> Organizational Locations</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {

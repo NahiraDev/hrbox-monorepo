@@ -1,6 +1,6 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
-import {Location, More, Trash} from 'iconsax-reactjs';
+import { Category, Edit, Location, More, Trash } from "iconsax-reactjs";
 import React, {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
@@ -28,23 +28,7 @@ const OrganizationalLocations = () => {
         setActiveButton(null);
     };
 
-    const handleDeleteClick = (index: number) => {
-        setActiveButton(null);
-        setSelectedLocationIndex(index);
 
-        // openModal(
-        //     'delete',
-        //     '',
-        //     <AppDeleteModal
-        //         onConfirm={() => handleDeleteConfirm(index)}
-        //         onCancel={() => console.log('Cancelled')}
-        //     />,
-        //     undefined,
-        //     'sm',
-        //     'Do you want to remove it?',
-        //     <Trash className='text-white'/>
-        // );
-    };
 
     const handleDeleteConfirm = (index: number) => {
         setLocations(prev => {
@@ -66,8 +50,33 @@ const OrganizationalLocations = () => {
       <OrganizationLocationModal/>,
       {
         isForm: true,
-        title: "Organizational Locations ",
+        title:<div className="flex items-center gap-2"> <Location size={18}/> Organizational Locations</div>,
         submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "OrganizationLocationModal",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "OrganizationLocationModal");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+  const handleOpenOrganizationLocationEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      "OrganizationLocationModal",
+      <OrganizationLocationModal/>,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Location size={18}/> Organizational Locations</div>,
+        submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesOrganizationLocation,
@@ -104,12 +113,12 @@ const OrganizationalLocations = () => {
                                     src=""
                                     color="primary"
                                 />
-                                <div className="w-full">
-                                    <span className="!font-bold text-left">{detail.title}</span>
+                                <div className="w-full flex items-start">
+                                    <span className="!font-bold text-secondary-1000">{detail.title}</span>
                                 </div>
 
                                 <div
-                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Address</span>
@@ -118,7 +127,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Email</span>
@@ -127,7 +136,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Website</span>
@@ -139,7 +148,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-gradient-to-r from-white via-sky-100 to-whit w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Is it visible?</span>
@@ -177,19 +186,31 @@ const OrganizationalLocations = () => {
 
                             {activeButton === index && (
                                 <div
-                                    className="absolute top-14 right-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200 py-1 w-30 animate-in slide-in-from-top-2 duration-200">
+                                    className="absolute top-12 right-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200  w-30 animate-in slide-in-from-top-2 duration-200">
                                     <AppButton
                                         size='sm'
                                         variant='light'
-                                        onPress={() => handleDeleteClick(index)}
+                                        // onPress={() => handleDeleteClick(index)}
                                         content={
                                             <div className="flex items-center gap-2">
-                                                <Trash size={16}/>
-                                                <span>Delete</span>
+                                                <Trash size={20}/>
+                                                <span className="text-sm text-secondary-1000 ">Delete</span>
                                             </div>
                                         }
-                                        className='w-full justify-start text-left hover:bg-red-50 transition-colors duration-150'
+                                        className='w-full justify-start text-left hover:bg-red-50 transition-colors rounded-[6px] duration-150 py-3 px-6'
                                     />
+                                  <AppButton
+                                    size='sm'
+                                    variant='light'
+                                    onPress={handleOpenOrganizationLocationEdit}
+                                    content={
+                                      <div className="flex items-center gap-2">
+                                        <Edit size={20}/>
+                                        <span className="text-sm text-secondary-1000 ">Edit</span>
+                                      </div>
+                                    }
+                                    className='w-full justify-start text-left hover:bg-red-50 transition-colors rounded-[6px] duration-150 py-3 px-6'
+                                  />
                                 </div>
                             )}
 
