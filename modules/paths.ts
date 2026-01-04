@@ -34,10 +34,10 @@ export const Paths = {
     ProcessMaker: "/chart-maker/process",
     ProcessList: "/chart-maker/process-list",
   },
-  ProjectManagement: {
-    Dashboard: "/project-management",
-    Projects: "/project-management/projects",
-  },
+    ProjectManagement: {
+      Dashboard: "/dashboard",
+      Projects: "/project-management/projects",
+    },
   BasicInfo: {
     Dashboard: "/basic-info",
     TechnicalDepartment: "/basic-info/technical-departments",
@@ -98,7 +98,8 @@ export const Paths = {
     Indicators:'/job-gradings/setting/indicators',
     General:'/job-gradings/setting/general',
     JDPage:'/job-gradings/JDPage',
-    Employee:'/job-gradings/Employee-job fit'
+    Employee:'/job-gradings/job-Employee',
+    EmployeeProfile:'/job-gradings/job-Employee/Employees-on-This-Job',
   },
     JobDescription:{
         jobdescription:"/job-description",
