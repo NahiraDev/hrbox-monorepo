@@ -1,5 +1,11 @@
 import { color, number } from "framer-motion";
-import { CloseCircle, Global, Location, TickCircle, Verify } from "iconsax-reactjs";
+import {
+  CloseCircle,
+  Global,
+  Location,
+  TickCircle,
+  Verify,
+} from "iconsax-reactjs";
 
 export const EntryExitData = [
   {
@@ -1393,19 +1399,35 @@ export const GeneralMock = [
     Grade: "Grade A",
     gradeColor: "#22C55E",
     Grouping: "Behavioral indicators",
-    fromPoints: 0,
-    toPoints: 60,
+    ofpoint: "0",
+    uptopoints: "60",
     Description: "High performance",
   },
   {
     Grade: "Grade B",
     gradeColor: "#3B82F6",
     Grouping: "Technical indicators",
-    fromPoints: 20,
-    toPoints: 80,
+    ofpoint: "20",
+    uptopoints: "80",
     Description: "Good performance",
   },
-]
+  {
+    Grade: "Grade A",
+    gradeColor: "#F97316",
+    Grouping: "Behavioral indicators",
+    ofpoint: "0",
+    uptopoints: "60",
+    Description: "High performance",
+  },
+  {
+    Grade: "Grade B",
+    gradeColor: "#EF4444",
+    Grouping: "Technical indicators",
+    ofpoint: "20",
+    uptopoints: "80",
+    Description: "Good performance",
+  },
+];
 export const GRADE_OPTIONS = [
   { id: "Grade A", name: "Grade A" },
   { id: "Grade B", name: "Grade B" },
@@ -1418,16 +1440,16 @@ export const GROUP_OPTIONS = [
   { id: "Technical indicators", name: "Technical indicators" },
 ];
 
-export const FROM_POINTS_OPTIONS = [
-  { id: "0", name: "0" },
-  { id: "20", name: "20" },
-  { id: "40", name: "40" },
+export const OF_POINTS = [
+  { id: 0, name: "0" },
+  { id: 20, name: "20" },
+  { id: 40, name: "40" },
 ];
 
-export const TO_POINTS_OPTIONS = [
-  { id: "60", name: "60" },
-  { id: "80", name: "80" },
-  { id: "100", name: "100" },
+export const UP_TO_POINT = [
+  { id: 60, name: "60" },
+  { id: 80, name: "80" },
+  { id: 100, name: "100" },
 ];
 
 // ✅ مطابق تایپ ColorItem (value/label)
@@ -1438,11 +1460,6 @@ export const GRADE_COLORS = [
   { value: "#EF4444", label: "Red" },
 ];
 
-
-
-
-
-
 export const ProfileEmployee = [
   {
     id: "1",
@@ -1450,8 +1467,8 @@ export const ProfileEmployee = [
       "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
     Name: "jahan hatami",
     category: "Mentor",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "2",
@@ -1459,8 +1476,8 @@ export const ProfileEmployee = [
       "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
     Name: "ali maleki",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "3",
@@ -1468,8 +1485,8 @@ export const ProfileEmployee = [
       "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
     Name: "sara asadi",
     category: "Front-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "4",
@@ -1477,8 +1494,8 @@ export const ProfileEmployee = [
       "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
     Name: "mahsa omidi",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "5",
@@ -1486,8 +1503,8 @@ export const ProfileEmployee = [
       "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
     Name: "asal hatami",
     category: "Designer",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "6",
@@ -1495,8 +1512,8 @@ export const ProfileEmployee = [
       "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
     Name: "Hosein fahmideh",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "7",
@@ -1504,8 +1521,8 @@ export const ProfileEmployee = [
       "https://img.freepik.com/free-photo/young-woman-blue-sweater-autumn-park_1303-11368.jpg?semt=ais_hybrid&w=740&q=80",
     Name: "Nasim Moradi",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "8",
@@ -1513,8 +1530,8 @@ export const ProfileEmployee = [
       "https://img.freepik.com/free-photo/smiling-beautiful-young-woman-standing-posing_171337-11412.jpg?semt=ais_hybrid&w=740&q=80",
     Name: "Maryam Mohammadi ",
     category: "Ceo",
-    icon:Verify,
-    info:false
+    icon: Verify,
+    info: false,
   },
   {
     id: "9",
@@ -1522,8 +1539,8 @@ export const ProfileEmployee = [
       "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?cs=srgb&dl=pexels-italo-melo-881954-2379004.jpg&fm=jpg",
     Name: "Mohsen Mosalman ",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "10",
@@ -1531,16 +1548,17 @@ export const ProfileEmployee = [
       "https://i.pinimg.com/236x/c2/88/0a/c2880a8f427b543079d893068ccae83f.jpg",
     Name: "Bradd Pitt ",
     category: "Ceo",
-    icon:Verify,
-    info:true
-  },{
+    icon: Verify,
+    info: true,
+  },
+  {
     id: "11",
     image:
       "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
     Name: "asal hatami",
     category: "Designer",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "12",
@@ -1548,16 +1566,17 @@ export const ProfileEmployee = [
       "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
     Name: "Hosein fahmideh",
     category: "back-end",
-    icon:Verify,
-    info:false
-  }, {
+    icon: Verify,
+    info: false,
+  },
+  {
     id: "13",
     image:
       "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
     Name: "ali maleki",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "14",
@@ -1565,16 +1584,17 @@ export const ProfileEmployee = [
       "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
     Name: "sara asadi",
     category: "Front-end",
-    icon:Verify,
-    info:true
-  },{
+    icon: Verify,
+    info: true,
+  },
+  {
     id: "15",
     image:
       "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
     Name: "jahan hatami",
     category: "Mentor",
-    icon:Verify,
-    info:false
+    icon: Verify,
+    info: false,
   },
   {
     id: "16",
@@ -1582,8 +1602,8 @@ export const ProfileEmployee = [
       "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
     Name: "ali maleki",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "17",
@@ -1591,8 +1611,8 @@ export const ProfileEmployee = [
       "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
     Name: "sara asadi",
     category: "Front-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "18",
@@ -1600,8 +1620,8 @@ export const ProfileEmployee = [
       "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
     Name: "mahsa omidi",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "19",
@@ -1609,8 +1629,8 @@ export const ProfileEmployee = [
       "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
     Name: "asal hatami",
     category: "Designer",
-    icon:Verify,
-    info:false
+    icon: Verify,
+    info: false,
   },
   {
     id: "20",
@@ -1618,8 +1638,8 @@ export const ProfileEmployee = [
       "https://i.pinimg.com/236x/3d/74/f3/3d74f3bf49034c74b7dd2f804ca9458d.jpg",
     Name: "Hosein fahmideh",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "21",
@@ -1627,8 +1647,8 @@ export const ProfileEmployee = [
       "https://m.media-amazon.com/images/M/MV5BMTQzMTI2NDQ5NV5BMl5BanBnXkFtZTgwMjM3Mjc1MjE@._V1_.jpg",
     Name: "Peyman maadi",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "22",
@@ -1636,8 +1656,8 @@ export const ProfileEmployee = [
       "https://i.pinimg.com/originals/6a/94/03/6a9403a53cbe94f633dc0446baa0ea4e.jpg",
     Name: "mahak ashouri",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "23",
@@ -1645,8 +1665,8 @@ export const ProfileEmployee = [
       "https://static.vecteezy.com/system/resources/previews/036/297/773/non_2x/ai-generated-business-woman-showing-thumbs-up-on-a-transparent-background-free-png.png",
     Name: "sara morsali",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "24",
@@ -1654,16 +1674,17 @@ export const ProfileEmployee = [
       "https://cdn.pinno.app/api/internal/cdb/contents/saqarnorouzi@instagram_photo_HIGH/0/238519",
     Name: "Saqar norouzi",
     category: "Front-end",
-    icon:Verify,
-    info:true
-  },{
+    icon: Verify,
+    info: true,
+  },
+  {
     id: "25",
     image:
       "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
     Name: "mahsa omidi",
     category: "back-end",
-    icon:Verify,
-    info:false
+    icon: Verify,
+    info: false,
   },
   {
     id: "26",
@@ -1671,24 +1692,26 @@ export const ProfileEmployee = [
       "https://preview.redd.it/kimiya-hoseini-irtr-v0-cfpm6w0gt1pb1.jpg?width=640&crop=smart&auto=webp&s=8f52a724cf8fba99e64f5b0ae5778cab327c038a",
     Name: "asal hatami",
     category: "Designer",
-    icon:Verify,
-    info:true
-  }, {
+    icon: Verify,
+    info: true,
+  },
+  {
     id: "27",
     image:
       "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
     Name: "sara asadi",
     category: "Front-end",
-    icon:Verify,
-    info:true
-  },{
+    icon: Verify,
+    info: true,
+  },
+  {
     id: "28",
     image:
       "https://images.stockcake.com/public/8/7/c/87cc3b74-63de-41ab-9955-334e9488c1e0_large/handsome-model-posing-stockcake.jpg",
     Name: "jahan hatami",
     category: "Mentor",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "29",
@@ -1696,8 +1719,8 @@ export const ProfileEmployee = [
       "https://thumbs.dreamstime.com/b/portrait-most-handsome-man-entire-world-80648074.jpg",
     Name: "ali maleki",
     category: "Ceo",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
   {
     id: "30",
@@ -1705,8 +1728,8 @@ export const ProfileEmployee = [
       "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-front-view-of-a-smiling-business-woman-png-image_12509704.png",
     Name: "sara asadi",
     category: "Front-end",
-    icon:Verify,
-    info:false
+    icon: Verify,
+    info: false,
   },
   {
     id: "31",
@@ -1714,27 +1737,28 @@ export const ProfileEmployee = [
       "https://burst.shopifycdn.com/photos/model-in-gold-fashion.jpg?width=1000&format=pjpg&exif=0&iptc=0",
     Name: "mahsa omidi",
     category: "back-end",
-    icon:Verify,
-    info:true
+    icon: Verify,
+    info: true,
   },
 ];
-export const CostEmployee=[
+export const CostEmployee = [
   {
-    index:"Highly Contextualized Domain-Specific Expert-Level Theoretical and Practical Knowledge",
-    Points_Required:"Grade 5",
-    Person:<span className="text-danger">"Grade 2"</span>,
-    color:"#8A1B1B"
+    index:
+      "Highly Contextualized Domain-Specific Expert-Level Theoretical and Practical Knowledge",
+    Points_Required: "Grade 5",
+    Person: <span className="text-danger">"Grade 2"</span>,
+    color: "#8A1B1B",
   },
   {
-    index:"Decision Making",
-    Points_Required:"Grade 4",
-    Person:"Grade 4",
-    color:"#136234"
+    index: "Decision Making",
+    Points_Required: "Grade 4",
+    Person: "Grade 4",
+    color: "#136234",
   },
   {
-    index:"Leadership Experience",
-    Points_Required:"Grade 2",
-    Person:"Grade 5",
-    color:"#05587A"
+    index: "Leadership Experience",
+    Points_Required: "Grade 2",
+    Person: "Grade 5",
+    color: "#05587A",
   },
-]
+];

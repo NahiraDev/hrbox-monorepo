@@ -1,59 +1,59 @@
 import { AppTable } from "@hrbox/uikit/components";
 import { GeneralMock } from "@hrbox/modules/job-gradings/app/mock";
-import GeneralModal from "../../modals/GeneralModal";
-import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
+import { ModalType, ModalSize } from "@hrbox/core/providers";
+import GeneralModal from "../../modals/GeneralModal";
 import type { ColumnConfig } from "@hrbox/uikit/components";
 
-const gradeColorMap: Record<string, string> = {
-  "Grade A": "bg-green-500 text-white",
-  "Grade B": "bg-blue-500 text-white",
-  "Grade C": "bg-orange-500 text-white",
-  "Grade D": "bg-red-500 text-white",
-};
-
 const columns: ColumnConfig[] = [
-  { key: "NO", label: "No" },
-  { key: "Index_title", label: "Index title" },
-  { key: "Grouping", label: "Grouping" },
+  { key: "NO", label: "No", width: 80, align: "center" },
+
+  { key: "ofpoint", label: "of point", width: 80, align: "center" },
+
+  { key: "uptopoints", label: "up to point", width: 80, align: "center" },
+
   {
     key: "Grade",
     label: "Grade",
-    render: (value) => (
+    width: 110,
+    align: "center",
+    render: (_, row: any) => (
       <span
-        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-          gradeColorMap[value] ?? "bg-gray-300 text-black"
-        }`}
+        className="px-2 py-0.5 rounded text-xs font-semibold text-white"
+        style={{ backgroundColor: row.gradeColor }}
       >
-        {value}
+        {row.Grade}
       </span>
     ),
   },
-  { key: "Creation_data", label: "Creation date" },
+
+  { key: "Grouping", label: "Grouping", width: 80 },
+
+  { key: "Description", label: "Description", width: 100 },
 ];
 
 const General = () => {
   const modal = useModal();
-
-  const openViewModal = () => {
+  const openViewModal = (row: any) => {
     modal.open(
       ModalType.VIEW,
       "general-view",
       <GeneralModal />,
-      {},
+      {
+        data:row,
+        isForm:true,
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: "general-view",
+        },
+      },
       ModalSize["3XL"]
     );
   };
 
   return (
-    <div className="w-full h-full">
-      <AppTable
-        data={GeneralMock}
-        columns={columns}
-        onRowClick={openViewModal}
-        hasPagination
-      />
-    </div>
+    <AppTable data={GeneralMock} columns={columns} onRowClick={(row)=>openViewModal(row)} />
   );
 };
 

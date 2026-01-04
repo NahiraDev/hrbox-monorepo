@@ -20,43 +20,41 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
 
   const isIndicators = location.pathname === "/job-gradings/setting/indicators";
   const handlerOpenModal = () => {
-    if (isIndicators) {
-      modal.open(
-        ModalType.CREATE,
-        t("indicators"),
-        <SettingModal />,
-        {
-          isForm: true,
-          submitLabel: "Submit",
-          cancelLabel: "Cancel",
-          formConfig: {
-            formId: "indicators-form",
-          },
-        },
-        ModalSize["2XL"]
-      );
-      return;
-    }
-
-    const handlerOpenModal = () => {
-  if (isGeneral) {
+  if (isIndicators) {
     modal.open(
       ModalType.CREATE,
-      t("general"),
-      <GeneralModal />,
+      t("indicators"),
+      <SettingModal />,
       {
         isForm: true,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
-        formConfig: {
-          formId: "general-form",
-        },
+        formConfig: { formId: "indicators-form" },
       },
       ModalSize["2XL"]
     );
+    return;
+  }
+
+  if (isGeneral) {
+    modal.open(
+  ModalType.CREATE,
+  t("general"),
+  <GeneralModal />,
+  {
+    isForm: true,
+    submitLabel: "Submit",
+    cancelLabel: "Cancel",
+    formConfig: {
+      formId: "general-form",
+    },
+  },
+  ModalSize["2XL"]
+);
+
   }
 };
-  };
+
 
   return (
     <>
