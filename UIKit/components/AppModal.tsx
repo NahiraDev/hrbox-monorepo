@@ -178,15 +178,39 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
     hideFooter,
     isContextMode
   } = useModalInternal();
+
   const isFormMode = !isContextMode;
-  const { handleSubmit } = useFormContext();
+
+  let formSubmitForm;
+  try {
+    const ctx = useFormContext();
+    formSubmitForm = ctx.submitForm;
+  } catch {
+    formSubmitForm = null;
+  }
+
   const showFooter =
     !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
 
   if (!showFooter) return null;
 
   const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
     closeModal();
+  };
+
+  const handleSubmitClick = async () => {
+    try {
+      if (onSubmit) {
+        await onSubmit();
+      } else if (formSubmitForm) {
+        await formSubmitForm();
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+    }
   };
 
   return (
@@ -211,10 +235,10 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
           >
             {cancelLabel}
           </Button>
-          {onSubmit && (
+          {(onSubmit || formSubmitForm) && (
             <Button
               color="primary"
-              onPress={handleSubmit}
+              onPress={handleSubmitClick}
               isDisabled={isSubmitting}
               isLoading={isSubmitting}
             >
