@@ -87,7 +87,7 @@ async function bootstrap() {
     const root = createRoot(rootElement);
 
     root.render(
-      <StrictMode>
+
         <ReduxProvider store={store}>
           <PersistGate loading={<LoadingScreen />} persistor={persistor}>
             <QueryClientProvider client={queryClient}>
@@ -115,7 +115,7 @@ async function bootstrap() {
             </QueryClientProvider>
           </PersistGate>
         </ReduxProvider>
-      </StrictMode>
+
     );
   } catch (error) {
     document.body.innerHTML = `

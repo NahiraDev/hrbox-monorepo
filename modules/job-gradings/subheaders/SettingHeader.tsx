@@ -36,24 +36,24 @@ const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
     return;
   }
 
-  if (isGeneral) {
-    modal.open(
-  ModalType.CREATE,
-  t("general"),
-  <GeneralModal />,
-  {
-    isForm: true,
-    submitLabel: "Submit",
-    cancelLabel: "Cancel",
-    formConfig: {
-      formId: "general-form",
-    },
-  },
-  ModalSize["2XL"]
-);
+    if (isGeneral) {
+      modal.open(
+          ModalType.CREATE,
+          t("general"),
+          <GeneralModal />,
+          {
+            isForm: true,              // ✅ فقط اینجا
+            submitLabel: "Submit",
+            cancelLabel: "Cancel",
+            formConfig: {
+              formId: "general-form",  // 🔑 مهم
+            },
+          },
+          ModalSize["2XL"]
+      );
+    }
 
-  }
-};
+  };
 
 
   return (

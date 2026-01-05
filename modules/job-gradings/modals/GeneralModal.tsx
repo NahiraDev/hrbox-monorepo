@@ -7,18 +7,18 @@ const GeneralModal = () => {
   const modalData = getOpenModal()?.data;
   const rowData = modalData?.data;
   console.log(rowData);
-  
+
   const initialValues = {
-    Grade: rowData?.Grade || null,
-    Grouping: rowData?.Grouping || null,
-    ofpoint: rowData?.ofpoint || null,
-    uptopoints: rowData?.uptopoints || null,
-    gradeColor: rowData?.gradeColor || null,
-    Description: rowData?.Description || null,
+    Grade: rowData?.Grade ,
+    Grouping: rowData?.Grouping ,
+    ofpoint: rowData?.ofpoint ,
+    uptopoints: rowData?.uptopoints ,
+    gradeColor: rowData?.gradeColor ,
+    Description: rowData?.Description ,
   };
 
 
-  const formValidationAction = Yup.object({
+  const formValidationAction = Yup.object().shape({
     Grade: Yup.string().required(),
     Grouping: Yup.string().required(),
     ofpoint: Yup.string().required(),
@@ -26,15 +26,17 @@ const GeneralModal = () => {
     Description: Yup.string().required(),
   });
 
-  const handelSubmit = async (values: any) => {
-    console.log("hello");
+  const handelSubmit =async (values: any) => {
+    console.log("hello", values);
   };
   return (
     <FormProvider
       formId="general-form"
       initialValues={initialValues}
       validationSchema={formValidationAction}
-      onSubmitAsync={handelSubmit}
+      onSubmit={handelSubmit}
+      enableCache={true}
+      clearCacheOnSubmit={true}
     >
       <GeneralForm />
     </FormProvider>

@@ -1396,6 +1396,7 @@ export const Indicators = [
 ];
 export const GeneralMock = [
   {
+    id:"1",
     Grade: "Grade A",
     gradeColor: "#22C55E",
     Grouping: "Behavioral indicators",
@@ -1404,6 +1405,7 @@ export const GeneralMock = [
     Description: "High performance",
   },
   {
+    id:"2",
     Grade: "Grade B",
     gradeColor: "#3B82F6",
     Grouping: "Technical indicators",
@@ -1412,6 +1414,7 @@ export const GeneralMock = [
     Description: "Good performance",
   },
   {
+    id:"3",
     Grade: "Grade A",
     gradeColor: "#F97316",
     Grouping: "Behavioral indicators",
@@ -1420,6 +1423,42 @@ export const GeneralMock = [
     Description: "High performance",
   },
   {
+    id:"4",
+    Grade: "Grade B",
+    gradeColor: "#EF4444",
+    Grouping: "Technical indicators",
+    ofpoint: "20",
+    uptopoints: "80",
+    Description: "Good performance",
+  },{
+    id:"5",
+    Grade: "Grade A",
+    gradeColor: "#22C55E",
+    Grouping: "Behavioral indicators",
+    ofpoint: "0",
+    uptopoints: "60",
+    Description: "High performance",
+  },
+  {
+    id:"6",
+    Grade: "Grade B",
+    gradeColor: "#3B82F6",
+    Grouping: "Technical indicators",
+    ofpoint: "20",
+    uptopoints: "80",
+    Description: "Good performance",
+  },
+  {
+    id:"7",
+    Grade: "Grade A",
+    gradeColor: "#F97316",
+    Grouping: "Behavioral indicators",
+    ofpoint: "0",
+    uptopoints: "60",
+    Description: "High performance",
+  },
+  {
+    id:"8",
     Grade: "Grade B",
     gradeColor: "#EF4444",
     Grouping: "Technical indicators",
