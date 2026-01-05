@@ -1,121 +1,115 @@
-import { Form } from "@heroui/react";
-import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
-import { Scan } from "iconsax-reactjs";
-import * as Yup from "yup";
-import { useFormContext } from "@hrbox/core/providers/FormProvider";
-import { FormField } from "@hrbox/uikit/components/FormField";
-import { useModalContext } from "@hrbox/core/providers";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import ColorPicker from "@hrbox/uikit/components/ColorPicker";
-import { GRADE_COLORS } from "../app/mock";
+  import { useEffect } from "react";
+  import { Form } from "@heroui/react";
+  import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
+  import { useFormContext } from "@hrbox/core/providers/FormProvider";
+  import { FormField } from "@hrbox/uikit/components/FormField";
+  import { useModalContext } from "@hrbox/core/providers";
+  import ColorPicker from "@hrbox/uikit/components/ColorPicker";
+  import {
+    GRADE_OPTIONS,
+    GROUP_OPTIONS,
+    OF_POINTS,
+    UP_TO_POINT,
+    GRADE_COLORS,
+  } from "../app/mock";
 
-export const initialValuesAction = {
-  index_title: null,
-  Select_Group: null,
-  type: null,
-  weight: null,
-  creation_date: null,
-  Department: null,
-  Employee: null,
-  Description: null,
-};
-export const formValidationAction = Yup.object().shape({
-  index_title: Yup.string().required(),
-  Select_Group: Yup.string().required(),
-  type: Yup.string().required(),
-  weight: Yup.string().required(),
-  creation_date: Yup.string().required(),
 
-  Description: Yup.string().required(),
-});
-export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.Description);
-  return {
-    index_title: values.index_title,
-    Select_Group: values.Group,
-    type: values.type,
-    weight: values.weight,
-    Description: values.Description,
-  };
-};
 
-const GeneralForm = () => {
-  const { t } = useTranslation();
-   const [color, setColor] = useState<string>("");
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    setFieldValue,
-  } = useFormContext();
+  const GeneralForm = () => {
+  const { values, handleSubmit, setFieldValue , touched , errors } = useFormContext();
   const { getOpenModal } = useModalContext();
-  const currentType = getOpenModal()?.type;
+
+  const currenttype = getOpenModal()?.type;
+   
+
+  useEffect(() => {
+    console.log("📋 VALUES:", values);
+  }, [values]);
+
   return (
-    <>
-      <Form id="face-allocation-form" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-full gap-7">
-          <div className="flex flex-row justify-between gap-10">
-            <div className="w-full">
-              <FormField
-                formMode={currentType}
-                name="Grade title"
-                label={t("Grade_title")}
-                component={AppAutoComplete}
-              />
-            </div>
-            <div className="w-full">
-              <FormField
-                formMode={currentType}
-                name="Select_Group"
-                label={t("Select_Group")}
-                component={AppAutoComplete}
-              />
-            </div>
-          </div>
-          <div className="flex flex-row justify-between gap-10">
-            <div className="w-full">
-              <FormField
-                formMode={currentType}
-                name="of points"
-                label={t("of_points")}
-                component={AppAutoComplete}
-              />
-            </div>
+    <form id="general-form" onSubmit={handleSubmit}>
+      <div className="grid grid-cols-2 gap-x-8 gap-y-6">
 
-            <div className="w-full">
-              <FormField
-                formMode={currentType}
-                name="up_to_points"
-                label={t("up_to_points")}
-                component={AppAutoComplete}
-              />
-            </div>
-          </div>
-          {/* PALETTE */}
-          <ColorPicker
-            colors={GRADE_COLORS}
-            value={color}
-            onChange={setColor}
-          />
+        <FormField
+          formMode={currenttype}
+          name="Grade"
+          aria-label="Grade"
+          label="Grade title"
+          component={AppAutoComplete}
+          data={GRADE_OPTIONS}
+          helperText={touched.Grade && errors.Grade }
+        />
 
-          <div className="w-full ">
-            <FormField
-              formMode={currentType}
-              name="Description"
-              label={t("descriptions")}
-              component={AppTextArea}
+        <FormField
+          formMode={currenttype}
+          name="Grouping"
+          aria-label="Grouping"
+          label="Select Group"
+          component={AppAutoComplete}
+          data={GROUP_OPTIONS}
+          helperText={touched.Grouping && errors.Grouping }
+        />
+
+        <FormField
+          formMode={currenttype}
+          name="ofpoint"
+          aria-label="ofpoint"
+          label="Of Points"
+          component={AppAutoComplete}
+          data={OF_POINTS}
+          helperText={touched.ofpoint && errors.ofpoint }
+
+        />
+
+        <FormField
+          formMode={currenttype}
+          name="uptopoints"
+          aria-label="uptopoints"
+          label="Up To Points"
+          component={AppAutoComplete}
+          data={UP_TO_POINT}
+          helperText={touched.uptopoints && errors.uptopoints }
+
+        />
+
+        {/* Color */}
+        <div className="col-span-2">
+          {currenttype === "view" ? (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-semibold text-secondary-900">
+                Color Grade
+              </label>
+              <div className="!h-10 px-3 flex items-center rounded-lg border border-[#DCF0F9]">
+                <span
+                  className="w-6 h-6 rounded-md"
+                  style={{ backgroundColor: values.gradeColor }}
+                />
+              </div>
+            </div>
+          ) : (
+            <ColorPicker
+              colors={GRADE_COLORS}
+              value={values.gradeColor}
+              onChange={(c) => setFieldValue("gradeColor", c)}
             />
-          </div>
+          )}
         </div>
-        <Scan color="gray" size={90} className="absolute bottom-2 left-0" />
-      </Form>
-    </>
+
+        <div className="col-span-2">
+          <FormField
+            formMode={currenttype}
+            name="Description"
+            area-label="Description"
+            label="Descriptions"
+            component={AppTextArea}
+            helperText={touched.Description && errors.Description }
+
+          />
+        </div>
+      </div>
+    </form>
   );
 };
-export default GeneralForm;
+
+
+  export default GeneralForm;
