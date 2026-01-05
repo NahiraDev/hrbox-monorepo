@@ -251,7 +251,7 @@ const AppModalBase: React.FC<AppModalProps> & {
 } = ({
        title,
        icon,
-       size = "md",
+       size,
        type,
        name,
        component,
@@ -356,7 +356,7 @@ const AppModalBase: React.FC<AppModalProps> & {
             className={clsx(
               "rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
               "shadow-2xl overflow-hidden max-h-[90vh] p-12 gap-6  flex flex-col relative",
-              sizeClasses[modalSize] || "max-w-md"
+              sizeClasses[modalSize]
             )}
           >
             <ModalContextProvider.Provider value={contextValue}>

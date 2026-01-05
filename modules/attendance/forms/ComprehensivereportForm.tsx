@@ -4,8 +4,7 @@ import { FormField } from "@hrbox/uikit/components/FormField";
 import { InfoCircle } from "iconsax-reactjs";
 import { useTranslation } from "react-i18next";
 
-const ComprehensivereportForm = ({isExpanded}) => {
-    console.log(isExpanded);
+const ComprehensivereportForm = (isExpanded:boolean) => {
     
   const { t } = useTranslation();
   const inputs = [

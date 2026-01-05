@@ -118,7 +118,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             name,
             component,
             data,
-            size: size || ModalSize.MD,
+            size: size ,
             title: title ?? null,
             icon: icon ?? null,
             closeOnBackdrop: options?.closeOnBackdrop ?? true,

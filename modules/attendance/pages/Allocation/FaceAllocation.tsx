@@ -5,9 +5,11 @@ import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
 import FaceAllocationModal from "@hrbox/modules/attendance/modals/FaceAllocationModal";
 import { Hierarchy3 } from "iconsax-reactjs";
+import { useTranslation } from "react-i18next";
 
 const FaceAllocation = () => {
   const modal = useModal();
+  const {t}=useTranslation()
   const [data, setData] = useState(getAllAllocations());
   const handleRowClick = (row:any) => {
     modal.open(
@@ -17,7 +19,7 @@ const FaceAllocation = () => {
       {
         data:row,
         isForm: true,
-        title:"Face Recognition Assignment",
+        title:t("face-recognition-assignment"),
         icon:<Hierarchy3 size={18} />,
         formConfig: {
           formId: "face-allocation-form"
@@ -26,6 +28,26 @@ const FaceAllocation = () => {
       ModalSize["3XL"]
     );
   };
+  const handleEditClick = (row:any) => {
+    modal.open(
+      ModalType.EDIT,
+      "face-allocation-form",
+      <FaceAllocationModal />,
+      {
+        data:row,
+        isForm: true,
+        title:t("edit-face-recognition-assignment"),
+                submitLabel: t("submit"),
+        cancelLabel: t("cancel"),
+        icon:<Hierarchy3 size={18} />,
+        formConfig: {
+          formId: "face-allocation-form"
+        }
+      },
+      ModalSize["3XL"]
+    );
+  };
+  
   return (
     <>
       <div className="h-full w-full flex flex-col ">
@@ -36,6 +58,7 @@ const FaceAllocation = () => {
           pageSize={8}
           onRowClick={(row)=>handleRowClick(row)}
           variant="bordered"
+          onEdit={(row)=>handleEditClick(row)}
         />
       </div>
     </>
