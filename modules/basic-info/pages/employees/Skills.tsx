@@ -3,10 +3,10 @@ import { Avatar, Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { LampCharge, Trash } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { AppDoubleLineProgress } from "@hrbox/uikit/sections/AppDoubleLineProgress";
 import { useState } from "react";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
 import {useModal} from "@hrbox/core/hooks";
+import { AppDoubleLineProgress } from "@hrbox/uikit/components/AppDoubleLineProgress";
 
 const Education = () => {
   const modal = useModal();
@@ -36,11 +36,14 @@ const Education = () => {
   };
 
   const SkillCard = (skill: any, index: number) => (
-    <Card key={index} className="p-3 flex gap-1.5 shdow-theme-sm bg-white">
+    <Card
+      isPressable
+      key={index}
+      className="p-3 flex gap-1.5 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white">
       <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 px-1.5">
           <Avatar radius="sm" size="sm" color='primary' />
-          <span className="text-lg">{skill.skill}</span>
+          <span className="text-[16px] font-semibold text-secondary-1000">{skill.skill}</span>
         </div>
         <div>
           <AppButton
@@ -50,21 +53,21 @@ const Education = () => {
               isIconOnly={true}
               onPress={() => handleDeleteClick(index)}
               content={
-                <Trash className="text-secondary-1000 group-hover:text-white" />
+                <Trash className="text-secondary-1000 group-hover:text-white"size={16} />
               }
               className="p-2 hover:!bg-red-500 transition-all duration-200"
           />
         </div>
       </div>
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between mt-1.5 gap-[49px]">
         <div className="flex flex-col gap-2 font-light">
-          <div className="flex items-center">
-            <span>Level:</span>
-            <span>{skill.Level}</span>
+          <div className="flex items-center gap-4">
+            <span className='text-sm text-[#353535] font-light'>Level:</span>
+            <span className='text-sm text-[#353535]'>{skill.Level}</span>
           </div>
-          <div>
-            <span>Grad:</span>
-            <span>{skill.Grad}</span>
+          <div  className="flex items-center gap-4">
+            <span className='text-sm text-[#353535] font-light'>Grad:</span>
+            <span className='text-sm text-[#353535]'>{skill.Grad}</span>
           </div>
         </div>
         <div>
@@ -80,9 +83,9 @@ const Education = () => {
         content={
           <div className="flex p-7 gap-10">
             <div className="flex flex-col w-full gap-3  ">
-              <div className="flex gap-1 items-center text-[20px] font-semibold">
-                <LampCharge />
-                <span className="text-secondary-1000">Hard Skills</span>
+              <div className="flex gap-1 items-center">
+                <LampCharge size={24} />
+                <span className="text-secondary-1000 text-xl font-semibold">Hard Skills</span>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
                 {currentSkills.map((skill: any, index: number) =>
@@ -92,9 +95,9 @@ const Education = () => {
             </div>
 
             <div className="flex flex-col gap-3 w-full">
-              <div className="flex gap-1 text-[20px] items-center font-semibold">
-                <LampCharge />
-                <span>Soft Skills</span> {/* Changed text for clarity */}
+              <div className="flex gap-1 items-center">
+                <LampCharge size={24} />
+                <span className="text-secondary-1000 text-xl font-semibold">Soft Skills</span>
               </div>
               <div className="grid grid-cols-2 gap-3 w-full">
                 {/* Use currentSkills state for mapping */}

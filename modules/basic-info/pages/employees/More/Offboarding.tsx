@@ -54,7 +54,7 @@ const rows = [
 ];
 
 
-const Onboarding = () => {
+const Offboarding = () => {
 
 
   const [activeIndex, setActiveIndex] = useState(null);
@@ -84,7 +84,7 @@ const Onboarding = () => {
   `}
               >
 
-              <div className="flex gap-1 items-center border-b border-neutral-100 pb-1">
+                <div className="flex gap-1 items-center border-b border-neutral-100 pb-1">
                   <Clipboard size="20" />
                   <span className="text-[16px] text-secondary-1000 font-semibold">{board.title}</span>
                 </div>
@@ -112,14 +112,14 @@ const Onboarding = () => {
                 <UserAdd size="26" />
                 <span className="text-xl font-semibold">Today:</span>
                 <span className="text-xl font-semibold ml-3">Oct.21</span>
-            </div>
+              </div>
             </div>
             <div className="flex flex-col gap-3">
-            <TableDnn/>
-            <TableDnn/>
-            <TableDnn/>
-            <TableDnn/>
-            <TableDnn/>
+              <TableDnn/>
+              <TableDnn/>
+              <TableDnn/>
+              <TableDnn/>
+              <TableDnn/>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@ const TableDnn = () => {
     <Accordion>
       <AccordionItem
         key="1"
-      title={
+        title={
           <div className="flex items-center justify-between">
             <div className="flex gap-2 items-center">
               <ArrowRight2
@@ -220,4 +220,4 @@ const TableDnn = () => {
   )
 }
 
-export default Onboarding;
+export default Offboarding;

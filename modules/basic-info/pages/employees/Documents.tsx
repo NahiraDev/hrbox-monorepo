@@ -85,7 +85,7 @@ const Documents = () => {
           },
         },
       },
-      ModalSize.XL,
+      ModalSize.SM,
     );
   };
 
@@ -94,24 +94,20 @@ const Documents = () => {
       content={
         <div className="grid grid-cols-4 gap-4 w-full p-4">
           {documentsList.map((user, index) => (
-            <Card key={index} className="p-3 w-full h-full">
+            <Card
+              isPressable
+              onPress={handleOpenDocuments}
+              key={index} className="p-3 w-full h-full shadow-sm hover:bg-[#D6F2FF] hover:cursor-pointer"
+            >
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
                   <div className="flex items-center gap-3">
-                    <AppButton
-                      size="xs"
-                      radius="sm"
-                      variant="light"
-                      isIconOnly={true}
-                      onPress={handleOpenDocuments}
-                      content={
                         <Avatar
                           radius="sm"
+                          color="primary"
                           size="lg"
                           src={user.avatarSrc || undefined}
                         />
-                      }
-                    />
                     <span>Identity Card</span>
                   </div>
                   <div className="flex gap-1">
@@ -143,21 +139,21 @@ const Documents = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-0.5 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1.5 items-center w-full border border-[#DCF0F9]/40 rounded-lg py-1.5 px-2">
                   <User className="w-4 h-4" />
-                  <span className="text-sm">{user.name}</span>
+                  <span className="text-xs text-secondary-1000">{user.name}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1.5 items-center w-full border border-[#DCF0F9]/40 rounded-lg py-1.5 px-2">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-sm">{user.Publication}</span>
+                  <span className="text-xs text-secondary-1000">{user.Publication}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1.5 items-center w-full border border-[#DCF0F9]/40 rounded-lg py-1.5 px-2">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-sm">{user.Edit}</span>
+                  <span className="text-xs text-secondary-1000">{user.Edit}</span>
                 </div>
-                <div className="flex gap-1 items-center w-full border border-[#DCF0F9]/40 rounded-5 p-1.5">
+                <div className="flex gap-1.5 items-center w-full border border-[#DCF0F9]/40 rounded-lg py-1.5 px-2">
                   <Status className="w-4 h-4" />
-                  <span className="text-sm">{user.UploadStatus}</span>
+                  <span className="text-xs text-secondary-1000">{user.UploadStatus}</span>
                 </div>
               </div>
             </Card>

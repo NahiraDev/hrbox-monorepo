@@ -43,23 +43,6 @@ export const OrganizationDepartmentModal = () => {
     await setFieldValue("rank", color);
   };
 
-  // const handleSave = () => {
-  //   if (formData.color) {
-  //     openModal(
-  //       "custom",
-  //       "",
-  //       <OrganizationDepartmentChoseModal
-  //         initialData={formData}
-  //         selectedColor={formData.color}
-  //       />,
-  //       undefined,
-  //       "3xl",
-  //       "Organization Departments",
-  //       <Category className="text-white" />,
-  //     );
-  //   }
-  // };
-
   const colorSwatches = colors.map((color) => {
     const isSelected = values.rank === color;
     return (
@@ -89,12 +72,12 @@ export const OrganizationDepartmentModal = () => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
       <div className="grid grid-cols-2 gap-4">
         <FormField
-          name="department_title"
+          name="department"
           label="Department Title"
-          helperText={touched.department_title && errors.department_title}
+          helperText={touched.department && errors.department}
           formMode={currentType}
         />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col ">
           <span className="!text-sm !font-medium">Department Color</span>
           <div className="flex gap-2.5 flex-wrap" role="radiogroup">
             {colorSwatches}
@@ -120,11 +103,13 @@ export const OrganizationDepartmentModal = () => {
         </div>
       </div>
       <FormField
-        name="description"
-        label="Description"
         formMode={currentType}
+        name="descriptions"
+        label="Descriptions"
         component={AppTextArea}
+        helperText={touched.Descriptions && errors.Descriptions}
       />
+
     </form>
   );
 };

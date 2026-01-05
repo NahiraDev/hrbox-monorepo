@@ -1,326 +1,189 @@
 import {
   AppAutoComplete,
-  AppButton,
+  AppButton, AppCheckBox, AppDatePicker,
   AppInput,
   AppModal,
-  AppTextArea,
+  AppTextArea, FormField
 } from "@hrbox/uikit/components";
-import { NotificationFavorite } from "iconsax-reactjs";
-import { useState } from "react";
 
-// ✅ INTERFACE
-interface PreEmploymentHealthRecordsModalsProps {
-  onSubmit: (newRecord: any) => void;
-}
+import React  from "react";
+import { useFormContext, useModalContext } from "@hrbox/core/providers";
 
-const PreEmploymentHealthRecordsModals: React.FC<
-  PreEmploymentHealthRecordsModalsProps
-> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    type: "",
-    drugAddiction: "",
-    smoking: "",
-    bloodType: "",
-    gastrointestinal: "",
-    alcohol: "",
-    musculoskeletal: "",
-    mentalHealth: "",
-    bloodSugar: "",
-    vitaminD: "",
-    bloodPressure: "",
-    liverEnzyme: "",
-    audiometry: "",
-    breathTest: "",
-    visionTest: "",
-    ecg: "",
-    bloodLipid: "",
-    bloodIron: "",
-    attachedFile: "",
-    date: "",
-    description: "",
-  });
 
-  // ✅ Handle Change برای همه input ها
-  const handleInputChange = (field: string) => (value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+const PreEmploymentHealthRecordsModals = () => {
 
-  const handleSubmit = () => {
-    const newRecord = {
-      id: Date.now(),
-      title: formData.type || "New Pre-Employment Record",
-      type: formData.type,
-      date: formData.date,
-      question: formData.description || "No treatment required",
-      titleButton: "Edit",
-      ...formData,
-    };
-    onSubmit(newRecord);
-  };
+  const {  errors, touched } =
+    useFormContext();
+
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
 
   return (
-    <>
       <AppModal.Body>
-        <div className="flex flex-col gap-y-6 p-4 overflow-y-scroll max-h-[70vh]">
+        <div className="flex flex-col gap-y-6 p-4">
           <div className="grid grid-cols-2 gap-x-10 gap-y-6">
-            <AppAutoComplete
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Type",
-                value: { value: formData.type },
-                onChange: handleInputChange("type"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Type"
+              name="Type"
+              component={AppAutoComplete}
+              helperText={touched.Type && errors.Type}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Drug Addiction",
-                value: formData.drugAddiction,
-                onChange: handleInputChange("drugAddiction"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Drug Addiction"
+              name="Drug"
+              component={AppAutoComplete}
+              helperText={touched.Drug && errors.Drug}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Smoking",
-                value: formData.smoking,
-                onChange: handleInputChange("smoking"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Smoking"
+              name="Smoking"
+              component={AppAutoComplete}
+              helperText={touched.Smoking && errors.Smoking}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Blood Type",
-                value: formData.bloodType,
-                onChange: handleInputChange("bloodType"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+             <FormField
+              formMode={currentType}
+              label="Blood Type"
+              name="Blood"
+              component={AppAutoComplete}
+              helperText={touched.Blood && errors.Blood}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Gastrointestinal Disease",
-                value: formData.gastrointestinal,
-                onChange: handleInputChange("gastrointestinal"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Gastrointestinal Disease"
+              name="Gastrointestinal"
+              component={AppAutoComplete}
+              helperText={touched.Gastrointestinal && errors.Gastrointestinal}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Alcohol Consumption",
-                value: formData.alcohol,
-                onChange: handleInputChange("alcohol"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Alcohol Consumption"
+              name="Alcohol"
+              component={AppAutoComplete}
+              helperText={touched.Alcohol && errors.Alcohol}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Musculoskeletal Disease",
-                value: formData.musculoskeletal,
-                onChange: handleInputChange("musculoskeletal"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Musculoskeletal Disease"
+              name="Musculoskeletal"
+              component={AppAutoComplete}
+              helperText={touched.Musculoskeletal && errors.Musculoskeletal}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Mental Health Condition",
-                value: formData.mentalHealth,
-                onChange: handleInputChange("mentalHealth"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Mental Health Condition"
+              name="Mental"
+              component={AppAutoComplete}
+              helperText={touched.Mental && errors.Mental}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Blood Sugar Level",
-                value: formData.bloodSugar,
-                onChange: handleInputChange("bloodSugar"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Blood Sugar Level"
+              name="Blood"
+              component={AppAutoComplete}
+              helperText={touched.Blood && errors.Blood}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Vitamin D Level",
-                value: formData.vitaminD,
-                onChange: handleInputChange("vitaminD"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+             <FormField
+              formMode={currentType}
+              label="Vitamin D Level"
+              name="Vitamin"
+              component={AppAutoComplete}
+              helperText={touched.Vitamin && errors.Vitamin}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Blood Pressure",
-                value: formData.bloodPressure,
-                onChange: handleInputChange("bloodPressure"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Blood Pressure"
+              name="Blood"
+              component={AppAutoComplete}
+              helperText={touched.Blood && errors.Blood}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Liver Enzyme Status",
-                value: formData.liverEnzyme,
-                onChange: handleInputChange("liverEnzyme"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Liver Enzyme Status"
+              name="Liver"
+              component={AppAutoComplete}
+              helperText={touched.Liver && errors.Liver}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Audiometry",
-                value: formData.audiometry,
-                onChange: handleInputChange("audiometry"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Audiometry "
+              name="Audiometry "
+              component={AppAutoComplete}
+              helperText={touched.Audiometry  && errors.Audiometry }
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Breath Test",
-                value: formData.breathTest,
-                onChange: handleInputChange("breathTest"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Breath Test"
+              name="Breath"
+              component={AppAutoComplete}
+              helperText={touched.Breath && errors.Breath}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Vision Test",
-                value: formData.visionTest,
-                onChange: handleInputChange("visionTest"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Vision Test"
+              name="Vision"
+              component={AppAutoComplete}
+              helperText={touched.Vision && errors.Vision}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "ECG",
-                value: formData.ecg,
-                onChange: handleInputChange("ecg"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="ECG"
+              name="ECG"
+              component={AppAutoComplete}
+              helperText={touched.ECG && errors.ECG}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Blood Lipid Level",
-                value: formData.bloodLipid,
-                onChange: handleInputChange("bloodLipid"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Blood Lipid Level"
+              name="Blood"
+              component={AppAutoComplete}
+              helperText={touched.Blood && errors.Blood}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Blood Iron Level",
-                value: formData.bloodIron,
-                onChange: handleInputChange("bloodIron"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+             <FormField
+              formMode={currentType}
+              label="Blood Iron Level"
+              name="Blood"
+              component={AppAutoComplete}
+              helperText={touched.Blood && errors.Blood}
             />
-            <AppInput
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Attached File",
-                value: formData.attachedFile,
-                onChange: handleInputChange("attachedFile"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Attached File"
+              name="Attached"
+              component={AppAutoComplete}
+              helperText={touched.Attached && errors.Attached}
             />
-            <AppAutoComplete
-              props={{
-                className: "border border-[#DCF0F9]",
-                label: "Date",
-                value: { value: formData.date },
-                onChange: handleInputChange("date"),
-                size: "lg",
-                color: "primary",
-                radius: "lg",
-              }}
+            <FormField
+              formMode={currentType}
+              label="Date"
+              name="Date"
+              component={AppDatePicker}
+              helperText={touched.Date && errors.Date}
             />
           </div>
-          <AppTextArea
-            props={{
-              className: "border border-[#DCF0F9]",
-              label: "Descriptions and Achievements*",
-              value: formData.description,
-              onChange: handleInputChange("description"),
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+          <FormField
+            formMode={currentType}
+            label="Descriptions and Achievements"
+            name="Descriptions"
+            component={AppTextArea}
+            helperText={touched.Descriptions && errors.Descriptions}
           />
+
+        </div>
+        <div className="bg-primary-50 flex items-center justify-between py-5 px-3 rounded-lg">
+          <span className="text-sm font-semibold text-secondary-1000">Does it require treatment?</span>
+          <div className="flex items-center justify-around ">
+            <AppCheckBox
+            />
+            <AppCheckBox
+            />
+          </div>
         </div>
       </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => {}, // Modal رو ببندید
-            content: <span>Cancel</span>,
-            className:
-              "text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200",
-          }}
-        />
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: handleSubmit,
-            content: <span>Submit</span>,
-            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg",
-          }}
-        />
-      </AppModal.Footer>
-    </>
+
   );
 };
 
