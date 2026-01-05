@@ -19,6 +19,7 @@ interface AppDatePickerProps {
   onChange?: (value: string) => void;
   onBlur?: () => void;
   disabled?: boolean;
+  helperText?: string;
   containerClassName?: string;
   errorClassName?: string;
 }
@@ -38,6 +39,7 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
       onChange,
       onBlur,
       disabled,
+      helperText,
       containerClassName,
       errorClassName
     },
@@ -122,6 +124,11 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
           value={value}
           disabled={isViewMode || disabled}
           className="shadow-[0_0_0_0_rgba(0,0,0,0)]"
+          onClose={() => {
+            if (onBlur) {
+              onBlur();
+            }
+          }}
           mapDays={({ date }: any) => {
             const isHoliday = holidays.includes(date.format("YYYY/MM/DD"));
             const isFriday =
@@ -144,6 +151,8 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
           ) => (
             <button
               type="button"
+              id={name}
+              name={name}
               className={buttonClasses}
               onClick={openCalendar}
               disabled={isViewMode || disabled}
@@ -152,14 +161,22 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
                 size="20"
                 className={
                   hasError && !isViewMode
-                    ? "text-danger text-neutral-250"
+                    ? "text-danger"
                     : isViewMode
                       ? "text-neutral-500 dark:text-neutral-400"
-                      : "text-[#999]"
+                      : "text-neutral-400 dark:text-neutral-500"
                 }
               />
-              <span
-                className="text-[#999] font-medium text-sm">{val || (lang === "fa" ? "انتخاب تاریخ" : "Select date")}</span>
+              <span className={clsx(
+                "font-medium text-sm",
+                hasError && !isViewMode
+                  ? "text-danger dark:text-danger-400"
+                  : isViewMode
+                    ? "text-neutral-600 dark:text-neutral-300"
+                    : "text-secondary-900 dark:text-white"
+              )}>
+                {val || (lang === "fa" ? "انتخاب تاریخ" : "Select date")}
+              </span>
             </button>
           )}
           onChange={(dateObj: any) => {
@@ -167,11 +184,10 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
               onChange(dateObj.format("YYYY/MM/DD"));
             }
           }}
-          onBlur={onBlur}
         />
 
         {hasError && typeof error === "string" && (
-          <span
+          <p
             className={clsx(
               "text-xs font-medium",
               "text-danger dark:text-danger-400",
@@ -179,7 +195,13 @@ export const AppDatePicker = forwardRef<HTMLDivElement, AppDatePickerProps>(
             )}
           >
             {error}
-          </span>
+          </p>
+        )}
+
+        {helperText && !hasError && (
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            {helperText}
+          </p>
         )}
       </div>
     );
