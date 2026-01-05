@@ -28,16 +28,19 @@ const Close: React.FC<{ size?: string; className?: string }> = ({
   );
 };
 
-const sizeClasses: Record<ModalSize | string, string> = {
-  sm: "max-w-sm",
-  md: "max-w-md",
-  lg: "max-w-lg",
-  xl: "max-w-xl",
-  "2xl": "max-w-2xl",
-  "3xl": "max-w-3xl",
-  "4xl": "max-w-4xl",
-  "5xl": "max-w-5xl",
-  full: "w-full h-full"
+const getSizeClass = (size: string): string => {
+  const sizes: { [key: string]: string } = {
+    "sm": "max-w-sm",
+    "md": "max-w-md",
+    "lg": "max-w-lg",
+    "xl": "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "max-w-4xl",
+    "5xl": "max-w-5xl",
+    "full": "w-full h-full"
+  };
+  return sizes[size] || "max-w-md";
 };
 
 interface AppModalContextType {
@@ -211,7 +214,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
           {onSubmit && (
             <Button
               color="primary"
-              onPress={() => handleSubmit}
+              onPress={handleSubmit}
               isDisabled={isSubmitting}
               isLoading={isSubmitting}
             >
@@ -355,7 +358,7 @@ const AppModalBase: React.FC<AppModalProps> & {
             className={clsx(
               "rounded-2xl bg-panel-surface dark:bg-[#01101A] border border-primary",
               "shadow-2xl overflow-hidden max-h-[90vh] p-12 gap-6  flex flex-col relative",
-              sizeClasses[modalSize] || "max-w-md"
+              getSizeClass(modalSize)
             )}
           >
             <ModalContextProvider.Provider value={contextValue}>

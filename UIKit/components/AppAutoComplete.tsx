@@ -66,7 +66,7 @@ const AppAutoCompleteComponent = React.forwardRef<
           return {
             wrapper: clsx(
               baseWrapper,
-              "!bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] !dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] ",
+              "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] ",
               "border border-[#DCF0F9] dark:border-primary-800",
               "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
@@ -78,7 +78,7 @@ const AppAutoCompleteComponent = React.forwardRef<
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60] bg-white!",
+              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
               "hover:border-primary-300 dark:hover:border-primary-600",
               "focus-within:border-primary"
             ),
@@ -91,7 +91,7 @@ const AppAutoCompleteComponent = React.forwardRef<
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-white dark:bg-secondary-1000 border border-[#DCF0F9] bg-white!",
+              "bg-white dark:bg-secondary-1000 border border-[#DCF0F9]",
               "dark:border-[#04425C]",
               "dark:focus-within:border-surface"
             ),
@@ -108,14 +108,14 @@ const AppAutoCompleteComponent = React.forwardRef<
       modeStyles.wrapper,
       hasError &&
       !isViewMode &&
-      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20 rounded-lg",
+      "border-danger dark:border-danger-500 bg-danger-50 dark:bg-danger-900/20",
       className
     );
 
     const inputClasses = clsx(
       modeStyles.input,
       hasError && !isViewMode && "text-danger dark:text-danger-400",
-      "placeholder:text-neutral-400 dark:placeholder:text-neutral-500 border-[#DCF0F9]"
+      "placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
     );
 
     return (
@@ -142,9 +142,14 @@ const AppAutoCompleteComponent = React.forwardRef<
           name={name}
           isDisabled={isViewMode || isDisabled}
           isInvalid={hasError}
+          inputProps={{
+            classNames: {
+              inputWrapper: wrapperClasses,
+              input: inputClasses
+            },
+            className: "shadow-[0_0_0_0_rgba(0,0,0,0)]"
+          }}
           classNames={{
-            inputWrapper: wrapperClasses,
-            input: inputClasses,
             errorMessage: clsx(
               "text-xs font-medium",
               "text-danger dark:text-danger-400",
