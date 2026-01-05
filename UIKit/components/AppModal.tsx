@@ -343,7 +343,7 @@ const AppModalBase: React.FC<AppModalProps> & {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
           onClick={handleBackdropClick}
         >
           <motion.div
@@ -353,7 +353,7 @@ const AppModalBase: React.FC<AppModalProps> & {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
             className={clsx(
-              "rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
+              "rounded-2xl bg-panel-surface dark:bg-[#01101A] border border-primary",
               "shadow-2xl overflow-hidden max-h-[90vh] p-12 gap-6  flex flex-col relative",
               sizeClasses[modalSize] || "max-w-md"
             )}
