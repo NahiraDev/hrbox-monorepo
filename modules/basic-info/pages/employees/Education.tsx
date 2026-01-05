@@ -51,7 +51,7 @@ const Education = () => {
       <EducationModals />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Teacher size={20}/>  Education Details</div>,
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/>  Education Details</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -75,7 +75,7 @@ const Education = () => {
       <EducationModals />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Teacher size={20}/> Edit Education</div>,
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/> Edit Education</div>,
         submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {

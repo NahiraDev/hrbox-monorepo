@@ -3,7 +3,7 @@ import { DynamicAddModal } from "@hrbox/modules/basic-info/modals/DynamicAddModa
 import { AppButton } from "@hrbox/uikit/components";
 import {
   Add,
-  Category,
+  Category, Cup, Designtools,
   FolderCross,
   MessageEdit, SearchNormal1, Teacher,
   Trash
@@ -116,7 +116,7 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <JobModal />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Category size={18}/> Software Management Details</div>,
+        title:<div className="flex items-center gap-2"> <Designtools size={22}/> Add New Job</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -142,7 +142,7 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <EducationModals />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Teacher size={20}/>Add New Education </div>,
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/>Add New Education</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -168,7 +168,7 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <CoursesModal />,
       {
         isForm: true,
-        title,
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/>Add New Courses </div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -220,9 +220,9 @@ export const AddButton = ({ tab }: AddButtonProps) => {
       <AchivementsModals />,
       {
         isForm: true,
-        title: "افزودن ",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
+        title:<div className="flex items-center gap-2"> <Cup size={22}/>Add New Achievement</div>,
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesRelative,
           validationSchema: formValidationRelative,

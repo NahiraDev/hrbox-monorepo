@@ -13,7 +13,7 @@ import {
   MessageEdit,
   Add,
   Profile,
-  User, People
+  User, People, Edit, Designtools
 } from "iconsax-reactjs";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
@@ -24,6 +24,7 @@ import { formValidationAction, initialValuesAction } from "@hrbox/modules/basic-
 import {initialValuesRelative,formValidationRelative} from "@hrbox/modules/basic-info/forms/RelativeForm";
 import SpouseModal from "@hrbox/modules/basic-info/modals/SpouseModal";
 import DependentsModal from "@hrbox/modules/basic-info/modals/DependentsModal";
+import React from "react";
 
 const Dependents = () => {
   const { openModal } = useModalContext();
@@ -37,7 +38,7 @@ const Dependents = () => {
       <SpouseModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/> Add New Spouse</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -62,8 +63,33 @@ const Dependents = () => {
       <SpouseModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/>  Spouse Details</div>,
         submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesAction,
+          validationSchema: formValidationAction,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+  const handleOpenSpouseEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      "Spouse",
+      <SpouseModal />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/> Edit Spouse</div>,
+        submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesAction,
@@ -87,7 +113,7 @@ const Dependents = () => {
       < DependentsModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/> Add New Dependents</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -112,8 +138,33 @@ const Dependents = () => {
       < DependentsModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/>  Dependents Details</div>,
         submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesAction,
+          validationSchema: formValidationAction,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+  const handleOpenDependentsEdit = () => {
+    modal.open(
+      ModalType.VIEW,
+      " Dependents",
+      < DependentsModal />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Profile2User size={22}/> Edit Dependents </div>,
+        submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesAction,
@@ -137,7 +188,7 @@ const Dependents = () => {
       < RelativesModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <People size={22}/> Add New Relatives </div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -162,8 +213,33 @@ const Dependents = () => {
       < RelativesModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <People size={22}/> Relatives Details </div>,
         submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+  const handleOpenRelativeEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      " Relatives",
+      < RelativesModal />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <People size={22}/>Edit Relatives  </div>,
+        submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesRelative,
@@ -197,6 +273,7 @@ const Dependents = () => {
                       radius="sm"
                       color="white"
                       variant="solid"
+                      onPress={handleOpenSpouseEdit}
                       isIconOnly={true}
                       className="bg-white border-1 border-primary p-1"
                       content={
@@ -221,7 +298,7 @@ const Dependents = () => {
                     isPressable
                     onPress={handleOpenSpouseShow}
                     key={index}
-                    className="p-2.5 w-full h-screen shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white flex flex-col gap-3"
+                    className="p-2.5 w-full  shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white flex flex-col gap-3"
                   >
                       <div className="flex gap-0.5 items-center justify-between  w-full border border-[#DCF0F9]/40 rounded-lg p-3 bg-gradient-to-r from-white via-sky-100 to-white">
                         <div className="flex text-sm gap-1.5 items-center">
@@ -296,7 +373,7 @@ const Dependents = () => {
                   <Profile2User size={24} />
                   <span className="text-xl font-semibold text-secondary-1000">Dependents</span>
                 </div>
-                <div>
+                <div className="mr-5">
                   <AppButton
                       size="xs"
                       radius="sm"
@@ -309,7 +386,7 @@ const Dependents = () => {
                   />
                 </div>
               </div>
-              <div className=" overflow-y-scroll h-screen">
+              <div className=" overflow-y-scroll  max-h-[calc(63.5vh)] pr-3">
                 {dataWorker.map((user: any, index) => (
                   <Card
                     isPressable
@@ -323,7 +400,16 @@ const Dependents = () => {
                           <span className="text-lg text-secondary-1000 font-semibold">{user.worker}</span>
                         </div>
                         <div className="flex gap-1">
-                          <div>
+                          <div className="flex items-center">
+                            <AppButton
+                              size= 'xs'
+                              radius= 'sm'
+                              variant= 'light'
+                              isIconOnly= {true}
+                              onPress= {handleOpenDependentsEdit}
+                              content= {<Edit className="text-secondary-1000 group-hover:text-white" size={16} />}
+                              className= 'p-2 hover:!bg-primary-400 transition-all duration-200'
+                            />
                             <AppButton
                               size='xs'
                               radius='sm'
@@ -397,31 +483,33 @@ const Dependents = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mr-2.5">
             <div className="flex items-center justify-between w-full ">
               <div className="flex items-center gap-1">
                 <People size={24} />
                 <span className="text-xl font-semibold text-secondary-1000">Relatives</span>
               </div>
               <div>
+                <div className="mr-7">
                 <AppButton
                   size="xs"
                   radius="sm"
                   color="white"
                   variant="solid"
                   isIconOnly={true}
-                  onPress={handleOpenDependents}
+                  onPress={handleOpenRelative}
                   className="bg-white border-1 border-primary p-1"
                   content={<Add className="text-secondary-900" size={19} />}
                 />
               </div>
+              </div>
             </div>
-            <div className="overflow-y-scroll h-screen">
-              <div className="grid grid-cols-2 gap-x-2.5 w-full ">
+            <div className="  overflow-y-scroll  max-h-[calc(63.5vh)] ">
+              <div className="grid grid-cols-2 gap-x-2.5 w-full pr-2.5 ">
                 {dataWorker2.map((user: any, index) => (
                   <Card
                     isPressable
-                    onPress={handleOpenDependentsShow}
+                    onPress={handleOpenRelativeShow}
                     key={index}
                     className="p-3 w-full shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer  bg-white flex flex-col gap-2 mb-2.5"
                   >
@@ -431,7 +519,16 @@ const Dependents = () => {
                         <span className="text-lg text-secondary-1000 font-semibold">{user.worker}</span>
                       </div>
                       <div className="flex gap-1">
-                        <div>
+                        <div className="flex items-center">
+                          <AppButton
+                            size= 'xs'
+                            radius= 'sm'
+                            variant= 'light'
+                            isIconOnly= {true}
+                            onPress= {handleOpenRelativeEdit}
+                            content= {<Edit className="text-secondary-1000 group-hover:text-white" size={16} />}
+                            className= 'p-2 hover:!bg-primary-400 transition-all duration-200'
+                          />
                           <AppButton
                             size='xs'
                             radius='sm'

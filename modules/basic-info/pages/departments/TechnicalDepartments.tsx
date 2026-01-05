@@ -42,8 +42,8 @@ const TechnicalDepartments = () => {
             />
 
 
-            <span className="group relative text-xs font-semibold text-secondary-1000 inline-block max-w-[18ch] overflow-hidden whitespace-nowrap">
-              {user.job.length > 18 ? (
+            <span className="group relative text-xs font-semibold text-secondary-1000 inline-block max-w-[13ch] overflow-hidden whitespace-nowrap">
+              {user.job.length > 13 ? (
                 <span
                   className="
                     inline-block
@@ -71,8 +71,8 @@ const TechnicalDepartments = () => {
             `}</style>
 
 
-            <span className="group relative bg-primary-50 border border-primary-100 text-primary-400 text-xs py-0.5 px-1.5 rounded-lg inline-block max-w-[18ch] overflow-hidden whitespace-nowrap">
-                {user.job.length > 18 ? (
+            <span className="group relative bg-primary-50 border border-primary-100 text-primary-400 text-xs py-0.5 px-1.5 rounded-lg inline-block max-w-[13ch] overflow-hidden whitespace-nowrap">
+                {user.job.length > 13 ? (
                   <span
                     className="
                       inline-block

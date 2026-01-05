@@ -1,5 +1,5 @@
 import { testReport } from "@module/basic-info/app/mock";
-import { ArrowDown, DollarCircle, Status, TickSquare, User } from "iconsax-reactjs";
+import { Add, ArrowDown, DollarCircle, Status, Teacher, TickSquare, User, UserSearch } from "iconsax-reactjs";
 import { Card } from "@heroui/react";
 import { AppButton } from "@hrbox/uikit/components";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
@@ -8,19 +8,20 @@ import { TestReportModal } from "@hrbox/modules/basic-info/modals/TestReportModa
 import { useModal } from "@hrbox/core/hooks";
 
 import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
+import React, { useState } from "react";
 
 const TestReport = () => {
   const { openModal } = useModalContext();
 
   const modal = useModal();
-  const handleOpenTestReportModal = () => {
+  const handleOpenTestReportModalShow = () => {
     modal.open(
       ModalType.VIEW,
       "Test Result",
       <TestReportModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <TickSquare size={22}/> Test Result </div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {
@@ -38,23 +39,77 @@ const TestReport = () => {
       ModalSize.XL,
     );
   };
+  // const handleOpenTestReportModal = () => {
+  //   modal.open(
+  //     ModalType.CREATE,
+  //     "Test Result",
+  //     <TestReportModal />,
+  //     {
+  //       isForm: true,
+  //       title:<div className="flex items-center gap-2"> <TickSquare size={22}/>Add new Test</div>,
+  //       submitLabel: "Submit",
+  //       cancelLabel: "Cancel",
+  //       formConfig: {
+  //         // initialValues: initialValuesHealth,
+  //         // validationSchema: formValidationHealth,
+  //         formId: "award-form",
+  //         enableCache: true,
+  //         clearCacheOnSubmit: true,
+  //         onSubmitAsync: async (values: any) => {
+  //           handleSubmitAward(values);
+  //           modal.close(ModalType.CREATE, "award-form");
+  //         },
+  //       },
+  //     },
+  //     ModalSize.XL,
+  //   );
+  // };
 
+  const cardContainerClass = `grid grid-cols-4 gap-3  overflow-y-scroll  max-h-[calc(62.5vh)]   pr-3  
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
+
+  const [activeIndex, setActiveIndex] = useState(null);
   return (
     <BasicInfoLayout
       content={
         <div className="p-3">
-          <div className="flex items-center gap-1 py-3">
-            <TickSquare size="24" />
-            <span className="text-xl text-semibold text-secondary-1000">Test Report</span>
+          <div className="flex items-center justify-between px-3 pt-6 pb-3">
+            <div className="flex items-center gap-1 ">
+              <TickSquare size="24" />
+              <span className="text-xl text-semibold text-secondary-1000">Test Report</span>
+            </div>
+            {/*<AppButton*/}
+            {/*  size="xs"*/}
+            {/*  radius="sm"*/}
+            {/*  color="white"*/}
+            {/*  variant="solid"*/}
+            {/*  onPress={handleOpenTestReportModal}*/}
+            {/*  isIconOnly={true}*/}
+            {/*  className="bg-white border-1 border-primary p-1 mr-2"*/}
+            {/*  content={<Add className="text-secondary-900" size={19} />}*/}
+            {/*/>*/}
           </div>
-          {/*todo height*/}
-          <div className="grid grid-cols-4 gap-3">
+          <div className={cardContainerClass}>
             {testReport.map((worker, index) => (
               <Card
                 isPressable
-                onPress={handleOpenTestReportModal}
+                onPress={handleOpenTestReportModalShow}
+                onClick={() => setActiveIndex(index)}
                 key={index}
-                className="p-3 flex flex-col gap-2  shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer"
+                className={`p-3 flex flex-col gap-2  shadow-sm  hover:cursor-pointer
+                 transition-all duration-200
+                  hover:!bg-[#D6F2FF]
+                 ${activeIndex === index
+                  ? "bg-[#D6F2FF] border border-primary-400"
+                  : "border border-transparent"
+                }
+                `}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">

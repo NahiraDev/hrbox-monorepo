@@ -41,7 +41,7 @@ const Jobs = () => {
       <JobModal />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Category size={18}/> Software Management</div>,
+        title:<div className="flex items-center gap-2"> <Designtools size={22}/> Job Details</div>,
         submitLabel: "ذخیره",
         cancelLabel: "لغو",
         formConfig: {
@@ -65,7 +65,7 @@ const Jobs = () => {
       <JobModal />,
       {
         isForm: true,
-        title:<div className="flex items-center gap-2"> <Category size={18}/> Software Management</div>,
+        title:<div className="flex items-center gap-2"> <Designtools size={22}/> Edit Job</div>,
         submitLabel: "Save Changes",
         cancelLabel: "Cancel",
         formConfig: {
