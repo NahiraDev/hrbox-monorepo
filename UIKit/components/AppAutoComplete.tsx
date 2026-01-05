@@ -66,7 +66,7 @@ const AppAutoCompleteComponent = React.forwardRef<
           return {
             wrapper: clsx(
               baseWrapper,
-              "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] bg-white!",
+              "!bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] !dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)] ",
               "border border-[#DCF0F9] dark:border-primary-800",
               "hover:bg-neutral-100 dark:hover:bg-neutral-800"
             ),
