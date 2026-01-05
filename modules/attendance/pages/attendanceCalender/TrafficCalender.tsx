@@ -1,13 +1,20 @@
-import { Add, Edit, Trash } from "iconsax-reactjs";
+import { Add, Edit, Hierarchy3, Trash } from "iconsax-reactjs";
 import { AppButton } from "@hrbox/uikit/components";
 import Comprehensivereport from "@hrbox/modules/attendance/pages/attendanceCalender/Comprehensivereport";
 import React, { useEffect, useRef, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { ModalSize, ModalType } from "@hrbox/core/providers";
+import { useModal } from "../../../../core/hooks";
+import AddPermisionTime from "../../modals/AddPermisionTime";
+import { EventModal } from "../../modals/EventModal";
+import { useTranslation } from "react-i18next";
 
 const TrafficCalender = () => {
   const [openpopup,setOpenpopup]=useState<string | null>()
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const {t}=useTranslation()
+  const modal=useModal()
   const [menuStyle, setMenuStyle] = useState<{ top: string; left: string }>({
     top: "0px",
     left: "0px",
@@ -56,6 +63,29 @@ const menuRef=useRef<HTMLDivElement | null>(null);
     }
   };
 
+    const handleOpenModal = (
+      formid: string,
+      modalComponent: any,
+      titleModal: string
+    ) => {
+      modal.open(
+        ModalType.CREATE,
+        formid,
+        modalComponent,
+        {
+          isForm: true,
+          title: titleModal,
+          icon: <Hierarchy3 size={18} />,
+          submitLabel: "Submit",
+          cancelLabel: "Cancel",
+          formConfig: {
+            formId: formid,
+          },
+        },
+        ModalSize["4XL"]
+      );
+    };
+
   return (
     <>
       <div
@@ -68,33 +98,33 @@ const menuRef=useRef<HTMLDivElement | null>(null);
               {/* start Header */}
               <div className="grid grid-cols-12 gap-2 text-white text-sm ">
                 <div className="bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2">
-                  <p>Date</p>
+                  <p>{t("date")}</p>
                 </div>
                 <div className="bg-[#999999] px-2 py-3 rounded-lg col-span-1">
-                  <p>Shift</p>
+                  <p>{t("shift")}</p>
                 </div>
                 <div className="grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5">
                   <div className="px-2 py-3 w-full">
-                    <p>Check in</p>
+                    <p>{t("check-in")}</p>
                   </div>
                   <div className="px-2 py-3 w-full">
-                    <p>Check out</p>
+                    <p>{t("check-out")}</p>
                   </div>
                   <div className="px-2 py-3 w-full">
-                    <p>Presence</p>
+                    <p>{t("presence")}</p>
                   </div>
                   <div className="px-2 py-3 w-full">
-                    <p>Overdue</p>
+                    <p>{t("overdue")}</p>
                   </div>
                   <div className="px-2 py-3 w-full">
-                    <p>Delay</p>
+                    <p>{t("delay")}</p>
                   </div>
                   <div className="px-2 py-3 w-full col-span-2">
-                    <p>Haste to leave</p>
+                    <p>{t("haste-to-leave")}</p>
                   </div>
                 </div>
                 <div className="px-2 py-3 w-full bg-success rounded-lg col-span-2">
-                  <p>Request</p>
+                  <p>{t("request")}</p>
                 </div>
               </div>
               {/* end Header */}
@@ -105,12 +135,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                 <div className="rounded-md">
                   <div className="grid grid-cols-12 gap-2 w-full text-xs text-[#1E3363] dark:text-[#DEE1E8] items-center text-center hover:bg-[#DCF0F9] dark:hover:bg-[#04425C60] rounded-md ">
                     <div
-                      ref={(el) => {
-                        if (el) cellRefs.current[`0-date`] = el;
-                      }}
-                      className="col-span-2 p-1 border-b-1 border-white dark:border-[#01101A] items-center text-start! relative cursor-pointer"
-                      onContextMenu={(e) => toggleMenu(0, "date",e)}
-                    >
+                      className="col-span-2 p-1 border-b-1 border-white dark:border-[#01101A] items-center text-start! relative">
                       <p>11/02/2025</p>
                       <p>Wednesday (Present)</p>
                     </div>
@@ -200,62 +225,41 @@ const menuRef=useRef<HTMLDivElement | null>(null);
             onClick={() => setOpenMenu(null)}
           >
             <div className="flex flex-col items-start gap-1.5">
-              {openMenu.includes("shift") ? (
+              {openMenu.includes("shift") && (
                     <React.Fragment key="shift-menu">
                 <AppButton
-                  content="Hourly Leave"
+                  content={t("hourly-leave")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
+                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time")}
                 />
                 <AppButton
-                  content="Hourly Mission"
+                  content={t("hourly-mission")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
+                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time")}
                 />
                 <AppButton
-                  content="Edit Traffic Entry"
+                  content={t("edit-traffic-entry")}
                   startContent={<Edit size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Edit_Traffic_Entry"
                   size=""
+                  onPress={()=>handleOpenModal("permision-form",<AddPermisionTime/>,"Add Permision Time")}
                 />
                 <AppButton
-                  content="Delete Traffic Entry"
+                  content={t("delete-traffic-entry")}
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Delete_Request"
                 />
               </React.Fragment>
-              ) : (
-        <React.Fragment key="date-menu dark:bg-[#01101A]!">
-                       <AppButton
-                         content="Daily Leave"
-                         startContent={<Add size={18} />}
-                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                         key="Daily_Leave"
-                         size=""
-                       />
-                       <AppButton
-                         content="Daily Mission"
-                         startContent={<Add size={18} />}
-                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                         size=""
-                         key="Daily_Mission"
-                       />
-                       <AppButton
-                         content="Delete Request"
-                         startContent={<Trash size={18} />}
-                         className="gap-1.5 text-sm dark:bg-[#01101A]!"
-                         size=""
-                         key="Delete_Request"
-                       />
-                     </React.Fragment>
-              )}
+              ) }
             </div>
           </div>
         )}

@@ -21,10 +21,11 @@ const TimeSheetHeader = (props:any) => {
             component={AppSearchInput}
             name="search"
             variant="bordered"
+            className="bg-red-400"
             />
             </FormProvider>
             {isAllProjects&&(
-            <AppButton content={<Setting4 size={24}/>} className="p-2 border border-primary " />
+            <AppButton content={<Setting4 size={24}/>} className="p-2 border border-primary " variant="" />
             )}
         </div>
     </div>

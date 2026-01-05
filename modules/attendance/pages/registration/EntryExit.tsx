@@ -20,7 +20,7 @@ const EntryExit = () => {
           formId: "event-form",
         }
       },
-      ModalSize.MD,
+      ModalSize["4XL"]
     );
   };
   return (

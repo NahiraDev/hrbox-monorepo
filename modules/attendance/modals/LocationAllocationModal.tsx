@@ -14,13 +14,13 @@ const LocationAllocationModal=({ onSuccess }: ShiftAllocationModalProps)=>{
   
     const initialValues = {
       type: dataRow?.type?.toLowerCase() || "person",
-      ChooseShift: dataRow?.ChooseShift || null,
-      FormDate: dataRow?.FormDate || null,
-      organization: dataRow?.organization || null,
-      Department: dataRow?.Department || null,
-      JobTitle: dataRow?.JobTitle || null,
-      Employee: dataRow?.Employee || null,
-      Description: dataRow?.Description || null,
+      ChooseShift: dataRow?.ChooseShift || "",
+      FormDate: dataRow?.FormDate || "",
+      organization: dataRow?.organization || "",
+      Department: dataRow?.Department || "",
+      JobTitle: dataRow?.JobTitle || "",
+      Employee: dataRow?.Employee || "",
+      Description: dataRow?.Description || "",
     };
    console.log("initialValues:", initialValues); 
   
