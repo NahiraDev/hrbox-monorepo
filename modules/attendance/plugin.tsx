@@ -168,7 +168,7 @@ export const AttendancePlugin: ModulePlugin = {
       component: IpAllocation,
       layout: "base",
       meta: {
-        title: "shift_allocation",
+        title: "ip_allocation",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },

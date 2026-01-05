@@ -9,8 +9,10 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { Button } from "@heroui/react";
 import { ArrowRight, ClipboardTick, Designtools } from "iconsax-reactjs";
+import { useTranslation } from "react-i18next";
 
 const SortableTaskCard = ({ id }: { id: string }) => {
+  
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -21,7 +23,7 @@ const SortableTaskCard = ({ id }: { id: string }) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <div className="bg-white shadow-shadow-light-tight/1 cursor-move rounded-5 p-4 mb-4">
+      <div className="bg-white shadow-sm cursor-move rounded-xl p-4 mb-4">
         <div className="flex flex-col gap-4">
           <div className="flex gap-2 items-center border-b-1 border-neutral-100 pb-1">
             <ClipboardTick className="text-secondary-400" />
@@ -82,19 +84,19 @@ export default function AppTasksList() {
       });
     }
   }
-
+const { t } = useTranslation();
   return (
-    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-5 h-full overflow-y-scroll">
+    <div className="bg-[#dcf0f966] border-1 border-primary-400 p-2.5 rounded-lg h-full overflow-y-scroll">
       <div className="flex items-center justify-between mb-4 border-b-1 pb-1 border-neutral-100">
         <span className="text-base font-semibold text-secondary-1000">
-          Tasks List
+          {t("task list")}
         </span>
         <Button
           className="!border-1 !border-primary-400 !px-2 !py-1 !rounded-2 bg-white gap-2 !h-fit"
           variant="light"
         >
           <span className="text-secondary-1000 text-xs font-normal">
-            See More
+            {t("SeeMore")}
           </span>
           <ArrowRight className="text-secondary-800" size="12" />
         </Button>

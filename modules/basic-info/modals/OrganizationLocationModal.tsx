@@ -1,19 +1,24 @@
 import {
   AppAutoComplete,
-  AppButton,
+  AppButton, AppDatePicker, AppInput,
   AppModal,
-  AppTextArea,
+  AppTextArea, FormField
 } from "@hrbox/uikit/components";
 import { Add } from "iconsax-reactjs";
 import { useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { Avatar } from "@heroui/react";
+import { useFormContext } from "@hrbox/core/providers";
 
 export const OrganizationLocationModal = () => {
   const { openModal } = useModalContext();
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormContext();
+
+  const { getOpenModal } = useModalContext();
+  const currentType = getOpenModal()?.type;
+
 
   return (
-    // <AppModal icon={<Location color="white" />} size="3xl" title="Organizational Locations">
-    <>
       <AppModal.Body>
         <div className="grid grid-cols-2 gap-6">
           <div className="flex gap-3">
@@ -48,97 +53,60 @@ export const OrganizationLocationModal = () => {
               />
             </div>
           </div>
-          <AppAutoComplete
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Depatments Title",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+          <FormField
+             formMode={currentType}
+            label="Location Title"
+            name="LocationTitle"
+            component={AppInput}
+            helperText={touched.LocationTitle && errors.LocationTitle}
           />
-          <AppAutoComplete
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Depatments Title",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+          <FormField
+             formMode={currentType}
+            label="URL"
+            name="URL"
+            component={AppInput}
+            helperText={touched.URL && errors.URL}
           />
-          <AppAutoComplete
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Depatments Title",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+
+       <FormField
+            formMode={currentType}
+            label="Province"
+            name="Province"
+            component={AppAutoComplete}
+            helperText={touched.Province && errors.Province}
           />
-          <AppAutoComplete
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Depatments Title",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+          <FormField
+             formMode={currentType}
+            label="City"
+            name="City"
+            component={AppAutoComplete}
+            helperText={touched.City && errors.City}
           />
-          <AppAutoComplete
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Depatments Title",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+                <FormField
+                   formMode={currentType}
+            label="HR Manager"
+            name="HRManager"
+            component={AppInput}
+            helperText={touched.HRManager && errors.HRManager}
           />
         </div>
         <div>
-          <AppTextArea
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Descriptions*",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
+          <FormField
+             formMode={currentType}
+            label="Address"
+            name="Address"
+            component={AppTextArea}
+            helperText={touched.Address && errors.Address}
           />
-          <AppTextArea
-            props={{
-              className: " border border-[#DCF0F9]",
-              label: "Descriptions*",
-              size: "lg",
-              color: "primary",
-              radius: "lg",
-            }}
-          />
+          <FormField
+             formMode={currentType}
+          label="Descriptions"
+          name="Descriptions"
+          component={AppTextArea}
+          helperText={touched.Descriptions && errors.Descriptions}
+        />
         </div>
       </AppModal.Body>
-      <AppModal.Footer>
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => openModal("delete", undefined),
-            content: <span>Cancel</span>,
-            className:
-              "text-Secondary-1000 py-1.5 px-3 text-xl rounded-lg hover:!bg-red-500 hover:text-white transition-all duration-200",
-          }}
-        />
-        <AppButton
-          props={{
-            size: "xs",
-            radius: "sm",
-            variant: "light",
-            onPress: () => console.log("a"),
-            content: <span>Save Changes</span>,
-            className: "bg-primary text-white py-1.5 px-3 text-xl rounded-lg ",
-          }}
-        />
-      </AppModal.Footer>
-    </>
-    // {/*</AppModal>*/}
+
   );
 };

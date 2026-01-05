@@ -1,8 +1,10 @@
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme/roles";
+import { Paths } from "@hrbox/modules/paths";
 import {
   Briefcase,
   Building,
+  Chart,
   Chart2,
   LocationAdd,
   Profile2User,
@@ -10,10 +12,22 @@ import {
   Setting3,
 } from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
-import { Paths } from "../paths";
+import { lazy } from "react";
 
-const Dashboard = lazyRouteComponent(() => import("./pages/Dashboard"));
-const Projects = lazyRouteComponent(() => import("./pages/Dashboard"));
+
+const Dashboard = lazyRouteComponent(
+  () => import("./pages/Dashboard/Dashboard")
+);
+const Projects = lazyRouteComponent(
+  () => import("./pages/Projects/Projects")
+);
+// ============================================
+// SubHeaders (Lazy Load)
+// ============================================
+
+const DashboardHeader = lazy(
+  () => import("./subheader/DashboardHeader")
+);
 
 export const ProjectManagementPlugin: ModulePlugin = {
   name: "project-management",
@@ -32,6 +46,11 @@ export const ProjectManagementPlugin: ModulePlugin = {
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION],
       },
+      subHeader: DashboardHeader,
+      subHeaderProps:{
+        title:"Dashboard",
+        icon:<Chart/>
+      }
     },
     {
       path: Paths.ProjectManagement.Projects,
@@ -48,19 +67,19 @@ export const ProjectManagementPlugin: ModulePlugin = {
     {
       id: "dashboard",
       label: "Dashboard",
-      path: Paths.BasicInfo.Dashboard,
+      path: Paths.ProjectManagement.Dashboard,
       icon: <Chart2 size="24" />,
     },
     {
       id: "organization-departments",
       label: "Organization Departments",
-      path: Paths.BasicInfo.OrganizationDepartments,
+      path: Paths.ProjectManagement.OrganizationDepartments,
       icon: <Building size="24" />,
     },
     {
       id: "technical-departments",
       label: "Technical Departments",
-      path: Paths.BasicInfo.TechnicalDepartment,
+      path: Paths.ProjectManagement.TechnicalDepartment,
       icon: <Building size="24" />,
     },
     {

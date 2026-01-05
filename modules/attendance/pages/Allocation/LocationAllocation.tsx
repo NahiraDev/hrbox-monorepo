@@ -1,24 +1,29 @@
 import { AppTable } from "@hrbox/uikit/components";
-import { Allocatio } from "@hrbox/modules/attendance/app/mock";
+import { Allocatio, getAllAllocations } from "@hrbox/modules/attendance/app/mock";
 import { useState } from "react";
 import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import LocationAllocationModal from "@hrbox/modules/attendance/modals/LocationAllocationModal";
+import { Hierarchy3 } from "iconsax-reactjs";
 
 const LocationAllocation = () => {
   const [data, setData] = useState(Allocatio);
   const modal = useModal();
-  const handleRowClick = () => {
+     const refreshData = () => {
+      setData(getAllAllocations());
+    };
+  const handleRowClick = (row:any) => {
     modal.open(
       ModalType.VIEW,
       "location-allocation",
-      <LocationAllocationModal />,
+      <LocationAllocationModal onSuccess={refreshData} />,
       {
+        data:row,
         isForm: true,
-        submitLabel: "Submit Again",
-        cancelLabel: "Cancel",
+        title:"Location Allocation",
+        icon:<Hierarchy3 size={18} />,
         formConfig: {
-          formId: "location-form",
+          formId: "location-allocation",
         },
       },
       ModalSize["3XL"]
@@ -31,7 +36,7 @@ const LocationAllocation = () => {
           data={data}
           showStatus={true}
           hasPagination={true}
-          onRowClick={handleRowClick}
+          onRowClick={(row)=>handleRowClick(row)}
           variant="bordered"
         />
       </div>

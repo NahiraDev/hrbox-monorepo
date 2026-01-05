@@ -98,11 +98,10 @@ const MentorCard = ({ name, role, avatar, badgeColor }: any) => {
 
 const EmployeeSatisfactionCalendarModal = ({
                                              data = sampleData,
-                                             onItemPress
+
                                            }) => {
   const { openModal } = useModalContext();
   const handlePress = (item: any) => {
-    if (onItemPress) onItemPress(item);
   };
 
 

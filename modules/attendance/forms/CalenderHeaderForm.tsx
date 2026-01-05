@@ -16,11 +16,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useModal } from "@hrbox/core/hooks";
 
 import { EventModal } from "@hrbox/modules/attendance/modals/EventModal";
-import {
-  formValidationEvent,
-  initialValuesEvent,
-  handleSubmitEvent,
-} from "@hrbox/modules/attendance/forms/EventForm";
+
 import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { useTranslation } from "react-i18next";
 import { ReportPersonnal } from "../app/mock";
@@ -88,30 +84,7 @@ export const CalenderHeaderForm = () => {
       }));
   }, []);
 
-  const handleOpenEventModal = () => {
-    modal.open(
-      ModalType.CREATE,
-      "event-form",
-      <EventModal />,
-      {
-        isForm: true,
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
-        formConfig: {
-          initialValues: initialValuesEvent,
-          validationSchema: formValidationEvent,
-          formId: "event-form",
-          enableCache: true,
-          clearCacheOnSubmit: true,
-          onSubmitAsync: async (values: any) => {
-            handleSubmitEvent(values);
-            modal.close(ModalType.CREATE, "event-form");
-          },
-        },
-      },
-      ModalSize.MD
-    );
-  };
+
 
   const handleFieldChange = (fieldName: string, value: any) => {
     setFieldValue(fieldName, value);
@@ -186,7 +159,6 @@ export const CalenderHeaderForm = () => {
               radius="lg"
               className="shadow-none border-1 border-primary"
               startContent={<ExportSquare size={20} />}
-              onPress={handleOpenEventModal}
               content={t("export")}
             />
           </div>

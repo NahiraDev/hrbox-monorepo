@@ -88,7 +88,7 @@ export const BasicInfoPlugin: ModulePlugin = {
     {
       path: Paths.BasicInfo.AllEmployees,
       component: AllEmployees,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "All Employees",
         requireAuth: false,
@@ -99,7 +99,7 @@ export const BasicInfoPlugin: ModulePlugin = {
     {
       path: Paths.BasicInfo.OrganizationDepartments,
       component: OrganizationDepartments,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "Organization Departments",
         requireAuth: false,
@@ -110,7 +110,7 @@ export const BasicInfoPlugin: ModulePlugin = {
     {
       path: Paths.BasicInfo.TechnicalDepartment,
       component: TechnicalDepartments,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "Technical Departments",
         requireAuth: false,
@@ -121,7 +121,7 @@ export const BasicInfoPlugin: ModulePlugin = {
     {
       path: Paths.BasicInfo.OrganizationalLocations,
       component: OrganizationalLocations,
-      layout: "base",
+      layout: "framed",
       meta: {
         title: "Organizational Locations",
         requireAuth: false,

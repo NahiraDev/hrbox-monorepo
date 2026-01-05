@@ -4,10 +4,14 @@ import { Repeat } from 'iconsax-reactjs';
 
 import { AppButton, AppModal } from '@hrbox/uikit/components';
 import CameraView from '@hrbox/modules/attendance/pages/registration/CameraView';
+import { useState } from 'react';
 
 const FaceIdModal = () => {
   const { closeModal } = useModalContext();
-
+    const [cameraKey, setCameraKey] = useState(0);
+    const handleRetake = () => {
+    setCameraKey(prev => prev + 1);
+  };
   return (
     <>
         <div className="flex flex-col w-full gap-6">
@@ -22,12 +26,12 @@ const FaceIdModal = () => {
             <div className="w-full h-full absolute bg-[#00000080] rounded-lg flex items-center justify-center ">
               <AppButton
                   color= 'none'
-                  className= 'shadow-none w-[488px] h-[303px]'
+                  className= 'shadow-none w-122 h-75.75 z-10'
                   content= {<Repeat color="white" size={56} variant='Bold' />}
-              
+                  onPress={handleRetake}           
               />
             </div>
-            <CameraView />
+            <CameraView key={cameraKey} />
           </div>
           <div className="text-center">
             <p className='font-semibold! text-xl!'>Today is Monday, March 17, 2025.</p>
