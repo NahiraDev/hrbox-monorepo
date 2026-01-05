@@ -4,6 +4,7 @@ import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/Mod
 import { Button } from "@heroui/react";
 import React, { createContext, useContext } from "react";
 import clsx from "clsx";
+import { useFormContext } from "@hrbox/core/providers";
 
 const Close: React.FC<{ size?: string; className?: string }> = ({
                                                                   size = "24",
@@ -147,7 +148,6 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
         </motion.div>
       )}
 
-      {/* Main Content */}
       {children}
     </motion.div>
   );
@@ -176,7 +176,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
     isContextMode
   } = useModalInternal();
   const isFormMode = !isContextMode;
-
+  const { handleSubmit } = useFormContext();
   const showFooter =
     !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
 
@@ -211,7 +211,7 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
           {onSubmit && (
             <Button
               color="primary"
-              onPress={onSubmit}
+              onPress={() => handleSubmit}
               isDisabled={isSubmitting}
               isLoading={isSubmitting}
             >
@@ -308,7 +308,7 @@ const AppModalBase: React.FC<AppModalProps> & {
       case ModalType.DELETE:
         return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.EDIT:
-        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#1E3363_19.05%,#FFFFFF_100%)]";
       case ModalType.VIEW:
         return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.CREATE:
@@ -335,7 +335,6 @@ const AppModalBase: React.FC<AppModalProps> & {
     hideFooter
   };
 
-  // Modal Content
   const modalContent = (
     <AnimatePresence mode="wait">
       {shouldShowModal && (
