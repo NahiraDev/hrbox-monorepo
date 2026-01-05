@@ -5,7 +5,16 @@
 import { lazy } from "react";
 import type { ModulePlugin } from "@hrbox/modules/types";
 import { RoleSlug } from "@hrbox/core/config/theme";
-import { Briefcase, Chart, Convertshape, DocumentSketch, Setting2 } from "iconsax-reactjs";
+import {
+  Briefcase,
+  BrifecaseTick,
+  Chart,
+  Convertshape,
+  DocumentSketch,
+  ReceiveSquare,
+  ReceiveSquare2,
+  Setting2
+} from "iconsax-reactjs";
 import { lazyRouteComponent } from "@tanstack/react-router";
 import { Paths } from "@hrbox/modules/paths";
 
@@ -90,7 +99,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       component: indicator,
       layout: "base",
       meta: {
-        title: "Indicator",
+        title: "Setting",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION]
       },
@@ -104,7 +113,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       component: general,
       layout: "base",
       meta: {
-        title: "Indicator",
+        title: "Setting",
         requireAuth: false,
         requiredRoles: [RoleSlug.ORGANIZATION]
       },
@@ -169,24 +178,24 @@ export const JobGradingsPlugins: ModulePlugin = {
       id: "dashboard",
       label: "Dashboard",
       path: "/job-gradings/dashboard",
-      icon: <Chart size="24" />
+      icon: <Chart cursor="pointer"  size="24" />
     },
     {
       id: "setting",
       label: "indicators",
-      path: "/job-gradings/setting",
-      icon: <Chart size="24" />
+      path: "/job-gradings/setting/indicators",
+      icon: <BrifecaseTick cursor="pointer"  size="24" />
     },
     {
       id: "JDPage",
       label: "JDPage",
       path: "/job-gradings/jdpage",
-      icon: <Chart size="24" />
+      icon: <Convertshape cursor="pointer"  size="24" />
     }, {
       id: "Job-Employee",
       label: "Employee-job fit",
       path: "/job-gradings/job-employee",
-      icon: <Convertshape size="24" />
+      icon: <ReceiveSquare2 cursor="pointer" size="24" />
     }
   ],
 

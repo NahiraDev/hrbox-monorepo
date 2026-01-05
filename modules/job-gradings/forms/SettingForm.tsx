@@ -19,6 +19,7 @@ const SettingForm = () => {
           <FormField
             formMode={currentType}
             name="index_title"
+            aria-label="index_title"
             label={t("index_title")}
             component={AppInput}
             helperText={touched?.index_title && errors?.index_title}
@@ -27,6 +28,7 @@ const SettingForm = () => {
           <FormField
             formMode={currentType}
             name="select_group"
+            aria-label="select_group"
             label={t("Select_Group")}
             component={AppAutoComplete}
             helperText={touched?.select_group && errors?.select_group}
@@ -37,6 +39,8 @@ const SettingForm = () => {
           <FormField
             formMode={currentType}
             name="type"
+            aria-label="type"
+
             label={t("Type")}
             component={AppAutoComplete}
             helperText={touched?.type && errors?.type}
@@ -45,6 +49,7 @@ const SettingForm = () => {
           <FormField
             formMode={currentType}
             name="weight"
+            aria-label="weight"
             label={t("weight")}
             component={AppInput}
             helperText={touched?.weight && errors?.weight}
@@ -54,6 +59,7 @@ const SettingForm = () => {
         <FormField
           formMode={currentType}
           name="description"
+          aria-label="description"
           label={t("descriptions")}
           component={AppTextArea}
           helperText={touched?.description && errors?.description}
