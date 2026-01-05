@@ -1,16 +1,17 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
-import {Location, More, Trash} from 'iconsax-reactjs';
-import {useMemo, useState} from 'react';
+import { Category, Edit, Location, More, Trash } from "iconsax-reactjs";
+import React, {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
-import {AppButton,AppDeleteModal} from '@hrbox/uikit/components';
+import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import {useModal} from "@hrbox/core/hooks";
-import {AwardModal} from "@hrbox/modules/hrlink/modals/AwardModal";
 import {handleSubmitAward} from "@hrbox/modules/hrlink/forms/AwardForm";
 import {
     formValidationOrganizationLocation,
     initialValuesOrganizationLocation
 } from "@hrbox/modules/basic-info/forms/OrganizationLocationForm";
+import { OrganizationLocationModal } from "@hrbox/modules/basic-info/modals/OrganizationLocationModal";
+import { meta } from "@eslint/js";
 
 const OrganizationalLocations = () => {
     const {openModal} = useModalContext();
@@ -27,23 +28,7 @@ const OrganizationalLocations = () => {
         setActiveButton(null);
     };
 
-    const handleDeleteClick = (index: number) => {
-        setActiveButton(null);
-        setSelectedLocationIndex(index);
 
-        // openModal(
-        //     'delete',
-        //     '',
-        //     <AppDeleteModal
-        //         onConfirm={() => handleDeleteConfirm(index)}
-        //         onCancel={() => console.log('Cancelled')}
-        //     />,
-        //     undefined,
-        //     'sm',
-        //     'Do you want to remove it?',
-        //     <Trash className='text-white'/>
-        // );
-    };
 
     const handleDeleteConfirm = (index: number) => {
         setLocations(prev => {
@@ -56,54 +41,84 @@ const OrganizationalLocations = () => {
 
     const filteredLocations = useMemo(() => locations, [locations]);
 
-    const modal = useModal()
-    const handleOpenOrganizationLocation = () => {
-        modal.open(
-            ModalType.CREATE,
-            "award-form",
-            <AwardModal/>,
-            {
-                isForm: true,
-                title: "افزودن ",
-                submitLabel: "ذخیره",
-                cancelLabel: "لغو",
-                formConfig: {
-                    initialValues: initialValuesOrganizationLocation,
-                    validationSchema: formValidationOrganizationLocation,
-                    formId: "award-form",
-                    enableCache: true,
-                    clearCacheOnSubmit: true,
-                    onSubmitAsync: async (values: any) => {
-                        handleSubmitAward(values);
-                        modal.close(ModalType.CREATE, "award-form");
-                    },
-                },
-            },
-            ModalSize.XL,
-        );
-    };
+  const modal = useModal()
 
-    return (
+  const handleOpenOrganizationLocation = () => {
+    modal.open(
+      ModalType.VIEW,
+      "OrganizationLocationModal",
+      <OrganizationLocationModal/>,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Location size={18}/> Organizational Locations</div>,
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "OrganizationLocationModal",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "OrganizationLocationModal");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+  const handleOpenOrganizationLocationEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      "OrganizationLocationModal",
+      <OrganizationLocationModal/>,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Location size={18}/> Organizational Locations</div>,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesOrganizationLocation,
+          validationSchema: formValidationOrganizationLocation,
+          formId: "OrganizationLocationModal",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "OrganizationLocationModal");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
+  };
+
+
+  return (
         <>
-            <div className="flex flex-col justify-between w-full h-full p-4 relative">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full h-full">
+            <div className="flex flex-col justify-between w-full h-full relative">
+                <div className="grid grid-cols-5  gap-4 w-full  ">
                     {filteredLocations.map((detail, index) => (
                         <div key={`${detail.title}-${index}`} className="relative group">
                             <Card
+                              isPressable
                               onPress={handleOpenOrganizationLocation}
-                                className="w-full bg-white shadow-sm rounded-2xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary  relative z-0"
+                              className="w-full bg-white shadow-sm rounded-xl p-4 flex flex-col items-center justify-center gap-3 hover:border  hover:!bg-[#D6F2FF] hover:cursor-pointer border-primary relative z-0"
+
                             >
                                 <Avatar
                                     className="w-full h-32 sm:h-40"
                                     radius="sm"
-                                    src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+                                    src=""
+                                    color="primary"
                                 />
-                                <div className="w-full">
-                                    <span className="!font-bold text-left">{detail.title}</span>
+                                <div className="w-full flex items-start">
+                                    <span className="!font-bold text-secondary-1000">{detail.title}</span>
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex flex-col gap-1">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Address</span>
@@ -112,7 +127,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Email</span>
@@ -121,7 +136,7 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Website</span>
@@ -133,12 +148,12 @@ const OrganizationalLocations = () => {
                                 </div>
 
                                 <div
-                                    className="bg-[#EEF9FF] w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
+                                    className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
                                         <Location size="15"/>
                                         <span className="!text-xs">Is it visible?</span>
                                     </div>
-                                    <p className="!text-xs !font-bold">
+                                    <p className="!text-xs !font-bol d">
                                       <span className={`px-2 py-1 rounded-full !text-xs ${
                                           detail.visible === 'Yes' ? '' : ''
                                       }`}>
@@ -171,19 +186,31 @@ const OrganizationalLocations = () => {
 
                             {activeButton === index && (
                                 <div
-                                    className="absolute top-14 right-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200 py-1 w-30 animate-in slide-in-from-top-2 duration-200">
+                                    className="absolute top-12 right-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200  w-30 animate-in slide-in-from-top-2 duration-200">
                                     <AppButton
                                         size='sm'
                                         variant='light'
-                                        onPress={() => handleDeleteClick(index)}
+                                        // onPress={() => handleDeleteClick(index)}
                                         content={
                                             <div className="flex items-center gap-2">
-                                                <Trash size={16}/>
-                                                <span>Delete</span>
+                                                <Trash size={20}/>
+                                                <span className="text-sm text-secondary-1000 ">Delete</span>
                                             </div>
                                         }
-                                        className='w-full justify-start text-left hover:bg-red-50 transition-colors duration-150'
+                                        className='w-full justify-start text-left hover:bg-red-50 transition-colors rounded-[6px] duration-150 py-3 px-6'
                                     />
+                                  <AppButton
+                                    size='sm'
+                                    variant='light'
+                                    onPress={handleOpenOrganizationLocationEdit}
+                                    content={
+                                      <div className="flex items-center gap-2">
+                                        <Edit size={20}/>
+                                        <span className="text-sm text-secondary-1000 ">Edit</span>
+                                      </div>
+                                    }
+                                    className='w-full justify-start text-left hover:bg-red-50 transition-colors rounded-[6px] duration-150 py-3 px-6'
+                                  />
                                 </div>
                             )}
 
@@ -198,7 +225,7 @@ const OrganizationalLocations = () => {
                 </div>
 
                 <div className="flex justify-end p-2 mt-4">
-                    {/*<AppPagination/>*/}
+                  <AppPagination meta={meta}  />
                 </div>
             </div>
         </>
