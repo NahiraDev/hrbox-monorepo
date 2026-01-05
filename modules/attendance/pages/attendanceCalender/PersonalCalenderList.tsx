@@ -9,6 +9,7 @@ import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { EventModal } from "../../modals/EventModal";
 import AddPermisionTime from "../../modals/AddPermisionTime";
+import { useTranslation } from "react-i18next";
 
 const PersonalCalenderList = () => {
   const [openpopover, setOpenpopover] = useState<string | null>(null);
@@ -19,6 +20,7 @@ const PersonalCalenderList = () => {
     top: "0px",
     left: "0px",
   });
+  const {t}=useTranslation()
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { values } = useFormContext();
   const month = values.month || "";
@@ -150,37 +152,37 @@ const PersonalCalenderList = () => {
         {/* start table */}
         <div className="w-full flex flex-col h-full ">
           {/* start Header */}
-          <div className="grid grid-cols-12 gap-2 text-white text-sm ">
-            <div className="bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2">
-              <p>Date</p>
-            </div>
-            <div className="bg-[#999999] px-2 py-3 rounded-lg col-span-1">
-              <p>Shift</p>
-            </div>
-            <div className="grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5">
-              <div className="px-2 py-3 w-full">
-                <p>Check in</p>
+        <div className="grid grid-cols-12 gap-2 text-white text-sm ">
+                <div className="bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2">
+                  <p>{t("date")}</p>
+                </div>
+                <div className="bg-[#999999] px-2 py-3 rounded-lg col-span-1">
+                  <p>{t("shift")}</p>
+                </div>
+                <div className="grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5">
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("check-in")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("check-out")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("presence")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("overdue")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("delay")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full col-span-2">
+                    <p>{t("haste-to-leave")}</p>
+                  </div>
+                </div>
+                <div className="px-2 py-3 w-full bg-success rounded-lg col-span-2">
+                  <p>{t("request")}</p>
+                </div>
               </div>
-              <div className="px-2 py-3 w-full">
-                <p>Check out</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Presence</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Overdue</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Delay</p>
-              </div>
-              <div className="px-2 py-3 w-full col-span-2">
-                <p>Haste to leave</p>
-              </div>
-            </div>
-            <div className="px-2 py-3 w-full bg-success rounded-lg col-span-2">
-              <p>Request</p>
-            </div>
-          </div>
           {/* end Header */}
 
           {/* start Rows */}
@@ -326,7 +328,7 @@ const PersonalCalenderList = () => {
             {openMenu.includes("shift") ? (
               <React.Fragment key="shift-menu">
                 <AppButton
-                  content="Hourly Leave"
+                  content={t("hourly-leave")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -336,7 +338,7 @@ const PersonalCalenderList = () => {
                   }
                 />
                 <AppButton
-                  content="Hourly Mission"
+                  content={t("hourly-mission")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -350,7 +352,7 @@ const PersonalCalenderList = () => {
                   }
                 />
                 <AppButton
-                  content="Edit Traffic Entry"
+                  content={t("edit-traffic-entry")}
                   startContent={<Edit size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Edit_Traffic_Entry"
@@ -364,7 +366,7 @@ const PersonalCalenderList = () => {
                   }
                 />
                 <AppButton
-                  content="Delete Traffic Entry"
+                  content={t("delete-traffic-entry")}
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -375,7 +377,7 @@ const PersonalCalenderList = () => {
             ) : openMenu.includes("date") ? (
               <React.Fragment key="date-menu dark:bg-[#01101A]!">
                 <AppButton
-                  content="Daily Leave"
+                  content={t("daily-leave")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Daily_Leave"
@@ -385,7 +387,7 @@ const PersonalCalenderList = () => {
                   }
                 />
                 <AppButton
-                  content="Daily Mission"
+                  content={t("daily-mission")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -395,7 +397,7 @@ const PersonalCalenderList = () => {
                   }
                 />
                 <AppButton
-                  content="Delete Request"
+                  content={t("delete-request")}
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
@@ -406,7 +408,7 @@ const PersonalCalenderList = () => {
             ) : openMenu.includes("checkin") ? (
               <React.Fragment key="date-menu dark:bg-[#01101A]!">
                 <AppButton
-                  content="Add attendence"
+                  content={t("add-attendence")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""

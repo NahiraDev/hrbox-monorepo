@@ -5,10 +5,12 @@ import { useModal } from "@hrbox/core/hooks";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import LocationAllocationModal from "@hrbox/modules/attendance/modals/LocationAllocationModal";
 import { Hierarchy3 } from "iconsax-reactjs";
+import { useTranslation } from "react-i18next";
 
 const LocationAllocation = () => {
   const [data, setData] = useState(Allocatio);
   const modal = useModal();
+  const {t}=useTranslation();
      const refreshData = () => {
       setData(getAllAllocations());
     };
@@ -20,7 +22,26 @@ const LocationAllocation = () => {
       {
         data:row,
         isForm: true,
-        title:"Location Allocation",
+        title:t("location-allocation"),
+        icon:<Hierarchy3 size={18} />,
+        formConfig: {
+          formId: "location-allocation",
+        },
+      },
+      ModalSize["3XL"]
+    );
+  };
+  const handleEditClick = (row:any) => {
+    modal.open(
+      ModalType.EDIT,
+      "location-allocation",
+      <LocationAllocationModal onSuccess={refreshData} />,
+      {
+        data:row,
+        isForm: true,
+        title:t("edit-location-allocation"),
+                submitLabel: t("submit"),
+        cancelLabel: t("cancel"),
         icon:<Hierarchy3 size={18} />,
         formConfig: {
           formId: "location-allocation",
@@ -38,6 +59,7 @@ const LocationAllocation = () => {
           hasPagination={true}
           onRowClick={(row)=>handleRowClick(row)}
           variant="bordered"
+          onEdit={(row)=>handleEditClick(row)}
         />
       </div>
     </>

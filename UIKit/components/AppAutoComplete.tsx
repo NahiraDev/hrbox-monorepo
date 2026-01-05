@@ -25,6 +25,7 @@ interface AppAutoCompleteProps extends Omit<
   errorClassName?: string;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
+  placeHolder?:boolean;
 }
 
 const AppAutoCompleteComponent = React.forwardRef<
@@ -51,6 +52,7 @@ const AppAutoCompleteComponent = React.forwardRef<
       className,
       startContent,
       endContent,
+      placeHolder=false,
       ...rest
     },
     ref
@@ -165,9 +167,9 @@ const AppAutoCompleteComponent = React.forwardRef<
             if (onChange && key) onChange(key as string);
           }}
           placeholder={
-            lang === "fa"
+           placeHolder ?( lang === "fa"
               ? `انتخاب ${label || "گزینه"}...`
-              : `Select ${label || "option"}...`
+              : `Select ${label || "option"}...`):undefined
           }
           {...rest}
         >

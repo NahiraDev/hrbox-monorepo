@@ -8,13 +8,13 @@ const FaceAllocationModal = () => {
   const rowData=modalData?.data
    const initialValuesAction = {
     type: rowData?.type?.toLowerCase() ||  "person",
-    ChooseShift: rowData?.ChooseShift|| null,
-    FormDate:rowData?.FormDate|| null,
-    organization:rowData?.organization|| null,
-    Department:rowData?.Department|| null,
-    Employee:rowData?.Employee|| null,
-    Description:rowData?.Description|| null,
-    JobTitle:rowData?.JobTitle|| null,
+    ChooseShift: rowData?.ChooseShift|| "",
+    FormDate:rowData?.FormDate|| "",
+    organization:rowData?.organization|| "",
+    Department:rowData?.Department|| "",
+    Employee:rowData?.Employee|| "",
+    Description:rowData?.Description|| "",
+    JobTitle:rowData?.JobTitle|| "",
   };
   const formValidationAction = Yup.object().shape({
     type: Yup.string().required(),

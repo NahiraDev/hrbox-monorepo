@@ -33,10 +33,10 @@ const AllocationSubheader = ({
       <ModalComponent />,
       {
         isForm: true,
-        title:"Add New One",
+        title:t("addNewOne"),
         icon:<Hierarchy3 />,
-        submitLabel: "Submit",
-        cancelLabel: "Cancel",
+        submitLabel: t("submit"),
+        cancelLabel: t("cancel"),
         formConfig: {
           formId: id,
         },
