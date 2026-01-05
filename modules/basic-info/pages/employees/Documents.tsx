@@ -3,10 +3,10 @@ import { identityCard } from "@module/basic-info/app/mock";
 import { AppButton } from "@hrbox/uikit/components";
 import {
   ArrowRotateLeft,
-  Calendar,
+  Calendar, DocumentUpload,
   Status,
   Trash,
-  User,
+  User
 } from "iconsax-reactjs";
 import { ModalSize, ModalType } from "@hrbox/core/providers/ModalProvider";
 import { useState } from "react";
@@ -63,6 +63,14 @@ const Documents = () => {
     });
   };
 
+  const cardContainerClass = `grid grid-cols-4 gap-4  overflow-y-scroll  max-h-[calc(66.5vh)] my-6 mx-2.5 pr-4.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
   const handleOpenDocuments = () => {
     modal.open(
       ModalType.CREATE,
@@ -70,9 +78,9 @@ const Documents = () => {
       <DocumentsModal />,
       {
         isForm: true,
-        title: "افزودن ",
-        submitLabel: "ذخیره",
-        cancelLabel: "لغو",
+        title: " ",
+        submitLabel: <div className="flex items-center gap-2"> <DocumentUpload size={22}/> Upload File</div>,
+        cancelLabel: "Cancel",
         formConfig: {
           initialValues: initialValuesRelative,
           validationSchema: formValidationRelative,
@@ -85,19 +93,32 @@ const Documents = () => {
           },
         },
       },
-      ModalSize.SM,
+      ModalSize.LG,
     );
   };
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
 
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full p-4">
+        <div className={cardContainerClass}>
           {documentsList.map((user, index) => (
             <Card
               isPressable
-              onPress={handleOpenDocuments}
-              key={index} className="p-3 w-full h-full shadow-sm hover:bg-[#D6F2FF] hover:cursor-pointer"
+              onPress={() => setActiveIndex(index)}
+              onClick={handleOpenDocuments}
+              key={index}
+              className={`
+              p-3 w-full shadow-sm  hover:cursor-pointer
+                transition-all duration-200
+                hover:!bg-[#D6F2FF]
+                ${activeIndex === index
+                ? "bg-[#D6F2FF] border border-primary-400"
+                : "border border-transparent"
+              }
+              `}
             >
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
@@ -119,7 +140,7 @@ const Documents = () => {
                         isIconOnly={true}
                         onPress={() => handleDeleteClick(index)}
                         content={
-                          <Trash className="text-secondary-1000 group-hover:text-white" />
+                          <Trash className="text-secondary-1000 group-hover:text-white" size={16} />
                         }
                         className="p-2 hover:!bg-red-500 transition-all duration-200"
                       />
@@ -132,7 +153,7 @@ const Documents = () => {
                         isIconOnly={true}
                         onPress={handleOpenDocuments}
                         content={
-                          <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" />
+                          <ArrowRotateLeft className="text-secondary-1000 group-hover:text-white" size={16} />
                         }
                         className="p-2 hover:!bg-primary transition-all duration-200"
                       />

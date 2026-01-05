@@ -1,5 +1,5 @@
 import { AppButton } from "@hrbox/uikit/components";
-import { Add,Setting4, SearchNormal1 } from "iconsax-reactjs";
+import { Add, Setting4, SearchNormal1, Location, Filter } from "iconsax-reactjs";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import {
   formValidationOrganizationLocation,
@@ -8,6 +8,7 @@ import {
 import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
 import { FilterCalenderModal } from "@hrbox/modules/basic-info/modals/FilterCalenderModal";
 import { useModal } from "@hrbox/core/hooks";
+import React from "react";
 
 const EmployeesSubHeader = (props: any) => {
 
@@ -19,8 +20,9 @@ const EmployeesSubHeader = (props: any) => {
       "OrganizationLocationModal",
       <FilterCalenderModal/>,
       {
+
         isForm: true,
-        title: "Filter ",
+        title:<div className="flex items-center gap-2"> <Filter size={22}/> Filter</div>,
         submitLabel: "Submit",
         cancelLabel: "Cancel",
         formConfig: {

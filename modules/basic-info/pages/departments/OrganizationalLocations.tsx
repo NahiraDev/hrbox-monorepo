@@ -1,6 +1,6 @@
 import {OrganizationalLocation} from '@module/basic-info/app/mock';
 import {Avatar, Card} from '@heroui/react';
-import { Category, Edit, Location, More, Trash } from "iconsax-reactjs";
+import { Category, Edit, Eye, Link2, Location, More, Trash } from "iconsax-reactjs";
 import React, {useMemo, useState} from 'react';
 import {ModalSize, ModalType, useModalContext} from "@hrbox/core/providers/ModalProvider";
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
@@ -123,13 +123,13 @@ const OrganizationalLocations = () => {
                                         <Location size="15"/>
                                         <span className="!text-xs">Address</span>
                                     </div>
-                                    <p className="!text-xs !font-bold truncate">{detail.Address}</p>
+                                    <p className="text-xs font-bold truncate text-left">{detail.Address}</p>
                                 </div>
 
                                 <div
                                     className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
-                                        <Location size="15"/>
+                                        <Link2 size="15"/>
                                         <span className="!text-xs">Email</span>
                                     </div>
                                     <p className="!text-xs !font-bold truncate">{detail.email}</p>
@@ -138,7 +138,7 @@ const OrganizationalLocations = () => {
                                 <div
                                     className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
-                                        <Location size="15"/>
+                                        <Eye size="15"/>
                                         <span className="!text-xs">Website</span>
                                     </div>
                                     <a className="!text-xs !font-bold hover:underline truncate" href={detail.webLink}
@@ -150,7 +150,7 @@ const OrganizationalLocations = () => {
                                 <div
                                     className="bg-gradient-to-r from-white via-sky-100 to-white w-full rounded-lg border border-sky-100 p-2 flex items-center gap-2 overflow-hidden">
                                     <div className="flex items-center gap-1">
-                                        <Location size="15"/>
+                                        <Link2 size="15"/>
                                         <span className="!text-xs">Is it visible?</span>
                                     </div>
                                     <p className="!text-xs !font-bol d">
@@ -224,7 +224,7 @@ const OrganizationalLocations = () => {
                     ))}
                 </div>
 
-                <div className="flex justify-end p-2 mt-4">
+                <div className="flex justify-end">
                   <AppPagination meta={meta}  />
                 </div>
             </div>

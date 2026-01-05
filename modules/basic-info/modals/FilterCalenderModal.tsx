@@ -12,7 +12,7 @@ export const FilterCalenderModal = () => {
 
   return (
       <AppModal.Body>
-
+        <div className="flex flex-col gap-6">
           <FormField
             formMode={currentType}
             label="Select Unit "
@@ -20,27 +20,28 @@ export const FilterCalenderModal = () => {
             component={AppAutoComplete}
             helperText={touched.select && errors.select}
           />
-         <FormField
+          <FormField
             formMode={currentType}
             label="Search by Name or Position"
             name="Search"
             component={AppInput}
             helperText={touched.Search && errors.Search}
           />
-         <FormField
+          <FormField
             formMode={currentType}
             label=" Personnel Code"
             name="Personnel"
             component={AppInput}
             helperText={touched.Personnel && errors.Personnel}
           />
-         <FormField
+          <FormField
             formMode={currentType}
             label="National Code"
             name="National"
             component={AppInput}
             helperText={touched.National && errors.National}
           />
+        </div>
 
       </AppModal.Body>
   );

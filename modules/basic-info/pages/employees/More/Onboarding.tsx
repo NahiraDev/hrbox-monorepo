@@ -74,14 +74,14 @@ const Onboarding = () => {
                 key={index}
                 onPress={() => setActiveIndex(index)}
                 className={`
-                py-2 px-3 flex flex-col gap-2 shadow-sm cursor-pointer
-                transition-all duration-200
-                hover:!bg-[#D6F2FF]
-                ${activeIndex === index
+                  py-2 px-3 flex flex-col gap-2 shadow-sm cursor-pointer
+                  transition-all duration-200
+                  hover:!bg-[#D6F2FF]
+                  ${activeIndex === index
                   ? "bg-[#D6F2FF] border border-primary-400"
                   : "border border-transparent"
                 }
-  `}
+    `}
               >
 
               <div className="flex gap-1 items-center border-b border-neutral-100 pb-1">

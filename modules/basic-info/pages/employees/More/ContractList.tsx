@@ -15,61 +15,7 @@ const columns = [
 ];
 
 const rows = [
-  {
-    key: '1',
-    no: 1,
-    name: 'Zahra Pakniyat',
-    fromDate: '2025/09/11',
-    toDate: '2025/09/11',
-    contractName: 'Confidentiality Agreement',
-    description: '-',
-    status: 'Signed',
-    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
-  },
-  {
-    key: '2',
-    no: 2,
-    name: 'Zahra Pakniyat',
-    fromDate: '2025/09/11',
-    toDate: '2025/09/11',
-    contractName: 'Confidentiality Agreement',
-    description: '-',
-    status: 'Signed',
-    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
-  },
-  {
-    key: '3',
-    no: 3,
-    name: 'Zahra Pakniyat',
-    fromDate: '2025/09/11',
-    toDate: '2025/09/11',
-    contractName: 'Confidentiality Agreement',
-    description: '-',
-    status: 'Signed',
-    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
-  },
-  {
-    key: '4',
-    no: 4,
-    name: 'Zahra Pakniyat',
-    fromDate: '2025/09/11',
-    toDate: '2025/09/11',
-    contractName: 'Confidentiality Agreement',
-    description: '-',
-    status: 'Pending',
-    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
-  },
-  {
-    key: '5',
-    no: 5,
-    name: 'Zahra Pakniyat',
-    fromDate: '2025/09/11',
-    toDate: '2025/09/11',
-    contractName: 'Confidentiality Agreement',
-    description: '-',
-    status: 'Signed',
-    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
-  },
+
   {
     key: '6',
     no: 6,
@@ -81,6 +27,95 @@ const rows = [
     status: 'Signed',
     action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
   },
+
+  {
+    key: '7',
+    no: 7,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },  {
+    key: '6',
+    no: 6,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },
+
+  {
+    key: '7',
+    no: 7,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },  {
+    key: '6',
+    no: 6,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },
+
+  {
+    key: '7',
+    no: 7,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },  {
+    key: '6',
+    no: 6,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },
+
+  {
+    key: '7',
+    no: 7,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },  {
+    key: '6',
+    no: 6,
+    name: 'Zahra Pakniyat',
+    fromDate: '2025/09/11',
+    toDate: '2025/09/11',
+    contractName: 'Confidentiality Agreement',
+    description: '-',
+    status: 'Signed',
+    action: <ReceiveSquare size={16} className="cursor-pointer hover:text-primary transition-colors" />,
+  },
+
   {
     key: '7',
     no: 7,
@@ -122,10 +157,20 @@ const ContractList = () => {
     return status;
   };
 
+
+  const cardContainerClass = ` gap-3  overflow-y-scroll  max-h-[calc(65.5vh)] my-5 mx-2.5 pr-2.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
+
   return (
     <BasicInfoLayout
       content={
-        <>
+        <div className={cardContainerClass}>
           <div className="flex items-center gap-1 text-xl text-secondary-900 font-semibold py-5">
             <Setting size="24" />
             <span>{t('contract_list')}</span>
@@ -168,7 +213,7 @@ const ContractList = () => {
               </TableBody>
             </Table>
           </div>
-        </>
+        </div>
       }
     />
   );

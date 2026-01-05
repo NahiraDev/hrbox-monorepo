@@ -1,8 +1,8 @@
 import { Card } from '@heroui/react';
 import { Jobss } from '@module/basic-info/app/mock';
 import { AppButton } from '@hrbox/uikit/components';
-import { Buildings, Calendar, Designtools, Location, Trash } from 'iconsax-reactjs';
-import { useState } from 'react';
+import { Buildings, Calendar, Category, Designtools, Edit, Location, Trash } from "iconsax-reactjs";
+import React, { useState } from 'react';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import {useModal} from "@hrbox/core/hooks";
@@ -17,20 +17,14 @@ const Jobs = () => {
   const modal = useModal();
   const [jobs, setJobs] = useState(Jobss);
 
-  const handleDeleteClick = (index: number) => {
-    // openModal(
-    //   'delete',
-    //   '',
-    //   <AppDeleteModal
-    //     onConfirm={() => handleDeleteConfirm(index)}
-    //     onCancel={() => console.log('Cancelled')}
-    //   />,
-    //   undefined,
-    //   'sm',
-    //   'Do you want to remove it?',
-    //   <Trash className='text-white'/>
-    // );
-  };
+  const cardContainerClass = `grid grid-cols-4 gap-3  overflow-y-scroll  max-h-[calc(66.5vh)] my-6 mx-2.5 pr-4.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
 
   const handleDeleteConfirm = (index: number)  => {
     setJobs(prev => {
@@ -47,7 +41,7 @@ const Jobs = () => {
       <JobModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Designtools size={22}/> Job Details</div>,
         submitLabel: "ذخیره",
         cancelLabel: "لغو",
         formConfig: {
@@ -64,20 +58,53 @@ const Jobs = () => {
       },
       ModalSize.XL,
     );
+  };  const handleOpenJobModalEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      " Documents",
+      <JobModal />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Designtools size={22}/> Edit Job</div>,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
   };
-
+  const [activeIndex, setActiveIndex] = useState(null);
   return (
     <>
       <BasicInfoLayout
         content={
-          <div className="grid grid-cols-4 gap-3 w-full p-4">
+          <div className={cardContainerClass}>
             {jobs.map((user, index) => (
               <Card
                 isPressable
                 onPress={handleOpenJobModal}
+                onClick={() => setActiveIndex(index)}
                 key={index}
-                className="py-2 px-3  hover:bg-[#D6F2FF] hover:cursor-pointer shadow-sm">
-                <div className="flex items-center justify-between border-b-2 border-neutral-100">
+                className={`
+                py-2 px-3  hover:cursor-pointer shadow-sm
+                   transition-all duration-200
+                hover:!bg-[#D6F2FF]
+                ${activeIndex === index
+                  ? "bg-[#D6F2FF] border border-primary-400"
+                  : "border border-transparent"
+                }
+                `}>
+                <div className="flex items-center justify-between border-b-2 border-neutral-100 pb-1">
                   <div className="flex items-center gap-2">
                     <div className='rounded-full w-2 h-2 bg-green-600'></div>
                     <Designtools size={18} />
@@ -88,15 +115,26 @@ const Jobs = () => {
                       width={16}
                       height={16}
                     />
-                    <AppButton
+                    <div className="flex items-center">
+                      <AppButton
                         size= 'xs'
                         radius= 'sm'
                         variant= 'light'
                         isIconOnly= {true}
-                        onPress= {() => handleDeleteClick(index)}
+                        onPress= {handleOpenJobModalEdit}
+                        content= {<Edit className="text-secondary-1000 group-hover:text-white" size={16} />}
+                        className= 'p-2 hover:!bg-primary-400 transition-all duration-200'
+                      />
+                      <AppButton
+                        size= 'xs'
+                        radius= 'sm'
+                        variant= 'light'
+                        isIconOnly= {true}
+                        // onPress= {() => handleDeleteClick(index)}
                         content= {<Trash className="text-secondary-1000 group-hover:text-white" size={16} />}
                         className= 'p-2 hover:!bg-red-500 transition-all duration-200'
-                    />
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col mt-2">

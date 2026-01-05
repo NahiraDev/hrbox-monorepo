@@ -1,9 +1,9 @@
 import { Card } from '@heroui/react';
 import { dataWorker } from '@module/basic-info/app/mock';
 import { AppButton } from '@hrbox/uikit/components';
-import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher } from 'iconsax-reactjs';
+import { Settings, TextalignJustifyleft, Trash, Calendar, Teacher, Edit, Category, Cup } from "iconsax-reactjs";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { BasicInfoLayout } from '@hrbox/modules/basic-info/components';
 import CoursesModal from "@hrbox/modules/basic-info/modals/CoursesModal";
@@ -41,6 +41,15 @@ const Courses = () => {
     });
   };
 
+  const cardContainerClass = `grid grid-cols-4 gap-4  overflow-y-scroll  max-h-[calc(66.5vh)] my-6 mx-2.5 pr-4.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
+
   const modal = useModal();
 
   const  handleOpenCoursesModal = () => {
@@ -50,7 +59,7 @@ const Courses = () => {
       <CoursesModal />,
       {
         isForm: true,
-        title: "افزودن ",
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/> Courses Details</div>,
         submitLabel: "ذخیره",
         cancelLabel: "لغو",
         formConfig: {
@@ -67,18 +76,51 @@ const Courses = () => {
       },
       ModalSize.XL,
     );
+  };  const  handleOpenCoursesModalEdit = () => {
+    modal.open(
+      ModalType.EDIT,
+      " Documents",
+      <CoursesModal />,
+      {
+        isForm: true,
+        title:<div className="flex items-center gap-2"> <Teacher size={22}/>Edit Courses</div>,
+        submitLabel: "Save Changes",
+        cancelLabel: "Cancel",
+        formConfig: {
+          initialValues: initialValuesRelative,
+          validationSchema: formValidationRelative,
+          formId: "award-form",
+          enableCache: true,
+          clearCacheOnSubmit: true,
+          onSubmitAsync: async (values: any) => {
+            handleSubmitAward(values);
+            modal.close(ModalType.CREATE, "award-form");
+          },
+        },
+      },
+      ModalSize.XL,
+    );
   };
-
+  const [activeIndex, setActiveIndex] = useState(null);
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-4 gap-4 w-full p-4">
+        <div className={cardContainerClass}>
           {courses.map((user: any, index) => (
             <Card
               isPressable
               onPress={handleOpenCoursesModal}
+              onClick={() => setActiveIndex(index)}
               key={index}
-              className="p-3 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white">
+              className={`
+              p-3 shadow-sm hover:cursor-pointer bg-white
+                transition-all duration-200
+                hover:!bg-[#D6F2FF]
+                ${activeIndex === index
+                ? "bg-[#D6F2FF] border border-primary-400"
+                : "border border-transparent"
+              }
+              `}>
               <div className="flex flex-col gap-2 ">
                 <div className="flex justify-between border-b border-neutral-100 p-1">
                   <div className="flex items-center gap-2">
@@ -88,6 +130,16 @@ const Courses = () => {
                   </div>
                   <div className="flex gap-1">
                     <div>
+                      <div className="flex items-center">
+                        <AppButton
+                          size= 'xs'
+                          radius= 'sm'
+                          variant= 'light'
+                          isIconOnly= {true}
+                          onPress= {handleOpenCoursesModalEdit}
+                          content= {<Edit className="text-secondary-1000 group-hover:text-white" size={16} />}
+                          className= 'p-2 hover:!bg-primary-400 transition-all duration-200'
+                        />
                       <AppButton
                         size='xs'
                         radius='sm'
@@ -97,6 +149,7 @@ const Courses = () => {
                           content={<Trash className="text-secondary-1000 group-hover:text-white" size={16} />}
                           className='p-2 hover:!bg-red-500 transition-all duration-200'
                       />
+                    </div>
                     </div>
                   </div>
                 </div>
