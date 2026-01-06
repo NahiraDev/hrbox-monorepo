@@ -543,7 +543,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
               if (onEdit || onDelete || onView || (rowActions && rowActions.length > 0)) {
                 cells.push(
-                  <TableCell key="actions" className={`text-secondary-400 ${densityClasses}`}>
+                  <TableCell key="actions" className={`text-secondary-400 `}>
                     <div className="flex items-center justify-center gap-2">
                       {onView && (
                         <Tooltip content="View">
@@ -555,20 +555,19 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                       )}
                       {onEdit && (
                         <Tooltip content="Edit">
-                          <AppButton size="sm" variant="light"
+                          <AppButton size="sm" variant=""
+                          className="p-0!"
                                      onPress={() => onEdit(row, index)}
-                                     content={<span
-                                       className="cursor-pointer text-lg"><Edit
-                                       className="dark:text-[#DEE1E8] text-[#1E3363]" />️</span>} />
+                                     content={<><Edit size={16} className="dark:text-[#DEE1E8] text-[#1E3363]" />️</>} />
                         </Tooltip>
                       )}
                       {onDelete && (
                         <Tooltip content="Delete">
-                          <AppButton size="sm" variant="light"
+                          <AppButton size="sm" variant=""
                                      onPress={() => onDelete(row, index)}
-                                     content={<span
-                                       className="cursor-pointer text-lg"><Trash
-                                       className="dark:text-[#DEE1E8] text-[#1E3363]" /></span>} />
+                                     className="p-0!"
+                                     content={<><Trash size={16}
+                                       className="dark:text-[#DEE1E8] text-[#1E3363]" /></>} />
                         </Tooltip>
                       )}
                       {renderRowActions(row, index)}
