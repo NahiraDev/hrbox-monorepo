@@ -42,7 +42,7 @@ const ApprovalsFilter = () => {
         enableCache={false}
       >
         <div className="flex flex-col w-[22%] h-full rounded-xl pr-2 pl-3 py-3 gap-10  border border-primary ">
-          <div className="relative h-[600px] pr-3">
+          <div className="relative h-150 pr-3">
             <AppButton
               onPress={scrollUp}
               className="absolute top-0 right-0 left-64 w-6 h-6 flex items-center justify-center cursor-pointer p-0 m-0 bg-transparent"
@@ -50,7 +50,7 @@ const ApprovalsFilter = () => {
             />
 
             <div
-              className="flex flex-col gap-4 pr-3 overflow-y-scroll max-h-[600px] custom-scroll-approvals"
+              className="flex flex-col gap-4 pr-3 overflow-y-scroll max-h-150 custom-scroll-approvals"
               ref={scrollRef}
             >
               {filterList.map((item, index) => {
