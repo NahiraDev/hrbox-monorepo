@@ -337,7 +337,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     };
 
     const getHeaderClassName = (col: ColumnConfig<any>): string => {
-      const baseClass = "text-white text-sm font-semibold !bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12";
+      const baseClass = "text-white text-sm font-semibold !bg-primary dark:bg-[#0D4D6A]! text-center !h-12";
       if (typeof col.headerClassName === "function") {
         return `${baseClass} ${col.headerClassName(col)}`;
       }
@@ -460,7 +460,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     if (onEdit || onDelete || onView || (rowActions && rowActions.length > 0)) {
       headerColumns.push(
         <TableColumn key="actions"
-                     className="bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[rgba(4,66,92,0.60)]">
+                     className="bg-primary h-12! text-center text-sm font-semibold text-white dark:bg-[#0D4D6A]">
           Actions
         </TableColumn>
       );

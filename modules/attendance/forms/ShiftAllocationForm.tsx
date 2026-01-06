@@ -45,6 +45,7 @@ const ShiftAllocationForm = () => {
             { value: "group", label: t("group") },
             { value: "job_title", label: t("job_title") },
           ]}
+           orientation="horizontal"
           className="flex! flex-row!"
         />
         <div className="flex flex-row justify-between gap-10">
@@ -136,7 +137,7 @@ const ShiftAllocationForm = () => {
           </div>
         )}
 
-        <div className="w-full">
+        <div className="w-full relative z-999">
           <FormField
             name="Description"
             label={t("descriptions")}

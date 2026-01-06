@@ -50,8 +50,6 @@ const AppRadioComponent = React.forwardRef<HTMLDivElement, AppRadioProps>(
         case FormMode.VIEW:
           return {
             wrapper: clsx(
-              "bg-[linear-gradient(90deg,#FFFFFF_5%,#EEF9FF_48%,#FFFFFF_95%)] dark:bg-[linear-gradient(90deg,#022C3D_5%,#05587A_50%,#022C3D_95%)]",
-              "border border-[#DCF0F9] dark:border-primary-800 rounded-lg p-3",
               "cursor-default"
             ),
             radio: clsx(
@@ -66,8 +64,6 @@ const AppRadioComponent = React.forwardRef<HTMLDivElement, AppRadioProps>(
         case FormMode.EDIT:
           return {
             wrapper: clsx(
-              "bg-[rgba(220,240,249,0.40)] dark:bg-[#04425C60]",
-              "border border-transparent rounded-lg p-3",
               "hover:border-primary-300 dark:hover:border-primary-600",
               "focus-within:border-primary"
             ),
@@ -81,7 +77,6 @@ const AppRadioComponent = React.forwardRef<HTMLDivElement, AppRadioProps>(
           return {
             wrapper: clsx(
               "bg-white dark:bg-secondary-1000",
-              "border border-[#DCF0F9] dark:border-[#04425C]",
               "rounded-lg p-3",
               "focus-within:border-surface dark:focus-within:border-surface"
             ),
@@ -127,7 +122,7 @@ const AppRadioComponent = React.forwardRef<HTMLDivElement, AppRadioProps>(
           orientation={orientation}
           className={wrapperClasses}
           classNames={{
-            wrapper: orientation === "horizontal" ? "flex-row gap-4" : "flex-col gap-2",
+            wrapper: orientation === "horizontal" ? "w-full flex flex-row justify-between gap-4" : "flex-col gap-2",
             errorMessage: clsx(
               "text-xs font-medium mt-1",
               "text-danger dark:text-danger-400",
