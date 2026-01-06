@@ -616,7 +616,7 @@ export const ListApprovals = [
     Duration: "3 Hours",
     "From Date": "2025/01/20",
     "Request Number": "1223425",
-    status: <TickCircle color="green" variant="Bold" />,
+    status: (<TickCircle color="green" variant="Bold" />),
   },
   {
     No: 1,
@@ -628,6 +628,7 @@ export const ListApprovals = [
     status: (
       <span>
         <TickCircle color="red" variant="Bold" />
+        <p>approvaled</p>
       </span>
     ),
   },
