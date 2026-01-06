@@ -27,7 +27,7 @@
   }, [values]);
 
   return (
-    <form id="general-form" onSubmit={handleSubmit}>
+    <Form id="general-form" onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-x-8 gap-y-6">
 
         <FormField
@@ -107,7 +107,7 @@
           />
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 
