@@ -13,7 +13,7 @@ import {
   MessageEdit,
   Add,
   Profile,
-  User, People, Edit, Designtools
+  User, People, Edit, Designtools, UserSquare
 } from "iconsax-reactjs";
 import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/ModalProvider";
 import { BasicInfoLayout } from "@hrbox/modules/basic-info/components";
@@ -259,7 +259,7 @@ const Dependents = () => {
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-2 gap-10 mt-4">
+        <div className="grid grid-cols-2 gap-5 mt-4 ml-3">
           <div className="grid grid-cols-2 gap-5">
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between w-full">
@@ -370,7 +370,7 @@ const Dependents = () => {
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between w-full ">
                 <div className="flex items-center gap-1">
-                  <Profile2User size={24} />
+                  <UserSquare size={24} />
                   <span className="text-xl font-semibold text-secondary-1000">Dependents</span>
                 </div>
                 <div className="mr-5">

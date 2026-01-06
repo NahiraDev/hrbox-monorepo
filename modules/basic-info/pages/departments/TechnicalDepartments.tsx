@@ -8,7 +8,6 @@ import {
   initialValuesTechnicalDepartment,
   formValidationTechnicalDepartment
 } from "@hrbox/modules/basic-info/forms/TechnicalDepartmentForm";
-import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
 import { TickIcon } from "@hrbox/uikit/icons";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { Paths } from "@hrbox/modules/paths";
@@ -16,8 +15,6 @@ import { Paths } from "@hrbox/modules/paths";
 const TechnicalDepartments = () => {
 
   const { push } = useNavigation();
-
-
 
   return (
     <div className="flex flex-col items-center justify-between gap-110">
