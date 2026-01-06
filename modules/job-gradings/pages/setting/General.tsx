@@ -8,16 +8,16 @@ import {Hierarchy3, Ranking} from "iconsax-reactjs";
 import {useTranslation} from "react-i18next";
 
     const columns: ColumnConfig[] = [
-      { key: "id", label: "No", width: 80, align: "center", cellClassName: "text-center", },
+      { key: "id", label: "No",  align: "center", cellClassName: "text-center", },
 
-      { key: "ofpoint", label: "of point", width: 80, align: "center" ,cellClassName: "text-center", },
+      { key: "ofpoint", label: "of point",  align: "center" ,cellClassName: "text-center", },
 
-      { key: "uptopoints", label: "up to point", width: 200, align: "center" , cellClassName: "text-center", },
+      { key: "uptopoints", label: "up to point",  align: "center" , cellClassName: "text-center", },
 
       {
         key: "Grade",
         label: "Grade",
-        width: 200,
+
         align: "center",
           cellClassName: "text-center",
         render: (_, row: any) => (
@@ -30,9 +30,9 @@ import {useTranslation} from "react-i18next";
         ),
       },
 
-      { key: "Grouping", label: "Grouping", width: 200 },
+      { key: "Grouping", label: "Grouping",  },
 
-      { key: "Description", label: "Description", width: 200 },
+      { key: "Description", label: "Description",  },
     ];
 
 const General = () => {

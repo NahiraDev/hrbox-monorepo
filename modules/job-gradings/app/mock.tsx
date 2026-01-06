@@ -1508,12 +1508,10 @@ export const JDPageList = [
     score: "650"
   },{
     id:"5",
-    Grade: "Grade B",
-    gradeColor: "#22C55E",
+    Grade: "-",
     Job_title: "Financial expert",
     unit: "finance",
-    grade_status:"has",
-
+    grade_status:"no",
     score: "650"
   },
   {
@@ -1528,11 +1526,10 @@ export const JDPageList = [
   },
   {
     id:"8",
-    Grade: "Grade A",
-    gradeColor: "#22C55E",
+    Grade: "-",
     Job_title: "Financial expert",
     unit: "finance",
-    grade_status:"has",
+    grade_status:"no",
 
     score: "650"
   },
@@ -1547,8 +1544,7 @@ export const JDPageList = [
     score: "650"
   },{
     id: "10",
-    Grade: "No Grade",
-    gradeColor: "#EF4444",
+    Grade: "-",
     Job_title: "HR Manager",
     unit: "HR",
     grade_status: "no",

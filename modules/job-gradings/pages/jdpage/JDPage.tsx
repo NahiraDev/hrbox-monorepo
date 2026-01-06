@@ -1,19 +1,15 @@
+import { useMemo } from "react";
 import { AppTable, type ColumnConfig } from "@hrbox/uikit/components";
 import { JDPageList } from "../../app/mock";
-
+import { useAppSelector } from "@hrbox/core/redux";
+import '../../app/index.css'
 const columns: ColumnConfig[] = [
-    {
-        key: "Job_title",
-        label: "job title",
-    },
-    {
-        key: "unit",
-        label: "unit",
-    },
+    { key: "Job_title", label: "Job Title" },{ key: "Job_title", label: "Job Title" },
+    { key: "unit", label: "Unit" },
     {
         key: "grade_status",
-        label: "Grade status",
-        render: (value) => (value === "has" ? "has" : "does not have"),
+        label: "Grade Status",
+        render: (v) => (v === "has" ? "Has Grade" : "No Grade"),
     },
     {
         key: "Grade",
@@ -27,17 +23,37 @@ const columns: ColumnConfig[] = [
       </span>
         ),
     },
-    {
-        key: "score",
-        label: "Score",
-    },
+    { key: "score", label: "Score" },
 ];
 
 const JDPage = () => {
+    const { showGraded, showNoGrade } = useAppSelector(
+        (state) => state.jdFilter
+    );
+
+    const filteredData = useMemo(() => {
+        if (!showGraded && !showNoGrade) return [];
+
+        return JDPageList.filter(({ grade_status }) =>
+            (showGraded && grade_status === "has") ||
+            (showNoGrade && grade_status !== "has")
+        );
+    }, [showGraded, showNoGrade]);
+
     return (
-        <div className="w-full h-full">
-            <AppTable data={JDPageList} columns={columns} showRowNumber />
-        </div>
+        <AppTable
+            data={filteredData}
+            columns={columns}
+            showRowNumber
+            hasPagination
+            pageSize={10}
+            styles={{
+                rowClassName: (row) =>
+                    row.grade_status === "has"
+                        ? "graded-row"
+                        : "no-grade-row",
+            }}
+        />
     );
 };
 
