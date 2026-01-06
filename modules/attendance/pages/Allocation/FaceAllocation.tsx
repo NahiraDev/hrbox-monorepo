@@ -25,7 +25,7 @@ const FaceAllocation = () => {
           formId: "face-allocation-form"
         }
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row:any) => {
@@ -44,7 +44,7 @@ const FaceAllocation = () => {
           formId: "face-allocation-form"
         }
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   

@@ -79,10 +79,25 @@ export const AppSidebar = () => {
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary shadow-theme-sm hover:scale-110 transition-transform"
+        className={`
+    absolute top-12.5 z-10
+    flex items-center justify-center
+    w-6 h-6 rounded-full
+    bg-white text-secondary shadow-theme-sm
+    hover:scale-110 transition-transform
+    ${lang === "fa" ? "-left-3" : "-right-3"}
+  `}
         aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
       >
-        {isExpanded ? <ArrowLeft2 size="12" color="#1E3363" /> : <ArrowRight2 size="12" color="#1E3363" />}
+        {isExpanded ? (
+  lang === "fa"
+    ? <ArrowRight2 size="12" color="#1E3363" />
+    : <ArrowLeft2 size="12" color="#1E3363" />
+) : (
+  lang === "fa"
+    ? <ArrowLeft2 size="12" color="#1E3363" />
+    : <ArrowRight2 size="12" color="#1E3363" />
+)}
       </button>
 
       <div className="flex flex-col items-center justify-between w-full h-full">

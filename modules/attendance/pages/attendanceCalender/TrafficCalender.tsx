@@ -66,7 +66,8 @@ const menuRef=useRef<HTMLDivElement | null>(null);
     const handleOpenModal = (
       formid: string,
       modalComponent: any,
-      titleModal: string
+      titleModal: string,
+      modalSize:any
     ) => {
       modal.open(
         ModalType.CREATE,
@@ -82,7 +83,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
             formId: formid,
           },
         },
-        ModalSize["4XL"]
+        modalSize
       );
     };
 
@@ -233,7 +234,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
-                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time")}
+                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time",ModalSize.SM)}
                 />
                 <AppButton
                   content={t("hourly-mission")}
@@ -241,7 +242,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
-                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time")}
+                  onPress={()=>handleOpenModal("event-form",<EventModal/>,"Add Time",ModalSize.SM)}
                 />
                 <AppButton
                   content={t("edit-traffic-entry")}
@@ -249,7 +250,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Edit_Traffic_Entry"
                   size=""
-                  onPress={()=>handleOpenModal("permision-form",<AddPermisionTime/>,"Add Permision Time")}
+                  onPress={()=>handleOpenModal("permision-form",<AddPermisionTime/>,"Add Permision Time",ModalSize["2XL"])}
                 />
                 <AppButton
                   content={t("delete-traffic-entry")}

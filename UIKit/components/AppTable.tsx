@@ -323,7 +323,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       const isSelected = selectedRows.has(index);
       const baseClass = "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer";
       const stripedClass = variant === "striped" && index % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/30" : "";
-      const borderedClass = variant === "bordered" ? "border-b border-gray-200 dark:border-gray-700" : "";
+      const borderedClass = variant === "bordered" ? "" : "";
       const selectedClass = isSelected ? "bg-primary-400 dark:bg-primary-900/30" : "";
       const customClass = typeof styles.rowClassName === "function" ? styles.rowClassName(row, index, isSelected) : styles.rowClassName || "";
       return `${baseClass} ${stripedClass} ${borderedClass} ${selectedClass} ${customClass}`;

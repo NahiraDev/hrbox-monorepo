@@ -31,7 +31,7 @@ const ShiftAllocation = () => {
           formId: "shift-allocation",
         },
       },
-      ModalSize["4XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row: any) => {
@@ -53,7 +53,7 @@ const ShiftAllocation = () => {
           }
         },
       },
-      ModalSize["4XL"]
+      ModalSize["2XL"]
     );
   };
 

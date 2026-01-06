@@ -29,7 +29,7 @@ const IpAllocation = () => {
           formId: "ip-allocation-form",
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row: any) => {
@@ -48,7 +48,7 @@ const IpAllocation = () => {
           formId: "ip-allocation-form",
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   return (

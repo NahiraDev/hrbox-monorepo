@@ -628,7 +628,6 @@ export const ListApprovals = [
     status: (
       <span>
         <TickCircle color="red" variant="Bold" />
-        <p>approvaled</p>
       </span>
     ),
   },

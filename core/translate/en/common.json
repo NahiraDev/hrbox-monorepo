@@ -151,7 +151,7 @@
   "attendance_calendar": "Attendance Calendar",
   "approvals": "Approvals",
   "list_of_approvals": "List of Approvals",
-  "ُshift_allocation": "ُShift Allocation",
+  "ُshift_allocation": "Shift Allocation",
   "face_allocation": "Face Allocation",
   "ip_allocation": "Ip Allocation",
   "location_allocation": "Location Allocation",
@@ -275,5 +275,6 @@
   "edit-face-recognition-assignment":"Edit Face Recognition Assignment",
   "edit-iP-allocation":"Edit IP Allocation",
   "edit-location-allocation":"Edit Location Allocation",
-  "edit-shift-allocation":"Edit Shift Allocation"
+  "edit-shift-allocation":"Edit Shift Allocation",
+  "timesheet":"Time Sheet"
 }

@@ -28,7 +28,7 @@ const LocationAllocation = () => {
           formId: "location-allocation",
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row:any) => {
@@ -47,7 +47,7 @@ const LocationAllocation = () => {
           formId: "location-allocation",
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   return (

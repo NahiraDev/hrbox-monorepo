@@ -41,7 +41,7 @@ const AllocationSubheader = ({
           formId: id,
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   return (

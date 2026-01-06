@@ -16,6 +16,7 @@ import { AppDropDown } from "@hrbox/uikit/components/AppDropDown";
 import { useTranslation } from "react-i18next";
 
 const EntryExitSubHeader = (props: any) => {
+  const isDark = document.documentElement.classList.contains("dark");
   const { openModal } = useModalContext();
   const [clock, setClock] = useState(false);
   const [time, setTime] = useState(0);
@@ -164,7 +165,7 @@ const EntryExitSubHeader = (props: any) => {
                       description:
                         "Traffic registration was done successfully!",
                       variant: "solid",
-                      icon: <TickCircle color="white" size={24} />,
+                      icon: <TickCircle color="white" size={24} variant={isDark?"Bold":undefined} />,
                       classNames: {
                         icon: newClockValue
                           ? "w-[40px] h-[40px] text-red-500 rounded-full p-1 border-1 border-red-100"

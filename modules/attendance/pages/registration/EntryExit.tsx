@@ -11,7 +11,7 @@ const EntryExit = () => {
     modal.open(
       ModalType.CREATE,
       "entry-exit",
-      row.Type2.props.children[2].props.children==="Ip"?<UserLocationModal/>:<FaceIdModal/>,
+      row.Type2.props.children[2].props.children==="Location"?<FaceIdModal/>:<UserLocationModal/>,
       {
         isForm: true,
         submitLabel: "Submit Again",
@@ -20,7 +20,7 @@ const EntryExit = () => {
           formId: "event-form",
         }
       },
-      ModalSize["4XL"]
+      ModalSize.XL
     );
   };
   return (
