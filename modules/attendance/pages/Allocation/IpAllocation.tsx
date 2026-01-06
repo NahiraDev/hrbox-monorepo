@@ -61,6 +61,7 @@ const IpAllocation = () => {
           onRowClick={(row) => handleRowClick(row)}
           variant="bordered"
           onEdit={(row) => handleEditClick(row)}
+          onDelete={()=>console.log("delete")}
         />
       </div>
     </>

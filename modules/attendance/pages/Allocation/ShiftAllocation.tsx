@@ -31,7 +31,7 @@ const ShiftAllocation = () => {
           formId: "shift-allocation",
         },
       },
-      ModalSize.XL
+      ModalSize["4XL"]
     );
   };
   const handleEditClick = (row: any) => {
@@ -49,11 +49,11 @@ const ShiftAllocation = () => {
         formConfig: {
           formId: "shift-allocation",
           onSubmitAsync: async (values: any) => {
-            console.log(values);
+            console.log("shift log");
           }
         },
       },
-      ModalSize.XL
+      ModalSize["4XL"]
     );
   };
 
@@ -65,6 +65,7 @@ const ShiftAllocation = () => {
           onRowClick={(row) => handleRowClick(row)}
           variant="bordered"
           onEdit={(row) => handleEditClick(row)}
+          onDelete={()=>console.log("delete")}
         />
       </div>
     </>

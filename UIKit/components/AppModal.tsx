@@ -333,14 +333,14 @@ const AppModalBase: React.FC<AppModalProps> & {
   const getHeaderColor = () => {
     switch (modalType) {
       case ModalType.DELETE:
-        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)] rtl:bg-[linear-gradient(270deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.EDIT:
-        return "bg-[linear-gradient(90deg,#1E3363_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#1E3363_19.05%,#FFFFFF_100%)] rtl:bg-[linear-gradient(270deg,#1E3363_19.05%,#FFFFFF_100%)]";
       case ModalType.VIEW:
-        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)] rtl:bg-[linear-gradient(270deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.CREATE:
       default:
-        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)] rtl:bg-[linear-gradient(270deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
     }
   };
 
