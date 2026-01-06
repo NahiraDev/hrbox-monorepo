@@ -14,96 +14,88 @@ interface SettingSubheaderProps {
 const SettingHeader = ({ title, icon }: SettingSubheaderProps) => {
   const { t } = useTranslation();
   const modal = useModal();
-  const navigate = useNavigate()
-  const location = useLocation()
-    const isGeneral =
-        location.pathname === "/job-gradings/setting/general";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isGeneral = location.pathname === "/job-gradings/setting/general";
 
-    const isIndicators =
-        location.pathname === "/job-gradings/setting/indicators";
-    const handlerOpenModal = () => {
-        if (isIndicators) {
-            modal.open(
-                ModalType.CREATE,
-                t("indicators"),
-                <SettingModal />,
-                {
-                    isForm: true,
-                    submitLabel: "Submit",
-                    cancelLabel: "Cancel",
-                    formConfig: {
-                        formId: "indicators-form",
-                    },
-                },
-                ModalSize["2XL"]
-            );
-            return;
-        }
+  const isIndicators = location.pathname === "/job-gradings/setting/indicators";
+  const handlerOpenModal = () => {
+  if (isIndicators) {
+    modal.open(
+      ModalType.CREATE,
+      t("indicators"),
+      <SettingModal />,
+      {
+        isForm: true,
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: { formId: "indicators-form" },
+      },
+      ModalSize["2XL"]
+    );
+    return;
+  }
 
-        if (isGeneral) {
-            modal.open(
-                ModalType.CREATE,
-                t("general"),
-                <GeneralModal />,
-                {
-                    isForm: true,
-                    submitLabel: "Submit",
-                    cancelLabel: "Cancel",
-                    formConfig: {
-                        formId: "general-form",
-                    },
-                },
-                ModalSize["2XL"]
-            );
-        }
-    };
+    if (isGeneral) {
+      modal.open(
+          ModalType.CREATE,
+          t("general"),
+          <GeneralModal />,
+          {
+            isForm: true,              // ✅ فقط اینجا
+            submitLabel: "Submit",
+            cancelLabel: "Cancel",
+            formConfig: {
+              formId: "general-form",  // 🔑 مهم
+            },
+          },
+          ModalSize["2XL"]
+      );
+    }
 
-    return (
+  };
+
+
+  return (
     <>
       <div className="w-full flex  flex-row">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row gap-3">
-              <AppButton
-                  color={isIndicators ? "primary" : "white"}
-                  size="md"
-                  radius="lg"
-                  startContent={<Setting size={18} />}
-                  className={isIndicators ? "text-white" : "text-black"}
-                  onPress={() =>
-                      navigate({ to: "/job-gradings/setting/indicators" })
-                  }
-                  content={t("indicators")}
-              />
+            <AppButton
+              color={isIndicators ? "primary" : "white"}
+              size="md"
+              radius="lg"
+              startContent={<Setting size={18} />}
+              className={isIndicators ? "text-white" : "text-black"}
+              onPress={() =>
+                navigate({ to: "/job-gradings/setting/indicators" })
+              }
+              content={t("indicators")}
+            />
 
-              <AppButton
-                  color={isGeneral ? "primary" : "white"}
-                  size="md"
-                  radius="lg"
-                  startContent={<Setting size={18} />}
-                  className={isGeneral ? "text-white" : "text-black"}
-                  onPress={() =>
-                      navigate({ to: "/job-gradings/setting/general" })
-                  }
-                  content={t("General")}
-              />
-
+            <AppButton
+              color={isGeneral ? "primary" : "white"}
+              size="md"
+              radius="lg"
+              startContent={<Setting size={18} />}
+              className={isGeneral ? "text-white" : "text-black"}
+              onPress={() => navigate({ to: "/job-gradings/setting/general" })}
+              content={t("General")}
+            />
           </div>
-          
         </div>
-          <div className="flex flex-row gap-2.5">
-              <AppSearchInput />
-              <AppButton
-                  onPress={handlerOpenModal}
-                  color="white"
-                  size="md"
-                  radius="lg"
-                  startContent={<Add size={22} />}
-                  className="border-1 border-primary"
-                  content={t("add_new_one")}
-              />
-          </div>
-    
-       
+        <div className="flex flex-row gap-2.5">
+          <AppSearchInput />
+          <AppButton
+            onPress={handlerOpenModal}
+            color="white"
+            size="md"
+            radius="lg"
+            startContent={<Add size={22} />}
+            className="border-1 border-primary"
+            content={t("add_new_one")}
+          />
+        </div>
       </div>
     </>
   );

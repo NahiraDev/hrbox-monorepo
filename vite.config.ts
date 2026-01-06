@@ -175,19 +175,15 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
               (proxyRes: any, req: any, _res: any): void;
             }) => void;
           }, options: any) => {
-            proxy.on("error", (err, _req, _res) => {
-              console.error("❌ Proxy error:", err.message);
+            proxy.on("error", (_err, _req, _res) => {
             });
 
-            proxy.on("proxyReq", (proxyReq, req, _res) => {
+            proxy.on("proxyReq", (proxyReq, _req, _res) => {
               proxyReq.setHeader("Host", "https://hrlink.hrbox.me:50443");
               proxyReq.setHeader("Origin", "https://front.hrbox.me");
             });
 
-            proxy.on("proxyRes", (proxyRes, req, _res) => {
-              console.log(
-                `📥 [hrlink.hrbox.me → Vite] ${proxyRes.statusCode} ${req.url}`
-              );
+            proxy.on("proxyRes", (_proxyRes, _req, _res) => {
             });
           }
         },
@@ -231,7 +227,7 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
     preview: {
       port: 443,
       host: "0.0.0.0",
-      allowedHosts: ["localhost", , "react.hrbox.me"],
+      allowedHosts: ["localhost", "front.hrbox.me", "react.hrbox.me"],
       strictPort: true,
       open: envVars.VITE_OPEN !== "false",
       cors: true,

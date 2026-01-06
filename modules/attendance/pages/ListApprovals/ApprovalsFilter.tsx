@@ -11,12 +11,12 @@ const ApprovalsFilter = () => {
   const filterList = [
     "request_type",
     "issuer",
-    "from_date",
+    "form_date",
     "to_date",
     "request_number",
     "request_type",
     "issuer",
-    "from_date",
+    "form_date",
     "to_date",
     "request_number",
   ];
@@ -60,6 +60,8 @@ const ApprovalsFilter = () => {
                     name={item}
                     label={t(item)}
                     component={AppAutoComplete}
+                    placeHolder={true}
+                    variant="solid"
                     labelClassName="!text-sm !font-semibold"
                   />
                 );

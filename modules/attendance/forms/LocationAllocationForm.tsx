@@ -1,114 +1,63 @@
 import { Form, Radio, RadioGroup } from "@heroui/react";
-import { AppAutoComplete, AppTextArea } from "@hrbox/uikit/components";
+import {
+  AppAutoComplete,
+  AppRadio,
+  AppTextArea,
+} from "@hrbox/uikit/components";
 import { Location } from "iconsax-reactjs";
 import * as Yup from "yup";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { FormField } from "@hrbox/uikit/components/FormField";
 import { useModalContext } from "@hrbox/core/providers";
 import { useTranslation } from "react-i18next";
-
-export const initialValuesAction = {
-  title: null,
-  type: "Person",
-  ChooseLocation: null,
-  FromDate: null,
-  organization: null,
-  Department: null,
-  Employee: null,
-  Description: null,
-  JobTitle: null,
-};
-export const formValidationAction = Yup.object().shape({
-  title: Yup.string().required(),
-  type: Yup.string().required(),
-  ChooseLocation: Yup.string().required(),
-  FromDate: Yup.string().required(),
-  organization: Yup.string().required(),
-  Department: Yup.string().required(),
-  JobTitle: Yup.string().required(),
-  Employee: Yup.string().required(),
-  Description: Yup.string().required(),
-});
-export const handleSubmitAction = (values: any) => {
-  console.log(values.title);
-  console.log(values.type);
-  console.log(values.ChooseShift);
-  console.log(values.FromDate);
-  console.log(values.organization);
-  console.log(values.Employee);
-  console.log(values.Description);
-  return {
-    title: values.title,
-    type: values.type,
-    ChooseLocation: values.ChooseLocation,
-    FromDate: values.FromDate,
-    organization: values.organization,
-    Department: values.Department,
-    JobTitle: values.JobTitle,
-    Employee: values.Employee,
-    Description: values.Description,
-  };
-};
+import { useEffect } from "react";
 
 const LocationAllocationForm = () => {
-  const {t}=useTranslation();
-  const {
-    values,
-    handleSubmit,
-    setFieldValue,
-  } = useFormContext();
-
-    const { getOpenModal } = useModalContext();
+  const { t } = useTranslation();
+  const { values, errors, handleSubmit, setFieldValue } = useFormContext();
+  useEffect(() => {
+    console.log("Errors-Location:", errors);
+    console.log("Values-Location:", values);
+  }, [errors, values]);
+  const { getOpenModal } = useModalContext();
   const currentType = getOpenModal()?.type;
 
   return (
     <>
-      <Form id="location-allocation-edit" onSubmit={handleSubmit}>
+      <Form id="location-allocation" onSubmit={handleSubmit}>
         <div className="flex flex-col w-full gap-7">
-          <RadioGroup
+          <FormField
             name="type"
-            classNames={{
-              base: "w-full flex justify-between",
-              wrapper: "w-full flex justify-between",
-            }}
-            defaultValue={t("person")}
-            orientation="horizontal"
-            onValueChange={(value) => setFieldValue("type", value)}
-          >
-            <Radio
-              value={t("person")}
-              classNames={{ wrapper: "border-2 border-primary" }}
-            >
-              {t("person")}
-            </Radio>
-            <Radio
-              value={t("group")}
-              classNames={{ wrapper: "border-2 border-primary" }}
-            >
-              {t("group")}
-            </Radio>
-            <Radio
-              value={t("job_title")}
-              classNames={{ wrapper: "border-2 border-primary" }}
-            >
-              {t("job_title")}
-            </Radio>
-          </RadioGroup>
+            component={AppRadio}
+            formMode={currentType}
+            options={[
+              { value: "person", label: t("person") },
+              { value: "group", label: t("group") },
+              { value: "job_title", label: t("job_title") },
+            ]}
+            className="flex! flex-row!"
+          />
           <div className="flex flex-row justify-between gap-10">
             <div className="w-full">
               <FormField
-                name="ChooseLocation"
-                label={t("choose_location")}
-                formMode={currentType}
+                name="ChooseShift"
+                label={t("choose_shift")}
                 component={AppAutoComplete}
+                formMode={currentType}
+                variant="solid"
+                aria-label="ChooseShift"
+                data={[{ id: "Administrative", name: "Administrative" }]}
               />
             </div>
             <div className="w-full">
               <FormField
-                name="FromDate"
+                name="FormDate"
                 label={t("form_date")}
-                formMode={currentType}
                 component={AppAutoComplete}
+                formMode={currentType}
+                variant="solid"
+                aria-label="FormDate"
+                data={[{ id: "2025/01/10", name: "2025/01/10" }]}
               />
             </div>
           </div>
@@ -117,17 +66,27 @@ const LocationAllocationForm = () => {
               <FormField
                 name="organization"
                 label={t("organizations")}
-                formMode={currentType}
                 component={AppAutoComplete}
+                formMode={currentType}
+                variant="solid"
+                aria-label="organization"
+                data={[{ id: "Zahra Pakniyat", name: "Zahra Pakniyat" }]}
               />
             </div>
-            {values?.type === t("person") || values?.type === t("group") ? (
+            {(values && values?.type === "person") ||
+            (values && values?.type === "group") ? (
               <div className="w-full">
                 <FormField
                   name="Department"
                   label={t("department")}
-                  formMode={currentType}
                   component={AppAutoComplete}
+                  formMode={currentType}
+                  variant="solid"
+                  aria-label="Department"
+                  data={[
+                    { id: "It", name: "It" },
+                    { id: "technical", name: "technical" },
+                  ]}
                 />
               </div>
             ) : (
@@ -135,20 +94,29 @@ const LocationAllocationForm = () => {
                 <FormField
                   name="JobTitle"
                   label={t("job_title")}
-                  formMode={currentType}
                   component={AppAutoComplete}
+                  formMode={currentType}
+                  variant="solid"
+                  aria-label="JobTitle"
+                  data={[{ id: "Developer", name: "Developer" }]}
                 />
               </div>
             )}
           </div>
-          {values?.type === t("person") && (
+          {values && values?.type === "person" && (
             <div className="flex flex-row justify-between gap-10">
               <div className="w-full">
                 <FormField
                   name="Employee"
                   label={t("employee")}
-                  formMode={currentType}
                   component={AppAutoComplete}
+                  formMode={currentType}
+                  variant="solid"
+                  aria-label="Employee"
+                  data={[
+                    { id: "Ali Rezaei", name: "Ali Rezaei" },
+                    { id: "Moho", name: "Moho" },
+                  ]}
                 />
               </div>
               <div className="w-full"></div>
@@ -159,12 +127,14 @@ const LocationAllocationForm = () => {
             <FormField
               name="Description"
               label={t("descriptions")}
-              formMode={currentType}
               component={AppTextArea}
+              formMode={currentType}
+              variant="solid"
+              aria-label="Description"
             />
           </div>
         </div>
-        <Location color="gray" size={90} className="absolute bottom-2 left-0" />
+        <Location color="gray" size={90} className="absolute bottom-2 left-0 rtl:right-0" />
       </Form>
     </>
   );

@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ReduxProvider } from "react-redux";
@@ -44,10 +43,6 @@ const ENABLED_MODULES = (import.meta.env.VITE_ENABLED_MODULES || "")
   "project-management"
 ];
 
-// ============================================
-// Bootstrap Function
-// ============================================
-
 async function bootstrap() {
   try {
     const moduleLoaders: Record<string, () => Promise<any>> = {
@@ -87,35 +82,33 @@ async function bootstrap() {
     const root = createRoot(rootElement);
 
     root.render(
-      <StrictMode>
-        <ReduxProvider store={store}>
-          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-            <QueryClientProvider client={queryClient}>
-              <I18nextProvider i18n={i18n}>
-                <HeroUIProvider>
-                  <LoadingProvider>
-                    <ModalProvider>
-                      <RouterContextProvider>
-                        <RouterProvider router={router} />
-                      </RouterContextProvider>
+      <ReduxProvider store={store}>
+        <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+          <QueryClientProvider client={queryClient}>
+            <I18nextProvider i18n={i18n}>
+              <HeroUIProvider>
+                <LoadingProvider>
+                  <ModalProvider>
+                    <RouterContextProvider>
+                      <RouterProvider router={router} />
+                    </RouterContextProvider>
 
-                      <GlobalModalRenderer />
+                    <GlobalModalRenderer />
 
-                      <Toaster
-                        position="top-right"
-                        richColors
-                        closeButton
-                        duration={3000}
-                        theme="system"
-                      />
-                    </ModalProvider>
-                  </LoadingProvider>
-                </HeroUIProvider>
-              </I18nextProvider>
-            </QueryClientProvider>
-          </PersistGate>
-        </ReduxProvider>
-      </StrictMode>
+                    <Toaster
+                      position="top-right"
+                      richColors
+                      closeButton
+                      duration={3000}
+                      theme="system"
+                    />
+                  </ModalProvider>
+                </LoadingProvider>
+              </HeroUIProvider>
+            </I18nextProvider>
+          </QueryClientProvider>
+        </PersistGate>
+      </ReduxProvider>
     );
   } catch (error) {
     document.body.innerHTML = `

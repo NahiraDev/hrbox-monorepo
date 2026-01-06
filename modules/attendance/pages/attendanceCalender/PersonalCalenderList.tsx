@@ -1,27 +1,33 @@
 import { ReportPersonnal } from "@hrbox/modules/attendance/app/mock";
 
 import { AppButton } from "@hrbox/uikit/components";
-import { Add, Edit, Trash } from "iconsax-reactjs";
+import { Add, Edit, Hierarchy3, Trash } from "iconsax-reactjs";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "@hrbox/core/providers/FormProvider";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { useModal } from "@hrbox/core/hooks";
+import { ModalSize, ModalType } from "@hrbox/core/providers";
+import { EventModal } from "../../modals/EventModal";
+import AddPermisionTime from "../../modals/AddPermisionTime";
+import { useTranslation } from "react-i18next";
 
 const PersonalCalenderList = () => {
-  const [openpopover,setOpenpopover]=useState<string | null>(null);
+  const [openpopover, setOpenpopover] = useState<string | null>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [data,setData]=useState(ReportPersonnal); 
+  const [data, setData] = useState(ReportPersonnal);
   const cellRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [menuStyle, setMenuStyle] = useState<{ top: string; left: string }>({
     top: "0px",
     left: "0px",
   });
-const menuRef=useRef<HTMLDivElement | null>(null);
+  const {t}=useTranslation()
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const { values } = useFormContext();
   const month = values.month || "";
   const year = values.year || "";
   const person = values.person || "";
   const department = values.department || "";
-
+  const modal = useModal();
   const parsePersianDate = (
     dateString: string
   ): { month: string; year: string } => {
@@ -43,19 +49,19 @@ const menuRef=useRef<HTMLDivElement | null>(null);
     };
   };
 
-  useEffect(()=>{
-    const handleClickOutSide=(event:MouseEvent)=>{
-      if(menuRef.current && !menuRef.current.contains(event.target as Node)){
-        setOpenMenu(null)
+  useEffect(() => {
+    const handleClickOutSide = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpenMenu(null);
       }
+    };
+    if (openMenu) {
+      document.addEventListener("mousedown", handleClickOutSide);
     }
-    if(openMenu){
-      document.addEventListener("mousedown",handleClickOutSide);
-    }
-    return ()=>{
-      document.removeEventListener("mousedown",handleClickOutSide)
-    }
-  },[openMenu])
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, [openMenu]);
 
   const filteredData = useMemo(() => {
     const filtered = data.filter((record) => {
@@ -72,7 +78,7 @@ const menuRef=useRef<HTMLDivElement | null>(null);
     });
 
     return filtered;
-  }, [month, year, person, department,data]);
+  }, [month, year, person, department, data]);
 
   const toggleMenu = (
     rowindex: number,
@@ -107,18 +113,38 @@ const menuRef=useRef<HTMLDivElement | null>(null);
     }
   };
 
-  const selectedRowIndex=openMenu?parseInt(openMenu.split("-")[0]):null;
-  const selectedRow=selectedRowIndex!==null?filteredData[selectedRowIndex]:null;
-const handelDelete = (row: any) => {
-  setData((prev) =>
-    prev.map((item) =>
-      item === row 
-        ? { ...item, request: "" } 
-        : item
-    )
-  );
-  setOpenMenu(null);
-};
+  const selectedRowIndex = openMenu ? parseInt(openMenu.split("-")[0]) : null;
+  const selectedRow =
+    selectedRowIndex !== null ? filteredData[selectedRowIndex] : null;
+  const handelDelete = (row: any) => {
+    setData((prev) =>
+      prev.map((item) => (item === row ? { ...item, request: "" } : item))
+    );
+    setOpenMenu(null);
+  };
+
+  const handleOpenModal = (
+    formid: string,
+    modalComponent: any,
+    titleModal: string
+  ) => {
+    modal.open(
+      ModalType.CREATE,
+      formid,
+      modalComponent,
+      {
+        isForm: true,
+        title: titleModal,
+        icon: <Hierarchy3 size={18} />,
+        submitLabel: "Submit",
+        cancelLabel: "Cancel",
+        formConfig: {
+          formId: formid,
+        },
+      },
+      ModalSize["4XL"]
+    );
+  };
 
   return (
     <>
@@ -126,37 +152,37 @@ const handelDelete = (row: any) => {
         {/* start table */}
         <div className="w-full flex flex-col h-full ">
           {/* start Header */}
-          <div className="grid grid-cols-12 gap-2 text-white text-sm ">
-            <div className="bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2">
-              <p>Date</p>
-            </div>
-            <div className="bg-[#999999] px-2 py-3 rounded-lg col-span-1">
-              <p>Shift</p>
-            </div>
-            <div className="grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5">
-              <div className="px-2 py-3 w-full">
-                <p>Check in</p>
+        <div className="grid grid-cols-12 gap-2 text-white text-sm ">
+                <div className="bg-[#999999] px-2 py-3 rounded-lg w-full col-span-2">
+                  <p>{t("date")}</p>
+                </div>
+                <div className="bg-[#999999] px-2 py-3 rounded-lg col-span-1">
+                  <p>{t("shift")}</p>
+                </div>
+                <div className="grid col-span-7 grid-cols-7 bg-primary rounded-lg w-full gap-2.5">
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("check-in")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("check-out")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("presence")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("overdue")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full">
+                    <p>{t("delay")}</p>
+                  </div>
+                  <div className="px-2 py-3 w-full col-span-2">
+                    <p>{t("haste-to-leave")}</p>
+                  </div>
+                </div>
+                <div className="px-2 py-3 w-full bg-success rounded-lg col-span-2">
+                  <p>{t("request")}</p>
+                </div>
               </div>
-              <div className="px-2 py-3 w-full">
-                <p>Check out</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Presence</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Overdue</p>
-              </div>
-              <div className="px-2 py-3 w-full">
-                <p>Delay</p>
-              </div>
-              <div className="px-2 py-3 w-full col-span-2">
-                <p>Haste to leave</p>
-              </div>
-            </div>
-            <div className="px-2 py-3 w-full bg-success rounded-lg col-span-2">
-              <p>Request</p>
-            </div>
-          </div>
           {/* end Header */}
 
           {/* start Rows */}
@@ -188,47 +214,71 @@ const handelDelete = (row: any) => {
                       onMouseEnter={() => setOpenpopover(`${index}-shift`)}
                       onMouseLeave={() => setOpenpopover(null)}
                     >
-                      <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-shift`}>
+                      <Popover
+                        placement="top"
+                        showArrow={true}
+                        isOpen={openpopover === `${index}-shift`}
+                      >
                         <PopoverTrigger>
-                      <p>{record.shift}</p>
+                          <p>{record.shift}</p>
                         </PopoverTrigger>
                         <PopoverContent>
                           <div className=" h-auto ">
-                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
+                            <p className="text-[10px] text-[#1E3363]">
+                              zahra pakniyat
+                            </p>
                           </div>
                         </PopoverContent>
                       </Popover>
                     </div>
-                    <div className="grid grid-cols-7 col-span-7 border-b-1 border-white dark:border-[#01101A] items-center">
-                      <div className="px-2 py-3" 
-                      onMouseEnter={() => setOpenpopover(`${index}-checkin`)}
-                      onMouseLeave={() => setOpenpopover(null)}
+                    <div className="grid grid-cols-7 col-span-7 border-b-1 border-white dark:border-[#01101A] items-center ">
+                      <div
+                        className="px-2 py-3"
+                        ref={(el) => {
+                          if (el) cellRefs.current[`${index}-checkin`] = el;
+                        }}
+                        onMouseEnter={() => setOpenpopover(`${index}-checkin`)}
+                        onMouseLeave={() => setOpenpopover(null)}
+                        onContextMenu={(e) => toggleMenu(index, "checkin", e)}
                       >
-                        <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-checkin`}>
-                        <PopoverTrigger>
-                        <p>{record.checkIn}</p>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <div className=" h-auto ">
-                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
-                          </div>
-                        </PopoverContent>
-                      </Popover>
+                        <Popover
+                          placement="top"
+                          showArrow={true}
+                          isOpen={openpopover === `${index}-checkin`}
+                        >
+                          <PopoverTrigger>
+                            <p className="cursor-pointer">{record.checkIn}</p>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <div className=" h-auto ">
+                              <p className="text-[10px] text-[#1E3363]">
+                                zahra pakniyat
+                              </p>
+                            </div>
+                          </PopoverContent>
+                        </Popover>
                       </div>
-                      <div className="px-2 py-3"
-                      onMouseEnter={() => setOpenpopover(`${index}-checkout`)}
-                      onMouseLeave={() => setOpenpopover(null)}
+                      <div
+                        className="px-2 py-3"
+                        onMouseEnter={() => setOpenpopover(`${index}-checkout`)}
+                        onMouseLeave={() => setOpenpopover(null)}
                       >
-                        <Popover placement="top" showArrow={true} isOpen={openpopover===`${index}-checkout`}>
-                        <PopoverTrigger>
-                        <p>{record.checkOut}</p>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <div className=" h-auto ">
-                          <p className="text-[10px] text-[#1E3363]">zahra pakniyat</p>
-                          </div>
-                        </PopoverContent>
-                      </Popover>
+                        <Popover
+                          placement="top"
+                          showArrow={true}
+                          isOpen={openpopover === `${index}-checkout`}
+                        >
+                          <PopoverTrigger>
+                            <p>{record.checkOut}</p>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <div className=" h-auto ">
+                              <p className="text-[10px] text-[#1E3363]">
+                                zahra pakniyat
+                              </p>
+                            </div>
+                          </PopoverContent>
+                        </Popover>
                       </div>
                       <div className="px-2 py-3">
                         <p>{record.presence}</p>
@@ -266,7 +316,7 @@ const handelDelete = (row: any) => {
       {/* start menu button */}
       {openMenu && (
         <div
-        ref={menuRef}
+          ref={menuRef}
           className="fixed px-4 py-2 bg-white rounded-md z-50 shadow-lg"
           style={{
             top: menuStyle.top,
@@ -278,61 +328,97 @@ const handelDelete = (row: any) => {
             {openMenu.includes("shift") ? (
               <React.Fragment key="shift-menu">
                 <AppButton
-                  content="Hourly Leave"
+                  content={t("hourly-leave")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Leave"
+                  onPress={() =>
+                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                  }
                 />
                 <AppButton
-                  content="Hourly Mission"
+                  content={t("hourly-mission")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
+                  onPress={() =>
+                    handleOpenModal(
+                      "event-form",
+                      <EventModal />,
+                      "Add Time"
+                    )
+                  }
                 />
                 <AppButton
-                  content="Edit Traffic Entry"
+                  content={t("edit-traffic-entry")}
                   startContent={<Edit size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Edit_Traffic_Entry"
                   size=""
+                  onPress={() =>
+                    handleOpenModal(
+                      "permision-form",
+                      <AddPermisionTime />,
+                      "Add Permision Time"
+                    )
+                  }
                 />
                 <AppButton
-                  content="Delete Traffic Entry"
+                  content={t("delete-traffic-entry")}
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
-                  onPress={()=> handelDelete(selectedRow) }
+                  onPress={() => handelDelete(selectedRow)}
                   key="Delete_Request"
                 />
               </React.Fragment>
-            ) : (
+            ) : openMenu.includes("date") ? (
               <React.Fragment key="date-menu dark:bg-[#01101A]!">
                 <AppButton
-                  content="Daily Leave"
+                  content={t("daily-leave")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   key="Daily_Leave"
                   size=""
+                  onPress={() =>
+                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                  }
                 />
                 <AppButton
-                  content="Daily Mission"
+                  content={t("daily-mission")}
                   startContent={<Add size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Daily_Mission"
+                  onPress={() =>
+                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                  }
                 />
                 <AppButton
-                  content="Delete Request"
+                  content={t("delete-request")}
                   startContent={<Trash size={18} />}
                   className="gap-1.5 text-sm dark:bg-[#01101A]!"
                   size=""
                   key="Delete_Request"
-                  onPress={()=> handelDelete(selectedRow)}
+                  onPress={() => handelDelete(selectedRow)}
                 />
               </React.Fragment>
-            )}
+            ) : openMenu.includes("checkin") ? (
+              <React.Fragment key="date-menu dark:bg-[#01101A]!">
+                <AppButton
+                  content={t("add-attendence")}
+                  startContent={<Add size={18} />}
+                  className="gap-1.5 text-sm dark:bg-[#01101A]!"
+                  size=""
+                  key="Add_attendence"
+                     onPress={() =>
+                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                  }
+                />
+              </React.Fragment>
+            ) : null}
           </div>
         </div>
       )}

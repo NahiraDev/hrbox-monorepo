@@ -4,6 +4,7 @@ import { ModalSize, ModalType, useModalContext } from "@hrbox/core/providers/Mod
 import { Button } from "@heroui/react";
 import React, { createContext, useContext } from "react";
 import clsx from "clsx";
+import { useFormContext } from "@hrbox/core/providers";
 
 const Close: React.FC<{ size?: string; className?: string }> = ({
                                                                   size = "24",
@@ -27,16 +28,19 @@ const Close: React.FC<{ size?: string; className?: string }> = ({
   );
 };
 
-const sizeClasses: Record<ModalSize | string, string> = {
-  sm: "max-w-sm",
-  md: "max-w-md",
-  lg: "max-w-lg",
-  xl: "max-w-xl",
-  "2xl": "max-w-2xl",
-  "3xl": "max-w-3xl",
-  "4xl": "max-w-4xl",
-  "5xl": "max-w-5xl",
-  full: "w-full h-full"
+const getSizeClass = (size: string): string => {
+  const sizes: { [key: string]: string } = {
+    "sm": "max-w-sm",
+    "md": "max-w-md",
+    "lg": "max-w-lg",
+    "xl": "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "max-w-4xl",
+    "5xl": "max-w-5xl",
+    "full": "w-full h-full"
+  };
+  return sizes[size] || "max-w-md";
 };
 
 interface AppModalContextType {
@@ -147,7 +151,6 @@ const AppModalBody: React.FC<AppModalBodyProps> = ({ children, className }) => {
         </motion.div>
       )}
 
-      {/* Main Content */}
       {children}
     </motion.div>
   );
@@ -175,7 +178,16 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
     hideFooter,
     isContextMode
   } = useModalInternal();
+
   const isFormMode = !isContextMode;
+
+  let formSubmitForm;
+  try {
+    const ctx = useFormContext();
+    formSubmitForm = ctx.submitForm;
+  } catch {
+    formSubmitForm = null;
+  }
 
   const showFooter =
     !hideFooter && (isFormMode || isDirty || isSubmitting || onSubmit);
@@ -183,7 +195,22 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
   if (!showFooter) return null;
 
   const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
     closeModal();
+  };
+
+  const handleSubmitClick = async () => {
+    try {
+      if (onSubmit) {
+        await onSubmit();
+      } else if (formSubmitForm) {
+        await formSubmitForm();
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+    }
   };
 
   return (
@@ -208,10 +235,10 @@ const AppModalFooter: React.FC<AppModalFooterProps> = ({
           >
             {cancelLabel}
           </Button>
-          {onSubmit && (
+          {(onSubmit || formSubmitForm) && (
             <Button
               color="primary"
-              onPress={onSubmit}
+              onPress={handleSubmitClick}
               isDisabled={isSubmitting}
               isLoading={isSubmitting}
             >
@@ -308,7 +335,7 @@ const AppModalBase: React.FC<AppModalProps> & {
       case ModalType.DELETE:
         return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.EDIT:
-        return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
+        return "bg-[linear-gradient(90deg,#1E3363_19.05%,#FFFFFF_100%)]";
       case ModalType.VIEW:
         return "bg-[linear-gradient(90deg,#0A9AD7_19.05%,#FFFFFF_100%)]";
       case ModalType.CREATE:
@@ -335,7 +362,6 @@ const AppModalBase: React.FC<AppModalProps> & {
     hideFooter
   };
 
-  // Modal Content
   const modalContent = (
     <AnimatePresence mode="wait">
       {shouldShowModal && (
@@ -344,7 +370,7 @@ const AppModalBase: React.FC<AppModalProps> & {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
           onClick={handleBackdropClick}
         >
           <motion.div
@@ -354,9 +380,9 @@ const AppModalBase: React.FC<AppModalProps> & {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
             className={clsx(
-              "rounded-2xl bg-panel-surface dark:bg-neutral-800 border border-primary",
+              "rounded-2xl bg-panel-surface dark:bg-[#01101A] border border-primary",
               "shadow-2xl overflow-hidden max-h-[90vh] p-12 gap-6  flex flex-col relative",
-              sizeClasses[modalSize] || "max-w-md"
+              getSizeClass(modalSize)
             )}
           >
             <ModalContextProvider.Provider value={contextValue}>

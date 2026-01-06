@@ -1,29 +1,53 @@
 import { AppTable } from "@hrbox/uikit/components";
-import { Allocatio } from "@hrbox/modules/attendance/app/mock";
+import { Allocatio, getAllAllocations } from "@hrbox/modules/attendance/app/mock";
 import { useState } from "react";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import { useModal } from "@hrbox/core/hooks";
 import FaceAllocationModal from "@hrbox/modules/attendance/modals/FaceAllocationModal";
+import { Hierarchy3 } from "iconsax-reactjs";
+import { useTranslation } from "react-i18next";
 
 const FaceAllocation = () => {
   const modal = useModal();
-  const [data, setData] = useState(Allocatio);
-  const handleRowClick = () => {
+  const {t}=useTranslation()
+  const [data, setData] = useState(getAllAllocations());
+  const handleRowClick = (row:any) => {
     modal.open(
       ModalType.VIEW,
-      "face-allocation",
+      "face-allocation-form",
       <FaceAllocationModal />,
       {
+        data:row,
         isForm: true,
-        submitLabel: "Submit Again",
-        cancelLabel: "Cancel",
+        title:t("face-recognition-assignment"),
+        icon:<Hierarchy3 size={18} />,
         formConfig: {
-          formId: "face-form"
+          formId: "face-allocation-form"
         }
       },
       ModalSize["3XL"]
     );
   };
+  const handleEditClick = (row:any) => {
+    modal.open(
+      ModalType.EDIT,
+      "face-allocation-form",
+      <FaceAllocationModal />,
+      {
+        data:row,
+        isForm: true,
+        title:t("edit-face-recognition-assignment"),
+                submitLabel: t("submit"),
+        cancelLabel: t("cancel"),
+        icon:<Hierarchy3 size={18} />,
+        formConfig: {
+          formId: "face-allocation-form"
+        }
+      },
+      ModalSize["3XL"]
+    );
+  };
+  
   return (
     <>
       <div className="h-full w-full flex flex-col ">
@@ -32,8 +56,9 @@ const FaceAllocation = () => {
           showStatus={true}
           hasPagination={true}
           pageSize={8}
-          onRowClick={handleRowClick}
+          onRowClick={(row)=>handleRowClick(row)}
           variant="bordered"
+          onEdit={(row)=>handleEditClick(row)}
         />
       </div>
     </>

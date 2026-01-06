@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Checkbox, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@heroui/react";
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
+import { Edit, Eye, Trash } from "iconsax-reactjs";
 
 export enum SortDirection {
   ASC = "asc",
@@ -112,7 +113,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     {
       data = [],
       columns,
-      columnGroups,
       rowKey = "id",
       selectable = false,
       onSelectionChange,
@@ -122,14 +122,12 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       sortable = false,
       onSort,
       defaultSort,
-      filterable = false,
-      onFilter,
       hasPagination = true,
       pageSize = 10,
       totalItems,
       currentPage: controlledPage,
       onPageChange,
-      variant = "default",
+      variant = "primary",
       styles = {},
       density = "md",
       loading = false,
@@ -137,7 +135,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       emptyMessage = "No data available",
       showCheckbox = selectable,
       showRowNumber = false,
-      showStatus = false,
       sticky = true,
       onEdit,
       onDelete,
@@ -159,7 +156,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     const [actionLoading, setActionLoading] = useState<string | null>(null);
     const tableContainerRef = useRef<HTMLDivElement>(null);
 
-    const page = controlledPage || currentPage;
+    const page: any = controlledPage || currentPage;
 
     const autoColumns = useMemo<ColumnConfig<any>[]>(() => {
       if (columns) return columns;
@@ -317,25 +314,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       };
     }, [expandedRowPosition]);
 
-    const getColumnGroupInfo = (colKey: string) => {
-      if (!columnGroups) return null;
-      for (const group of columnGroups) {
-        const startIdx = autoColumns.findIndex((c) => c.key === group.startKey);
-        const endIdx = autoColumns.findIndex((c) => c.key === group.endKey);
-        const currentIdx = autoColumns.findIndex((c) => c.key === colKey);
-        if (currentIdx >= startIdx && currentIdx <= endIdx) {
-          return {
-            group,
-            isFirst: currentIdx === startIdx,
-            isLast: currentIdx === endIdx,
-            isOnly: startIdx === endIdx,
-            colspan: endIdx - startIdx + 1
-          };
-        }
-      }
-      return null;
-    };
-
     const getRowKey = (row: any, index: number): string | number => {
       if (typeof rowKey === "function") return rowKey(row, index);
       return row[rowKey] ?? index;
@@ -346,7 +324,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       const baseClass = "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer";
       const stripedClass = variant === "striped" && index % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/30" : "";
       const borderedClass = variant === "bordered" ? "border-b border-gray-200 dark:border-gray-700" : "";
-      const selectedClass = isSelected ? "bg-primary-100 dark:bg-primary-900/30" : "";
+      const selectedClass = isSelected ? "bg-primary-400 dark:bg-primary-900/30" : "";
       const customClass = typeof styles.rowClassName === "function" ? styles.rowClassName(row, index, isSelected) : styles.rowClassName || "";
       return `${baseClass} ${stripedClass} ${borderedClass} ${selectedClass} ${customClass}`;
     };
@@ -359,9 +337,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
     };
 
     const getHeaderClassName = (col: ColumnConfig<any>): string => {
-      const baseClass = variant === "default"
-        ? "text-white text-sm font-semibold bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12"
-        : "text-gray-700 dark:text-gray-300 font-semibold bg-gray-100 dark:bg-gray-800";
+      const baseClass = "text-white text-sm font-semibold !bg-primary dark:bg-[rgba(4,66,92,0.60)] text-center !h-12";
       if (typeof col.headerClassName === "function") {
         return `${baseClass} ${col.headerClassName(col)}`;
       }
@@ -404,7 +380,8 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                   isDisabled={disabled || actionLoading === action.id}
                   isLoading={actionLoading === action.id}
                   onPress={() => handleRowAction(action, row, index)}
-                  content={<span className="cursor-pointer text-lg">{action.icon || action.label}</span>}
+                  content={<span
+                    className="cursor-pointer text-lg">{action.icon || action.label}</span>}
                 />
               </Tooltip>
             );
@@ -473,7 +450,8 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
         >
           <div className="flex items-center justify-start gap-1">
             {col.headerRender ? col.headerRender() : col.label || col.key}
-            {sortable && sort?.key === col.key && <span>{sort.direction === SortDirection.ASC ? "↑" : "↓"}</span>}
+            {sortable && sort?.key === col.key &&
+              <span>{sort.direction === SortDirection.ASC ? "↑" : "↓"}</span>}
           </div>
         </TableColumn>
       );
@@ -501,9 +479,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             table: "!w-full",
             tbody: "!w-full",
             td: densityClasses,
-            thead: `!w-full ${sticky ? "sticky top-0 z-10" : ""}`,
-            tr: "rounded-6 !w-full",
-            th: "bg-primary-400"
+            tr: "rounded-6 !w-full"
           }}
         >
           <TableHeader className={styles.headerClassName}>
@@ -513,12 +489,12 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             {paginatedData.map((row, index) => {
               const key = getRowKey(row, index);
               const isSelected = selectedRows.has(index);
-              const isExpanded = expandedRows.has(index);
               const cells: React.ReactNode[] = [];
 
               if (showRowNumber) {
                 cells.push(
-                  <TableCell key="row-number" className={`${densityClasses} text-center text-gray-500 font-medium`}>
+                  <TableCell key="row-number"
+                             className={`${densityClasses} text-center text-gray-500 font-medium`}>
                     {(page - 1) * pageSize + index + 1}
                   </TableCell>
                 );
@@ -571,23 +547,28 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
                     <div className="flex items-center justify-center gap-2">
                       {onView && (
                         <Tooltip content="View">
-                          <AppButton size="sm" radius="full" variant="light" color="primary"
+                          <AppButton size="sm" variant="light"
                                      onPress={() => onView(row, index)}
-                                     content={<span className="cursor-pointer text-lg">👁️</span>} />
+                                     content={<span
+                                       className="cursor-pointer text-lg"><Eye color="#DEE1E8" /></span>} />
                         </Tooltip>
                       )}
                       {onEdit && (
                         <Tooltip content="Edit">
-                          <AppButton size="sm" radius="full" variant="light" color="warning"
+                          <AppButton size="sm" variant="light"
                                      onPress={() => onEdit(row, index)}
-                                     content={<span className="cursor-pointer text-lg">✏️</span>} />
+                                     content={<span
+                                       className="cursor-pointer text-lg"><Edit
+                                       className="dark:text-[#DEE1E8] text-[#1E3363]" />️</span>} />
                         </Tooltip>
                       )}
                       {onDelete && (
                         <Tooltip content="Delete">
-                          <AppButton size="sm" radius="full" variant="light" color="danger"
+                          <AppButton size="sm" variant="light"
                                      onPress={() => onDelete(row, index)}
-                                     content={<span className="cursor-pointer text-lg">🗑️</span>} />
+                                     content={<span
+                                       className="cursor-pointer text-lg"><Trash
+                                       className="dark:text-[#DEE1E8] text-[#1E3363]" /></span>} />
                         </Tooltip>
                       )}
                       {renderRowActions(row, index)}

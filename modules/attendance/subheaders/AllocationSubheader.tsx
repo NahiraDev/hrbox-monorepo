@@ -3,7 +3,7 @@ import {
   AppPageTitle,
   AppSearchInput,
 } from "@hrbox/uikit/components";
-import { Add, ArrowLeft2 } from "iconsax-reactjs";
+import { Add, ArrowLeft2, Hierarchy3 } from "iconsax-reactjs";
 import {
   ModalSize,
   ModalType,
@@ -16,11 +16,13 @@ interface AllocationSubheaderProps {
   modalComponent: React.ComponentType;
   title: string;
   icon: React.ReactNode;
+  id:string;
 }
 const AllocationSubheader = ({
   modalComponent: ModalComponent,
   title,
   icon,
+  id,
 }: AllocationSubheaderProps) => {
   const { t } = useTranslation();
   const modal = useModal();
@@ -31,13 +33,15 @@ const AllocationSubheader = ({
       <ModalComponent />,
       {
         isForm: true,
-        submitLabel: "Submit",
-        cancelLabel: "Cancel",
+        title:t("addNewOne"),
+        icon:<Hierarchy3 />,
+        submitLabel: t("submit"),
+        cancelLabel: t("cancel"),
         formConfig: {
-          formId: "face-form",
+          formId: id,
         },
       },
-      ModalSize["2XL"]
+      ModalSize["3XL"]
     );
   };
   return (

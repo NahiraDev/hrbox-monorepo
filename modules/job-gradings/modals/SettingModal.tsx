@@ -1,42 +1,34 @@
-import SettingForm from "../forms/SettingForm";
 import { FormProvider } from "@hrbox/core/providers";
 import * as Yup from "yup";
+import GeneralForm from "../forms/GeneralForm";
+import SettingForm from "../forms/SettingForm";
 
-const SettingModal = () => {
-  const initialValues = {
-    index_title: "",
-    select_group: "",
-    type: "",
-    weight: "",
-    description: ""
-  };
+export const initialValuesAction = {
+  Grade: "",
+  Grouping: "",
+  fromPoints: "",
+  toPoints: "",
+  gradeColor: "",
+  Description: "",
+};
 
-  const validationSchema = Yup.object({
-    index_title: Yup.string().required("Required"),
-    select_group: Yup.string().required("Required"),
-    type: Yup.string().required("Required"),
-    weight: Yup.string().required("Required"),
-    description: Yup.string().required("Required")
-  });
+export const formValidationAction = Yup.object({
+  Grade: Yup.string().required(),
+  Grouping: Yup.string().required(),
+  fromPoints: Yup.string().required(),
+  toPoints: Yup.string().required(),
+  Description: Yup.string().required(),
+});
+interface Props {
+  initialData?: any;
+}
 
-  const handleSubmit = (values: any) => {
-    console.log("SUBMIT VALUES 👉", values);
-
-    return {
-      index_title: values.index_title,
-      select_group: values.select_group,
-      type: values.type,
-      weight: values.weight,
-      description: values.description
-    };
-  };
-
+const SettingModal = ({ initialData }: Props) => {
   return (
     <FormProvider
-      formId="setting-form"
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      formId="general-form"
+      initialValues={initialData ?? initialValuesAction}
+      validationSchema={initialData ? undefined : formValidationAction}
     >
       <SettingForm />
     </FormProvider>
