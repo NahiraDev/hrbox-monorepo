@@ -79,7 +79,6 @@ const General = () => {
   return (
     <AppTable data={GeneralMock}
               onDelete={()=>console.log('deleting')}
-
               onEdit={(row)=>handleEditClick(row)} columns={columns} onRowClick={(row)=>openViewModal(row)}  />
   );
 };

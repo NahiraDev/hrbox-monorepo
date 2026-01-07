@@ -91,7 +91,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       subHeader: DashboardSubHeader,
       subHeaderProps: {
         title: "Dashboard",
-        icon: <Chart />
+        icon: <Chart color="#FFFFFF" />
       }
     },
     {
@@ -106,7 +106,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       subHeader: SettingSubHeader,
       subHeaderProps: {
         title: "Indicators",
-        icon: <Setting2 />
+        icon: <Setting2 color="#FFFFFF" />
       }
     }, {
       path: Paths.JobGradings.General,
@@ -120,7 +120,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       subHeader: SettingSubHeader,
       subHeaderProps: {
         title: "Indicators",
-        icon: <Setting2 />
+        icon: <Setting2 color="#FFFFFF" />
       }
     },
     {
@@ -135,7 +135,7 @@ export const JobGradingsPlugins: ModulePlugin = {
       subHeader: JDHeader,
       subHeaderProps: {
         title: "JD List",
-        icon: <Briefcase />
+        icon: <Briefcase color="#FFFFFF"   />
       }
     },
     {

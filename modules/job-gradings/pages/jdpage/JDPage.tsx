@@ -3,6 +3,10 @@ import { AppTable, type ColumnConfig } from "@hrbox/uikit/components";
 import { useAppSelector } from "@hrbox/core/redux";
 import { JDPageList } from "../../app/mock";
 import "../../app/index.css";
+import { ModalSize, ModalType } from "@hrbox/core/providers";
+import { Ranking, TagUser } from "iconsax-reactjs";
+import JDmodal from "@hrbox/modules/job-gradings/modals/JDmodal";
+import { useModal } from "@hrbox/core/hooks";
 
 const columns: ColumnConfig[] = [
     { key: "Job_title", label: "Job Title" },
@@ -38,6 +42,8 @@ const JDPage = () => {
         (state) => state.search.query
     );
 
+    const modal = useModal();
+
     const filteredData = useMemo(() => {
         return JDPageList.filter((item) => {
 
@@ -60,6 +66,26 @@ const JDPage = () => {
         });
     }, [showGraded, showNoGrade, searchQuery]);
 
+    const openViewModal = (row: any) => {
+        modal.open(
+            ModalType.VIEW,
+            "general-form",
+            <JDmodal />,
+            {
+                data: row,
+                isForm: false,
+                title: "Sales expert",
+                icon: <TagUser />,
+                submitLabel: "Submit",
+                cancelLabel: "Cancel",
+                formConfig: {
+                    formId: "general-form",
+                },
+            },
+            ModalSize["3XL"]
+        );
+    };
+
     return (
         <AppTable
             data={filteredData}
@@ -67,6 +93,7 @@ const JDPage = () => {
             showRowNumber
             hasPagination
             pageSize={10}
+            onRowClick={(row) => openViewModal(row)} // Open modal when row is clicked
             styles={{
                 rowClassName: (row) =>
                     row.grade_status === "has"
