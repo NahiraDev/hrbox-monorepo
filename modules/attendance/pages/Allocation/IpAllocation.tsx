@@ -46,6 +46,9 @@ const IpAllocation = () => {
         cancelLabel: t("cancel"),
         formConfig: {
           formId: "ip-allocation-form",
+            onSubmitAsync: async (values: any) => {
+            console.log("ip allocation edit");
+          }
         },
       },
       ModalSize["2XL"]
@@ -61,7 +64,7 @@ const IpAllocation = () => {
           onRowClick={(row) => handleRowClick(row)}
           variant="bordered"
           onEdit={(row) => handleEditClick(row)}
-          onDelete={()=>console.log("delete")}
+          onDelete={() => console.log("delete")}
         />
       </div>
     </>

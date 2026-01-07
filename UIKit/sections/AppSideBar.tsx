@@ -8,6 +8,7 @@ import { useLanguage } from "@hrbox/core/hooks/useLanguage";
 import { useAuth } from "@hrbox/core/hooks/useAuth";
 import { useLogout } from "@hrbox/core/hooks/useLogout";
 import { moduleRegistry } from "@hrbox/modules/registry";
+import i18n from "@hrbox/core/translate";
 
 interface MenuItem {
   id: string;
@@ -31,14 +32,17 @@ export const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    console.log(moduleMenu);
     return moduleMenu?.menu;
   }, [currentPanel]);
 
   const isActiveRoute = (path: string) => {
     return !!matchRoute({ to: path });
   };
-
+  const topMenu=useMemo(
+    ()=>{
+      return menuItems
+    }
+  ,[i18n])
   const bottomMenu = useMemo(
     () => [
       {
@@ -108,7 +112,7 @@ export const AppSidebar = () => {
           aria-label="Main navigation"
         >
           <AnimatePresence mode="wait">
-            {menuItems.map((item: MenuItem) => {
+            {topMenu.map((item: MenuItem) => {
               const isActive = isActiveRoute(item.path);
 
               return (

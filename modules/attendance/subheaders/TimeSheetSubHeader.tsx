@@ -21,7 +21,6 @@ const TimeSheetHeader = (props:any) => {
             component={AppSearchInput}
             name="search"
             variant="bordered"
-            className="bg-red-400"
             />
             </FormProvider>
             {isAllProjects&&(
