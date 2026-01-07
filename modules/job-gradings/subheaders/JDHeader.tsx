@@ -1,12 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { AppPageTitle } from "@hrbox/uikit/components/AppPageTitle";
-import { AppButton, AppSearchInput, AppCheckBox } from "@hrbox/uikit/components";
+import {
+    AppButton,
+    AppSearchInput,
+    AppCheckBox,
+} from "@hrbox/uikit/components";
 import { Add } from "iconsax-reactjs";
 import { useAppDispatch, useAppSelector } from "@hrbox/core/redux";
 import {
     toggleShowGraded,
     toggleShowNoGrade,
 } from "@hrbox/core/redux/slices/JDFilterSlice";
+import { setSearchQuery } from "@hrbox/core/redux/slices/searchSlice";
 
 const JDHeader = ({ title, icon }: any) => {
     const { t } = useTranslation();
@@ -15,33 +20,42 @@ const JDHeader = ({ title, icon }: any) => {
     const { showGraded, showNoGrade } = useAppSelector(
         (state) => state.jdFilter
     );
+    const searchQuery = useAppSelector((state) => state.search.query);
 
     return (
         <div className="w-full flex justify-between items-center">
             <AppPageTitle title={t(title)} icon={icon} />
 
             <div className="flex items-center gap-4">
-                {/* Graded */}
+
                 <label className="flex items-center gap-2 cursor-pointer">
                     <AppCheckBox
                         checked={showGraded}
-                        onChange={() => dispatch(toggleShowNoGrade())}
+                        onChange={() => dispatch(toggleShowGraded())}
                     />
-
-                    {t("Graded")}
+                    <span className="h-3 w-3 rounded-full bg-green-500" />
+                    {t("graded")}
                 </label>
 
-                {/* No Grade */}
+
                 <label className="flex items-center gap-2 cursor-pointer">
                     <AppCheckBox
                         checked={showNoGrade}
-                        onChange={() => dispatch(toggleShowGraded())}
+                        onChange={() => dispatch(toggleShowNoGrade())}
                     />
-
-                    {t("No Grade")}
+                    <span className="h-3 w-3 rounded-full bg-red-500" />
+                    {t("no_grade")}
                 </label>
 
-                <AppSearchInput />
+
+                <AppSearchInput
+                    defaultValue={searchQuery}
+                    placeholder={t("search")}
+                    onSearch={(query) =>
+                        dispatch(setSearchQuery(query.trim()))
+                    }
+                />
+
 
                 <AppButton
                     color="white"

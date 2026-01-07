@@ -1504,7 +1504,6 @@ export const JDPageList = [
     Job_title: "Financial expert",
     unit: "finance",
     grade_status:"has",
-
     score: "650"
   },{
     id:"5",
@@ -1521,7 +1520,6 @@ export const JDPageList = [
     Job_title: "Financial expert",
     unit: "finance",
     grade_status:"has",
-
     score: "650"
   },
   {
@@ -1530,7 +1528,6 @@ export const JDPageList = [
     Job_title: "Financial expert",
     unit: "finance",
     grade_status:"no",
-
     score: "650"
   },
   {

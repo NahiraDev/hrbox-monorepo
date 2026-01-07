@@ -15,6 +15,8 @@ import messageAction from "@hrbox/core/redux/slices/messageAction";
 import { HRLinkApi } from "@hrbox/modules/hrlink/app/baseApi";
 import { MessengerApi } from "@hrbox/modules/messenger/app/baseApi";
 import jdFilterReducer from "@hrbox/core/redux/slices/jdFilterSlice";
+import searchReducer from "@hrbox/core/redux/slices/searchSlice";
+
 
 const persistConfig = {
   key: "hrbox-v3",
@@ -39,7 +41,7 @@ export function createStoreWithModules(ENABLED_MODULES: string[]) {
     profile: profile(state.profile, action),
     messengerAction: messengerAction(state.messengerAction, action),
     messageAction: messageAction(state.messageAction, action),
-
+    search: searchReducer(state.search, action),
     [ssoApiWithEndpoints.reducerPath]: ssoApiWithEndpoints.reducer(state?.[ssoApiWithEndpoints.reducerPath], action),
     [HRLinkApi.reducerPath]: HRLinkApi.reducer(state?.[HRLinkApi.reducerPath], action),
     [MessengerApi.reducerPath]: MessengerApi.reducer(state?.[MessengerApi.reducerPath], action),
