@@ -1,13 +1,37 @@
 
- .gradient-divider {
-  width: 100%;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(
-    90deg,
-    #E6F0FF 0%,
-    #3B82F6 50%,
-    #E6F0FF 100%
-  );
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 10px;
 }
 
+
+.graded-row td {
+    background-color: #DFF3E766;
+}
+
+.graded-row td:first-child {
+    border-left: 3px solid #0E4A27;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.graded-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+
+.no-grade-row td {
+    background-color: #fef2f2;
+}
+
+.no-grade-row td:first-child {
+    border-left: 4px solid #ef4444;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.no-grade-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

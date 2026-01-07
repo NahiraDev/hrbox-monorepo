@@ -4,19 +4,20 @@ import { useModal } from "@hrbox/core/hooks";
 import { ModalType, ModalSize } from "@hrbox/core/providers";
 import GeneralModal from "../../modals/GeneralModal";
 import type { ColumnConfig } from "@hrbox/uikit/components";
-import {Ranking} from "iconsax-reactjs";
+import {Hierarchy3, Ranking} from "iconsax-reactjs";
+import {useTranslation} from "react-i18next";
 
     const columns: ColumnConfig[] = [
-      { key: "id", label: "No", width: 80, align: "center", cellClassName: "text-center", },
+      { key: "id", label: "No",  align: "center", cellClassName: "text-center", },
 
-      { key: "ofpoint", label: "of point", width: 80, align: "center" ,cellClassName: "text-center", },
+      { key: "ofpoint", label: "of point",  align: "center" ,cellClassName: "text-center", },
 
-      { key: "uptopoints", label: "up to point", width: 80, align: "center" , cellClassName: "text-center", },
+      { key: "uptopoints", label: "up to point",  align: "center" , cellClassName: "text-center", },
 
       {
         key: "Grade",
         label: "Grade",
-        width: 120,
+
         align: "center",
           cellClassName: "text-center",
         render: (_, row: any) => (
@@ -29,13 +30,14 @@ import {Ranking} from "iconsax-reactjs";
         ),
       },
 
-      { key: "Grouping", label: "Grouping", width: 80 },
+      { key: "Grouping", label: "Grouping",  },
 
-      { key: "Description", label: "Description", width: 100 },
+      { key: "Description", label: "Description",  },
     ];
 
 const General = () => {
   const modal = useModal();
+    const { t } = useTranslation();
   const openViewModal = (row: any) => {
     modal.open(
       ModalType.VIEW,
@@ -55,9 +57,30 @@ const General = () => {
       ModalSize["3XL"]
     );
   };
-
+    const handleEditClick = (row:any) => {
+        modal.open(
+            ModalType.EDIT,
+            "face-allocation-form",
+            <GeneralModal/>,
+            {
+                data:row,
+                isForm: true,
+                title:t("edit-face-recognition-assignment"),
+                submitLabel: t("submit"),
+                cancelLabel: t("cancel"),
+                icon:<Hierarchy3 size={18} />,
+                formConfig: {
+                    formId: "general-form"
+                }
+            },
+            ModalSize["3XL"]
+        );
+    };
   return (
-    <AppTable data={GeneralMock} columns={columns} onRowClick={(row)=>openViewModal(row)}  />
+    <AppTable data={GeneralMock}
+              onDelete={()=>console.log('deleting')}
+
+              onEdit={(row)=>handleEditClick(row)} columns={columns} onRowClick={(row)=>openViewModal(row)}  />
   );
 };
 

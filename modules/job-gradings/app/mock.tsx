@@ -1466,6 +1466,87 @@ export const GeneralMock = [
     uptopoints: "80",
     Description: "Good performance",
   },
+]
+export const JDPageList = [
+  {
+    id:"1",
+    Grade: "Grade A",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+    score: "650"
+  },
+  {
+    id:"2",
+    Grade: "Grade B",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+
+    score: "650"
+  },
+  {
+    id:"3",
+    Grade: "Grade c",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+
+    score: "650"
+  },
+  {
+    id:"4",
+    Grade: "Grade B",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+    score: "650"
+  },{
+    id:"5",
+    Grade: "-",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"no",
+    score: "650"
+  },
+  {
+    id:"7",
+    Grade: "Grade A",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+    score: "650"
+  },
+  {
+    id:"8",
+    Grade: "-",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"no",
+    score: "650"
+  },
+  {
+    id:"9",
+    Grade: "Grade A",
+    gradeColor: "#22C55E",
+    Job_title: "Financial expert",
+    unit: "finance",
+    grade_status:"has",
+
+    score: "650"
+  },{
+    id: "10",
+    Grade: "-",
+    Job_title: "HR Manager",
+    unit: "HR",
+    grade_status: "no",
+    score: "540"
+  },
 ];
 export const GRADE_OPTIONS = [
   { id: "Grade A", name: "Grade A" },
