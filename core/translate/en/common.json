@@ -276,5 +276,9 @@
   "edit-iP-allocation":"Edit IP Allocation",
   "edit-location-allocation":"Edit Location Allocation",
   "edit-shift-allocation":"Edit Shift Allocation",
+  "Employee-job_fit": "Employee-job fit",
+  "JDList": "JDList",
+  "graded": "Graded",
+  "not graded": "No Graded"
   "timesheet":"Time Sheet"
 }

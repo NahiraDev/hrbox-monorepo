@@ -19,6 +19,12 @@ table {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
 }
+.custom-table {
+    width: 800px !important;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: none !important;
+}
 
 
 .no-grade-row td {

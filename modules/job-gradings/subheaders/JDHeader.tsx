@@ -24,10 +24,10 @@ const JDHeader = ({ title, icon }: any) => {
 
     return (
         <div className="w-full flex justify-between items-center">
-            <AppPageTitle title={t(title)} icon={icon} />
+            <AppPageTitle title={t("JDList")} icon={icon} />
 
             <div className="flex items-center gap-4">
-
+                {/* Graded */}
                 <label className="flex items-center gap-2 cursor-pointer">
                     <AppCheckBox
                         checked={showGraded}
@@ -37,7 +37,7 @@ const JDHeader = ({ title, icon }: any) => {
                     {t("graded")}
                 </label>
 
-
+                {/* No Grade */}
                 <label className="flex items-center gap-2 cursor-pointer">
                     <AppCheckBox
                         checked={showNoGrade}
@@ -47,16 +47,19 @@ const JDHeader = ({ title, icon }: any) => {
                     {t("no_grade")}
                 </label>
 
-
+                {/* Search */}
                 <AppSearchInput
                     defaultValue={searchQuery}
                     placeholder={t("search")}
-                    onSearch={(query) =>
-                        dispatch(setSearchQuery(query.trim()))
-                    }
+                    onSearch={(query) => {
+                        dispatch(setSearchQuery(query.trim())); // onSearch برای مواردی که Enter زده شد
+                    }}
+                    onChangeQuery={(query) => {
+                        dispatch(setSearchQuery(query.trim())); // onChange برای هر تایپ
+                    }}
                 />
 
-
+                {/* Add */}
                 <AppButton
                     color="white"
                     size="md"

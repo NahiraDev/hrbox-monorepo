@@ -9,7 +9,7 @@ const EmployeeHeader = (props: any) => {
     <>
       <div className="w-full flex flex-row justify-between">
         <div className="flex flex-row gap-3 items-center">
-          <AppPageTitle title={t(props.title)} icon={props.icon} />
+          <AppPageTitle title={t("Employee-job_fit")} icon={props.icon} />
         </div>
         <div className="flex flex-row gap-2.5">
           <AppSearchInput />

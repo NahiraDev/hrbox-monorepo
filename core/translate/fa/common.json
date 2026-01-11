@@ -285,6 +285,11 @@
 "edit-iP-allocation": "ویرایش تخصیص آی‌پی",
 "edit-location-allocation": "ویرایش تخصیص موقعیت مکانی",
 "edit-shift-allocation": "ویرایش تخصیص شیفت",
+  "Employee-job_fit": "انطباق کارمند-شغل",
+  "JDList": "فهرست شناسنامه شغل",
+  "graded": "سطح بندی شده",
+  "not graded": "سطح بندی نشده"
+
 "timesheet": "تایم‌شیت",
 "shift_allocation": "تخصیص شیفت"
 }
