@@ -39,9 +39,12 @@ const AllocationSubheader = ({
         cancelLabel: t("cancel"),
         formConfig: {
           formId: id,
+          onSubmitAsync: async (values: any) => {
+            console.log(title);
+          }
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   return (

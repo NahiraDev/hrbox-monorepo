@@ -30,14 +30,14 @@ const Close: React.FC<{ size?: string; className?: string }> = ({
 
 const getSizeClass = (size: string): string => {
   const sizes: { [key: string]: string } = {
-    "sm": "max-w-sm",
-    "md": "max-w-md",
-    "lg": "max-w-lg",
-    "xl": "max-w-xl",
-    "2xl": "max-w-2xl",
-    "3xl": "max-w-3xl",
-    "4xl": "max-w-4xl",
-    "5xl": "max-w-5xl",
+    "sm": "w-sm",
+    "md": "w-md",
+    "lg": "w-lg",
+    "xl": "w-xl",
+    "2xl": "w-2xl",
+    "3xl": "w-3xl",
+    "4xl": "w-4xl",
+    "5xl": "w-5xl",
     "full": "w-full h-full"
   };
   return sizes[size] || "max-w-md";

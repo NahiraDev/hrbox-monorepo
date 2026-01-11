@@ -8,6 +8,7 @@ import { useLanguage } from "@hrbox/core/hooks/useLanguage";
 import { useAuth } from "@hrbox/core/hooks/useAuth";
 import { useLogout } from "@hrbox/core/hooks/useLogout";
 import { moduleRegistry } from "@hrbox/modules/registry";
+import i18n from "@hrbox/core/translate";
 
 interface MenuItem {
   id: string;
@@ -31,14 +32,17 @@ export const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = useMemo(() => {
-    console.log(moduleMenu);
     return moduleMenu?.menu;
   }, [currentPanel]);
 
   const isActiveRoute = (path: string) => {
     return !!matchRoute({ to: path });
   };
-
+  const topMenu=useMemo(
+    ()=>{
+      return menuItems
+    }
+  ,[i18n])
   const bottomMenu = useMemo(
     () => [
       {
@@ -79,10 +83,25 @@ export const AppSidebar = () => {
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="absolute top-[50px] -right-3 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white text-secondary shadow-theme-sm hover:scale-110 transition-transform"
+        className={`
+    absolute top-12.5 z-10
+    flex items-center justify-center
+    w-6 h-6 rounded-full
+    bg-white text-secondary shadow-theme-sm
+    hover:scale-110 transition-transform
+    ${lang === "fa" ? "-left-3" : "-right-3"}
+  `}
         aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
       >
-        {isExpanded ? <ArrowLeft2 size="12" color="#1E3363" /> : <ArrowRight2 size="12" color="#1E3363" />}
+        {isExpanded ? (
+  lang === "fa"
+    ? <ArrowRight2 size="12" color="#1E3363" />
+    : <ArrowLeft2 size="12" color="#1E3363" />
+) : (
+  lang === "fa"
+    ? <ArrowLeft2 size="12" color="#1E3363" />
+    : <ArrowRight2 size="12" color="#1E3363" />
+)}
       </button>
 
       <div className="flex flex-col items-center justify-between w-full h-full">
@@ -93,7 +112,7 @@ export const AppSidebar = () => {
           aria-label="Main navigation"
         >
           <AnimatePresence mode="wait">
-            {menuItems.map((item: MenuItem) => {
+            {topMenu.map((item: MenuItem) => {
               const isActive = isActiveRoute(item.path);
 
               return (

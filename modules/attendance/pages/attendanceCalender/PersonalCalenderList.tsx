@@ -126,7 +126,8 @@ const PersonalCalenderList = () => {
   const handleOpenModal = (
     formid: string,
     modalComponent: any,
-    titleModal: string
+    titleModal: string,
+    modalSize:any
   ) => {
     modal.open(
       ModalType.CREATE,
@@ -142,7 +143,7 @@ const PersonalCalenderList = () => {
           formId: formid,
         },
       },
-      ModalSize["4XL"]
+      modalSize
     );
   };
 
@@ -334,7 +335,7 @@ const PersonalCalenderList = () => {
                   size=""
                   key="Daily_Leave"
                   onPress={() =>
-                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                    handleOpenModal("event-form", <EventModal />, "Add Time",ModalSize.SM)
                   }
                 />
                 <AppButton
@@ -347,7 +348,8 @@ const PersonalCalenderList = () => {
                     handleOpenModal(
                       "event-form",
                       <EventModal />,
-                      "Add Time"
+                      "Add Time",
+                      ModalSize.SM
                     )
                   }
                 />
@@ -361,7 +363,8 @@ const PersonalCalenderList = () => {
                     handleOpenModal(
                       "permision-form",
                       <AddPermisionTime />,
-                      "Add Permision Time"
+                      "Add Permision Time",
+                      ModalSize["2XL"]
                     )
                   }
                 />
@@ -383,7 +386,7 @@ const PersonalCalenderList = () => {
                   key="Daily_Leave"
                   size=""
                   onPress={() =>
-                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                    handleOpenModal("event-form", <EventModal />, "Add Time",ModalSize.SM)
                   }
                 />
                 <AppButton
@@ -393,7 +396,7 @@ const PersonalCalenderList = () => {
                   size=""
                   key="Daily_Mission"
                   onPress={() =>
-                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                    handleOpenModal("event-form", <EventModal />, "Add Time",ModalSize.SM)
                   }
                 />
                 <AppButton
@@ -414,7 +417,7 @@ const PersonalCalenderList = () => {
                   size=""
                   key="Add_attendence"
                      onPress={() =>
-                    handleOpenModal("event-form", <EventModal />, "Add Time")
+                    handleOpenModal("event-form", <EventModal />, "Add Time",ModalSize.SM)
                   }
                 />
               </React.Fragment>

@@ -151,9 +151,9 @@
   "computationalCoefficients": "Computational Coefficients (fa)",
   "please_sign_in_to_our_hrbox_account": "Please Sign in to your “HRBOX“ account. (fa)",
   "please_sign_in_to_our_hrlink_account": "Please Sign in to your “HRLink“ account. (fa)",
-  "entry_exit": "Entry Exit",
+  "entry_exit": "ورود و خروج",
   "my_time": "ثبت ورود و خروج",
-  "attendance_calendar": "Attendance Calendar",
+  "attendance_calendar": "تقویم حضور و غیاب",
   "approvals": "Approvals",
   "list_of_approvals": "لیست تاییدیه ها",
   "ُshift_allocation": "ُShift Allocation",
@@ -161,7 +161,7 @@
   "ip_allocation": "Ip Allocation",
   "location_allocation": "Location Allocation",
   "export": "دانلود خروجی",
-  "traffic_calendar": "Traffic Calendar",
+  "traffic_calendar": "تقویم تردد",
   "clock_in": "ثبت ورود",
   "clock_out": "ثبت خروج",
   "Selectproject/Task": "پروژه / وظیفه را انتخاب کنید",
@@ -284,6 +284,7 @@
 "edit-face-recognition-assignment": "ویرایش تخصیص تشخیص چهره",
 "edit-iP-allocation": "ویرایش تخصیص آی‌پی",
 "edit-location-allocation": "ویرایش تخصیص موقعیت مکانی",
-"edit-shift-allocation": "ویرایش تخصیص شیفت"
-
+"edit-shift-allocation": "ویرایش تخصیص شیفت",
+"timesheet": "تایم‌شیت",
+"shift_allocation": "تخصیص شیفت"
 }
