@@ -1,5 +1,5 @@
 import { AppButton } from "@hrbox/uikit/components";
-import { Add, Setting4, SearchNormal1, Location, Filter } from "iconsax-reactjs";
+import { Add, Setting4, SearchNormal1, Location, Filter, People, LikeShapes } from "iconsax-reactjs";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
 import {
   formValidationOrganizationLocation,
@@ -9,6 +9,7 @@ import { handleSubmitAward } from "@hrbox/modules/hrlink/forms/AwardForm";
 import { FilterCalenderModal } from "@hrbox/modules/basic-info/modals/FilterCalenderModal";
 import { useModal } from "@hrbox/core/hooks";
 import React from "react";
+import { Paths } from "@hrbox/modules";
 
 const EmployeesSubHeader = (props: any) => {
 
@@ -46,9 +47,16 @@ const EmployeesSubHeader = (props: any) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-2">
-        <div className="flex items-center gap-2 rounded-md bg-primary shdow-theme-sm px-3 py-1.5 w-fit">
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal">{props.name}</span>
+        <div
+          // onPress={() => push({ to: Paths.BasicInfo.OrganizationDepartments })}
+          className="flex items-center gap-2 rounded-md bg-primary shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer">
+          {/*{props.icon && <props.icon color="#fff" />}*/}
+          <People color="white" size={22} />
+          <span className="text-white text-xl ">Employees</span>
+        </div>  <div className="flex items-center gap-2 rounded-md shdow-theme-sm px-3 py-1.5 w-fit cursor-pointer">
+          {/*{props.icon && <props.icon color="#fff" />}*/}
+        <LikeShapes color="black  " size={22}  />
+          <span className="text-secondary-1000 text-xl ">Satisfaction Status</span>
         </div>
       </div>
       <div className="flex items-center gap-2">

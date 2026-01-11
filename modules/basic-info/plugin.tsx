@@ -72,7 +72,6 @@ const OrganizationalLocationsSubHeader = lazyRouteComponent(
 const AllEmployeesSubHeader = lazyRouteComponent(
   () => import("./subheaders/EmployeesSubHeader"),
 );
-
 // ============================================
 // Plugin Definition
 // ============================================

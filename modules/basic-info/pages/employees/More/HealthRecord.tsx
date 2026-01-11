@@ -189,20 +189,27 @@ const HealthRecord = () => {
       ModalSize.XL,
     );
   };
+  const cardContainerClass = `grid grid-cols-2 gap-3  overflow-y-scroll  max-h-[calc(63vh)] my-4 mx-2.5 pr-2.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
 
   return (
     <BasicInfoLayout
       content={
-        <div className="p-4 grid grid-cols-2 gap-15">
-          <div className="flex flex-col gap-5">
+        <div className=" grid grid-cols-2 gap-2 mt-5">
+          <div>
             <div className="flex items-center justify-between">
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-1 items-center ml-2" >
                 <NotificationFavorite size="24" />
                 <span className="text-xl font-semibold text-secondary-1000">
                   Pre-Employment Health Records
                 </span>
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1 mr-7">
                 <AppButton
                   size="xs"
                   radius="sm"
@@ -225,7 +232,7 @@ const HealthRecord = () => {
               />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className={cardContainerClass}>
               {[...healthy, ...preEmploymentRecords].map(
                 (worker: any, index) => (
                   <Card
@@ -286,15 +293,15 @@ const HealthRecord = () => {
               )}
             </div>
           </div>
-          <div className="flex flex-col gap-5">
+          <div>
             <div className="flex items-center justify-between">
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-1 items-center ml-2">
                 <HeartEdit size="24" />
                 <span className="text-xl font-semibold text-secondary-1000">
                   On-Duty Health Records
                 </span>
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1 mr-7">
                 <AppButton
                   size="xs"
                   radius="sm"
@@ -317,7 +324,7 @@ const HealthRecord = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div  className={cardContainerClass}>
               {healthy.map((worker, index) => (
                 <Card
                   isPressable

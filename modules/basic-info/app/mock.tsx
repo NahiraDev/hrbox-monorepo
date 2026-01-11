@@ -1055,6 +1055,98 @@ export const education = [
     company: 'Digital Solution',
     date: '2020 - 2023',
     location: 'Tehran',
+  }, {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  }, {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  }, {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  }, {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
+  },
+  {
+    job: 'Industrial',
+    company: 'Digital Solution',
+    date: '2020 - 2023',
+    location: 'Tehran',
   },
   {
     job: 'Industrial',
@@ -1107,6 +1199,29 @@ export const education = [
 ];
 export const skills = [
   {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  },
+  {
+    skill: 'Adobe PS',
+    Level: 'A',
+    Grad: '80%',
+    present: '',
+  }, {
     skill: 'Adobe PS',
     Level: 'A',
     Grad: '80%',
@@ -1988,6 +2103,60 @@ export const testReport = [
 ];
 export const healthy = [
   {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },
+  {
+    title: 'Blood Type',
+    titleButton: 'Pre-Employment',
+    type: 'A+',
+    date: '2025/02/05',
+    question: 'Yes',
+  },  {
     title: 'Blood Type',
     titleButton: 'Pre-Employment',
     type: 'A+',

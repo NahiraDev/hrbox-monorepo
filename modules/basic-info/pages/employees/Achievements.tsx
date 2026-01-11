@@ -15,7 +15,7 @@ import React, { useState } from "react";
 const Achievements = () => {
 
 
-  const cardContainerClass = `grid grid-cols-4 gap-4  overflow-y-scroll  max-h-[calc(66.5vh)] my-6 mx-2.5 pr-4.5
+  const cardContainerClass = `grid grid-cols-4 gap-4  overflow-y-scroll  max-h-[calc(66.5vh)] my-5 mx-2.5 pr-4.5
   [&::-webkit-scrollbar]:w-1.5
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-transparent
