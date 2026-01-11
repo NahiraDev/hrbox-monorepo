@@ -25,7 +25,7 @@ const FaceAllocation = () => {
           formId: "face-allocation-form"
         }
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row:any) => {
@@ -41,10 +41,13 @@ const FaceAllocation = () => {
         cancelLabel: t("cancel"),
         icon:<Hierarchy3 size={18} />,
         formConfig: {
-          formId: "face-allocation-form"
+          formId: "face-allocation-form",
+          onSubmitAsync: async (values: any) => {
+            console.log("face allocation-edit");
+          }
         }
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   

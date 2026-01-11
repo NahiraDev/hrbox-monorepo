@@ -46,8 +46,9 @@ const OrganizationLocationSubHeader = (props: any) => {
     <div className="flex items-center justify-between">
       <div className="flex gap-2">
         <div className="flex items-center gap-2 rounded-md bg-primary shdow-theme-sm px-3 py-1.5 w-fit">
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal">{props.name}</span>
+          {/*{props.icon && <props.icon color="#fff" />}*/}
+          <Location size={22} color="white"/>
+          <span className="text-white text-xl font-normal">Organizational Locations</span>
         </div>
       </div>
       <div className="flex items-center gap-2">

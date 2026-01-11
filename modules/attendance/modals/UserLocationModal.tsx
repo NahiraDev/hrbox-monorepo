@@ -36,7 +36,6 @@ const UserLocationModal = () => {
   const mapRef = useRef<LeafletMap | null>(null);
 
   return (
-    <>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-row gap-3 items-center">
             <Avatar
@@ -92,7 +91,6 @@ const UserLocationModal = () => {
             </MapContainer>
           </div>
         </div>
-    </>
   );
 };
 

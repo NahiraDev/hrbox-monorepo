@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Checkbox, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@heroui/react";
+import { Checkbox, Table, TableBody, TableCell, TableColumn, TableFooter, TableHeader, TableRow, Tooltip } from "@heroui/react";
 import { AppButton, AppPagination } from "@hrbox/uikit/components";
 import { createPortal } from "react-dom";
 import { Edit, Eye, Trash } from "iconsax-reactjs";
@@ -90,7 +90,7 @@ export interface AppTableProps<T = any> {
   onFilter?: (filters: FilterConfig) => void;
   hasPagination?: boolean;
   pageSize?: number;
-  totalItems?: number;
+  totalItems?:any;
   currentPage?: number;
   onPageChange?: (page: number) => void;
   variant?: "default" | "striped" | "bordered" | "minimal";
@@ -124,7 +124,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       defaultSort,
       hasPagination = true,
       pageSize = 10,
-      totalItems,
+      totalItems=[],
       currentPage: controlledPage,
       onPageChange,
       variant = "primary",
@@ -191,7 +191,6 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
           return "py-3 px-2 text-sm";
       }
     }, [density]);
-
     const handlePageChange = useCallback(
       (newPage: number) => {
         if (onPageChange) {
@@ -202,6 +201,15 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       },
       [onPageChange]
     );
+    const bottomContent = React.useMemo(() => {
+      return (
+        <div className="py-2 px-2 flex justify-center items-center">
+          <AppPagination meta={{ page, totalPages, pageSize, total: totalItems.length }} onPageChange={handlePageChange} />
+        </div>
+      );
+    }, [ page, totalPages, pageSize ]);
+
+
 
     const handleSort = useCallback(
       (key: string) => {
@@ -323,7 +331,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
       const isSelected = selectedRows.has(index);
       const baseClass = "hover:bg-surface dark:hover:bg-[#04425c66] transition-colors cursor-pointer";
       const stripedClass = variant === "striped" && index % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/30" : "";
-      const borderedClass = variant === "bordered" ? "border-b border-gray-200 dark:border-gray-700" : "";
+      const borderedClass = variant === "bordered" ? "" : "";
       const selectedClass = isSelected ? "bg-primary-400 dark:bg-primary-900/30" : "";
       const customClass = typeof styles.rowClassName === "function" ? styles.rowClassName(row, index, isSelected) : styles.rowClassName || "";
       return `${baseClass} ${stripedClass} ${borderedClass} ${selectedClass} ${customClass}`;
@@ -468,10 +476,11 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
 
     return (
       <div ref={tableContainerRef}
-           className={`w-full h-full border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}>
+           className={`w-full h-full! flex flex-col justify-between border-primary bg-surface-50! shadow-light-tight/1 rounded-2xl border dark:border-[#04425c66] ${styles.containerClassName || ""}`}>
         <Table
           aria-label="Data table"
           isStriped={variant === "striped"}
+          bottomContent={hasPagination && bottomContent}
           className={`${styles.tableClassName} h-full`}
           classNames={{
             base: "!h-full !w-full",
@@ -599,11 +608,7 @@ export const AppTable = React.forwardRef<HTMLDivElement, AppTableProps>(
             document.body
           )}
 
-        {hasPagination && totalPages > 1 && (
-          <div className="mt-4 flex justify-end px-4">
-            <AppPagination meta={{ page, totalPages }} onPageChange={handlePageChange} />
-          </div>
-        )}
+       
       </div>
     );
   }

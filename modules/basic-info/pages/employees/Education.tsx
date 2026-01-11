@@ -95,11 +95,20 @@ const Education = () => {
   };
   const [activeIndex, setActiveIndex] = useState(null);
 
+  const cardContainerClass = `grid grid-cols-4 gap-3  overflow-y-scroll  max-h-[calc(67vh)] my-4 mx-2.5 pr-2.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
+
   return (
     <>
       <BasicInfoLayout
         content={
-          <div className="grid grid-cols-4 gap-3 w-full p-4">
+          <div className={cardContainerClass}>
             {educationList.map((user, index) => (
               <Card
                 isPressable

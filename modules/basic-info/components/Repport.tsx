@@ -54,7 +54,7 @@ const users = [
   },
 ];
 
-const cardContainerClass = `m-4 overflow-y-auto scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 max-h-[calc(100vh-100px)]
+const cardContainerClass = `m-4  mr-2 pr-3 overflow-y-auto scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 max-h-[calc(66.5vh)]
   [&::-webkit-scrollbar]:w-3
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-100

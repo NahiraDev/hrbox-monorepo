@@ -1,5 +1,5 @@
 import { AppButton } from "@hrbox/uikit/components";
-import { ArrowLeft2, Category, Edit, Hierarchy3 } from "iconsax-reactjs";
+import { ArrowLeft2, Category, DocumentSketch, Edit, Hierarchy3 } from "iconsax-reactjs";
 import { useNavigation } from "@hrbox/core/hooks/useNavigation";
 import { Paths } from "@hrbox/modules/paths";
 import { ModalSize, ModalType } from "@hrbox/core/providers";
@@ -50,8 +50,9 @@ const TechnicalDepartmentsSubHeader = (props: any) => {
           />}
         />
         <div className="flex items-center gap-2 rounded-md bg-primary shdow-theme-sm px-3 py-1.5 w-fit">
-          {props.icon && <props.icon color="#fff" />}
-          <span className="text-white text-xl font-normal">{props.title}</span>
+          {/*{props.icon && <props.icon color="#fff" />}*/}
+          <DocumentSketch color="white" />
+          <span className="text-white text-xl font-normal">Technical Department</span>
         </div>
       </div>
       <div className="flex items-center gap-2">

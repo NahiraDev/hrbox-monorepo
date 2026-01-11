@@ -15,6 +15,7 @@ import {
   ShiftAllocationSubheader,
 } from "@hrbox/modules/attendance/subheaders/CreateAllocationSubHeaderWithHook";
 import ProjectTimesheets from "./pages/TimeSheet/ProjectTimesheets";
+import i18n from "../../core/translate";
 
 // ============================================
 // Pages
@@ -244,43 +245,43 @@ export const AttendancePlugin: ModulePlugin = {
   menu: [
     {
       id: "dashboard",
-      label: "Dashboard",
+      label: i18n.t("dashboard"),
       path: "/attendance/dashboard",
       icon: <Chart size="24" />,
     },
     {
       id: "entry-exit",
-      label: "Entry Exit",
+      label: i18n.t("entry_exit"),
       path: "/attendance/entry-exit",
       icon: <PasswordCheck size="24" />,
     },
     {
       id: "calender",
-      label: "Attendance Calender",
+      label: i18n.t("attendance_calendar"),
       path: "/attendance/attendance-calender",
       icon: <CalendarTick size="24" />,
     },{
       id: "traffic",
-      label: "Traffic Calender",
+      label: i18n.t("traffic_calendar"),
       path: "/attendance/list-of-approvals",
       icon: <Key size="24" />,
     },
     {
       id: "export",
-      label: "Export",
+      label: i18n.t("export"),
       path: "/attendance/export",
       icon: <ReceiveSquare2 size="24" />,
     },
     
     {
       id: "shift",
-      label: "Shift Allocation",
+      label: i18n.t("shift_allocation"),
       path: "/attendance/shift-allocation",
       icon: <Setting3 size="24" />,
     },
     {
       id: "timesheet",
-      label: "Time Sheet",
+      label: i18n.t("timesheet"),
       path: "/attendance/all-projects",
       icon: <Clock size="24" />,
     },

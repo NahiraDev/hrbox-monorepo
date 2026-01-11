@@ -35,12 +35,21 @@ const Education = () => {
     });
   };
 
+  const cardContainerClass1 = `grid h-full grid-cols-2 gap-3  overflow-y-scroll  max-h-[calc(63.5vh)] mt-4 mx-2.5 pr-3
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
+
   const SkillCard = (skill: any, index: number) => (
     <Card
       isPressable
       key={index}
-      className="p-3 flex gap-1.5 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white">
-      <div className="flex items-center justify-between border-b-2 border-gray-200 p-1.5 ">
+      className="p-3 h-full flex gap-1.5 shadow-sm hover:!bg-[#D6F2FF] hover:cursor-pointer bg-white">
+      <div className="flex items-center justify-between border-b-2 border-neutral-100 py-1.5 px-0.5 ">
         <div className="flex items-center gap-1.5 px-1.5">
           <Avatar radius="sm" size="sm" color='primary' />
           <span className="text-[16px] font-semibold text-secondary-1000">{skill.skill}</span>
@@ -59,7 +68,7 @@ const Education = () => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-between mt-1.5 gap-[49px]">
+      <div className="flex items-center justify-between mt-1.5">
         <div className="flex flex-col gap-2 font-light">
           <div className="flex items-center gap-4">
             <span className='text-sm text-[#353535] font-light'>Level:</span>
@@ -70,7 +79,7 @@ const Education = () => {
             <span className='text-sm text-[#353535]'>{skill.Grad}</span>
           </div>
         </div>
-        <div>
+        <div className="">
           <AppDoubleLineProgress value={80} />
         </div>
       </div>
@@ -81,26 +90,25 @@ const Education = () => {
     <>
       <BasicInfoLayout
         content={
-          <div className="flex p-7 gap-10">
-            <div className="flex flex-col w-full gap-3  ">
-              <div className="flex gap-1 items-center">
+          <div className="flex ">
+            <div className="flex flex-col w-full mt-4  ">
+              <div className="flex gap-1 items-center ml-2">
                 <LampCharge size={24} />
                 <span className="text-secondary-1000 text-xl font-semibold">Hard Skills</span>
               </div>
-              <div className="grid grid-cols-2 gap-3 w-full">
+              <div className={cardContainerClass1}>
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 w-full">
-              <div className="flex gap-1 items-center">
+            <div className="flex flex-col  w-full  mt-4">
+              <div className="flex gap-1 items-center ml-2">
                 <LampCharge size={24} />
                 <span className="text-secondary-1000 text-xl font-semibold">Soft Skills</span>
               </div>
-              <div className="grid grid-cols-2 gap-3 w-full">
-                {/* Use currentSkills state for mapping */}
+              <div className={cardContainerClass1}>
                 {currentSkills.map((skill: any, index: number) =>
                   SkillCard(skill, index),
                 )}

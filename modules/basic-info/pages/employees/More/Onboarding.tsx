@@ -59,48 +59,57 @@ const Onboarding = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
+  const cardContainerClass = `grid  grid-cols-[25%_74%] gap-2  overflow-y-scroll  max-h-[calc(67vh)] my-4 mx-2.5 pr-2.5
+  [&::-webkit-scrollbar]:w-1.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-blue-600
+  [&::-webkit-scrollbar-thumb]:hover:bg-blue-800`;
+
   return (
     <BasicInfoLayout
       content={
-        <div className="grid grid-cols-[25%_75%] gap-2 p-4">
+        <div className={cardContainerClass}>
           <div className="flex flex-col gap-3 ">
             <div className="flex items-center gap-1 p-3">
               <UserAdd size="26" />
               <span className="text-xl font-semibold">Onboarding</span>
             </div>
-            {onBoarding.map((board, index) => (
-              <Card
-                isPressable
-                key={index}
-                onPress={() => setActiveIndex(index)}
-                className={`
+              {onBoarding.map((board, index) => (
+                <Card
+                  isPressable
+                  key={index}
+                  onPress={() => setActiveIndex(index)}
+                  className={`
                   py-2 px-3 flex flex-col gap-2 shadow-sm cursor-pointer
                   transition-all duration-200
                   hover:!bg-[#D6F2FF]
                   ${activeIndex === index
-                  ? "bg-[#D6F2FF] border border-primary-400"
-                  : "border border-transparent"
-                }
+                    ? "bg-[#D6F2FF] border border-primary-400"
+                    : "border border-transparent"
+                  }
     `}
-              >
+                >
 
-              <div className="flex gap-1 items-center border-b border-neutral-100 pb-1">
-                  <Clipboard size="20" />
-                  <span className="text-[16px] text-secondary-1000 font-semibold">{board.title}</span>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between border border-[#DCF0F9]/40 rounded-lg px-2 py-1.5">
-                    <div className="flex gap-1 items-center text-xs">
-                      <Calendar size="16" />
-                      <span className="text-xs text-secondary-1000">date</span>
-                    </div>
-                    <div>
-                      <span className="text-xs text-secondary-1000 font-semibold">{board.date}</span>
+                  <div className="flex gap-1 items-center border-b border-neutral-100 pb-1">
+                    <Clipboard size="20" />
+                    <span className="text-[16px] text-secondary-1000 font-semibold">{board.title}</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between border border-[#DCF0F9]/40 rounded-lg px-2 py-1.5">
+                      <div className="flex gap-1 items-center text-xs">
+                        <Calendar size="16" />
+                        <span className="text-xs text-secondary-1000">date</span>
+                      </div>
+                      <div>
+                        <span className="text-xs text-secondary-1000 font-semibold">{board.date}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
+
           </div>
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
@@ -108,7 +117,7 @@ const Onboarding = () => {
                 <UserAdd size="26" />
                 <span className="text-xl font-semibold">DNN Supervisor</span>
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1 mr-5">
                 <UserAdd size="26" />
                 <span className="text-xl font-semibold">Today:</span>
                 <span className="text-xl font-semibold ml-3">Oct.21</span>

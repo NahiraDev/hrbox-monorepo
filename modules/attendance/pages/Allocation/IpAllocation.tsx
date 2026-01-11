@@ -29,7 +29,7 @@ const IpAllocation = () => {
           formId: "ip-allocation-form",
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   const handleEditClick = (row: any) => {
@@ -46,9 +46,12 @@ const IpAllocation = () => {
         cancelLabel: t("cancel"),
         formConfig: {
           formId: "ip-allocation-form",
+            onSubmitAsync: async (values: any) => {
+            console.log("ip allocation edit");
+          }
         },
       },
-      ModalSize["3XL"]
+      ModalSize["2XL"]
     );
   };
   return (
@@ -61,7 +64,7 @@ const IpAllocation = () => {
           onRowClick={(row) => handleRowClick(row)}
           variant="bordered"
           onEdit={(row) => handleEditClick(row)}
-          onDelete={()=>console.log("delete")}
+          onDelete={() => console.log("delete")}
         />
       </div>
     </>

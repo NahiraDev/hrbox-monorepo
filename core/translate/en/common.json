@@ -151,7 +151,7 @@
   "attendance_calendar": "Attendance Calendar",
   "approvals": "Approvals",
   "list_of_approvals": "List of Approvals",
-  "ُshift_allocation": "ُShift Allocation",
+  "ُshift_allocation": "Shift Allocation",
   "face_allocation": "Face Allocation",
   "ip_allocation": "Ip Allocation",
   "location_allocation": "Location Allocation",
@@ -280,4 +280,5 @@
   "JDList": "JDList",
   "graded": "Graded",
   "not graded": "No Graded"
+  "timesheet":"Time Sheet"
 }
