@@ -11,36 +11,18 @@ import path from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
-  const mode: any = process.env.VITE_APP_ENV;
-  const isDevelopment = mode;
-  const isProduction = mode;
+  const mode: any = process.env.VITE_APP_ENV || env.mode;
+  const isDevelopment = mode !== "production";
+  const isProduction = mode === "production";
   const isTest = mode === "test";
 
   const envVars = loadEnv(mode, process.cwd(), "");
-
   let packageJson: any = {};
   try {
     packageJson = JSON.parse(
       readFileSync(resolve(__dirname, "package.json"), "utf-8")
     );
   } catch {
-  }
-
-  let httpsConfig = undefined;
-  try {
-    const keyPath = resolve(__dirname, "./certs/cert_hrbox.key");
-    const certPath = resolve(__dirname, "./certs/cert_hrbox.crt");
-    const caPath = resolve(__dirname, "./certs/cert_hrbox_ca.crt");
-
-    if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-      httpsConfig = {
-        key: fs.readFileSync(keyPath),
-        cert: fs.readFileSync(certPath),
-        ca: fs.readFileSync(caPath)
-      };
-    }
-  } catch (error) {
-    console.error("❌ Error loading SSL certificates:", error);
   }
 
   const plugins = [
@@ -51,6 +33,9 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
 
   return {
     plugins,
+
+    cacheDir: ".vite",
+
     define: {
       __DEV__: isDevelopment,
       __PROD__: isProduction,
@@ -62,104 +47,119 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       __FEATURE_REPORTS__: true,
       "process.env.VITE_APP_ENV": JSON.stringify(mode)
     },
+
     css: {
-      postcss: "./core/config/tailwind/postcss.config.js"
+      postcss: "./core/config/tailwind/postcss.config.js",
+      devSourcemap: false
     },
+
     build: {
-      target: "es2023",
-      minify: "terser",
-      sourcemap: false,
+      target: "es2022",
+      minify: isProduction ? "terser" : false,
+      sourcemap: isDevelopment,
       emptyOutDir: true,
       cssCodeSplit: true,
       outDir: resolve(__dirname, "dist"),
       assetsDir: "public",
-      rollupOptions: {
-        input: {
-          main: resolve(__dirname, "main.tsx"),
-          sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
-          processMaker: resolve(
-            __dirname,
-            "./modules/process-maker/plugin.tsx"
-          ),
-          chartMaker: resolve(__dirname, "modules/chart-maker/plugin.tsx"),
-          hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
-          attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
-          jobGradings: resolve(__dirname, "./modules/job-gradings/plugin.tsx"),
-          basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
-          projectManagement: resolve(
-            __dirname,
-            "./modules/project-management/plugin.tsx"
-          ),
-          messenger: resolve(__dirname, "./modules/messenger/plugin.tsx"),
-          jobDescription: resolve(__dirname, "./modules/job-description/plugin.tsx")
-        },
-        output: {
-          entryFileNames: (chunkInfo: { name: string; }) => {
-            if (chunkInfo.name === "main") return "index.js";
-            if (chunkInfo.name === "core") return "core/index.js";
-            if (chunkInfo.name === "sso") return "modules/sso/index.js";
-            if (chunkInfo.name === "processMaker")
-              return "modules/process-maker/index.js";
-            if (chunkInfo.name === "chartMaker")
-              return "modules/chart-maker/index.js";
-            if (chunkInfo.name === "hrlink") return "modules/hrlink/index.js";
-            if (chunkInfo.name === "basicInfo")
-              return "modules/basic-info/index.js";
-            if (chunkInfo.name === "attendance")
-              return "modules/attendance/index.js";
-            if (chunkInfo.name === "projectManagement")
-              return "modules/project-management/index.js";
-            if (chunkInfo.name === "jobGradings")
-              return "modules/job-gradings/index.js";
-            if (chunkInfo.name === "jobDescription")
-              return "modules/job-description/index.js";
-            return "[name].js";
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: isProduction
+        ? {
+          input: {
+            main: resolve(__dirname, "main.tsx"),
+            sso: path.resolve(__dirname, "./modules/sso/plugin.tsx"),
+            processMaker: resolve(
+              __dirname,
+              "./modules/process-maker/plugin.tsx"
+            ),
+            chartMaker: resolve(__dirname, "modules/chart-maker/plugin.tsx"),
+            hrlink: resolve(__dirname, "./modules/hrlink/plugin.tsx"),
+            attendance: resolve(__dirname, "./modules/attendance/plugin.tsx"),
+            jobGradings: resolve(
+              __dirname,
+              "./modules/job-gradings/plugin.tsx"
+            ),
+            basicInfo: resolve(__dirname, "./modules/basic-info/plugin.tsx"),
+            projectManagement: resolve(
+              __dirname,
+              "./modules/project-management/plugin.tsx"
+            ),
+            messenger: resolve(__dirname, "./modules/messenger/plugin.tsx"),
+            jobDescription: resolve(
+              __dirname,
+              "./modules/job-description/plugin.tsx"
+            )
           },
-          chunkFileNames: "[name]-[hash].js",
-          assetFileNames: "assets/[name]-[ext]"
+          output: {
+            chunkFileNames: "[name]-[hash].js",
+            assetFileNames: "assets/[name]-[ext]",
+            manualChunks(id) {
+              if (id.includes("node_modules")) {
+                if (id.includes("react") || id.includes("react-dom")) {
+                  return "react-vendor";
+                }
+                if (id.includes("@heroui") || id.includes("@emotion")) {
+                  return "ui-vendor";
+                }
+                if (id.includes("@tanstack")) {
+                  return "query-vendor";
+                }
+                if (id.includes("redux")) {
+                  return "redux-vendor";
+                }
+                return "vendor";
+              }
+            }
+          }
         }
-      }
+        : {
+          input: resolve(__dirname, "main.tsx")
+        }
     },
 
     esbuild: {
       drop: isProduction ? ["console", "debugger"] : [],
       legalComments: "none",
       charset: "utf8",
-      minifyIdentifiers: true,
-      minifySyntax: true,
-      minifyWhitespace: true,
-      treeShaking: true
+      logOverride: {
+        "this-is-undefined-in-esm": "silent"
+      }
     },
 
     root: resolve(__dirname, "."),
-    base: "/",
+    base: "./",
 
     resolve: {
       alias: {
         "@hrbox/core": resolve(__dirname, "core"),
         "@hrbox/modules": resolve(__dirname, "modules"),
         "@hrbox/routes": resolve(__dirname, "routes"),
-        "@hrbox/uikit": resolve(__dirname, "UIKit")
+        "@hrbox/uikit": resolve(__dirname, "UIKit"),
+
+        react: resolve(__dirname, "node_modules/react"),
+        "react-dom": resolve(__dirname, "node_modules/react-dom")
       },
       extensions: [".mjs", ".js", ".mts", ".ts", ".jsx", ".tsx", ".json"],
       conditions: isProduction ? ["production"] : ["development"],
-      mainFields: ["browser", "module", "main"]
+      mainFields: ["browser", "module", "main"],
+      dedupe: ["react", "react-dom", "react/jsx-runtime"]
     },
 
     assetsInclude: ["**/*.html"],
 
     server: {
       port: 443,
-      host: true,
+      host: "0.0.0.0",
       allowedHosts: ["localhost", "front.hrbox.me", "react.hrbox.me"],
       strictPort: false,
       open: false,
       cors: true,
-      https: httpsConfig,
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, "certs/cert_hrbox.key")),
+        cert: fs.readFileSync(path.resolve(__dirname, "certs/cert_hrbox.crt"))
+      },
       hmr: {
         overlay: true,
-        protocol: "wss",
-        port: 443
+        clientPort: 443
       },
 
       proxy: {
@@ -168,59 +168,33 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
           changeOrigin: true,
           secure: false,
           ws: true,
-          configure: (proxy: {
-            on: (arg0: string, arg1: {
-              (err: any, _req: any, _res: any): void;
-              (proxyReq: any, req: any, _res: any): void;
-              (proxyRes: any, req: any, _res: any): void;
-            }) => void;
-          }, options: any) => {
-            proxy.on("error", (_err, _req, _res) => {
+          configure: (proxy: any) => {
+            proxy.on("error", () => {
             });
-
-            proxy.on("proxyReq", (proxyReq, _req, _res) => {
+            proxy.on("proxyReq", (proxyReq: any) => {
               proxyReq.setHeader("Host", "https://hrlink.hrbox.me:50443");
               proxyReq.setHeader("Origin", "https://front.hrbox.me");
             });
-
-            proxy.on("proxyRes", (_proxyRes, _req, _res) => {
-            });
           }
         },
-
         "/DesktopModules": {
           target: "https://hrlink.hrbox.me:50443",
           changeOrigin: true,
           secure: false,
-          ws: true,
-          configure: (proxy: {
-            on: (arg0: string, arg1: {
-              (err: any, _req: any, _res: any): void;
-              (proxyReq: any, req: any, _res: any): void;
-              (proxyRes: any, req: any, _res: any): void;
-            }) => void;
-          }, options: any) => {
-            proxy.on("error", (err, _req, _res) => {
-              console.error("❌ Proxy error (DesktopModules):", err.message);
-            });
-
-            proxy.on("proxyReq", (proxyReq, req, _res) => {
-              proxyReq.setHeader("Host", "hrlink.hrbox.me:50443");
-              proxyReq.setHeader("Origin", "https://front.hrbox.me");
-            });
-
-            proxy.on("proxyRes", (proxyRes, req, _res) => {
-              console.log(
-                `📥 [hrlink.hrbox.me → Vite (DesktopModules)] ${proxyRes.statusCode} ${req.url}`
-              );
-            });
-          }
+          ws: true
         }
       },
 
       watch: {
-        usePolling: true,
-        interval: parseInt(envVars.VITE_WATCH_INTERVAL || "100")
+        usePolling: false,
+        ignored: [
+          "**/node_modules/**",
+          "**/.git/**",
+          "**/dist/**",
+          "**/.vite/**",
+          "**/coverage/**",
+          "**/*.log"
+        ]
       }
     },
 
@@ -231,24 +205,42 @@ export default defineConfig(async (env: ConfigEnv): Promise<UserConfig> => {
       strictPort: true,
       open: envVars.VITE_OPEN !== "false",
       cors: true,
-      https: httpsConfig
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, "certs/cert_hrbox.key")),
+        cert: fs.readFileSync(path.resolve(__dirname, "certs/cert_hrbox.crt"))
+      }
     },
 
     appType: "spa",
 
     optimizeDeps: {
-      include: ["react", "react-dom", "@emotion/react", "@emotion/styled"],
-      exclude: ["@vite/client", "@vite/env"]
+      entries: ["main.tsx"],
+      include: [
+        "react",
+        "react-dom",
+        "react-dom/client",
+        "@tanstack/react-query",
+        "react-redux",
+        "@reduxjs/toolkit",
+        "@reduxjs/toolkit/query",
+        "@reduxjs/toolkit/query/react",
+        "redux-persist",
+        "redux-persist/integration/react",
+        "react-i18next",
+        "i18next",
+        "i18next-browser-languagedetector",
+        "formik",
+        "clsx",
+        "framer-motion",
+        "sonner"
+      ],
+      force: true
     },
 
     worker: {
-      format: "es",
-      plugins: () => [react()],
-      rollupOptions: {
-        output: {
-          entryFileNames: "assets/workers/[name]-[hash].js"
-        }
-      }
-    }
+      format: "es"
+    },
+
+    logLevel: "info"
   };
 });

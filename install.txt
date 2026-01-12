@@ -1,0 +1,7 @@
+Team members without internet:
+1. tar -xzvf offline-pack.tar.gz
+2. cd offline-pack
+3. pnpm install --offline --store ./pnpm-store
+4. pnpm run dev
+
+

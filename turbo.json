@@ -7,26 +7,21 @@
         "^build"
       ],
       "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env*",
-        "modules/**/*.{ts,tsx,js,jsx}",
-        "core/**/*.{ts,tsx,js,jsx}",
-        "package.json",
-        "tsconfig.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "modules/**/*",
+        "core/**/*"
       ],
       "outputs": [
         "dist/**"
-      ],
-      "persistent": false,
-      "cache": false,
-      "env": [
-        "VITE_ENABLED_MODULES"
       ]
     },
     "dev": {
-      "cache": false,
+      "cache": true,
       "persistent": true,
+      "outputs": [
+        ".vite/**",
+        "pnpm-store/**"
+      ],
       "dependsOn": [
         "^dev"
       ]
