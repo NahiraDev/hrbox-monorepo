@@ -6,6 +6,5 @@ packages:
   - UIKit
   - launcher
 
-ignoredBuiltDependencies:
-  - '@heroui/shared-utils'
-  - esbuild
+store-dir=~/:
+  pnpm-store:

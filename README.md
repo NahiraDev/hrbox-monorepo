@@ -162,14 +162,14 @@ The project uses TypeScript path mapping for clean imports across all packages:
 
 ```typescript
 // ❌ Instead of messy relative imports
-import { utils } from '../../../core/utils'
-import { Button } from '../../modules/ui/button'
-import { api } from '../../../../core/api/client'
+import {utils} from '../../../core/utils'
+import {Button} from '../../modules/ui/button'
+import {api} from '../../../../core/api/client'
 
 // ✅ Use clean absolute imports with aliases
-import { utils } from '@core/utils'
-import { Button } from '@module/ui/button'
-import { api } from '@core/api/client'
+import {utils} from '@core/utils'
+import {Button} from '@module/ui/button'
+import {api} from '@core/api/client'
 ```
 
 **Available Global Aliases:**
@@ -374,19 +374,30 @@ The monorepo uses TypeScript path mapping for clean imports. If experiencing imp
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["./core/*"],
-      "@module/*": ["./modules/*"]
+      "@core/*": [
+        "./core/*"
+      ],
+      "@module/*": [
+        "./modules/*"
+      ]
     },
-    "types": ["vite/client", "@testing-library/jest-dom"]
+    "types": [
+      "vite/client",
+      "@testing-library/jest-dom"
+    ]
   },
-  "exclude": ["node_modules", "**/dist", "**/build"]
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/build"
+  ]
 }
 ```
 
 #### 2. Vite Configuration
 
 ```typescript
-// vite.config.ts or module-specific vite config
+// vite.config.js or module-specific vite config
 import {defineConfig} from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -645,7 +656,7 @@ cat > tsconfig.json << EOF
 EOF
 
 # 4. Configure Vite
-cat > vite.config.ts << EOF
+cat > vite.config.js << EOF
 import { defineConfig } from 'vite';
 import { baseConfig } from '../../configs/vite.config.base';
 
@@ -935,20 +946,20 @@ describe('Button Component', () => {
 
 ```typescript
 // src/hooks/useApi/useApi.test.ts
-import { renderHook, waitFor } from '@testing-library/react';
-import { useApi } from './useApi';
+import {renderHook, waitFor} from '@testing-library/react';
+import {useApi} from './useApi';
 
 describe('useApi Hook', () => {
-  it('fetches data successfully', async () => {
-    const { result } = renderHook(() => useApi('/api/users'));
-    
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
+    it('fetches data successfully', async () => {
+        const {result} = renderHook(() => useApi('/api/users'));
+
+        await waitFor(() => {
+            expect(result.current.isLoading).toBe(false);
+        });
+
+        expect(result.current.data).toBeDefined();
+        expect(result.current.error).toBeNull();
     });
-    
-    expect(result.current.data).toBeDefined();
-    expect(result.current.error).toBeNull();
-  });
 });
 ```
 
@@ -1063,7 +1074,7 @@ All components should include:
 ```typescript
 /**
  * Button component with multiple variants and sizes
- * 
+ *
  * @example
  * ```tsx
  * <Button variant="primary" size="large" onClick={handleClick}>
@@ -1249,10 +1260,10 @@ spec:
         app: hrbox-app
     spec:
       containers:
-      - name: hrbox-app
-        image: hrbox-monorepo:latest
-        ports:
-        - containerPort: 3000
+        - name: hrbox-app
+          image: hrbox-monorepo:latest
+          ports:
+            - containerPort: 3000
 ```
 
 ## 📊 Quality Assurance
@@ -1286,9 +1297,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, develop]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main, develop]
+    branches: [ main, develop ]
 
 jobs:
   quality-checks:
@@ -1296,33 +1307,33 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 10.14.0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Lint
         run: pnpm lint
-      
+
       - name: Type check
         run: pnpm type-check
-      
+
       - name: Test with coverage
         run: pnpm test:coverage
-      
+
       - name: Build
         run: pnpm build
-      
+
       - name: Upload coverage
         uses: codecov/codecov-action@v3
 ```
@@ -1480,23 +1491,28 @@ chore(deps): update dependencies to latest versions
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix (non-breaking change that fixes an issue)
 - [ ] New feature (non-breaking change that adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests added/updated
 - [ ] Manual testing completed
 
 ## Screenshots (if applicable)
+
 Include screenshots of UI changes
 
 ## Related Issues
+
 Closes #123
 ```
 
@@ -1641,7 +1657,7 @@ const LazyComponent = lazy(() => import('./HeavyComponent'));
 turbo run dev --parallel
 
 # Enable hot reloading optimizations
-# Add to vite.config.ts:
+# Add to vite.config.js:
 server: {
   hmr: {
     overlay: false
@@ -1702,12 +1718,12 @@ Production error tracking (when implemented):
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: process.env.REACT_APP_SENTRY_DSN,
-  environment: process.env.NODE_ENV,
-  beforeSend(event) {
-    // Filter sensitive data
-    return event;
-  }
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    environment: process.env.NODE_ENV,
+    beforeSend(event) {
+        // Filter sensitive data
+        return event;
+    }
 });
 ```
 
