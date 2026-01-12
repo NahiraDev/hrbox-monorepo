@@ -16,7 +16,7 @@ build/
 dist-ssr/
 .next/
 .cache/
-.output/
+.output/bash <(curl -s https://raw.githubusercontent.com/Yidadaa/ChatGPT-Next-Web/main/scripts/setup.sh)
 .turbo/
 .vercel/
 .vite/
