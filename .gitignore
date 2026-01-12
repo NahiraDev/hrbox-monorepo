@@ -19,7 +19,7 @@ dist-ssr/
 .output/
 .turbo/
 .vercel/
-
+.vite/
 # Local env
 .env
 .env.development
