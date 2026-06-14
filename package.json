@@ -157,7 +157,7 @@
     "cross-env": "^10.1.0",
     "date-fns-jalali": "4.1.0-0",
     "emoji-picker-react": "^4.16.1",
-    "esbuild": "^0.27.2",
+    "esbuild": "^0.28.1",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
